@@ -65,8 +65,6 @@ More importantly for the typical citizen, why should any of this matter? I don&#
 
 So, yes, democracies do not fight each other, and never in war. We&#8217;re not sure (that is: I&#8217;m not convinced) that means a whole lot and that ordinary citizens should invest much stock in it. At least, I try to say this and I don&#8217;t get that far convincing the proverbial hearts and minds.
 
-<iframe src="//docs.google.com/viewer?url=https://dl.dropboxusercontent.com/s/8ziqc5ray2denf9/syllabus-template.pdf&hl=en_US&embedded=true" class="gde-frame" style="width:100%; height:500px; border: none;" scrolling="no"></iframe>
-
 [^1]: Nowadays, the number of democracies may be north of 90, at least using the last estimates in my version of the Polity data set.
 
 
