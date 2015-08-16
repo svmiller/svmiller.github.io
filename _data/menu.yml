@@ -1,0 +1,42 @@
+- title: "About"
+  href: "/about/"
+
+- title: "Blog"
+  href: "/blog/"
+
+- title: "CV"
+  href: "/cv/"
+
+- title: "For Students"
+  href: "/for-students/"
+  subcategories:
+    - subtitle: "Letters of Recommendation"
+      subhref: "/for-students/letters-of-recommendation/"
+    - subtitle: "Pi Sigma Alpha"
+      subhref: "/for-students/pi-sigma-alpha/"
+
+- title: "Research"
+  href: "/research/"
+
+- title: "Teaching"
+  href: "/teaching/"
+  subcategories:
+    - subtitle: "POSC 1020 – Introduction to International Relations"
+      subhref: "/teaching/posc-1020-introduction-to-international-relations/"
+    - subtitle: "POSC 3410 – Quantitative Methods in Political Science"
+      subhref: "/teaching/posc-3410-quantitative-methods-in-political-science/"
+    - subtitle: "POSC 3610 – International Politics in Crisis"
+      subhref: "/teaching/posc-3610-international-politics-in-crisis/"
+    - subtitle: "POSC 3630 – United States Foreign Policy"
+      subhref: "/teaching/posc-3630-united-states-foreign-policy/"
+
+- title: "Miscellany"
+  href: "/miscellany/"
+  subcategories:
+    - subtitle: "Clean USAID Greenbook Data"
+      subhref: "/miscellany/clean-usaid-greenbook-data/"
+    - subtitle: "Journal of Peace Research *.bst File"
+      subhref: "/miscellany/journal-of-peace-research-bst-file/"
+    - subtitle: "My Custom Beamer Style"
+      subhref: "/miscellany/my-custom-clemson-themed-beamer-style/"
+

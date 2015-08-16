@@ -1,0 +1,17 @@
+# Site settings
+title: Steven V. Miller
+email: svmille@clemson.edu
+description: > # this means to ignore newlines until "baseurl:"
+  I'm a political scientist at Clemson University with research interests in
+  international conflict and political behavior. Topics on my site include
+  my teaching interests, R, LaTeX, and professional development.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://svmiller.com" # the base hostname & protocol for your site
+twitter_username: stevenvmiller
+github_username:  svmiller
+
+# Build settings
+markdown: kramdown
+
+# Other options
+permalink: blog/:year/:month/:title
