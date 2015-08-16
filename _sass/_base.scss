@@ -103,9 +103,9 @@ a {
     }
 }
 
-.post-content a, .home a {
+/* .post-content a, .home a {
 	font-weight: 500;
-}
+} */
 
 /**
  * Blockquotes
@@ -130,7 +130,7 @@ blockquote {
  */
 pre,
 code {
-    font-size: 15px;
+    font-size: 14px;
     border: 1px solid $grey-color-light;
     border-radius: 3px;
     background-color: #eef;
