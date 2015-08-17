@@ -4,8 +4,6 @@ title: Research
 permalink: /research/
 ---
 
-{% include image.html url="/images/falklands-rally-1982.jpg" caption="Argentine citizens rally in April 1982 at May Square in Buenos Aires, demonstrating support for their government’s recent invasion of the British-held islands off the Argentinian coast. (Panta Astiazaran, AFP, Getty Images)" width=640 align="center" %}
-
 My research focuses on international conflict, particularly over the distribution of territory. I examine the effect these territorial issues have on domestic politics, particularly at the level of the individual citizen. Here, you can find materials relevant to my published research and research in progress. Feel free to contact me if you are interested in reading unpublished manuscripts on which I am currently working. I welcome feedback.
 
 ## Publications
@@ -35,3 +33,5 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 "The Effects of International Terrorism on Judicial Confidence."
 
 "Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East."
+
+{% include image.html url="/images/falklands-rally-1982.jpg" caption="Argentine citizens rally in April 1982 at May Square in Buenos Aires, demonstrating support for their government’s recent invasion of the British-held islands off the Argentinian coast. (Panta Astiazaran, AFP, Getty Images)" width=640 align="center" %}
