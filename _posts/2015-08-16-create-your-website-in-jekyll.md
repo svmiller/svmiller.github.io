@@ -282,4 +282,12 @@ git push -u origin master
 {% endraw %}
 {% endhighlight %}
 
-Thereafter, you should be prompted in the terminal window to give your username and password. Once that's done uploading, open a tab in your browser to `yourusername.github.io`. You should be done.
+Thereafter, you should be prompted in the terminal window to give your username and password. Once that's done uploading, open a tab in your browser to `yourusername.github.io`. You should be done. Subsequent updates can be done as follows.
+
+{% highlight bash %}
+{% raw %}
+git add .
+git commit -m "message accompanying my updates"
+git push -u origin master
+{% endraw %}
+{% endhighlight %}
