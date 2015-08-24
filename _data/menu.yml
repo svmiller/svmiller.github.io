@@ -10,6 +10,8 @@
 - title: "For Students"
   href: "/for-students/"
   subcategories:
+    - subtitle: "Office Hours Appointment"
+      subhref: "/for-students/office-hours-appointment/"
     - subtitle: "Letters of Recommendation"
       subhref: "/for-students/letters-of-recommendation/"
     - subtitle: "Pi Sigma Alpha"

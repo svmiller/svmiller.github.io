@@ -10,9 +10,7 @@ This is the parent page for a list of resources for students of mine at Clemson 
 
 ## Office Hours
 
-Office hours in the summer are by appointment only. I am always available by e-mail, though.
-
-My office hours are posted next to the door to my office in Brackett Hall (230A). I'm typically available for walk-in appointments Wednesday morning from 9 a.m. to 12 p.m.
+My office is in 230A Brackett Hall. Office hours for fall and spring semester are typically Wednesday, 9 a.m. to 11:30 a.m. Students may visit the following page to [schedule me for an appointment](/for-students/office-hours-appointment/) in my office.
 
 ## Clemson’s Academic Calendar and Exam Schedule
 
