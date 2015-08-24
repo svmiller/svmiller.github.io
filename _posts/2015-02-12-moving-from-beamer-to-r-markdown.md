@@ -12,6 +12,11 @@ tags:
   - Markdown
   - R
 ---
+
+Markdown is awesome. It's much better for preparing slides than the Beamer package in LaTeX. I offer a guide to get started.
+
+<!--more-->
+
 I&#8217;ve been using LaTeX for document rendering for over five years. No one else in my department at the time used it, beyond [my friend Joe][1] (who introduced it to me). There was no pressure from my department to learn it, only a curiosity on my end for the benefits of it. The transition to LaTeX came with a concurrent transition to its sister package Beamer, which renders Powerpoint-styled presentations. Both have numerous advantages over their Microsoft equivalents.
 
 However, I never particularly cared for Beamer. At least, I found LaTeX&#8217;s document preparation system more intuitive than Beamer&#8217;s slides preparation system. Using both will lead to proficiency, but Beamer markup remains ugly and a chore to write.

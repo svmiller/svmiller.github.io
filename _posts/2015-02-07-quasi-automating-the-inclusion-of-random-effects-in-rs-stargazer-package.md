@@ -6,6 +6,11 @@ permalink: /blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-
 categories:
   - R
 ---
+
+I wish the stargazer package in R would automatically generate random effect statistics from the lme4 package. Here's a backward way to get those and include them in stargazer output.
+
+<!--more-->
+
 [stargazer][1] is a godsend for those of us who look for seamless ways to manage the execution and presentation of our statistical analyses. LaTeX, for all its strengths, inconveniences users who need to manually create tables. Doing this for peer-reviewed scholarship can be a perilous process, greatly increasing the probability of human error in the presentation of the results. The stargazer package, as all useful packages do, automates that and makes it the job of R to render the regression table. It also handles `lmer` output, which is fantastic for those of us who estimate mixed effects models as models of choice.
 
 However, one limitation of the stargazer package is that it ultimately processes `lmer` output no different than it would handle a standard linear model or generalized linear model. It reports only the fixed effects of the model, even though the whole point of mixed effects models is that they contain important quantities of interest known as random effects. When these models are estimated, these parameters should be communicated in the regression table as well. In most standard models, following discussion in the likes of Andrew Gelman and Jennifer Hill's book, these quantities of interest are typically just the number of unique observations in the random effect (i.e. "the number of groups") and the standard deviation of the random effect. This second quantity of interest, which is standard output from an `lmer` model, communicates the variation in the group intercepts left unexplained after the fixed effects of the model are estimated.

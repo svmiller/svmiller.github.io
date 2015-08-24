@@ -6,6 +6,11 @@ permalink: /blog/2015/04/some-psfrustrations-from-an-ir-perspective/
 categories:
   - Political Science
 ---
+
+Here are some #PSFrustrations from the perspective of an IR scholar.
+
+<!--more-->
+
 I checked Twitter for the first time in two months or so and found this interesting tweet from [Jonathan Bernstein][1] at Bloomberg View.
 
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">Hey, political scientists: what&#39;s the finding that&#39;s most frustrating when you can&#39;t convince your parents/friends/etc. about it?</p>&mdash; Jonathan Bernstein (@jbview) <a href="https://twitter.com/jbview/status/586625156363251712">April 10, 2015</a></blockquote>

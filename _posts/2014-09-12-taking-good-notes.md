@@ -6,6 +6,11 @@ permalink: /blog/2014/09/taking-good-notes/
 categories:
   - Teaching
 ---
+
+It's important for students to take good notes in class, though it's not obvious what this means. I offer a guide here for a political science audience.
+
+<!--more-->
+
 This blog post is a written complement to a talk I gave to Clemson University students on Friday, September 12th. I provide [the slides to that talk here][1]. The subject of the talk was on note-taking in class. Professors expect students to take good notes in class. Students attempt to take good notes in class. However, it's not obvious what the process entails.
 
 In this talk, I offered comments about what to do and what not to do in trying to take good notes. The talk reiterated three things in particular. One, students cannot take good notes without also having read the material. The process of reading goes beyond just reading to "get it over with". Two, students need to write, not transcribe, in order to take good notes. Three, students should listen more and read (slides) less in order to make the most of the lecture. I elaborate these below.

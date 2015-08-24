@@ -6,6 +6,10 @@ permalink: /blog/2014/05/hello-world/
 categories:
   - Site News
 ---
+
+I do not anticipate doing a lot of professional blogging here. When I do, it'll largely be about R, LaTeX, or professional development for students in political science.
+<!--more-->
+
 WordPress automatically creates these first posts upon installation of the software. Rather than edit or delete it, I let it sit for a year and a half before I started “blogging”.
 
 I do not anticipate doing a lot of professional blogging here. Before too long, I intend to start more “substantive” semi-regular blogging at another blog that is a consortium of scholars all of whom possess an eclectic approach to understanding problems of international politics.

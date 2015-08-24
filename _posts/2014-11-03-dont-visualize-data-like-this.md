@@ -1,11 +1,16 @@
 ---
-title: 'Don&#8217;t Visualize Data Like This'
+title: "Don't Visualize Data Like This"
 author: steve
 layout: post
 permalink: /blog/2014/11/dont-visualize-data-like-this/
 categories:
   - Uncategorized
 ---
+
+Facebook's Data Science blog should not visualize data like this.
+
+<!--more-->
+
 Facebook&#8217;s Data Science blog published some observations of Facebook users in light of the upcoming Midterm elections. The premise was simple. Politics at the mass-level and institution-level seem as polarized as ever. With the midterm elections approaching, what can we say about pop culture differences between Facebook users who self-identify as Republicans and Facebook users who self-identify as Democrats?
 
 [The ensuing post][1] from Facebook&#8217;s Data Science blog generated a fair bit of interest, especially with data visualizations like this.
