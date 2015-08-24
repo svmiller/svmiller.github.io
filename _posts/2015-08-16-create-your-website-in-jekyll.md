@@ -8,6 +8,10 @@ categories:
   - Github
 ---
 
+I recently moved my academic website from a shared hosting plan to Github. You should too.
+
+<!--more-->
+
 {% include image.html url="/images/octojekyll.png" caption="Octojekyll." width=300 align="right" %}
 
 I recently moved my academic website from a shared hosting plan through a provider to Github. I also changed the engine from Wordpress' content managing system to [Jekyll](http://jekyllrb.com/), an open-source, blog-aware, static-site generator that is powered by [Ruby](https://www.ruby-lang.org/en/). 
