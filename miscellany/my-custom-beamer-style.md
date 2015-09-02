@@ -4,7 +4,7 @@ title: "My Custom Beamer Style"
 permalink: /miscellany/my-custom-clemson-themed-beamer-style/
 ---
 
-A little while ago, I offered some advice on [moving from Beamer to R Markdown](/blog/2015/02/moving-from-beamer-to-r-markdown/) for rendering presentation slides. Some friends of mine thought my custom Beamer style was quite useful and wanted to know if they could have it and modify it. I present it below my custom, minimal style below with a few comments to follow.
+A little while ago, I offered some advice on [moving from Beamer to R Markdown](/blog/2015/02/moving-from-beamer-to-r-markdown/) for rendering presentation slides. Some friends of mine thought my custom Beamer style was quite useful and wanted to know if they could have it and modify it. I present my custom, minimal style below with a few comments to follow.
 
 {% highlight latex %}
 {% raw %}
