@@ -10,9 +10,9 @@ My research focuses on international conflict, particularly over the distributio
 
 Miller, Steven V. Forthcoming. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science*.
 
-Gibler, Douglas M. and Steven V. Miller. "[External Territorial Threat, State Capacity, and Civil War](http://dmgibler.people.ua.edu/state-capacity.html)." *Journal of Peace Research* 51(5): 634-646.
+Gibler, Douglas M. and Steven V. Miller. 2014. "[External Territorial Threat, State Capacity, and Civil War](http://dmgibler.people.ua.edu/state-capacity.html)." *Journal of Peace Research* 51(5): 634-646.
 
-Miller, Steven V. "[Territorial Disputes and the Politics of Individual Well-Being](/research/territorial-disputes-and-the-politics-of-individual-well-being/)." *Journal of Peace Research* 50(6): 677-690.
+Miller, Steven V. 2013. "[Territorial Disputes and the Politics of Individual Well-Being](/research/territorial-disputes-and-the-politics-of-individual-well-being/)." *Journal of Peace Research* 50(6): 677-690.
 
 Gibler, Douglas M. and Steven V. Miller. 2013. "[Quick Victories? Territory, Democracies and Their Disputes](http://jcr.sagepub.com/content/57/2/258.full)." *Journal of Conflict Resolution* 57(2): 258-284.
 
