@@ -17,13 +17,15 @@ Markdown is awesome. It's much better for preparing slides than the Beamer packa
 
 <!--more-->
 
-I&#8217;ve been using LaTeX for document rendering for over five years. No one else in my department at the time used it, beyond [my friend Joe][1] (who introduced it to me). There was no pressure from my department to learn it, only a curiosity on my end for the benefits of it. The transition to LaTeX came with a concurrent transition to its sister package Beamer, which renders Powerpoint-styled presentations. Both have numerous advantages over their Microsoft equivalents.
+I've been using LaTeX for document rendering for over five years. No one else in my department at the time used it, beyond [my friend Joe][1] (who introduced it to me). There was no pressure from my department to learn it, only a curiosity on my end for the benefits of it. The transition to LaTeX came with a concurrent transition to its sister package Beamer, which renders Powerpoint-styled presentations. Both have numerous advantages over their Microsoft equivalents.
 
-However, I never particularly cared for Beamer. At least, I found LaTeX&#8217;s document preparation system more intuitive than Beamer&#8217;s slides preparation system. Using both will lead to proficiency, but Beamer markup remains ugly and a chore to write.
+However, I never particularly cared for Beamer. At least, I found LaTeX's document preparation system more intuitive than Beamer's slides preparation system. Using both will lead to proficiency, but Beamer markup remains ugly and a chore to write.
 
 Look at it this way. Almost the entirety of a LaTeX document is the content itself whereas it seems half (if not more) of a Beamer document is markup. Take, for example, this sample code from a lecture slide for one of my classes.
 
-<pre>\frame{
+{% highlight latex %}
+
+\frame{
  \frametitle{Examples of States and Non-States}
 Here are some examples of a state and non-states by this classification.
  \begin{itemize}
@@ -46,19 +48,23 @@ Here are some examples of a state and non-states by this classification.
  \hline
 \end{tabular}
  \end{table}
- }</pre>
+ }
 
-That&#8217;s a lot of manual code for one little slide.
+{% endhighlight %}
 
-I&#8217;ve known about [Markdown][2] language (and [Pandoc][3]) as a substitute for straight Beamer. Markdown language is simple and elegant. Pandoc allows for Markdown to be translated to TeX, and ultimately a Beamer PDF. However, Pandoc is something of a chore to render. [Look at all these extra commands][4] one needs in a terminal to make even minimal changes (e.g. a simple theme, let alone a custom one) to a Pandoc call. I don&#8217;t have time for all that when a simple Cmd-R in [Textmate][5] (or F5 in [Gedit][6]&#8216;s [LaTeX plugin][7]) will do the same thing when the appropriate markup is included in the preamble of the document.
+
+That's a lot of manual code for one little slide.
+
+I've known about [Markdown][2] language (and [Pandoc][3]) as a substitute for straight Beamer. Markdown language is simple and elegant. Pandoc allows for Markdown to be translated to TeX, and ultimately a Beamer PDF. However, Pandoc is something of a chore to render. [Look at all these extra commands][4] one needs in a terminal to make even minimal changes (e.g. a simple theme, let alone a custom one) to a Pandoc call. I don't have time for all that when a simple Cmd-R in [Textmate][5] (or F5 in [Gedit][6]'s [LaTeX plugin][7]) will do the same thing when the appropriate markup is included in the preamble of the document.
 
 [R Markdown][8] is the best of both worlds. R Markdown allows for elegant Markdown code *and* simple means of stylizing and rendering the slides without a ton of additional commands in the terminal. It took a while to get something that was exactly what I wanted (since R Markdown has its own peculiarities), but I did and offer what follows as a guide for those looking to take advantage of R Markdown.
 
 # Understanding Your Markdown Document
 
-R Markdown uses [YAML][9] for its metadata. It also does so in a manner that&#8217;s more efficient than Pandoc (or, at least, more intuitive for me). Consider my working example below.
+R Markdown uses [YAML][9] for its metadata. It also does so in a manner that's more efficient than Pandoc (or, at least, more intuitive for me). Consider my working example below.
 
-<pre>---
+{% highlight yaml %}
+---
 title: An Example R Markdown Document
 subtitle: (A Subtitle Would Go Here if This Were a Class)
 author: Steven V. Miller
@@ -72,44 +78,59 @@ output:
  includes:
  in_header: ~/Dropbox/teaching/clemson-beamer-header-simple.txt
  after_body: ~/Dropbox/teaching/table-of-contents.txt
----</pre>
+---
 
-Metadata is always at the top of a R Markdown document. I&#8217;ll explain some important YAML items below, assuming some items (e.g. title, subtitle, date, author, fontsize) are intuitive.
+{% endhighlight %}
 
-The output section designates how the Markdown language will be processed. You can insert `html_document` if HTML is the desired output, though I&#8217;m assuming the preferred output here is a Beamer PDF.
 
-After `beamer_presentation`, enter a new line, hit the space bar four times and add miscellaneous options. In the working example above, I commented out two options. When `keep_tex` is true, the compiling will also spit out a .tex file of the Markdown document. When `toc` is true, a table of contents is rendered after the title frame. In my case, I don&#8217;t want a .tex output in addition to the PDF (unless I&#8217;m doing some debugging) and I like my table of contents after my slides.<sup><a href="#footnote_0_154" id="identifier_0_154" class="footnote-link footnote-identifier-link" title="This was something I started doing in job market talks in order to field questions back to particular slides more easily.">1</a></sup>
+Metadata is always at the top of a R Markdown document. I'll explain some important YAML items below, assuming some items (e.g. title, subtitle, date, author, fontsize) are intuitive.
 
-The next option is an important one and it took me a while to figure out what exactly it was doing. `slide_level` determines how many pound signs are required for Markdown to assume you are wanting a new slide. I think the default option is one, but this may be inefficient if you want clear sections and subsections in your presentation. If `slide_level` is three, then Markdown output like this&#8230;
+The output section designates how the Markdown language will be processed. You can insert `html_document` if HTML is the desired output, though I'm assuming the preferred output here is a Beamer PDF.
 
-<pre># This is my section
+After `beamer_presentation`, enter a new line, hit the space bar four times and add miscellaneous options. In the working example above, I commented out two options. When `keep_tex` is true, the compiling will also spit out a .tex file of the Markdown document. When `toc` is true, a table of contents is rendered after the title frame. In my case, I don't want a .tex output in addition to the PDF (unless I'm doing some debugging) and I like my table of contents after my slides. [^1]
+
+[^1]: This was something I started doing in job market talks in order to field questions back to particular slides more easily.
+
+The next option is an important one and it took me a while to figure out what exactly it was doing. `slide_level` determines how many pound signs are required for Markdown to assume you are wanting a new slide. I think the default option is one, but this may be inefficient if you want clear sections and subsections in your presentation. If `slide_level` is three, then Markdown output like this...
+
+{% highlight latex %}
+
+# This is my section
 ## This is my subsection
 ### Title of a slide
 
-*Hi mom!*</pre>
+*Hi mom!*
 
-&#8230;will look like this standard TeX/Beamer markup.
+{% endhighlight %}
 
-<pre>\section{This is my section}
+...will look like this standard TeX/Beamer markup.
+
+{% highlight latex %}
+
+\section{This is my section}
 \subsection{This is my subsection}
 \frame{
 \frametitle{Title of a slide}
 
 \textit{Hi mom!}
 
-}</pre>
+}
 
-Since this is how I&#8217;m used to handling Beamer (and I like occasional subsections in my slides and in the table of contents), I set `slide_level` to three.
+{% endhighlight %}
 
-Next, you can use `in_header` (after `includes:`) to determine what additional packages and style changes you want to include in what would otherwise be the preamble of your Beamer document. This is where you can get creative with stylizing a theme how you want. I also thought it mandatory because Markdown does some things with Beamer that I think are odd (e.g. giving a section title its own slide). Here&#8217;s my standard style file, for your consideration.
+Since this is how I'm used to handling Beamer (and I like occasional subsections in my slides and in the table of contents), I set `slide_level` to three.
 
-<pre>\usepackage{graphicx}
+Next, you can use `in_header` (after `includes:`) to determine what additional packages and style changes you want to include in what would otherwise be the preamble of your Beamer document. This is where you can get creative with stylizing a theme how you want. I also thought it mandatory because Markdown does some things with Beamer that I think are odd (e.g. giving a section title its own slide). Here's my standard style file, for your consideration.
+
+{% highlight latex %}
+
+\usepackage{graphicx}
 \usepackage{rotating}
 %\setbeamertemplate{caption}[numbered]
 \usepackage{hyperref}
 \usepackage{caption}
 \usepackage[normalem]{ulem}
-%\mode&lt;presentation&gt;
+%\mode<presentation>
 \usepackage{wasysym}
 \usepackage{amsmath}
 
@@ -140,29 +161,36 @@ Next, you can use `in_header` (after `includes:`) to determine what additional p
 \AtBeginSubsection{}
 \AtBeginSubsubsection{}
 \setlength{\emergencystretch}{0em}
-\setlength{\parskip}{0pt}</pre>
+\setlength{\parskip}{0pt}
 
-Most of these are cosmetic fixes (i.e. representing school colors in my presentations, which you are free to change), but some commands are quite useful. The last two commands in the above code reduce some of R Markdown&#8217;s odd vertical spacing. The four lines above that suppress R Markdown&#8217;s proclivity to create new slides that are just the section titles.
+{% endhighlight %}
+
+Most of these are cosmetic fixes (i.e. representing school colors in my presentations, which you are free to change), but some commands are quite useful. The last two commands in the above code reduce some of R Markdown's odd vertical spacing. The four lines above that suppress R Markdown's proclivity to create new slides that are just the section titles.
 
 Finally, `after_body` is an optional command that will include whatever you want as slides material after what is otherwise the last slide of your document. Since I like table of contents after the last slide, I have simple .txt file with the following Beamer markup.
 
-<pre>\section[]{}
+{% highlight latex %}
+\section[]{}
 \frame{\small \frametitle{Table of Contents}
-\tableofcontents}</pre>
+\tableofcontents}
+
+{% endhighlight %}
 
 #  Compiling Your Markdown Document
 
-If you&#8217;re using [Rstudio][10], compiling the R Markdown document is as simple as clicking a few buttons in the script window.
+If you're using [Rstudio][10], compiling the R Markdown document is as simple as clicking a few buttons in the script window.
 
-However, I tend to not like using GUIs, even if Rstudio is quite useful. I do love automated scripts, though, especially R scripts in which I don&#8217;t have to specify a working directory. Toward that end, I wrote a simple script that you can treat as executable (assuming you&#8217;re on a Linux or Mac machine) to automatically compile your Markdown documents.
+However, I tend to not like using GUIs, even if Rstudio is quite useful. I do love automated scripts, though, especially R scripts in which I don't have to specify a working directory. Toward that end, I wrote a simple script that you can treat as executable (assuming you're on a Linux or Mac machine) to automatically compile your Markdown documents.
 
-<pre>#! /usr/bin/Rscript --vanilla --default-packages=base,stats,utils
+{% highlight r %}
+#! /usr/bin/Rscript --vanilla --default-packages=base,stats,utils
 library(knitr)
 library(rmarkdown)
-file &lt;- list.files(pattern='.Rmd')
-rmarkdown::render(file)</pre>
+file <- list.files(pattern='.Rmd')
+rmarkdown::render(file)
+{% endhighlight %}
 
-This process assumes you have just one .Rmd file per directory, which should not be a drastic change for LaTeX users. Given LaTeX&#8217;s proclivity to create log files and additional auxiliary files with every compile, LaTeX users (like me) tend to get in the habit of having one directory for each document.
+This process assumes you have just one .Rmd file per directory, which should not be a drastic change for LaTeX users. Given LaTeX's proclivity to create log files and additional auxiliary files with every compile, LaTeX users (like me) tend to get in the habit of having one directory for each document.
 
 Save that script with a .R extension and allow your Linux or Mac operating system to treat it as executable. You should be good to go after that.
 
@@ -170,9 +198,11 @@ Save that script with a .R extension and allow your Linux or Mac operating syste
 
 From there, the rest involves learning how simple of a language Markdown is. There are [numerous][11] [cheatsheets][12].
 
-Here&#8217;s a sample document I created in Markdown for illustration purposes. [This is the output][13] from compiling it with my R script.
+Here's a sample document I created in Markdown for illustration purposes. [This is the output][13] from compiling it with my R script.
 
-<pre>---
+
+{% highlight latex %}
+---
 title: An Example R Markdown Document
 subtitle:  (A Subtitle Would Go Here if This Were a Class)
 author: Steven V. Miller
@@ -293,7 +323,7 @@ Save this to a .R script (call it whatever you like)
 #! /usr/bin/Rscript --vanilla --default-packages=base,stats,utils
 library(knitr)
 library(rmarkdown)
-file &lt;- list.files(pattern='.Rmd')
+file <- list.files(pattern='.Rmd')
 rmarkdown::render(file)
 ```
 
@@ -313,13 +343,9 @@ Beamer markup is messy. Markdown is much more elegant.
 - Rendering Markdown $\rightarrow$ Beamer requires minimal Rscript example.
  - I provide such a script to accompany this presentation.
 
-</pre>
+{% endhighlight %}
 
-<ol class="footnotes">
-  <li id="footnote_0_154" class="footnote">
-    This was something I started doing in job market talks in order to field questions back to particular slides more easily. [<a href="#identifier_0_154" class="footnote-link footnote-back-link">&#8617;</a>]
-  </li>
-</ol>
+
 
  [1]: http://www.joestradam.us/
  [2]: http://en.wikipedia.org/wiki/Markdown
