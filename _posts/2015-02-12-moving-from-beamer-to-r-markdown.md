@@ -59,7 +59,7 @@ I've known about [Markdown][2] language (and [Pandoc][3]) as a substitute for st
 
 [R Markdown][8] is the best of both worlds. R Markdown allows for elegant Markdown code *and* simple means of stylizing and rendering the slides without a ton of additional commands in the terminal. It took a while to get something that was exactly what I wanted (since R Markdown has its own peculiarities), but I did and offer what follows as a guide for those looking to take advantage of R Markdown.
 
-# Understanding Your Markdown Document
+## Understanding Your Markdown Document
 
 R Markdown uses [YAML][9] for its metadata. It also does so in a manner that's more efficient than Pandoc (or, at least, more intuitive for me). Consider my working example below.
 
@@ -176,7 +176,7 @@ Finally, `after_body` is an optional command that will include whatever you want
 
 {% endhighlight %}
 
-#  Compiling Your Markdown Document
+## Compiling Your Markdown Document
 
 If you're using [Rstudio][10], compiling the R Markdown document is as simple as clicking a few buttons in the script window.
 
@@ -194,7 +194,7 @@ This process assumes you have just one .Rmd file per directory, which should not
 
 Save that script with a .R extension and allow your Linux or Mac operating system to treat it as executable. You should be good to go after that.
 
-# An Example R Markdown Document
+## An Example R Markdown Document
 
 From there, the rest involves learning how simple of a language Markdown is. There are [numerous][11] [cheatsheets][12].
 
