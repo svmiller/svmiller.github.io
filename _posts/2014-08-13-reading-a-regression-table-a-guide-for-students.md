@@ -137,7 +137,7 @@ Standardization (or centering at the least) is a useful way to get meaningful in
 
 Greater levels of statistical significance suggest more precise estimates, but do not themselves suggest one independent variable is "more important" or "greater" than another independent variable that is also statistically discernible from zero.
 
-# To Conclude {#tldr}
+## To Conclude {#tldr}
 
 Students new to reading regression tables are encouraged to do the following in order to make sense of the information presented to them.
 
