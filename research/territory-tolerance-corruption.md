@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Territorial Disputes and the Politics of Individual Well-being"
+title: "External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction"
 permalink: /research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/
 ---
 
