@@ -6,10 +6,8 @@ permalink: /miscellany/journal-of-peace-research-bst-file/
 
 {% include image.html url="/images/jpr-cover.png" caption="Journal of Peace Research." width=590 align="center" %}
 
-**Last Update: October 19, 2015**. I thank [Allan Dafoe](http://www.allandafoe.com/), [Jillienne Haglund](http://www.jill-haglund.com/) [Peter Rudloff](http://peterrudloff.net/), and [Baobao Zhang](http://politicalscience.yale.edu/people/baobao-zhang) for their contributions and correcting various errors in previous versions of this style file. Feel free to e-mail me at svmille@clemson.edu if you find anything that is not compliant with *Journal of Peace Research* standards. As of March 5, 2014, I've been aware that the style is not fully compliant with the journal's standards when the number of authors is greater than three. I would like to find a work-around for this, but I lack the time and resources.
 
-<!-- **UPDATE:** Found an almost perfect solution to the issue of middle names and initials. (07.05.2013)  
-&#8211; It has come to my attention that the style is not fully JPR-compliant when the number of authors is greater than three. I am trying to find a work-around for this. (03.05.2014) -->
+> **Last Update: October 19, 2015**. I thank [Allan Dafoe](http://www.allandafoe.com/), [Jillienne Haglund](http://www.jill-haglund.com/), [Peter Rudloff](http://peterrudloff.net/), and [Baobao Zhang](http://politicalscience.yale.edu/people/baobao-zhang) for their contributions and correcting various errors in previous versions of this style file. Feel free to e-mail me at [svmille@clemson.edu](mailto:svmille@clemson.edu) if you find anything that is not compliant with *Journal of Peace Research* standards. As of March 5, 2014, I've been aware that the style is not fully compliant with the journal's standards when the number of authors is greater than three. I would like to find a work-around for this, but I lack the time and resources.
 
 The *[Journal of Peace Research][1]* (JPR) routinely publishes some of the most interesting and substantively important quantitative research in international relations. Its [rising "impact ranking"][2] reflects the journal's interest to both policymakers and social scientists alike, and across the world.
 
