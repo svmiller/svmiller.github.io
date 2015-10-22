@@ -11,19 +11,11 @@ Facebook's Data Science blog should not visualize data like this.
 
 <!--more-->
 
-Facebook&#8217;s Data Science blog published some observations of Facebook users in light of the upcoming Midterm elections. The premise was simple. Politics at the mass-level and institution-level seem as polarized as ever. With the midterm elections approaching, what can we say about pop culture differences between Facebook users who self-identify as Republicans and Facebook users who self-identify as Democrats?
+Facebook's Data Science blog published some observations of Facebook users in light of the upcoming Midterm elections. The premise was simple. Politics at the mass-level and institution-level seem as polarized as ever. With the midterm elections approaching, what can we say about pop culture differences between Facebook users who self-identify as Republicans and Facebook users who self-identify as Democrats?
 
 [The ensuing post][1] from Facebook&#8217;s Data Science blog generated a fair bit of interest, especially with data visualizations like this.
 
-<dl id="attachment_98" class="wp-caption aligncenter" style="max-width:720px">
-  <dt>
-    <a href="http://svmiller.com/wp-content/uploads/2014/12/facebook-data-science-music-preferences.png"><img class="size-full wp-image-98" src="http://svmiller.com/wp-content/uploads/2014/12/facebook-data-science-music-preferences.png" alt="Music preferences of Facebook users, color-coded between Republicans (red) and Democrats (blue). " width="720" height="360" /></a>
-  </dt>
-  
-  <dd>
-    Music preferences of Facebook users, color-coded between Republicans (red) and Democrats (blue).
-  </dd>
-</dl>
+{% include image.html url="/images/facebook-data-science-music-preferences.png" caption="Music preferences of Facebook users, color-coded between Republicans (red) and Democrats (blue)." width=720 align="center" %}
 
 The graph (among others listing where Facebook users visit, what TV shows they watch, and what authors they read) caught the attention of general interest websites. This led to some headlines like [&#8220;Why Do Republicans Hate the Beatles?&#8221;][2] to accentuate what this graph purports to tell an audience.<sup><a href="#footnote_0_97" id="identifier_0_97" class="footnote-link footnote-identifier-link" title="From my perspective, the more pressing question would be why doesn&rsquo;t everyone love Mary J. Blige. She&rsquo;s awesome, but alas.">1</a></sup>
 

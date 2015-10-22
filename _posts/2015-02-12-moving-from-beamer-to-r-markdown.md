@@ -359,4 +359,4 @@ Beamer markup is messy. Markdown is much more elegant.
  [10]: http://rstudio.com
  [11]: https://help.github.com/articles/markdown-basics/
  [12]: http://blog.rstudio.org/2014/08/01/the-r-markdown-cheat-sheet/
- [13]: http://svmiller.com/wp-content/uploads/rmarkdown-example.pdf
+ [13]: http://svmiller.com/rmarkdown-example.pdf
