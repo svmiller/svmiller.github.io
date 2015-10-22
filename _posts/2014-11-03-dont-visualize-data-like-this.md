@@ -27,7 +27,7 @@ By using a format akin to a [scatterplot][3], the graph purports to a show a biv
 
 However, that's not what the graph shows, nor is the Facebook user even the unit of analysis. Facebook's Data Science blog needed this preface to the graphs provided on its blog.
 
-> <span style="color: #141823;">Note: in all of the figures below, the more a page is disproportionately liked by fans of Republican candidates, the farther right the page name appears (precisely indicated by the darker line in the middle). Conversely, the more a page is disproportionately liked by fans of Democratic candidates, the farther left the page name appears. The font size of the name is proportional to the total number of people from the US who liked that page.</span>
+> Note: in all of the figures below, the more a page is disproportionately liked by fans of Republican candidates, the farther right the page name appears (precisely indicated by the darker line in the middle). Conversely, the more a page is disproportionately liked by fans of Democratic candidates, the farther left the page name appears. The font size of the name is proportional to the total number of people from the US who liked that page.
 
 A preface to interpreting graphs this long-winded already jeopardizes the entire endeavor. Having to follow it with [a clarification like this in the comment section][4] means the plot is lost.
 
