@@ -187,6 +187,6 @@ In years after the Republican Revolution, there is no discernible effect of GOP 
 
 ## Conclusion
 
-We commonly believe the gun control debate to be a polarizing issue, but data from the General Social Survey suggest that is not necessarily true. GOP partisanship does not robustly reduce support for gun control and most Republicans actually support gun control measures. However, the issue is quickly becoming a polarizing issue among the electorate, and it's likely not just the South that is responsible for that.
+We commonly believe the gun control debate to be a polarizing issue. However, data from the General Social Survey suggest that is not necessarily true. GOP partisanship does not robustly reduce support for gun control across all forms of gun control policies that could be considered by the general public. Further, most Republicans actually support gun control measures notwithstanding the negative relationship between GOP partisanship and support for gun control. However, the issue is quickly becoming a polarizing issue among the electorate, and it's likely not just the South that is responsible for that.
 
 Code for this analysis is available [on my Github](https://github.com/svmiller/gss-guns).
