@@ -107,8 +107,8 @@ We can further illustrate this with post-estimation simulation using the `Zelig`
 	
   <tr>
     <th class="tg-031e">Category</th>
-    <th style="text-align:center">Expected Value</th>
-    <th class="tg-031e">95% Interval</th>
+    <th style="text-align:center">Expected <br/> Value</th>
+    <th class="tg-031e">95% <br /> Interval</th>
   </tr>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
   <tr>
