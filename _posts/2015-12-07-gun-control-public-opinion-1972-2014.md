@@ -12,7 +12,7 @@ We commonly believe the gun control debate to be a polarizing issue, but data fr
 
 <!--more-->
 
-{% include image.html url="/images/planned-parenthood-shooter-arrested.jpg" caption="Robert Lewis Dear was taken into custody after a mass shooting at a Colorado Springs Planned Parenthood." width=594 align="right" %}
+{% include image.html url="/images/planned-parenthood-shooter-arrested.jpg" caption="Robert Lewis Dear was taken into custody after a mass shooting at a Colorado Springs Planned Parenthood." width=450 align="right" %}
 
 The recent terrorist incidents in Colorado Springs and San Bernardino have renewed public interest in the gun control debate. The *New York Daily News* ran a provocative front-page images that implored high-ranking politicians to abandon the proverbial "thoughts and prayers" as little more than cheap rhetoric from legislators who would rather not, well, "legislate" on this particular issue. A follow-up front-page image on the San Bernardino incident engaged in deliberate issue-linkage of the San Bernardino terrorist incident with semi-automatic rampages in Newtown and Aurora, among, sadly, several others.
 
