@@ -39,31 +39,32 @@ I kept my independent variables rather minimal. I include the age of the respond
 
 The models summarized in the following table are mixed effects logistic regressions. I include random effects for the year (in the first model) and [condensed Census regions](http://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf) in all six models. I also allow the effect of party identification to vary by region and year.
 
+
 <table style="text-align:center; padding-bottom: 20px"><caption><strong>Mixed Effects Models of Attitudes toward Gun Control</strong></caption>
 <tr><td colspan="7" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><strong>Require Police Permit?</strong></td><td><strong>Background Check for Private Sales?</strong></td><td><strong>Tougher Penalties than Selling Drugs?</strong></td><td><strong>Limit Semi-Automatics to Police/Military?</strong></td><td><strong>Illegal to Carry a Gun while Drunk?</strong></td><td><strong>Tougher Gun Control Laws after 9/11?</strong></td></tr>
 <tr><td style="text-align:left"></td><td><strong>Model 1</strong></td><td><strong>Model 2</strong></td><td><strong>Model 3</strong></td><td><strong>Model 4</strong></td><td><strong>Model 5</strong></td><td><strong>Model 6</strong></td></tr>
-<tr><td colspan="7" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Age</td><td>0.063<sup>**</sup></td><td>-0.113</td><td>0.359<sup>**</sup></td><td>1.236<sup>***</sup></td><td>0.236</td><td>0.116</td></tr>
-<tr><td style="text-align:left"></td><td>(0.029)</td><td>(0.194)</td><td>(0.155)</td><td>(0.265)</td><td>(0.285)</td><td>(0.226)</td></tr>
-<tr><td style="text-align:left">College Educated</td><td>0.310<sup>***</sup></td><td>0.631<sup>**</sup></td><td>-0.187</td><td>0.423</td><td>0.261</td><td>0.040</td></tr>
-<tr><td style="text-align:left"></td><td>(0.038)</td><td>(0.250)</td><td>(0.179)</td><td>(0.295)</td><td>(0.345)</td><td>(0.261)</td></tr>
-<tr><td style="text-align:left">Female</td><td>0.662<sup>***</sup></td><td>1.056<sup>***</sup></td><td>0.034</td><td>2.014<sup>***</sup></td><td>0.847<sup>***</sup></td><td>1.223<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.029)</td><td>(0.199)</td><td>(0.157)</td><td>(0.272)</td><td>(0.282)</td><td>(0.226)</td></tr>
-<tr><td style="text-align:left">Black</td><td>0.178<sup>***</sup></td><td>-0.154</td><td>0.947<sup>***</sup></td><td>0.403</td><td>-0.576</td><td>-0.104</td></tr>
-<tr><td style="text-align:left"></td><td>(0.049)</td><td>(0.321)</td><td>(0.256)</td><td>(0.447)</td><td>(0.430)</td><td>(0.409)</td></tr>
-<tr><td style="text-align:left">Other Race (Not White)</td><td>0.413<sup>***</sup></td><td>0.256</td><td>0.837<sup>***</sup></td><td>1.038<sup>**</sup></td><td>-0.242</td><td>0.287</td></tr>
-<tr><td style="text-align:left"></td><td>(0.080)</td><td>(0.382)</td><td>(0.289)</td><td>(0.476)</td><td>(0.466)</td><td>(0.431)</td></tr>
-<tr style=" background-color: #f3f3f3; font-weight: bold"><td style="text-align:left">Party ID <br />(D to R)</td><td>-0.402<sup>***</sup></td><td>-0.228</td><td>0.077</td><td>-0.364</td><td>-0.312</td><td>-0.662<sup>**</sup></td></tr>
-<tr style=" background-color: #f3f3f3; font-weight: bold"><td style="text-align:left"></td><td>(0.077)</td><td>(0.218)</td><td>(0.183)</td><td>(0.258)</td><td>(0.390)</td><td>(0.287)</td></tr>
-<tr><td style="text-align:left">Gun in the Household</td><td>-0.962<sup>***</sup></td><td>-0.621<sup>***</sup></td><td>-0.532<sup>***</sup></td><td>-1.182<sup>***</sup></td><td>-0.267</td><td>-1.196<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.030)</td><td>(0.200)</td><td>(0.166)</td><td>(0.253)</td><td>(0.292)</td><td>(0.229)</td></tr>
-<tr><td style="text-align:left">Constant</td><td>1.354<sup>***</sup></td><td>1.053<sup>***</sup></td><td>0.043</td><td>1.352<sup>***</sup></td><td>2.224<sup>***</sup></td><td>1.535<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.155)</td><td>(0.222)</td><td>(0.204)</td><td>(0.303)</td><td>(0.319)</td><td>(0.317)</td></tr>
-<tr><td style="text-align:left">N</td><td>29220</td><td>743</td><td>739</td><td>739</td><td>746</td><td>699</td></tr>
+<tr><td colspan="7" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Age</td><td>0.085<sup>***</sup></td><td>-0.049</td><td>0.343<sup>**</sup></td><td>1.234<sup>***</sup></td><td>0.164</td><td>0.071</td></tr>
+<tr><td style="text-align:left"></td><td>(0.028)</td><td>(0.181)</td><td>(0.146)</td><td>(0.251)</td><td>(0.258)</td><td>(0.215)</td></tr>
+<tr><td style="text-align:left">College Educated</td><td>0.338<sup>***</sup></td><td>0.598<sup>***</sup></td><td>-0.162</td><td>0.457</td><td>0.349</td><td>0.113</td></tr>
+<tr><td style="text-align:left"></td><td>(0.036)</td><td>(0.231)</td><td>(0.168)</td><td>(0.283)</td><td>(0.317)</td><td>(0.252)</td></tr>
+<tr><td style="text-align:left">Female</td><td>0.661<sup>***</sup></td><td>0.955<sup>***</sup></td><td>0.109</td><td>2.041<sup>***</sup></td><td>0.628<sup>**</sup></td><td>1.219<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.028)</td><td>(0.186)</td><td>(0.150)</td><td>(0.264)</td><td>(0.256)</td><td>(0.217)</td></tr>
+<tr><td style="text-align:left">Black</td><td>0.122<sup>***</sup></td><td>-0.253</td><td>0.884<sup>***</sup></td><td>0.547</td><td>-0.515</td><td>-0.191</td></tr>
+<tr><td style="text-align:left"></td><td>(0.046)</td><td>(0.291)</td><td>(0.242)</td><td>(0.438)</td><td>(0.389)</td><td>(0.378)</td></tr>
+<tr><td style="text-align:left">Other Race (Not White)</td><td>0.361<sup>***</sup></td><td>-0.202</td><td>0.873<sup>***</sup></td><td>1.045<sup>**</sup></td><td>-0.396</td><td>0.342</td></tr>
+<tr><td style="text-align:left"></td><td>(0.075)</td><td>(0.332)</td><td>(0.279)</td><td>(0.472)</td><td>(0.417)</td><td>(0.425)</td></tr>
+<tr style=" background-color: #f3f3f3; font-weight: bold"><td style="text-align:left">Party ID (D to R)</td><td>-0.388<sup>***</sup></td><td>-0.283</td><td>0.082</td><td>-0.360</td><td>-0.287</td><td>-0.558<sup>**</sup></td></tr>
+<tr style=" background-color: #f3f3f3; font-weight: bold"><td style="text-align:left"></td><td>(0.068)</td><td>(0.206)</td><td>(0.171)</td><td>(0.246)</td><td>(0.341)</td><td>(0.275)</td></tr>
+<tr><td style="text-align:left">Gun in the Household</td><td>-0.983<sup>***</sup></td><td>-0.529<sup>***</sup></td><td>-0.603<sup>***</sup></td><td>-1.288<sup>***</sup></td><td>-0.063</td><td>-1.198<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.029)</td><td>(0.191)</td><td>(0.160)</td><td>(0.245)</td><td>(0.277)</td><td>(0.221)</td></tr>
+<tr><td style="text-align:left">Constant</td><td>1.354<sup>***</sup></td><td>1.092<sup>***</sup></td><td>0.166</td><td>1.472<sup>***</sup></td><td>2.158<sup>***</sup></td><td>1.640<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.141)</td><td>(0.197)</td><td>(0.262)</td><td>(0.275)</td><td>(0.296)</td><td>(0.320)</td></tr>
+<tr><td style="text-align:left">N</td><td>34234</td><td>838</td><td>835</td><td>832</td><td>842</td><td>790</td></tr>
 <tr><td colspan="7" style="border-bottom: 1px solid black"></td></tr><tr><td colspan="7" style="text-align:left"><sup>***</sup>p < .01; <sup>**</sup>p < .05; <sup>*</sup>p < .1</td></tr>
 </table>
 
 
-The results here tell a mixed story about the effect of increasing partisanship with the GOP on support (rather: opposition) to gun control legislation. The most precise effect is observed in the first model that estimates whether a respondent believes a potential gun-owner should obtain a permit from the police before purchasing a weapon. A change across two standard deviations in the distribution of this variable (i.e. about 47.7% of the data) leads to a decrease of -.402 in the logged odds of support for this hypothetical gun control measure. There is a similar discernible effect of partisanship on opposition to tougher gun control measures after 9/11. An increase of two standard deviations across the partisanship variable leads to a decrease of -.662 in the logged odds of support for tougher gun control measures as a response to 9/11.
+The results here tell a mixed story about the effect of increasing partisanship with the GOP on support (rather: opposition) to gun control legislation. The most precise effect is observed in the first model that estimates whether a respondent believes a potential gun-owner should obtain a permit from the police before purchasing a weapon. A change across two standard deviations in the distribution of this variable (i.e. about 47.7% of the data) leads to a decrease of -.388 in the logged odds of support for this hypothetical gun control measure. There is a similar discernible effect of partisanship on opposition to tougher gun control measures after 9/11. An increase of two standard deviations across the partisanship variable leads to a decrease of -.558 in the logged odds of support for tougher gun control measures as a response to 9/11.
 
 While this might be disconcerting for gun control advocates, I do wonder how informative this question is. It appears just once (in the 2006 wave of GSS). While it does frame the respondent to think of 9/11 in answering this question, it does *not* connect terrorists as potential firearm purchasers or owners. We know now this is an issue in the San Bernardino case. The attackers in that case were American citizens who purchased their weapons legally in advance of a terrorist attack.
 
@@ -102,11 +103,14 @@ We can further illustrate this with post-estimation simulation using the `Zelig`
 
 
 <table style="float: right; padding-left:20px"><caption><strong>Expected Values of Support for Police Permits for Handgun Purchases</strong></caption>
+	<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
+	
   <tr>
     <th class="tg-031e">Category</th>
     <th style="text-align:center">Expected Value</th>
     <th class="tg-031e">95% Interval</th>
   </tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
   <tr>
     <td class="tg-031e">Female, Strong GOP, Doesn't Own Gun</td>
     <td style="text-align:center">.842</td>
@@ -132,6 +136,7 @@ We can further illustrate this with post-estimation simulation using the `Zelig`
     <td style="text-align:center">.590</td>
     <td class="tg-031e">(.511, .666)</td>
   </tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
 </table>
 
 The simulations show that the point estimates for expected value of support for police permits for handgun purchases, given the explanatory variables (e.g. women/men, strong GOP, owns gun/does not own a gun) is above .500 in every application. Further, the 95% interval for all expected values from the simulations are above .500 in all but one category---men with strong GOP affiliation, no college education, and with a gun in the home. Among those men who strongly identify as Republicans, who do own a gun, and *are* college educated in the analysis, the expected value of support for police permits rises to a mean of .590 and a 95% distribution of expected values that are above .500.
@@ -148,6 +153,7 @@ Among the respondents in the analysis with the strongest conceivable affiliation
 <tr><td style="text-align:left">Not Strong GOP</td><td>80.81</td><td>46.97</td><td>83.33</td><td>93.43</td><td>77.78</td></tr>
 <tr style=" background-color: #f3f3f3; font-weight: bold"><td style="text-align:left">Strong GOP</td><td>79.87</td><td>51.68</td><td>80.54</td><td>89.93</td><td>73.15</td></tr>
 <tr><td colspan="6" style="border-bottom: 1px solid black"></td></tr></table>
+
 
 ## Gun Control Isn't Necessarily a Partisan Issue, but It's Becoming One
 
