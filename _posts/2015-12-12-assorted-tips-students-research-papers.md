@@ -58,7 +58,9 @@ Yuck. A better way to state this argument follows:
 
 > In this paper, I argue that multilateral sanctions can be more effective than unilateral sanctions when there is just one issue at stake and when the sanctioning states legitimate the sanctions through international institutions.
 
-This reworked example uses a much simpler sentence structure to more plainly communicate the overall point of the paper to follow. However, I caution that thesis statements, especially about the overall argument in the paper, should be even simpler than that. Given this author identified two conditions under which s/he purports multilateral sanctions would be more effective than unilateral sanctions, it might even be better to state this argument this as follows:
+This reworked example uses a much simpler sentence structure to more plainly communicate the overall point of the paper to follow. 
+
+However, I caution that thesis statements, especially about the overall argument in the paper, should be even simpler than that. Given this author identified two conditions under which s/he purports multilateral sanctions would be more effective than unilateral sanctions, it might even be better to state this argument this as follows:
 
 > In this paper, I argue that multilateral sanctions can be more effective than unilateral sanctions under two conditions. First, multilateral sanctions are more effective than unilateral sanctions when there is just one issue at stake. Second, multilateral sanctions are more effective than unilateral sanctions when the sanctioning states legitimate the sanction policy through an international institution.
 
@@ -74,14 +76,14 @@ By "quote-dump", I refer to the practice of taking an entire sentence (and routi
 
 The spirit of the "quote-dump" is effectively plagiarism. Both are devices used by the student who 1) does not want to take time to write something in his/her own words and 2) does not want to take time to adequately understand what the cited source actually means for the student's purpose.
 
-Professors encourage citing relevant sources used in the course of writing a research paper. However, failure to take time to translate what the cited sources are saying into the student's own words amounts to something that is spiritually similar to plagiarism. The "quote-dump" will not amount to an academic misconduct hearing, but both the "quote-dump" and plagiarism will result in identically poor grades for the assignment.
+Professors encourage citing relevant sources used in the course of writing a research paper. However, failure to take time to translate what the cited sources are saying into the student's own words amounts to something that is spiritually similar to plagiarism. The "quote-dump" will not result in an academic misconduct hearing, but both the "quote-dump" and plagiarism may result in identically poor grades for the assignment.
 
 ## Other Miscellaneous Tips
 
 - Don't do anything at the last minute. Believe me; it shows.
 - Proofread, seriously.
 - Follow instructions. This one should go without saying.
-- Learn APSA citation style, or whichever one the professor wants. I think most of us want APSA style.
+- Learn [APSA citation style](https://library.tamu.edu/help/help-yourself/citing-sources/files/Using%20APSA%20Format.pdf), or whichever one the professor wants. I think most of us want APSA style.
 - Learn what is and is not a [proper noun](https://en.wikipedia.org/wiki/Proper_noun). I've never seen such confusion about what is and is not a proper noun in my life. Things like [sic] "(U.S.) civil war", "cold war", "vladimir putin", "obama", and "department of defense" I see reduced to common nouns while disparate terms like [sic] "Oil", "Gas", "Systems", and "Terror" become proper nouns. Is this a residual effect of kids coming of age with the internet? I'm wondering if this is something akin to a Buzzfeed effect ([see example here](http://www.buzzfeed.com/emmar4309e60de/1st-post-omg-why-does-every-word-start-with-a-capi-20dvk)).
 - Does it need to be said, but is it ultimately a diversion from the overall point the student is trying to communicate? If so, make it a footnote.
 - To parrot my [dos and don'ts of writing](http://svmiller.com/blog/2015/06/dos-and-donts-of-writing-for-students/) post: never use passive voice, never use weasel words, do not use adverbs, and do not use the word "very". I expand further on the rationale for these in that post.
