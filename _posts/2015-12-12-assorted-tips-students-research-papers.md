@@ -27,7 +27,7 @@ My hunch is students take forever to get to the point they think they are arguin
 
 I believe there's an obvious solution to this issue, though it requires taking to heart lessons students learned (or should have learned) in writing papers at lower levels of education. *Outline each proposed paragraph in each section*. For example, the literature review of any research paper should be about eight paragraphs in length.[^1] Make an outline with six-to-eight bullet points. The student that starts with just six bullet points can expand one of them to an additional paragraph later. For each bullet point, write a clear and concise statement that corresponds with an important lesson gathered from the review of the literature.
 
-I'll illustrate this with what a condensed version of my literature review in [my forthcoming *Conflict Management and Peace Science* article](http://cmp.sagepub.com/content/early/2015/10/24/0738894215600384.abstract). For sake of clarity, I omit some parenthetical citations for these claims in order to better illustrate what this process should resemble.
+I'll illustrate this with a condensed version of my literature review in [my forthcoming *Conflict Management and Peace Science* article](http://cmp.sagepub.com/content/early/2015/10/24/0738894215600384.abstract). For sake of clarity, I omit some parenthetical citations for these claims in order to better illustrate what this process should resemble.
 
 1. Why do invididuals prefer a "strong leader" (with many discretionary powers) if we believe preferences for democracy are universal?
 2. Perhaps this preference for democracy is "lip service" if we have not seen it manifest in democracy at the state-level.
