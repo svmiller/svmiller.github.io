@@ -68,11 +68,11 @@ I suppose there is some value in the first example, though. The first example is
 
 The third example is a happy medium between the two, should the student place more urgency on the minimum word count/page length.
 
-## Never "Quote-Dump"
+## *Never* "Quote-Dump"
 
 The "quote-dump" is one of the worst, most commonly appearing elements to any student paper and it needs to stop post haste.
 
-By "quote-dump", I refer to the practice of taking an entire sentence (and routinely more) from a given text, inserting it as a direct quote into a paragraph, and offering the minimal parenthetical citation to avoid accusations of plagiarism. *Turnitin* will flag this practice as "unoriginal", and it is. It's not plagiarism, but it sure as heck is not original.
+By "quote-dump", I refer to the practice of taking a verbatim passage from a given text (sometimes a full sentence and routinely more than that), inserting it as a direct quote into a paragraph, and offering the minimal parenthetical citation to avoid accusations of plagiarism. *Turnitin* will flag this practice as "unoriginal", and it is. It's not plagiarism, but it sure as heck is not original.
 
 The spirit of the "quote-dump" is effectively plagiarism. Both are devices used by the student who 1) does not want to take time to write something in his/her own words and 2) does not want to take time to adequately understand what the cited source actually means for the student's purpose.
 
@@ -82,7 +82,7 @@ Here's a guide for students who are asking themselves whether they should direct
 
 1. Don't do it.
 2. Is the quote from a policymaker or otherwise public figure (i.e. not an academic source)? If so, you can think about using it as a tool to frame your paper with an informative quote that illustrates an ongoing debate. Here's an example from [Stohl et. al's (1984) article](https://www.dropbox.com/s/amk7e15xecxh9lz/stohletal1984hrus.pdf?dl=0) on whether human rights considerations actually mattered to U.S. foreign assistance decisions from the Nixon Administration to the Carter Administration. Notice the quote to begin the article.
-3. Did the author from whom you are thinking about quote-dumping say something so profound---or even profoundly wrong---that it needs to be said as is? If so, you can think about "quote-dumping" a particular passage to draw attention to how this passage is so profound it needs to be included as is in the form of a blockquote. [Ashworth et al. (2008a)](http://isites.harvard.edu/fs/docs/icb.topic1188138.files/Week%208/Ashworth_2008.pdf) and [Ashworth et al. (2008b)](https://scholar.princeton.edu/sites/default/files/rejoinder3.pdf) use this device largely to draw the reader's attention to the extent of logical fallacies and research design flaws committed by [Pape (2003)](http://www.columbia.edu/itc/journalism/stille/Politics%20Fall%202007/readings%20weeks%206-7/Strategic%20Logic%20of%20Suicide%20Missions.pdf) in his analysis on the causes of suicide terrorism. Odds are the student will not encounter such a situation for the end-of-the-semester research paper.
+3. Did the author from whom you are thinking about quote-dumping say something so profound---or even profoundly wrong---that it needs to be said as is? If so, you can think about "quote-dumping" a particular passage to draw attention to how this passage is so profound it needs to be included as a blockquote. [Ashworth et al. (2008a)](http://isites.harvard.edu/fs/docs/icb.topic1188138.files/Week%208/Ashworth_2008.pdf) and [Ashworth et al. (2008b)](https://scholar.princeton.edu/sites/default/files/rejoinder3.pdf) use this device largely to draw the reader's attention to the extent of logical fallacies and research design flaws committed by [Pape (2003)](http://www.columbia.edu/itc/journalism/stille/Politics%20Fall%202007/readings%20weeks%206-7/Strategic%20Logic%20of%20Suicide%20Missions.pdf) in his analysis on the causes of suicide terrorism. Odds are the student will not encounter such a situation for the end-of-the-semester research paper.
 4. So, don't do it. Use your own words.
 
 ## Other Miscellaneous Tips
