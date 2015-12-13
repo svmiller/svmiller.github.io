@@ -60,7 +60,7 @@ Yuck. A better way to state this argument follows:
 
 This reworked example uses a much simpler sentence structure to more plainly communicate the overall point of the paper to follow. 
 
-However, I caution that thesis statements, especially about the overall argument in the paper, should be even simpler than that. Given this author identified two conditions under which s/he purports multilateral sanctions would be more effective than unilateral sanctions, it might even be better to state this argument this as follows:
+However, I caution that thesis statements, especially about the overall argument in the paper, should be even simpler than that. Given this author identified two conditions under which s/he purports multilateral sanctions would be more effective than unilateral sanctions, it might even be better to state this argument as follows:
 
 > In this paper, I argue that multilateral sanctions can be more effective than unilateral sanctions under two conditions. First, multilateral sanctions are more effective than unilateral sanctions when there is just one issue at stake. Second, multilateral sanctions are more effective than unilateral sanctions when the sanctioning states legitimate the sanction policy through an international institution.
 
