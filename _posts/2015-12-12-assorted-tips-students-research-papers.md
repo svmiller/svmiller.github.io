@@ -11,7 +11,7 @@ My last batch of research papers in my methods class were, to put it gently, und
 
 <!--more-->
 
-{% include image.html url="/images/squidward-paper.jpg" caption="It's remarkable how much Squidward appears in a Google search for writing term papers during an all-nighter." width=400 align="right" %}
+{% include image.html url="/images/squidward-paper.jpg" caption="It's remarkable how much Squidward appears in a Google Images search for writing term papers during an all-nighter." width=400 align="right" %}
 
 I take great pride in teaching a quantitative methods class that emphasizes work toward an end-of-the-semester research design paper. I've been genuinely surprised at the results that some students put forward. This class has also produced a couple research assistants for me and students who have begun graduate school or will be sure to start graduate programs soon (i.e. once they graduate). 
 
@@ -58,13 +58,17 @@ Yuck. A better way to state this argument follows:
 
 > In this paper, I argue that multilateral sanctions can be more effective than unilateral sanctions when there is just one issue at stake and when the sanctioning states legitimate the sanctions through international institutions.
 
-This reworked example uses a much simpler sentence structure to more plainly communicate the overall point of the paper to follow.
+This reworked example uses a much simpler sentence structure to more plainly communicate the overall point of the paper to follow. However, I caution that thesis statements, especially about the overall argument in the paper, should be even simpler than that. Given this author identified two conditions under which s/he purports multilateral sanctions would be more effective than unilateral sanctions, it might even be better to state this argument this as follows:
 
-I suppose there is some value in the first example, though. The former is better if the student is concerned foremost with the minimum page length and word count. The latter is better if the students wants the reader to know what s/he intends to argue. I care more about the latter than the former.
+> In this paper, I argue that multilateral sanctions can be more effective than unilateral sanctions under two conditions. First, multilateral sanctions are more effective than unilateral sanctions when there is just one issue at stake. Second, multilateral sanctions are more effective than unilateral sanctions when the sanctioning states legitimate the sanction policy through an international institution.
+
+I suppose there is some value in the first example, though. The first example is better if the student is concerned foremost with the minimum page length and word count. The second example is better if the students wants the reader to know what s/he intends to argue. I care more about the latter than the former.
+
+The third example is a happy medium between the two, should the student place more urgency on the minimum word count/page length.
 
 ## Never "Quote-Dump"
 
-The "quote-dump" is one of the worst, most commonly appearing element to any student paper and it needs to stop post haste.
+The "quote-dump" is one of the worst, most commonly appearing elements to any student paper and it needs to stop post haste.
 
 By "quote-dump", I refer to the practice of taking an entire sentence (and routinely more) from a given text, inserting it as a direct quote into a paragraph, and offering the minimal parenthetical citation to avoid accusations of plagiarism. *Turnitin* will flag this practice as "unoriginal", and it is. It's not plagiarism, but it sure as heck is not original.
 
