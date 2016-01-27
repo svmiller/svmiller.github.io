@@ -23,7 +23,7 @@ These links will be as useful for students as they will be for me. I find myself
 
 I never used [my alma mater’s writing center](https://cstw.osu.edu/writing-center) when I was an undergraduate. In hindsight, I wish I did. Clemson’s political science students needs to take better advantage of this resource. Check [The Writing Center at Clemson](http://www.clemson.edu/centers-institutes/writing/) for resources to help you with your papers and other writing pursuits.
 
-Borrowing from my friend [Andy Owsiak](http://www.andrewowsiak.org/for-students.html)'s (Georgia) resources, I also recommend the following books to help you with writing. The Handley (2014), McCloskey (2000), and Thomson (2011) books are my recommendations though the focus of both is in economics.
+Borrowing from my friend [Andy Owsiak](http://www.andrewowsiak.org/for-students.html)'s (Georgia) resources, I also recommend the following books to help you with writing. The Handley (2014), McCloskey (2000), and Thomson (2011) books are my recommendations though the focus is not strictly on academic writing in political science. Handley's book is about writing for the web while McCloskey and Thomson are writing for economists.
 
 - Becker, Howard S. 1986. *Writing for Social Scientists: How to Start and Finish your Thesis, Book, or Article*. Chicago: University of Chicago Press.
 - Handley, Ann. 2014. [*Everybody Writes: Your Go-To Guide to Creating Ridiculously Good Content.*](http://www.amazon.com/Everybody-Writes-Go-Creating-Ridiculously/dp/1118905555/ref=tmm_hrd_swatch_0?_encoding=UTF8&qid=&sr=) Hoboken: John Wiley & Sons, Inc.

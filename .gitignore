@@ -2,6 +2,7 @@ _site
 .sass-cache
 /dross
 HIDEME
+/drafts
 
 # ignore temp files w/ trailing ~
 *~
