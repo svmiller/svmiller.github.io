@@ -5,11 +5,9 @@ layout: post
 permalink: /blog/2015/04/some-psfrustrations-from-an-ir-perspective/
 categories:
   - Political Science
+excerpt: "Here are some #PSFrustrations from the perspective of an IR scholar."
 ---
 
-Here are some #PSFrustrations from the perspective of an IR scholar.
-
-<!--more-->
 
 I checked Twitter for the first time in two months or so and found this interesting tweet from [Jonathan Bernstein][1] at Bloomberg View.
 

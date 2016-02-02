@@ -5,11 +5,8 @@ layout: post
 permalink:
 categories:
   - Shameless self promotion
+excerpt: "I guested on *The Monkey Cage* to offer insight to what Putin and Trump supporters have in common and what they expect of their heads of state."
 ---
-
-I guested on *The Monkey Cage* to offer insight to what Putin and Trump supporters have in common and what they expect of their heads of state.
-
-<!--more-->
 
 From [a guest post at *The Monkey Cage*](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/):
 

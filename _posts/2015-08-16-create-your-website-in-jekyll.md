@@ -6,11 +6,9 @@ permalink:
 categories:
   - Jekyll
   - Github
+excerpt: "I recently moved my academic website from a shared hosting plan to Github. You should too."
 ---
 
-I recently moved my academic website from a shared hosting plan to Github. You should too.
-
-<!--more-->
 
 {% include image.html url="/images/octojekyll.png" caption="Octojekyll." width=300 align="right" %}
 

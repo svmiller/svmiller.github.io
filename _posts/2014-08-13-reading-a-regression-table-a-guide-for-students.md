@@ -7,11 +7,10 @@ categories:
   - Teaching
 tags:
   - Regression
+excerpt: "I believe that the ability to read a regression table is an important task for undergraduate students in political science. I offer an explanation of the regression table in this post. "
 ---
 
-I believe that the ability to read a regression table is an important task for undergraduate students in political science. I offer an explanation of the regression table in this post.
 
-<!--more-->
 
 I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. In my field, this can be perilous. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, can be misleading. The proof is not as convincing as it seems. A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
 

@@ -5,9 +5,10 @@ layout: post
 permalink: /blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-stargazer-package/
 categories:
   - R
+excerpt: "I wish the stargazer package in R would automatically generate random effect statistics from the lme4 package. Here's a backward way to get those and include them in stargazer output.   "
 ---
 
-I wish the stargazer package in R would automatically generate random effect statistics from the lme4 package. Here's a backward way to get those and include them in stargazer output.
+
 
 <!--more-->
 

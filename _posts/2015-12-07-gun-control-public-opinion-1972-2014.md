@@ -6,11 +6,11 @@ permalink:
 categories:
   - Gun control
   - Public opinion
+excerpt:  "We commonly believe the gun control debate to be a polarizing issue, but data from the General Social Survey suggest that is not necessarily true."
 ---
 
-We commonly believe the gun control debate to be a polarizing issue, but data from the General Social Survey suggest that is not necessarily true. GOP partisanship does not robustly reduce support for gun control and most Republicans actually support gun control measures. However, the issue is quickly becoming a polarizing issue among the electorate, and it's likely not just the South that is responsible for that.
-
-<!--more-->
+<!--We commonly believe the gun control debate to be a polarizing issue, but data from the General Social Survey suggest that is not necessarily true. GOP partisanship does not robustly reduce support for gun control and most Republicans actually support gun control measures. However, the issue is quickly becoming a polarizing issue among the electorate, and it's likely not just the South that is responsible for that.
+     -->
 
 {% include image.html url="/images/planned-parenthood-shooter-arrested.jpg" caption="Robert Lewis Dear was taken into custody after a mass shooting at a Colorado Springs Planned Parenthood." width=450 align="right" %}
 

@@ -4,11 +4,9 @@ author: steve
 title:  "A Beginner’s Guide to Using R"
 date:   2014-08-09 15:16:01
 categories: R
+excerpt: "R seems daunting, but it shouldn't be. I write a beginner's guide to using R and estimating regressions in it."
 ---
 
-R seems daunting, but it shouldn't be. I write a beginner's guide to using R and estimating regressions in it.
-
-<!--more-->
 
 I prefer to teach applied statistical analysis to students using the R programming language as a guide. R is an open source programming language with origins in C and FORTRAN. Statisticians and quantitative researchers are moving to R because of its flexibility. It can handle advanced computational models better than some canned software packages like Stata and SPSS and can permit advanced users to write their own functions. R is also useful because it is free, unlike Stata and SPSS. Any person can download and install R and all its capabilities without needing to shell out hundreds or thousands of dollars.
 

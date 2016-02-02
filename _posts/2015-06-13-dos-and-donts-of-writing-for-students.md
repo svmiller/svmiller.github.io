@@ -4,12 +4,10 @@ author: steve
 layout: post
 permalink: /blog/2015/06/dos-and-donts-of-writing-for-students/
 categories:
-  - Teaching
+  - Teaching 
+excerpt: "A list of dos and dont's for writing for students in political science."
 ---
 
-A list of dos and dont's for writing for students in political science.
-
-<!--more-->
 
 This will be the subject of a professional development talk I want to give students in the upcoming fall semester. I am releasing a draft of it here for some preliminary feedback from friends and colleagues. Comments are definitely welcome.
 

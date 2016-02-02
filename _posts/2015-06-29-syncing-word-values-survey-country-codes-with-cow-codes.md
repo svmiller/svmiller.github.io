@@ -5,11 +5,10 @@ layout: post
 permalink: /blog/2015/06/syncing-word-values-survey-country-codes-with-cow-codes/
 categories:
   - R
+excerpt: "World Values Survey country codes don't sync well with other country classification systems. Here, I use the countrycode package in R and some recoding to sync them."
 ---
 
-World Values Survey country codes don't sync well with other country classification systems. Here, I use the countrycode package in R and some recoding to sync them.
 
-<!--more-->
 
 I work with World Values Survey (WVS) data a lot and recently downloaded the [six-wave longitudinal data from WVS][1] (v. 2015-04-18) for a project. Anyone who has worked with WVS before knows WVS country classification is a bit opaque. It is mostly derived from [UN M.49 classification][2], much like [Gleditsch-Ward numbers][3] were mostly derived from [Russett, Singer, and Small (1968)][4] codes. However, WVS' system diverged in important ways from UN M.49 with the progression of time, much like Gleditsch-Ward diverged from the Russett, Singer, and Small system that evolved into the more familiar Correlates of War (CoW) project. Look no further than the former Yugoslavia to see important points of divergence among various country classification systems.
 

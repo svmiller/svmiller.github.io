@@ -9,11 +9,10 @@ tags:
   - Congress
   - NSF
 format: quote
+excerpt: "Conservatives don't like funding political science for not-so-subtle reasons."
 ---
 
-Conservatives don't like funding political science for not-so-subtle reasons.
 
-<!--more-->
 
 ...these studies tend to find outcomes conservatives don’t like—about the [consequences of inequality][1], or [limiting democracy][2], or that anthropogenic climate change is a problem. Dressing up these budget cuts as fiscal responsibility isn’t fooling anyone.
 

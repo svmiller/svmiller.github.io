@@ -4,12 +4,10 @@ author: steve
 layout: post
 permalink:
 categories:
-  - Teaching
+  - Teaching 
+excerpt: "My last batch of research papers were, to put it gently, underwhelming. I offer some advice for future students on how to not repeat some errors that I encountered."
 ---
 
-My last batch of research papers were, to put it gently, underwhelming. I offer some advice for future students on how to not repeat some errors that I encountered.
-
-<!--more-->
 
 {% include image.html url="/images/squidward-paper.jpg" caption="It's remarkable how much Squidward appears in a Google Images search for writing term papers during an all-nighter." width=400 align="right" %}
 

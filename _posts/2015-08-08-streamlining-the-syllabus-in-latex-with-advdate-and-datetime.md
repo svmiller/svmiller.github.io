@@ -5,11 +5,9 @@ layout: post
 permalink: /blog/2015/08/streamlining-the-syllabus-in-latex-with-advdate-and-datetime/
 categories:
   - LaTeX
+excerpt: "I got tired of manually getting dates right for each week of the semester in the reading list section of the syllabus, so I found a way to make LaTeX do that."
 ---
 
-I got tired of manually getting dates right for each week of the semester in the reading list section of the syllabus, so I found a way to make LaTeX do that.
-
-<!--more-->
 
 'Tis the season for academics to be finalizing new syllabi for the upcoming academic year.
 
