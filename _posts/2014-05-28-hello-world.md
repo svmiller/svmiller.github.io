@@ -8,6 +8,7 @@ categories:
 ---
 
 I do not anticipate doing a lot of professional blogging here. When I do, it'll largely be about R, LaTeX, or professional development for students in political science.
+
 <!--more-->
 
 WordPress automatically creates these first posts upon installation of the software. Rather than edit or delete it, I let it sit for a year and a half before I started “blogging”.

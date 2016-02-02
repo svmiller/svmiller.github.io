@@ -10,6 +10,7 @@ categories:
 I got tired of manually getting dates right for each week of the semester in the reading list section of the syllabus, so I found a way to make LaTeX do that.
 
 <!--more-->
+
 'Tis the season for academics to be finalizing new syllabi for the upcoming academic year.
 
 Generally, academics do not change syllabi for their courses much from one semester to the next. This is intuitive in political science. For example, my belief about what constitutes core scholarship in [inter-state conflict][1] does not budge much. Students in every version of the class I have taught are assigned [Maoz and Russett (1993)][2] and [Fearon (1995)][3], to name just two examples. The next time I teach an upper-division class on the topic, the new batch of students will read the same basic materials.
