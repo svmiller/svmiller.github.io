@@ -17,3 +17,8 @@ markdown: kramdown
 permalink: blog/:year/:month/:title
 job.title: "Assistant Professor"
 excerpt_separator: "<!--more-->"
+
+# SEO stuff
+google_author: "https://plus.google.com/u/0/110288225974212014913"
+google_site_verification: "nfd8hkZSc3GmIivrLCudAdTq5m1kI0Ao7P1UyIt9z5Q"
+bing_webmastertools_id: "E24D33E8D53D5730794478CB209F15E5"
