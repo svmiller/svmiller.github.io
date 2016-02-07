@@ -4,8 +4,7 @@ author: steve
 layout: post
 permalink:
 categories:
-  - Gun control
-  - Public opinion
+  - Political Science
 excerpt:  "We commonly believe the gun control debate to be a polarizing issue, but data from the General Social Survey suggest that is not necessarily true."
 ---
 
