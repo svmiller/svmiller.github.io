@@ -5,7 +5,6 @@ layout: post
 permalink: /blog/2015/02/moving-from-beamer-to-r-markdown/
 categories:
   - R
-  - Workflow
 tags:
   - Beamer
   - LaTeX
