@@ -11,7 +11,7 @@ excerpt: "I got tired of manually getting dates right for each week of the semes
 
 'Tis the season for academics to be finalizing new syllabi for the upcoming academic year.
 
-Generally, academics do not change syllabi for their courses much from one semester to the next. This is intuitive in political science. For example, my belief about what constitutes core scholarship in [inter-state conflict][1] does not budge much. Students in every version of the class I have taught are assigned [Maoz and Russett (1993)][2] and [Fearon (1995)][3], to name just two examples. The next time I teach an upper-division class on the topic, the new batch of students will read the same basic materials.
+Academics do not change syllabi for their courses much from one semester to the next. This is intuitive in political science. For example, my belief about what constitutes core scholarship in [inter-state conflict][1] does not budge much. I assign students [Maoz and Russett (1993)][2] and [Fearon (1995)][3], to name just two examples, in every version of the class I have taught. The next time I teach an upper-division class on the topic, the new batch of students will read the same basic materials.
 
 Experienced professors instead spend more time with monotonous features of the syllabus. Dates for midterms and exams change. Perhaps [the university must have a Thursday night football game][4] that leads to a canceled class. The academic conference schedule may adjust a class date here or there.
 
@@ -52,11 +52,11 @@ Next, venture to the part of your document where your reading list will be rende
 \week{Week 15}
 {% endhighlight %}
 
-The `\SetDate `command starts **a week before the first Monday of the first week of class**. If you used `\section` in lieu of `\paragraph`, enter the date of **the first Monday of the first week of class**. I wish I knew why this was, but I think it&#8217;s because `\paragraph` is something akin to a &#8220;child&#8221; field in LaTeX while `\section` is akin to a &#8220;parent&#8221; field. Thus, the &#8220;child&#8221; field prematurely advances a week.
+The `\SetDate `command starts **a week before the first Monday of the first week of class**. If you used `\section` in lieu of `\paragraph`, enter the date of **the first Monday of the first week of class**. I wish I knew why this was, but I think it's because `\paragraph` is something akin to a "child" field in LaTeX while `\section` is akin to a "parent" field. Thus, the "child" field prematurely advances a week.
 
 Enter as many weeks as you wish, as you can see in my example code.
 
-When you're done, you&#8217;ll get a PDF that looks like this.
+When you're done, you'll get a PDF that looks like this.
 
 {% include embedpdf.html code="8ziqc5ray2denf9/syllabus-template.pdf" width=100 height=800 %}
 
