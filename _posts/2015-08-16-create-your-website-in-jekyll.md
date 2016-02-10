@@ -270,7 +270,7 @@ _site
 {% endraw %}
 {% endhighlight %}
 
-This tells Github to ignore the `_site` directory and `.sass-cache` directories, which auto-update via Jekyll and are quite large. `_site` may run about 30 MB. More importantly, you don't need them to render your site on Github.
+This tells Github to ignore the `_site` directory and `.sass-cache`. You'll never want to edit these. You'll especially want to leave the `_site` directory alone. The `_site` directory is the destination directory for your entire website. Jekyll uses the raw markdown files in the "main" directory of your Jekyll installation to render your website in the `_site` directory. Likewise, Github's servers will do the same.
 
 Open a terminal window and change the directory to the one containing your website. Enter the following commands. Change `yourusername` as necessary.
 
