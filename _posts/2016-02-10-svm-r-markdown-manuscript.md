@@ -39,7 +39,7 @@ output:
     keep_tex: true
     fig_caption: true
     latex_engine: pdflatex
-    template: ~/Dropbox/miscelanea/svm-r-markdown-templates/svm.latex.ms.tex
+    template: ~/Dropbox/miscelanea/svm-r-markdown-templates/svm-latex-ms.tex
 title: "A Pandoc Markdown Article Starter and Template"
 thanks: "Replication files are available on the author's Github account..."
 author:
