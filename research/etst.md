@@ -4,13 +4,16 @@ title: "Economic Threats or Societal Turmoil? Understanding Preferences for Auth
 permalink: /research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/
 ---
 
-{% include image.html url="/images/germany-hyperinflation.jpg" caption="Hyperinflation was so severe in Germany in 1923 that it became more convenient for citizens like this unknown German woman to weigh the marks on a scale than count the currency printed on the bills. The extent of hyperinflation gave rise to a host of societal problems that later led to the emergence of the Nazi Party." width="750" align="center" %}
+{% include image.html url="/images/germany-hyperinflation.jpg" caption="Hyperinflation was so severe in Germany in 1923 that it became more convenient for Germans to weigh the marks on a scale than count the currency printed on the bills." width="400" align="right" %}
 
 ## Article and Supporting Materials
 
 - [Article](https://www.dropbox.com/s/harb6ylpcxdpalr/etst.pdf?dl=0)
 - [Appendix](https://www.dropbox.com/s/pq8gmr7v1xvvu2h/etst-appendix.pdf?dl=0)
 - Replication materials (upon publication)
+- [Discussion on *The Monkey Cage*](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/)
+
+<hr style="clear:both;visibility: hidden;" />  
 
 ## Abstract
 

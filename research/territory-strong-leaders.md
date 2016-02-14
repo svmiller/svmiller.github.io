@@ -4,13 +4,16 @@ title: "Individual-level Expectations of Executive Authority under Territorial T
 permalink: /research/individual-level-expectations-of-executive-authority-under-territorial-threat/
 ---
 
-{% include image.html url="/images/georges-ernest-boulanger.jpg" caption="Though unsuccessful in his political ambitions, the extent of the external threat imposed by Germany after the Franco-Prussian War made Georges Ernest Boulanger a credible threat to the Third Republic." width="642" align="center" %}
+{% include image.html url="/images/georges-ernest-boulanger.jpg" caption="The fallout of the Franco-Prussian War made Georges Ernest Boulanger a credible threat to the French Third Republic." width="400" align="right" %}
 
 ## Article and Supporting Materials
 
 - [Article](https://www.dropbox.com/s/piehk2hqiaygi8k/strong-leaders.pdf?dl=0)
 - [Appendix](https://www.dropbox.com/s/m8fq7jn14e7l9gy/strong-leaders-appendix.pdf?dl=0)
 - [Replication materials](https://www.dropbox.com/sh/9mc65oehdiznr9b/AADJ7IQQDTvtO9Wed7mWGGHLa?dl=0)
+- [Discussion on *The Monkey Cage*](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/)
+                   
+<hr style="clear:both;visibility: hidden;" />
 
 ## Abstract
 
