@@ -6,7 +6,9 @@ permalink: /research/
 
 My research focuses on international conflict, particularly over the distribution of territory. I examine the effect these territorial issues have on domestic politics, particularly at the level of the individual citizen. Here, you can find materials relevant to my published research and research in progress. Feel free to contact me if you are interested in reading unpublished manuscripts on which I am currently working. I welcome feedback.
 
-## Publications
+## Publications 
+
+"[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." (with Douglas M. Gibler and Erin K. Little). Conditionally accepted at *International Studies Quarterly*.
 
 Miller, Steven V. Forthcoming. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science*.
 
@@ -23,8 +25,6 @@ Gibler, Douglas M. and Steven V. Miller "[Comparing the Foreign Aid Policies of 
 Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Negotiated Compromises](http://cmp.sagepub.com/content/28/3/261)." *Conflict Management and Peace Science* 28(3): 261-279.
 
 ## Working Papers and Works in Progress
-
-"[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." (with Douglas M. Gibler and Erin K. Little). Invitation to revise and resubmit.
 
 "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)." Under review.
 
