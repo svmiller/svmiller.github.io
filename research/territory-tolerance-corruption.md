@@ -6,7 +6,7 @@ permalink: /research/external-territorial-threats-and-tolerance-of-corruption-a-
 
 {% include image.html url="/images/india-protester-corruption.jpg" caption="Are we sure attitudes against corruption are uniform like this? (AP Photo/Kevin Frayer)" width="400" align="right" %}
 
-## Article and Supporting Materials
+<!--## Article and Supporting Materials  --> 
 
 - [Article](https://www.dropbox.com/s/m3pqvejwy7yev2g/tolerance-corruption.pdf?dl=0)
 - Appendix

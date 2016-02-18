@@ -6,7 +6,7 @@ permalink: /research/individual-level-expectations-of-executive-authority-under-
 
 {% include image.html url="/images/georges-ernest-boulanger.jpg" caption="The fallout of the Franco-Prussian War made Georges Ernest Boulanger a credible threat to the French Third Republic." width="400" align="right" %}
 
-## Article and Supporting Materials
+<!--## Article and Supporting Materials  --> 
 
 - [Article](https://www.dropbox.com/s/piehk2hqiaygi8k/strong-leaders.pdf?dl=0)
 - [Appendix](https://www.dropbox.com/s/m8fq7jn14e7l9gy/strong-leaders-appendix.pdf?dl=0)

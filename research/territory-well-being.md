@@ -6,7 +6,7 @@ permalink: /research/territorial-disputes-and-the-politics-of-individual-well-be
 
 {% include image.html url="/images/1982pdm-galtieri-thumbs-up.png" caption="Leopoldo Galtieri, who had just ordered the occupation of the Falkland Islands, greets a jubilant Argentine crowd in the Plaza de Mayo." width="400" align="right" %}
 
-## Article and Supporting Materials
+<!--## Article and Supporting Materials  -->
 
 - [Article](http://jpr.sagepub.com/content/50/6/677)
 - [Appendix](https://www.dropbox.com/s/ueii3id7zk5kqfu/miller2013tdpi-appendix.pdf)

@@ -6,7 +6,7 @@ permalink: /research/economic-threats-or-societal-turmoil-understanding-preferen
 
 {% include image.html url="/images/germany-hyperinflation.jpg" caption="Hyperinflation was so severe in Germany in 1923 that it became more convenient for Germans to weigh the marks on a scale than count the currency printed on the bills." width="400" align="right" %}
 
-## Article and Supporting Materials
+<!--## Article and Supporting Materials  --> 
 
 - [Article](https://www.dropbox.com/s/harb6ylpcxdpalr/etst.pdf?dl=0)
 - [Appendix](https://www.dropbox.com/s/pq8gmr7v1xvvu2h/etst-appendix.pdf?dl=0)
