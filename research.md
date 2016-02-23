@@ -30,7 +30,7 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 "[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." Under review.
 
-"The Effects of International Terrorism on Judicial Confidence."
+"[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/terrorism-judicial-confidence/)."
 
 "Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East."
 
