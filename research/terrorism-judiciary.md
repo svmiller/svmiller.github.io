@@ -4,7 +4,7 @@ title: "The Effect of Terrorism on Judicial Confidence"
 permalink: /research/terrorism-judicial-confidence/
 ---
 
-{% include image.html url="/images/french-patriot-act-protests.jpg" caption="The 'French Patriot Act' is controversial, but the French are generally open to it." width="400" align="right" %}
+{% include image.html url="/images/french-patriot-act-protests-2.jpg" caption="The 'French Patriot Act' is controversial, but the French are generally open to it." width="400" align="right" %}
 
 <!--## Article and Supporting Materials  --> 
 
