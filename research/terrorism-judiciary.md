@@ -9,7 +9,8 @@ permalink: /research/terrorism-judicial-confidence/
 <!--## Article and Supporting Materials  --> 
 
 - [Article](https://github.com/svmiller/terrorism-judiciary/blob/master/terrorism-judiciary.pdf)
-- [Appendix](https://github.com/svmiller/terrorism-judiciary/blob/master/appendix/terrorism-judiciary-appendix.pdf)
+- [Appendix](https://github.com/svmiller/terrorism-judiciary/blob/master/appendix/terrorism-judiciary-appendix.pdf) 
+- [Presentation](https://github.com/svmiller/terrorism-judiciary/blob/master/presentation/terrorism-judiciary-presentation.pdf)
 - Replication materials
 
 
