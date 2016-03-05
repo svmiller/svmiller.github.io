@@ -4,7 +4,7 @@ author: steve
 layout: post
 permalink: /blog/2015/02/moving-from-beamer-to-r-markdown/
 categories:
-  - R
+  - R Markdown
 tags:
   - Beamer
   - LaTeX

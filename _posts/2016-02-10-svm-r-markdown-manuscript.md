@@ -4,7 +4,7 @@ author: steve
 layout: post
 permalink:
 categories:
-  - R
+  - R Markdown
 excerpt: "I have a series of templates for R Markdown. Here's one for academic manuscripts. I offer a guide on how to use it."
 ---
 
