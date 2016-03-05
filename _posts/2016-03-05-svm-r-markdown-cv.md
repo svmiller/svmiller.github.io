@@ -52,7 +52,7 @@ We start with `output:`, which tells us we want a PDF document on the next line 
 
 `title:` and `author:` should be intuitive. Make `title:` some value like "CV" or "vita". I'll defer on your particular choice of words. `author:` should be your name. My template chooses William Sealy Gosset, who introductory quantitative students may know as "Student" of Student's t-distribution fame. Gosset may be [one of the most underappreciated statisticians of all time](http://www.amazon.com/The-Cult-Statistical-Significance-Economics/dp/0472050079). He was also a researcher and brewer for Arthur Guinness & Son, now known as Guinness. Fun fact: Gosset wrote under the pseudonym of "Student" because Guinness frowned on his statistical side projects and forbade its scientists from publishing research for fear of it being useful to rival brewers.
 
-My endorsement of his importance to the field of applied statistics should not be confused as an endorsement of that awful beer. 
+My endorsement of his importance to the field of applied statistics should not be confused as an endorsement of that awful beer. You could do better than Guinness.
 
 The next two lines will constitute the first two lines after your name on your CV. Add your particular job title in the `jobtitle:` field (e.g. Assistant Professor, Department of Political Science). Add your address in the `address:` field thereafter. Note: R Markdown is flexible with most forms of Unicode, which is why I have dots separating what are otherwise "lines" on a mailing address.
 
