@@ -27,7 +27,7 @@ output:
 geometry: margin=1in
 
 title: "CV"
-author: William Sealy Gossett
+author: William Sealy Gosset
 
 jobtitle: "Chief Brewer, Arthur Guinness & Son"
 address: "Guinness Brewery · Park Royal · London NW10 7RR, UK"
@@ -50,7 +50,7 @@ urlcolor: blue
 
 We start with `output:`, which tells us we want a PDF document on the next line (with two indented spaces). Thereafter, we specify some PDF document options. `latex_engine` will rely on pdflatex, which is my rendering engine of choice for LaTeX (because I love the mathpazo family of fonts). `template:` specifies the relative path of my template (titled `svm-latex-cv.tex`). Make sure it points to wherever you saved this template.
 
-`title:` and `author:` should be intuitive. Make `title:` some value like "CV" or "vita". I'll defer on your particular choice of words. `author:` should be your name. My template chooses William Sealy Gossett, who introductory quantitative students may know as "Student" of Student's t-distribution fame. Gossett may be [one of the most underappreciated statisticians of all time](http://www.amazon.com/The-Cult-Statistical-Significance-Economics/dp/0472050079). He was also a researcher and brewer for Arthur Guinness & Son, now known as Guinness. Fun fact: Gosset wrote under the pseudonym of "Student" because Guinness frowned on his statistical side projects and forbade its scientists from publishing research for fear of it being useful to rival brewers.
+`title:` and `author:` should be intuitive. Make `title:` some value like "CV" or "vita". I'll defer on your particular choice of words. `author:` should be your name. My template chooses William Sealy Gosset, who introductory quantitative students may know as "Student" of Student's t-distribution fame. Gosset may be [one of the most underappreciated statisticians of all time](http://www.amazon.com/The-Cult-Statistical-Significance-Economics/dp/0472050079). He was also a researcher and brewer for Arthur Guinness & Son, now known as Guinness. Fun fact: Gosset wrote under the pseudonym of "Student" because Guinness frowned on his statistical side projects and forbade its scientists from publishing research for fear of it being useful to rival brewers.
 
 My endorsement of his importance to the field of applied statistics should not be confused as an endorsement of that awful beer. 
 
