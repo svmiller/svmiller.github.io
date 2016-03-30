@@ -8,7 +8,7 @@ My research focuses on international conflict, particularly over the distributio
 
 ## Publications 
 
-"[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." (with Douglas M. Gibler and Erin K. Little). Conditionally accepted at *International Studies Quarterly*.
+Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly*.
 
 Miller, Steven V. Forthcoming. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science*.
 
