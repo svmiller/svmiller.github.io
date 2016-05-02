@@ -28,7 +28,9 @@ Here is a pretty graph to illustrate how robust the findings are with a basic li
 
 {% include image.html url="/images/attendance-grades.png" caption="A Scatterplot of the Relationship between Class Attendance and Final Grade (Fall 2014-Spring 2016)" width=800 align="center" %}
 
-Friends that know me also know I love to bombard with a series of models estimating a proposed relationship. So, I estimate the relationship between class attendance first as a linear model (Model 1). I estimate it again with fixed effects for semester and class number to control for unit heterogeneity (Model 2). Next, I estimate the model again with random effects for semester and class number (Model 3). Since a smart student may object that attendance is partly endogenous to a grade since past classes deducted all participation points after five unexcused absences, I subset the data to just observations with greater than or equal to 75% attendance (i.e. roughly the threshold below which I deduct all participation points since one missed class constitutes a five-percent decrease in attendance). These analyses comprise Model 4, Model 5, and Model 6.
+Friends that know me also know I love to bombard with a series of models estimating a proposed relationship. So, I estimate the relationship between class attendance first as a linear model (Model 1). I estimate it again with fixed effects for semester and class number to control for unit heterogeneity (Model 2). Next, I estimate the model again with random effects for semester and class number (Model 3). 
+
+A smart student may object that attendance is partly endogenous to a grade since past classes deducted all participation points after five unexcused absences. This is true. So, I subset the data to just observations with greater than or equal to 75% attendance (i.e. roughly the threshold below which I deduct all participation points since one missed class constitutes a five-percent decrease in attendance). These analyses comprise Model 4, Model 5, and Model 6.
 
 The reader can see that the results are robust to multiple model specifications and, well, an endogeneity concern. 
 
