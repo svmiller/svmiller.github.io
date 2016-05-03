@@ -15,4 +15,4 @@ excerpt: "Discomfort should be a learning experience as Irina Popescu notes at T
 >
 > I am talking about the fragility that follows their separation from the structured patterns of high school and middle school, as they are thrown into a world where the future is unknown. There are no more good-job-dinosaur-with-a-thumb-up stickers for simply getting a task done in college. That lack of consistent positive reinforcement often discourages and upsets them, especially in a writing class...
 
-Popescu works in the field of comparative literature where their academics privilege different approaches than political scientists but the central takeaway is the same. Failure is a part of learning. College students need to learn that. Take proactive measures after a first major setback to prevent compounding errors.
+Popescu works in the field of comparative literature where their academics privilege different approaches than political scientists but the central takeaway is the same. Failure is a part of learning and college students need to learn that. Take proactive measures after a first major setback to prevent compounding errors.
