@@ -20,7 +20,7 @@ Could a web-minded approach actually help students become better writers? I aske
 
 ## Shed High School Rules
 
-Handley dedicated this topic her third chapter but I think it's worth summarizing first. Writing incentives, formats and even some rules that students learned in middle school or high school do not translate to being a good writer in college or beyond.
+Handley dedicated this topic as her third chapter but I think it's worth summarizing first. Writing incentives, formats and even some rules that students learned in high school do not translate to being a good writer in college or beyond.
 
 The five-paragraph essay is illustrative of the problem. This format is so ubiquitous that it is one of few things I remember from high school. It's also the format on the SAT college entrance exam. The problems with it are multiple. For one, students may have learned that this format [rewards (and thus encourages) vocabulary and long-winded bombast](http://www.nytimes.com/2014/03/09/magazine/the-story-behind-the-sat-overhaul.html). It even courages students to flub basic facts in pursuit of paper length. Retired MIT researcher [Les Perelman](http://lesperelman.com/) found that paper length correlated with SAT essay score more than any factor. He cynically encouraged students to exploit that for the sake of the SAT.
 
