@@ -10,7 +10,7 @@ excerpt: "I have a series of templates for R Markdown. Here's one for an academi
 
 {% include image.html url="/images/rmarkdown-cv.png" caption="What my CV looks like with this template." width=450 align="right" %}
 
-Why aren't you using [R Markdown](http://rmarkdown.rstudio.com/) already? I've offered an argument why you should consider doing everything in R Markdown with posts about [my academic manuscript template](http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/) and [my integretation of R Markdown with Beamer](http://svmiller.com/blog/2015/02/moving-from-beamer-to-r-markdown/) (see [updated Beamer-R Markdown template here](https://github.com/svmiller/svm-r-markdown-templates)).
+Why aren't you using [R Markdown](http://rmarkdown.rstudio.com/) already? I've offered an argument why you should consider doing everything in R Markdown with posts about [my academic manuscript template](http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/) and [my integration of R Markdown with Beamer](http://svmiller.com/blog/2015/02/moving-from-beamer-to-r-markdown/) (see [updated Beamer-R Markdown template here](https://github.com/svmiller/svm-r-markdown-templates)).
 
 I recently moved my CV from pure LaTeX to R Markdown. Here's the template I used. You can find the template and minimal working example [on my Github](https://github.com/svmiller/svm-r-markdown-templates).
 
