@@ -120,6 +120,6 @@ What is misunderstood in this sentence? Scholars who argue that anarchy is simpl
 
 If it's the former, then the sentence contains a non sequitir. Scholars may be misunderstood but that does not appear to matter to a claim about anarchy that the sentence does not question.
 
-If it's the latter (and it is), then the sentence buries the proverbial lede. What matters here is the general public mistakes the term "anarchy" for chaos when that term minimially means the absence of government (hence: a-narchy, without government).
+If it's the latter (and it is), then the sentence buries the proverbial lede. What matters here is the general public mistakes the term "anarchy" for chaos when that term minimially means the absence of government (hence: [a-narchy, without government](http://www.etymonline.com/index.php?term=anarchy)) as scholars know well.
 
 Do note that this example defies the first point raised in this section. Make the important words come first. Whoever is misunderstood is tangential to the claim that anarchy does not mean chaos.
