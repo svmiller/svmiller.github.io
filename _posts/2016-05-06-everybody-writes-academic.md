@@ -112,7 +112,7 @@ Handley recommends to ditch all adverbs unless they adjust the meaning of the ve
 
 ### Watch For Misplaced Modifiers
 
-Students routinely misplace modifiers in an odd word order. I see these errors and believe the student needed to edit the paper better before sending it to me grade. I'll use one of Handley's examples here because it involves an international relations topic.
+Students routinely misplace modifiers in an odd word order. I see these errors and believe the student needed to edit the paper better before sending it to me to grade. I'll use one of Handley's examples here because it involves an international relations topic.
 
 > Though often misunderstood, scholars know that anarchy does not mean chaos.
 
