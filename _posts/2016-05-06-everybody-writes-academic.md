@@ -50,7 +50,7 @@ One, never lose sight of the goal of the paper. Each paper the student writes ne
 
 Two, never lose sight of the reader. Good writing should serve the reader, not the writer. I like advice Handley relayed in this chapter about putting the reader into the goal of the writing assignment. The student should take the goal of the assignment s/he has and ask "so what?". The student should be able to answer this at least three times in different ways.
 
-I'll illustrate this with an example for a foreign policy case paper I wrote to show students my expectations. I chose the [Samoan Crisis](https://en.wikipedia.org/wiki/Samoan_crisis) because I happen to know a lot about it and think it's interesting. Here is [an example paper](https://www.dropbox.com/s/8dqznk7gvxsan0o/posc3630-samoa-crisis-example.pdf?dl=0) I wrote about it to illustrate the expectations of the assignment. Here's how I'd go about this process Handley describes.
+I'll illustrate this with an example for a foreign policy case paper I wrote to show students my expectations. I chose the [Samoan Crisis](https://en.wikipedia.org/wiki/Samoan_crisis) because I happen to know a lot about it and think it's interesting. Here is [an example paper](https://www.dropbox.com/s/8dqznk7gvxsan0o/posc3630-samoa-crisis-example.pdf?dl=0) I wrote about it to illustrate the expectations of the assignment and here's how I'd go about this process Handley describes.
 
 > Goal: Explain how the preferences of key decision-makers in the Samoa Crisis manifested in the brief intervention that followed.
 >
@@ -106,7 +106,7 @@ Edit first by chainsaw, then by surgical tools (to use Handley's metaphors). Fir
 
 > "The road to hell is paved with adverbs." - Stephen King
 
-Adverbs don't make the writer sound smart. Adverbs just get in the way of the point the student should be communicating.
+Adverbs don't make the writer sound smart. Adverbs just get in the way of the point the writer should be communicating.
 
 Handley recommends to ditch all adverbs unless they adjust the meaning of the verb or adjective they modify. I recommend going one step further. Eliminate adverbs altogether. Find a better adjective or verb instead and get from A to B in as few words as possible.
 
