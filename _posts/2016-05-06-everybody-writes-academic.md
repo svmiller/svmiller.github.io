@@ -92,7 +92,7 @@ Students have a bad habit of burying ledes because they think it sounds smart an
 
 > According to the National Assessment of Adult Literacy (NAAL), released in 2006 by the U.S. Department of Education, 30 million adults struggle with basic reading tasks.
 
-What's ultimately important in this sentence? It wouldn't be NAAL. NAAL just released a report. It would not be that they released the report in 2006 through the U.S. Department of Education. That's not brass tacks. The claim is 30 million adults, *almost 10 percent of the U.S. population*, struggle with basic reading tasks. *That's important*.
+What's ultimately important in this sentence? It would not be NAAL. NAAL is just a report. It would not be that the U.S. Department of Education released it in 2006. That's not brass tacks. The claim is 30 million adults, *almost 10 percent of the U.S. population*, struggle with basic reading tasks. *That's important*.
 
 Make the important stuff come first and focus on it. The rest is filler that students tend to write because they are worried most about the minimum page length or word count. *Don't write with those in mind*. Save those words and analytical energies to clarify and expand on the important stuff, not the irrelevant stuff.
 
