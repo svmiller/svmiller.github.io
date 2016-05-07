@@ -106,7 +106,7 @@ Edit first by chainsaw, then by surgical tools (to use Handley's metaphors). Fir
 
 > "The road to hell is paved with adverbs." - Stephen King
 
-Adverbs don't make the reader sound smart. They just get in the way of the point the student should be communicating.
+Adverbs don't make the writer sound smart. Adverbs just get in the way of the point the student should be communicating.
 
 Handley recommends to ditch all adverbs unless they adjust the meaning of the verb or adjective they modify. I recommend going one step further. Eliminate adverbs altogether. Find a better adjective or verb instead and get from A to B in as few words as possible.
 
