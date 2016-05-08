@@ -11,7 +11,7 @@ excerpt:  "We commonly believe the gun control debate to be a polarizing issue, 
 <!--We commonly believe the gun control debate to be a polarizing issue, but data from the General Social Survey suggest that is not necessarily true. GOP partisanship does not robustly reduce support for gun control and most Republicans actually support gun control measures. However, the issue is quickly becoming a polarizing issue among the electorate, and it's likely not just the South that is responsible for that.
      -->
 
-{% include image.html url="/images/planned-parenthood-shooter-arrested.jpg" caption="Robert Lewis Dear was taken into custody after a mass shooting at a Colorado Springs Planned Parenthood." width=450 align="right" %}
+{% include image.html url="/images/planned-parenthood-shooter-arrested.jpg" caption="Police take Robert Lewis Dear into custody after a mass shooting at a Colorado Springs Planned Parenthood." width=450 align="right" %}
 
 The recent terrorist incidents in Colorado Springs and San Bernardino have renewed public interest in the gun control debate. The *New York Daily News* ran [a provocative front-page image](http://www.nydailynews.com/news/politics/gop-candidates-call-prayers-calf-massacre-article-1.2453261) that implored high-ranking politicians to abandon the proverbial "thoughts and prayers" as little more than cheap rhetoric from legislators who would rather not, well, "legislate" on this particular issue. [A follow-up front-page cover](https://twitter.com/NYDailyNews/status/672745824447787008?ref_src=twsrc^tfw) on the San Bernardino incident engaged in deliberate issue-linkage of the San Bernardino terrorist incident with semi-automatic rampages in Newtown and Aurora, among, sadly, several others.
 
