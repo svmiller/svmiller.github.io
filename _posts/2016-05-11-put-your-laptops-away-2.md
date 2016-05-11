@@ -18,4 +18,4 @@ computers. Through the use of two separate treatment arms, we uncover evidence t
 negative effect occurs in classrooms where laptops and tablets are permitted without restriction 
 and in classrooms where students are only permitted to use tablets that must remain flat on the desk surface.
 
-Laptops are terrible learning devices. *Put them away during class*.
+Laptops are terrible learning devices. *Put them away during class*. Students curious how to take good notes without laptops should read [my guide from two years ago](http://svmiller.com/blog/2014/09/taking-good-notes/).
