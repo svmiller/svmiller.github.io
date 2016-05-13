@@ -4,7 +4,14 @@ title: Research
 permalink: /research/
 ---
 
-My research focuses on international conflict, particularly over the distribution of territory. I examine the effect these territorial issues have on domestic politics, particularly at the level of the individual citizen. Here, you can find materials relevant to my published research and research in progress. Feel free to contact me if you are interested in reading unpublished manuscripts on which I am currently working. I welcome feedback.
+{% include image.html url="/images/falklands-rally-1982.jpg" caption="Argentine citizens rally in April 1982 at May Square in Buenos Aires, demonstrating support for their government's recent invasion of the British-held Falkland Islands. (Panta Astiazaran, AFP, Getty Images)" width=400 align="right" %}
+
+My research focuses on international conflict, particularly over the distribution of territory. I examine the effect these territorial issues have on domestic politics, particularly at the level of the individual citizen. Here, you can find materials relevant to my published research and research in progress. 
+
+I also provide titles for some working papers and works in progress below. I provide full links for these papers when I believe they are ready for peer review. Feel free to contact me if you are interested in some of these projects. [My CV](http://svmiller.com/cv/) contains more information about where some of these projects are in the peer review process.
+ 
+<hr style="clear:both;visibility: hidden;" />  
+
 
 ## Publications 
 
@@ -26,12 +33,14 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 ## Working Papers and Works in Progress
 
-"[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)." Under review.
+"[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)." 
 
-"[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." Under review.
+"[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)."
 
 "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/terrorism-judicial-confidence/)."
 
 "Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East."
 
-{% include image.html url="/images/falklands-rally-1982.jpg" caption="Argentine citizens rally in April 1982 at May Square in Buenos Aires, demonstrating support for their government’s recent invasion of the British-held islands off the Argentinian coast. (Panta Astiazaran, AFP, Getty Images)" width=640 align="center" %}
+"U.S. Presidents, Human Rights, and Economic Aid from Truman to Obama: A Mixed Effects Approach"
+
+"Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders"
