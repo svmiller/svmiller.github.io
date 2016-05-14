@@ -105,9 +105,9 @@ I could, however, assign an input to a new object called `hello`. For example, I
 Or, because this is my guide on my website and I can put what I want on it:
 
 {% highlight r %}
-> hello <- "i'll get u bluth" 
+> hello <- "annyong" 
 > hello
-[1] "i'll get u bluth"
+[1] "annyong"
 {% endhighlight %}
 
 Be careful with what you call your objects, though.
