@@ -194,7 +194,7 @@ The effect of increasing education from failing to finish high school to a colle
 
 {% include image.html url="/images/usa-sl-ranef-raceethnic.png" caption="The random effect for racial/ethnic categories." width=450 align="right" %}
 
-The Trump phenomenon is fueled in large party by white voters with a fear and antipathy of the "other" (i.e. Mexicans against whom Trump proposes swift deportation and a wall and Muslims who Trump believes should be barred entry into the country). However, it would be a mistake to assume that support for a strong leader in the World Values Survey data falls largely on white respondents. 
+The Trump phenomenon is fueled in large part by white voters with a fear and antipathy of the "other" (i.e. Mexicans against whom Trump proposes swift deportation and a wall and Muslims who Trump believes should be barred entry into the country). However, it would be a mistake to assume that support for a strong leader in the World Values Survey data falls largely on white respondents. 
 
 In fact, white respondents are the least likely to support the kind of leader that Trump purports to be, all things equal. Observe the intercepts and conditional variances for categories of the random effect. The intercept and conditional variance for white respondents is discernibly below zero while the intercept and conditional variance for black respondents is above zero.
 
