@@ -1,12 +1,11 @@
 ---
-date: 2016-07-03 12:00:00
 title: "Automatically Do (Just About) Everything in Your Syllabus with R Markdown"
 author: steve
 layout: post
 permalink:
 categories:
   - R Markdown
-excerpt: "Political scientists are discovering an open secret from the World Values Survey data. A lot of Americans may have a fickle attachment to democracy."
+excerpt: "I have a series of templates for R Markdown. Here's one for an syllabus. I offer a guide on how to use it."
 ---
 
 {% include image.html url="/images/itsinsyllabus.gif" caption="Via PhD Comics, naturally." width=450 align="right" %}
