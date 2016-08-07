@@ -4,7 +4,7 @@ title: "Economic Threats or Societal Turmoil? Understanding Preferences for Auth
 permalink: /research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/
 ---
 
-{% include image.html url="/images/germany-hyperinflation.jpg" caption="Hyperinflation was so severe in Germany in 1923 that it became more convenient for Germans to weigh the marks on a scale than count the currency printed on the bills." width="400" align="right" %}
+{% include image.html url="/images/germany-hyperinflation.jpg" caption="Hyperinflation was so severe in 1923 Germany that it became more convenient for Germans to count the value of marks by weighing them." width="400" align="right" %}
 
 <!--## Article and Supporting Materials  --> 
 
