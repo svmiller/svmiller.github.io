@@ -149,7 +149,7 @@ Students new to reading regression tables are encouraged to do the following in 
  [2]: http://www.socialresearchmethods.net/kb/statinf.php
  [3]: https://www.census.gov/prod/techdoc/cps/cpsnov00.pdf
  [4]: http://en.wikipedia.org/wiki/Linear_equation
- [5]: http://svmiller.com/wp-content/uploads/voteincome-regression.png
+ [5]: http://svmiller.com/images/voteincome-regression.png
  [6]: http://en.wikipedia.org/wiki/Logit
  [7]: http://www.amazon.com/The-Cult-Statistical-Significance-Economics/dp/0472050079
  [8]: http://io9.com/10-scientific-ideas-that-scientists-wish-you-would-stop-1591309822
