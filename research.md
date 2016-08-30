@@ -13,7 +13,9 @@ I also provide titles for some working papers and works in progress below. I pro
 <hr style="clear:both;visibility: hidden;" />  
 
 
-## Publications 
+## Publications
+
+Miller, Steven V. Forthcoming. "[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." *Political Behavior*.
 
 Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly*.
 
@@ -34,8 +36,6 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 ## Working Papers and Works in Progress
 
 "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)." 
-
-"[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)."
 
 "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/terrorism-judicial-confidence/)."
 
