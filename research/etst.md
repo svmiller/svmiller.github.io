@@ -8,7 +8,7 @@ permalink: /research/economic-threats-or-societal-turmoil-understanding-preferen
 
 <!--## Article and Supporting Materials  --> 
 
-- [Article](https://docs.google.com/viewer?url=https://github.com/svmiller/etst/raw/master/etst.pdf)
+- [Article](http://link.springer.com/article/10.1007/s11109-016-9363-7?wt_mc=Affiliate.CommissionJunction.3.EPR1089.DeepLink)
 - [Appendix](https://docs.google.com/viewer?url=https://github.com/svmiller/etst/raw/master/appendix/etst-appendix.pdf)
 - [Replication materials](https://github.com/svmiller/etst)
 - [Discussion on *The Monkey Cage*](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/)

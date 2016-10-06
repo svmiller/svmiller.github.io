@@ -8,7 +8,7 @@ permalink: /research/individual-level-expectations-of-executive-authority-under-
 
 <!--## Article and Supporting Materials  --> 
 
-- [Article](https://www.dropbox.com/s/piehk2hqiaygi8k/strong-leaders.pdf?dl=0)
+- [Article](http://cmp.sagepub.com/content/early/2015/10/24/0738894215600384)
 - [Appendix](https://www.dropbox.com/s/m8fq7jn14e7l9gy/strong-leaders-appendix.pdf?dl=0)
 - [Replication materials](https://www.dropbox.com/sh/9mc65oehdiznr9b/AADJ7IQQDTvtO9Wed7mWGGHLa?dl=0)
 - [Discussion on *The Monkey Cage*](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/)
