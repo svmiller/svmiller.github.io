@@ -4,7 +4,7 @@ title: Blog
 permalink: /blog/
 ---
 
-I blog semi-regularly about stuff. Most of my blog entries involve professional development stuff for student or some parlor tricks in LaTeX, R, or Markdown that I have taught myself. A full listing of my blog posts follow.
+I blog semi-regularly about stuff. Most of my blog entries involve professional development stuff for student or some parlor tricks in LaTeX, R, or Markdown that I have taught myself. A full listing of my blog posts follows.
 
 <ul class="listing">
 {% for post in site.posts %}
