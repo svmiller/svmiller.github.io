@@ -8,7 +8,7 @@ categories:
 excerpt: "Donald Trump's Twitter diversions on controversial topics usually match well with public opinion."
 ---
 
-{% include image.html url="/images/sad-trump-1.jpg" caption="The President-elect reportedly finds this picture of him flattering and thinks of it as a personal favorite photo of him, so I intend to use it." width=450 align="right" %}
+{% include image.html url="/images/sad-trump-1.jpg" caption="The President-elect reportedly finds this picture of himself flattering and thinks of it as a personal favorite photo, so I intend to use it." width=450 align="right" %}
 
 Donald Trump, President-elect of the United States, has gone on some Twitter rants lately. All have touched on controversial topics like flag-burning and the exact scope of presidential authority in an era in which Americans wrestle with how much liberty is acceptable to trade for the cause of security.
 
