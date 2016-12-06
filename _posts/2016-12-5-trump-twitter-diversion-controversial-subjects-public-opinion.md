@@ -44,7 +44,7 @@ This is a rather provocative question gauging protectionist sentiment that stand
 
 {% include image.html url="/images/import-limits.png" caption="Histogram of support for import limits in ANES (2012) data" width=614 align="center" %}
 
-We can cynically retort that we'll see how long that holds when your typical American can't buy an iPhone and ultimately realizes a tariff is a regressive consumption tax, but the signal Trump sends resonates well with public opinion here.
+We can cynically retort that we'll see how long that holds when your typical American can't buy an iPhone and ultimately realizes a tariff is a regressive consumption tax that they'll pay when they shop at Walmart, but the signal Trump sends resonates well with public opinion here.
 
 {% include image.html url="/images/pew-gay-marriage.png" caption="Support for same-sex marriage, 2001-2016 (Pew)" width=450 align="right" %}
 
