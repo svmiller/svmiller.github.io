@@ -20,7 +20,7 @@ The Twitter rants have increased in intensity lately amid [news items that Trump
 
 The problems with this proposition are enormous, almost infinite. Flag-burning is constitutionally-protected free speech via two Supreme Court decisions in 1989 and 1990. *Texas v. Johnson* in 1989 overturned flag-burning laws in 48 states while a follow-up decision in 1990, *United States v. Eichman*, overturned the federal Flag Protection Act. Conservative hero Antonin Scalia, controversial as he was on other topics, voted in the majority in both cases. Further, *Afroyim v. Rusk* in 1967 ruled the U.S. government cannot strip citizenship rights from natural-born or naturalized U.S. citizens. 
 
-It's bad enough as a Twitter rant until you realize this comes from in the incoming President of the United States. At which point, this Twitter rant becomes terrifying.
+It's bad enough as a Twitter rant until you realize this comes from the incoming President of the United States. At which point, this Twitter rant becomes terrifying.
 
 However, Trump is not the only terrifying component of this topic. It might be even scarier that [*most Americans agree with him*](http://www.nationalreview.com/corner/442543/trump-wrong-flag-burning-public-agrees-him).
 
