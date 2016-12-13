@@ -31,14 +31,3 @@
       subhref: "/teaching/posc-3610-international-politics-in-crisis/"
     - subtitle: "POSC 3630 – United States Foreign Policy"
       subhref: "/teaching/posc-3630-united-states-foreign-policy/"
-
-- title: "Miscellany"
-  href: "/miscellany/"
-  subcategories:
-    - subtitle: "Clean USAID Greenbook Data"
-      subhref: "/miscellany/clean-usaid-greenbook-data/"
-    - subtitle: "Journal of Peace Research *.bst File"
-      subhref: "/miscellany/journal-of-peace-research-bst-file/"
-    - subtitle: "My Custom Beamer Style"
-      subhref: "/miscellany/my-custom-clemson-themed-beamer-style/"
-
