@@ -8,7 +8,7 @@ permalink: /research/terrorism-judicial-confidence/
 
 <!--## Article and Supporting Materials  --> 
 
-- Article
+- [Article](https://www.dropbox.com/s/egg1jl8p2t8qc47/terrorism-judiciary-082516.pdf?dl=0)
 - Appendix
 - Presentation
 
