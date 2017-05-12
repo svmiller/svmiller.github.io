@@ -18,6 +18,10 @@ This page serves as a directory for the courses I have taught, which is freely a
 3. [POSC 3610](/teaching/posc-3610-international-politics-in-crisis/) (International Politics in Crisis)
 4. [POSC 3630](/teaching/posc-3630-united-states-foreign-policy/) (United States Foreign Policy)
 
+### Proposed Classes
+
+1. [Data Science for the Social Sciences](/teaching/data-science-social-sciences/)
+
 ## University of Illinois at Urbana-Champaign
 
   1. PS 283 (Intro to International Security)
