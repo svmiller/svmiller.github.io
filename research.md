@@ -6,7 +6,7 @@ permalink: /research/
 
 {% include image.html url="/images/falklands-rally-1982.jpg" caption="Argentine citizens rally in April 1982 at May Square in Buenos Aires, demonstrating support for their government's recent invasion of the British-held Falkland Islands. (Panta Astiazaran, AFP, Getty Images)" width=400 align="right" %}
 
-My research focuses on international conflict, particularly over the distribution of territory. I examine the effect these territorial issues have on domestic politics, particularly at the level of the individual citizen. Here, you can find materials relevant to my published research and research in progress. 
+My research focuses on international conflict, particularly over the distribution of territory. I examine the effect these territorial issues have on domestic politics, with a focus at the level of the individual citizen. Here, you can find materials relevant to my published research and research in progress. 
 
 I also provide titles for some working papers and works in progress below. I provide full links for these papers when I believe they are ready for peer review. Feel free to contact me if you are interested in some of these projects. [My CV](http://svmiller.com/cv/) contains more information about where some of these projects are in the peer review process.
  
@@ -15,11 +15,13 @@ I also provide titles for some working papers and works in progress below. I pro
 
 ## Publications
 
-Miller, Steven V. Forthcoming. "[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." *Political Behavior*.
-
-Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly*.
+Miller, Steven V. Forthcoming. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly*.
 
 Miller, Steven V. Forthcoming. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science*.
+
+Miller, Steven V. 2017. "[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." *Political Behavior*. 39(2): 457-478.
+
+Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. "[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly* 60(4): 719-730.
 
 Gibler, Douglas M. and Steven V. Miller. 2014. "[External Territorial Threat, State Capacity, and Civil War](http://dmgibler.people.ua.edu/state-capacity.html)." *Journal of Peace Research* 51(5): 634-646.
 
@@ -36,8 +38,6 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 ## Working Papers and Works in Progress
 
 "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)." 
-
-"[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/terrorism-judicial-confidence/)."
 
 "Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East."
 
