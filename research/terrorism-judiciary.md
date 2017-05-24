@@ -8,8 +8,9 @@ permalink: /research/terrorism-judicial-confidence/
 
 <!--## Article and Supporting Materials  --> 
 
-- [Article](https://www.dropbox.com/s/2hzp139vsj33r3g/terrorism-judiciary.pdf?dl=0)
+- [Article](https://www.dropbox.com/s/zs5dbpyx5fr7agr/etjc.pdf?dl=0)
 - [Appendix](https://www.dropbox.com/s/a9nchqtjv1eynas/etjc-appendix.pdf?dl=0)
+- [Replication materials](https://github.com/svmiller/etjc)
 
 
 <hr style="clear:both;visibility: hidden;" />  
