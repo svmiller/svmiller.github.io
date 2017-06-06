@@ -29,9 +29,9 @@ Miller, Steven V. 2013. "[Territorial Disputes and the Politics of Individual We
 
 Gibler, Douglas M. and Steven V. Miller. 2013. "[Quick Victories? Territory, Democracies and Their Disputes](http://jcr.sagepub.com/content/57/2/258.full)." *Journal of Conflict Resolution* 57(2): 258-284.
 
-Gibler, Douglas M., Marc L. Hutchison and Steven V. Miller. "[Individual Identity Attachments and International Conflict: The Importance of Territorial Threat](http://cps.sagepub.com/content/45/12/1655.full)." *Comparative Political Studies* 45(12): 1655-1683.
+Gibler, Douglas M., Marc L. Hutchison and Steven V. Miller. 2012. "[Individual Identity Attachments and International Conflict: The Importance of Territorial Threat](http://cps.sagepub.com/content/45/12/1655.full)." *Comparative Political Studies* 45(12): 1655-1683.
 
-Gibler, Douglas M. and Steven V. Miller "[Comparing the Foreign Aid Policies of Presidents Bush and Obama](http://onlinelibrary.wiley.com/doi/10.1111/j.1540-6237.2012.00909.x/full)." *Social Science Quarterly* 93(5): 1202-1217.
+Gibler, Douglas M. and Steven V. Miller. 2012. "[Comparing the Foreign Aid Policies of Presidents Bush and Obama](http://onlinelibrary.wiley.com/doi/10.1111/j.1540-6237.2012.00909.x/full)." *Social Science Quarterly* 93(5): 1202-1217.
 
 Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Negotiated Compromises](http://cmp.sagepub.com/content/28/3/261)." *Conflict Management and Peace Science* 28(3): 261-279.
 
