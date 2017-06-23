@@ -12,9 +12,11 @@ excerpt: "I have my first attempt at an R package, stevemisc, available on my gi
 
 Scholars may find themselves needing to control for temporal dependence in their analysis of event data. International relations scholars know this problem well. It arises when the likelihood of an event occurring---prominently: a militarized interstate dispute (MID) in the IR literature---depends, in part, on the time since the last event. Longer "peace spells" beget a decreasing likelihood of the onset of a MID whereas short "peace spells" make states more prone to another MID onset. Contrast India-Pakistan with, say, USA-Canada.
 
-Dave Armstrong's `DAMisc` package provides a useful function for creating these peace years, but my own research encounters problems with implementation. Both are related. One, the function is slow when used on a large data set. Further, it chokes---and I don't know why---when a lot of cross-sectional units don't have an event onset. Scholars who work with Correlates of War data know this problem well. It's the "rare event" problem that confounds simple maximum likelihood estimation. In a "politically relevant" sampling frame, MIDs still occur less than 5% of the time. If, for some reason, you want to flood your sampling frame with politically irrelevant cross-sections (e.g. Mongolia-Nigeria, Belize-Botswana), the data get into the hundreds of thousands and the likelihood of an event dips to around .5% of the data.
+Dave Armstrong's `DAMisc` package provides a useful function for creating these peace years, but my own research encounters problems with implementation. Both are related. One, the function is slow when used on a large data set. The time to estimate increases noticeably with larger data frames that get into the hundreds of thousands. 
 
-This leads to some frustrating coding problems. The `btscs` package is slow to run and will sometimes choke when a large number of cross-sections don't have events. I created my `sbtscs` function, for which I fully confess I liberally copied Dave Armstrong's code, for my own research. You may find it useful too.
+Further, it throws an error---and I don't know why---when a lot of cross-sectional units don't have an event onset. Scholars who work with Correlates of War data know this problem well. It's the "rare event" problem that confounds simple maximum likelihood estimation. In a "politically relevant" sampling frame, MIDs still occur less than 5% of the time. If, for some reason, you want to flood your sampling frame with politically irrelevant cross-sections (e.g. Mongolia-Nigeria, Belize-Botswana), the data get into the hundreds of thousands and the likelihood of an event dips to around .5% of the data. This comment is more a critique of our most commonly used event data in international relations than it is of the `btscs` function, but many "peace science" folks in our discipline will still encounter this problem.
+
+This leads to some frustrating coding problems. The `btscs` package is slow to run and will sometimes throw an error when a large number of cross-sections don't have events. I created my `sbtscs` function, for which I fully confess I liberally copied Dave Armstrong's code, for my own research. You may find it useful too.
 
 Let me first note some of the problems I routinely encounter when trying to create peace-years in R. First, here's the `btscs` function in the `DAMisc` package. Observe what happens when I try to run it on a non-directed, politically-irrelevant dyad-year sampling frame of the Gibler-Miller-Little (GML) MID data.
 
@@ -75,7 +77,7 @@ system.time(PY1 <- sbtscs(Guyana1, midongoing, year, dyad))
 
 ```
 ##    user  system elapsed 
-##   1.022   0.029   1.052
+##   1.051   0.044   1.097
 ```
 
 ```r
@@ -84,7 +86,7 @@ system.time(PY2 <- btscs(Guyana1, "midongoing", "year", "dyad"))
 
 ```
 ##    user  system elapsed 
-##  10.514   8.565  19.081
+##  11.915  11.205  23.176
 ```
 
 ```r
