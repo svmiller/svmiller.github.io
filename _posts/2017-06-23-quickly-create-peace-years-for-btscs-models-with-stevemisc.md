@@ -19,62 +19,10 @@ This leads to some frustrating coding problems. The `btscs` package is slow to r
 Let me first note some of the problems I routinely encounter when trying to create peace-years in R. First, here's the `btscs` function in the `DAMisc` package. Observe what happens when I try to run it on a non-directed, politically-irrelevant dyad-year sampling frame of the Gibler-Miller-Little (GML) MID data.
 
 
-```r
-btscs <- function (data, event, tvar, csunit, pad.ts = FALSE){
-    data$orig_order <- 1:nrow(data)
-    data <- data[order(data[[csunit]], data[[tvar]]), ]
-    spells <- function(x) {
-        tmp <- rep(0, length(x))
-        runcount <- 0
-        for (j in 2:length(x)) {
-            if (x[j] == 0 & x[(j - 1)] == 0) {
-                tmp[j] <- runcount <- runcount + 1
-            }
-            if (x[j] != 0 & x[(j - 1)] == 0) {
-                tmp[j] <- runcount + 1
-                runcount <- 0
-            }
-            if (x[j] == 0 & x[(j - 1)] != 0) {
-                tmp[j] <- runcount <- 0
-            }
-        }
-        tmp
-    }
-    sp <- split(data, data[[csunit]])
-    if (pad.ts) {
-        sp <- lapply(sp, function(x) x[match(seq(min(x[[tvar]], 
-            na.rm = T), max(x[[tvar]], na.rm = T)), x[[tvar]]), 
-            ])
-        for (i in 1:length(sp)) {
-            if (any(is.na(sp[[i]][[event]]))) {
-                sp[[i]][[event]][which(is.na(sp[[i]][[event]]))] <- 1
-            }
-            if (any(is.na(sp[[i]][[tvar]]))) {
-                sp[[i]][[tvar]] <- seq(min(sp[[i]][[tvar]], na.rm = T), 
-                  max(sp[[i]][[tvar]], na.rm = T))
-            }
-            if (any(is.na(sp[[i]][[csunit]]))) {
-                sp[[i]][[csunit]][which(is.na(sp[[i]][[csunit]]))] <- mean(sp[[i]][[csunit]], 
-                  na.rm = T)
-            }
-        }
-    }
-    sp <- lapply(1:length(sp), function(x) {
-        cbind(sp[[x]], data.frame(spell = spells(sp[[x]][[event]])))
-    })
-    data <- do.call(rbind, sp)
-    if (!pad.ts) {
-        if (any(is.na(data$orig_order))) {
-            data <- data[-which(is.na(data$orig_order)), ]
-        }
-        data <- data[data$orig_order, ]
-    }
-    else {
-        data <- data[order(data[[csunit]], data[[tvar]]), ]
-    }
-    invisible(data)
-}
 
+
+```r
+library(DAMisc)
 library(RCurl)
 library(tidyverse)
 
@@ -127,7 +75,7 @@ system.time(PY1 <- sbtscs(Guyana1, midongoing, year, dyad))
 
 ```
 ##    user  system elapsed 
-##   1.328   0.000   1.330
+##   1.022   0.029   1.052
 ```
 
 ```r
@@ -136,7 +84,7 @@ system.time(PY2 <- btscs(Guyana1, "midongoing", "year", "dyad"))
 
 ```
 ##    user  system elapsed 
-##  10.724   0.036  10.767
+##  10.514   8.565  19.081
 ```
 
 ```r
