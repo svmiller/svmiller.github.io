@@ -10,9 +10,12 @@ tags:
 excerpt: "I believe that the ability to read a regression table is an important task for undergraduate students in political science. I offer an explanation of the regression table in this post. "
 ---
 
+```{r setup, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(fig.path='images/')
 
+```
 
-*Last updated: June 23, 2017*
+*Last updated: `r format(Sys.time(), '%B %d, %Y')`*
 
 I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. In my field, this can be perilous. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, can be misleading. The proof is not as convincing as it seems. A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
 
@@ -24,7 +27,11 @@ What follows is a guide for undergraduate students in reading a regression table
 
 Some of the biggest errors of misinterpretation of a regression table come from not knowing what is being tested and what the author is trying to do with even a basic linear or logistic regression. In short, there is no shortcut for beginners in not reading the research design of an article as well. Knowing what the variables are and how they are distributed have some implications for how to read the regression table in the results section.
 
-
+```{r, message=F, echo=F, eval=T}
+library(Zelig)
+library(stargazer)
+data(voteincome)
+```
 
 To illustrate this step, I am going to call in a simple data set in R. This is the `voteincome` data set that comes standard with the `Zelig` package.[^1] I'll start by discussing the data set and its purpose.
 
@@ -37,22 +44,10 @@ We obviously can't get data on the 300 million or so Americans in this country. 
 
 We obtained data from 1,500 Americans in November 2000 from the [2000 Current Population Survey][3]. 500 respondents are from Arkansas and 1,000 respondents are from South Carolina. The dependent variable (i.e. the variation of which we want to explain) is called `vote`. It takes on two values (0 = not a registered voter, 1 = registered voter. `age` is, intuitively, the age of the respondent in years. The youngest is 18 and the oldest is 85. `income` is an ordered variable between 4 and 17. In this variable, a 4 captures a person who makes less than $5,000 a year. A 17 codes a person who makes more than $75,000 a year. `education` takes on values of 1 (did not complete high school), 2, 3, and 4 (had more than a college education). `female` is another binary variable where 0 = men and 1 = women. A summary of the data follows.
 
-
-```
-##  state          year           vote            income        education    
-##  AR: 500   Min.   :2000   Min.   :0.0000   Min.   : 4.00   Min.   :1.000  
-##  SC:1000   1st Qu.:2000   1st Qu.:1.0000   1st Qu.: 9.00   1st Qu.:2.000  
-##            Median :2000   Median :1.0000   Median :13.00   Median :3.000  
-##            Mean   :2000   Mean   :0.8553   Mean   :12.46   Mean   :2.651  
-##            3rd Qu.:2000   3rd Qu.:1.0000   3rd Qu.:16.00   3rd Qu.:4.000  
-##            Max.   :2000   Max.   :1.0000   Max.   :17.00   Max.   :4.000  
-##       age            female      
-##  Min.   :18.00   Min.   :0.0000  
-##  1st Qu.:36.00   1st Qu.:0.0000  
-##  Median :49.00   Median :1.0000  
-##  Mean   :49.26   Mean   :0.5593  
-##  3rd Qu.:62.00   3rd Qu.:1.0000  
-##  Max.   :85.00   Max.   :1.0000
+```{r, echo=F, eval=T}
+# library(Zelig) # quietly run, check _source
+# data(voteincome) # quietly run, check _source
+summary(voteincome)
 ```
 
 <!-- {% include image.html url="/images/voteincome-summary.png" caption="A summary of the voteincome data set in Zelig." align="center" width=744 %} -->
@@ -65,71 +60,22 @@ This section will omit a more comprehensive discussion of the logic of regressio
 
 In our illustration, we believe we can model whether someone is a registered voter as a linear equation of the person's age, gender, education level, and income. In short: `vote = age + female + education + income` in our data set. When we do this, we get output that [looks like this][5].
 
-
-```r
+```{r, echo=T, eval=T}
 summary(M1 <- glm(vote ~ age + female + education + income, 
           data=voteincome,
           family=binomial(link="logit")))
 ```
 
-```
-## 
-## Call:
-## glm(formula = vote ~ age + female + education + income, family = binomial(link = "logit"), 
-##     data = voteincome)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.4247   0.3936   0.4869   0.5913   1.0284  
-## 
-## Coefficients:
-##              Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -0.877591   0.375796  -2.335 0.019529 *  
-## age          0.016464   0.004328   3.804 0.000142 ***
-## female       0.309880   0.151031   2.052 0.040193 *  
-## education    0.224927   0.090063   2.497 0.012510 *  
-## income       0.094331   0.021666   4.354 1.34e-05 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 1240.0  on 1499  degrees of freedom
-## Residual deviance: 1185.6  on 1495  degrees of freedom
-## AIC: 1195.6
-## 
-## Number of Fisher Scoring iterations: 5
-```
-
 A polished result would resemble this table, though this particular rendering requires the `stargazer` package in R.
 
 <center>
-
-<table style="text-align:center"><caption><strong>Explaining Registered Voters in 2000 (Arkansas, South Carolina)</strong></caption>
-<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
-<tr><td></td><td colspan="1" style="border-bottom: 1px solid black"></td></tr>
-<tr><td style="text-align:left"></td><td>Is Respondent a Voter?</td></tr>
-<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Age</td><td>0.016<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.004)</td></tr>
-<tr><td style="text-align:left"></td><td></td></tr>
-<tr><td style="text-align:left">Female</td><td>0.310<sup>**</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.151)</td></tr>
-<tr><td style="text-align:left"></td><td></td></tr>
-<tr><td style="text-align:left">Education</td><td>0.225<sup>**</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.090)</td></tr>
-<tr><td style="text-align:left"></td><td></td></tr>
-<tr><td style="text-align:left">Income</td><td>0.094<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.022)</td></tr>
-<tr><td style="text-align:left"></td><td></td></tr>
-<tr><td style="text-align:left">Constant</td><td>-0.878<sup>**</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.376)</td></tr>
-<tr><td style="text-align:left"></td><td></td></tr>
-<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>1,500</td></tr>
-<tr><td style="text-align:left">Log Likelihood</td><td>-592.801</td></tr>
-<tr><td style="text-align:left">Akaike Inf. Crit.</td><td>1,195.602</td></tr>
-<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
-<tr><td style="text-align:left"></td><td style="text-align:right"><small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small></td></tr>
-</table>
+```{r, echo=F, eval=T, results="asis"}
+stargazer(M1, type="html",
+          covariate.labels = c("Age","Female","Education","Income","Constant"),
+          title="Explaining Registered Voters in 2000 (Arkansas, South Carolina)",
+          notes="<small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small>",
+          dep.var.labels="Is Respondent a Voter?")
+```
 <br /></center>
 
 <!--{% include image.html url="/images/voteincome-table.png" caption="A regression table" align="right" width=198 %} -->
@@ -191,8 +137,7 @@ None of the four independent variables in the regression share a common scale so
 
 Prior to post-estimation simulation, one way around this is [standardization, especially by two standard deviations instead of one][9]. Dividing by two standard deviations allows continuous predictors to be roughly similar in scale to binary variables. When we do this (with the `arm` package in R), the effect of `female` doesn't seem so large relative to the other predictors.
 
-
-```r
+```{r, echo=T, eval=T, message=F}
 library(arm)
 voteincome$z_age <- arm::rescale(voteincome$age)
 voteincome$z_education  <- arm::rescale(voteincome$education)
@@ -202,35 +147,6 @@ M2 <- glm(vote ~ z_age + female + z_education + z_income,
           data=voteincome,
           family=binomial(link="logit"))
 summary(M2)
-```
-
-```
-## 
-## Call:
-## glm(formula = vote ~ z_age + female + z_education + z_income, 
-##     family = binomial(link = "logit"), data = voteincome)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.4247   0.3936   0.4869   0.5913   1.0284  
-## 
-## Coefficients:
-##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)   1.7055     0.1105  15.437  < 2e-16 ***
-## z_age         0.5753     0.1512   3.804 0.000142 ***
-## female        0.3099     0.1510   2.052 0.040193 *  
-## z_education   0.4593     0.1839   2.497 0.012510 *  
-## z_income      0.7387     0.1697   4.354 1.34e-05 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 1240.0  on 1499  degrees of freedom
-## Residual deviance: 1185.6  on 1495  degrees of freedom
-## AIC: 1195.6
-## 
-## Number of Fisher Scoring iterations: 5
 ```
 
 <!--```r

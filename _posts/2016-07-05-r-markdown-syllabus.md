@@ -87,7 +87,7 @@ The `advdate` function I wrote is a simple hack. It identifies the date object y
 
 Notice what I do with this function within my R Markdown syllabus. I hide it in a subsection block, follow it with a colon and a description of the week's readings. Here's the actual code in my R Markdown document.
 
-```rmarkdown
+```r
 ##  `r advdate(mon, 6)`: Keep
 
 ##  `r advdate(mon, 7)`: Going
