@@ -74,7 +74,8 @@ stargazer(M1, type="html",
           covariate.labels = c("Age","Female","Education","Income","Constant"),
           title="Explaining Registered Voters in 2000 (Arkansas, South Carolina)",
           notes="<small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small>",
-          dep.var.labels="Is Respondent a Voter?")
+          dep.var.labels="Is Respondent a Voter?",
+          omit.stat = c("aic","ll"))
 ```
 <br /></center>
 
@@ -137,17 +138,27 @@ None of the four independent variables in the regression share a common scale so
 
 Prior to post-estimation simulation, one way around this is [standardization, especially by two standard deviations instead of one][9]. Dividing by two standard deviations allows continuous predictors to be roughly similar in scale to binary variables. When we do this (with the `arm` package in R), the effect of `female` doesn't seem so large relative to the other predictors.
 
-```{r, echo=T, eval=T, message=F}
+<center>
+```{r, echo=F, eval=T, message=F, results="asis"}
 library(arm)
-voteincome$z_age <- arm::rescale(voteincome$age)
-voteincome$z_education  <- arm::rescale(voteincome$education)
-voteincome$z_income  <- arm::rescale(voteincome$income)
+age <- arm::rescale(voteincome$age)
+education  <- arm::rescale(voteincome$education)
+income  <- arm::rescale(voteincome$income)
+female <- voteincome$female
+vote2 <- voteincome$vote
 
-M2 <- glm(vote ~ z_age + female + z_education + z_income,
-          data=voteincome,
+M2 <- glm(vote2 ~ age + female + education + income,
           family=binomial(link="logit"))
-summary(M2)
+
+stargazer(M1, M2, type="html",
+          dep.var.labels=c("Unstandardized<br />Coefficents","Standardized<br />Coefficients"),
+          covariate.labels = c("Age","Female","Education","Income","Constant"),
+          title="Explaining Registered Voters in 2000 (Arkansas, South Carolina)",
+          notes="<small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small>",
+          omit.stat = c("aic","ll"),
+          dep.var.caption  = "<em>Is Respondent a Voter?</em>")
 ```
+<br /></center>
 
 <!--```r
 > M2 <- glm(vote ~ z.age + female + z.education + z.income, data=voteincome, family=binomial(link="logit"))

@@ -12,7 +12,7 @@ excerpt: "I believe that the ability to read a regression table is an important 
 
 
 
-*Last updated: June 23, 2017*
+*Last updated: June 25, 2017*
 
 I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. In my field, this can be perilous. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, can be misleading. The proof is not as convincing as it seems. A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
 
@@ -125,8 +125,6 @@ A polished result would resemble this table, though this particular rendering re
 <tr><td style="text-align:left"></td><td>(0.376)</td></tr>
 <tr><td style="text-align:left"></td><td></td></tr>
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>1,500</td></tr>
-<tr><td style="text-align:left">Log Likelihood</td><td>-592.801</td></tr>
-<tr><td style="text-align:left">Akaike Inf. Crit.</td><td>1,195.602</td></tr>
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td style="text-align:right"><small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small></td></tr>
 </table>
@@ -191,47 +189,33 @@ None of the four independent variables in the regression share a common scale so
 
 Prior to post-estimation simulation, one way around this is [standardization, especially by two standard deviations instead of one][9]. Dividing by two standard deviations allows continuous predictors to be roughly similar in scale to binary variables. When we do this (with the `arm` package in R), the effect of `female` doesn't seem so large relative to the other predictors.
 
+<center>
 
-```r
-library(arm)
-voteincome$z_age <- arm::rescale(voteincome$age)
-voteincome$z_education  <- arm::rescale(voteincome$education)
-voteincome$z_income  <- arm::rescale(voteincome$income)
-
-M2 <- glm(vote ~ z_age + female + z_education + z_income,
-          data=voteincome,
-          family=binomial(link="logit"))
-summary(M2)
-```
-
-```
-## 
-## Call:
-## glm(formula = vote ~ z_age + female + z_education + z_income, 
-##     family = binomial(link = "logit"), data = voteincome)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -2.4247   0.3936   0.4869   0.5913   1.0284  
-## 
-## Coefficients:
-##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)   1.7055     0.1105  15.437  < 2e-16 ***
-## z_age         0.5753     0.1512   3.804 0.000142 ***
-## female        0.3099     0.1510   2.052 0.040193 *  
-## z_education   0.4593     0.1839   2.497 0.012510 *  
-## z_income      0.7387     0.1697   4.354 1.34e-05 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 1240.0  on 1499  degrees of freedom
-## Residual deviance: 1185.6  on 1495  degrees of freedom
-## AIC: 1195.6
-## 
-## Number of Fisher Scoring iterations: 5
-```
+<table style="text-align:center"><caption><strong>Explaining Registered Voters in 2000 (Arkansas, South Carolina)</strong></caption>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Is Respondent a Voter?</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td>Unstandardized<br />Coefficents</td><td>Standardized<br />Coefficients</td></tr>
+<tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Age</td><td>0.016<sup>***</sup></td><td>0.575<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.004)</td><td>(0.151)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Female</td><td>0.310<sup>**</sup></td><td>0.310<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.151)</td><td>(0.151)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Education</td><td>0.225<sup>**</sup></td><td>0.459<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.090)</td><td>(0.184)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Income</td><td>0.094<sup>***</sup></td><td>0.739<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.022)</td><td>(0.170)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">Constant</td><td>-0.878<sup>**</sup></td><td>1.706<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.376)</td><td>(0.110)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>1,500</td><td>1,500</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+<tr><td style="text-align:left"></td><td colspan="2" style="text-align:right"><small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small></td></tr>
+</table>
+<br /></center>
 
 <!--```r
 > M2 <- glm(vote ~ z.age + female + z.education + z.income, data=voteincome, family=binomial(link="logit"))
