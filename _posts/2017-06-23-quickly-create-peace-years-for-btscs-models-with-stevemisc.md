@@ -2,12 +2,13 @@
 title: "Quickly Create Peace Years for BTSCS Models with sbtscs in stevemisc"
 author: steve
 layout: post
-date: "2017-06-25"
+date: "2017-06-26"
 permalink:
 categories:
   - R
 excerpt: "I have my first attempt at an R package, stevemisc, available on my github. It can help you quickly generate peace years for BTSCS models."
 ---
+
 
 
 Scholars may find themselves needing to control for temporal dependence in their analysis of event data. International relations scholars know this problem well. It arises when the likelihood of an event occurring---prominently: a militarized interstate dispute (MID) in the IR literature---depends, in part, on the time since the last event. Longer "peace spells" beget a decreasing likelihood of the onset of a MID whereas short "peace spells" make states more prone to another MID onset. Contrast India-Pakistan with, say, USA-Canada.
@@ -77,7 +78,7 @@ system.time(PY1 <- sbtscs(Guyana1, midongoing, year, dyad))
 
 ```
 ##    user  system elapsed 
-##   1.074   0.043   1.119
+##   1.143   0.042   1.189
 ```
 
 ```r
@@ -86,7 +87,7 @@ system.time(PY2 <- btscs(Guyana1, "midongoing", "year", "dyad"))
 
 ```
 ##    user  system elapsed 
-##  11.609  11.352  23.070
+##   12.85   13.57   26.53
 ```
 
 ```r

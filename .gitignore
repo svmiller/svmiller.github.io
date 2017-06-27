@@ -3,6 +3,7 @@ _site
 /dross
 HIDEME
 /drafts
+/cache
 
 # ignore temp files w/ trailing ~
 *~

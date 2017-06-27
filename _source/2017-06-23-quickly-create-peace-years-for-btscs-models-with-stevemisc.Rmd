@@ -9,6 +9,9 @@ categories:
 excerpt: "I have my first attempt at an R package, stevemisc, available on my github. It can help you quickly generate peace years for BTSCS models."
 ---
 
+```{r setup, include=FALSE, cache=TRUE}
+knitr::opts_chunk$set(fig.path='images/')
+```
 
 Scholars may find themselves needing to control for temporal dependence in their analysis of event data. International relations scholars know this problem well. It arises when the likelihood of an event occurring---prominently: a militarized interstate dispute (MID) in the IR literature---depends, in part, on the time since the last event. Longer "peace spells" beget a decreasing likelihood of the onset of a MID whereas short "peace spells" make states more prone to another MID onset. Contrast India-Pakistan with, say, USA-Canada.
 
