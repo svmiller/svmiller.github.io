@@ -25,7 +25,7 @@ I got this email in response.
 
 > I'm a senior here and I've never seen or had a professor use the library website before, so I've done literally none of the readings, and again several of my classmates haven't either. The midterm is in four days, correct? I'll try to get them all done by then, otherwise I might have to withdraw or something. 
 
-Oof. So, yeah. Apparently students at my institution are not learning how to do this. Thus, here's a guide on how to use [Google Scholar](https://scholar.google.com/) to speak to your library and retrieve journal articles for you with the easy-to-use interface that led us to fall in love with Google in the first place.
+Oof. So, yeah. Apparently a large number of students in my major at my institution are not learning how to do this. Thus, here's a guide on how to use [Google Scholar](https://scholar.google.com/) to speak to your library and retrieve journal articles for you with the easy-to-use interface that led us to fall in love with Google in the first place.
 
 ## Set Up Google Scholar
 
@@ -67,7 +67,7 @@ This is a peculiar result because we simply entered the main title of the articl
 
 I want the student to see two things in the above screengrab. First, the "Full-text @ Clemson" link would direct you to Clemson's library, prompting you to elect which subscription service you want that has access to this article (i.e. JSTOR, Academic Search Complete, or Oxford Journals in this example). Select "Article" for any one of those and you will be prompted to log into the library with your Clemson username and password. Do that and you'll get your article.
 
-Alternatively, Google is adroit at crawling through university websites to locate articles as PDFs that some professor may have left on their university websites for their students. It's not uncommon for professors to make their own published work freely available on their university website to anyone who wants it. In this case, it found a copy at the University of Michigan. This feature of Google Scholar will be useful for the next scenario.
+Alternatively, Google is adroit at crawling through university websites to locate articles as PDFs that some professor may have left on her/his university website for posterity. It's not uncommon for professors to make their own published work freely available on their university website to anyone who wants it. In this case, it found a copy at the University of Michigan. This feature of Google Scholar will be useful for the next scenario.
 
 ## Google Scholar May Find Something Your Library Can't Find or Doesn't Have
 
@@ -75,7 +75,7 @@ Google Scholar may be useful when you're looking for an obscure article, or an o
 
 Consider the case of [the Jones, Bremer, and Singer (1996)](http://journals.sagepub.com/doi/pdf/10.1177/073889429601500203) article that I also routinely assign in my upper-division international conflict course. This is another data piece I like to assign because I want students to understand what do we mean with terms like "war" and "militarized interstate dispute." This article introduced what we know now as version 2 of [the Correlates of War (CoW) Militarized Interstate Dispute (MID) data set](http://correlatesofwar.org/data-sets/MIDs) and gets my students to more clearly understand the concepts we use and how we operationalize them. It's almost required reading at the grad level in international conflict as well. Basically, everyone in my field who works with that data has read this article and obtained a copy of it somewhere in their travels.
 
-However, this article is now over twenty-years-old. *Conflict Management and Peace Science*, otherwise one of my favorite journals in the field, appears to be among a subset of peace science journals for which older articles are not readily accessible.[^ii] For the sake of Clemson students, the university's library only has all issues of *Conflict Management and Peace Science* [from 1999 to the present](http://hw4sm7zh5k.search.serialssolutions.com/?V=1.0&L=HW4SM7ZH5K&S=JCs&C=CONFMANANP&T=marc). That would exclude the Jones, Bremer, and Singer (1996) article that might otherwise be the most widely cited article in the journal's history.
+However, this article is now over twenty-years-old. *Conflict Management and Peace Science*, one of my favorite journals in the field, appears to be among a subset of peace science journals for which older articles are not readily accessible.[^ii] For the sake of Clemson students, the university's library only has all issues of *Conflict Management and Peace Science* [from 1999 to the present](http://hw4sm7zh5k.search.serialssolutions.com/?V=1.0&L=HW4SM7ZH5K&S=JCs&C=CONFMANANP&T=marc). That would exclude the Jones, Bremer, and Singer (1996) article that might otherwise be the most widely cited article in the journal's history.
 
 [^ii]: I encountered a similar situation in grad school at the University of Alabama looking for [this Raymond (1996) article in *International Interactions*](http://www.tandfonline.com/doi/abs/10.1080/03050629608434877). It turned out to be the basis for what became [my first publication](http://cmp.sagepub.com/content/28/3/261), but Alabama's library did not have an electronic version of this article. I got lucky because the library had a physical copy instead.
 
