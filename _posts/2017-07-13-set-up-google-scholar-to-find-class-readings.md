@@ -10,7 +10,7 @@ excerpt: "This is a guide about how to use Google Scholar to find journal articl
 ---
 
 
-Let me start with an only slightly edited e-mail exchange I got from a student during a class I taught.
+Let me start with an only slightly edited e-mail exchange with a student during a class I taught.
 
 > Dr. Miller,
 >
@@ -21,11 +21,11 @@ For those unaware, I'm a big proponent of relying on journal articles to teach u
 My syllabi say to obtain the course readings from the university library through its various journal subscription services (e.g.,
 JSTOR, Blackwell-synergy). I build in an assumption that students have learned somewhere along the way about how to use the library for class readings or research papers in their classes. I remember that was one of the first things Ohio State taught me when I arrived as an undergrad for orientation and that was in 2002.
 
-I got this email in response.
+I got this email in response after telling this student (and the rest of the class) about how to use the library to find the readings.
 
 > I'm a senior here and I've never seen or had a professor use the library website before, so I've done literally none of the readings, and again several of my classmates haven't either. The midterm is in four days, correct? I'll try to get them all done by then, otherwise I might have to withdraw or something. 
 
-Oof. So, yeah. Apparently a large number of students in my major at my institution are not learning how to do this. Thus, here's a guide on how to use [Google Scholar](https://scholar.google.com/) to speak to your library and retrieve journal articles for you with the easy-to-use interface that led us to fall in love with Google in the first place.
+Oof. So, yeah. Apparently a large number of students in my major at my institution are not learning how to do this. Let me make it easier for my students by providing a guide on how to use [Google Scholar](https://scholar.google.com/) to speak to the university's library and retrieve journal articles with the easy-to-use interface that led us to fall in love with Google in the first place. What follows is intended for my students but is generalizable for professors at other institutions.
 
 ## Set Up Google Scholar
 
