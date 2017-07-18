@@ -332,7 +332,7 @@ Data %>%
   facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Very\nSatisfied","Satisfied","Dissatisfied", "Very\nDissatisfied")) + 
-   geom_text(aes(label=percper), vjust=1.5, colour="black",
+   geom_text(aes(label=percper), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4) +
   theme(legend.position = "bottom") +
   ylab("Percent in Category") + xlab("Satisfaction with Democracy") +
