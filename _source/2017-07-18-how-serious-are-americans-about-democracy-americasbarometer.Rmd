@@ -330,7 +330,7 @@ Data %>%
   ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) + theme_steve() +
   geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
-  scale_y_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Very\nSatisfied","Satisfied","Dissatisfied", "Very\nDissatisfied")) + 
    geom_text(aes(label=percper), vjust=1.5, colour="black",
             position=position_dodge(.9), size=4) +
@@ -368,7 +368,7 @@ Data %>%
   ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) + theme_steve() +
   geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
-  scale_y_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Very\nDemocratic","Somewhat\nDemocratic","Not Very\nDemocratic", "Not At All\nDemocratic")) + 
    geom_text(aes(label=percper), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4) +
