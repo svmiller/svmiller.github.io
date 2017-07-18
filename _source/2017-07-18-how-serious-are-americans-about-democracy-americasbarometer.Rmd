@@ -1,0 +1,497 @@
+---
+title: 'How Serious Are Americans About Democracy? An Exploratory Analysis of the AmericasBarometer Data'
+author: steve
+layout: post
+date: "`r Sys.Date()`"
+permalink:
+categories:
+  - Political Science
+excerpt: "I have my first attempt at an R package, stevemisc, available on my github. It can help you quickly generate peace years for BTSCS models."
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+knitr::opts_chunk$set(fig.path='images/')
+
+```
+{% include image.html url="/images/trump-ny-rally.jpg" caption="A recurring theme among partisans (Reuters/Stephen Yang)" width=400 align="right" %}
+
+One of my favorite disconnects in political science---as much as you can call it that---concerns political behavior research in the United States where we see two different classes of surveys. The first, those exclusive to the United States---like the [American National Election Study](http://www.electionstudies.org/studypages/download/datacenter_all_NoData.php) (ANES), [Cooperative Congressional Election Study](https://cces.gov.harvard.edu/data) (CCES), and [General Social Survey](http://gss.norc.org/) (GSS)---ask quite granular questions about politics in the United States that are of great interest to American political behavior researchers and political commentators. They will help us understand what Americans think about things like the Trans-Pacific Partnership or gay marriage (as opposed to homosexuality, in general). I've used these surveys to dig at some of the more particular things Americans think about [gun control](http://svmiller.com/blog/2015/12/gun-control-public-opinion-1972-2014/), [racism](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/), [abortion, and protectionism](http://svmiller.com/blog/2016/12/trump-twitter-diversion-controversial-subjects-public-opinion/).
+
+The second class of surveys---like [AmericasBarometer](http://www.vanderbilt.edu/lapop/) or [World Values Survey](http://www.worldvaluessurvey.org/wvs.jsp) (WVS)---will ask effectively the *same questions* in the United States as it would ask in a country like Pakistan or Venezuela. This is understandable from the perspective of these researchers; the U.S. is home to arguably the most accessible public opinion data sources in the world and the marginal cost of adding a thousand or two observations in the U.S. to compare American responses to Pakistani or Venezuelan responses is quite small. However, these questions are more general, concerning bigger issues of democracy, prosperity, and security. When we use these data sources, we're almost not interested in what the Americans are saying. The bigger concern would be developing countries where democracy is less stable and prosperity and security are not givens.
+
+The problem with this myopia is that Americans are saying things in these surveys that we're ignoring or treating uncritically. They're communicating statements about American democracy that are not as optimistic or rosy as we want to think they are. My analysis, consistent with some of my hunches on what I call [America's "strong leader" problem](http://svmiller.com/blog/2016/05/america-strong-leaders-world-values-survey-trump/) in the WVS data, suggests attitudes about American democracy that are close to [the "instrumental-intrinsic" arguments](https://www.cambridge.org/core/journals/british-journal-of-political-science/article/support-for-democracy-in-africa-intrinsic-or-instrumental/AEFE1DC3B5327DF4C8420B6D60B05B14) we were having about African democracy 15 years ago. Americans---partisans, in particular---may be valuing democracy and democratic norms the extent to which elections produce outcomes that partisans like. They may not be serious about democracy for democracy's sake.
+
+```{r, echo=F, eval=T, message=F, warning=F}
+library(car)
+library(tidyverse)
+library(stevemisc)
+library(labelled)
+library(forcats)
+
+US06 <- haven::read_dta("~/Dropbox/data/americasbarometer/lapop-usa-2006.dta")
+US08 <- haven::read_dta("~/Dropbox/data/americasbarometer/lapop-usa-2008.dta")
+US10 <- haven::read_dta("~/Dropbox/data/americasbarometer/lapop-usa-2010.dta")
+US12 <- haven::read_dta("~/Dropbox/data/americasbarometer/lapop-usa-2012.dta")
+US14 <- haven::read_dta("~/Dropbox/data/americasbarometer/lapop-usa-2014.dta")
+
+
+US08 %>%
+  mutate(country = "USA",
+         year = 2008,
+         potus_limitopp = pop101,
+         potus_wocong = pop102,
+         potus_woscotus = pop103,
+         pop_govern = pop107,
+         goodvevil = pop109,
+         pop_stopopp = pop110,
+         disag_threat = pop113,
+         dembest = ing4,
+         gop = car::recode(pid3, "1=0; 2=1; 3:4=0; 5=NA"),
+         dem = car::recode(pid3, "1=1; 2:4=0; 5=NA"),
+         indother = car::recode(pid3, "1:2=0; 3:4=1; 5=NA"),
+         pid = pid7,
+         votegop = car::recode(vb3, "1=1; 2:3=0"),
+         ideo = l1,
+         satislife = car::recode(ls3, "1=4;2=3;3=2;4=1"),
+         econsitc = car::recode(soct1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitc12 = car::recode(soct2, "1=3; 2=2; 3=1"),
+         econsitp = car::recode(idio1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitp12 = car::recode(idio2, "1=3; 2=2; 3=1"),
+         immig_services = immig1,
+         immig_takejobs = immig2 - 1,
+         trust_af = b12,
+         trust_cong = b13,
+         trust_govt = b14,
+         trust_potus = b21a,
+         trust_media = b37,
+         trust_elections = b47,
+         jobeval_potus = m1,
+         jobeval_cong = m2,
+         satisdem = pn4,
+         usdemocratic = pn5,
+         bt_vote = d1,
+         bt_demonstrate = d2,
+         bt_runfor = d3,
+         bt_makespeech = d4,
+         autocok = car::recode(dem2, "1=1; 2=0; 3=1"),
+         armyto_unemploy = NA,
+         armyto_crime = NA,
+         armyto_corrupt = NA,
+         closecong = NA,
+         closescotus = NA,
+         age = 2008 - birthyr,
+         yearborn = birthyr,
+         female = q1 - 1,
+         racecat = race,
+         educcat = educ,
+         interestp = car::recode(polinterest, "1=3; 2=2; 3=1; 4=NA"),
+         houseinc = income,
+         persinc = NA,
+         churchatd = churatd,
+         protestant = car::recode(religion, "1=1; 2:7=0"),
+         stateid = inputstate) %>%
+  select(country, year, potus_limitopp:ncol(.)) -> US08s
+
+us08labs <- val_labels(US08s$stateid)
+
+us08labs <- data.frame(stateid=us08labs)
+
+us08labs <- rownames_to_column(us08labs, "state")
+
+US08s <- left_join(US08s, us08labs)
+
+US10 %>%
+  mutate(country = "USA",
+         year = 2010,
+         potus_limitopp = pop101,
+         potus_wocong = pop102,
+         potus_woscotus = pop103,
+         pop_govern = pop107,
+         goodvevil = NA,
+         pop_stopopp = NA,
+         disag_threat = pop113,
+         dembest = ing4,
+         gop = car::recode(vb11s, "1=0; 2=1; 3=0"),
+         dem = car::recode(vb11s, "1=1; 2=0; 3=0"),
+         indother = car::recode(vb11s, "1=0; 2=0; 3=1"),
+         pid = car::recode(pid7, "8=NA"),
+         votegop = car::recode(vb3s, "0:1=0; 2=1; 3=0"),
+         ideo = l1b,
+         satislife = car::recode(ls3, "1=4;2=3;3=2;4=1"),
+         econsitc = car::recode(soct1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitc12 = car::recode(soct2, "1=3; 2=2; 3=1"),
+         econsitp = car::recode(idio1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitp12 = car::recode(idio2, "1=3; 2=2; 3=1"),
+         immig_services = NA,
+         immig_takejobs = NA,
+         trust_af = b12,
+         trust_cong = b13,
+         trust_govt = b14,
+         trust_potus = b21a,
+         trust_media = b37,
+         trust_elections = NA,
+         jobeval_potus = m1,
+         jobeval_cong = NA,
+         satisdem = pn4,
+         usdemocratic = pn5,
+         bt_vote = d1,
+         bt_demonstrate = d2,
+         bt_runfor = d3,
+         bt_makespeech = d4,
+         autocok = car::recode(dem2, "1=1; 2=0; 3=1"),
+         armyto_unemploy = car::recode(jc1, "2=0"),
+         armyto_crime = car::recode(jc10, "2=0"),
+         armyto_corrupt = car::recode(jc13, "2=0"),
+         closecong = car::recode(jc15a, "2=0"),
+         closescotus = car::recode(jc16a, "2=0"),
+         age = q2,
+         female = q1 - 1,
+         yearborn = birthyr,
+         racecat = race,
+         educcat = educ,
+         interestp = car::recode(pol1, "1=4; 2=3; 3=2; 4=1"),
+         houseinc = q10,
+         persinc = NA,
+         churchatd = NA,
+         protestant = car::recode(religpew, "1=1; 2:12=0"),
+         stateid = inputstate) %>%
+  select(country, year, potus_limitopp:ncol(.))  -> US10s
+
+us10labs <- val_labels(US10s$stateid)
+
+us10labs <- data.frame(stateid=us10labs)
+
+us10labs <- rownames_to_column(us10labs, "state")
+
+US10s <- left_join(US10s, us10labs)
+
+US12 %>%
+  mutate(country = "USA",
+         year = 2012,
+         potus_limitopp = pop101,
+         potus_wocong = NA,
+         potus_woscotus = NA,
+         pop_govern = pop107,
+         goodvevil = NA,
+         pop_stopopp = NA,
+         disag_threat = pop113,
+         dembest = ing4,
+         gop = car::recode(vb11s, "1=0; 2=1; 3=0"),
+         dem = car::recode(vb11s, "1=1; 2=0; 3=0"),
+         indother = car::recode(vb11s, "1=0; 2=0; 3=1"),
+         pid = car::recode(pid7, "8=NA"),
+         votegop = car::recode(vb3s, "0:2=0; 3=1; 4=0"),
+         ideo = l1b,
+         satislife = car::recode(ls3, "1=4;2=3;3=2;4=1"),
+         econsitc = car::recode(soct1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitc12 = car::recode(soct2, "1=3; 2=2; 3=1"),
+         econsitp = car::recode(idio1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitp12 = car::recode(idio2, "1=3; 2=2; 3=1"),
+         immig_services = NA,
+         immig_takejobs = NA,
+         trust_af = b12,
+         trust_cong = b13,
+         trust_govt = NA,
+         trust_potus = b21a,
+         trust_media = b37,
+         trust_elections = NA,
+         satisdem = pn4,
+         usdemocratic = pn5,
+         bt_vote = d1,
+         bt_demonstrate = d2,
+         bt_runfor = d3,
+         bt_makespeech = d4,
+         autocok = car::recode(dem2, "1=1; 2=0; 3=1"),
+         armyto_unemploy = car::recode(jc1, "2=0"),
+         armyto_crime = car::recode(jc10, "2=0"),
+         armyto_corrupt = car::recode(jc13, "2=0"),
+         closecong = car::recode(jc15a, "2=0"),
+         closescotus = car::recode(jc16a, "2=0"),
+         jobeval_potus = m1,
+         jobeval_cong = NA,
+         age = q2,
+         female = q1 - 1,
+         yearborn = birthyr,
+         racecat = etid,
+         educcat = educ,
+         interestp = car::recode(pol1, "1=4; 2=3; 3=2; 4=1"),
+         houseinc = q10,
+         persinc = NA,
+         churchatd = NA,
+         protestant = car::recode(q3c, "1=0; 2=1; 3:15=0"),
+         stateid = inputstate)  %>%
+  select(country, year, potus_limitopp:ncol(.))  -> US12s
+
+us12labs <- val_labels(US12s$stateid)
+
+us12labs <- data.frame(stateid=us12labs)
+
+us12labs <- rownames_to_column(us12labs, "state")
+
+US12s <- left_join(US12s, us12labs)
+
+US14 %>%
+  mutate(country = "USA",
+         year = 2014,
+         potus_limitopp = NA,
+         potus_wocong = NA,
+         potus_woscotus = NA,
+         pop_govern = NA,
+         goodvevil = NA,
+         pop_stopopp = NA,
+         disag_threat = pop113,
+         dembest = ing4,
+         gop = car::recode(usvb1011, "4001=1; 4002:4003=0; 77=0"),
+         dem = car::recode(usvb1011, "4001=0; 4002=1; 4003=0; 77=0"),
+         indother = car::recode(usvb1011, "4001:4002=0; 4003=1; 77=1"),
+         votegop = car::recode(vb3n, "0=NA; 97=0; 4001=0; 4002=1; 4007=0"),
+         pid = NA,
+         ideo = l1b,
+         satislife = car::recode(ls3, "1=4;2=3;3=2;4=1"),
+         econsitc = car::recode(soct1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitc12 = car::recode(soct2, "1=3; 2=2; 3=1"),
+         econsitp = car::recode(idio1, "1=5;2=4;3=3;4=2;5=1"),
+         econsitp12 = car::recode(idio2, "1=3; 2=2; 3=1"),
+         immig_services = NA,
+         immig_takejobs = NA,
+         trust_af = b12,
+         trust_cong = b13,
+         trust_govt = NA,
+         trust_potus = b21a,
+         trust_media = b37,
+         trust_elections = b47a,
+         satisdem = pn4,
+         usdemocratic = NA,
+         bt_vote = d1,
+         bt_demonstrate = d2,
+         bt_runfor = d3,
+         bt_makespeech = d4,
+         autocok = car::recode(dem2, "1=1; 2=0; 3=1"),
+         armyto_unemploy = NA,
+         armyto_crime = car::recode(jc10, "2=0"),
+         armyto_corrupt = car::recode(jc13, "2=0"),
+         closecong = car::recode(jc15a, "2=0"),
+         closescotus = NA,
+         jobeval_potus = m1,
+         jobeval_cong = NA,
+         age = q2,
+         female = q1 - 1,
+         yearborn = q2y,
+         racecat = race,
+         educcat = used2,
+         interestp = car::recode(pol1, "1=4; 2=3; 3=2; 4=1"),
+         houseinc = q10new,
+         persinc = q10g,
+         churchatd = NA,
+         protestant = car::recode(q3c, "1=0; 2=1; 3:12=0"),
+         stateid = prov
+         ) %>%
+  select(country, year, potus_limitopp:ncol(.))  -> US14s
+
+us14labs <- val_labels(US14s$stateid)
+
+us14labs <- data.frame(stateid=us14labs)
+
+us14labs <- rownames_to_column(us14labs, "state")
+
+US14s <- left_join(US14s, us14labs)
+
+Data <- rbind(US08s, US10s, US12s, US14s)
+
+
+Data[,3:ncol(Data)-1] <- sapply(Data[,3:ncol(Data)-1],
+                                function(x)ifelse(x == "NaN",NA, as.numeric(x)))
+
+
+
+```
+
+## An Exploratory Analysis of Four Waves of AmericasBarometer Data
+
+I chose the AmericasBarometer data, part of the Latin American Public Opinion Project (LAPOP), to explore how partisanship conditions attitudes about democracy in the United States. Data are available in 2008, 2010, 2012, and 2014, though surveys are not coherent from one wave to the next. Questions may assume a different form from one wave to the next, like the political interest variable that goes from a three-part ordinal measure to a more familiar four-part ordinal measure after the 2008 wave. Additionally, some interesting questions LAPOP would ask in the United States about populism start to disappear after the 2008 wave. Consider what follows tentative and illustrative as a result since we'll mostly be speaking to how Republicans viewed American democracy with Obama as president. I would expand on these descriptive analyses to an inferential analysis if I knew a publication would follow. This is a bit outside my wheelhouse after all.
+
+### Co-Partisan Control of the White House Coincides with Satisfaction with Democracy (Among Republicans)
+
+We'll start with one of the items that does appear in all four AmericasBarometer waves under consideration here: satisfaction with the way democracy works in the United States. This question, which prompts the respondent to state their level of satisfaction with democracy on a four-part scale from "very satisfied" to "very dissatisfied", is ubiquitous in all cross-national survey research on democracy, making it a good place to start. The figure, reproduced below, makes evident a partisan shift in democratic satisfaction after Obama's election in 2008. Interestingly, we see this shift among Republicans and not Democrats.
+
+```{r satisdem, echo=F, fig.width=13, fig.height=11}
+Data %>%
+  mutate(pid3 = ifelse(dem == 1, "Democrat", NA),
+         pid3 = ifelse(indother == 1, "Independent/Other", pid3),
+         pid3 = ifelse(gop == 1, "Republican", pid3),
+         pid3 = fct_rev(pid3)) %>%
+  filter(!is.na(satisdem) & !is.na(pid3) & pid3 != "Independent/Other") %>%
+  group_by(year, satisdem, pid3) %>%
+  summarise(sum = n()) %>%
+  group_by(year, pid3) %>%
+  mutate(perc = round(sum/sum(sum), 2),
+         `Party ID` = pid3,
+         percper = paste0(perc*100,"%")) %>%
+  ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) + theme_steve() +
+  geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+  facet_wrap(~ year, ncol=2, scales="free") +
+  scale_y_continuous(labels = scales::percent) +
+    scale_x_discrete(labels=c("Very\nSatisfied","Satisfied","Dissatisfied", "Very\nDissatisfied")) + 
+   geom_text(aes(label=percper), vjust=1.5, colour="black",
+            position=position_dodge(.9), size=4) +
+  theme(legend.position = "bottom") +
+  ylab("Percent in Category") + xlab("Satisfaction with Democracy") +
+   labs(caption="Data: AmericasBarometer (2008-2014). Note: the 2008 survey occurred in April of that year, before the general election.",
+       title="Democrats Experienced No Change in Satisfaction with Democracy after Obama's Election. Republicans on the Other Hand...",
+       subtitle="''In general, would you say that you are very satisfied, satisfied, dissatisfied or very dissatisfied with the way democracy works in the United States?''")
+```
+
+The Democrats experienced no change in their level of satisfaction with democracy after Obama's general election win gave Democrats united government. They also experienced no real shift after the Republicans took control of the House of Representatives. Republicans, on the other hand, experienced a discernible drop in their level of democratic satisfaction after Democrats took control of the White House. The percentage of cases among Republicans in the "very satisfied" group dropped from 18% to 6% in 2010. The "satisfied" group dropped from 65% to 44%. Those overall "satisfied" dropped from 83% to 50%. Democratic satisfaction after an honest election gave Democrats united government dropped to a 50/50 proposition among Republicans that did not materially improve after the Republicans retook the House.
+
+This says more about Republicans than Democrats, per se, at the moment. Republicans conditioned their satisfaction with the way democracy works contingent on what party controlled the White House. We lack data for 2016 on this question in this survey and I've no doubt the results of the 2018 survey will show Democrats conditioning their level of satisfaction with democracy, in part, on what party controls the White House.
+
+### Republicans Started to Think the U.S. Was No Longer Democratic after Obama
+
+We could reassure ourselves with a statement of, "well, of course partisans are dissatisfied with the way democracy works when their guy no longer sits in the White House because partisanship is a hell of a drug." I think this is naïve and, worse yet, whitewashes a troubling statement that partisans (here: Republicans during the Obama Administration) were communicating about what they think of American democracy when it produces outcomes they do not like. If we accept the tall tales of democracy that we like to tell ourselves as the longest-running continuous democracy in the world, these patterns we observe among partisans simply proxy presidential approval. If we jettison that naïve reassurance, we see partisans might be conditioning their support for democracy based on partisan representation in government, particularly in the White House. 
+
+There are more patterns consistent with the latter statement than the former. AmericasBarometer asked its respondents in the 2008, 2010, and 2012 waves to state how democratic they think the United States is, in general. It regrettably dropped this question for the 2014 wave but the hope is it returns in future waves. Here, we see effectively the same pattern. Republicans are more dissatisfied with how democracy works in the U.S. after the Democrats took control of the White House *and* they are also more inclined to think the U.S. is *less democratic* after elections produce outcomes they do not like, even if this trend "corrected" a little in the 2012 wave.
+
+```{r usdemocratic, echo=F, fig.width=13, fig.height=11}
+
+Data %>%
+  mutate(pid3 = ifelse(dem == 1, "Democrat", NA),
+         pid3 = ifelse(indother == 1, "Independent/Other", pid3),
+         pid3 = ifelse(gop == 1, "Republican", pid3),
+         pid3 = fct_rev(pid3)) %>%
+  filter(!is.na(usdemocratic) & !is.na(pid3) & pid3 != "Independent/Other") %>%
+  group_by(year, usdemocratic, pid3) %>%
+  summarise(sum = n()) %>%
+  group_by(year, pid3) %>%
+  mutate(perc = round(sum/sum(sum), 2),
+         `Party ID` = pid3,
+         percper = paste0(perc*100,"%")) %>%
+  ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) + theme_steve() +
+  geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+  facet_wrap(~ year, ncol=2, scales="free") +
+  scale_y_continuous(labels = scales::percent) +
+    scale_x_discrete(labels=c("Very\nDemocratic","Somewhat\nDemocratic","Not Very\nDemocratic", "Not At All\nDemocratic")) + 
+   geom_text(aes(label=percper), vjust=-.5, colour="black",
+            position=position_dodge(.9), size=4) +
+  theme(legend.position = "bottom") +
+  ylab("Percent in Category") + xlab("Level of Democracy in the U.S.") +
+   labs(caption="Data: AmericasBarometer (2008-2014). Note: the 2008 survey occurred in April of that year, before the general election.",
+       title="Republicans Started to Think the U.S. Was Less Democratic after Obama's Election",
+       subtitle="'In your opinion, is the United States very democratic, somewhat democratic, not very democratic or not at all democratic?''")
+
+```
+
+We observe no such change among Democrats in these three waves. Obama's presence in the White House and the ephemeral control of the executive and legislative branches by Democrats did not make Democrats think the U.S. was more democratic in these three waves. We should note that Democrat movement on this item, should it (hopefully) appear again in AmericasBarometer wave, would no doubt resemble what we saw of the Republican respondents in 2010.
+
+### Democrats Wanted to Limit the Voice and Vote of Political Opposition when Obama was President (and Vice-Versa for Republicans)
+
+Democrats are not blameless in the AmericasBarometer data. The AmericasBarometer data are unique for asking a battery of populist questions that, regrettably, start to disappear from the questionnaire in more recent waves. The most commonly asked of these "populist" items is the following prompt: "It is necessary for the progress of this country that our Presidents limit the voice and vote of opposition parties, how much do you agree or disagree with that view?" The respondent expresses their level of agreement on a seven-item scale from "strongly disagree" to "strongly agree." For clarity and ease of interpretation (i.e. the data understandably have a discernible right skew), I condense this ordinal measure into a three-item measure that condenses values of 1-3 to "Disagree", a value of 4 (in the middle of the possible responses) to "On the Fence" and the values of 5-7 to "Agree."
+
+
+
+```{r potus_limitopp, echo=F, fig.width=13, fig.height=11}
+Data %>%
+    mutate(pid3 = ifelse(dem == 1, "Democrat", NA),
+           pid3 = ifelse(indother == 1, "Independent/Other", pid3),
+           pid3 = ifelse(gop == 1, "Republican", pid3),
+           pid3 = fct_rev(pid3),
+           potus_limitopp = car::recode(potus_limitopp, "1:3=0; 4=2; 5:7=1")) %>%
+    filter(!is.na(potus_limitopp) & !is.na(pid3) & pid3 != "Independent/Other") %>%
+    group_by(year, potus_limitopp, pid3) %>%
+    summarise(sum = n()) %>%
+    group_by(year, pid3) %>%
+    mutate(perc = round(sum/sum(sum), 2),
+           `Party ID` = pid3,
+           percper = paste0(perc*100,"%")) %>%
+    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve() +
+    geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+    facet_wrap(~ year, ncol=2, scales="free") +
+  scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
+    scale_x_discrete(labels=c("Disagree", "On the Fence", "Agree")) + 
+   geom_text(aes(label=percper), vjust=-.5, colour="black",
+            position=position_dodge(.9), size=4) +
+  theme(legend.position = "bottom")  +
+  ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition.") +
+   labs(caption="Data: AmericasBarometer (2008-2012). Note: the 2008 survey occurred in April of that year, before the general election.",
+       title="Democrats Became More Open to the President Limiting Political Opposition When Obama was President",
+       subtitle="''It is necessary for the progress of this country that our Presidents limit the voice and vote of opposition parties, how much do you agree or disagree with that view?''")
+
+```
+
+Here, you see an important partisan sort of responses after Obama's election. 53% of Republicans at least somewhat disagreed (per my inference) with the President silencing political opposition when George W. Bush was in office. The remainder were either on the fence (21%) or at least somewhat agreed that Bush should silence political opposition (26%). These responses, understandably, changed considerably among Republicans when Obama became president. They also changed among Democrats, who became more open to the President silencing political opposition when Obama had the position.
+
+You could alternatively condense this to a dichotomous measure of "Strongly Disagree" vs. "Does Not Strongly Disagree" and you'll get the same basic story. It might arguably be even "starker" because the "mostly disagree" responses would be in the same category as the "strongly agree" responses.
+
+
+```{r potus_limitopp2, echo=F, fig.width=13, fig.height=11}
+Data %>%
+    mutate(pid3 = ifelse(dem == 1, "Democrat", NA),
+           pid3 = ifelse(indother == 1, "Independent/Other", pid3),
+           pid3 = ifelse(gop == 1, "Republican", pid3),
+           pid3 = fct_rev(pid3),
+           potus_limitopp = car::recode(potus_limitopp, "1=0; 2:7=1")) %>%
+    filter(!is.na(potus_limitopp) & !is.na(pid3) & pid3 != "Independent/Other") %>%
+    group_by(year, potus_limitopp, pid3) %>%
+    summarise(sum = n()) %>%
+    group_by(year, pid3) %>%
+    mutate(perc = round(sum/sum(sum), 2),
+           `Party ID` = pid3,
+           percper = paste0(perc*100,"%")) %>%
+    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve() +
+    geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+    facet_wrap(~ year, ncol=2, scales="free") +
+  scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
+    scale_x_discrete(labels=c("Strongly\nDisagree", "Does Not Strongly\nDisagree")) + 
+   geom_text(aes(label=percper), vjust=1.5, colour="black",
+            position=position_dodge(.9), size=4) +
+  theme(legend.position = "bottom")  +
+  ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition.") +
+   labs(caption="Data: AmericasBarometer (2008-2012). Note: the 2008 survey occurred in April of that year, before the general election.",
+       title="Democrats Became More Open to the President Limiting Political Opposition When Obama was President",
+       subtitle="''It is necessary for the progress of this country that our Presidents limit the voice and vote of opposition parties, how much do you agree or disagree with that view?''")
+
+```
+
+AmericasBarometer stopped asking this question in the United States after the 2012 wave. I wish it would return.
+
+### Democrats Became a Little Bit More Open to Closing Congress Later into the Obama Administration
+
+AmericasBarometer data are again partial, but illustrative, for the purpose of this descriptive analysis. Consider this item that AmericasBarometer started asking in 2010 that dovetails nicely [with some of my research](http://svmiller.com/research/individual-level-expectations-of-executive-authority-under-territorial-threat/). The prompt resembles familiar items from Latinobarómetro and WVS with, "Do you believe that when the country is facing very difficult times it is justifiable for the president of the country to close the Congress and govern without Congress?" The respondent can answer with "yes, it is justified" or "no, it is not justified." Note that the question has more tooth than a similar "populist" item that talks about the President acting "without Congress." Here, the survey item explicitly prompts the respondent to think of a situational justification for "closing" Congress and governing without the legislative body that occupied most of the Founders' efforts in crafting the U.S. Constitution.
+
+The good news is that most partisans are against this situational suspension of Congress even as [Congress has lower approval ratings than lice and Nickelback](https://www.washingtonpost.com/news/wonk/wp/2013/01/10/graph-of-the-day-congress-is-less-popular-than-lice-colonoscopies-and-nickelback/?utm_term=.6b98cf082c39). The bad news is there's a clear, if small, movement among Democrats later into the Obama administration when Democrats 1) lost the House and 2) looked like they were going to lose the Senate.
+
+```{r closecong, echo=F, fig.width=13, fig.height=11}
+Data %>%
+    mutate(pid3 = ifelse(dem == 1, "Democrat", NA),
+           pid3 = ifelse(indother == 1, "Independent/Other", pid3),
+           pid3 = ifelse(gop == 1, "Republican", pid3),
+           pid3 = fct_rev(pid3),
+           potus_limitopp = car::recode(closecong, "1=0; 2:7=1")) %>%
+    filter(!is.na(closecong) & !is.na(pid3) & pid3 != "Independent/Other") %>%
+    group_by(year, closecong, pid3) %>%
+    summarise(sum = n()) %>%
+    group_by(year, pid3) %>%
+    mutate(perc = round(sum/sum(sum), 2),
+           `Party ID` = pid3,
+           percper = paste0(perc*100,"%")) %>%
+    ggplot(aes(x=factor(closecong), y =perc, fill=`Party ID`)) + theme_steve() +
+    geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+    facet_wrap(~ year, ncol=2, scales="free") +
+  scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
+    scale_x_discrete(labels=c("Not\nJustified", "Justified")) + 
+   geom_text(aes(label=percper), vjust=-.5, colour="black",
+            position=position_dodge(.9), size=4) +
+  theme(legend.position = "bottom")  +
+  ylab("Percent in Category") + xlab("Justifiable to Close Congress") +
+   labs(caption="Data: AmericasBarometer (2010-2014). Note: the 2008 survey occurred in April of that year, before the general election.",
+       title="Democrats Became a Little More Open to Closing Congress Later into the Obama Administration",
+       subtitle="''Do you believe that when the country is facing very difficult times it is justifiable for the president of the country to close the Congress and govern without Congress?''")
+
+```
+
+We should note with morbid interest what this resembled among Democrats in 2016, or would look like among Republicans if the 2018 midterm elections result in the worst-case scenario for the GOP.
+
+## Conclusion
+
+I worry the politics we see in the United States right now at the mass-level suggests that American partisans might not be serious about democracy. You saw it in the "Tea Party" reaction to Obama's White House win. You're going to see it soon among Democrats and those further to the political left with Trump in the White House, even as concerns about Trump are far more legitimate than the concerns about Obama's united government in January 2009. Those who value democracy for democracy's sake should not be conditioning their attitudes toward American democracy and democratic norms based on whether their co-partisans control government. Increasingly, we see this is the case. We definitely see it among Republicans. We even see it a little among Democrats in the available data, for which more recent waves will likely continue this trend.
+
+I should note that I'm an American, and a political behavior researcher. I'm not an "American political behavior" researcher. However, my analysis suggests that those two classes of surveys in the U.S. I mentioned in the preamble---those exclusive to the U.S. and those that include the U.S. with observations from other countries---should better speak to each other. Clearly those that include the U.S. among cases like Pakistan or Venezuela could benefit from more granular and focused questions about American politics. Those exclusive to the U.S., however, may have to start questionining how committed Americans are to democracy if their responses to these general questions about democratic commitment are conditioned by co-partisan control of government. We need to start Americans the same questions we would ask Pakistanis and Venezuelans.
