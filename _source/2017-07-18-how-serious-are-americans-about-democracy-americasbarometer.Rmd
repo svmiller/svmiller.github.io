@@ -382,7 +382,7 @@ Data %>%
 
 We observe no such change among Democrats in these three waves. Obama's presence in the White House and the ephemeral control of the executive and legislative branches by Democrats did not make Democrats think the U.S. was more democratic in these three waves. We should note that Democrat movement on this item, should it (hopefully) appear again in AmericasBarometer wave, would no doubt resemble what we saw of the Republican respondents in 2010.
 
-### Democrats Wanted to Limit the Voice and Vote of Political Opposition when Obama was President (and Vice-Versa for Republicans)
+### Democrats, Like Republicans Were More Open to Limiting the Voice and Vote of Political Opposition when Their Party Controlled the White House
 
 Democrats are not blameless in the AmericasBarometer data. The AmericasBarometer data are unique for asking a battery of populist questions that, regrettably, start to disappear from the questionnaire in more recent waves. The most commonly asked of these "populist" items is the following prompt: "It is necessary for the progress of this country that our Presidents limit the voice and vote of opposition parties, how much do you agree or disagree with that view?" The respondent expresses their level of agreement on a seven-item scale from "strongly disagree" to "strongly agree." For clarity and ease of interpretation (i.e. the data understandably have a discernible right skew), I condense this ordinal measure into a three-item measure that condenses values of 1-3 to "Disagree", a value of 4 (in the middle of the possible responses) to "On the Fence" and the values of 5-7 to "Agree."
 
