@@ -6,7 +6,7 @@ date: "2017-07-18"
 permalink:
 categories:
   - Political Science
-excerpt: "I have my first attempt at an R package, stevemisc, available on my github. It can help you quickly generate peace years for BTSCS models."
+excerpt: "How serious are Americans about democracy? I look at four waves of AmericasBarometer data to answer that question. I have my doubts about American (certainly partisan) commitment to democracy."
 ---
 
 
