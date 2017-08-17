@@ -2,7 +2,7 @@
 title: 'How Serious Are Americans About Democracy? An Exploratory Analysis of the AmericasBarometer Data'
 author: steve
 layout: post
-date: "2017-07-19"
+date: "2017-08-07"
 permalink:
 categories:
   - Political Science
