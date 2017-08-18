@@ -2,7 +2,7 @@
 title: 'Outgroup Intolerance and Support for Democracy: An Analysis of White Americans in the World Values Survey Data'
 author: steve
 layout: post
-date: "2017-08-17"
+date: "2017-08-18"
 permalink:
 categories:
   - Political Science
@@ -27,7 +27,7 @@ I use the aforementioned four waves of WVS data for this analysis and pattern th
 
 Briefly, I take various general questions about attitudes toward democracy for Americans readily available in the WVS and regress them on some variables of interest. These dependent variables are four-item measures about whether the responsdent would think having a strong leader without legislative or electoral oversight or rule of government by the army would be good for the United States. I also include whether the respondent believes having a democracy would be good for the United States. I condense these four-item measures to equal 1 if the respondent thinks a strong leader or army rule would be good and if having democracy would be bad. I invert the scale of the democracy question for comparability of coefficients.
 
-I simplify the set of regressors to variables for age, age-squared, whether the respondent is a woman, whether the respondent has a high school education or less, the respondent's ideology, ideology-squared, an income scale measuring personal income, whether the respondent identifies as a Republican, whether the respondent is unemployed, and [the emancipative values measure from Welzel](http://www.cambridge.org/us/academic/subjects/politics-international-relations/comparative-politics/freedom-rising-human-empowerment-and-quest-emancipation?format=PB&isbn=9781107664838).
+I simplify the set of regressors to variables for age, age-squared, whether the respondent is a woman, whether the respondent has a high school education or less, the respondent's ideology, ideology-squared, an income scale measuring personal income, whether the respondent identifies as a Republican or Democrat relative to a baseline of independents or third-party supporters (e.g. Libertarians, Reform Party [remember them?]), whether the respondent is unemployed, and [the emancipative values measure from Welzel](http://www.cambridge.org/us/academic/subjects/politics-international-relations/comparative-politics/freedom-rising-human-empowerment-and-quest-emancipation?format=PB&isbn=9781107664838).
 
 I offer one new variable here to measure white intolerance for various outgroups that routinely appear as pejoratives for the white supremacists like we saw in Charlottesville. The WVS is not perfect for these questions. Indeed, eliciting a xenophobic or racist statement in a survey or survey experiment is *hard* (see: [my summary](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/) of what [Christopher DeSante](http://pages.iu.edu/~cdesante/) and [Candis Smith](http://publicpolicy.unc.edu/people/candis-w-smith/) are doing) and typically require more nuance than WVS shows (e.g. [endorsement experiments](https://imai.princeton.edu/research/support.html)). Still, WVS uses something close to a familiar device for intolerance researchers. The survey asks respondents to say what types of people they would not like to have as neighbors.[^social] The respondent can name any they like from a set list of familiar groups. 
 
@@ -73,38 +73,41 @@ Interestingly, the only other effect that is positive and robust across all thre
 <tr><td></td><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
 <tr><td style="text-align:left"></td><td>Strong Leader</td><td>Army Rule</td><td>Opposition to Democracy</td></tr>
 <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td></tr>
-<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Age</td><td>-0.454<sup>***</sup></td><td>-0.456<sup>***</sup></td><td>-0.705<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.088)</td><td>(0.077)</td><td>(0.119)</td></tr>
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Age</td><td>-0.449<sup>***</sup></td><td>-0.452<sup>***</sup></td><td>-0.612<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.088)</td><td>(0.077)</td><td>(0.121)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Age-squared</td><td>0.158</td><td>0.045</td><td>0.024</td></tr>
-<tr><td style="text-align:left"></td><td>(0.159)</td><td>(0.140)</td><td>(0.224)</td></tr>
+<tr><td style="text-align:left">Age-squared</td><td>0.163</td><td>0.049</td><td>0.099</td></tr>
+<tr><td style="text-align:left"></td><td>(0.160)</td><td>(0.140)</td><td>(0.226)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Female</td><td>0.054</td><td>0.139<sup>*</sup></td><td>0.470<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.084)</td><td>(0.072)</td><td>(0.117)</td></tr>
+<tr><td style="text-align:left">Female</td><td>0.057</td><td>0.142<sup>**</sup></td><td>0.522<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.084)</td><td>(0.072)</td><td>(0.118)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">High School Education or Less</td><td>0.589<sup>***</sup></td><td>0.205<sup>**</sup></td><td>0.586<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.099)</td><td>(0.083)</td><td>(0.141)</td></tr>
+<tr><td style="text-align:left">High School Education or Less</td><td>0.587<sup>***</sup></td><td>0.204<sup>**</sup></td><td>0.572<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.099)</td><td>(0.083)</td><td>(0.143)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Ideology (L to R)</td><td>0.014</td><td>-0.156<sup>*</sup></td><td>-0.147</td></tr>
-<tr><td style="text-align:left"></td><td>(0.101)</td><td>(0.082)</td><td>(0.137)</td></tr>
+<tr><td style="text-align:left">Ideology (L to R)</td><td>0.006</td><td>-0.164<sup>**</sup></td><td>-0.274<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.102)</td><td>(0.082)</td><td>(0.139)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Ideology-squared</td><td>-0.544<sup>***</sup></td><td>-0.271<sup>***</sup></td><td>-0.293<sup>*</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.131)</td><td>(0.101)</td><td>(0.175)</td></tr>
+<tr><td style="text-align:left">Ideology-squared</td><td>-0.536<sup>***</sup></td><td>-0.264<sup>***</sup></td><td>-0.165</td></tr>
+<tr><td style="text-align:left"></td><td>(0.132)</td><td>(0.102)</td><td>(0.175)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Income Scale</td><td>0.019</td><td>-0.010</td><td>-0.538<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.093)</td><td>(0.079)</td><td>(0.128)</td></tr>
+<tr><td style="text-align:left">Income Scale</td><td>0.022</td><td>-0.008</td><td>-0.503<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.093)</td><td>(0.079)</td><td>(0.130)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Republican</td><td>-0.335<sup>***</sup></td><td>-0.155<sup>*</sup></td><td>0.689<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.097)</td><td>(0.084)</td><td>(0.132)</td></tr>
+<tr><td style="text-align:left">Republican</td><td>-0.399<sup>***</sup></td><td>-0.213<sup>*</sup></td><td>-0.265<sup>*</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.131)</td><td>(0.116)</td><td>(0.161)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Unemployed</td><td>0.462<sup>**</sup></td><td>0.056</td><td>0.639<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.189)</td><td>(0.176)</td><td>(0.235)</td></tr>
+<tr><td style="text-align:left">Democrat</td><td>-0.090</td><td>-0.081</td><td>-1.627<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.125)</td><td>(0.111)</td><td>(0.189)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Emancipative Values</td><td>-0.613<sup>***</sup></td><td>0.037</td><td>-0.667<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.096)</td><td>(0.081)</td><td>(0.133)</td></tr>
+<tr><td style="text-align:left">Unemployed</td><td>0.457<sup>**</sup></td><td>0.051</td><td>0.566<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.189)</td><td>(0.176)</td><td>(0.241)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left"><strong>White Outgroup Intolerance</strong></td><td>0.466<sup>***</sup></td><td>0.310<sup>***</sup></td><td>0.398<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.098)</td><td>(0.089)</td><td>(0.131)</td></tr>
+<tr><td style="text-align:left">Emancipative Values</td><td>-0.613<sup>***</sup></td><td>0.037</td><td>-0.692<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.096)</td><td>(0.081)</td><td>(0.136)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
+<tr><td style="text-align:left"><strong>White Outgroup Intolerance</strong></td><td>0.467<sup>***</sup></td><td>0.310<sup>***</sup></td><td>0.394<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.098)</td><td>(0.089)</td><td>(0.133)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>3,425</td><td>3,406</td><td>3,394</td></tr>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="3" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>

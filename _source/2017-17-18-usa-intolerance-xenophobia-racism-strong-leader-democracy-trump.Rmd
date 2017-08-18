@@ -104,7 +104,7 @@ USA$party[USA$e179wvs == 840004] <- "Libertarian"
 USA$party[USA$e179wvs == 840005] <- "Reform"
 
 USA$gop <- with(USA, ifelse(party == "Republican", 1, 0))
-
+USA$dem <- with(USA, ifelse(party == "Democrat", 1, 0))
 
 
 USA$strongleader <- with(USA, recode(e114, "-5:-1=NA; 1=4; 2=3; 3=2; 4=1"))
@@ -363,7 +363,7 @@ I use the aforementioned four waves of WVS data for this analysis and pattern th
 
 Briefly, I take various general questions about attitudes toward democracy for Americans readily available in the WVS and regress them on some variables of interest. These dependent variables are four-item measures about whether the responsdent would think having a strong leader without legislative or electoral oversight or rule of government by the army would be good for the United States. I also include whether the respondent believes having a democracy would be good for the United States. I condense these four-item measures to equal 1 if the respondent thinks a strong leader or army rule would be good and if having democracy would be bad. I invert the scale of the democracy question for comparability of coefficients.
 
-I simplify the set of regressors to variables for age, age-squared, whether the respondent is a woman, whether the respondent has a high school education or less, the respondent's ideology, ideology-squared, an income scale measuring personal income, whether the respondent identifies as a Republican, whether the respondent is unemployed, and [the emancipative values measure from Welzel](http://www.cambridge.org/us/academic/subjects/politics-international-relations/comparative-politics/freedom-rising-human-empowerment-and-quest-emancipation?format=PB&isbn=9781107664838).
+I simplify the set of regressors to variables for age, age-squared, whether the respondent is a woman, whether the respondent has a high school education or less, the respondent's ideology, ideology-squared, an income scale measuring personal income, whether the respondent identifies as a Republican or Democrat relative to a baseline of independents or third-party supporters (e.g. Libertarians, Reform Party [remember them?]), whether the respondent is unemployed, and [the emancipative values measure from Welzel](http://www.cambridge.org/us/academic/subjects/politics-international-relations/comparative-politics/freedom-rising-human-empowerment-and-quest-emancipation?format=PB&isbn=9781107664838).
 
 I offer one new variable here to measure white intolerance for various outgroups that routinely appear as pejoratives for the white supremacists like we saw in Charlottesville. The WVS is not perfect for these questions. Indeed, eliciting a xenophobic or racist statement in a survey or survey experiment is *hard* (see: [my summary](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/) of what [Christopher DeSante](http://pages.iu.edu/~cdesante/) and [Candis Smith](http://publicpolicy.unc.edu/people/candis-w-smith/) are doing) and typically require more nuance than WVS shows (e.g. [endorsement experiments](https://imai.princeton.edu/research/support.html)). Still, WVS uses something close to a familiar device for intolerance researchers. The survey asks respondents to say what types of people they would not like to have as neighbors.[^social] The respondent can name any they like from a set list of familiar groups. 
 
@@ -406,7 +406,7 @@ Interestingly, the only other effect that is positive and robust across all thre
 ```{r, echo=F, eval=T, results="asis", cache=T}
 
 M1 <- glmer(sldummy ~ z_age + I(z_age^2) + female +
-              hsedorless + z_ideo + I(z_ideo^2) + z_incscale + gop + unemployed +
+              hsedorless + z_ideo + I(z_ideo^2) + z_incscale + gop + dem + unemployed +
               + z_lemanc  + wnneighb +
               (1  | censusr) + (1 | year) +
               (1  | censusr:year),
@@ -415,7 +415,7 @@ M1 <- glmer(sldummy ~ z_age + I(z_age^2) + female +
                                  optCtrl=list(maxfun=2e5)))
 
 M2 <- glmer(ardummy ~ z_age + I(z_age^2) + female +
-              hsedorless + z_ideo + I(z_ideo^2) + z_incscale + gop + unemployed +
+              hsedorless + z_ideo + I(z_ideo^2) + z_incscale + gop + dem + unemployed +
               + z_lemanc  + wnneighb +
               (1  | censusr) + (1 | year) +
               (1  | censusr:year),
@@ -424,7 +424,7 @@ M2 <- glmer(ardummy ~ z_age + I(z_age^2) + female +
                                  optCtrl=list(maxfun=2e5)))
 
 M3 <- glmer(hddummy ~ z_age + I(z_age^2) + female +
-              hsedorless + z_ideo + I(z_ideo^2) + z_incscale + gop + unemployed +
+              hsedorless + z_ideo + I(z_ideo^2) + z_incscale + gop + dem + unemployed +
               + z_lemanc  + wnneighb +
               (1  | censusr) + (1 | year) +
               (1  | censusr:year),
@@ -435,7 +435,7 @@ stargazer(M1, M2, M3, type="html",
           covariate.labels = c("Age", "Age-squared", "Female",
                                "High School Education or Less",
                                "Ideology (L to R)", "Ideology-squared",
-                               "Income Scale", "Republican", "Unemployed",
+                               "Income Scale", "Republican", "Democrat", "Unemployed",
                                "Emancipative Values", "<strong>White Outgroup Intolerance</strong>","Constant"),
           title="The Effect of White Outgroup Intolerance on Support for Democracy (White Americans, WVS)",
           notes="<small>Models include random effects for Census region, year, and Census-years.</small>",
@@ -457,6 +457,7 @@ newdat_m1 <- with(USA, data.frame(
   "I(z_ideo^2)" = 0,
   z_incscale = 0,
   gop = 1,
+ dem = 0,
   unemployed = 0,
   z_lemanc = 0,
   wnneighb = c(0, 1, 0, 1),
