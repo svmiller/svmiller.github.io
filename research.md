@@ -12,6 +12,9 @@ I also provide titles for some working papers and works in progress below. I pro
  
 <hr style="clear:both;visibility: hidden;" />  
 
+## Data
+
+[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/)
 
 ## Publications
 
