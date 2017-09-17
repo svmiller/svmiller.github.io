@@ -12,17 +12,17 @@ I also provide titles for some working papers and works in progress below. I pro
  
 <hr style="clear:both;visibility: hidden;" />  
 
-## Data
+## Original Data
 
-[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/)
+[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/). <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
 
 ## Publications
 
 Miller, Steven V. Forthcoming. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly*.
 
-Miller, Steven V. Forthcoming. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science*.
+Miller, Steven V. 2017. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science* 34(5): 526-545.
 
-Miller, Steven V. 2017. "[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." *Political Behavior*. 39(2): 457-478.
+Miller, Steven V. 2017. "[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." *Political Behavior* 39(2): 457-478.
 
 Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. "[An Analysis of the Militarized Interstate Dispute (MID) Dataset, 1816-2001](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly* 60(4): 719-730.
 
