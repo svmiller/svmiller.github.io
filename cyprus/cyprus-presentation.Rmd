@@ -14,9 +14,9 @@ output:
     slide_level: 2
 ---
 
-# We're Starting a New Study-Abroad Program!
+# We're starting a new study-abroad program!
 
-# Here's What You Need to Know
+# Here's what you need to know...
 
 ## Clemson Summer in Cyprus Program
 
@@ -101,7 +101,7 @@ knitr::include_graphics("../images/cyprus-kitty-1.jpg")
 ```
 
 
-# Why Else?
+# Why else?
 
 ## Cyprus is a Unique Country
 
@@ -140,7 +140,7 @@ knitr::include_graphics("../images/cyprus-lazarus-1.jpg")
 knitr::include_graphics("../images/cyprus-lazarus-2.jpg")
 ```
 
-# What You'll Get from This Experience
+# What you'll get from this experience...
 
 ## What You'll Get
 
@@ -150,7 +150,7 @@ knitr::include_graphics("../images/cyprus-lazarus-2.jpg")
 
     - Many students who go there once come back again.
     
-# You Should Apply!
+# You should apply!
 
 ## Apply!
 
@@ -158,3 +158,7 @@ knitr::include_graphics("../images/cyprus-lazarus-2.jpg")
 - Minimum GPA is a reasonable 2.5.
 - [Find us on Terradotta](http://terradotta.app.clemson.edu/index.cfm?FuseAction=Programs.ViewProgram&Program_ID=12338) ("Clemson Summer in Cyprus")
 - Email me (svmille@clemson.edu) or Zeynep Taydas (ztaydas@clemson.edu) with any questions.
+
+See website at [svmiller.com/cyprus](http://svmiller.com/cyprus/) for more details as well.
+
+- See the presentation again at [svmiller.com/cyprus/cyprus-presentation.html](http://svmiller.com/cyprus/cyprus-presentation.html)
