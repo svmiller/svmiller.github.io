@@ -40,10 +40,13 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 ## Working Papers and Works in Progress
 
-"[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)." 
 
-"Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East."
+"[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)" 
+
+"Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East"
 
 "U.S. Presidents, Human Rights, and Economic Aid from Truman to Obama: A Mixed Effects Approach"
 
 "Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders"
+
+"[What Americans Really Think About Gun Control: Evidence from the General Social Survey, 1972-2016](/research/what-americans-really-think-about-gun-control/)" 
