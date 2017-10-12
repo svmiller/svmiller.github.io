@@ -144,7 +144,7 @@ knitr::include_graphics("../images/cyprus-lazarus-2.jpg")
 
 ## What You'll Get
 
-- Credit for POSC 3610 (Middle East Politics) and POSC 4760 (Middle East Politics)
+- Credit for POSC 3610 (International Politics in Crisis) and POSC 4760 (Middle East Politics)
 - Multiple excursions all across the island (across both sides)
 - Potential lifelong relationship with the University of Nicosia.
 
