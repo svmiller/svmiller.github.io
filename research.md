@@ -14,11 +14,11 @@ I also provide titles for some working papers and works in progress below. I pro
 
 ## Original Data
 
-[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/). <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
+[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/) ![Version 2.02](https://img.shields.io/badge/release-v2.02-blue.svg) <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
 
 ## Publications
 
-Miller, Steven V. Forthcoming. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly*.
+Miller, Steven V. Forthcoming. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly* 70(4): 790--802.
 
 Miller, Steven V. 2017. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science* 34(5): 526-545.
 
