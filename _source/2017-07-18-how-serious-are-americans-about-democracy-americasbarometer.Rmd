@@ -2,7 +2,7 @@
 title: 'How Serious Are Americans About Democracy? An Exploratory Analysis of the AmericasBarometer Data'
 author: steve
 layout: post
-date: "`r Sys.Date()`"
+date: "2017-07-18"
 permalink:
 categories:
   - Political Science
@@ -327,7 +327,7 @@ Data %>%
   mutate(perc = round(sum/sum(sum), 2),
          `Party ID` = pid3,
          percper = paste0(perc*100,"%")) %>%
-  ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) + theme_steve() +
+  ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) + theme_steve_web() +
   geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -365,7 +365,7 @@ Data %>%
   mutate(perc = round(sum/sum(sum), 2),
          `Party ID` = pid3,
          percper = paste0(perc*100,"%")) %>%
-  ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) + theme_steve() +
+  ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) + theme_steve_web() +
   geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -402,7 +402,7 @@ Data %>%
     mutate(perc = round(sum/sum(sum), 2),
            `Party ID` = pid3,
            percper = paste0(perc*100,"%")) %>%
-    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve() +
+    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve_web() +
     geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -436,7 +436,7 @@ Data %>%
     mutate(perc = round(sum/sum(sum), 2),
            `Party ID` = pid3,
            percper = paste0(perc*100,"%")) %>%
-    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve() +
+    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve_web() +
     geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -473,7 +473,7 @@ Data %>%
     mutate(perc = round(sum/sum(sum), 2),
            `Party ID` = pid3,
            percper = paste0(perc*100,"%")) %>%
-    ggplot(aes(x=factor(closecong), y =perc, fill=`Party ID`)) + theme_steve() +
+    ggplot(aes(x=factor(closecong), y =perc, fill=`Party ID`)) + theme_steve_web() +
     geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +

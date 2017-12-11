@@ -2,7 +2,7 @@
 title: 'Outgroup Intolerance and Support for Democracy: An Analysis of White Americans in the World Values Survey Data'
 author: steve
 layout: post
-date: "`r Sys.Date()`"
+date: "2017-08-18"
 permalink:
 categories:
   - Political Science
@@ -512,13 +512,13 @@ ggplot(m13v, aes(colour = Category)) +
                         ymax = upr),
                     lwd = 1/2, position = position_dodge(width = 1/2),
                      fill = "WHITE") + 
-    coord_flip() + theme_steve() +
+    coord_flip() + theme_steve_web() +
   ylab("Predicted Probability (with Confidence Intervals)") +
   xlab("Dependent Variable") +
   labs(caption="Values communicate predicted probabilities of a 1 for the three models in the regression table.
        Data: World Values Survey (USA, 1995-2011).") +
   ggtitle("The Effect of Education and Outgroup Intolerance on Attitudes Toward Democracy for Republican Men")
-  
+   
 
 
 ```

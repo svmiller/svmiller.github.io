@@ -94,7 +94,7 @@ Interestingly, the only other effect that is positive and robust across all thre
 <tr><td style="text-align:left">Income Scale</td><td>0.022</td><td>-0.008</td><td>-0.503<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.093)</td><td>(0.079)</td><td>(0.130)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Republican</td><td>-0.399<sup>***</sup></td><td>-0.213<sup>*</sup></td><td>-0.265<sup>*</sup></td></tr>
+<tr><td style="text-align:left">Republican</td><td>-0.399<sup>***</sup></td><td>-0.213<sup>*</sup></td><td>-0.266<sup>*</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.131)</td><td>(0.116)</td><td>(0.161)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
 <tr><td style="text-align:left">Democrat</td><td>-0.090</td><td>-0.081</td><td>-1.627<sup>***</sup></td></tr>
@@ -103,10 +103,10 @@ Interestingly, the only other effect that is positive and robust across all thre
 <tr><td style="text-align:left">Unemployed</td><td>0.457<sup>**</sup></td><td>0.051</td><td>0.566<sup>**</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.189)</td><td>(0.176)</td><td>(0.241)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Emancipative Values</td><td>-0.613<sup>***</sup></td><td>0.037</td><td>-0.692<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Emancipative Values</td><td>-0.614<sup>***</sup></td><td>0.037</td><td>-0.692<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.096)</td><td>(0.081)</td><td>(0.136)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
-<tr><td style="text-align:left"><strong>White Outgroup Intolerance</strong></td><td>0.467<sup>***</sup></td><td>0.310<sup>***</sup></td><td>0.394<sup>***</sup></td></tr>
+<tr><td style="text-align:left"><strong>White Outgroup Intolerance</strong></td><td>0.466<sup>***</sup></td><td>0.310<sup>***</sup></td><td>0.394<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.098)</td><td>(0.089)</td><td>(0.133)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>3,425</td><td>3,406</td><td>3,394</td></tr>
