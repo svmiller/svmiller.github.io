@@ -15,7 +15,7 @@ This page serves as a directory for the courses I have taught, which is freely a
 
 1. [POSC 1020](/teaching/posc-1020-introduction-to-international-relations/) (Introduction to International Relations)
 2. [POSC 3410](/teaching/posc-3410-quantitative-methods-in-political-science/) (Quantitative Methods in Political Science)
-3. [POSC 3610](/teaching/posc-3610-international-politics-in-crisis/) (International Politics in Crisis)
+3. [POSC 3610](/teaching/posc-3610-international-conflict/) (International Conflict)
 4. [POSC 3630](/teaching/posc-3630-united-states-foreign-policy/) (United States Foreign Policy)
 5. [POSC 4430](/teaching/posc-4430-political-behavior/) (Political Behavior)
 
