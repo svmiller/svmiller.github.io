@@ -18,7 +18,9 @@ I also provide titles for some working papers and works in progress below. I pro
 
 ## Publications
 
-Miller, Steven V. Forthcoming. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly* 70(4): 790--802.
+Miller, Steven V. Forthcoming. "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)". *Peace Economics, Peace Science and Public Policy*
+
+Miller, Steven V. 2017. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly* 70(4): 790--802.
 
 Miller, Steven V. 2017. "[Individual-Level Expectations of Executive Authority under Territorial Threat](/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science* 34(5): 526-545.
 
@@ -39,9 +41,6 @@ Gibler, Douglas M. and Steven V. Miller. 2012. "[Comparing the Foreign Aid Polic
 Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Negotiated Compromises](http://cmp.sagepub.com/content/28/3/261)." *Conflict Management and Peace Science* 28(3): 261-279.
 
 ## Working Papers and Works in Progress
-
-
-"[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)" 
 
 "Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East"
 

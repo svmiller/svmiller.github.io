@@ -8,9 +8,9 @@ permalink: /research/external-territorial-threats-and-tolerance-of-corruption-a-
 
 <!--## Article and Supporting Materials  --> 
 
-- [Article](https://www.dropbox.com/s/fozrw1iubjn4qtx/tolerance-corruption-rmd.pdf?dl=0)
-- Appendix
-- Replication materials (upon publication) 
+- [Article](https://github.com/svmiller/territorial-threats-corruption-attitudes/blob/master/etttc.pdf)
+- [Appendix](https://github.com/svmiller/territorial-threats-corruption-attitudes/blob/master/appendix/etttc-appendix.pdf)
+- [Replication materials](https://github.com/svmiller/territorial-threats-corruption-attitudes/blob/master/appendix/etttc-appendix.pdf)
 
 <hr style="clear:both;visibility: hidden;" />  
 
