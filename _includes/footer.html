@@ -14,7 +14,16 @@
       </div>
 
       <div class="footer-col  footer-col-2">
-        <ul class="social-media-list">
+ 
+
+         <p class="text">
+		Department of Political Science<br />
+		232 Brackett Hall<br />
+		Clemson, SC 29634-1354</p> <!-- {{ site.description }} -->
+      </div>
+
+      <div class="footer-col  footer-col-3">
+       <ul class="social-media-list">
      
 
           {% if site.github_username %}
@@ -44,7 +53,7 @@
           {% if site.orcid_id %}
   <li>
     <a href="https://orcid.org/{{ site.orcid_id }}">
-      <i class="ai ai-orcid" style="color:gray"></i> <small>{{ site.orcid_id }}</small>
+      <i class="ai ai-orcid" style="color:gray"></i> {{ site.orcid_id }}
     </a>
   </li>
 {% endif %}
@@ -52,13 +61,6 @@
 
        
         </ul>
-      </div>
-
-      <div class="footer-col  footer-col-3">
-         <p class="text">
-		Department of Political Science<br />
-		232 Brackett Hall<br />
-		Clemson, SC 29634-1354</p> <!-- {{ site.description }} -->
       </div>
     </div>
 
