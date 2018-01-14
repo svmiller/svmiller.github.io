@@ -9,6 +9,8 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://svmiller.com" # the base hostname & protocol for your site
 twitter_username: stevenvmiller
 github_username:  svmiller
+orcid_id: 0000-0003-4072-6263
+google_scholar_id: BNr-fb8AAAAJ
 
 # Build settings
 markdown: kramdown
