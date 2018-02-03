@@ -75,7 +75,7 @@ Yes, a little. Xaringan has the following features that deviate a little from R 
 
 ## So What Fun Stuff Can You Do With Xaringan?
 
-Well, [here's my presentation using Xaringan](http://svmiller.com/miscellany/svm-xaringan-example.html#1). Long story short, you can have all sorts of fun. Click on the following frame and start clicking left to see the presentation if you don't want to follow the link in the first sentence in this paragraph.
+Well, [here's my presentation using Xaringan](http://svmiller.com/miscellany/svm-xaringan-example.html#1). Long story short, you can have all sorts of fun. Click on the following frame and start clicking right to see the presentation if you don't want to follow the link in the first sentence in this paragraph.
 
 <iframe src="http://svmiller.com/miscellany/svm-xaringan-example.html" class="gde-frame" style="height: 400px; width: 100%; border: none;" scrolling="yes"></iframe>
 
