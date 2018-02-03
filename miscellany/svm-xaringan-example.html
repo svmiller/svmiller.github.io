@@ -250,8 +250,8 @@ rnorm(10)
 ```
 
 ```
-##  [1]  1.20013612  2.31224346 -0.93752423 -0.06007699  0.59760033
-##  [6]  0.97456620  1.90347887  0.85762035  0.27830471  0.73378011
+##  [1]  0.002850883 -0.149813354 -0.220822044 -1.266090471  0.226159849
+##  [6] -0.270881768  0.961845294  1.596540397 -0.985665575  0.526373053
 ```
 
 
@@ -259,8 +259,8 @@ rnorm(10)
 
 Here's a simple ultimatum game, a la Fearon (1995). Done via `DiagrammeR`.
 
-<div id="htmlwidget-e677f9430bccd301bd30" style="width:504px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e677f9430bccd301bd30">{"x":{"diagram":" \n  digraph {\n    # Multiple level nodes\n    node [shape = square, color=CornflowerBlue]\n    A [label = \"A\"]; \n    0 [label = \"0\", shape = none];\n    B [label = \"B\"];\n    1 [label = \"1\", shape = none];\n    Accept [label = \"1 - x, x\", shape = none];\n    N;\n    Awins [shape = none, label = \"1 - k, k\"];\n    Bwins [shape = none, label = \"-k, 1 - k\"]\n\n\n\n     # Connect nodes with edges and labels\n    A -> 0 [arrowhead= none]\n    A -> B\n    A -> 1 [arrowhead = none]\n    B -> Accept [headlabel = \"Accept\", labeldistance = 5, labelangle=75] \n    B -> N [label = \"       Reject\"]\n    N -> Awins [headlabel = \"A wins (1 - p)\", labeldistance=4.5 ,\n        labelangle=75]\n    N -> Bwins [label = \"B wins (p)\"]\n  }\n\n[1]: \"A\" \n[2]: \"0\"\n[3]: paste0(\"Model 3\\n Split 3\") \n[4]: paste0(\"Model 6\\n Split 4\") \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ff023cb79752df48a01b" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ff023cb79752df48a01b">{"x":{"diagram":" \n  digraph {\n    # Multiple level nodes\n    node [shape = square, color=CornflowerBlue]\n    A [label = \"A\"]; \n    0 [label = \"0\", shape = none];\n    B [label = \"B\"];\n    1 [label = \"1\", shape = none];\n    Accept [label = \"1 - x, x\", shape = none];\n    N;\n    Awins [shape = none, label = \"1 - k, k\"];\n    Bwins [shape = none, label = \"-k, 1 - k\"]\n\n\n\n     # Connect nodes with edges and labels\n    A -> 0 [arrowhead= none]\n    A -> B\n    A -> 1 [arrowhead = none]\n    B -> Accept [headlabel = \"Accept\", labeldistance = 5, labelangle=75] \n    B -> N [label = \"       Reject\"]\n    N -> Awins [headlabel = \"A wins (1 - p)\", labeldistance=4.5 ,\n        labelangle=75]\n    N -> Bwins [label = \"B wins (p)\"]\n  }\n\n[1]: \"A\" \n[2]: \"0\"\n[3]: paste0(\"Model 3\\n Split 3\") \n[4]: paste0(\"Model 6\\n Split 4\") \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
