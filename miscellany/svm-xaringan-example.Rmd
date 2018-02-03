@@ -5,7 +5,7 @@ author: "Steven V. Miller<br /> <br /> <br /> Department of Political Science"
 institute: Department of Political Science
 output:
   xaringan::moon_reader:
-    css: ["default", "~/Dropbox/miscelanea/svm-r-markdown-templates/svm-xaringan-style.css"]
+    css: ["default", "svm-xaringan-style.css"]
     lib_dir: libs
     nature:
       highlightStyle: github
