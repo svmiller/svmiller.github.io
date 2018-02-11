@@ -255,3 +255,66 @@ ul.listing li.listing-item a {
 	font-family: 'Titillium Web', sans-serif;
 }
 
+
+/*------ archive type stuff ------ */
+
+ul#archive {
+       list-style-type: none;
+       margin: 0 0 1em 0;
+       padding: 0;
+}
+
+ul#archive li {
+       border-top: #999 1px dotted;
+       border-bottom: #999 1px dotted;
+       padding: .1em 0 .1em .5em;
+       background: #fff;
+}
+
+ul#archive  h2 {
+	padding-top: .5em }
+
+ul#archive li.alt {
+       background: #f6f6f6;
+}
+
+.archiveposturl {
+       display: block;
+
+       color: #333;
+}
+
+.archiveposturl:hover {
+
+}
+
+ul#archive li span a {
+       color: $clemson-purple;
+	font-weight: bold;
+font-family: 'Titillium Web', sans-serif;
+}
+
+
+ul#archive li span.postlower {
+	font-size: 85%
+
+}
+
+ul#archive li span.postlower a {
+	color: #0077CC;
+	font-weight: normal;
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+
+}
+
+
+/* ul#archive li span {
+       color: #000;
+       font-size: 85%;
+}
+
+
+
+ul#archive li span a:hover {
+       border-bottom: #bdbdbd 1px solid;
+} */
