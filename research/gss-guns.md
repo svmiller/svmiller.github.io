@@ -8,8 +8,8 @@ permalink: /research/what-americans-really-think-about-gun-control/
 
 <!--## Article and Supporting Materials  --> 
 
-- [Article](https://github.com/svmiller/gss-guns-manuscript/blob/master/gss-guns.pdf)
-- [Replication materials](https://github.com/svmiller/gss-guns-manuscript/blob/master/gss-guns.pdf)
+- [Article](http://doi.org/10.17605/OSF.IO/AUZBC)
+- [Replication materials](https://github.com/svmiller/gss-guns-manuscript)
 
 <hr style="clear:both;visibility: hidden;" />  
 
