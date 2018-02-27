@@ -41,7 +41,7 @@ Contents of this zip file include:
 - `gml-midb-[version].csv`: participant-level GML MID data, forked from CoW's version 4.01.
 - `gml-ddy-disputes-[version].csv`: directed dispute-year GML MID data.
 - `gml-ndy-disputes-[version].csv`: nondirected dispute-year GML data.
-- `gml-ddy-[version].csv`:  Full directed dyad-year data for use in standard time-series cross-section models for MID onset. This data frame contains no duplicate observations for dyad-years.[^whittling] We offer the editorial caveat that these data do not (yet) contain variables for political relevance and that use of a politically irrelevant sampling frame (e.g. including Nigeria-Mongolia with Nigeria-Cameroon) to gain precision in the regression parameters to follow is a questionable estimation strategy.
+- `gml-ddy-[version].csv`:  Full directed dyad-year data for use in standard time-series cross-section models for MID onset. This data frame contains no duplicate observations for dyad-years.[^whittling] This data set includes all possibly dyads no matter the political activity or relevance of the dyad. The user is free to employ case-exclusion rules of her/his choice.
 - `gml-ndy-[version].csv`: Full *non*directed dyad-year data. See item above.
 
 [^whittling]: Consider the case of France and Italy in 1860, which had three separate MID onsets that year (MID#0112, MID#0113, MID#0306), as illustrative of the problem. This data set employs the following rules to whittle down these duplicate dispute-year observations, first selecting on MID onsets, then selecting highest fatality level, highest hostility level, longest mindur, and finally, in the event of duplicates still outstanding, selecting the MID that came first. 
