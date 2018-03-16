@@ -37,6 +37,8 @@ Please contact me (svmille@clemson.edu) with any inquiries about the script and 
 
 Contents of this zip file include:
 
+- `gml-[version]-change-summary-disp.txt`: A summary of new changes at the dispute-level in the current version.
+- `gml-[version]-change-summary-part.txt`: A summary of new changes at the participant-level in the current version.
 - `gml-mida-[version].csv`: dispute-level GML MID data, forked from CoW's version 4.01.
 - `gml-midb-[version].csv`: participant-level GML MID data, forked from CoW's version 4.01.
 - `gml-ddy-disputes-[version].csv`: directed dispute-year GML MID data.
