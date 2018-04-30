@@ -4,7 +4,7 @@
     <title>Steve’s Xaringan Presentation</title>
     <meta charset="utf-8">
     <meta name="author" content="Steven V. Miller      Department of Political Science" />
-    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
     <script src="libs/htmlwidgets/htmlwidgets.js"></script>
     <script src="libs/viz/viz.js"></script>
     <link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
@@ -166,7 +166,7 @@ Billy Ocean released "Caribbean Queen" in 1984.
 
 .pull-right[
 
-![](http://wearethemighty.wpengine.netdna-cdn.com/wp-content/uploads/2016/05/GrenadaNewsCartoon.jpg)
+![](https://assets.rbl.ms/17298787/980x.jpg)
 
 *This seriously happened, btw..*
 ]
@@ -250,8 +250,8 @@ rnorm(10)
 ```
 
 ```
-##  [1]  0.002850883 -0.149813354 -0.220822044 -1.266090471  0.226159849
-##  [6] -0.270881768  0.961845294  1.596540397 -0.985665575  0.526373053
+##  [1]  2.3360163 -1.4155523 -0.5883711 -1.0664700  0.1020312  0.4102483
+##  [7] -0.4007678  0.2821428  1.5215133 -0.5227195
 ```
 
 
@@ -259,8 +259,8 @@ rnorm(10)
 
 Here's a simple ultimatum game, a la Fearon (1995). Done via `DiagrammeR`.
 
-<div id="htmlwidget-ff023cb79752df48a01b" style="width:504px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ff023cb79752df48a01b">{"x":{"diagram":" \n  digraph {\n    # Multiple level nodes\n    node [shape = square, color=CornflowerBlue]\n    A [label = \"A\"]; \n    0 [label = \"0\", shape = none];\n    B [label = \"B\"];\n    1 [label = \"1\", shape = none];\n    Accept [label = \"1 - x, x\", shape = none];\n    N;\n    Awins [shape = none, label = \"1 - k, k\"];\n    Bwins [shape = none, label = \"-k, 1 - k\"]\n\n\n\n     # Connect nodes with edges and labels\n    A -> 0 [arrowhead= none]\n    A -> B\n    A -> 1 [arrowhead = none]\n    B -> Accept [headlabel = \"Accept\", labeldistance = 5, labelangle=75] \n    B -> N [label = \"       Reject\"]\n    N -> Awins [headlabel = \"A wins (1 - p)\", labeldistance=4.5 ,\n        labelangle=75]\n    N -> Bwins [label = \"B wins (p)\"]\n  }\n\n[1]: \"A\" \n[2]: \"0\"\n[3]: paste0(\"Model 3\\n Split 3\") \n[4]: paste0(\"Model 6\\n Split 4\") \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-98f4ab7a034c14f7c909" style="width:504px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98f4ab7a034c14f7c909">{"x":{"diagram":" \n  digraph {\n    # Multiple level nodes\n    node [shape = square, color=CornflowerBlue]\n    A [label = \"A\"]; \n    0 [label = \"0\", shape = none];\n    B [label = \"B\"];\n    1 [label = \"1\", shape = none];\n    Accept [label = \"1 - x, x\", shape = none];\n    N;\n    Awins [shape = none, label = \"1 - k, k\"];\n    Bwins [shape = none, label = \"-k, 1 - k\"]\n\n\n\n     # Connect nodes with edges and labels\n    A -> 0 [arrowhead= none]\n    A -> B\n    A -> 1 [arrowhead = none]\n    B -> Accept [headlabel = \"Accept\", labeldistance = 5, labelangle=75] \n    B -> N [label = \"       Reject\"]\n    N -> Awins [headlabel = \"A wins (1 - p)\", labeldistance=4.5 ,\n        labelangle=75]\n    N -> Bwins [label = \"B wins (p)\"]\n  }\n\n[1]: \"A\" \n[2]: \"0\"\n[3]: paste0(\"Model 3\\n Split 3\") \n[4]: paste0(\"Model 6\\n Split 4\") \n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -290,8 +290,15 @@ Questions? Hate mail? Stay out of my mentions @stevenvmiller
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({

@@ -22,10 +22,12 @@ div.remark-slide-container h1 {
 	color: #522D80;
 	letter-spacing: -1px;
 font-size: 36px;
+font-weight: normal;
 }
 
 .inverse h1 {
     line-height: 0.5em;
+    font-weight: normal;
 }
 .title-slide h1 {
     
@@ -36,6 +38,7 @@ div.remark-slide-container h2 {
 	font-family: 'Open Sans', sans-serif;
 	color: #522D80;
 	letter-spacing: -1px;
+	font-weight: normal;
 	font-size: 20px
 }
 
@@ -44,6 +47,7 @@ div.remark-slide-container h3 {
 	color: #000;
 	letter-spacing: -1px;
 	font-size: 18px;
+	font-weight: normal;
 	padding-top: 50px
 }
 
