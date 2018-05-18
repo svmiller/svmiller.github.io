@@ -48,4 +48,6 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 "Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders"
 
+"[White Outgroup Intolerance and Declining Support for American Democracy](/research/white-outgroup-intolerance-democratic-support/)" 
+
 "[What Americans Really Think About Gun Control: Evidence from the General Social Survey, 1972-2016](/research/what-americans-really-think-about-gun-control/)" 
