@@ -18,7 +18,7 @@ I also provide titles for some working papers and works in progress below. I pro
 
 ## Publications
 
-Miller, Steven V. Forthcoming. "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)". *Peace Economics, Peace Science and Public Policy*
+Miller, Steven V. 2018. "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)". *Peace Economics, Peace Science and Public Policy* 24(1): `doi:` [10.1515/peps-2017-0043](https://doi.org/10.1515/peps-2017-0043)
 
 Miller, Steven V. 2017. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly* 70(4): 790--802.
 

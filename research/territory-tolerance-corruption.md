@@ -8,7 +8,8 @@ permalink: /research/external-territorial-threats-and-tolerance-of-corruption-a-
 
 <!--## Article and Supporting Materials  --> 
 
-- [Article](https://github.com/svmiller/territorial-threats-corruption-attitudes/blob/master/etttc.pdf)
+- [Article](https://doi.org/10.1515/peps-2017-0043) (gated)
+- [Article](https://github.com/svmiller/territorial-threats-corruption-attitudes/blob/master/etttc.pdf) (ungated)
 - [Appendix](https://github.com/svmiller/territorial-threats-corruption-attitudes/blob/master/appendix/etttc-appendix.pdf)
 - [Replication materials](https://github.com/svmiller/territorial-threats-corruption-attitudes/blob/master/appendix/etttc-appendix.pdf)
 

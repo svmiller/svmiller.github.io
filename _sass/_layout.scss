@@ -307,6 +307,16 @@ ul#archive li span.postlower a {
 
 }
 
+article ul {
+  list-style-type: none;
+}
+
+article ul > li:before {
+  content: "–"; /* en dash */
+  position: absolute;
+  margin-left: -1.1em; 
+}
+
 
 /* ul#archive li span {
        color: #000;
