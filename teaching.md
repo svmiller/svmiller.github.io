@@ -19,32 +19,32 @@ This page serves includes my teaching philosophy and an empirical assessment of 
 
 ### Clemson University
 
-1. [POSC 1020](/teaching/posc-1020-introduction-to-international-relations/) (Introduction to International Relations)
-2. [POSC 3410](/teaching/posc-3410-quantitative-methods-in-political-science/) (Quantitative Methods in Political Science)
-3. [POSC 3610](/teaching/posc-3610-international-conflict/) (International Conflict)
-4. [POSC 3630](/teaching/posc-3630-united-states-foreign-policy/) (United States Foreign Policy)
+- [POSC 1020](/teaching/posc-1020-introduction-to-international-relations/) (Introduction to International Relations)
+- [POSC 3410](/teaching/posc-3410-quantitative-methods-in-political-science/) (Quantitative Methods in Political Science)
+- [POSC 3610](/teaching/posc-3610-international-conflict/) (International Conflict)
+- [POSC 3630](/teaching/posc-3630-united-states-foreign-policy/) (United States Foreign Policy)
 
 #### Proposed Classes
 
-1. [Data Science for the Social Sciences](/teaching/data-science-social-sciences/)
-2. [Comparative Political Behavior](/teaching/posc-4430-political-behavior/)
+- [Data Science for the Social Sciences](/teaching/data-science-social-sciences/)
+- [Comparative Political Behavior](/teaching/posc-4430-political-behavior/)
 
 ### University of Illinois at Urbana-Champaign
 
-  1. PS 283 (Intro to International Security)
-  2. PS 300 (Democracies and Peace)
-  3. PS 395 (International Organization)
-  4. PS 396 (International Conflict)
+- PS 283 (Intro to International Security)
+- PS 300 (Democracies and Peace)
+- PS 395 (International Organization)
+- PS 396 (International Conflict)
 
 ### University of Alabama
 
 I taught eight separate courses while a graduate student at the University of Alabama. I taught a few classes on several occasions, for which the substance and course materials would change from one term to the next.
 
-1. PSC 101 (Intro to American Politics)
-2. PSC 102 (America and the World — Foreign Policy Decision-Making)
-3. PSC 201 (Scope of Political Science)
-4. PSC 202 (Political Science Methods)
-5. PSC 203 (Intro to Comparative Politics)
-6. PSC 204 (Intro to International Relations)
-7. PSC 442 (Interstate Conflict)
-8. PSC 446w (Political Economy of Security)
+- PSC 101 (Intro to American Politics)
+- PSC 102 (America and the World — Foreign Policy Decision-Making)
+- PSC 201 (Scope of Political Science)
+- PSC 202 (Political Science Methods)
+- PSC 203 (Intro to Comparative Politics)
+- PSC 204 (Intro to International Relations)
+- PSC 442 (Interstate Conflict)
+- PSC 446w (Political Economy of Security)
