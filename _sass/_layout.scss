@@ -317,6 +317,11 @@ article ul > li:before {
   margin-left: -1.1em; 
 }
 
+article ul#archive > li:before {
+  list-style-type: none;
+  content: none;
+}
+
 
 /* ul#archive li span {
        color: #000;
