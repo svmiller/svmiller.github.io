@@ -26,5 +26,5 @@ Social intolerance embodies an unwillingness to associate or fraternize with ind
 - *Maclean's*: [If you vote for a reckless politician, you can’t claim to be a good person](https://www.macleans.ca/opinion/if-you-vote-for-a-reckless-politician-you-cant-claim-to-be-a-good-person/)
 - *NBC News:* [The Trump effect: New study connects white American intolerance and support for authoritarianism](https://www.nbcnews.com/think/opinion/trump-effect-new-study-connects-white-american-intolerance-support-authoritarianism-ncna877886)
 - *New York Times*: [President Trump Is a Very Political Animal](https://www.nytimes.com/2018/05/24/opinion/trump-animals-immigrants-politics.html)
-- *Think Progress*: [Trump is awakening and emboldening Americans with anti-democratic ideals, research shows](https://thinkprogress.org/new-study-trump-white-supremacy-awakening/)
+- *ThinkProgress*: [Trump is awakening and emboldening Americans with anti-democratic ideals, research shows](https://thinkprogress.org/new-study-trump-white-supremacy-awakening/)
 - [Outgroup Intolerance and Support for Democracy: An Analysis of White Americans in the World Values Survey Data](http://svmiller.com/blog/2017/08/usa-intolerance-xenophobia-racism-strong-leader-democracy-trump/)
