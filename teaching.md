@@ -12,8 +12,8 @@ This page serves includes my teaching philosophy and an empirical assessment of 
 
 ## Teaching Documents
 
-- [Teaching Philosophy](https://www.dropbox.com/s/97khsh7ydjkpvrk/svm-teaching-philosophy.pdf?dl=0)
-- [An Empirical Assessment of My Teaching Effectiveness](https://www.dropbox.com/s/m5sdmkia2b7hl8b/svm-teaching-evals.pdf?dl=0)
+- [Teaching Philosophy](/docs/svm-teaching-philosophy.pdf)
+- [An Empirical Assessment of My Teaching Effectiveness](/docs/svm-teaching-evals.pdf?dl=0)
 
 ## Course Directory
 
