@@ -4,7 +4,9 @@ title: CV
 permalink: /cv/
 ---
 
-I embed a current version of my CV below. You can also [download the PDF here](https://www.dropbox.com/s/f5p4nwg73ruxbho/svm-cv.pdf?dl=0).
+I embed a current version of my CV below. You can also [download the PDF here](/docs/svm-cv.pdf).
 
-{% include embedpdf.html code="f5p4nwg73ruxbho/svm-cv.pdf" width=100 height=800 %}
+<iframe src="http://svmiller.com/docs/svm-cv.pdf" class="gde-frame" style="height: 1000px; width: 100%; border: none;" scrolling="yes"></iframe>
+
+<!-- {% include embedpdf.html code="f5p4nwg73ruxbho/svm-cv.pdf" width=100 height=800 %} -->
 
