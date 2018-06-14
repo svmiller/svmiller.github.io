@@ -8,6 +8,25 @@ Here's a repository of various graphs I've made over the years. Most of these ar
 
 And yes, as soon as I can figure out more of [Jekyll](https://jekyllrb.com/) to make this page useful, I'll do it.
 
+*Update*: I can tediously YAML a solution for making this useful, but I'll probably do this in batches because I'm lazy. Please don't mind the construction.
+
+<ul id="archive">
+
+{% for gallery in site.data.graphs %}
+  {% if graph.id == page.galleryid %}
+    <h1>{{ graph.description }}</h1>
+    {% for image in gallery.images %}
+      <li class="archiveposturl">
+        <span><a href="{{ site.url }}/graphs/{{ image.file }}">{{image.title }}</a></span><br>
+<span class = "postlower">{{ image.caption }}<br />
+<strong>Tags:</strong> {{ image.tags }}</span>
+      </li>
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+</ul>
+
 <ul id="archive">
 
 {% for image in site.static_files %}

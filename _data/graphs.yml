@@ -1,0 +1,59 @@
+- id: graphs
+  imagefolder: /graphs
+  images:
+  - file: arg-bra-mex-debt-1945-1990.pdf
+    title: ISI Usually Meant These Latin American Governments Took on Debt Well Beyond Their Ability to Service It
+    caption: "ISI amounts to massive subsidies or even outright ownership of enterprises, which is compounded by the fact these exports weren't competitive."
+    tags: Intro to IR
+
+  - file: arg-gdp-growth-1990-2002-oecd.pdf
+    title: Argentina's Depression Started in 1999 and Became a Full Crisis in December 2001
+    caption: "The country's GDP shrunk an astounding 67% from 1998 to 2002. By comparison, the U.S. Great Depression was a loss of about 45% of GDP from 1929 to 1933."
+    tags: Intro to IR
+
+  - file: arg-inflation-1996-2013-imf.pdf
+    title: Inflation in Argentina Increased to Over 25% from the Previous Year After 2001
+    caption: "Country experts know inflation has historically been the country's most severe recurring problem. It became a problem again after 2001."
+    tags: Intro to IR
+
+  - file: arg-peso-reer-1994-2018.pdf
+    title: Argentina's Peso Tumbled in 2001 and Has Yet to Recover
+    caption: "Losing access to foreign finance played a huge role in the depreciation of the Argentinian peso."
+    tags: Intro to IR
+
+  - file: arg-tariff-rate-1980-2016.pdf
+    title: Tariff Rates, Like Argentina's Tariff Rate Here, Were Some of the First Targets of Washington Consensus Reforms
+    caption: "Tariffs were a core component to ISI but reducing them were among the first orders of business for economic recovery."
+    tags: Intro to IR
+
+  - file: arg-tariff-rate-1980-2016.pdf
+    title: Argentina Lost Around 45% of its Dollar Reserves in the First Seven Months of 2001
+    caption: "International investors started to lose faith in the dollar peg around the time Argentina's lawmakers started to tinker with the exchange rate."
+    tags: Intro to IR
+
+  - file: arg-unemployment-rate-1990-2017.pdf
+    title: Argentina's Unemployment Rate Surged to 20% During its 2001 Depression
+    caption: "The spike followed a similar one as a result of a related 1995 banking crisis."
+    tags: Intro to IR
+
+  - file: asian-tigers-vs-latin-america.pdf
+    title: Why Did Development in These 'Asian Tigers' Far Exceed the Three Biggest Economies in Latin America?
+    caption: "One prominent answer focuses on the different development strategies we saw in East Asia vs. Latin America."
+    tags: Intro to IR
+
+  - file: bra-rok-auto-export-quality.pdf
+    title: South Korean Passenger Automobiles Surpassed Brazil's Autos in Export Quality Early into the 1970s
+    caption: "South Koreas's first foray into the distant foreign market may have been Guam (through Hyundai) but cracking the U.S. market soon set it apart from Brazil."
+    tags: Intro to IR
+
+  - file: bra-rok-auto-production-1950-2016.pdf
+    title: It Didn't Take That Long For South Korea's Motor Vehicle Production to Outpace Brazil
+    caption: "South Korea's model found an audience abroad, producing products for foreign consumption in contrast to Brazil's domestic focus."
+    tags: Intro to IR
+
+  - file: bra-rus-reer-default-crisis-1994-1999.pdf
+    title: Boris Yeltsin Went to Bed Drunk and Brazil Got the Hangover
+    caption: "Russia defaulted on its debt in 1998, which sent investors into a panic about Brazil's ability to maintain its crawling peg to the dollar."
+    tags: Intro to IR
+
+
