@@ -12,10 +12,12 @@ And yes, as soon as I can figure out more of [Jekyll](https://jekyllrb.com/) to 
 
 <ul id="archive">
 
+
 {% for gallery in site.data.graphs %}
   {% if graph.id == page.galleryid %}
     <h1>{{ graph.description }}</h1>
-    {% for image in gallery.images %}
+    {% assign sortedimages = gallery.images | sort: 'title' %}
+    {% for image in sortedimages %}
       <li class="archiveposturl">
         <span><a href="{{ site.url }}/graphs/{{ image.file }}">{{image.title }}</a></span><br>
 <span class = "postlower">{{ image.caption }}<br />
