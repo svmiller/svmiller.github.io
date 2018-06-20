@@ -171,3 +171,38 @@
     title: The Italian Lira's Slide Was Even More Pronounced (Than the Pound Sterling) in the 1992 ERM Crisis
     caption: "The Lira lost about a third of its value in the three year window between 1992 and 1995."
     tags: Intro to IR
+
+  - file: mean-temperature-anomalies-context.pdf
+    title: Annual Mean Temperature Anomalies (in Celsius) Relative to 1950-1980 Base Period (With Additional Context)
+    caption: "Thing is we've known about this for like the past 30 years and..."
+    tags: Intro to IR
+
+  - file: mean-temperature-anomalies.pdf
+    title: Annual Mean Temperature Anomalies (in Celsius) Relative to 1950-1980 Base Period
+    caption: "Thing is we've known about this for like the past 30 years and..."
+    tags: Intro to IR
+
+  - file: migrant-pop-usa-by-country.pdf
+    title: U.S. Migration is Mostly Regional and Mexico Accounts for Just Under a Quarter of It
+    caption: "Mexico, Puerto Rico, Canada, and Cuba combine for about 33% of the U.S.' mid-year migrant population in 2017."
+    tags: Intro to IR
+
+  - file: migrant-pop-usa.pdf
+    title: "About 15% of the U.S. Population was Born in Another Country"
+    caption: "The trend has accelerated around the time the 'Boomers' started to approach retirement age and as globalization increased after the Cold War."
+    tags: Intro to IR
+
+  - file: military-balance-usa-chn-2015.pdf
+    title: "China's Eventual ''Rise'' Still Comes Amid Major Military Disparity with the United States"
+    caption: "Generally: China beats U.S. on manpower and never quality or equipment. We expects these trends to persist even as China surpasses the U.S. in economic output."
+    tags: Intro to IR
+
+  - file: nra-favorability-ratings-pew-1994-2014.pdf
+    title: "A Mid-Nineties Lull Notwithstanding, Most Americans Think Favorably of the NRA"
+    caption: "Data coverage is spotty but favorability has held steady even in the wake of prominent mass shootings like Aurora and Newtown. Interpretations are multiple but these patterns would be consistent with partisan sorting that started in 1994 and accelerated in 2008."
+    tags: Miscellany
+
+  - file: nra-influence-gun-laws-pew-2000-2017.pdf
+    title: "Americans Used to Think the NRA Generally Had Too Much Influence on Gun Laws; Now They're Evenly Divided"
+    caption: "Partisan sorting and elite cues might capture this as, conceivably, more Republicans moved from the 'don't know' category to the 'right amount' category."
+    tags: Miscellany
