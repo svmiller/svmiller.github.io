@@ -292,3 +292,195 @@ It can take a bloody nose for the cause of the cartel and beat anyone to the flo
     title: "Sulfur Dioxide Emissions in the U.S. Have Decreased 87% Since 1980"
     caption: The U.S. has largely met the 75ppb line by 2010 in large measure because of the EPA and the concentrated costs acid rain pose on the populations of polluting countries.
     tags: Intro to IR
+
+  - file: top-ten-oil-states.pdf
+    title: These Are the Ten Countries Whose Economies Are Most Indebted to Selling Oil Abroad (2015)
+    caption: "There are some conspicuous states in here, but: the median GDP per capita is 8,108 USD and the median GDP (87 billion USD) is half the GDP of South Carolina (the 10th poorest U.S. state)."
+    tags: Intro to IR
+
+  - file: trade-mids-1870-2010.pdf
+    title: "IR Scholars Generally See Trade as Conducive to Global Peace"
+    caption: "The argument is intuitive; interconnected states see conflict as too costly and an unnecessary disruption of commerce."
+    tags: Intro to IR, International Conflict
+
+  - file: uae-opec-production-quota-1982-2000.pdf
+    title: "Cartels Are Inherently Unstable. OPEC is No Different. And Everyone---like the United Arab Emirates---Cheats"
+    caption: "Some OPEC members (e.g. Indonesia) cheat less than others but everyone does it and it kinda defeats the purpose of the cartel."
+    tags: Intro to IR
+
+  - file: ukg-reer-1992-1993-black-wednesday.pdf
+    title: "'Black Wednesday' Triggered a Major Depreciation in the Value of the Pound Sterling"
+    caption: "All told, a FOIA request in 2005 revealed the total loss to be around £3.3 billion. The UK lost around £800 million in reserves in two weeks."
+    tags: Intro to IR
+
+  - file: unemployment-rate-financial-crisis.pdf
+    title: "Unemployment Spiked in These Five Countries as a Result of the 2007 Financial Crisis"
+    caption: "Unemployment is still conspicuously high in Greece and Spain."
+    tags: Intro to IR
+
+  - file: usa-can-mex-high-tech-esports-1990-2016.pdf
+    title: "The U.S. Exports About Three Times as Much in High-Technology Goods than Canada and Mexico"
+    caption: "This would square with casual observations that the U.S. is better endowed in capital than its NAFTA neighbors."
+
+  - file: usa-can-mex-human-rights-comparison-fariss.pdf
+    title: "Human Rights Protection Scores for the U.S., Canada, and Mexico, 1980-2015"
+    caption: "Notice the U.S. is not exactly a world leader in human rights protections despite demonstrations to the contrary."
+    tags: Intro to IR
+
+  - file: usa-can-mex-torture-allegations-comparison-itt.pdf
+    title: "The U.S. Experiences About Twice the Allegations of Ill-Treatment and Torture in a Given Year Compared to Its Neighbors"
+    caption: "Conrad and Moore's ITT data measure Amnesty International (AI) allegations arguing that torture is unobservable but AI allegations are reliable and valid, even for comparing the U.S. to Mexico here."
+    tags: Intro to IR
+
+  - file: usa-chn-exchange-rate-1980-2018.pdf
+    title: "China's Currency Tango With the U.S. Is Even More Pronounced in the 1990s"
+    caption: "China pegged the RMB to the dollar at 8.28 in 1994 and held that peg until July 2005."
+    tags: Intro to IR
+
+  - file: usa-chn-human-rights-comparison-fariss.pdf
+    title: "Human Rights Protection Scores for the U.S. and China, 1949-2015"
+    caption: "We oberve a clear contrast between the two starting in 1965 but observe the United States' downward trend."
+
+  - file: usa-chn-reer-1980-2016.pdf
+    title: "The Real Effective Exchange Rates for the Chinese Renmibi and the U.S. Dollar (1980-2016)"
+    caption: "China's currency depreciation strategy was obvious in the 1980s but is less evident now."
+    tags: Intro to IR
+
+  - file: usa-drunk-driving-terror-suicide-data-1970-2015.pdf
+    title: "Casualties in the United States from Terrorism, Suicide, and Drunk-driving, 1970-2015"
+    caption: "Drunk-driving and suicide are more deadly public bads but don't command public attention like terrorism."
+    tags: Intro to IR
+
+  - file: usa-euro-exchange-rate-1999-2018-fed.pdf
+    title: "The Euro is Usually Worth More Than the Dollar"
+    caption: "A dollar and 15 cents bought one Euro to open 1999 and, despite obvious fluctuation, that's about the exchange rate now."
+    tags: Intro to IR
+
+  - file: usa-exports-2016.pdf
+    title: "The U.S. Exported About $2.2 Trillion USD in Goods and Services in 2016"
+    caption: "Capital goods (e.g. commercial aircraft [$121 billion], industrial machines [$51 billion], semiconductors [$44 billion], and telecommunications [$41 billion]) lead the way among all export types."
+    tags: Intro to IR
+
+  - file: usa-household-computers-1984-2015.pdf
+    title: "Almost Every Household Has a Computer These Days, Thanks to Globalization"
+    caption: "Household computers used to be a luxury item before parts could be cheaply made/imported from Asia. In fact, the old Apple Macintosh from 1984 cost more than $6,000 in 2017 USD."
+    tags: Intro to IR
+
+  - file: usa-human-rights-ranking-fariss.pdf
+    title: "Where Does the U.S. Rank on Human Rights? Below Average."
+    caption: "The U.S. is a tricky country to measure for human rights abuses for a myriad of reasons. It does well in some areas and deceptively terrible in others and Amnesty International, aggressively monitor the U.S."
+    tags: Intro to IR
+
+  - file: usa-labor-share-income-1987-2018.pdf
+    title: "Labor Share of Income in Manufacturing Has Gone Down"
+    caption: "Those gains in real compensation have largely been going to the top."
+    tags: Intro to IR
+
+  - file: usa-manufacturing-employment-1987-2018.pdf
+    title: "U.S. Manufacturing Employment Has Declined as Globalization Has Increased"
+    caption: "You'll almost always hear of this as ''jobs leaving the country'' because of globalization."
+    tags: Intro to IR
+
+  - file: usa-manufacturing-output-1987-2018.pdf
+    title: "U.S. Manufacturing Output Has Generally Risen Despite the Drop in Manufacturing Employment"
+    caption: "Automation explains more of this phenomenon than globalization, but globalization gets the blame."
+
+  - file: usa-mex-exchange-rate-1993-2018-fed.pdf
+    title: "The Dollar Has Always Been Strong to the Mexican Peso"
+    caption: "Mexico dropped its previous peg (i.e. three new pesos to one USD) in 1995, which you can see in the first few years of the data."
+    tags: Intro to IR
+
+  - file: usa-modal-age-by-raceethnic.pdf
+    title: "The Modal (i.e. Most Common) Age for a White Person in the U.S. is 56. For Hispanics: 9."
+    caption: "Only about a third of all Hispanics are foreign born but they comprise a large chunk of the low-skilled labor population."
+    tags: Intro to IR
+
+  - file: usa-price-index-tech-goods-1997-2015.pdf
+    title: "The Price Index For Computers and TVs Has Declined More Than 95% Since December 1997"
+    caption: "Most of the decline happened between 1998 and 2003 following a boom in cheaper parts and products coming from trading partners in Asia."
+    tags: Intro to IR
+
+  - file: usa-raceethnic-by-generation.pdf
+    title: "(Non-Hispanic) White People Are Around 62% of the U.S. Population But They're Getting Older"
+    caption: "Meanwhile, more than a majority of African-Americans and Hispanics are Millennials or younger."
+    tags: Intro to IR
+
+  - file: usa-rok-trade-balance-1949-2017.pdf
+    title: "The Boom in Cheap Household Computers Followed a Surge of Imports from South Korea (Among Others)"
+    caption: "South Korea specializes in cheaply producing high-quality consumer electronics for consumption in the U.S."
+    tags: Intro to IR
+
+  - file: usa-skyjacking-data-1942-2016.pdf
+    title: "The Number of International Skyjackings, 1942-2016"
+    caption: "Skyjackings were once a favorite tool of terror groups with a peak of 86 incidents in 1969."
+    tags: Intro to IR
+
+  - file: usa-terror-casualties-1970-2015.pdf
+    title: "A Little More Than Two Dozen (Median: 28) Casualties Each Year in Terror Incidents in the United States"
+    caption: "There are obvious peaks with the deadliest year on record being, clearly, 2001."
+    tags: Intro to IR
+
+  - file: usa-terror-incidents-1970-2015.pdf
+    title: "There's a Median of 40 Terror Incidents in a Given Year in the United States"
+    caption: "The peak for terror incidents in the data is the first year (1970), with a reported 468 incidents. These were mostly perpetrated by left-wing radicals with prominent groups like the Weathermen."
+    tags: Intro to IR
+
+  - file: usa-torture-allegations-by-actor-type.pdf
+    title: "Allegations of Ill-Treatment and Torture in the U.S. Used to Focus on Police and Prisons. Now They Focus on the Military."
+    caption: "Allegations of torture by the police bottomed out to near zero in the 2000s but accusations against the military, nearly non-existent in the 1990s, became 3/4ths of all allegations after 9/11."
+    tags: Intro to IR
+
+  - file: usa-trade-gdp-1790-2016.pdf
+    title: "The Volume of Trade as Percentage of GDP in the United States, 1790-2016"
+    caption: "Trade's importance to the U.S. economy has major variation over time, especially early into the country's independence from Great Britain."
+    tags: Intro to IR
+
+  - file: usa-trade-gdp-1960-2016.pdf
+    title: "Trade as a Percentage of U.S. GDP, 1960-2016"
+    caption: "Trade has become an increasingly large part of the U.S. economy since the 1960s."
+    tags: Intro to IR
+
+  - file: vanishing-sea-ice.pdf
+    title: "The Arctic Sea Ice is Rapidly Vanishing in Our Lifetime"
+    caption: "The Arctic shows no sign of returning to the reliably frozen region of recent past decades."
+    tags: Intro to IR
+
+  - file: very-stupid-graph.pdf
+    title: "A Very Stupid Graph on How Global Temperatures Have Changed Over Time, 1880-2016"
+    caption: "You can easily ''lie'' with data by misrepresenting scale and, importantly, context."
+    tags: Intro to IR
+
+  - file: western-europe-gdp-1950-1980.pdf
+    title: "(West) Germany Was the Biggest Economy in Western Europe Leading to the 1979 European Exchange Rate Mechanism"
+    caption: "West Germany surpassed the UK as the biggest economy in Europe in 1953 despite its division and occupation by four different countries."
+    tags: Intro to IR
+
+  - file: western-europe-gdp-1950-1980.pdf
+    title: "(West) Germany Was Also the Biggest Trading Partner in Europe"
+    caption: "West Germany's rather quick emergence as the focal point of commerce in post-war Europe underlined calls for exchange rate stability."
+    tags: Intro to IR
+
+  - file: what-explains-declining-share-of-income-imf.pdf
+    title: "What Explains Declining Share of Income in Advanced Economies? Technology."
+    caption: "An IMF report from April 2017 found most  of the movement is explained by declining relative price of investment and initial exposure to routinization across sectors."
+    tags: Intro to IR
+
+  - file: where-do-usa-clothes-come-from.pdf
+    title: "Where Do Your Clothes Come From?"
+    caption: "Textile/clothing imports in the U.S. come from countries with large, low-skilled labor populations. This is consistent with Heckscher-Ohlin theory."
+    tags: Intro to IR
+
+  - file: white-americans-civil-rights-too-fast-anes-1964-1992.pdf
+    title: "White Americans Thought Civil Rights Leaders Were Pushing 'Too Fast' at the Height of the Civil Rights Movement"
+    caption: "''Do you think that civil rights leaders are trying to push too fast, are going too slowly, or are they moving about the right speed?''"
+    tags: Miscellany
+
+  - file: wti-crude-price-1947-2018.pdf
+    title: "Average Crude Oil Price, 1947-2018"
+    caption: "We observe prominent spikes that coincide with the Arab oil embargo, Iran-Iraq War onset, and the worst consequences of the Iraq War and corollary financial crisis."
+    tags: Intro to IR
+
+  - file: wvs-swiid-income-inequality-scapegoating-immigrants.pdf
+    title: "Higher Income Inequality Coincides With Societies Scapegoating Immigrants As Part of the Problem"
+    caption: "Less-developed countries are generally more anti-immigrant but the correlation is near identical in more developed economies."
+    tags: Intro to IR
