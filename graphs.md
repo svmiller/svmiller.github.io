@@ -8,8 +8,6 @@ Here's a repository of various graphs I've made over the years. Most of these ar
 
 And yes, as soon as I can figure out more of [Jekyll](https://jekyllrb.com/) to make this page useful, I'll do it.
 
-*Update*: I can tediously YAML a solution for making this useful, but I'll probably do this in batches because I'm lazy. Please don't mind the construction.
-
 <ul id="archive">
 
 
