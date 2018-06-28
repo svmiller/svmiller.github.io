@@ -73,7 +73,7 @@ You can conveniently refit your statistical model with multiple different optimi
 
 The standard generalized linear mixed effects model estimation does parameter optimization through a combination of BOBYQA and the [Nelder-Mead "downhill simplex" method](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method). This approach is "standard" for estimation but, in practice, creates much longer computation times as the optimization goes through a series of convergence checks. It's understandable for a precaution; sometimes the model needs these convergence checks and the researcher should know the results of these convergence checks. However, it can create a wait for your results and it may not matter, contingent on the model you estimate.
 
-`allFit` will test whether your optimization choice you make for convenience may change the results of the model. It will re-estimate your model with a series of different optimizers. These are the aforementioned Nelder-Mead method and the BOBYQA method. It'll use those same optimizers, but permit additional stopping criteria through non-linear optimization (`nlopt`) if the optimization procedures believes it has found the optimum. This speeds up computation at the expense of additional convergence checks. Additional optimization methods include large-scale, quasi-Newton, bound-constrained optimization of [the Byrd et al. (1995) method](https://epubs.siam.org/doi/abs/10.1137/0916069) (`L-BFGS-B`), iterative derivative-free *k*-bounded optimization of the Nelder-Mead method (`nmkb`) [@kelley1999imo], and [non-linear minimization with box constraints](https://epubs.siam.org/doi/abs/10.1137/S1052623493253991) (`nlminb`). My worry is I forgot one of these optimizers that `allFit` has, so these are the optmizers with which I'm most familiar.
+`allFit` will test whether your optimization choice you make for convenience may change the results of the model by re-estimating your model with a series of different optimizers. These are the aforementioned Nelder-Mead method and the BOBYQA method. It'll use those same optimizers, but permit additional stopping criteria through non-linear optimization (`nlopt`) if the optimization procedures believes it has found the optimum. This speeds up computation at the expense of additional convergence checks. Additional optimization methods include large-scale, quasi-Newton, bound-constrained optimization of [the Byrd et al. (1995) method](https://epubs.siam.org/doi/abs/10.1137/0916069) (`L-BFGS-B`), iterative derivative-free *k*-bounded optimization of the Nelder-Mead method (`nmkb`), and [non-linear minimization with box constraints](https://epubs.siam.org/doi/abs/10.1137/S1052623493253991) (`nlminb`). My worry is I forgot one of these optimizers that `allFit` has, so these are the optmizers with which I'm most familiar.
 
 Here's how you would perform these additional optimizer checks in my sample analysis.
 
@@ -160,6 +160,25 @@ bind_rows(AF1_zcai, AF2_zcai) %>%
 ![plot of chunk optimizerzts](/images/optimizerzts-1.png)
 
 `allFit` will helpfully store the estimation times of these models as well. This will be useful as you figure out which optimizer gives you the most "bang for your buck" (i.e. what converges the fastest, especially if you're short on memory and time). The results suggest you can get the most bang for your buck through non-linear optimization of the Nelder-Mead and BOBYQA methods. This is unsurprising, at least in our example, because these optimization procedures permit stopping convergence checks earlier if it the procedure believes it has already found an approximate optimum. The differences may not matter as much for linear models in the mixed effects framework. These already estimate quickly, all things considered.
+
+```r
+cbind(as.data.frame(summary(AF1)$times), rownames(summary(AF1)$times)) %>%
+  tbl_df() %>%
+  rename(Optimizer = `rownames(summary(AF1)$times)`) %>%
+  mutate(Model = "Linear Mixed Effects Model") -> AF1times
+
+cbind(as.data.frame(summary(AF2)$times), rownames(summary(AF2)$times)) %>%
+  tbl_df() %>%
+  rename(Optimizer = `rownames(summary(AF2)$times)`) %>%
+  mutate(Model = "Logistic Mixed Effects Model") -> AF2times
+
+bind_rows(AF1times, AF2times) %>%
+  ggplot(.,aes(Optimizer, elapsed)) + geom_point() +
+  facet_wrap(~Model) + coord_flip() +
+  theme_steve_web2() +
+  ylab("Elapsed Time") +
+  labs(title = "A Comparison of Estimation Times Across Seven Different Optimizers")
+```
 
 ![plot of chunk allfittimes](/images/allfittimes-1.png)
 
