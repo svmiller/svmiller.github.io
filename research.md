@@ -53,3 +53,5 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 "[White Outgroup Intolerance and Declining Support for American Democracy](/research/white-outgroup-intolerance-democratic-support/)" 
 
 "[What Americans Really Think About Gun Control: Evidence from the General Social Survey, 1972-2016](/research/what-americans-really-think-about-gun-control/)" 
+
+"[Economic Anxiety or Racial Resentment? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2016](/research/economic-anxiety-racial-resentment-immigration-1992-2016/)" 
