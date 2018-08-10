@@ -4,6 +4,7 @@ _site
 HIDEME
 /drafts
 /cache
+/docs/hidden
 
 # ignore temp files w/ trailing ~
 *~
