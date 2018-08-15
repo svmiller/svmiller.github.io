@@ -21,7 +21,7 @@ This page serves includes my teaching philosophy and an empirical assessment of 
 
 - [POSC 1020](http://posc1020.svmiller.com) (Introduction to International Relations)
 - [POSC 3410](/teaching/posc-3410-quantitative-methods-in-political-science/) (Quantitative Methods in Political Science)
-- [POSC 3610](/teaching/posc-3610-international-conflict/) (International Conflict)
+- [POSC 3610](http://posc3610.svmiller.com) (International Conflict)
 - [POSC 3630](/teaching/posc-3630-united-states-foreign-policy/) (United States Foreign Policy)
 
 #### Proposed Classes
