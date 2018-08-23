@@ -8,10 +8,6 @@ permalink: /for-students/
 
 This is the parent page for a list of resources for students of mine at Clemson University or students in the Department of Political Science. Students should also read dedicated pages I have to [Pi Sigma Alpha](/for-students/pi-sigma-alpha/) and obtaining [letters of recommendation](/for-students/letters-of-recommendation/).
 
-## Office Hours
-
-My office is in 230A Brackett Hall. Office hours for fall and spring semester are typically Wednesday, 9 a.m. to 11:30 a.m. Students may visit the following page to [schedule me for an appointment](/for-students/office-hours-appointment/) in my office.
-
 ## Clemson’s Academic Calendar and Exam Schedule
 
 These links will be as useful for students as they will be for me. I find myself looking for these every now and then.
