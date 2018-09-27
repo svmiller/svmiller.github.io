@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "What Americans Really Think About Gun Control: Evidence from the General Social Survey, 1972-2016"
+title: "What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016"
 permalink: /research/what-americans-really-think-about-gun-control/
 ---
 
@@ -16,7 +16,7 @@ permalink: /research/what-americans-really-think-about-gun-control/
 
 ## Abstract
 
-Gun control is one of the most controversial public opinion debates in the United States and each new mass shooting raises the stakes involved in the debate. It is easy to assume gridlock that has blocked legislation on gun control follows because of the mass-level polarization on the topic of gun control. My analysis of 28 waves of General Social Survey data from 1972 to 2016 shows this is wrong. My analysis of the data generates four key findings: 1) GOP partisanship does not robustly reduce support for gun control; 2) most 'strong' Republicans actually support gun control; 3) polarization of attitudes about gun control is only partial and recent; and 4) our casual assumptions about regional variation in attitudes toward gun control need re-evaluation. I conclude with a discussion of the differences we observe between elite polarization and mass polarization and with implications for the future of gun control advocacy.
+*Objective*: Gun control is a classic case of policy gridlock and we commonly assume public opinion is at the foundation of this gridlock. However, public opinion analyses of attitudes about gun control often say little about the topic of gun control itself and do not fully leverage our long-running survey data to assess partisan, regional, and temporal trends on attitudes toward gun control. *Methods*: I use over 26 waves of General Social Survey data from 1972 to 2016 to analyze the main public opinion cleavages (partisanship, urban/rural distinctions, and Census regions) of gun control. *Results*: I find that partisanship and ruralness are not robust predictors of attitudes about gun control and that partisan polarization is only partial and recent. Further assumptions about regional variation in attitudes toward gun control need re-evaluation. *Conclusion*: Gun control policy gridlock says more about polarization at the elite-level than mass-level. Future research can also do well to assess issue-linkage concerns on specific gun control policy measures.
 
 ## Elsewhere
 
