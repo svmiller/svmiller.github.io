@@ -8,7 +8,7 @@ permalink: /gml-mid-data/
 
 This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from Gibler, Miller and Little's project published in *International Studies Quarterly*.
 
-![Version 2.03](https://img.shields.io/badge/release-v2.03-blue.svg)
+![Version 2.1](https://img.shields.io/badge/release-v2.1-blue.svg)
 
 ## Overview
 
@@ -33,14 +33,18 @@ Please contact me (svmille@clemson.edu) with any inquiries about the script and 
 
 ## Data and Documentation
 
-- [**Version 2.03**](http://bit.ly/gml_mid_203)
+- [**Version 2.1**](http://bit.ly/gml_mid_21)
 
 Contents of this zip file include:
 
 - `gml-[version]-change-summary-disp.txt`: A summary of new changes at the dispute-level in the current version.
 - `gml-[version]-change-summary-part.txt`: A summary of new changes at the participant-level in the current version.
+- `gml-[version]-change-summary-incid.txt`: A summary of new changes at the incident-level in the current version. This is new as of version 2.1.
+- `gml-[version]-change-summary-incidpart.txt`: A summary of new changes at the incident-participant-level in the current version. This is new as of version 2.1.
 - `gml-mida-[version].csv`: dispute-level GML MID data, forked from CoW's version 4.01.
 - `gml-midb-[version].csv`: participant-level GML MID data, forked from CoW's version 4.01.
+- `gml-midi-[version].csv`: incident-level GML MID data, forked from CoW's version 4.01. This is new as of version 2.1.
+- `gml-midip-[version].csv`: incident-participant-level GML MID data, forked from CoW's version 4.01. This is new as of version 2.1.
 - `gml-ddy-disputes-[version].csv`: directed dispute-year GML MID data.
 - `gml-ndy-disputes-[version].csv`: nondirected dispute-year GML data.
 - `gml-ddy-[version].csv`:  Full directed dyad-year data for use in standard time-series cross-section models for MID onset. This data frame contains no duplicate observations for dyad-years.[^whittling] This data set includes all possible dyads no matter the dyad's [political relevance](http://journals.sagepub.com/doi/abs/10.1177/002200277602000302) or [activity](https://www.tandfonline.com/doi/abs/10.1080/07388940500503804). The user is free to employ case-exclusion rules of her/his choice.
