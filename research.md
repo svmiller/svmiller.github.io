@@ -16,7 +16,7 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 
 ## Original Data
 
-[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/) ![Version 2.1](https://img.shields.io/badge/release-v2.03-blue.svg) <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
+[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/) ![Version 2.1](https://img.shields.io/badge/release-v2.1-blue.svg) <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
 
 ## Publications
 
