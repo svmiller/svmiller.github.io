@@ -157,6 +157,6 @@ On that note, you could easily pass most LaTeX code through Markdown if you're w
 
 This is what the template looks like in action. You can also find how to use R Markdown and [knitr](http://yihui.name/knitr/) to run R code within your R Markdown document, allowing for dynamic report generation.
 
-{% include embedpdf.html code="qod8po3txr7owil/svm-rmarkdown-article-example.pdf" width=100 height=800 %}
+{% include embedpdf.html code="9r4cuu0vb9nxppf/svm-rmarkdown-article-example.pdf" width=100 height=800 %}
 
 Refer to [my Github](https://github.com/svmiller) and [my template repository](https://github.com/svmiller/svm-r-markdown-templates) for future updates.
