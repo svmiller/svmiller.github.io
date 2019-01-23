@@ -5,6 +5,7 @@ HIDEME
 /drafts
 /cache
 /docs/hidden
+docs/**/*.Rmd
 
 # ignore temp files w/ trailing ~
 *~
