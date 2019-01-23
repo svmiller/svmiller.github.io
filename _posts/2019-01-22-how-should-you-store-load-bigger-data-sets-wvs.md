@@ -51,7 +51,7 @@ Again, the data span 1,410 columns and 341,271 rows. This might not be the large
 
 I have saved the following formats of WVS data over the years. First, I have original downloads that WVS provides of its data as an R `.Rdata` file as well as an SPSS `.sav` file.[^dta] In the past, I had loaded that WVS data and saved it as two different serialized data frames. The first is an R serialized data frame through the `readRDS()` function that comes standard in R. The second format is a fast serialization through the [`fst` package](https://www.fstpackage.org/). 
 
-[^dta]: I also have Stata `.dta` files but `haven`, my preferred package for loading foreign databases, doesn't always play nice with Stata files. I've had greater difficulties with newer Stata binaries (i.e. after Stata 12), which in part behooved tis project.
+[^dta]: I also have Stata `.dta` files but `haven`, my preferred package for loading foreign databases, doesn't always play nice with Stata files. I've had greater difficulties with newer Stata binaries (i.e. after Stata 12), which in part behooved this project.
 
 The final format is an SQLite database. SQLite is one of many relational database management system options. I'm still teaching myself the ins and outs of various SQL standards, but SQLite's main advantage for R users is its more lightweight nature. My (limited) understanding is SQLite is not ideal for when there are a lot of users making a lot of queries on a database at a given time. However, that limitation won't apply to an individual R user trying to access a data source. This should make SQLite a go-to for relational database management sytems for users interested in doing their own statistical analyses and queries on larger data sets.
 
