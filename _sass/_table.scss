@@ -1,0 +1,28 @@
+#stevetable {
+	width: 100%;
+	margin-bottom: 15px;
+	border-collapse: collapse; 
+
+}
+
+#stevetable caption {
+	font-weight: bold;
+	padding-bottom: 5px;
+} 
+
+#stevetable th {
+	font-weight: bold;
+	color: #fff;
+	border-bottom: 1px #ddd solid;
+	background: $clemson-purple;
+	padding: 3px 3px 3px 10px
+}
+
+
+#stevetable td {
+	padding: 3px 3px 3px 10px;	
+	border-bottom: 1px #ddd solid;
+}
+
+#stevetable tr:nth-child(even) {background: #f3f3f3}
+#stevetable tr:nth-child(odd) {background: #fdfdfd}

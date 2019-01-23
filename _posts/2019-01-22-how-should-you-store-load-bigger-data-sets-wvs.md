@@ -14,7 +14,7 @@ categories: R
 <style>
   .myTable {
     padding-bottom: 15px;
-    width: 100%
+    width: 100%;
   }
   
   .myTable th {
@@ -24,13 +24,13 @@ categories: R
   }
   
 .myTable table {
-  border-spacing: 0;
-  border-collapse: collapse;
+  border-spacing: 0px;
+  border-collapse: collapse; 
   }
   
   .myTable tr:nth-child(even) {background: #f3f3f3}
-.myTable tr:nth-child(odd) {background: #fff}
-.myTable td {margin-right: 0}
+.myTable tr:nth-child(odd) {background: #fdfdfd}
+.myTable td { padding: 3px 3px 3px 10px }
 </style>
 
 
@@ -86,7 +86,8 @@ Here is a box-and-whisker plot of the load times across the 10 trials for each f
 
 The box-and-whisker plot will easily communicate the scale of time saved through loading the data frame as an SQLite database or serialized data frame. The table below will summarize the average load time and standard deviation of a load time as well.
 
-<table class="myTable">
+<table id="stevetable">
+<caption>Average Load Times (and Standard Deviations) of Five Methods in R</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Method </th>
@@ -131,7 +132,8 @@ The load times for the standard objects you can download on the WVS' website sta
 
 This experiment would be incomplete without a consideration of the storage of these various data frames. A SQLite database (and presumably other SQL-standard relational database management systems) might have the fastest load times but are they the most economical means to *storing* data?
 
-<table class="myTable">
+<table id="stevetable">
+<caption>A Comparison of WVS Longitudinal Data File Sizes</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Data Type </th>

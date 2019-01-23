@@ -113,7 +113,8 @@ combined_times %>%
   summarize(`Mean Load Time (Seconds)` = round(mean(elapsed), 2),
             `Standard Deviation Load Time (Seconds)` = round(sd(elapsed), 2)) %>%
   kable(., format="html",
-        table.attr='class="myTable"',
+        table.attr='id="stevetable"',
+        caption = "Average Load Times (and Standard Deviations) of Five Methods in R",
         align=c("l","c","c"))
 
 ```
@@ -143,7 +144,8 @@ tribble(~`Data Type`, ~`Disk Space (in MB)`,
         "Serialized Data Frame (fst)", fst_size,
         "Serialized Data Frame (RDS)", rds_size)  %>%
   kable(., format="html",
-        table.attr='class="myTable"',
+        caption = "A Comparison of WVS Longitudinal Data File Sizes",
+        table.attr='id="stevetable"',
         align=c("l","c"))
 
 ```
