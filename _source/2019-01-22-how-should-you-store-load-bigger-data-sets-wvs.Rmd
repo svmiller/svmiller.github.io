@@ -61,11 +61,11 @@ Again, the data span 1,410 columns and 341,271 rows. This might not be the large
 
 I have saved the following formats of WVS data over the years. First, I have original downloads that WVS provides of its data as an R `.Rdata` file as well as an SPSS `.sav` file.[^dta] In the past, I had loaded that WVS data and saved it as two different serialized data frames. The first is an R serialized data frame through the `readRDS()` function that comes standard in R. The second format is a fast serialization through the [`fst` package](https://www.fstpackage.org/). 
 
-[^dta]: I also have Stata `.dta` files but `haven`, my preferred package for loading foreign databases, doesn't always play nice with Stata files. I've had greater difficulties with newer Stata binaries (i.e. after Stata 12), which in part behooved tis project.
+[^dta]: I also have Stata `.dta` files but `haven`, my preferred package for loading foreign databases, doesn't always play nice with Stata files. I've had greater difficulties with newer Stata binaries (i.e. after Stata 12), which in part behooved this project.
 
 The final format is an SQLite database. SQLite is one of many relational database management system options. I'm still teaching myself the ins and outs of various SQL standards, but SQLite's main advantage for R users is its more lightweight nature. My (limited) understanding is SQLite is not ideal for when there are a lot of users making a lot of queries on a database at a given time. However, that limitation won't apply to an individual R user trying to access a data source. This should make SQLite a go-to for relational database management sytems for users interested in doing their own statistical analyses and queries on larger data sets.
 
-This amounts to five different versions of the same data source I have in my WVS subdirectory. For the sake of this experiment, I looped through a load of a particular format 10 times and saved the time it took to perform the task into a data frame. This is not the most elegant code, but here is what this loop would look like the for the `.Rdata` format.
+This amounts to five different versions of the same data source I have in my WVS subdirectory. For the sake of this experiment, I looped through a load of a particular format 10 times and saved the time it took to perform the task into a data frame. This is not the most elegant code, but here is what this loop would look like for the `.Rdata` format.
 
 ```r
 # load rdata method -----
@@ -119,7 +119,7 @@ combined_times %>%
 
 ```
 
-The average load time in R for an SQLite database of this size was .04 seconds, which is an almost instantaneous load time on par with calling in `data(mtcars)` in base R. The average speed of that load time is roughly 40 times faster than loading the data as a serialized data frame through the `fst` package and about 160 times faster than loading the data as an R serialized data frame.
+The average load time in R for an SQLite database of this size was .05 seconds, which is an almost instantaneous load time on par with calling in `data(mtcars)` in base R. The average speed of that load time is roughly 40 times faster than loading the data as a serialized data frame through the `fst` package and about 160 times faster than loading the data as an R serialized data frame.
 
 The load times for the standard objects you can download on the WVS' website stand out. All told, the typical load time for a standard WVS download as either an SPSS file or Rdata file is more than two minutes (SPSS) or almost three minutes (Rdata). That's a lot of time spent waiting for the data to load into an R session. It may not seem like it, but the user will feel it when it's happening.
 
@@ -174,5 +174,9 @@ I think one implication of this experiment concerns how WVS makes its data avail
 
 For one, the Rdata format is well over a gigabyte in size. WVS will feel that bandwith crunch when users download the data, even if the data are zipped. Second, R's `load` command is clunky, especially as WVS handles it. Basically, the data get loaded into the R session with an object name like `WVS_Longitudinal_1981_2014_R_v2015_04_18`. The user cannot change this. S/he can only duplicate the data to a more accessible object name (e.g. `WVS`) and discard `WVS_Longitudinal_1981_2014_R_v2015_04_18` to avoid consuming too much memory in the R session.
 
-An R serialized data frame offers a substantial improvement on this approach. For one, the R serialized data frame is compressed to around 1/30th the size of the Rdata format. Unlike the `fst` compression or the SQL-standard relational database, the R serialized data frame can keep the variable labels. It can even be saved as a tibble, which are invaluable for larger data sets. Finally, the user has the option of assigning the object when s/he loads it into the R session. Whereas the `load` command comes with a preset output, the user can assign a more intuitive/acccessible name to the object (i.e. `WVS <- readRDS("wvs6wave-20150418.rds")`, in my case). Plus, the R serialized data frame requires no other package that isn't already part of base R. The `readRDS` function is base R.
+An R serialized data frame offers a substantial improvement on this approach. For one, the R serialized data frame is compressed to around 1/30th the size of the Rdata format. Unlike the `fst` compression or the SQL-standard relational database, the R serialized data frame can keep the variable labels. It can even be saved as a tibble, which are invaluable for larger data sets. 
+
+Further, the user has the option of assigning the object when s/he loads it into the R session. Whereas the `load` command comes with a preset output, the user can assign a more intuitive/acccessible name to the object (i.e. `WVS <- readRDS("wvs6wave-20150418.rds")`, in my case). Notice the implication here. An R user should only need the `load()` and `save()` functions when s/he is loading or save *multiple* objects to or from an R session. Here, WVS is providing just one object (a single data frame). A serialized data frame is [far more useful in this situation](https://www.fromthebottomoftheheap.net/2012/04/01/saving-and-loading-r-objects/).
+
+Finally, the R serialized data frame requires no other package that isn't already part of base R. It and its compantion function `saveRDS()` come standard in R. I think WVS would find considerable value in eschewing the Rdata format for its users to download and providing an RDS file instead.
 
