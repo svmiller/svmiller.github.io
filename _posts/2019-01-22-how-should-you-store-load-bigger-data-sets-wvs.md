@@ -73,7 +73,7 @@ for(i in 1:10) {
 }
 
 rdata_times %>%
-  mutate(Method = "load() # Rdata") -> rdata_times
+  mutate(Method = "load (Rdata)") -> rdata_times
 ```
 
 ## The Results
