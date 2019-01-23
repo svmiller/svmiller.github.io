@@ -82,7 +82,7 @@ rdata_times %>%
 
 Here is a box-and-whisker plot of the load times across the 10 trials for each format. The results are pretty clear that the fastest load times came when the data were stored in some format other than what WVS provides for its users.
 
-![plot of chunk bwplotwvsloadtimes](/figure/source/2019-01-22-how-should-you-store-load-bigger-data-sets-wvs/bwplotwvsloadtimes-1.png)
+![plot of chunk bwplotwvsloadtimes](/images/bwplotwvsloadtimes-1.png)
 
 The box-and-whisker plot will easily communicate the scale of time saved through loading the data frame as an SQLite database or serialized data frame. The table below will summarize the average load time and standard deviation of a load time as well.
 
