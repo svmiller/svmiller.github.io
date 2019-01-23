@@ -123,7 +123,7 @@ The box-and-whisker plot will easily communicate the scale of time saved through
 </tbody>
 </table>
 
-The average load time in R for an SQLite database of this size was .04 seconds, which is an almost instantaneous load time on par with calling in `data(mtcars)` in base R. The average speed of that load time is roughly 40 times faster than loading the data as a serialized data frame through the `fst` package and about 160 times faster than loading the data as an R serialized data frame.
+The average load time in R for an SQLite database of this size was .05 seconds, which is an almost instantaneous load time on par with calling in `data(mtcars)` in base R. The average speed of that load time is roughly 40 times faster than loading the data as a serialized data frame through the `fst` package and about 160 times faster than loading the data as an R serialized data frame.
 
 The load times for the standard objects you can download on the WVS' website stand out. All told, the typical load time for a standard WVS download as either an SPSS file or Rdata file is more than two minutes (SPSS) or almost three minutes (Rdata). That's a lot of time spent waiting for the data to load into an R session. It may not seem like it, but the user will feel it when it's happening.
 
