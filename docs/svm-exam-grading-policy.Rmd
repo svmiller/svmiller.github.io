@@ -1,0 +1,52 @@
+---
+output: 
+  pdf_document:
+    keep_tex: true
+    fig_caption: yes
+    latex_engine: pdflatex
+    template: ~/Dropbox/miscelanea/svm-r-markdown-templates/svm-latex-statement.tex
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+
+title: "Exam Grading Policy"
+author: Steven V. Miller
+affiliation: Department of Political Science, Clemson University
+email: "svmille@clemson.edu"
+
+fontfamily: mathpazo
+fontsize: 11pt
+---
+
+My typical in-class exam for students involves writing short answers. Whereas most classes are between 50 minutes to 75 minutes at the university-level, I prompt students to answer just six or seven short-answer questions in five to seven complete sentences each. Each question is five points each, meaning that the maximum points for an exam is 40 (with some points awarded as a cushion to reach 40 points). Thus, each point deduction corresponds with a deduction in 2.5% of the overall grade for the exam. 
+
+In what follows, I list my rationale for point deductions for a particular short-answer question. Whereas I teach approximately 50-60 students per class at my institution, I offer this exam grading policy to students to save me the hassle of explaining, on the exam, why I deducted the points I did. The student should consider this document as a means to preempt inquiries into why they were deducted a given number of points on a short-answer question.
+
+# Grading Scale
+
+Points are deducted from a response for a variety of reasons. What follows is a broad, but not exhaustive, rationale for point deductions on a short-answer question.
+
+## One-point Deduction
+
+A one-point deduction can occur for a variety of reasons.
+
+- In some cases, a point was deducted if I felt there was some minor part of the puzzle that was left unanswered by the student, thus compromising total faith that the student knew the extent of the material necessary to answer the question.
+- A single point is also the unit deduction from a question that prompted the student to list a number of individual things as part of the response. If a student missed one part of a list of four or five items s/he needed to address in an answer, a single point was deducted. These can obviously accumulate (e.g. a four-point deduction if the student forgot to address four necessary items in an answer).
+- One-point deductions may follow when I can tell the student is ``padding'' to meet the minimum sentence requirement. This happens a lot for students who believe they can answer a question without explaining it and feel the need to add irrelevant or redundant information to get to five complete sentences. I will punish this each time. These can accumulate for each sentence I determine to be irrelevant to the question or redundant.
+- Each sentence in an answer that is not a sentence (i.e. no subject and verb) will warrant a one-point deduction. These, like item-specific one-point deductions, can obviously accumulate. 
+
+## Two-point Deduction
+
+A two-point deduction indicates a response I felt was half-right or only met half the obligations. I also deducted two points from answers I felt were "rambling". While I do not punish students for going over the five-to-seven-sentence requirement, per se, I do deduct points for short answers that go over the sentence requirement with long, winding sentences that get off-track from the question I asked. When students, figuratively, throw out information in a short-answer to see what "sticks", I interpret this as partial awareness of the material at best.
+
+## Three-point Deduction
+
+A three-point deduction is similar to a two-point deduction. These occur for a partially right answer where even the "partially right" element is qualified. This occurred in situations where the student answered half the question and even the "half-right" part of the answer did not demonstrate full confidence in the material. I hope the student notes that I do *not* want to deduct all credit for an answer. These completely wrong answers can accumulate quickly on one of my exams.
+
+## Four-point Deduction
+
+Four-point deductions are rare occurrences in my grading policy. These are cumulative deductions for one-point deductions for things like padding answers and failing to address specific items in an answer.  
+
+## Five-point Deduction
+
+A five-point deduction indicates a completely wrong answer.

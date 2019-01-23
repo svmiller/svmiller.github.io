@@ -1,0 +1,415 @@
+---
+output: 
+  pdf_document:
+    keep_tex: FALSE
+    fig_caption: yes
+    latex_engine: pdflatex
+    template: ~/Dropbox/miscelanea/svm-r-markdown-templates/svm-latex-cv.tex
+geometry: margin=1in
+
+title: "CV"
+author: Steven V. Miller
+
+jobtitle: "Assistant Professor, Department of Political Science"
+address: "232 Brackett Hall · Clemson University · Clemson, SC 29634-1354"
+email: svmille@clemson.edu
+github: svmiller
+#phone: "+1 205 614 1153"
+web: svmiller.com
+updated: yes
+fontawesome: yes
+
+keywords: International conflict, conflict processes, democratic peace, political behavior
+
+fontfamily: mathpazo
+fontfamilyoptions: sc, osf
+fontsize: 11pt
+linkcolor: blue
+urlcolor: blue
+---
+
+# Employment
+
+*Clemson University*, Assistant Professor \hfill 2013--present
+
+*University of Illinois at Urbana-Champaign*, Visiting Lecturer \hfill 2012-2013
+
+# Education
+
+*University of Alabama*, Ph.D. Political Science \hfill 2012
+
+*The Ohio State University*, B.A. Political Science \hfill 2006
+
+# Additional Training
+
+*Empirical Implications of Theoretical Models*, Washington University in St. Louis \hfill 2011
+
+*Inter-University Consortium for Political and Social Research*, University of Michigan \hfill 2010
+
+# Publications
+## Journal Articles
+
+<!-- \hangindent=1em -->
+
+Miller, Steven V. 2019. ["What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016"](https://onlinelibrary.wiley.com/doi/full/10.1111/ssqu.12555). *Social Science Quarterly*. 100(1): 272--288. <!-- (JCR Impact Factor: .874, Category: Political Science, Sociology) -->
+
+Miller, Steven V. 2018. "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](http://svmiller.com/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)." *Peace Economics, Peace Science and Public Policy*. 24(1): `doi:` [10.1515/peps-2017-0043](https://doi.org/10.1515/peps-2017-0043) 
+
+Miller, Steven V. 2017. "[The Effect of Terrorism on Judicial Confidence](http://svmiller.com/research/effect-terrorism-judicial-confidence/)." *Political Research Quarterly* 70(4): 790--802. <!-- (JCR Impact Factor: 1.523, Category: Political Science) -->
+
+Miller, Steven V. 2017 "[Individual-Level Expectations of Executive Authority under Territorial
+Threat](http://svmiller.com/research/individual-level-expectations-of-executive-authority-under-territorial-threat/)." *Conflict Management and Peace Science* 34(5): 526--545. <!-- `doi:` [10.1177/0738894215600384](http://dx.doi.org/10.1177/0738894215600384) --> <!-- (JCR Impact Factor: 1.6, Category: International Relations) -->
+
+Miller, Steven V. 2017. "[Economic Threats or Societal Turmoil? Understanding Preferences for Authoritarian Political Systems](http://svmiller.com/research/economic-threats-or-societal-turmoil-understanding-preferences-for-authoritarian-political-systems/)." *Political Behavior* 39(2): 457-478. <!-- `doi`: [10.1007/s11109-016-9363-7](http://dx.doi.org/10.1007/s11109-016-9363-7) --> <!-- (JCR Impact Factor: 1.877, Category: Political Science) -->
+
+Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. "[An Analysis of the Militarized
+Interstate Dispute (MID) Dataset, 1816–2001](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext)." *International Studies Quarterly* 60(4): 719-730. <!-- (JCR Impact Factor: 2.148, Category: International Relations, Political Science) -->
+
+Gibler, Douglas M. and Steven V. Miller. 2014. "[External Territorial Threat, State Capacity, and Civil
+War](http://dmgibler.people.ua.edu/state-capacity.html)." *Journal of Peace Research* 51(5): 634-646. <!-- (JCR Impact Factor: 2.419, Category: International Relations, Political Science) -->
+
+Miller, Steven V. 2013. "[Territorial Disputes and the Politics of Individual Well-Being](http://svmiller.com/research/territorial-disputes-and-the-politics-of-individual-well-being/)." *Journal of Peace Research*  50(6): 677-690. <!-- (JCR Impact Factor: 2.419, Category: International Relations, Political Science) -->
+
+Gibler, Douglas M. and Steven V. Miller. 2013. "[Quick Victories? Territory, Democracies and Their
+Disputes](http://jcr.sagepub.com/content/57/2/258.full)." *Journal of Conflict Resolution* 57(2): 258-284. <!-- (JCR Impact Factor: 3.491, Category: International Relations, Political Science) -->
+
+Gibler, Douglas M., Marc L. Hutchison, and Steven V. Miller. 2012. "[Individual Identity Attachments
+and International Conflict: The Importance of Territorial Threat](http://cps.sagepub.com/content/45/12/1655.full)." *Comparative Political Studies* 45(12):
+1655-1683. <!-- (JCR Impact Factor: 2.919, Category: International Relations, Political Science) -->
+
+Gibler, Douglas M. and Steven V. Miller. 2012. "[Comparing the Foreign Aid Policies of Presidents Bush
+and Obama](http://onlinelibrary.wiley.com/doi/10.1111/j.1540-6237.2012.00909.x/abstract)." *Social Science Quarterly* 92(5): 1202-1217. <!-- (JCR Impact Factor: .874, Category: Political Science, Sociology) -->
+
+Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Negotiated Compromises](http://cmp.sagepub.com/content/28/3/261)."
+*Conflict Management and Peace Science* 28(3): 261-279. <!-- (JCR Impact Factor: 1.6, Category: International Relations) -->
+
+## Book Reviews
+
+Miller, Steven V. Forthcoming. "[National Identity and Territory in a World of Changing Scale](https://academic.oup.com/isr/advance-article-abstract/doi/10.1093/isr/viy051/5026359?redirectedFrom=fulltext)" *International Studies Review*
+
+- Review of Herb, Guntram M. and David H. Kaplan. 2017. *Scaling Identities: Nationalism and Territoriality*. Lanham, MD: Rowman & Littlefield.
+
+
+# Working Papers and Works in Progress
+
+"Prioritizing Defense: Territorial Threat and Attitudes Toward Defense as National Priority". *Under Review*.
+
+"[White Outgroup Intolerance and Declining Support for American Democracy](http://svmiller.com/research/white-outgroup-intolerance-democratic-support/)" (with [Nicholas T. Davis](http://www.nicholastdavis.com)) *Under Review*
+
+"[Economic Anxiety or Racial Resentment? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2016](http://svmiller.com/research/economic-anxiety-racial-resentment-immigration-1992-2016/)". *Under Review*.
+
+"Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East."
+
+"U.S. Presidents, Human Rights, and Economic Aid from Truman to Obama: A Mixed Effects Approach." 
+
+"Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders"
+
+"Pro-Government Violence and Support for Authoritarian Governments" (with [Brandon Stewart](https://www.researchgate.net/profile/Brandon_Stewart4))
+
+"When and Where is the Democratic Peace?" (with [Chase Joyner](https://mthsc.clemson.edu/directory/view_person.py?person_id=465) and [Stella Watson](https://mthsc.clemson.edu/directory/view_person.py?person_id=474))
+
+
+
+# Grants and Awards
+## External Grants
+
+Gibler, Douglas M and Steven V. Miller. 2017. *[What Do Leaders Want?: Collecting and Coding Issue Positions and Demands in the Militarized Interstate Dispute (MID) Data, 1816-2010.](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1729138&HistoricalAwards=false)* National Science Foundation Grant. 2017-2020, $342,012 ($92,787 to Clemson University).
+
+## Awards and Distinctions
+
+["Professor of the Game"](https://issuu.com/clemsontigers/docs/5_-_georgia_tech), Clemson University, Oct. 2017
+
+Artinian Travel Award, Southern Political Science Association, Jan. 2016
+
+[40 Under 40: Professors Who Inspire](http://www.nerdwallet.com/nerdscholar/40-under-40#steven-v-miller), May 2014
+
+[Graduate Student Spotlight](https://graduate.ua.edu/2012/11/20/steven-v-miller-political-science/), November 2012
+
+Lex Arden Fikes, Jr. Award, Department of Political Science, University of Alabama, Apr. 2010
+
+Pi Sigma Alpha, Omicron Chapter, The Ohio State University, June 2006.
+
+
+## Internal Grants
+
+University Research Grant Committee Completion Grant, Clemson University, 2016 ($3,000)
+
+Graduate Council Research/Creative Activity Fellowship, University of Alabama, 2010--2011
+
+# Conference Presentations
+
+International Studies Association
+
+- 2010, 2015, 2016
+
+Midwest Political Science Association 
+
+- 2008, 2011, 2012, 2013, 2015*, 2017, 2018
+    -  &#42; \small Participant in Junior Scholar Symposium
+
+Peace Science Society (International)
+
+- 2010, 2011
+
+Southern Political Science Association
+
+- 2011, 2015, 2016
+
+# Professional Activities and Service
+## Professional Service
+
+Manuscript reviewer for *American Journal of Political Science*, *American Political Science Review*, *British Journal of Political Science*, *Cambridge Review of International Affairs*, *Chinese Journal of International Politics*, *Comparative Political Studies*, *Conflict Management and Peace Science*, *Foreign Policy Analysis*, *Human Rights Review*, *International Interactions*, *International Journal of Public Opinion Research*, *International Studies Quarterly*, *International Studies Review*, *Journal of Conflict Resolution*, *Journal of International Relations and Development*, *Journal of Peace Research*, *Journal of Politics*, *Mass Communication and Society*, *Political Behavior*, *Political Research Quarterly*, *Political Science Research and Methods*, *Social Science Research*
+ 
+Section chair for 75th annual Midwest Political Science Association conference (2017, Peace Science).
+ 
+Panel chair, discussant at conferences for Midwest Political Science Association (2012, 2013, 2017, 2018*), International Studies Association (2015), Peace Science Society (International) (2016, 2017), Southern Political Science Association (2015, 2016).
+
+-  &#42; \small Discussant in Junior Scholar Symposium
+ 
+Discussant at [Online Peace Science Colloquium](https://www.youtube.com/watch?v=gisnSG8Omkc), Peace Science Society (International). Feb. 12, 2016.
+
+Discussant at Korea's Rise in Comparative Perspective Conference, Clemson University. Oct. 9, 2014. 
+
+Participant at Militarized Interstate Disputes/Incidents (MID/MIDI) Workshop, University of California, Davis. Jan. 24-25, 2014. 
+
+Presenter at Research Academy Conference on Territory, Rivalry, and Domestic Politics, University of Alabama. Oct. 3, 2009.
+
+## University Service
+
+Research Advisory Board, Clemson University, 2017--2018.
+
+Fulbright Campus Committee Evaluation, Clemson University, 2013.
+
+## College Service
+
+Research Committee, College of Behavioral, Social and Health Sciences, Clemson University, 2016--present.
+
+## Department Service
+
+Curriculum Committee, Department of Political Science, Clemson University, 2016--present.
+
+Chair of Search Committee for Assistant Professor in Comparative Politics, 2017.
+
+Chair of Search Committee for Visiting Assistant Professor in Comparative Politics/International Relations, 2017.
+
+[*Summer in the Balkans*](http://www.clemson.edu/cbbs/departments/political-science/study-abroad/summer-abroad.html) study-abroad program, 2015
+
+Advisor to [*The Pendulum*](http://www.clemsonpendulum.org), Clemson University, 2014--2017.
+
+Advisor to Pi Sigma Alpha (Eta Lambda), Clemson University, 2013--present.
+
+## Memberships
+
+American Political Science Association  
+[Berkeley Initiative for Transparency in the Social Sciences](https://www.bitss.org/people/steven-miller/)  
+European Consortium for Political Research  
+European Political Science Association  
+International Studies Association  
+International Political Science Association  
+Midwest Political Science Association  
+Peace Science Society International  
+Southern Political Science Association  
+
+## Invited Presentations
+
+University of South Carolina, 2015  
+Boise State University, 2012  
+University College of London, 2012
+
+# Media
+
+<!-- ["Lots of Republicans actually support gun control"](https://www.washingtonpost.com/news/monkey-cage/wp/2017/10/03/lots-of-republicans-actually-support-gun-control/?utm_term=.cfdbab0be7b6), *The Monkey Cage* (Oct. 3, 2017)
+
+["Here's what Trump and Putin have in common, and why so many people approve"](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/), *The Monkey Cage* (Dec. 24, 2015)
+
+- Reprinted in Sides, John and Henry Farrell. 2016. *The Science of Trump: Explaining the Rise of an Unlikely Candidate*. The Monkey Cage.
+
+["The standoff in Crimea: A familiar story with no easy resolution for U.S. interests."](http://newsstand.clemson.edu/opinion-the-standoff-in-crimea-a-familiar-story-with-no-easy-resolution-for-u-s-interests/) 
+
+- Reprinted in *Anderson Independent Mail*, *Scranton Times-Tribune*, *The Times and Democrat* -->
+
+
+Invited commentary in *Clemson Newsstand* ([March 10, 2014](http://newsstand.clemson.edu/opinion-the-standoff-in-crimea-a-familiar-story-with-no-easy-resolution-for-u-s-interests/)), *Data for Progress* ([Oct. 25, 2018](https://wthh.dataforprogress.org/blog/2018/10/24/how-belief-in-discrimination-against-whites-influences-support-for-the-gop-candidate-in-seven-competitive-house-races)), *The Monkey Cage (Washington Post)* ([Dec. 24, 2015*](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/); [Oct. 3, 2017](https://www.washingtonpost.com/news/monkey-cage/wp/2017/10/03/lots-of-republicans-actually-support-gun-control/?utm_term=.cfdbab0be7b6)), *Vox* ([July 2, 2018](https://www.vox.com/mischiefs-of-faction/2018/7/2/17524960/racism-authoritarianism-hand-in-hand))
+
+-  &#42; Reprinted in Sides, John and Henry Farrell. 2016. *The Science of Trump: Explaining the Rise of an Unlikely Candidate*. The Monkey Cage.
+
+<!-- Invited commentary in:
+
+- *Clemson Newsstand*
+    - ["The standoff in Crimea: A familiar story with no easy resolution for U.S. interests."](http://newsstand.clemson.edu/opinion-the-standoff-in-crimea-a-familiar-story-with-no-easy-resolution-for-u-s-interests/), March 10, 2014
+- *Data for Progress*
+    - ["The Role of Racism in the Fight for the House"](https://wthh.dataforprogress.org/blog/2018/10/24/how-belief-in-discrimination-against-whites-influences-support-for-the-gop-candidate-in-seven-competitive-house-races), Oct. 25, 2018
+- *The Monkey Cage (Washington Post)*
+    - ["Here's what Trump and Putin have in common, and why so many people approve"](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/), Dec. 24, 2015
+      - \scriptsize Reprinted in Sides, John and Henry Farrell. 2016. *The Science of Trump: Explaining the Rise of an Unlikely Candidate*. The Monkey Cage.
+    - ["Lots of Republicans actually support gun control"](https://www.washingtonpost.com/news/monkey-cage/wp/2017/10/03/lots-of-republicans-actually-support-gun-control/?utm_term=.cfdbab0be7b6), Oct. 3, 2017
+- *Vox*
+    - ["Racism and authoritarianism go hand in hand"](https://www.vox.com/mischiefs-of-faction/2018/7/2/17524960/racism-authoritarianism-hand-in-hand), July 2, 2018 (with Nicholas T. Davis) -->
+
+Podcast interview with [*Break it Down Podcast*](https://soundcloud.com/break-it-down-podcast/a-conversation-on-policy-with) (Oct. 24, 2017), [*This Is Hell!*](https://soundcloud.com/this-is-hell/episode-1007-rising-signs) (June 9, 2018)
+
+Radio interview with [*BBC Radio 5 Live*](http://www.bbc.co.uk/programmes/b09rwzk1) (Feb. 19, 2018), [*Morning Wave in Busan*](http://www.befm.or.kr/program/morning/ProgramAction.do?cmd=PlayListMgr&prgmId=morning&bbsId=&tab=PRGM_SCRIPT&nowPage=96) (Mar. 20, 2014),  [*WBAI Radio 99.5FM NYC*](http://nuarchive.wbai.org/mp3/wbai_180703_140000artsyfartsy.mp3) (July 3, 2018), [*WBZ’s NightSide*](https://wbznewsradio.iheart.com/featured/nightside-with-dan-rea/about/) (July 13, 2018)
+
+Sourced in *Bloomberg BusinessWeek* ([Oct. 11, 2017](https://www.bloomberg.com/news/articles/2017-10-11/the-bump-stock-millionaire-and-the-las-vegas-massacre)), *Correio Braziliense* ([Feb. 16, 2018](https://www.dropbox.com/s/z33amd9vr8kp4ge/2018-02-16-braziliense-correio.pdf)), *CNN* ([Nov. 10, 2018](https://www.cnn.com/2018/11/10/us/thousand-oaks-california-shooting-changes/index.html)), *Greenville News* ([Oct. 25, 2016](http://www.greenvilleonline.com/story/news/politics/elections/2016/10/25/heres-why-there-fewer-campaign-signs/92669092/)), *MacLean's* ([March 10, 2016](http://www.macleans.ca/news/world/trumputin-the-disturbing-parallels-between-donald-trump-and-vladimir-putin/)), *Mother Jones* ([July 11, 2018](https://www.motherjones.com/kevin-drum/2018/07/immigrant-bashing-is-all-about-racism/)), *NBC News* ([Dec. 15, 2017](https://www.nbcnews.com/news/us-news/5-years-after-newtown-gun-control-groups-still-looking-big-n829871); [May 27, 2018](https://www.nbcnews.com/think/opinion/trump-effect-new-study-connects-white-american-intolerance-support-authoritarianism-ncna877886)), *New York Times* ([May 24, 2018](https://www.nytimes.com/2018/05/24/opinion/trump-animals-immigrants-politics.html)), *Salon* ([Aug. 2, 2018](https://www.salon.com/2018/08/02/are-white-people-ready-to-bail-on-democracy-these-researchers-say-the-danger-is-real/)), *ThinkProgress* ([June 4, 2018](https://thinkprogress.org/new-study-trump-white-supremacy-awakening/)), *Washington Post* ([Oct. 2, 2017](https://www.washingtonpost.com/news/wonk/wp/2017/10/02/experts-and-the-public-agree-on-how-to-stop-gun-violence-politicians-dont/?utm_term=.b5817be56247); [July 10, 2018](https://www.washingtonpost.com/business/2018/07/10/racial-resentment-is-biggest-predictor-immigration-attitudes-study-finds/?utm_term=.630bf1077d6b))
+
+<!-- - *Bloomberg BusinessWeek*
+    - ["The Making of a Millionaire and a Massacre"](https://www.bloomberg.com/news/articles/2017-10-11/the-bump-stock-millionaire-and-the-las-vegas-massacre), Oct. 11, 2017
+- *Correio Braziliense* 
+    - ["Massacre Anunciado"](https://www.dropbox.com/s/z33amd9vr8kp4ge/2018-02-16-braziliense-correio.pdf), Feb. 16, 2018
+- *CNN*
+    - ["Will Thousand Oaks be the mass shooting that spurs change? Maybe not"](https://www.cnn.com/2018/11/10/us/thousand-oaks-california-shooting-changes/index.html), Nov. 10, 2018
+- *Greenville News*
+    - ["Here's why there are fewer campaign signs"
+](http://www.greenvilleonline.com/story/news/politics/elections/2016/10/25/heres-why-there-fewer-campaign-signs/92669092/), Oct. 25, 2016
+- *MacLean's*
+    - ["Trumputin: Disturbing parallels between Trump and Putin"](http://www.macleans.ca/news/world/trumputin-the-disturbing-parallels-between-donald-trump-and-vladimir-putin/), March 10, 2016
+- *Mother Jones*
+    - ["Immigrant Bashing Is All About Racism"](https://www.motherjones.com/kevin-drum/2018/07/immigrant-bashing-is-all-about-racism/), July 11, 2018
+- *NBC News*
+    - ["Five years after Sandy Hook, gun control groups still looking for big win"](https://www.nbcnews.com/news/us-news/5-years-after-newtown-gun-control-groups-still-looking-big-n829871), Dec. 15, 2017
+    - ["The Trump effect: New study connects white American intolerance and support for authoritarianism"](https://www.nbcnews.com/think/opinion/trump-effect-new-study-connects-white-american-intolerance-support-authoritarianism-ncna877886), May 27, 2018
+- *New York Times* 
+    - ["President Trump Is a Very Political Animal"](https://www.nytimes.com/2018/05/24/opinion/trump-animals-immigrants-politics.html), May 24, 2018
+- *Salon*
+    - ["Are white people ready to bail on democracy? These researchers say the danger is real"](https://www.salon.com/2018/08/02/are-white-people-ready-to-bail-on-democracy-these-researchers-say-the-danger-is-real/), Aug. 2, 2018
+- *ThinkProgress*
+    - ["Trump is awakening and emboldening Americans with anti-democratic ideals, research shows"](https://thinkprogress.org/new-study-trump-white-supremacy-awakening/), June 4, 2018
+- *Washington Post* 
+    - ["Experts and the public agree on how to stop gun violence. Politicians don’t."](https://www.washingtonpost.com/news/wonk/wp/2017/10/02/experts-and-the-public-agree-on-how-to-stop-gun-violence-politicians-dont/?utm_term=.b5817be56247), Oct. 2, 2017
+    - ["Racial resentment is the biggest predictor of immigration attitudes, study finds"](https://www.washingtonpost.com/business/2018/07/10/racial-resentment-is-biggest-predictor-immigration-attitudes-study-finds/?utm_term=.630bf1077d6b), July 10, 2018
+    
+-->
+    
+Video interview with [*WYFF*](http://www.wyff4.com/article/latest-las-vegas-mass-shooting-re-ignites-the-us-domestic-terrorism-debate/12774918) (Oct. 3, 2017)
+
+
+# Teaching
+## Clemson University
+
+Introduction to International Relations  
+International Politics in Crisis  
+Political Behavior  
+Quantitative Methods in Political Science  
+Tracking Political Attitudes in Latin America (Creative Inquiry, with [K. Amber Curtis](http://acurti2.people.clemson.edu/))  
+U.S. Foreign Policy
+
+## University of Illinois at Urbana-Champaign
+
+Democracies and Peace  
+Introduction to International Security  
+International Organization  
+International Conflict
+
+## University of Alabama
+
+Introduction to American Politics  
+America and the World (Foreign Policy Decision-Making)  
+Scope of Political Science  
+Political Science Methods  
+Introduction to Comparative Politics  
+Introduction to International Relations  
+Interstate Conflict  
+Political Economy of Security
+
+
+
+<!-- # References
+
+Available upon request
+
+-->
+
+\newpage
+
+# References
+
+*William T. Bernhard*  
+Associate Provost for Faculty Development  
+University of Illinois at Urbana-Champaign  
+`bernhard@illinois.edu`  
+
+*Douglas M. Gibler*  
+Professor of Political Science  
+Arts and Sciences Leadership Board Fellow  
+University of Alabama  
+`dmgibler@ua.edu`
+
+*Marc L. Hutchison*  
+Professor and Department Chair  
+University of Rhode Island  
+`mlhutch@uri.edu`
+  
+  
+<!-- *Laura R. Olson*   -->
+<!-- Professor of Political Science   -->
+<!-- Clemson University   -->
+<!-- `laurao@clemson.edu` -->
+  
+  
+*Adam Warber*  
+Professor of Political Science  
+Clemson University  
+`awarber@clemson.edu`  
+  
+  
+*John A. Vasquez*  
+Professor of Political Science  
+University of Illinois at Urbana-Champaign  
+`vasqueja@illinois.edu`
+
+
+
+
+<!-- |  |  |
+|:--------------------------------------|:--------------------------------------|
+| *William T. Bernhard* | *Douglas M. Gibler* |
+| Associate Provost for Faculty Development | Institute for Social Science Research |
+| University of Illinois at Urbana-Champaign | University of Alabama |
+| `bernhard@illinois.edu` | `dmgibler@ua.edu` |
+| | |
+| *Marc L. Hutchison* | *Laura R. Olson* |
+| Professor and Department Chair | Professor of Political Science |
+| University of Rhode Island | Clemson University |
+| `mlhutch@uri.edu` | `laurao@clemson.edu` |
+| | |
+| *Adam Warber*     | *John A. Vasquez* |
+| Professor of Political Science | Professor of Political Science |
+| Clemson University | University of Illinois at Urbana-Champaign |
+| `awarber@clemson.edu` | `vasquezja@illinois.edu ` | -->
+
+ 
+
+<!--
+*William T. Bernhard*  
+Associate Provost for Faculty Development  
+University of Illinois at Urbana-Champaign  
+`bernhard@illinois.edu`  
+
+*Douglas M. Gibler*  
+Professor of Political Science  
+Arts and Sciences Leadership Board Fellow  
+University of Alabama  
+`dmgibler@ua.edu`
+  
+  
+*Laura R. Olson*  
+Professor of Political Science  
+Clemson University  
+`laurao@clemson.edu`
+  
+  
+*John A. Vasquez*  
+Professor of Political Science  
+University of Illinois at Urbana-Champaign  
+`vasquezja@illinois.edu` -->
+
+<!-- |:-----------------------------------|:-----------------------------------|
+| **William T. Bernhard ** | **Douglas M. Gibler** |
+| Associate Provost for Faculty Development | Institute for Social Science Research |
+| University of Illinois at Urbana-Champaign | University of Alabama |
+| `bernhard@illinois.edu` | `dmgibler@ua.edu` |
+| | |
+| **Laura R. Olson**     | **John A. Vasquez** |
+| Professor of Political Science | Professor of Political Science |
+| Clemson University | University of Illinois at Urbana-Champaign |
+| `laurao@clemson.edu` | `vasquezja@illinois.edu ` | -->

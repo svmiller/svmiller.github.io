@@ -1,0 +1,414 @@
+---
+output: 
+  pdf_document:
+#    keep_tex: true
+    fig_caption: yes
+    latex_engine: pdflatex
+    citation_package: natbib
+    template: ~/Dropbox/miscelanea/svm-r-markdown-templates/svm-latex-statement.tex
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+
+title: "An Empirical Assessment of My Teaching Effectiveness"
+author: Steven V. Miller
+affiliation: Department of Political Science, Clemson University
+email: "svmille@clemson.edu"
+
+fontfamily: mathpazo
+fontsize: 11pt
+
+bibliography: "`r paste0(Sys.getenv('HOME'),'/Dropbox/master.bib')`"
+biblio-style: apsr
+---
+
+```{r setup, include=FALSE, warning=F, mesage=F}
+
+library(tidyverse)
+library(stevemisc)
+Evals <- read_csv("~/Dropbox/clemson/student-evals/student-evals.csv")
+DeptMeans <- readxl::read_xlsx("~/Dropbox/clemson/student-evals/student-evals-dept-means.xlsx")
+Grades <- read_csv("~/Dropbox/teaching/attendance-grades-relationship.csv")
+
+g2006f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2006-grades.txt") %>%
+  mutate(Term = "Fall 2006")
+g2007s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2007-grades.txt") %>%
+  mutate(Term = "Spring 2007")
+
+g2007f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2007-grades.txt") %>%
+  mutate(Term = "Fall 2007")
+g2008s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2008-grades.txt") %>%
+  mutate(Term = "Spring 2008")
+
+g2008f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2008-grades.txt") %>%
+  mutate(Term = "Fall 2008")
+g2009s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2009-grades.txt") %>%
+  mutate(Term = "Spring 2009")
+
+g2009f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2009-grades.txt") %>%
+  mutate(Term = "Fall 2009")
+g2010s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2010-grades.txt") %>%
+  mutate(Term = "Spring 2010")
+
+g2010f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2010-grades.txt") %>%
+  mutate(Term = "Fall 2010")
+g2011s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2011-grades.txt") %>%
+  mutate(Term = "Spring 2011")
+
+g2011f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2011-grades.txt") %>%
+  mutate(Term = "Fall 2011")
+g2012s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2012-grades.txt") %>%
+  mutate(Term = "Spring 2012")
+
+g2012f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2012-grades.txt") %>%
+  mutate(Term = "Fall 2012")
+g2013s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2013-grades.txt") %>%
+  mutate(Term = "Spring 2013")
+
+
+g2013f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2013-grades.txt") %>%
+  mutate(Term = "Fall 2013")
+g2014s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2014-grades.txt") %>%
+  mutate(Term = "Spring 2014")
+g2014f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2014-grades.txt") %>%
+  mutate(Term = "Fall 2014")
+g2015s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2015-grades.txt") %>%
+  mutate(Term = "Spring 2015")
+g2015f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2015-grades.txt") %>%
+  mutate(Term = "Fall 2015")
+g2016s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2016-grades.txt") %>%
+  mutate(Term = "Spring 2016")
+g2016f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2016-grades.txt") %>%
+  mutate(Term = "Fall 2016")
+g2017s <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/spring2017-grades.txt") %>%
+  mutate(Term = "Spring 2017")
+g2017f <- read_tsv("~/Dropbox/clemson/student-evals/grade-dists/fall2017-grades.txt") %>%
+  mutate(Term = "Fall 2017")
+
+bind_rows(g2006f, g2007s,
+          g2007f, g2008s,
+          g2008f, g2009s,
+          g2009f, g2010s,
+          g2010f, g2011s,
+          g2011f, g2012s,
+          g2012f, g2013s,
+          g2013f, g2014s,
+          g2014f, g2015s,
+          g2015f, g2016s,
+          g2016f, g2017s,
+          g2017f) -> gradedists
+
+gradedists %>%
+  filter( A != "#") %>%
+  filter(P == 0 & F_1 == 0) %>%
+  select(Term, Course:`I`) %>%
+  rename(Prof = `Prof_Name (Assigned Dept-College)`) %>%
+  mutate(Prof = gsub(" (1354-CBSHS)", "", Prof, fixed=T),
+         Prof = gsub(" (0125-CBSHS)", "", Prof, fixed=T),
+         Prof = gsub(" (1310-CBUS)", "", Prof, fixed=T),
+         Prof = gsub(" (1301-CBUS)", "", Prof, fixed=T),
+         Prof = gsub(" (5106-PROV)", "", Prof, fixed=T),
+         Prof = gsub(" (5108-PROV)", "", Prof, fixed=T),
+         Prof = gsub(" (4001-STUD)", "", Prof, fixed=T),
+         Prof = gsub(" (0313-CAFLS)", "", Prof, fixed=T),
+         Prof = gsub(" (1309-CBUS)", "", Prof, fixed=T)) %>% 
+  mutate(`Is It Steve?` = ifelse(Prof == "Miller, Steven Vincent", "Yes", "No"),
+         A = as.numeric(A),
+         B = as.numeric(B),
+         C = as.numeric(C),
+         D = as.numeric(D),
+         `F` = as.numeric(F),
+         W = as.numeric(W),
+         I = as.numeric(I),
+         Number = ifelse(Number < 1000, as.numeric(paste0(Number,"0")), Number)) -> gradedists
+```
+
+This document offers an empirical assessment and analysis of my teaching effectiveness since I arrived at Clemson University. The empirical assessment I offer here pools teaching evaluations by each unique class I have taught and compares them to the department average for all classes. They suggest that class room organization, communication, and my ability to impart meaningful skills and knowledge are relative strengths of mine in the class room while my perceived lack of a "positive" disposition and the higher level of difficulty in my classes are weaknesses of mine relative to other department offerings.
+
+The rest of this document outlines how I proceeded with this empirical analysis, starting with a discussion of Clemson University's course evaluation system.
+
+# Clemson University's Course Evaluation System
+
+Clemson University has been using online-only course evaluations for longer than I have been employed at the university. This online-only evaluation system has instructors activate the online assessment tool shortly before the end of the semester and then inform the class to fill out these forms. The inferential problem of selection is unavoidable in these evaluations. We, as instructors, try our best to encourage students to fill out these forms, but <!-- The department behooves its instructors to encourage students to fill out these forms even to the point of offering positive inducements toward that end. Ultimately, --> the evaluations we receive come from those most motivated to complete them. Evaluations will always be a non-random sample of all students, barring a more effective sampling method or outright compulsion [c.f. @nulty2008arr]. <!--  Even then, compulsion invites additional selection concerns since the method would select out those who withdrew from the course before the end of the semester. @mckeachie1997sr -->
+
+The evaluations are two-fold and work at two-levels. The "two-levels" indicate the university has a standard catalog of questions for all instructors in all departments and that each department can craft additional questions to include on these assessments to gauge metrics germane to their own interests. The "two-fold" element comes from the varying nature of questions. Most questions are Likert-like responses in which the evaluation gives a prompt, either in the form of a question or a statement, and then the student says on a five-point scale the degree to which the student agrees with it. Higher values indicate more agreement. There are additional open-ended responses though these do not lend themselves to an easy quantification and, for the most part, do not manifest in the more exhaustive feedback we receive about our performance in the class room. This results in 13 university-level metrics that share this five-point scale and an additional 10 prompts that assess metrics of interest to the Department of Political Science at Clemson University.[^exclude] The prompts at the university-level (with corollary variables codes in parentheses) are:
+
+[^exclude]: This analysis will exclude one university-level metric ("Was the course a requirement for you?") and one department-level metric ("I had a strong desire to take this course.") because neither prompt measures teaching effectiveness in any meaningful way even after considering for the measurement bias inherent in these student assessments of teaching [e.g. @mckeachie1997sr].
+
+- "The instructor clearly communicated what I was expected to learn." (`G1`)
+- "The instructor made the relevance of the course material clear." (`G2`)
+- "The course was well organized." (`G3`)
+- "There was a positive interaction between the class and the instructor." (`G4`)
+- "The instructor's teaching methods helped me understand the course material." (`G5`)
+- "The instructor's verbal communication skills helped me understand the course material." (`G6`)
+- "The instructor clearly explained what was expected on assignments and tests." (`G7`)
+- "The instructor kept me informed about my progress in the course." (`G8`)
+- "The feedback I received on assignments and tests gave me the opportunity to improve my performance." (`G9`)
+- "Overall, the instructor is an effective teacher." (`G10`)
+- "The instructor's grading procedures gave a fair evaluation of my understanding of the material." (`G11`)
+- "How much work did you put into this course relative to your other courses?" (`G12`)
+- "How difficult was this course for you relative to your other courses?" (`G13`)
+
+The prompts at the department-level (with corollary variable codes in parentheses) are:
+
+- "The instructor seemed interested in my progress as a student." (`D1`)
+- "The instructor used handouts, audio-visual equipment, and computer applications where appropriate." (`D2`)
+- "I was encouraged to visit with my instructor during office hours if I had difficulty with the course material." (`D3`)
+- "The instructor encouraged students to use multiple resources (library holdings, etc.) to improve understanding." (`D4`)
+- "The instructor asked students to help one another understand ideas and concepts." (`D5`)
+- "I felt I gained factual knowledge in this course." (`D6`)
+- "I learned important fundamental principles, generalizations, and theories about politics in this course." (`D7`)
+- "The instructor stimulated critical and creative thinking about the subject." (`D8`)
+- "This course enhanced my ability to write critically." (`D9`)
+- "The instructor presented the course material at the appropriate level of difficulty." (`D10`)
+
+# Toward an Empirical Assessment of My Teaching Effectiveness
+
+I outline here the approach that I will use to gauge my teaching effectiveness while I have been employed at Clemson University. This approach leverages teaching evaluations data for the Department of Political Science at Clemson University since Fall 2013, complementing it with grade distribution data since Fall 2006, for an analysis that is fundamentally descriptive. As such, the analysis I present here is faithful to the nature of the data but the patterns I describe and the explanations I offer for them are ultimately illustrative.
+
+I logged into Clemson University's [Student Assessment of Instructors portal](https://courseval.app.clemson.edu/index.php?it=i) and downloaded the individual-level raw response data for every class I taught since I arrived at Clemson University in the Fall of 2013. Thereafter, I pooled all observations by the unique course I taught, creating four clusters for all teaching evaluations for my classes on introduction to international relations (POSC 1020), quantitative methods in political science (POSC 3410), international conflict (POSC 3610), and U.S. foreign policy (POSC 3630). I calculate semester averages for the entire department using the available information that the [Student Assessment of Instructors portal](https://courseval.app.clemson.edu/index.php?it=i) provides in its written summary report. I then compare the department averages to the averages for each of the unique clusters for the separate courses I teach.[^average]
+
+[^average]: The use of arithmetic means for data that are fundamentally ordinal is technically an incorrect measure of central tendency but this approach is ubiquitous in administrative assessments of instructors in the class room.
+
+I use these data to create Figure 1, which shows my average evaluation scores by each unique course I have taught relative to the overall department average since Fall 2013. It serves as the foundation from which I assess my relative strengths and weaknesses in the remainder of this document.
+
+
+```{r, warning=F, message=F, echo=F, fig.height = 7.5, fig.width=11, fig.cap = "My University-Level and Department-Level Teaching Evaluations, Fall 2013-Present"}
+
+DeptMeans %>% select(2:ncol(.)) %>%
+  summarise_all(funs(mean)) %>%
+  mutate(class = 5000) %>%
+  select(class, everything()) %>%
+  gather(Question, Value, G01:D10) -> DeptMeans2
+
+Evals %>%
+  group_by(semester) %>%
+  summarize_all(funs(mean(., na.rm = TRUE))) %>%
+  separate(semester, c("term","year"), remove=F) %>%
+  select(semester, term, year, G1:G13, D1:D10) %>%
+  mutate(semester = forcats::fct_relevel(semester,
+                                         "Fall 2013",
+                                         "Spring 2014",
+                                         "Fall 2014",
+                                         "Spring 2015",
+                                         "Fall 2015",
+                                         "Spring 2016",
+                                         "Fall 2016",
+                                         "Spring 2017",
+                                         "Fall 2017",
+                                         "Spring 2018",
+                                         "Fall 2018")) %>%
+  arrange(semester) %>%
+  ungroup() %>%
+  group_by(semester) %>%
+  gather(question, value, G1:D10) %>%
+  ggplot(.,aes(semester, value)) +
+  geom_bar(stat="identity") + 
+  facet_wrap(~question)
+
+tribble(
+  ~class, ~Question, ~Value,
+  5000, "G01", 3.90,
+  NA, "G02", 4.12,
+  NA, "G03", 3.83,
+  NA, "G04", 4.14,
+  NA, "G05", 3.65,
+  NA, "G06", 3.61,
+  NA, "G07", 3.92,
+  NA, "G08", 4.18,
+  NA, "G09", 3.71,
+  NA, "G10", 3.94,
+  NA, "G11", 3.95,
+  NA, "G12", 3.68,
+  NA, "G13", 3.67,
+  NA, "G14", 4.05,
+    5000, "D01", 4.18,
+  NA, "D02", 3.86,
+  NA, "D03", 3.88,
+  NA, "D04", 3.63,
+  NA, "D05", 3.43,
+  NA, "D06", 4.21,
+  NA, "D07", 4.18,
+  NA, "D08", 4.03,
+  NA, "D09", 3.83,
+  NA, "D10", 3.91,
+  NA, "D11", 3.73
+) %>% fill(class) -> deptmeans 
+
+Evals %>% 
+  filter(semester != "Fall 2013") %>%
+  mutate(class = ifelse(class == 3050, 3410, class)) %>% group_by(class) %>%
+  summarize(G01 = mean(G1, na.rm=T),
+            G02 = mean(G2, na.rm=T),
+            G03 = mean(G3, na.rm=T),
+            G04 = mean(G4, na.rm=T),
+            G05 = mean(G5, na.rm=T),
+            G06 = mean(G6, na.rm=T),
+            G07 = mean(G7, na.rm=T),
+            G08 = mean(G8, na.rm=T),
+            G09 = mean(G9, na.rm=T),
+            G10 = mean(G10, na.rm=T),
+            G11 = mean(G11, na.rm=T),
+            G12 = mean(G12, na.rm=T),
+            G13 = mean(G13, na.rm=T),
+            G14 = mean(G14, na.rm=T),
+            D01 = mean(D1, na.rm=T),
+            D02 = mean(D2, na.rm=T),
+            D03 = mean(D3, na.rm=T),
+            D04 = mean(D4, na.rm=T),
+            D05 = mean(D5, na.rm=T),
+            D06 = mean(D6, na.rm=T),
+            D07 = mean(D7, na.rm=T),
+            D08 = mean(D8, na.rm=T),
+            D09 = mean(D9, na.rm=T),
+            D10 = mean(D10, na.rm=T),
+            D11 = mean(D11, na.rm=T)) %>%
+  gather(Question, Value, G01:D11) %>%
+  bind_rows(.,deptmeans) %>%
+  filter(Question != "G14" & Question != "D11") %>%
+  mutate(Category = as.factor(class)) %>%
+  mutate(Category = forcats::fct_recode(Category,
+                                         "Intro to IR" = "1020",
+                                         "Quantitative Methods" = "3410",
+                                         "International Conflict" = "3610",
+                                         "U.S. Foreign Policy" = "3630",
+                                         "Department Means (All Classes)" = "5000"),
+         Question = forcats::fct_relevel(Question,
+                                         "G01", "G02", "G03", "G04", "G05",
+                                         "G06", "G07","G08", "G09", "G10",
+                                         "G11", "G12", "G13", "D01",
+                                         "D02","D03", "D04", "D05",
+                                         "D06", "D07", "D08", "D09","D10"),
+         Level = ifelse(Question %in% c("G01","G02","G03","G04","G05",
+                                        "G06","G07","G08","G09","G10",
+                                        "G11","G12","G13"),
+                        "University Questions","Department Questions"),
+         Question = forcats::fct_recode(Question,
+                                        "Clearly\nCommunicated\n(G1)" = "G01",
+                                        "Clear\nRelevance\n(G2)" = "G02",
+                              "Well\nOrganized\n(G3)" = "G03",
+                              "Positive\nInteraction\n(G4)" = "G04",
+                              "Clear\nTeaching\nMethods\n(G5)" = "G05",
+                              "Verbal\nCommunication\nSkills\n(G6)" = "G06",
+                              "Explained\nAssignment\nExpectations\n(G7)" = "G07",
+                              "Kept Me\nInformed\n(G8)" = "G08",
+                              "Clear\nFeedback\n(G9)" = "G09",
+                              "Effective\nTeacher\nOverall\n(G10)" = "G10",
+                              "Fair\nGrading\nProcedure\n(G11)" = "G11",
+                              "Put in\nMuch Work?\n(G12)" = "G12",
+                              "How\nDifficult?\n(G13)" = "G13",
+                              "Interested\nin My\nProgress?\n(D1)" = "D01",
+                              "Used Handouts,\nA/V, etc.\n(D2)" = "D02",
+                              "Encouraged\nto Visit\nOffice Hours?\n(D3)" = "D03",
+                              "Encouraged\nto Use\nLibrary?\n(D4)" = "D04",
+                              "Asked\nStudents to\nHelp One\nAnother?\n(D5)\n" = "D05",
+                              "Gained\nFactual\nKnowledge?\n(D6)" = "D06",
+                              "Learned\nImportant\nPrinciples?\n(D7)" = "D07",
+                              "Stimulated\nCreative/Critical\nThinking?\n(D8)" = "D08",
+                              "Enhanced\nMy Ability\nto Write?\n(D9)" = "D09",
+                              "Appropriate\nLevel of\nDifficulty?\n(D10)" = "D10")) %>%
+  # filter(Question != "G14") %>%
+  ggplot(.,aes(Question, Value, group=Category, color=Category)) + theme_steve() +
+  geom_bar(stat="identity", position="dodge",
+           alpha=0.8, color="black", aes(fill=Category)) +
+  xlab("") + ylab("") + facet_wrap(~Level, nrow=2, scales="free") +
+  scale_y_continuous(limits=c(0,5)) +
+  scale_fill_brewer(palette="Spectral") +
+#  labs(title = "I'm Not As Bad as an Instructor as You Think I am, Assholes",
+#       subtitle = "Pool my fucking evaluations next time you dickwads. Seriously.") +
+  theme(legend.title=element_blank())
+```
+
+
+## My Strengths as an Instructor
+
+My teaching record at Clemson University since I arrived in Fall 2013 suggests I have numerous strengths in the classroom that cluster on three categories. First, my evaluations suggest I am a great class room organizer, excelling at structuring material for a semester and explaining what I expect on class assignments. Second, my evaluations also suggest I rank well as a class room communicator and that my teaching methods and verbal communication skills ultimately lead to a positive learning environment. Third, my evaluations generally show that students take more from my class and learn more useful skills than they acquire in the typical class. I discusses these in detail below.
+
+I score high across the board as a class organizer. Students evaluate me above the mean on how well I clearly communicate to them what I expect them to learn in the class room (`G1`). All my classes score above the average in how well I explain what I expect from them on assignments and tests (`G7`). A review of my course websites will illustrate that my midterm and final reviews are detailed and make the details of the assignments transparent. I provide documentation for exam-grading policies and I even provide the rubrics that I will use to evaluate their written assignments due at the end of the semester. My classes also all score above the department average for how positively students evaluate the organization of the course (`G3`). Generally, students across all my classes respect the depth of information I offer them and how well I structure the course to meet the benchmarks I outline at the beginning of the syllabus.
+
+I also score above the department average as a class room communicator as well. I score above the department average in how well I explain the relevance of the course material (`G2`) in three of the four different classes I teach. I show similar results in how well my teaching methods (`G5`) and my verbal communication skills (`G6`) help students understand the course material. This manifests in an overall assessment of myself as a teacher (`G10`) that scores above the department average in three of the four unique classes I teach at Clemson University. The only course exception to this trend are the evaluations for my quantitative methods class. These evaluations score just below the department average for all classes on these four metrics.
+
+Third, my record shows that students ultimately acquire meaningful skills and knowledge that university instructors should strive to impart on their students. I am pleased that my upper-division international conflict and U.S. foreign policy courses stimulate an ability to write (`D9`). Further, my intro-level course scores at the department mean as well. Good writing is an essential skill for all college graduates and especially political science graduates. I take care to communicate tips on my class websites toward that end. Three of my four classes also score above the department average on stimulating creative/critical thinking (`D8`), a result that follows how much I get students to think about political problems strategically and force them to read and critically evaluate regressions at the upper-division (especially in my international conflict course). Finally, I am pleased at how much students appreciate my efforts to get them into the library and to use library resources (`D4`). This is a hobby horse of mine. I want students to take advantage of library resources and I routinely fill out class readings with journal articles toward that end. In fact, my international conflict course is taught exclusively with journal articles. Students have remarked to me via email that no other professor they had at Clemson University used the library's resources like I had and that few even encouraged them to go into the campus' library. I take considerable pride in that.
+
+## Documenting My Shortcomings and Accounting for Them
+
+My teaching evaluations since I arrived at Clemson University suggest the following pitfalls in my teaching record. This section outlines these limitations and offers contextualizations of them.
+
+The first trend that is evident from Figure 1 is how my evaluations for the quantitative methods lag behind the department mean and my other classes on almost every metric. There are a few factors, some unique to our department at Clemson University, that can partially account for this trend, though I will highlight one factor in particular. Students tend to do poorly in this class no matter who teaches it. Consider Figure 2, which leverages Clemson University's [Grade Distribution Reports](https://www.clemson.edu/institutional-effectiveness/oir/data-reports/) data from Fall 2006 to the present to highlight this. Figure 2 shows that the grade distribution for quantitative methods skews much more negative than the grade distribution for any other upper-division course our department has offered since Fall 2006. It is unsurprising that more negative teaching evaluations may follow if student assessments of teaching are in part functions of expected grades and that higher grades generally lead to higher evaluations [e.g. @germainescandura2005gisi].[^anecdote]
+
+[^anecdote]: This comment implies that our department's quantitative methods class generally receives lower evaluations than other course offerings, which follows informal conversation with colleagues in my department. However, I do not have access to my colleagues' assessments of teaching effectiveness to illustrate this.
+
+```{r, warning=F, message=F, echo=F, fig.width=8.5, fig.cap = "Grade Distribution for Quantitative Methods Relative to Other Department 3000-4000 Level Classes, Fall 2006-Present"}
+gradedists %>%
+  filter(Number >= 3000 & Number <= 5000) %>%
+  mutate(Level = ifelse(Number == 3410, "Quantitative Methods", "Other 3000-4000 Level Course")) %>%
+group_by(Level) %>%
+  summarize(A = mean(A),
+            B = mean(B),
+            C = mean(C),
+            D = mean(D),
+            F = mean(F),
+            Withdraw = mean(W),
+            Incomplete = mean(I),
+            Total = A + B + C + D + Withdraw + Incomplete + F) %>%
+  select(-Total) %>%
+  gather(Category, label, A:Incomplete) %>%
+  ungroup() %>%
+  mutate(perc = label/100,
+         label = paste0(round(label, 2), "%")) %>%
+  ggplot(.,aes(Category, perc, fill=Level, color=Level)) +
+  geom_bar(stat="identity", position="dodge", color = "black", alpha=0.8) + 
+  theme_steve() + scale_fill_brewer(palette="Paired") +
+  xlab("") + ylab("") +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label=label), vjust=-.5, colour="black",
+            position=position_dodge(.9), size=3.5) +
+  theme(legend.title=element_blank()) 
+  
+
+```
+
+The second class of negatives that are immediately evident in my teaching evaluations concern how "positive" or approachable I seem. I score below the department average in the department-level question about how interested I seem in the progress students make during the course (`D1`). I also score below the mean on the university-level question about the positive interaction I offer in class (`G4`). These scores are concerning and made more curious by the fact that I generally score well on the department-level question about how often I encourage students to come to my office hours (`D3`) and I score around the mean on how clear my feedback is on assignments (`G9`). <!-- It has led to some feedback from colleagues about trying to "smile more" or "come off more as their friend/advocate." --> One potential explanation is my traditional approach to lecturing puts a barrier between me and my students regarding more direct or positive interaction, which is one explanation why I score low on this metric relative to others who may eschew lectures in lieu of some more personable or direct means of instruction. Another potential explanation concerns how I provide feedback. Even though I score around the department mean on how clear my feedback is (`G9`), my approach to feedback is usually blunt. I am clear in why I deduct points on an assignment or an exam, but the bluntness of my delivery may explain why I seem less "positive" or approachable. <!-- However, these are trends that I ultimately cannot perfectly contextualize. References to my overall teaching philosophy and grade distribution will also be incomplete and inadequate. -->
+
+The third class of negatives from my evaluations concern the level of difficulty and the effort I require from students in my class. Generally, students say they put in much more work relative to their other courses (`G12`) and that my course is much more difficult than other courses a student takes (`G13`). This also partly manifests in assessments of whether the difficulty of my classes is appropriate (`D10`). My intro-level course on international relations and quantitative methods class score particularly low on this metric, coinciding with informal feedback from students that I demand too much in the class room.
+
+```{r, warning=F, message=F, echo=F, fig.width=8.5, fig.cap = "Grade Distribution for My Classes Relative to the Average Political Science Class, Fall 2013-Present"}
+gradedists %>%
+group_by(`Is It Steve?`) %>%
+  summarize(A = mean(A),
+            B = mean(B),
+            C = mean(C),
+            D = mean(D),
+            F = mean(F),
+            Withdraw = mean(W),
+            Incomplete = mean(I),
+            Total = A + B + C + D + Withdraw + Incomplete + F) %>%
+  select(-Total) %>%
+  gather(Category, label, A:Incomplete) %>%
+  ungroup() %>%
+  mutate(`Is It Steve?` = ifelse(`Is It Steve?` == "No",
+                                "Department Average",
+                                "My Average")) %>%
+  mutate(perc = label/100,
+         label = paste0(round(label, 2), "%")) %>%
+  ggplot(.,aes(Category, perc, fill=`Is It Steve?`, color=`Is It Steve?`)) +
+  geom_bar(stat="identity", position="dodge", color = "black", alpha=0.8) + 
+  theme_steve() + scale_fill_brewer(palette="Paired") +
+  xlab("") + ylab("") +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label=label), vjust=-.5, colour="black",
+            position=position_dodge(.9), size=3.5) +
+  theme(legend.title=element_blank()) 
+  
+
+```
+
+Figure 3, which compares my grade distribution since I arrived for the Fall 2013 semester to the department average, offers a partial explanation for these trends about the difficulty-level of my courses and the effort I expect from students. I give fewer As and Bs than the typical instructor in the typical class. 73% of students in the typical class taught by some instructor other than myself gets an A or a B while just over 55% of students get an A or B in classes I teach. This can explain why students generally say I am more difficult than other instructors and why, across all classes I teach, they say they have to put in much more work relative to other courses.
+
+There are two other metrics on which I score poorly relative to the department average, but these two metrics are somewhat anachronistic questions for which scoring low has an intuitive explanation that need not reflect instructor quality. Students rank me much lower than the department average on how often I ask students to help one another (`D5`) and how often I keep them informed about their progress in the course (`G8`). Both have simple explanations. First, my teaching philosophy privileges the importance of traditional lectures to unpack and expand concepts and no class I teach has a group project or interactive component. Thus, I score low in how often I ask students to help one another because no part of my class necessitates it. Further, the metric that probes how well I provide updates on feedback about progress on the course is ultimately a question that students interpret as "did the instructor post grades and the number of times the student skipped class on Blackboard/Canvas?" My syllabi and introductory lecture every class each semester make clear that I do not do this as a matter of personal convenience and that I expect students to keep track of their standing through the course of the semester. I think the latter rationale is important because I encourage students to exercise more agency in how they assess their own academic standing as adults in a four-year university. However, more negative evaluations on that university-level assessment ultimately follow.
+
+# Conclusion
+
+This document served as an empirical assessment of my teaching effectiveness, leveraging course evaluation data from Clemson University (since Fall 2013) and even grade distribution data (since Fall 2006) to highlight and contextualize my strengths and weaknesses in the class room. I score highly as a class organizer and class room communicator. My evaluations suggest that students acquire important and meaningful skills from my classes as well and that students learn good writing, critical thinking, and how to use their library's resources. My shortcomings in the class room cluster on my evaluations for quantitative methods, how "positive" or approachable I seem, and how difficult my classes are relative to other department or university offerings. I offered contextualizations for these shortcomings as well. The findings on the balance demonstrate teaching effectiveness in the class room, concentrated in multiple and important categories, that signal competence in the class room in addition to the competence I demonstrate in scholarly research.
+
+\newpage

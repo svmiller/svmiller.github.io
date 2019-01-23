@@ -55,7 +55,7 @@ I have saved the following formats of WVS data over the years. First, I have ori
 
 The final format is an SQLite database. SQLite is one of many relational database management system options. I'm still teaching myself the ins and outs of various SQL standards, but SQLite's main advantage for R users is its more lightweight nature. My (limited) understanding is SQLite is not ideal for when there are a lot of users making a lot of queries on a database at a given time. However, that limitation won't apply to an individual R user trying to access a data source. This should make SQLite a go-to for relational database management sytems for users interested in doing their own statistical analyses and queries on larger data sets.
 
-This amounts to five different versions of the same data source I have in my WVS subdirectory. For the sake of this experiment, I looped through a load of a particular format 10 times and saved the time it took to perform the task into a data frame. This is not the most elegant code, but here is what this loop would look like the for the `.Rdata` format.
+This amounts to five different versions of the same data source I have in my WVS subdirectory. For the sake of this experiment, I looped through a load of a particular format 10 times and saved the time it took to perform the task into a data frame. This is not the most elegant code, but here is what this loop would look like for the `.Rdata` format.
 
 ```r
 # load rdata method -----
