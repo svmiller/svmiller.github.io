@@ -129,7 +129,7 @@ CY %>% filter(ccode == 280) %>%
 
 ## Directed Dyad-Year Data
 
-Directed dyad-year data are useful when the researcher is interested in, say, conflict onsets in a given dyad-year and it matters who initiates the dispute. In this interpretation, "France-Germany, 1911" and "Germany-France, 1911"" are importantly different observations because Germany initiated the Agadir Crisis (MID#0315) against France and that distinction matters.
+Directed dyad-year data are useful when the researcher is interested in, say, conflict onsets in a given dyad-year and it matters who initiates the dispute. In this interpretation, "France-Germany, 1911" and "Germany-France, 1911" are importantly different observations because Germany initiated the Agadir Crisis (MID#0315) against France and that distinction matters.
 
 The code to create directed dyad-year data from the Correlates of War State System Membership data is remarkably easy to do.
 
@@ -164,7 +164,7 @@ For what it's worth, the `left_join()` function in `dplyr` is sophisticated enou
 
 Second, the filtering of the years will make sure the user is not left with any observations where the countries did not exist at the same time. For example, Kuwait and Baden were never independent states at the same time. That part is important. Obviously states like Belize and Wuerttemberg can't have a conflict with each other when they never existed at the same time.
 
-Third, the data take no consideration of whether the dyads here are ["politically relevant"](https://www.jstor.org/stable/3176286?seq=1#page_scan_tab_contents) or ["politically active"](https://journals.sagepub.com/doi/10.1080/07388940500503804). They are universal. This means two things. One, this is a *long* data set. 1,912,350 rows long. It's also why I dropped out all other columns to avoid the data frame taking consuming too much memory in R.
+Third, the data take no consideration of whether the dyads here are ["politically relevant"](https://www.jstor.org/stable/3176286?seq=1#page_scan_tab_contents) or ["politically active"](https://journals.sagepub.com/doi/10.1080/07388940500503804). They are universal. This means two things. One, this is a *long* data set. 1,912,350 rows long. It's also why I dropped out all other columns to avoid the data frame consuming too much memory in R.
 
 ```{r nrowsddy}
 nrow(DDY)
