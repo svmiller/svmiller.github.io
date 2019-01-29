@@ -30,7 +30,7 @@ States <- read_csv("~/Dropbox/data/cow/states/states2016.csv")
 
 ## Country-Year Data
 
-The following code will create a simple country-year data frame that a user can populate with country-year data of interest to you (e.g. civil war data, various IPE data). I'll annotate the code below so the reader can see what it's doing.
+The following code will create a simple country-year data frame that a user can populate with country-year-level data of interest (e.g. civil war data, various IPE data). I'll annotate the code below so the reader can see what it's doing.
 
 ```r
 States %>%
