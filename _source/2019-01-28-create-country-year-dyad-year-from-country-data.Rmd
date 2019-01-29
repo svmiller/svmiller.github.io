@@ -93,7 +93,7 @@ States <- read_csv("~/Dropbox/data/cow/states/states2016.csv")
 
 ## Country-Year Data
 
-The following code will create a simple country-year data frame that you can populate with country-year data of interest to you (e.g. civil war data, various IPE data). I'll annotate the code below so the reader can see what it's doing.
+The following code will create a simple country-year data frame that a user can populate with country-year data of interest to you (e.g. civil war data, various IPE data). I'll annotate the code below so the reader can see what it's doing.
 
 ```r
 States %>%
@@ -117,7 +117,7 @@ States %>%
   distinct(ccode, statenme, year) -> CY
 ```
 
-As a proof of concept, here are all the years for Grand Duchy of Mecklenburg-Schwerin in the the Correlates of War State System Membership data, which would coincide with its emergence as a state system member on Jan. 1, 1843 to its elimination as an independent state upon its entry into [the North German Confederation](https://en.wikipedia.org/wiki/North_German_Confederation). This alliance was an effective concession of state sovereignty by [Fredrich Franz II](https://en.wikipedia.org/wiki/Frederick_Francis_II,_Grand_Duke_of_Mecklenburg-Schwerin) to Prussia.
+As a proof of concept, here are all the years for Grand Duchy of Mecklenburg-Schwerin in the the Correlates of War State System Membership data. These years would coincide with its emergence as a state system member on Jan. 1, 1843 to its elimination as an independent state upon its entry into [the North German Confederation](https://en.wikipedia.org/wiki/North_German_Confederation). This alliance was an effective concession of state sovereignty by [Fredrich Franz II](https://en.wikipedia.org/wiki/Frederick_Francis_II,_Grand_Duke_of_Mecklenburg-Schwerin) to Prussia.
 
 ```{r tabmecklenburgschwerin, echo=T, eval=T, cache=T, fig.width=13, fig.height=8, warning=F}
 CY %>% filter(ccode == 280) %>%
@@ -129,7 +129,7 @@ CY %>% filter(ccode == 280) %>%
 
 ## Directed Dyad-Year Data
 
-Directed dyad-year data are useful when the researcher is interested in, say, conflict onsets in a given dyad-year and it matters who initiates the dispute. In this interpretation, "France-Germany, 1911" and "Germany-France, 1911" are importantly different observations because Germany initiated the Agadir Crisis (MID#0315) against France and that distinction matters.
+Directed dyad-year data are useful when the researcher is interested in, say, conflict onsets in a given dyad-year and it is important who initiates the dispute. In this interpretation, "France-Germany, 1911" and "Germany-France, 1911" are importantly different observations because Germany initiated the Agadir Crisis (MID#0315) against France and that distinction matters. There is likely an application of directed dyad-year panel frames for IPE researchers interested in, say, directional trade flows. However, I've never done an analysis like this before.
 
 The code to create directed dyad-year data from the Correlates of War State System Membership data is remarkably easy to do.
 
@@ -162,15 +162,11 @@ First, when populating a dyad-year (directed or non-directed) panel data frame w
 
 For what it's worth, the `left_join()` function in `dplyr` is sophisticated enough to allow you to merge on two different keys. That's what the `by` field is doing in the `left_join()` part of the piped chain of functions above.
 
-Second, the filtering of the years will make sure the user is not left with any observations where the countries did not exist at the same time. For example, Kuwait and Baden were never independent states at the same time. That part is important. Obviously states like Belize and Wuerttemberg can't have a conflict with each other when they never existed at the same time.
+Second, the filtering of the years will make sure the user is not left with any observations where the countries did not exist at the same time. For example, Kuwait and Baden were never independent states at the same time. That is an important detail. Obviously states like Belize and Wuerttemberg can't have a conflict with each other when they never existed at the same time.
 
-Third, the data take no consideration of whether the dyads here are ["politically relevant"](https://www.jstor.org/stable/3176286?seq=1#page_scan_tab_contents) or ["politically active"](https://journals.sagepub.com/doi/10.1080/07388940500503804). They are universal. This means two things. One, this is a *long* data set. 1,912,350 rows long. It's also why I dropped out all other columns to avoid the data frame consuming too much memory in R.
+Third, the data take no consideration of whether the dyads here are ["politically relevant"](https://www.jstor.org/stable/3176286?seq=1#page_scan_tab_contents) or ["politically active"](https://journals.sagepub.com/doi/10.1080/07388940500503804). They are universal. This means two things. One, this is a *long* data set. 1,912,350 rows long. It's also why I dropped out all other columns to avoid the data frame consuming too much memory in R for this simple exercise.
 
-```{r nrowsddy}
-nrow(DDY)
-```
-
-The user may want to apply some case exclusion rules like "political relevance" or "political activity" because there are a lot of irrelevant dyads in this data and the data set can start to devour memory in the R session pretty quickly. When I discuss [this topic](http://posc3610.svmiller.com/opportunity-conflict/posc3610-lecture-opportunity-conflict.pdf) with [my students](http://posc3610.svmiller.com/), I always bring up my favorite dyad---Mongolia-Nigeria---because the probability of conflict between both states, let alone a fatal MID, is effectively zero even if the thought experiment of what such a fatal conflict would resemble will have your brain wandering to weird places.
+The user may want to apply some case exclusion rules like "political relevance" or "political activity" before merging in other data because there are a lot of irrelevant dyads. That will start to devour memory in the R session pretty quickly. When I discuss [this topic](http://posc3610.svmiller.com/opportunity-conflict/posc3610-lecture-opportunity-conflict.pdf) with [my students](http://posc3610.svmiller.com/), I always bring up my favorite dyad---Mongolia-Nigeria---because the probability of conflict between both states, let alone a fatal MID, is effectively zero even if the thought experiment of what such a fatal conflict would resemble will have your brain wandering to weird places.
 
 However, Mongolia-Nigeria are in this data set, as are Nigeria-Mongolia.
 
@@ -188,11 +184,13 @@ DDY %>%
         align=c("c","c","l","l","c"))
 ```
 
+Again, this will create universal directed dyad-year data. It's imperative for the user to make reasonable case exclusion rules on top of that. There may be a reason to have a dyad like Mongolia-Nigeria, Belize-Botswana, or Estonia-Trinidad and Tobago in the data, no matter how rarely those countries interact. However, that's for the user to justify in the analysis section of the paper s/he will write.
+
 ## Non-Directed Dyad-Year Data
 
 Non-directed dyad-year data are (I think) the most common form of dyad-year analyses of inter-state conflict. In other words, the distinction between who initiated a MID versus who was targeted in a MID is irrelevant. It does not matter that Germany initiated a MID against France in 1911 in Agadir. It only matters that there was one, especially between those two countries at that point in time.
 
-In practice, creating non-directed dyad-year data means `ccode1` is whichever state has the lower `ccode` in the dyad. That means the United States (`ccode == 2`) will always be first in any non-directed dyad in which it is a party) and Samoa (`ccode == 990`) will never be first in any non-directed dyad in which it is a member.
+In practice, creating non-directed dyad-year data means `ccode1` is whichever state has the lower `ccode` in the dyad. That means the United States (`ccode == 2`) will always be first in any non-directed dyad in which it is a party and Samoa (`ccode == 990`) will never be first in any non-directed dyad in which it is a member.
 
 Once you understand that distinction, creating a non-directed dyad-year data frame from the directed dyad-year data frame is simple.
 
