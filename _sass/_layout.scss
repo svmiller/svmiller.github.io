@@ -184,7 +184,7 @@ h1 /* .post-title */ {
     letter-spacing: -1px;
     line-height: 1;
 		font-family: 'Titillium Web', sans-serif;
-		color: #522d80;
+		color: $clemson-purple;
 
     @include media-query($on-laptop) {
 /*        font-size: 36px; */
