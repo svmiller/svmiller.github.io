@@ -24,12 +24,28 @@
 
       <div class="footer-col  footer-col-3">
        <ul class="social-media-list">
+
+                  {% if site.google_scholar_id %}
+  <li>
+    <a href="https://scholar.google.com/citations?user={{ site.google_scholar_id }}">
+      <i class="ai ai-google-scholar" style="color:gray"></i> Google Scholar
+    </a>
+  </li>
+{% endif %}
      
 
           {% if site.github_username %}
   <li>
     <a href="https://github.com/{{ site.github_username }}">
       <i class="fa fa-github" style="color:gray"></i> Github
+    </a>
+  </li>
+{% endif %}
+
+          {% if site.orcid_id %}
+  <li>
+    <a href="https://orcid.org/{{ site.orcid_id }}">
+      <i class="ai ai-orcid" style="color:gray"></i> ORCID
     </a>
   </li>
 {% endif %}
@@ -42,21 +58,9 @@
   </li>
 {% endif %}
 
-          {% if site.google_scholar_id %}
-  <li>
-    <a href="https://scholar.google.com/citations?user={{ site.google_scholar_id }}">
-      <i class="ai ai-google-scholar" style="color:gray"></i> Google Scholar
-    </a>
-  </li>
-{% endif %}
 
-          {% if site.orcid_id %}
-  <li>
-    <a href="https://orcid.org/{{ site.orcid_id }}">
-      <i class="ai ai-orcid" style="color:gray"></i> ORCID
-    </a>
-  </li>
-{% endif %}
+
+
 
 
        
