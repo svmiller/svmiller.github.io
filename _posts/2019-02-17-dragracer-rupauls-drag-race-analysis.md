@@ -348,7 +348,7 @@ BenDeLaCreme and Katya are the only contestants without top four finishes on thi
 
 I don't have much to conclude, but I do have a few #takes that I'll offer as heaters here.
 
-- The scorecard is pretty clear Tyra Sanchez deserved to win Season 2, but I bet RuPaul wishes she could back and do that one again.
+- The scorecard is pretty clear Tyra Sanchez deserved to win Season 2, but I bet RuPaul wishes she could go back and do that one again.
 - Kameron Michaels should've won Season 10. Hey, I didn't say these takes were good, just that they were 🔥.
 - Sasha Velour needs a street named after her in Urbana. Hell, next-door [Champaign had a street named after REO Speedwagon](https://www.chicagotribune.com/news/ct-xpm-2001-01-16-0101160268-story.html) when I was living in that city. Why not Sasha Velour for Urbana?
 - Acid Betty needed more episodes on Season 8. Her three high performances in the first three episodes push her up a lot of rankings for someone who otherwise landed No. 8 in a season.
