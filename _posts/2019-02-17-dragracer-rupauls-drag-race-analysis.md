@@ -317,7 +317,7 @@ The data can also be used to identify the lowest-scoring performers to get a top
 </tbody>
 </table>
 
-A couple of names stand out. Darienne Lake has the lowest "Dusted or Busted" score of any contestant with a top four finish. In fact, she finished bottom or low in six of her 10 competitive episodes. The distance between her and the next lowest scoring top four performer by "Dusted or Busted" score (Courtney Act) is seven points.
+A couple of names stand out. Darienne Lake has the lowest "Dusted or Busted" score of any contestant with a top four finish. In fact, she finished bottom or low in six of her 10 competitive episodes. The distance between her and the next lowest scoring top four performer by "Dusted or Busted" score in her season (Courtney Act) is seven points.
 
 Several names will be familiar and unsurprising entries on this list, thinking especially of Shannel, Jujubee, and Tatianna. Jujubee emerged as the queen of the read and the lip-sync assassin of Season 2. She was in the bottom two three times and sent home Sahara Davenport, Pandora Boxx, and Tatianna. No matter, bottom two performances are still penalized heavily in this scoring system. Tatianna, likewise, is in the bottom 10 in this metric. From my outside reading of how fans interpret the show, Tatianna was perhaps raw in Season 2---apparently only 20 years old at the time of filming. She was excellent in Season 2 of All-Stars, though. It is interesting to see two of Season 2's top four in this list, though.
 
