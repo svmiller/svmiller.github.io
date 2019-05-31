@@ -553,7 +553,7 @@ Finally, I decided to run a simple graded response model on the data for all con
 
 The top 25 participants on this metric are listed below, with accompanying standard errors around the latent estimate.
 
-![plot of chunk top-rupauls-drag-race-performers](/figure/source/2019-02-17-dragracer-rupauls-drag-race-analysis/top-rupauls-drag-race-performers-1.png)
+![plot of chunk top-rupauls-drag-race-performers](/images/top-rupauls-drag-race-performers-1.png)
 
 Fans of the show are free to read into this what they want. I'm not too invested in what this demonstrates, but a few things are worth mentioning as quick hitters.
 
