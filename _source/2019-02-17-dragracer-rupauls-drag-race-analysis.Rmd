@@ -20,80 +20,30 @@ library(dragracer)
 library(knitr)
 library(kableExtra)
 
-data("rdr_ep")
-data("rdr_contep")
-
-rdr_contep %>%
-  filter(participant == 1 & finale == 0 & penultimate == 0) %>%
-  mutate(high = ifelse(outcome == "HIGH", 1, 0),
-         win = ifelse(outcome == "WIN", 1, 0),
-         low = ifelse(outcome == "LOW", 1, 0),
-         safe = ifelse(outcome == "SAFE", 1, 0),
-         btm = ifelse(outcome == "BTM", 1, 0),
-         highsafe = ifelse(outcome %in% c("HIGH", "SAFE"), 1, 0),
-         winhigh = ifelse(outcome %in% c("HIGH", "WIN"), 1, 0),) %>%
-  group_by(season,Contestant, Rank) %>% 
-  summarize(bd_score = 2*sum(win, na.rm=T) +
-              1*sum(high, na.rm=T) +
-              (sum(safe, na.rm=T)*0) +
-              (sum(low, na.rm=T)*-1) +
-(sum(btm, na.rm=T)*-2)) -> rdr_cont_bd
-
-rdr_contep %>% 
-  filter(participant == 1 & finale == 0 & penultimate == 0) %>%
-  mutate(high = ifelse(outcome == "HIGH", 1, 0),
-         win = ifelse(outcome == "WIN", 1, 0),
-         low = ifelse(outcome == "LOW", 1, 0),
-         safe = ifelse(outcome == "SAFE", 1, 0),
-         highsafe = ifelse(outcome %in% c("HIGH", "SAFE"), 1, 0),
-         winhigh = ifelse(outcome %in% c("HIGH", "WIN"), 1, 0),
-        btm = ifelse(outcome == "BTM", 1, 0),
-         lowbtm = ifelse(outcome %in% c("BTM", "LOW"), 1, 0)) %>%
-  group_by(season,Contestant,Rank) %>%
-  mutate(numcontests = n()) %>%
-  group_by(season,Contestant, numcontests, Rank) %>%
-  summarize(perc_high = sum(high)/unique(numcontests),
-            perc_win = sum(win)/unique(numcontests),
-            perc_winhigh = sum(winhigh)/unique(numcontests),
-            perc_low = sum(low)/unique(numcontests),
-            perc_btm = sum(btm)/unique(numcontests),
-            perc_lowbtm = sum(lowbtm)/unique(numcontests),
-            num_high = sum(high),
-            num_win = sum(win),
-            num_winhigh = sum(winhigh),
-            num_btm = sum(btm),
-            num_low = sum(low),
-            num_lowbtm = sum(lowbtm),
-            bd_score = 2*sum(win, na.rm=T) +
-              1*sum(high, na.rm=T) +
-              (sum(safe, na.rm=T)*0) +
-              (sum(low, na.rm=T)*-1) +
-(sum(btm, na.rm=T)*-2)) -> rdr_contestant_outcomes
 
 library(mirt)
 
-rdr_contestant_outcomes %>%
-  ungroup() %>%
-  # filter(numcontests >= 5) %>%
-  select(season, Contestant, numcontests, Rank, num_win, num_winhigh, num_btm, bd_score) %>%
-  data.frame() -> rdr_contestant_outcomes_m4
+rpdr_contestants %>%
+  select(season, contestant, numcontests, rank, num_win, num_winhigh, num_btm, db_score) %>%
+  data.frame() -> rpdr_sub
 
-RDRM <- mirt(rdr_contestant_outcomes_m4[ ,  4:ncol(rdr_contestant_outcomes_m4)], model = 1,
+RDRM <- mirt(rpdr_sub[ ,  4:ncol(rpdr_sub)], model = 1,
             itemtype = "graded", SE = TRUE, verbose = FALSE)
 
 rrscores <- fscores(RDRM, full.scores = TRUE, full.scores.SE = TRUE)
 
-cbind(rdr_contestant_outcomes_m4, rrscores) %>%
+cbind(rpdr_sub, rrscores) %>%
   rename(lperform = F1,
          lperform_se = SE_F1) %>%
-  tbl_df() -> rdr_contestant_outcomes_m4
+  tbl_df() -> rpdr_sub
 
-#left_join(rdr_cont_winhigh, rdr_cont_bd) %>%
-#  select(season, Contestant, numcontests, Rank, everything()) -> rdr_contestant_outcomes
+
 
 ```
 
 {% include image.html url="/images/kameron-michaels.jpg" caption="Kameron Michaels isn't quite sure what's happening below, but she's certainly a little revolted at the sight." width=410 align="right" %}
+
+*Last updated: `r format(Sys.time(), '%B %d, %Y')`*
 
 My wife got me hooked into watching RuPaul's Drag Race with her. The long and short of it is I didn't need to have my arm twisted to watch or enjoy the show. Indeed, drag nights at Icon in Tuscaloosa---incidentally home to [the performer who gave Trinity her "Tuck" moniker](https://twitter.com/leland2genesis?lang=en)---are some of my fondest memories of graduate school. A performer who routinely served as opening act for her---[and sadly passed away](http://obits.al.com/obituaries/birmingham/obituary.aspx?n=kevin-thomas&pid=188344432&fhid=6039) last year---was among the sweetest/kindest people I knew in town.[^herdoc] I had a receptiveness to drag as concept and creative outlet, but oddly did not know about the show until my wife told me about it.
 
@@ -105,24 +55,30 @@ This creates a lot of conversation on the subreddit for the show and spawns nume
 
 ## About the Data/Methods
 
-The data package is a work in progress and leans heavily on scraping the wiki, especially [the contestant-level information that the wiki turns into pyramidal tables](https://rupaulsdragrace.fandom.com/wiki/RuPaul's_Drag_Race_(Season_10)#Contestants). I have, so far, a fairly informative episode-contestant-level data set and a somewhat informative episode-level data set. In the interest of full disclosure, I'll offer some caveats about what I have so far, and how I tweak some of the information the Wiki provides:
+The data package is a work in progress and leans heavily on scraping the wiki, especially [the contestant-level information that the wiki turns into pyramidal tables](https://rupaulsdragrace.fandom.com/wiki/RuPaul's_Drag_Race_(Season_10)#Contestants). I have, so far, three data sets in the package. `rpdr_contep` is contestant-episode-level data about how contestants fared, if they appeared, in episodes as the season progressed. `rpdr_contestants` is contestant-level data that includes some background information on the contestants along with metrics of their performances through the season. `rpdr_ep` contains some episode-level data that would have been difficult or tedious to build into the contestant-episode-level data. These are data points like the mini-challenge winners, the runway theme (where applicable), and some information about the lip-sync.
 
-- I interpret "HIGH TEAM" codings as cases where the contestant was on a winning team for a main challenge, but the contestant herself is safe.
+There are some additional caveats.
+
+- I interpret "HIGH TEAM" codings in the wiki as cases where the contestant was on a winning team for a main challenge, but the contestant herself is safe.
 - "Eliminations" are broadly understood as cases where a participant was removed from the show. As a result, there is an `outcome` variable that codes whether a contestant was a winner, scored high, was safe, scored low, or was in the bottom two for the main challenge and runway and a corollary `eliminated` variable if the contestant was removed from the show. The overlap here is substantial, obviously. However, there are a few cases where a contestant was removed despite winning a challenge (Willam, Season 4) or scoring safe (Eureka O'Hara, Season 9) for some other reason.
-- The `minichalw` column in the episode-contestant data is mostly uninformative. I think cases where the wiki lists a "team captain" outcome for a contestant is its way of saying the contestant won a mini-challenge and got to lead a team, but the queen herself did not win a challenge. I was unsure and effectively ignored those in favor of the more direct "mini-challenge winner" codings. However, those are incomplete.
-- Finales are sui generis and users should not read too much into them. They also evolve substantially over the show's 10 seasons. For example, the first three seasons had finales where the finale itself effectively had a bottom and, practically, an elimination. Seasons 4-8 had top threes (later top fours) where there was no "bottom" or elimination, just a crowning. Season 9 started the newer trend of having a top four and semifinal competition that leads to a lip-sync for the crown. Users who want to compare performers should subset out finales.
-- Related: Seasons 6 through 8 have a `penultimate` column. These were episodes in which RuPaul whittled the top four to a top 3. They're unique episodes in that no one was a bottom, but everyone lip-synced. This created three winners and one bottom/elimination. I code those episodes as such but encourage users to subset those out when comparing contestant performances.
+- The `minichalw` column in the contestant-episode data is mostly uninformative. I should delete it or better sync the episode-level data with it.
+- Finales are sui generis and users should not read too much into them. They also evolve substantially over the show's 11 seasons. For example, the first three seasons had finales where the finale itself effectively had a bottom and, practically, an elimination. Seasons 4-8 had top threes (later top fours) where there was no "bottom" or elimination, just a crowning. Season 9 started the newer trend of having a top four and semifinal competition that leads to a lip-sync for the crown. Users who want to compare performers should subset out finales.
+- Related: Seasons 6 through 8 have a `penultimate` column. These were episodes in which RuPaul whittled the top four to a top 3. They're unique episodes in that no one was a bottom, but everyone lip-synced. This created three winners and one bottom/elimination. I code those episodes as such but encourage users to subset those out when comparing contestant performances. However, I do not do this Season 11. Therein, there was no winner, but a clear bottom two in the episode that sent Vanessa Vanjie Mateo home and put Brooke Lynn Hytes as the fourth semifinalist.
 - The episode-level data has a `numqueens` column that codes the number of participants who were active in the episode. There were several cases where RuPaul reintroduced a performer---or, in the case of Season 7, an entire damn cast---at the start of the episode. In more than a few cases, those reintroduced were eliminated the exact same episode.
 - Related to that: I code that episode in Season 7 as a case where Pearl and Trixie Mattel were joint winners.
 - The finales for Season 9 and Season 10 are cases where the runner-up(s) (e.g. Peppermint, Season 9) scored high and those who lost the semifinals (e.g. Trinity Taylor, Season 9) were bottoms for that episode. Again, these are finales so the user should subset them out when comparing queens across different seasons.
 
 ## An Empirical Analysis of RuPaul's Drag Race Performances
 
-The data are far from perfect or complete, but they're workable for an empirical analysis of contestant performance for the 10 main seasons of RuPaul's Drag Race. Here, I'll explore some of the best performers in the history of the show with some rudimentary metrics. Namely, which contestants had the highest percentage of competitive (i.e. non-special, but non-finale) episodes in which they won, or scored high/won? Which queens scored the highest on the ["Dusted or Busted" scoring system](https://rupaulsdragrace.fandom.com/wiki/%22Dusted_or_Busted%22_Scoring_System)? The data aren't too hard to generate and require a few lines in `tidyverse`. Notice the case exclusion rules, which I think are justifiable in this context.[^nominic]
+The data are far from perfect or complete, but they're workable for an empirical analysis of contestant performance for the 11 main seasons of RuPaul's Drag Race. Here, I'll explore some of the best performers in the history of the show with some rudimentary metrics. Namely, which contestants had the highest percentage of competitive (i.e. non-special, but non-finale) episodes in which they won, or scored high/won? Which queens scored the highest on the ["Dusted or Busted" scoring system](https://rupaulsdragrace.fandom.com/wiki/%22Dusted_or_Busted%22_Scoring_System)? The data aren't too hard to generate and require a few lines in `tidyverse`. The [source code](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2019-02-17-dragracer-rupauls-drag-race-analysis.Rmd), along with version history, is available on the `_source` directory for my website. 
+
+<!-- Notice the case exclusion rules, which I think are justifiable in this context.[^nominic]
 
 
-[^nominic]: For now, I'm omitting mini-challenge wins from consideration because I don't think the data I have are too reliable.
+[^nominic]: For now, I'm omitting mini-challenge wins from consideration because I don't think the data I have are too reliable.  -->
 
+
+<!--
 ```r
 rdr_contep %>% 
   filter(participant == 1 & finale == 0 & penultimate == 0) %>%
@@ -154,18 +110,19 @@ rdr_contep %>%
               (sum(safe, na.rm=T)*0) +
               (sum(low, na.rm=T)*-1) + (sum(btm, na.rm=T)*-2)) -> rdr_contestant_outcomes
 ```
+-->
 
 ### Comparing the Season Winners
 
-This will facilitate some kind of comparison, say, among the season-winners by reference to thier performance in main challenges/runways through the course of a season. I choose to focus on the percentage of wins, bottoms, etc. because the number of competitive episodes varies considerably through the 10 seasons. For example, Bebe Zahara Benet had just six episodes before the finale in which she could've been eliminated. Raja, Season's 3 winner, had the most (12). Seasons since then have had 10 or 11 competitive episodes, excluding the eight competitive episodes in Season 8.
+This will facilitate some kind of comparison, say, among the season-winners by reference to thier performance in main challenges/runways through the course of a season. I choose to focus on the percentage of wins, bottoms, etc. because the number of competitive episodes varies considerably through the 11 seasons. For example, Bebe Zahara Benet had just six episodes before the finale in which she could've been eliminated. Raja, Season's 3 winner, had the most (12). Seasons since then have had 10 or 11 competitive episodes, excluding the eight competitive episodes in Season 8.
 
 ```{r tabseasonwinners, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
 
-rdr_contestant_outcomes %>%
-  ungroup() %>%
-  filter(Rank == 1) %>%
-  select(season, Contestant, perc_win, perc_winhigh, perc_btm, perc_lowbtm, bd_score) %>%
-  mutate(perc_win = paste0(mround2(perc_win), "%"),
+
+rpdr_contestants %>%
+  filter(rank == 1) %>% 
+  select(season, contestant, perc_win, perc_winhigh, perc_btm, perc_lowbtm, db_score) %>%
+    mutate(perc_win = paste0(mround2(perc_win), "%"),
          perc_winhigh = paste0(mround2(perc_winhigh), "%"),
          perc_btm = paste0(mround2(perc_btm), "%"),
          perc_lowbtm = paste0(mround2(perc_lowbtm), "%"),) %>%
@@ -173,11 +130,12 @@ rdr_contestant_outcomes %>%
          `% Wins/Highs` = perc_winhigh,
          `% Bottom` = perc_btm,
          `% Bottom/Low` = perc_lowbtm,
-         `DB Score` = bd_score) %>%
+         `D/B Score` = db_score) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
-        caption = "Ranking the RuPaul's Drag Race Winners from Season 1 to Season 10",
+        caption = "Ranking the RuPaul's Drag Race Winners from Season 1 to Season 11",
         align=c("c","l","c","c","c","c","c"))
+
 
 ```
 
@@ -189,19 +147,20 @@ Likewise, Bianca Del Rio has the distinction of the first and, to date, only que
 
 Bob the Drag Queen and Aquaria stand out for scoring eye-openingly low in the "Dusted or Busted" scoring system. Both are, from what I've gathered, well-respected among fans of the show, and I think their low scores have some intuitive explanations. In Bob's case, she had just eight competitive episodes in what amounts to a conspicuously abbreviated season. That she has 12% of her appearances in the bottom means she was in the bottom just once. Fans will remember that episode well. She lip-synced against Derrick Barry to the tune of one of my all-time favorite jams: Sylvester's "You Make Me Feel (Mighty Real)." That contest was not close.
 
-In Aquaria's case, her season might have been the most competitive top to bottom in the show's history. Blair St. Clair (9th place) and Mayhem Miller (10th place) could probably crack top five each in most other seasons. Vanessa Vanjie Mateo, 14th place in Season 10, may even make a long run in Season 11.
+In Aquaria's case, her season might have been the most competitive top to bottom in the show's history. Blair St. Clair (9th place) and Mayhem Miller (10th place) could probably crack top five each in most other seasons. Vanessa Vanjie Mateo, 14th place in Season 10, may even make a long run in Season 11 *(ed, May 31/2019: she did)*.
+
+The conclusion of Season 11 and addition of Yvie Oddly to this list of winners means the current champion has surpassed BeBe Zahara Benet for lowest "Dusted or Busted" score to ever win a season. She has the fewest wins (1, and a shared one at that) and the fewest number of wins/highs (3) of any eventual champion. I can qualify that the episode prior to the reunion was one in which Yvie would've won if Ru had announced a winner. She had the best runway look (in a walk) and Ru named her first as a semifinalist. Alas, that episode is coded as a safe. Had Ru announced her as a winner that episode, her "Dusted or Busted" score improves to 4.
 
 ### Who Were the Lowest-Ranked Performers to Land in the Top Four?
 
 The data can also be used to identify the lowest-scoring performers to get a top four finish in the show's 10 seasons. There are several metrics available for ranking these performers, but I'll go in descending order, by "Dusted or Busted" score.
 
 ```{r tablowesttop4, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
-rdr_contestant_outcomes %>%
-  ungroup() %>%
-  filter(Rank <= 4) %>%
-  arrange(bd_score) %>%
-  head(10)  %>%
-  select(season, Rank, Contestant, perc_win, perc_winhigh, perc_btm, perc_lowbtm, bd_score) %>%
+rpdr_contestants %>%
+  filter(rank <= 4) %>%
+  arrange(db_score) %>%
+  head(10) %>%
+  select(season, rank, contestant, perc_win, perc_winhigh, perc_btm, perc_lowbtm, db_score) %>%
   mutate(perc_win = paste0(mround2(perc_win), "%"),
          perc_winhigh = paste0(mround2(perc_winhigh), "%"),
          perc_btm = paste0(mround2(perc_btm), "%"),
@@ -210,11 +169,13 @@ rdr_contestant_outcomes %>%
          `% Wins/Highs` = perc_winhigh,
          `% Bottom` = perc_btm,
          `% Bottom/Low` = perc_lowbtm,
-         `DB Score` = bd_score) %>%
+         `D/B Score` = db_score) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
-        caption = "The Lowest-Ranked Top Four Performers from Season 1 to Season 10",
+        caption = "The Lowest Ranked Top Four Performers from Season 1 to Season 11",
         align=c("c","c","l","c","c","c","c","c"))
+
+
 ```
 
 A couple of names stand out. Darienne Lake has the lowest "Dusted or Busted" score of any contestant with a top four finish. In fact, she finished bottom or low in six of her 10 competitive episodes. The distance between her and the next lowest scoring top four performer by "Dusted or Busted" score (Courtney Act) is seven points.
@@ -225,6 +186,76 @@ Kameron Michaels is the only No. 2 finisher to appear in this top ten. Fans of t
 
 Detox's entry into this list is one of those head-scratchers that makes sense upon further review. Detox can match high-concept looks with great comedy, but that and her top three performance in All-Stars 2 belie that her performance in Season 5 included only one win and four appearances in the "low" or "bottom" categories.
 
+### Which Contestants Were "Robbed?" Their Season
+
+I added this table after Season 11 ended because the selection of the champion is arguably a bit controversial. Not only does Yvie have the lowest "Dusted or Busted" score of any champion in a given season, but the queen she beat in the finale, Brooke Lynn Hytes, had a "Dusted or Busted" score a full three points higher. In fact, a latent variable analysis that I provide below will contend Brooke Lynne Hytes had the eighth best season of any performer in the show's history.
+
+This would not be the first time a queen was "robbed" from winning her particular season (at least, if that's how you want to spin it). Long-time fans of the show probably know Ru started the first season with the idea of crowning BeBe Zahara Benet at the end, forgetting along the way that it meant Nina Flowers had a better season and finished second. The most prominent case of this might have been Shea Couleé, who entered the semifinals as the top performer in that season and was bulldozed in the semifinal by arguably the best individual lip sync in the show's history. Sasha Velour deserved to advance on the merits of the lip sync but it did mean Shea Couleé, who had arguably the third best run in the show's history to that point, did not snatch the crown.
+
+There are four such cases I show below where an individual performer had a higher "Dusted or Busted" score than the eventual winner that season. All four have unique situations. Nina finished second despite having the overall better record than Bebe Zahara Benet, but Ongina was woefully underplaced in her season. She too had a better "Dusted or Busted" score than the eventual champion, but finished in fifth place. Shea Couleé had arguably the best season run in the show's history but was eliminated in the semifinals. More recently, Brooke Lynn Hytes can now boast the biggest point differential in show history over an eventual champion. Her three-point cushion over the eventual season champion may not be topped.
+
+```{r robbedqueens1, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
+
+rpdr_contestants %>%
+  group_by(season) %>%
+  mutate(winnerdb = ifelse(rank == 1, db_score, NA),
+         winnerwins = ifelse(rank == 1, num_win, NA)) %>%
+  fill(winnerdb, winnerwins) %>%
+  filter(db_score > winnerdb) %>%
+  select(season, contestant, rank, num_win, winnerwins, db_score, winnerdb) %>%
+  rename(Season = season,
+         Contestant = contestant,
+         Rank = rank,
+         `Number of Wins` = num_win,
+         `Number of Wins for Champion` = winnerwins,
+         `Champions's D/B Score` = winnerdb,
+         `D/B Score` = db_score) %>%
+  kable(., format="html",
+        table.attr='id="stevetable"',
+        caption = "Queens Whose D/B Scores Were Greater Than the Season Champion",
+        align=c("c","l","c","c","c","c","c"))
+
+
+```
+
+One other metric for classifying "robbed" queens is to locate those queens who 1) finished outside the top four in a season but 2) had a higher "Dusted or Busted" score than the lowest-ranked performer to land in the top four. There are over 43 such instances in the data, but much of that is in Season 6 because Darienne Lake had such a low score by the end of the season that even contestants like Gia Gunn and Laganja Estranja had comfortably outperformed her. The table below subsets that list to just the cases of performers who had the highest such difference in a given season and arranges them by largest difference.
+
+
+```{r robbedqueens2, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
+rpdr_contestants %>%
+  filter(rank <= 4) %>%
+  group_by(season) %>%
+  mutate(mindb = min(db_score)) %>% 
+  filter(db_score == mindb) %>%
+  mutate(mindbperformers = paste0(contestant, collapse = ", ")) %>%
+  select(season, mindb, mindbperformers) %>%
+  distinct() %>%
+  left_join(rpdr_contestants, .) %>%
+  filter(rank > 4) %>%
+  filter(db_score > mindb) %>%
+  mutate(diff = db_score - mindb) %>%
+  select(season, contestant, rank, db_score, mindb, mindbperformers, diff) %>%
+  group_by(season) %>%
+  mutate(maxdiff = max(diff)) %>%
+  ungroup() %>%
+  filter(diff == maxdiff) %>%
+  select(-maxdiff) %>%
+  arrange(-diff) %>%
+  rename(Season = season,
+         Contestant = contestant,
+         Rank = rank,
+         `Lowest D/B Score in Top 4` = mindb,
+         `Lowest Ranked Top 4 Queen` = mindbperformers,
+         `D/B Score` = db_score,
+         Difference = diff) %>%
+  kable(., format="html",
+        table.attr='id="stevetable"',
+        caption = "Select Queens Outside Top Four Who Finished With Higher ''Dusted or Busted'' Scores Than Lowest Ranked Top Four Performer",
+        align=c("c","l","c","c","c","l","c"))
+```
+
+There should be some care in interpreting this table. I don't agree with all of it (e.g. I'm on the record as being a big Kameron Michaels fan). Also consider that Eureka O'Hara and Lineysha Sparx had fewer episodes on which they could've accrued "Dusted or Busted" score deductions and these metrics are largely driven by the number of contests in which a queen appears. Yet, this table offers substantive support to the contention that Darienne Lake advancing over BenDeLaCreme in Season 6 was almost unforgivable. Further, Ongina was woefully underplaced in Season 1. Also, Acid Betty should've been on more episodes.
+
 ### A Simple Item Response Model for Ranking All Contestants
 
 Finally, I decided to run a simple graded response model on the data for all contestants. The graded response model includes the number of performances in which the contestant won, won or scored high, or was in the bottom.[^lowbtmcomment] I also include the contestant's final rank for the season and the "Dusted or Busted" score. Conceptually, these polytomous measures of a contestant's performances are judges of a contestant's ability based on discrete scale. This is obviously rudimentary, and someone more versed in IRT modeling will balk at treating the "Dusted or Busted" score in this way, but the model ran and I'm not submitting it for peer review and I don't have time to invest in a more comprehensive model. Your critiques can sashay away.
@@ -234,8 +265,8 @@ Finally, I decided to run a simple graded response model on the data for all con
 The top 25 participants on this metric are listed below, with accompanying standard errors around the latent estimate.
 
 ```{r top-rupauls-drag-race-performers, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
-rdr_contestant_outcomes_m4 %>%
-  mutate(seasoncontestant = paste0(Contestant, " (",season,")")) %>%
+rpdr_sub %>%
+  mutate(seasoncontestant = paste0(contestant, " (",season,")")) %>%
   select(seasoncontestant, everything()) %>%
   arrange(-lperform) %>%
   head(25) %>%
@@ -251,7 +282,7 @@ rdr_contestant_outcomes_m4 %>%
                     lwd = 1/2, position = position_dodge(width = 1/2),
                      fill = "white", color="#3288BD", shape=22)  +
   xlab("Contestant") + ylab("Latent Performance Score for RuPaul's Drag Race Season Participant")  +
-  labs(title = "A Ranking of Latent Performance Scores for RuPaul's Drag Race Participants, Seasons 1-10",
+  labs(title = "A Ranking of Latent Performance Scores for RuPaul's Drag Race Participants, Seasons 1-11",
        subtitle = "The model is admittedly crude, but it seems to want to penalize Bob the Drag Queen for being on a somewhat abbreviated season.",
        caption = "Data: dragracer (github.com/svmiller/dragracer)")
 ```
@@ -269,10 +300,33 @@ BenDeLaCreme and Katya are the only contestants without top four finishes on thi
 
 I don't have much to conclude, but I do have a few #takes that I'll offer as heaters here.
 
-- The scorecard is pretty clear Tyra Sanchez deserved to win Season 2, but I bet RuPaul wishes she could bgo ack and do that one again.
+- The scorecard is pretty clear Tyra Sanchez deserved to win Season 2, but I bet RuPaul wishes she could go back and do that one again.
 - Kameron Michaels should've won Season 10. Hey, I didn't say these takes were good, just that they were 🔥.
 - Sasha Velour needs a street named after her in Urbana. Hell, next-door [Champaign had a street named after REO Speedwagon](https://www.chicagotribune.com/news/ct-xpm-2001-01-16-0101160268-story.html) when I was living in that city. Why not Sasha Velour for Urbana?
 - Acid Betty needed more episodes on Season 8. Her three high performances in the first three episodes push her up a lot of rankings for someone who otherwise landed No. 8 in a season.
 - I would've put Aquaria as a bottom instead of Monét in episode 10 of Season 10. That would've put Aquaria, the future winner of the season, in front of the grim reaper of lip-syncs (Kameron Michaels). And, yeah, there's no way RuPaul would've sent Aquaria home instead of Kameron Michaels, but the thought experiment is fun.
 - I feel most scoring metrics for RuPaul's Drag Race should include a category that awards 10 points to a contestant if she is able to check the box of "is Alyssa Edwards." I think that's appropriate.
 - I am compelled to support Nina West in Season 11 because she is from Columbus. I will disregard any critiques of her as wrong as a result.
+
+
+### Addendum: Season 11 🔥 #Takes
+
+Btw, nailed it. This was from February.
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Hot and maybe only RuPaul&#39;s Drag Race Season 11 <a href="https://twitter.com/hashtag/take?src=hash&amp;ref_src=twsrc%5Etfw">#take</a> for a while: I think this season Ru goes hunting for a &quot;mid-market&quot; winner after three-straight NY-based winners. Lot of options for that this season. Heart says <a href="https://twitter.com/NinaWest?ref_src=twsrc%5Etfw">@NinaWest</a> (O-H...). Gut says <a href="https://twitter.com/OddlyYvie?ref_src=twsrc%5Etfw">@OddlyYvie</a> (of Denver).</p>&mdash; Steven V. Miller (@stevenvmiller) <a href="https://twitter.com/stevenvmiller/status/1101109692498132998?ref_src=twsrc%5Etfw">February 28, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+- Jaymes Mansfield might appreciate this reference, but Silky for me was the first performer in the show's history to have what pro wrestling fans call ["X-Pac Heat."](https://allthetropes.fandom.com/wiki/X_Pac_Heat) There have been other villains in the show's history you want to see vanquished or defeated. Phi'Phi O'Hara (Season 4), Roxxxy Andrews (Season 5), and The Vixen (Season 10)  come to mind here as performers who took on a villain role but were still enjoyable to watch the extent to which a viewer wanted to see some measure of comeuppance. However, like the canonical case of X-Pac, I didn't want to see Silky get her just deserts. I just wanted her off my television so I could enjoy the other performers.
+- I think Chris says it best here. Nina was great on Season 11 because her character on the show augmented other performers around her (prominently Brooke in the L.A.D.P. challenge). Silky just sucked up and rerouted the energy in the room in a way that doesn't make for good television and isn't compelling to watch.
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Trying to be a Nina West in a Silky Ganache world. (Be brave enough to be kind)</p>&mdash; Chris Skovron (@cskovron) <a href="https://twitter.com/cskovron/status/1119403735237709824?ref_src=twsrc%5Etfw">April 20, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+- Als not the first to make this observation, but this would be the first winner who lip-synced after Snatch Game. It was going to be the case no matter if Ru had gone with the Brooke edit or the Yvie edit.
+- I'm hoping Yvie's win offers some pause for future performers who think the path through the finale is to make compound reveals. Yvie's final two lip syncs were light on reveals ("Free Britney" in the first and the backward head reveal in the second). Contrast that with the compound reveals that Silky had in the lip sync that made no sense and were poorly timed. One tells a story through the song. The other is mindless theatrics. One works better than the other.
+- That said, Brooke's final lip sync reveal was hilarious. I love a good fourth wall break.
+- Both of Silky's wins were cases where I thought it was clear Nina had the better main challenge performance and runway look. Nina should've received those two wins instead. That would put Nina West at four wins on the season and would have made it almost impossible to deny her the crown. My apologies to Shea Couleé.
+- Ra'Also, political scientist speaking, Silky's explanation for why she registers as a Republican was the dumbest thing I've heard an educated person say on that show. The rationale behind what she said was basically nails on a chalkboard as I heard it.
+- Jah O'Hara has the distinction of being tied with Carmen Carrera for the worst ever D/B score in the show's history (-8).
+- I thought this season took a while to get going. With 15 queens in the mix, the space seemed kind of crowded and it took about four or five episodes to figure out who some of these queens were and identify with them and their craft.
