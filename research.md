@@ -20,7 +20,7 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 
 ## Publications
 
-Miller, Steven V. Forthcoming. "[What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016](/research/what-americans-really-think-about-gun-control/)". *Social Science Quarterly*.
+Miller, Steven V. 2019. "[What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016](/research/what-americans-really-think-about-gun-control/)". *Social Science Quarterly* 100(1): 272-288.
 
 Miller, Steven V. 2018. "[External Territorial Threats and Tolerance of Corruption: A Private/Government Distinction](/research/external-territorial-threats-and-tolerance-of-corruption-a-privategovernment-distinction/)". *Peace Economics, Peace Science and Public Policy* 24(1): `doi:` [10.1515/peps-2017-0043](https://doi.org/10.1515/peps-2017-0043)
 
