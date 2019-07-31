@@ -8,7 +8,7 @@ permalink: null
 categories:
   - R
   - Political Science
-images: mocking-spongebob.jpg
+image: mocking-spongebob.jpg
 ---
 
 
