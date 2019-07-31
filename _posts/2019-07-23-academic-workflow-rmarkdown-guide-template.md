@@ -153,7 +153,7 @@ Setting up the .Rmd file is fairly simple. First, there is the YAML. My proposed
 
 The next part of the setup process could conceivably be optional if the researcher felt like skipping it altogether. However, I think the following chunk at the beginning of the document (after the YAML) is useful for a lot of things.
 
-{% highlight rmarkdown %}
+~~~
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache=TRUE,
                       message=FALSE, warning=FALSE,
@@ -164,7 +164,7 @@ knitr::opts_chunk$set(cache=TRUE,
                       if (file.rename(x, x2)) x2 else x
                       })
 ```
-{% endhighlight %}
+~~~
 
 The first set of options tells R Markdown to cache everything by default, which I think is appropriate for analyses of bigger data sets or those that involve more complicated models. They also tell R Markdown to suppress any unnecessary warnings or messages that some lines of code may want to spit into the console (and thus be knitted). The next two options specify the directories for the cache and the figures. Do note: a researcher can always have R Markdown create these directories in lieu of the researcher manually creating these directories. The final option (`fig.process`) takes a close eye to discern what it's doing, but it will change how R Markdown names figures. By default, R Markdown will name a figure as whatever the name of the chunk is and add a number to it. This command will strip the file name of the number, leaving a file named something like `plot_sims.pdf` instead of `plot_sims-1.pdf`.
 
