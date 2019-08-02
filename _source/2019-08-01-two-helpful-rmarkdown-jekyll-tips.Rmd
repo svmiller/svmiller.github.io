@@ -38,11 +38,11 @@ library(stevemisc)
 
 ```
  
-```{r leadimage, echo=F, eval=F, results="asis"}
+```{r leadimage, echo=F, eval=T, results="asis"}
 cat('{% include image.html url="/images/brent-rambo.gif" caption="Jekyll rules the world. Your Jekyll friend, Steve" width=410 align="right" %} ')
 ```
 
-
+*Last updated: `r format(Sys.time(), '%B %d, %Y')`*
 
 It's crazy to think [I transitioned my website from Wordpress to Jekyll](http://svmiller.com/blog/2015/08/create-your-website-in-jekyll/) four years ago this month. About two and a half years ago [(example)](http://svmiller.com/blog/2017/07/how-serious-are-americans-about-democracy-americasbarometer/), I started doing some R blogging by using [the `servr` package](https://github.com/yihui/servr) to render some R Markdown-based analyses as blog posts.
 
@@ -81,6 +81,42 @@ This looks like boilerplate YAML for any post on a Jekyll blog. It's the `output
 The `knit:` option is a convoluted way of specifying that the finished markdown document should be in the `_posts` directory. The relative path there (i.e. `../`) says to backtrack one directory (i.e. from `_source`) to the root directory, and then go into the `_posts` directory. 
 
 I like this workflow better than using `servr` to build my blog. Here, I can build my site in terminal with `jekyll serve -w` and open up the preview version at `http://localhost:4000`, and use R Markdown to knit the R Markdown document as a blog post. From there, it's a matter of clicking the link to the blog post in the browser and refreshing every time I update the R Markdown document to see what it looks like.
+
+### Alternatively: Just Knit it in the Console if You Have Some Jekyll Liquid Tags
+
+The aforementioned setup should work for most people in most applications. However, most of my posts have a lead image that's wrapped in a Jekyll [Liquid](https://jekyllrb.com/docs/liquid/) tag. You can see what it does [here](https://github.com/svmiller/svmiller.github.io/blob/master/_includes/image.html). It basically calls in a few parameters to render an image like how my Wordpress installation used to do it.
+
+{% raw %}
+```ruby
+<dl id="" class="wp-caption align{{include.align}}" style="max-width: {{include.width}}px">
+
+<dt><a href="{{ include.href }}"><img class="" src="{{ include.url }}" alt="{{ include.caption }}" /></a></dt>
+
+<dd>{{ include.caption }}</dd>
+</dl>
+```
+{% endraw %}
+
+This creates a problem for using R Markdown to render to a normal markdown document. For one, I know of no way to pass raw HTML through R Markdown to render it to a Markdown document. Further, R Markdown won't correctly process Liquid tags either. It'd be nice if it ignored it, but it'll try (and fail) to render it. In addition, a clever use of the `results="asis"` option with a `cat()` function will still lead to problems. Basically, it creates a quotation mark encoding issue in which standard ["neutral"](https://www.cl.cam.ac.uk/~mgk25/ucs/quotes.html) quotation marks get rendered as left and right quotation marks. That'll break a Liquid tag; it seems.
+
+There's a workaround if you're wanting to use Liquid tags in R Markdown posts. First, wrap the Liquid tag in an R Markdown chunk. Set `eval=TRUE`, `echo=FALSE`, and, importantly, `results="asis"`. Thereafter, wrap it in a `cat()` command in R as I do for the lead image.
+
+{% raw %}
+```liquid
+cat('{% include image.html url="/images/brent-rambo.gif" caption="Jekyll rules the world. Your Jekyll friend, Steve" width=410 align="right" %} ')
+```
+{% endraw %}
+
+
+Then, just knit it and specify and output file in the `_posts` directory. It helps to set the working directory to the `_source` directory of the Jekyll blog before you do this.
+
+```{r knit_example, echo=T, eval=F}
+setwd("~/Dropbox/svmiller.github.io/_source") # adjust to your preferences.
+knitr::knit("2019-08-01-two-helpful-rmarkdown-jekyll-tips.Rmd",
+            output = "../_posts/2019-08-01-two-helpful-rmarkdown-jekyll-tips.md")
+```
+
+The benefit of this approach is it skips R Markdown's `render` function altogether. Plus, this approach means you can ignore the `knit:` field in the YAML. However, it does mean making sure you correctly spelled the output file. The silver lining here is typing out this command once means it's in the console in Rstudio. Hitting up in the console will retrieve it from the session history so you don't have to keep typing it out.
 
 ## Tweak Where the R Graphs Are Stored
 
