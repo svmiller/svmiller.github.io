@@ -35,7 +35,7 @@ knitr::opts_chunk$set(fig.path = fig_path,
 #   
 #  img <-  paste0("<dl id='' class='wp-caption align",align," style='max-width:", width,"px'>
 # 
-# <dt><a href='",url,"'><img class='' src='",url,"' alt='",caption,"' /></a></dt><dd>butt</dd></dl>")
+# <dt><a href='",url,"'><img class='' src='",url,"' alt='",caption,"' /></a></dt><dd>safsafsafsafsafsat</dd></dl>")
 #   
 # cat(img)
 # }
