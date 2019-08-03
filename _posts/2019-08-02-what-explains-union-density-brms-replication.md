@@ -25,6 +25,8 @@ image: "1946-may-day.jpg"
 
 {% include image.html url="/images/1946-may-day.jpg" caption="Diverse workers of various affiliations march together at a 1946 May Day parade in New York City. (Bettmann Archive via Getty Images)" width=400 align="right" %}
 
+*Last updated: August 03, 2019*
+
 Count this as a post I've always wanted to write for myself because I wish I could go back in time to show this to me in graduate school when I was trying (and struggling) to learn Bayesian methods.
 
 If someone were to press me to name my top ten favorite political science articles, assembling and ranking the list would be an ordeal but I can guarantee the reader that [Western and Jackman's (1994) article](https://www.jstor.org/stable/2944713?seq=1#page_scan_tab_contents) on Bayesian inference [(ungated here)](http://allman.rhon.itam.mx/~emagar/talleR/lecturas/dia2reg/western+jackmanBayes1994apsr.pdf) would be in that list. It would be tough to pin down what exactly makes a "great" political science article, the extent to which "favorite" presumably collides with "great" in assembling such a subjective list. The discipline evolves so much. Topics change; for example, few people (to my knowledge) talk about cybneretic decision-making anymore notwithstanding the intellectual currency that topic had in the 1970s to the mid-1980s or so. Methods certainly change. Cheap computing power, coupled with decades of accumulated knowledge, have made the most rudimentary statistical analyses like *t*-tests, chi-square analyses, and even simple linear models seem like relics. Exceptions include those pushing/advancing experimental designs that largely obviate the need to address thornier selection problems with fancier statistical models. I think the point still remains.
@@ -601,9 +603,86 @@ The posterior distributions for left governments are unchanged across both prior
 
 ## Conclusion {#conclusion}
 
-Table 4 and Table 5 in Western and Jackman (1994) do some sensitivity analyses, which 1) omit the outlier case of Italy, and 2) multiply the variances by 10 to diffuse the priors more. The results of those analyses, which I was partially able to replicate[^partial], do show the results are sensitive to diffusing the priors. This much makes sense given what diffuse priors can do on a low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.
+Table 4 and Table 5 in Western and Jackman (1994) do some sensitivity analyses, which 1) omit the outlier case of Italy, and 2) multiply the variances by 10 to diffuse the priors more. The results of those analyses, which I was partially able to replicate, do show the results are sensitive to diffusing the priors. You can see the code for a reproduction of the same basic findings from Table 5 below. 
 
-[^partial]: In other words, I'm getting the same basic story by adjusing the the priors to be more diffuse but the point estimates don't neatly match as they did in the other cases. Feel free to inquire for that code if you'd like.
+
+```r
+# The sensitivity analyses are:
+# 1) keep the informative priors, but exclude Italy
+# 2) multiply the variances by 10, and exclude Italy.
+#    Notice: variances. Take sd to power 2, then multiply by 10, then sqrt()
+
+
+wall_priors_diffuse <- c(set_prior("normal(3, sqrt(3*10))", class = "b", coef= "left"),
+                         set_prior("normal(-5, sqrt(5*10))", class = "b", coef="size"),
+                         set_prior("normal(0,10^6)", class="b", coef="concen"),
+                         set_prior("normal(0,10^6)", class="Intercept"))
+
+stephens_priors_diffuse <- c(set_prior("normal(3, sqrt(3*10))", class = "b", coef= "left"),
+                         set_prior("normal(0,10^6)", class = "b", coef="size"),
+                         set_prior("normal(10,sqrt(10*10))", class="b", coef="concen"),
+                         set_prior("normal(0,10^6)", class="Intercept"))
+
+B3 <- brm(union ~ left + size + concen,
+          data = subset(uniondensity, country != "Italy"),
+          prior=wall_priors,
+          family="gaussian")
+
+B4 <- brm(union ~ left + size + concen,
+          data = subset(uniondensity, country != "Italy"),
+          prior=wall_priors_diffuse,
+          family="gaussian")
+
+
+B5 <- brm(union ~ left + size + concen,
+          data = subset(uniondensity, country != "Italy"),
+          prior=stephens_priors,
+          family="gaussian")
+
+B6 <- brm(union ~ left + size + concen,
+          data = subset(uniondensity, country != "Italy"),
+          prior=stephens_priors_diffuse,
+          family="gaussian")
+```
+
+The point estimates differ a little but the same basic story emerges that emhasize the effect of diffuse priors on low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.
+
+
+```r
+tidy(B3) %>% mutate(model = "Informative, Italy Omitted", category = "Wallerstein's Priors") %>%
+  bind_rows(., tidy(B5) %>% mutate(model = "Informative, Italy Omitted",
+                                   category = "Stephens' Priors")) %>%
+  bind_rows(., tidy(B4) %>% mutate(model = "Diffuse, Italy Omitted",
+                                   category = "Wallerstein's Priors")) %>%
+  bind_rows(., tidy(B6) %>% mutate(model = "Diffuse, Italy Omitted",
+                                   category = "Stephens' Priors")) %>%
+  tbl_df() %>%
+  filter(term %in% c("b_left", "b_size","b_concen", "b_Intercept")) %>%
+  mutate(term = forcats::fct_recode(term,
+                                        "Intercept" = "b_Intercept",
+                                        "Left Government" = "b_left",
+                                        "Labor Force Size (logged)" = "b_size",
+                                        "Industrial Concentration" = "b_concen",
+  ))  %>%
+  mutate(term = forcats::fct_relevel(term,
+                                         "Intercept",
+                                         "Left Government",
+                                         "Labor Force Size (logged)")) %>%
+  ggplot(.,aes(category, estimate, ymin=lower, ymax=upper, color=model, shape=model)) +
+  theme_steve_web() +
+  scale_colour_brewer(palette = "Set1") +
+  geom_pointrange(position = position_dodge(width = .5)) + coord_flip() +
+  facet_wrap(~term, scales="free_x", ncol=4) + geom_hline(yintercept = 0, linetype="dashed") +
+  labs(color="Model",
+       shape = "Model",
+       x = "",
+       y = "Mean Estimate (with 90% Intervals)",
+       title = "A Reproduction of the Sensitivity Analyses from Table 5 in Western and Jackman (1994)",
+       subtitle = "The results differ a little bit in the point estimates, but still communicate the same basic findings from Western and Jackman.")
+```
+
+![plot of chunk westernjackman1994-tab5-reproduction](/images/westernjackman1994-tab5-reproduction-1.png)
+
 
 Still, this post is a love letter of sorts to the Western and Jackman (1994) article and to the `brms` package for doing Bayesian statistical modeling with the Stan programming language. The article appears on every quantitative methods syllabus of mine and `brms` is an incredibly useful tool for getting standard R users to do more Bayesian modeling. You can use the latter to replicate the statistical analyses in the former, which might help the learning experience for students trying to unpack Western and Jackman's research design.
 
