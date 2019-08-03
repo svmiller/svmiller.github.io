@@ -11,7 +11,7 @@ output:
 #   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-02'
-excerpt: "This is just a document for me to mess with things."
+excerpt: "What explains union density? This is an old article, but it's a fun replication in brms/Stan."
 layout: post
 categories:
   - R
