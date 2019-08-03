@@ -17,7 +17,7 @@ knitr::opts_chunk$set(fig.path='images/')
 
 *Last updated: `r format(Sys.time(), '%B %d, %Y')`*
 
-I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. In my field, this can be perilous. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, can be misleading. The proof is not as convincing as it seems. A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
+I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. This can be perilous in my field. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, [can be misleading](https://www.cambridge.org/core/journals/american-political-science-review/article/assessing-the-dyadic-nature-of-the-democratic-peace-191888/54C72B38A813D9B0753D1F94320883F4). The proof is [not as convincing as it seems](https://journals.sagepub.com/doi/10.1177/0022002796040004006). A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
 
 However, students can go from freshmen to senior without acquiring this ability. I know I did when I was an undergraduate. Quantitative methods classes can be specialty classes. Only a motivated few self-select into acquiring this tool though a more widespread knowledge among political science students would be beneficial.
 
@@ -214,3 +214,10 @@ Students new to reading regression tables are encouraged to do the following in 
  [7]: http://www.amazon.com/The-Cult-Statistical-Significance-Economics/dp/0472050079
  [8]: http://io9.com/10-scientific-ideas-that-scientists-wish-you-would-stop-1591309822
  [9]: http://www.stat.columbia.edu/~gelman/research/published/standardizing7.pdf
+ 
+ 
+```{r knitchunk, echo=F, eval=F}
+setwd("~/Dropbox/svmiller.github.io/_source")
+knitr::knit("2014-08-13-reading-a-regression-table-a-guide-for-students.Rmd",
+            output = "../_posts/2014-08-13-reading-a-regression-table-a-guide-for-students.md")
+```
