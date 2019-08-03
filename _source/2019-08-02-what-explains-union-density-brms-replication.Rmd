@@ -266,13 +266,13 @@ B2 %>%
 
 bind_rows(B1_draws, B2_draws) %>%
   mutate(variable = forcats::fct_recode(variable,
-                                        "(Intercept)" = "b_Intercept",
+                                        "Intercept" = "b_Intercept",
                                         "Left Government" = "b_left",
                                         "Labor Force Size (logged)" = "b_size",
                                         "Industrial Concentration" = "b_concen",
                                         ))  %>%
   mutate(variable = forcats::fct_relevel(variable,
-                                       "(Intercept)",
+                                       "Intercept",
                                        "Left Government",
                                        "Labor Force Size (logged)")) %>%
   arrange(variable, prior) %>%

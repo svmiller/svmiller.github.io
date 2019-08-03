@@ -496,13 +496,13 @@ B2 %>%
 
 bind_rows(B1_draws, B2_draws) %>%
   mutate(variable = forcats::fct_recode(variable,
-                                        "(Intercept)" = "b_Intercept",
+                                        "Intercept" = "b_Intercept",
                                         "Left Government" = "b_left",
                                         "Labor Force Size (logged)" = "b_size",
                                         "Industrial Concentration" = "b_concen",
                                         ))  %>%
   mutate(variable = forcats::fct_relevel(variable,
-                                       "(Intercept)",
+                                       "Intercept",
                                        "Left Government",
                                        "Labor Force Size (logged)")) %>%
   arrange(variable, prior) %>%
@@ -527,7 +527,7 @@ bind_rows(B1_draws, B2_draws) %>%
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:left;"> Intercept </td>
    <td style="text-align:center;"> 70.66 </td>
    <td style="text-align:center;"> 20.79 </td>
    <td style="text-align:center;"> 36.54 </td>
@@ -535,7 +535,7 @@ bind_rows(B1_draws, B2_draws) %>%
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> (Intercept) </td>
+   <td style="text-align:left;"> Intercept </td>
    <td style="text-align:center;"> 83.24 </td>
    <td style="text-align:center;"> 33.34 </td>
    <td style="text-align:center;"> 27.33 </td>
