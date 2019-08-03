@@ -29,7 +29,7 @@ Count this as a post I've always wanted to write for myself because I wish I cou
 
 If someone were to press me to name my top ten favorite political science articles, assembling and ranking the list would be an ordeal but I can guarantee the reader that [Western and Jackman's (1994) article](https://www.jstor.org/stable/2944713?seq=1#page_scan_tab_contents) on Bayesian inference [(ungated here)](http://allman.rhon.itam.mx/~emagar/talleR/lecturas/dia2reg/western+jackmanBayes1994apsr.pdf) would be in that list. It would be tough to pin down what exactly makes a "great" political science article, the extent to which "favorite" presumably collides with "great" in assembling such a subjective list. The discipline evolves so much. Topics change; for example, few people (to my knowledge) talk about cybneretic decision-making anymore notwithstanding the intellectual currency that topic had in the 1970s to the mid-1980s or so. Methods certainly change. Cheap computing power, coupled with decades of accumulated knowledge, have made the most rudimentary statistical analyses like *t*-tests, chi-square analyses, and even simple linear models seem like relics. Exceptions include those pushing/advancing experimental designs that largely obviate the need to address thornier selection problems with fancier statistical models. I think the point still remains.
 
-Western and Jackman's (1994) article would appear on my list with all that in mind largely because it's the clearest articulation of what Bayesians want and why. The topic is simple but important. The statistical application is clearly simple and others have done more advanced Bayesian analyses, but it was sophisticated for the time. It more importantly served a use clarifying an empirical debate about a topic 1) of great scholarly interest in the comparative politics literature, and 2) my undergraduates would already kind of understand jumping into the article cold. It's why it appears in any quantitative methods class I teach.
+Western and Jackman's (1994) article would appear on my list with all that in mind largely because it's the clearest articulation of what Bayesians want and why. The topic is simple but important. The statistical application is clearly simple and others have done more advanced Bayesian analyses, but it was sophisticated for the time. It more importantly served a use clarifying an empirical debate about a topic that was of great scholarly interest in the comparative politics literature at the time and that my undergraduates would already kind of understand jumping into the article cold. It's why it appears in any quantitative methods class I teach.
 
 While I always understood the basic crux of what the authors were doing, I always struggled with a replication of it. The concept of Bayesian inference was always simpler for me than the implementation of it. However, [the `brms` package](https://cran.r-project.org/web/packages/brms/index.html) has made Bayesian statistical modeling (through [Stan](https://mc-stan.org/)) so much simpler. In this case, someone can quickly replicate this article in a matter of minutes.
 
@@ -269,6 +269,12 @@ The first part of the replication process will set the competing priors into two
 
 
 ```r
+# Wallerstein's priors
+# left: 3(1.5)
+# size: -5(2.5) // This is what he's arguing
+# concen: 0(10^6) // diffuse/"ignorance" prior
+# Intercept: 0(10^6) // diffuse/"ignorance" prior
+
 wall_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
                  set_prior("normal(-5,2.5)", class = "b", coef="size"),
                  set_prior("normal(0,10^6)", class="b", coef="concen"),
@@ -325,7 +331,7 @@ tidy(M1) %>%
 
 tribble(
   ~term, ~`Mean|Coef (SD|SE)`, ~lower, ~upper,
-  "Intercept", "97.59 (57.58)", 3.04, 192.14,
+  "Intercept", "97.59 (57.48)", 3.04, 192.14,
   "Left Government", "0.27 (0.08)", .15, .39,
   "Labor Force Size (logged)", "-6.46 (3.79)", -12.70, -.22,
   "Industrial Concentration", "0.35 (19.25)", -31.32, 32.02
@@ -360,9 +366,9 @@ tribble(
 <tbody>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 95.06 (63.33) </td>
-   <td style="text-align:center;"> -11.84 </td>
-   <td style="text-align:center;"> 197.60 </td>
+   <td style="text-align:center;"> 100.74 (63.83) </td>
+   <td style="text-align:center;"> -2.80 </td>
+   <td style="text-align:center;"> 205.58 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -374,7 +380,7 @@ tribble(
   </tr>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 97.59 (57.58) </td>
+   <td style="text-align:center;"> 97.59 (57.48) </td>
    <td style="text-align:center;"> 3.04 </td>
    <td style="text-align:center;"> 192.14 </td>
    <td style="text-align:left;"> Western and Jackman (Table 2) </td>
@@ -382,7 +388,7 @@ tribble(
   <tr>
    <td style="text-align:left;"> Left Government </td>
    <td style="text-align:center;"> 0.27 (0.08) </td>
-   <td style="text-align:center;"> 0.13 </td>
+   <td style="text-align:center;"> 0.14 </td>
    <td style="text-align:center;"> 0.40 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
@@ -402,9 +408,9 @@ tribble(
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -6.28 (4.19) </td>
-   <td style="text-align:center;"> -12.95 </td>
-   <td style="text-align:center;"> 0.69 </td>
+   <td style="text-align:center;"> -6.66 (4.21) </td>
+   <td style="text-align:center;"> -13.55 </td>
+   <td style="text-align:center;"> 0.14 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -423,9 +429,9 @@ tribble(
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 1.23 (21.37) </td>
-   <td style="text-align:center;"> -32.79 </td>
-   <td style="text-align:center;"> 37.03 </td>
+   <td style="text-align:center;"> -0.74 (21.35) </td>
+   <td style="text-align:center;"> -35.83 </td>
+   <td style="text-align:center;"> 33.77 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -595,7 +601,9 @@ The posterior distributions for left governments are unchanged across both prior
 
 ## Conclusion {#conclusion}
 
-Table 4 and Table 5 in Western and Jackman (1994) do some sensitivity analyses, which 1) omit the outlier case of Italy, and 2) multiply the variances by 10 to diffuse the priors more. The results of those analyses, which I was partially able to replicate, do show the results are sensitive to diffusing the priors. This much makes sense given what diffuse priors can do on a low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.
+Table 4 and Table 5 in Western and Jackman (1994) do some sensitivity analyses, which 1) omit the outlier case of Italy, and 2) multiply the variances by 10 to diffuse the priors more. The results of those analyses, which I was partially able to replicate[^partial], do show the results are sensitive to diffusing the priors. This much makes sense given what diffuse priors can do on a low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.
+
+[^partial]: In other words, I'm getting the same basic story by adjusing the the priors to be more diffuse but the point estimates don't neatly match as they did in the other cases. Feel free to inquire for that code if you'd like.
 
 Still, this post is a love letter of sorts to the Western and Jackman (1994) article and to the `brms` package for doing Bayesian statistical modeling with the Stan programming language. The article appears on every quantitative methods syllabus of mine and `brms` is an incredibly useful tool for getting standard R users to do more Bayesian modeling. You can use the latter to replicate the statistical analyses in the former, which might help the learning experience for students trying to unpack Western and Jackman's research design.
 
