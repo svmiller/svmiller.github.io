@@ -101,26 +101,56 @@ Because it's only getting worse.
 ```r
 library(gsheet)
 
-mass_shootings = gsheet2tbl('https://docs.google.com/spreadsheets/d/1b9o6uDO18sLxBqPwl_Gh9bnhW-ev_dABH83M5Vb5L8o/htmlview?sle=true#gid=0')
-
-mass_shootings %>%
+gsheet2tbl('https://docs.google.com/spreadsheets/d/1b9o6uDO18sLxBqPwl_Gh9bnhW-ev_dABH83M5Vb5L8o/htmlview?sle=true#gid=0') %>%
   separate(date, c("month","day","year"), sep="/") %>%
   mutate(date = lubridate::as_date(paste0(year,"-",month,"-", day))) %>%
-  select(case, date, everything()) %>%
+  select(case, date, everything()) -> mass_shootings
+
+mass_shootings %>% 
+  slice(1) %>%
+  select(date) %>% 
+  mutate(date = format(date, '%B %d, %Y')) %>% 
+  pull(date) -> last_update
+
+mass_shootings %>% 
+  slice(n()) %>%
+  select(date) %>% 
+  mutate(date = format(date, '%B %d, %Y')) %>% 
+  pull(date) -> first_event
+
+mass_shootings %>%
   mutate(year = lubridate::year(date)) %>%
   group_by(year) %>%
-  summarize(n = n()) %>% 
+  summarize(n = n()) -> mass_shootings_yearly
+
+mass_shootings_yearly %>%
+  filter(year <= 1999) %>%
+  summarize(n = sum(n)) %>% pull(n) -> nobs80s90s
+
+mass_shootings_yearly %>%
+  filter(year >= 2017) %>%
+  summarize(n = sum(n)) %>% pull(n) -> nobssince2017
+
+today <- format(Sys.time(), '%B %d, %Y')
+
+# mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
+# mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
+# 
+# mjms_caption = paste0("Data: Mother Jones. Methodology: pretty sure these are shooting incidents in which at least three people died. Earlier classifications of mass shootings counted four or more casualties, if I recall correctly.\nIf I'm updating this plot, it likely means there was another mass shooting today, ", today, ".")
+
+mass_shootings_yearly %>%
   ggplot(.,aes(year, n)) +
   theme_steve_web() +
   geom_bar(stat="identity", alpha=0.4, fill="#619cff",color="black") +
   scale_x_continuous(breaks = seq(1980, 2020, by = 4)) +
+  scale_y_continuous(breaks = seq(0, 14, by =2)) +
   geom_text(aes(label=n), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4, family="Open Sans") +
   labs(y = "Number of Mass Shootings in a Calendar Year",
        x = "Year",
-       title = paste0("The Number of Mass Shootings by Year, 1982-Present (", format(Sys.time(), '%B %d, %Y'), ")"),
-       subtitle = "There were 31 mass shootings from 1982-1999. There've been 28---29, including El Paso---in the past 2.5 years.",
-       caption = "Data: Mother Jones. Methodology: pretty sure these are shooting incidents in which at least three people died. Earlier classifications of mass shootings counted four or more casualties, if I recall correctly.")
+       title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update),
+       subtitle =  paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,"."), 
+       caption = paste0("Data: Mother Jones. Methodology: pretty sure these are shooting incidents in which at least three people died. Earlier classifications of mass shootings counted four or more casualties, if I recall correctly.\nIf I'm updating this plot, it likely means there was another mass shooting today, ", today, "."))
 ```
 
 ![plot of chunk us-mass-shootings-by-year-1982-present-mother-jones](/images/us-mass-shootings-by-year-1982-present-mother-jones-1.png)

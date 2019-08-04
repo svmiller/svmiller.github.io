@@ -19,10 +19,8 @@ categories:
 image: "gilroy-strong.jpg"
 ---
 
-{% include image.html url="/images/gilroy-strong.jpg" caption="Artist
-Ignacio 'Nacho' Moya carries a sign he made during a vigil for the
-victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area
-News Group)" width=400 align="right" %}
+{% include image.html url="/images/gilroy-strong.jpg" caption="Artist Ignacio 'Nacho' Moya carries a sign he made during a vigil for the victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area News Group)" width=400 align="right" %}
+
 
 *Last updated: August 04, 2019*
 
@@ -30,9 +28,11 @@ News Group)" width=400 align="right" %}
 shooting](https://www.cnn.com/2019/08/03/us/el-paso-shooting/index.html)
 for literally the only country of its size and development where this
 happens on a routine basis. This one in El Paso may (reportedly) have
-some domestic terrorist overtones to it, but barring confirmation of the
-shooter and the shooter’s motives for the moment, this post will focus
-on just the gun violence and the mass shooting angle here.
+some domestic terrorist overtones to it, but ~~barring confirmation of
+the shooter and the shooter’s motives for the
+moment~~([nevermind](https://www.nytimes.com/2019/08/03/us/patrick-crusius-el-paso-shooter-manifesto.html)),
+this post will focus on just the gun violence and the mass shooting
+angle here.
 
 Gun control emerged as a political and academic hobby horse of mine
 largely because the problem strikes me as a massive and obvious public
@@ -136,19 +136,20 @@ decades ago than they are now. Still, the gun homicide rate is
 *increasing* in the United States since 2009. By comparison, they’re
 improving in every other country, prominently Italy.
 
-\`\`\`{r firearm-homicide-rate-data-usa-peer-countries-yearly, echo=T,
-eval=T, cache=T ,warning=F, message=F, fig.width=13, fig.height=88
+``` r
+ghp100k %>%
+  arrange(country, year) %>%
+  ggplot(.,aes(year, ghp100k)) + geom_line(size=1.1) +
+  theme_steve_web() +
+  facet_wrap(~country) +
+  labs(title = "The Gun Homicide Rate for Select Countries, by Year",
+       x = "Year",
+       y = "Homicide by Firearm Rate (per 100,000 population)",
+       subtitle = "Some countries (Italy, prominently) have done well to address gun violence over time. It's only increased in the U.S. since 2009.",
+       caption = "Data: gunpolicy.org, through various other sources (e.g. UNODC, CDC, WHO).")
+```
 
-ghp100k %\>% arrange(country, year) %\>% ggplot(.,aes(year, ghp100k)) +
-geom\_line(size=1.1) + theme\_steve\_web() + facet\_wrap(~country) +
-labs(title = “The Gun Homicide Rate for Select Countries, by Year”, x =
-“Year”, y = “Homicide by Firearm Rate (per 100,000 population)”,
-subtitle = “Some countries (Italy, prominently) have done well to
-address gun violence over time. It’s only increased in the U.S. since
-2009.”, caption = “Data: gunpolicy.org, through various other sources
-(e.g. UNODC, CDC, WHO).”)
-
-\`\`\`
+![](/images/firearm-homicide-rate-data-usa-peer-countries-yearly-faceted-1.png)<!-- -->
 
 Finally, you can start thinking about automating a script to scan [the
 Mother Jones database on mass
@@ -159,30 +160,60 @@ worse the problem is getting.
 
 Because it’s only getting worse.
 
-\`\`\`{r us-mass-shootings-by-year-1982-present-mother-jones, echo=T,
-eval=T, cache=T, warning=F, fig.width=13, fig.height=8
-
+``` r
 library(gsheet)
 
-mass\_shootings =
-gsheet2tbl(‘<https://docs.google.com/spreadsheets/d/1b9o6uDO18sLxBqPwl_Gh9bnhW-ev_dABH83M5Vb5L8o/htmlview?sle=true#gid=0>’)
+gsheet2tbl('https://docs.google.com/spreadsheets/d/1b9o6uDO18sLxBqPwl_Gh9bnhW-ev_dABH83M5Vb5L8o/htmlview?sle=true#gid=0') %>%
+  separate(date, c("month","day","year"), sep="/") %>%
+  mutate(date = lubridate::as_date(paste0(year,"-",month,"-", day))) %>%
+  select(case, date, everything()) -> mass_shootings
 
-mass\_shootings %\>% separate(date, c(“month”,“day”,“year”), sep=“/”)
-%\>% mutate(date = lubridate::as\_date(paste0(year,“-”,month,“-”, day)))
-%\>% select(case, date, everything()) %\>% mutate(year =
-lubridate::year(date)) %\>% group\_by(year) %\>% summarize(n = n()) %\>%
-ggplot(.,aes(year, n)) + theme\_steve\_web() +
-geom\_bar(stat=“identity”, alpha=0.4, fill=“\#619cff”,color=“black”)
-+ scale\_x\_continuous(breaks = seq(1980, 2020, by = 4)) +
-geom\_text(aes(label=n), vjust=-.5, colour=“black”,
-position=position\_dodge(.9), size=4, family=“Open Sans”) + labs(y =
-“Number of Mass Shootings in a Calendar Year”, x = “Year”, title =
-paste0(“The Number of Mass Shootings by Year, 1982-Present (”,
-format(Sys.time(), ‘%B %d, %Y’), “)”), subtitle = “There were 31 mass
-shootings from 1982-1999. There’ve been 28—29, including El Paso—in the
-past 2.5 years.”, caption = “Data: Mother Jones. Methodology: pretty
-sure these are shooting incidents in which at least three people died.
-Earlier classifications of mass shootings counted four or more
-casualties, if I recall correctly.”)
+mass_shootings %>% 
+  slice(1) %>%
+  select(date) %>% 
+  mutate(date = format(date, '%B %d, %Y')) %>% 
+  pull(date) -> last_update
 
-\`\`\`
+mass_shootings %>% 
+  slice(n()) %>%
+  select(date) %>% 
+  mutate(date = format(date, '%B %d, %Y')) %>% 
+  pull(date) -> first_event
+
+mass_shootings %>%
+  mutate(year = lubridate::year(date)) %>%
+  group_by(year) %>%
+  summarize(n = n()) -> mass_shootings_yearly
+
+mass_shootings_yearly %>%
+  filter(year <= 1999) %>%
+  summarize(n = sum(n)) %>% pull(n) -> nobs80s90s
+
+mass_shootings_yearly %>%
+  filter(year >= 2017) %>%
+  summarize(n = sum(n)) %>% pull(n) -> nobssince2017
+
+today <- format(Sys.time(), '%B %d, %Y')
+
+mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
+mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
+
+mjms_caption = paste0("Data: Mother Jones. Methodology: pretty sure these are shooting incidents in which at least three people died. Earlier classifications of mass shootings counted four or more casualties, if I recall correctly. If I'm updating this plot, it likely means there was another mass shooting today, ", today, ".")
+
+mass_shootings_yearly %>%
+  ggplot(.,aes(year, n)) +
+  theme_steve_web() +
+  geom_bar(stat="identity", alpha=0.4, fill="#619cff",color="black") +
+  scale_x_continuous(breaks = seq(1980, 2020, by = 4)) +
+  scale_y_continuous(breaks = seq(0, 14, by =2)) +
+  geom_text(aes(label=n), vjust=-.5, colour="black",
+            position=position_dodge(.9), size=4, family="Open Sans") +
+  labs(y = "Number of Mass Shootings in a Calendar Year",
+       x = "Year",
+       title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update),
+       subtitle =  paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,"."), 
+       caption = paste0("Data: Mother Jones. Methodology: pretty sure these are shooting incidents in which at least three people died. Earlier classifications of mass shootings counted four or more casualties, if I recall correctly. If I'm updating this plot, it likely means there was another mass shooting today, ", today, ".")
+  )
+```
+
+![](/images/us-mass-shootings-by-year-1982-present-mother-jones-1.png)<!-- -->
