@@ -25,7 +25,7 @@ image: "gilroy-strong.jpg"
 
 {% include image.html url="/images/gilroy-strong.jpg" caption="Artist Ignacio 'Nacho' Moya carries a sign he made during a vigil for the victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area News Group)" width=400 align="right" %}
 
-*Last updated: August 03, 2019*
+*Last updated: August 04, 2019*
 
 [Another day, another mass shooting](https://www.cnn.com/2019/08/03/us/el-paso-shooting/index.html) for literally the only country of its size and development where this happens on a routine basis. This one in El Paso may (reportedly) have some domestic terrorist overtones to it, but barring confirmation of the shooter and the shooter's motives for the moment, this post will focus on just the gun violence and the mass shooting angle here.
 
@@ -37,49 +37,61 @@ Alas, here we are: massive public health problem---*needless* public health prob
 
 Anywho, a few lines of R code will emphasize the scope of the problem.
 
-First, United Nations Office on Drugs and Crime data (see: [here](https://www.unodc.org/documents/data-and-analysis/statistics/Homicide/Homicides_by_firearms.xls)) will emphasize how the U.S. stands out among peer countries. I link to the spreadsheet in this post. It's an *ugly* spreadsheet that requires some tidying and eye-balling things in LibreOffice for slicing, but it can be done all the same. Do note: the data are mostly limited to 2009/2010 observations, not that it should meaningfully change the takeaway here. The U.S. will conspicuously be an island among peer countries (i.e. Canada, Australia, New Zealand, and Western/Northern Europe) for its homicide by firearm rate.
+First, [GunPolicy.org](https://www.gunpolicy.org) is an excellent repository of information about gun deaths, gun laws, and gun trafficking for a slew of countries over time. It also has fairly comprehensive coverage of estimated gun homicides per 100,000 people that leans on country reports from various agencies (e.g. Center for Disease Control, United Nations Office on Drugs and Crime, World Health Organization) and incorporates information from academic research on gun homicides as well when necessary. Since we're dealing with advanced countries, there is high confidence in the estimates even if not all years are covered (e.g. the latest year for Germany in the data is 2015).
+
+
+
+
+<!-- United Nations Office on Drugs and Crime data (see: [here](https://www.unodc.org/documents/data-and-analysis/statistics/Homicide/Homicides_by_firearms.xls)) will emphasize how the U.S. stands out among peer countries. I link to the spreadsheet in this post. It's an *ugly* spreadsheet that requires some tidying and eye-balling things in LibreOffice for slicing, but it can be done all the same. Do note: the data are mostly limited to 2009/2010 observations, not that it should meaningfully change the takeaway here. The U.S. will conspicuously be an island among peer countries (i.e. Canada, Australia, New Zealand, and Western/Northern Europe) for its homicide by firearm rate. -->
+
+I gathered data for 25 peer countries to the U.S. (i.e. Western Europe, Northern Europe, Canada, Australia, and New Zealand) in addition to data for the U.S. on gun homicides per 100,000 people in the population. I created a data frame for it (`ghp100k`) and added it to [my `stevemisc` package.](https://github.com/svmiller/stevemisc). You can [read more about the data here](https://github.com/svmiller/stevemisc/blob/master/man/ghp100k.Rd) and, better yet, [check the underlying sources here](https://www.gunpolicy.org).
+
+We can first assess the scope of the problem by selecting on the latest years for all 25 countres in the data. Here, it's apparent the U.S. will conspicuously be an island among peer countries for its gun homicide rate. The U.S. had a gun homicide rate (per 100,000 people) in 2017 of an astounding 4.46. The next closest country is Canada, with a rate .75. The U.S. rate is almost six times the next closest country in gun homicides.
 
 
 
 ```r
-readxl::read_xls("~/Dropbox/data/unodc/Homicides_by_firearms.xls",
-                 skip = 5) %>%
-  select(1:3, Variable, `1995`:`2010`) %>% slice(1:348) %>%
-  rename(Country = `Country/Territory`) %>%
-  fill(Region, Subregion, Country) %>%
-  group_by(Region, Subregion, Country, Variable) %>%
-  gather(year, value, `1995`:`2010`) %>%
-  mutate(ccode = countrycode::countrycode(Country,"country.name","cown")) -> UNODC
+# require(tidyverse)
+# require(stevemisc)
+# data(ghp100k)
 
-UNODC %>% ungroup() %>%
-  filter(ccode %in% c(2, 20, 200, 205, 210, 211, 212, 220, 230,
-                      235, 255, 260, 305, 310, 316, 317, 325,
-                      366, 367, 368, 900, 920)) %>%
-  filter(Variable == "Homicide by firearm rate per 100,000 population") %>%
-  arrange(Country, year) %>% 
-  group_by(Country) %>%
-  # These are advanced countries so most fills are coming from 2009 or so.
-  fill(value) %>% 
-  filter(year >= 2010) %>%
-  # Meh, didn't want to have to do this.
-  ungroup() %>%
-  mutate(Country = ifelse(Country == "United States of America", "USA", Country),
-         Country = ifelse(Country == "United Kingdom (Northern Ireland)", "Northern Ireland", Country),
-         Country = ifelse(Country == "United Kingdom (England and Wales)", "England/Wales", Country)) %>%
-  ggplot(.,aes(reorder(Country, -value), value)) +
+ghp100k %>%
+  arrange(country, year) %>%
+  group_by(country) %>%
+  slice(n()) %>%
+  mutate(cy = paste0(country,"\n(", year, ")")) %>%
+  ggplot(.,aes(reorder(cy, -ghp100k), ghp100k)) +
   theme_steve_web() +
   geom_bar(stat="identity", alpha=0.6, color="black") +
-  geom_text(aes(label=round(value, 2)), vjust=-.5, colour="black",
+  geom_text(aes(label=round(ghp100k, 2)), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4, family="Open Sans") +
   theme(axis.text.x = element_text(angle = 45)) +
-  labs(x = "Country/Territory",
+  labs(x = "Country (Year)",
        y = "Homicide by Firearm Rate (per 100,000 population)",
-      title = "The U.S. (in 2010) Had a Homicide by Firearm Rate of 3.21 per 100,000 People",
-       subtitle = "That's more than four times the next nearest peer country (Italy), which had a firearm mortality rate of .71 per 100,000 people.",
-       caption = "Data: United Nations Office on Drugs and Crime. Note: data are limited to 2010 at the latest for convenience. Includes some fills from previous years.") 
+       caption = "Data: gunpolicy.org, through various other sources (e.g. UNODC, CDC, WHO).",
+       title = "The United States' Gun Homicide Rate (per 100,000 People) is Almost Six Times The Next Closest Peer Country",
+       subtitle = "Other countries are reducing what are already low rates. The U.S. rate is only increasing.")
 ```
 
 ![plot of chunk firearm-homicide-rate-data-usa-peer-countries](/images/firearm-homicide-rate-data-usa-peer-countries-1.png)
+
+The data I collected have a time-series component as well to assess changes over time. A few things are worth highlighting here. First, the U.S. gun homicide rate had been much worse a few decades ago. This we knew. Crime rates everywhere in the United States were higher a few decades ago than they are now. Still, the gun homicide rate is *increasing* in the United States since 2009. By comparison, they're improving in every other country, prominently Italy.
+
+
+```r
+ghp100k %>%
+  arrange(country, year) %>%
+  ggplot(.,aes(year, ghp100k)) + geom_line(size=1.1) +
+  theme_steve_web() +
+  facet_wrap(~country) +
+  labs(title = "The Gun Homicide Rate for Select Countries, by Year",
+       x = "Year",
+       y = "Homicide by Firearm Rate (per 100,000 population)",
+       subtitle = "Some countries (Italy, prominently) have done well to address gun violence over time. It's only increased in the U.S. since 2009.",
+       caption = "Data: gunpolicy.org, through various other sources (e.g. UNODC, CDC, WHO).")
+```
+
+![plot of chunk firearm-homicide-rate-data-usa-peer-countries-yearly-faceted](/images/firearm-homicide-rate-data-usa-peer-countries-yearly-faceted-1.png)
 
 Finally, you can start thinking about automating a script to scan [the Mother Jones database on mass shootings](https://www.motherjones.com/politics/2012/12/mass-shootings-mother-jones-full-data/) to note how this problem is only getting worse. In subsequent updates, I might try to fully automate this with built-in assessments of how much worse the problem is getting.
 
