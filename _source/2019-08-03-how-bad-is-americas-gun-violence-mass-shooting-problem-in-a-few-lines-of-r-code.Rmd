@@ -4,11 +4,8 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-    pandoc_args: [ 
-      "--ascii"
-    ]
-# knit: (function(inputFile, encoding) {
-#   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
+knit: (function(inputFile, encoding) {
+   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-03'
 excerpt: "America's gun violence/mass shooting problem is bad. Conspicuously bad and it's getting worse despite obvious soluations for which there's no political will."
@@ -38,12 +35,12 @@ knitr::opts_chunk$set(fig.path = fig_path,
 
 library(tidyverse)
 library(stevemisc)
-
+library(knitr)
 ```
 
 
 
-```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+```{r leadimage, echo=F, eval=F, results="asis", cache=F}
  
 add_jekyll_image('/images/gilroy-strong.jpg', "Artist Ignacio 'Nacho' Moya carries a sign he made during a vigil for the victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area News Group)", "400", "right")
  
@@ -53,7 +50,7 @@ add_jekyll_image('/images/gilroy-strong.jpg', "Artist Ignacio 'Nacho' Moya carri
 
 [Another day, another mass shooting](https://www.cnn.com/2019/08/03/us/el-paso-shooting/index.html) for literally the only country of its size and development where this happens on a routine basis. This one in El Paso may (reportedly) have some domestic terrorist overtones to it, but ~~barring confirmation of the shooter and the shooter's motives for the moment~~([nevermind](https://www.nytimes.com/2019/08/03/us/patrick-crusius-el-paso-shooter-manifesto.html)), this post will focus on just the gun violence and the mass shooting angle here.
 
-Gun control emerged as a political and academic hobby horse of mine largely because the problem strikes me as a massive and obvious public health problem that has a fairly simple solution on paper. Cheap gun supply---especially of weapons like AR-15s and AK-47s that have no practical use for hobbyists, hunters, ranchers, or those with an earnest interest in self-defense---decreases the transaction costs associated with carrying out violent rampages (see: [Wintemute, 2005](https://ucdavis.pure.elsevier.com/en/publications/guns-and-gun-violence) and [Bartley and Williams, 2018](https://events.iadb.org/events/handler/geteventdocument.ashx?AFCF784DCD0CBF43BE2C6862BF3344018A6A5CB902FA5578FDC3D0A580A830F93EB421FAAECD73D52562D8C42E362FA5853AE10D3E97D4160C156BD8B16088D305C031362E48EDD5)). The quality of those assault rifles in particular also increase the costs for first-responders, putting them at risk and delaying much needed aid. This raises the societal costs for these "transactions" carried out by perpetrators. Restricting gun supply should raise the transaction costs associated with executing a violent rampage. Again, it's not hard. If you don't believe that, then you don't believe people respond to economic incentives.
+Gun control emerged as a political and academic hobby horse of mine largely because the problem strikes me as a massive and obvious public health problem that has a fairly simple solution on paper. Cheap gun supply---especially of weapons like AR-15s and AK-47s that have no practical use for hobbyists, hunters, ranchers, or those with an earnest interest in self-defense---decreases the transaction costs associated with carrying out violent rampages (see: [Wintemute, 2005](https://ucdavis.pure.elsevier.com/en/publications/guns-and-gun-violence) and [Bartley and Williams, 2018](https://events.iadb.org/events/handler/geteventdocument.ashx?AFCF784DCD0CBF43BE2C6862BF3344018A6A5CB902FA5578FDC3D0A580A830F93EB421FAAECD73D52562D8C42E362FA5853AE10D3E97D4160C156BD8B16088D305C031362E48EDD5)). The quality of those assault rifles in particular also increases the costs for first-responders, putting them at risk and delaying much needed aid. This raises the societal costs for these "transactions" carried out by perpetrators. Restricting gun supply should raise the transaction costs associated with executing a violent rampage. Again, it's not hard. If you don't believe that, then you don't believe people respond to economic incentives.
 
 Obviously, there's no political will here. [The public opinion is there](http://svmiller.com/research/what-americans-really-think-about-gun-control/) in support of most forms of gun control, even subtly aggressive forms of gun control, but GOP voters are gradually adopting cues from GOP elites on this topic. At the elite-level, the GOP relies on the National Rifle Association---which wants cheap guns for purchase to the benefit of gun manufacturers---to help [message "conservatism" to the voting bloc](https://www.amazon.com/Guns-Democracy-Insurrectionist-Joshua-Horwitz/dp/0472033700) and massage over other issues for GOP partisans (on fiscal policies, for example). The National Rifle Association is well-funded and partisan sorting has made them credible threats to primary GOP legislators who don't cooperate with them.
 
@@ -91,13 +88,48 @@ ghp100k %>%
   theme(axis.text.x = element_text(angle = 45)) +
   labs(x = "Country (Year)",
        y = "Homicide by Firearm Rate (per 100,000 population)",
-       caption = "Data: gunpolicy.org, through various other sources (e.g. UNODC, CDC, WHO).",
+       caption = "Data: GunPolicy.org, through various other sources (e.g. UNODC, CDC, WHO).",
        title = "The United States' Gun Homicide Rate (per 100,000 People) is Almost Six Times The Next Closest Peer Country",
        subtitle = "Other countries are reducing what are already low rates. The U.S. rate is only increasing.")
 
 ```
 
-The data I collected have a time-series component as well to assess changes over time. A few things are worth highlighting here. First, the U.S. gun homicide rate had been much worse a few decades ago. This we knew. Crime rates everywhere in the United States were higher a few decades ago than they are now. Still, the gun homicide rate is *increasing* in the United States since 2009. By comparison, they're improving in every other country, prominently Italy.
+In the event someone may want to copy-paste this information in lieu of showing this graph, you can see the pertinent information here.
+
+```{r firearm-homicide-rate-data-usa-peer-countries-table, cache=T, echo=F}
+ghp100k %>%
+  arrange(country, year) %>%
+  group_by(country) %>%
+  slice(n()) %>%
+  select(country, year, ghp100k) %>%
+  arrange(-ghp100k) %>%
+  mutate(ghp100k = round(ghp100k, 2)) %>%
+  rename(Country = country,
+         `Year (Most Recent)` = year,
+         `Homicide by Firearm Rate (per 100,000 People)` = ghp100k) %>%
+  kable(., format="html",
+        table.attr='id="stevetable"',
+        caption = "The Most Recent Homicide by Firearm Rate (per 100,000 People) for the U.S. and Select Peer Countries",
+        align=c("l","c","c"))
+```
+
+The data I collected have a time-series component as well to assess changes over time. A few things are worth highlighting here. First, data availability isn't as great for the 1990s since GunPolicy.org leans heavily on the Centers for Disease Control to get estimates for homicide rates by firearm. [The Wonder tool](https://wonder.cdc.gov/ucd-icd10.html) has an easy API for data from 1999 to 2017, which would explain why that's the bulk of the data here, in addition to that lonely observation from 1993. Second, the U.S. gun homicide rate had been much worse a few decades ago. This we knew. Crime rates everywhere in the United States were higher a few decades ago than they are now.  Still, the gun homicide rate is *increasing* in the United States since 2009. 
+
+```{r firearm-homicide-rate-data-usa-over-time, cache=T, echo=F}
+ghp100k %>%
+  filter(country == "USA") %>%
+  select(country, year, ghp100k) %>%
+  mutate(ghp100k = round(ghp100k, 2)) %>%
+  rename(Country = country,
+         Year = year,
+         `Homicide by Firearm Rate (per 100,000 People)` = ghp100k) %>%
+  kable(., format="html",
+        table.attr='id="stevetable"',
+        caption = "The Homicide by Firearm Rate (per 100,000 People) in the United States, 1993 to 2017",
+        align=c("l","c","c"))
+```
+
+By comparison, they're improving in every other country, prominently Italy.
 
 ```{r firearm-homicide-rate-data-usa-peer-countries-yearly-faceted, echo=T, eval=T, cache=F ,warning=F, message=F, fig.width=13, fig.height=9}
 
@@ -118,7 +150,7 @@ Finally, you can start thinking about automating a script to scan [the Mother Jo
 
 Because it's only getting worse.
 
-```{r us-mass-shootings-by-year-1982-present-mother-jones, echo=T, eval=T, cache=T, warning=F, fig.width=13, fig.height=8}
+```{r us-mass-shootings-by-year-1982-present-mother-jones, echo=T, eval=T, cache=F, warning=F, fig.width=13, fig.height=8}
 
 library(gsheet)
 
