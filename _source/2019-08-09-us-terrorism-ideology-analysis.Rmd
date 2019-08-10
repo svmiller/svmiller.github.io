@@ -383,7 +383,7 @@ Charges against these groups were quietly dropped because of the warantless sear
 
 Amid successful counterterrorism/policing (again, of varying legality), as well the absence of some of the original motivations for these groups/militants (e.g. the end of the Vietnam war), left-wing terrorism was about 57% of all terrorism and only just over 24% of all terrorism by 1979. Nationalist-separatist terrorism surpassed left-wing terrorism as the modal form of terrorism by the end of the decade even as all forms of terrorism combined was just over 14% of what it was in 1970. Indeed, the 69 incidents in 1979 would be just four more than what the U.S. experienced in 2017 and five more than what it experienced in 2016.
 
-In other words, domestic terorrism regressed to the typical mean by the end of the decade even as the first two years are over a quarter of the entire data set.
+In other words, domestic terrorism regressed to the typical mean by the end of the decade even as the first two years are over a quarter of the entire data set.
 
 ```{r knitchunk, echo=F, eval=F}
 setwd("~/Dropbox/svmiller.github.io/_source")
