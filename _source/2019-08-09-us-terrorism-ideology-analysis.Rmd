@@ -100,7 +100,7 @@ Ideo %>%
   kable(., format="html",
         col.names = c("Motivation", "Number of Terror Attacks"),
         table.attr='id="stevetable"',
-        caption = "The Number of Terror Attacks by Motviation in the 1970s",
+        caption = "The Number of Terror Attacks by Motivation in the 1970s",
         align=c("l","c"))
 ```
 

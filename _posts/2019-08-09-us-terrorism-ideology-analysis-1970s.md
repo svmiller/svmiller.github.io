@@ -39,7 +39,7 @@ The 1970s were a lost decade for the United States. Without trivializing what "l
 Motivation-wise, left-wing extremists were clearly the focal point of the problem. There were almost 800 terror attacks in the decade perpetrated by people or groups with left-wing motivations. The overlap between left-wing terrorism and nationalist-separatist terrorism---the second biggest category---was non-trivial as well, which further accentuates the nature of terrorism that decade.
 
 <table id="stevetable">
-<caption>The Number of Terror Attacks by Motviation in the 1970s</caption>
+<caption>The Number of Terror Attacks by Motivation in the 1970s</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Motivation </th>
