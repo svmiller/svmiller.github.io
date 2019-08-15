@@ -28,6 +28,7 @@ This page serves includes my teaching philosophy and an empirical assessment of 
 
 - [Data Science for the Social Sciences](/teaching/data-science-social-sciences/)
 - [Comparative Political Behavior](/teaching/posc-4430-political-behavior/)
+- [Quantitative Public Policy Analysis](/teaching/quantitative-public-policy-analysis/)
 
 ### University of Illinois at Urbana-Champaign
 
