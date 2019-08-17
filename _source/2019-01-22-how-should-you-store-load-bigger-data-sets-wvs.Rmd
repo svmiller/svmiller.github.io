@@ -9,43 +9,40 @@ excerpt: Storing your bigger data sets as an SQL database ensures the fastest lo
 layout: post
 permalink: null
 categories: R
+image: "world-values-survey.jpg"
 ---
 
-<style>
-  .myTable {
-    padding-bottom: 15px;
-    width: 100%
-  }
-  
-  .myTable th {
-  font-weight: bold;
-  border-bottom: 1px #000 solid;
-  border-spacing: 0
-  }
-  
-.myTable table {
-  border-spacing: 0;
-  border-collapse: collapse;
-  }
-  
-  .myTable tr:nth-child(even) {background: #f3f3f3}
-.myTable tr:nth-child(odd) {background: #fff}
-.myTable td {margin-right: 0}
-</style>
 
-```{r setup, include=FALSE, cache=T}
-knitr::opts_chunk$set(fig.path='images/')
+```{r setup-us-terrorism-ideology, include=FALSE, cache=F}
 
-#library(RCurl)
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- "images/"
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
+                      cache.path = '../cache/how-should-you-store/',
+                      message=FALSE, warning=FALSE,
+                      cache = TRUE) 
+
 library(tidyverse)
 library(stevemisc)
 library(knitr)
 library(kableExtra)
-combined_times <- read_csv("https://gist.githubusercontent.com/svmiller/aad0347f6627de709c0e2bbc6a4f2873/raw/e7f5afc040c107f67f43dcc7b43270f25a5e56b2/wvs-load-times.comparison.csv")
 
+combined_times <- read_csv("https://gist.githubusercontent.com/svmiller/aad0347f6627de709c0e2bbc6a4f2873/raw/e7f5afc040c107f67f43dcc7b43270f25a5e56b2/wvs-load-times.comparison.csv")
 ```
 
-{% include image.html url="/images/world-values-survey.jpg" caption="World Values Survey" width=350 align="right" %}
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+ 
+add_jekyll_image('/images/world-values-survey.jpg', "World Values Survey", "350", "right")
+ 
+```
 
 How should you store and load your bigger data sets? Academics increasingly work with larger data sets but still mostly rely on computation through their personal computers. Cloud computing is available, either through Amazon or the university, but there's a greater convenience in eschewing the cloud and analyzing the data on a personal computer. This is certainly how I approach things as I work in R, even after all these years.
 
@@ -96,7 +93,9 @@ Here is a box-and-whisker plot of the load times across the 10 trials for each f
 
 combined_times %>%
   ggplot(.,aes(Method, elapsed)) +
-  theme_steve_web2() +
+  theme_steve_web() +
+  theme(plot.background = element_rect(fill = "#fdfdfd"),
+        panel.background = element_rect(fill = "#fdfdfd")) +
   geom_boxplot(fill="#619cff", alpha=.5) +
   ylab("Elapsed Time in Seconds") +
   labs(title = "Load Times for World Values Survey Longitudinal Data in Various Formats",
@@ -180,3 +179,8 @@ Further, the user has the option of assigning the object when s/he loads it into
 
 Finally, the R serialized data frame requires no other package that isn't already part of base R. It and its companion function `saveRDS()` come standard in R. I think WVS would find considerable value in eschewing the Rdata format for its users to download and providing an RDS file instead.
 
+```{r knitchunk, echo=F, eval=F}
+setwd("~/Dropbox/svmiller.github.io/_source")
+knitr::knit("2019-01-22-how-should-you-store-load-bigger-data-sets-wvs.Rmd",
+            output = "../_posts/2019-01-22-how-should-you-store-load-bigger-data-sets-wvs.md")
+```

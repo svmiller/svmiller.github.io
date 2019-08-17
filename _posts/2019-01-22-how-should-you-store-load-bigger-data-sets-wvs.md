@@ -9,29 +9,9 @@ excerpt: Storing your bigger data sets as an SQL database ensures the fastest lo
 layout: post
 permalink: null
 categories: R
+image: "world-values-survey.jpg"
 ---
 
-<style>
-  .myTable {
-    padding-bottom: 15px;
-    width: 100%;
-  }
-  
-  .myTable th {
-  font-weight: bold;
-  border-bottom: 1px #000 solid;
-  border-spacing: 0
-  }
-  
-.myTable table {
-  border-spacing: 0px;
-  border-collapse: collapse; 
-  }
-  
-  .myTable tr:nth-child(even) {background: #f3f3f3}
-.myTable tr:nth-child(odd) {background: #fdfdfd}
-.myTable td { padding: 3px 3px 3px 10px }
-</style>
 
 
 
@@ -197,4 +177,5 @@ An R serialized data frame offers a substantial improvement on this approach. Fo
 Further, the user has the option of assigning the object when s/he loads it into the R session. Whereas the `load` command comes with a preset output, the user can assign a more intuitive/acccessible name to the object (i.e. `WVS <- readRDS("wvs6wave-20150418.rds")`, in my case). Notice the implication here. An R user should only need the `load()` and `save()` functions when s/he is loading or save *multiple* objects to or from an R session. Here, WVS is providing just one object (a single data frame). A serialized data frame is [far more useful in this situation](https://www.fromthebottomoftheheap.net/2012/04/01/saving-and-loading-r-objects/).
 
 Finally, the R serialized data frame requires no other package that isn't already part of base R. It and its companion function `saveRDS()` come standard in R. I think WVS would find considerable value in eschewing the Rdata format for its users to download and providing an RDS file instead.
+
 
