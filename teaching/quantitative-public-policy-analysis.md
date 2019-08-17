@@ -10,4 +10,4 @@ Quantitative public policy analysis shares important foundations with a standard
 
 ## Course Materials
 
-1. Syllabus
+1. [Syllabus](https://www.dropbox.com/s/8khxgmvyxg4diiy/public-policy-analysis-syllabus.pdf?dl=0)
