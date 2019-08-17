@@ -27,7 +27,7 @@ add_jekyll_image <- function(url, caption, width, align) {
 }
 
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
-knitr::opts_chunk$set(fig.path = fig_path,
+knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
                       cache.path = '../cache/us-terrorism-ideology',
                       message=FALSE, warning=FALSE,
                       cache = TRUE) 
@@ -177,6 +177,8 @@ Ideo %>%
                                    "Single Issue" = "single")) %>%
   ggplot(.,aes(attacktype1_txt, prop)) +
   theme_steve_web() + 
+  theme(plot.background = element_rect(fill = "#fdfdfd"),
+        panel.background = element_rect(fill = "#fdfdfd")) +
   geom_bar(stat="identity", alpha=0.8, fill="#619cff", color="black") +
   facet_wrap(~cat) +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -316,6 +318,8 @@ Ideo %>%
   geom_text(aes(label=n), vjust=-.5, colour="black",
             position=position_dodge(.9), size=3.5, family="Open Sans") +
   theme_steve_web() +
+  theme(plot.background = element_rect(fill = "#fdfdfd"),
+        panel.background = element_rect(fill = "#fdfdfd")) +
   scale_x_continuous(breaks = seq(1970, 1980, by = 2)) +
   facet_wrap(~cat) +
   labs(x = "Year",
