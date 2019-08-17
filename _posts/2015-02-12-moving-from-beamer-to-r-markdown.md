@@ -13,6 +13,8 @@ tags:
 excerpt: "Markdown is awesome. It's much better for preparing slides than the Beamer package in LaTeX. I offer a guide to get started."
 ---
 
+*Last updated: August 17, 2019. Feel free to read this, but it's a legacy blog post right now and not very informative for those interested in learning to use R Markdown. You can [read an update here](http://svmiller.com/blog/2019/08/r-markdown-template-beamer-presentations/).
+
 I've been using LaTeX for document rendering for over five years. No one else in my department at the time used it, beyond [my friend Joe][1] (who introduced it to me). There was no pressure from my department to learn it, only a curiosity on my end for the benefits of it. The transition to LaTeX came with a concurrent transition to its sister package Beamer, which renders Powerpoint-styled presentations. Both have numerous advantages over their Microsoft equivalents.
 
 However, I never particularly cared for Beamer. At least, I found LaTeX's document preparation system more intuitive than Beamer's slides preparation system. Using both will lead to proficiency, but Beamer markup remains ugly and a chore to write.
@@ -59,7 +61,7 @@ I've known about [Markdown][2] language (and [Pandoc][3]) as a substitute for st
 
 R Markdown uses [YAML][9] for its metadata. It also does so in a manner that's more efficient than Pandoc (or, at least, more intuitive for me). Consider my working example below.
 
-{% highlight yaml %}
+```yaml
 ---
 title: An Example R Markdown Document
 subtitle: (A Subtitle Would Go Here if This Were a Class)
@@ -75,8 +77,7 @@ output:
  in_header: ~/Dropbox/teaching/clemson-beamer-header-simple.txt
  after_body: ~/Dropbox/teaching/table-of-contents.txt
 ---
-
-{% endhighlight %}
+```
 
 
 Metadata is always at the top of a R Markdown document. I'll explain some important YAML items below, assuming some items (e.g. title, subtitle, date, author, fontsize) are intuitive.
