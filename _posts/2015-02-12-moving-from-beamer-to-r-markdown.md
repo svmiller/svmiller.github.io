@@ -13,7 +13,7 @@ tags:
 excerpt: "Markdown is awesome. It's much better for preparing slides than the Beamer package in LaTeX. I offer a guide to get started."
 ---
 
-*Last updated: August 17, 2019. Feel free to read this, but it's a legacy blog post right now and not very informative for those interested in learning to use R Markdown. You can [read an update here](http://svmiller.com/blog/2019/08/r-markdown-template-beamer-presentations/).
+*Last updated: August 17, 2019. Feel free to read this, but it's a legacy blog post right now and not very informative for those interested in learning to use R Markdown. You can [read an update here](http://svmiller.com/blog/2019/08/r-markdown-template-beamer-presentations/).*
 
 I've been using LaTeX for document rendering for over five years. No one else in my department at the time used it, beyond [my friend Joe][1] (who introduced it to me). There was no pressure from my department to learn it, only a curiosity on my end for the benefits of it. The transition to LaTeX came with a concurrent transition to its sister package Beamer, which renders Powerpoint-styled presentations. Both have numerous advantages over their Microsoft equivalents.
 
