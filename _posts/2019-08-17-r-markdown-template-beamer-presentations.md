@@ -51,7 +51,7 @@ titlefont: "Titillium Web" # Try out some font options if xelatex
 
 Long-time users of my templates or R Markdown should recognize a fair bit here. Make `title:` the topic of your presentation. `subtitle:` is optional, but try to use it since it looks nice and fleshes out the title page. The `author:` field should be who you are (or me, you're free to make everything about and by me). The `institute:` field should be your department or employer. 
 
-The `titlegraphic:` field should be a relative(-ish) path to a brand marker for your university or employer. LaTeX (as far as I know) is a bit wonky about paths. In my template, I specify this as option like this.
+The `titlegraphic:` field should be a relative(-ish) path to a brand marker for your university or employer. LaTeX (as far as I know) is a bit wonky about paths. My template specifies this field like this, if you wanted to see what it looks like under the proverbial hood.
 
 ```latex
 % \titlegraphic{\includegraphics[width=0.3\paperwidth]{\string~/Dropbox/teaching/clemson-academic.png}} 
