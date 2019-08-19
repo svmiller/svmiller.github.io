@@ -23,11 +23,11 @@ image: brent-rambo.jpg
 
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- "cache/"
 
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path,
-                      cache.path = '../cache/',
+                      cache.path = '../cache/dross/',
                       message=FALSE, warning=FALSE,
                       cache = TRUE) 
 
@@ -44,6 +44,18 @@ add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
+
+library(tidyverse)
+library(stevemisc)
+# theme_steve_web <- function() {
+#   theme_steve_web() +
+#   theme(plot.background = element_rect(fill = "#fdfdfd"),
+#         panel.background = element_rect(fill = "#fdfdfd"))
+# }
+post_bg <- function() {
+  theme(plot.background = element_rect(fill = "#fdfdfd"),
+        panel.background = element_rect(fill = "#fdfdfd"))
+}
 ```
 
 ```{r leadimage2, echo=F, eval=T, results="asis", cache=F}
@@ -52,3 +64,10 @@ add_jekyll_image('/images/brent-rambo.jpg', "DSFS", "430", "right")
  
 ```
 
+```{r attack-type-terrorism-1970s, echo=F, eval=T, cache=T, warning=F, fig.width=13, fig.height=8}
+uniondensity %>%
+  ggplot(.,aes(left, concen)) + geom_point() +
+  theme_steve_web() + 
+  post_bg() +
+  labs(title = "Let's Try This")
+```

@@ -28,7 +28,7 @@ add_jekyll_image <- function(url, caption, width, align) {
 
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
-                      cache.path = '../cache/us-terrorism-ideology',
+                      cache.path = '../cache/us-terrorism-ideology/',
                       message=FALSE, warning=FALSE,
                       cache = TRUE) 
 

@@ -7,12 +7,39 @@ permalink:
 categories:
   - Political Science
 excerpt: "How serious are Americans about democracy? I look at four waves of AmericasBarometer data to answer that question. I have my doubts about American (certainly partisan) commitment to democracy."
+image: trump-ny-rally.jpg
 ---
 
-```{r setup, include=FALSE, cache=TRUE}
-knitr::opts_chunk$set(fig.path='images/')
+```{r setup-how-serious-americans, include=FALSE, cache=F}
 
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- "images/"
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
+                      cache.path = '../cache/how-serious-americans/',
+                      message=FALSE, warning=FALSE,
+                      cache = TRUE) 
+
+library(tidyverse)
+library(stevemisc)
+library(knitr)
+library(kableExtra)
+library(labelled)
+library(forcats)
+
+post_bg <- function() {
+  theme(plot.background = element_rect(fill = "#fdfdfd"),
+        panel.background = element_rect(fill = "#fdfdfd"))
+}
 ```
+
 {% include image.html url="/images/trump-ny-rally.jpg" caption="A recurring theme among partisans (Reuters/Stephen Yang)" width=400 align="right" %}
 
 One of my favorite disconnects in political science---as much as you can call it that---concerns political behavior research in the United States where we see two different classes of surveys. The first, those exclusive to the United States---like the [American National Election Study](http://www.electionstudies.org/studypages/download/datacenter_all_NoData.php) (ANES), [Cooperative Congressional Election Study](https://cces.gov.harvard.edu/data) (CCES), and [General Social Survey](http://gss.norc.org/) (GSS)---ask quite granular questions about politics in the United States that are of great interest to American political behavior researchers and political commentators. They will help us understand what Americans think about things like the Trans-Pacific Partnership or gay marriage (as opposed to homosexuality, in general). I've used these surveys to dig at some of the more particular things Americans think about [gun control](http://svmiller.com/blog/2015/12/gun-control-public-opinion-1972-2014/), [racism](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/), [abortion, and protectionism](http://svmiller.com/blog/2016/12/trump-twitter-diversion-controversial-subjects-public-opinion/).
@@ -22,11 +49,6 @@ The second class of surveys---like [AmericasBarometer](http://www.vanderbilt.edu
 The problem with this myopia is that Americans are saying things in these surveys that we're ignoring or treating uncritically. They're communicating statements about American democracy that are not as optimistic or rosy as we want to think they are. My analysis, consistent with some of my hunches on what I call [America's "strong leader" problem](http://svmiller.com/blog/2016/05/america-strong-leaders-world-values-survey-trump/) in the WVS data, suggests attitudes about American democracy that are close to [the "instrumental-intrinsic" arguments](https://www.cambridge.org/core/journals/british-journal-of-political-science/article/support-for-democracy-in-africa-intrinsic-or-instrumental/AEFE1DC3B5327DF4C8420B6D60B05B14) we were having about African democracy 15 years ago. Americans---partisans, in particular---may be valuing democracy and democratic norms the extent to which elections produce outcomes that partisans like. They may not be serious about democracy for democracy's sake.
 
 ```{r, echo=F, eval=T, message=F, warning=F}
-library(car)
-library(tidyverse)
-library(stevemisc)
-library(labelled)
-library(forcats)
 
 US06 <- haven::read_dta("~/Dropbox/data/americasbarometer/lapop-usa-2006.dta")
 US08 <- haven::read_dta("~/Dropbox/data/americasbarometer/lapop-usa-2008.dta")
@@ -314,7 +336,7 @@ I chose the AmericasBarometer data, part of the Latin American Public Opinion Pr
 
 We'll start with one of the items that does appear in all four AmericasBarometer waves under consideration here: satisfaction with the way democracy works in the United States. This question, which prompts the respondent to state their level of satisfaction with democracy on a four-part scale from "very satisfied" to "very dissatisfied", is ubiquitous in all cross-national survey research on democracy, making it a good place to start. The figure, reproduced below, makes evident a partisan shift in democratic satisfaction after Obama's election in 2008. Interestingly, we see this shift among Republicans and not Democrats.
 
-```{r satisdem, echo=F, fig.width=13, fig.height=11}
+```{r satisdem, echo=F, fig.width=14.5, fig.height=11}
 Data %>%
   mutate(pid3 = ifelse(dem == 1, "Democrat", NA),
          pid3 = ifelse(indother == 1, "Independent/Other", pid3),
@@ -327,16 +349,18 @@ Data %>%
   mutate(perc = round(sum/sum(sum), 2),
          `Party ID` = pid3,
          percper = paste0(perc*100,"%")) %>%
-  ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) + theme_steve_web() +
+  ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) +
+  theme_steve_web() +
+  post_bg() +
   geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Very\nSatisfied","Satisfied","Dissatisfied", "Very\nDissatisfied")) + 
    geom_text(aes(label=percper), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4) +
-  theme(legend.position = "bottom") +
   ylab("Percent in Category") + xlab("Satisfaction with Democracy") +
    labs(caption="Data: AmericasBarometer (2008-2014). Note: the 2008 survey occurred in April of that year, before the general election.",
+        fill = "Party ID",
        title="Democrats Experienced No Change in Satisfaction with Democracy after Obama's Election. Republicans on the Other Hand...",
        subtitle="''In general, would you say that you are very satisfied, satisfied, dissatisfied or very dissatisfied with the way democracy works in the United States?''")
 ```
@@ -365,16 +389,18 @@ Data %>%
   mutate(perc = round(sum/sum(sum), 2),
          `Party ID` = pid3,
          percper = paste0(perc*100,"%")) %>%
-  ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) + theme_steve_web() +
+  ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) +
+  theme_steve_web() +
+  post_bg() +
   geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Very\nDemocratic","Somewhat\nDemocratic","Not Very\nDemocratic", "Not At All\nDemocratic")) + 
    geom_text(aes(label=percper), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4) +
-  theme(legend.position = "bottom") +
   ylab("Percent in Category") + xlab("Level of Democracy in the U.S.") +
    labs(caption="Data: AmericasBarometer (2008-2014). Note: the 2008 survey occurred in April of that year, before the general election.",
+        fill = "Party ID",
        title="Republicans Started to Think the U.S. Was Less Democratic after Obama's Election",
        subtitle="'In your opinion, is the United States very democratic, somewhat democratic, not very democratic or not at all democratic?''")
 
@@ -402,7 +428,9 @@ Data %>%
     mutate(perc = round(sum/sum(sum), 2),
            `Party ID` = pid3,
            percper = paste0(perc*100,"%")) %>%
-    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve_web() +
+    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + 
+  theme_steve_web() +
+  post_bg() +
     geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -412,6 +440,7 @@ Data %>%
   theme(legend.position = "bottom")  +
   ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition.") +
    labs(caption="Data: AmericasBarometer (2008-2012). Note: the 2008 survey occurred in April of that year, before the general election.",
+        fill = "Party ID",
        title="Democrats Became More Open to the President Limiting Political Opposition When Obama was President",
        subtitle="''It is necessary for the progress of this country that our Presidents limit the voice and vote of opposition parties, how much do you agree or disagree with that view?''")
 
@@ -436,7 +465,9 @@ Data %>%
     mutate(perc = round(sum/sum(sum), 2),
            `Party ID` = pid3,
            percper = paste0(perc*100,"%")) %>%
-    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + theme_steve_web() +
+    ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + 
+  theme_steve_web() +
+  post_bg() +
     geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -446,6 +477,7 @@ Data %>%
   theme(legend.position = "bottom")  +
   ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition.") +
    labs(caption="Data: AmericasBarometer (2008-2012). Note: the 2008 survey occurred in April of that year, before the general election.",
+        fill = "Party ID",
        title="Democrats Became More Open to the President Limiting Political Opposition When Obama was President",
        subtitle="''It is necessary for the progress of this country that our Presidents limit the voice and vote of opposition parties, how much do you agree or disagree with that view?''")
 
@@ -473,7 +505,9 @@ Data %>%
     mutate(perc = round(sum/sum(sum), 2),
            `Party ID` = pid3,
            percper = paste0(perc*100,"%")) %>%
-    ggplot(aes(x=factor(closecong), y =perc, fill=`Party ID`)) + theme_steve_web() +
+    ggplot(aes(x=factor(closecong), y =perc, fill=`Party ID`)) +
+  theme_steve_web() +
+  post_bg() +
     geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -483,6 +517,7 @@ Data %>%
   theme(legend.position = "bottom")  +
   ylab("Percent in Category") + xlab("Justifiable to Close Congress") +
    labs(caption="Data: AmericasBarometer (2010-2014). Note: the 2008 survey occurred in April of that year, before the general election.",
+        fill = "Party ID",
        title="Democrats Became a Little More Open to Closing Congress Later into the Obama Administration",
        subtitle="''Do you believe that when the country is facing very difficult times it is justifiable for the president of the country to close the Congress and govern without Congress?''")
 
@@ -495,3 +530,9 @@ We should note with morbid interest what this resembled among Democrats in 2016,
 I worry the politics we see in the United States right now at the mass-level suggests that American partisans might not be serious about democracy. You saw it in the "Tea Party" reaction to Obama's White House win. You're going to see it soon among Democrats and those further to the political left with Trump in the White House, even as concerns about Trump are far more legitimate than the concerns about Obama's united government in January 2009. Those who value democracy for democracy's sake should not be conditioning their attitudes toward American democracy and democratic norms based on whether their co-partisans control government. Increasingly, we see this is the case. We definitely see it among Republicans. We even see it a little among Democrats in the available data, for which more recent waves will likely continue this trend.
 
 I should note that I'm an American, and a political behavior researcher. I'm not an "American political behavior" researcher. However, my analysis suggests that those two classes of surveys in the U.S. I mentioned in the preamble---those exclusive to the U.S. and those that include the U.S. with observations from other countries---should better speak to each other. Clearly those that include the U.S. among cases like Pakistan or Venezuela could benefit from more granular and focused questions about American politics. Those exclusive to the U.S., however, may have to start questionining how committed Americans are to democracy if their responses to these general questions about democratic commitment are conditioned by co-partisan control of government. We need to start asking Americans the same questions about democracy we would ask Pakistanis and Venezuelans.
+
+```{r knitchunk, echo=F, eval=F}
+setwd("~/Dropbox/svmiller.github.io/_source")
+knitr::knit("2017-07-18-how-serious-are-americans-about-democracy-americasbarometer.Rmd",
+            output = "../_posts/2017-07-18-how-serious-are-americans-about-democracy-americasbarometer.md")
+```
