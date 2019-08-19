@@ -28,7 +28,7 @@ add_jekyll_image <- function(url, caption, width, align) {
 }
 
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
-knitr::opts_chunk$set(fig.path = fig_path,
+knitr::opts_chunk$set(fig.path = fig_path,dpi=300, echo=FALSE,
                       cache.path = '../cache/gun-violence-mass-shooting/',
                       message=FALSE, warning=FALSE,
                       cache = TRUE) 
@@ -36,11 +36,50 @@ knitr::opts_chunk$set(fig.path = fig_path,
 library(tidyverse)
 library(stevemisc)
 library(knitr)
+
+
+library(gsheet)
+
+gsheet2tbl('https://docs.google.com/spreadsheets/d/1b9o6uDO18sLxBqPwl_Gh9bnhW-ev_dABH83M5Vb5L8o/htmlview?sle=true#gid=0') %>%
+  separate(date, c("month","day","year"), sep="/") %>%
+  mutate(date = lubridate::as_date(paste0(year,"-",month,"-", day))) %>%
+  select(case, date, everything()) -> mass_shootings
+
+mass_shootings %>% 
+  slice(1) %>%
+  select(date) %>% 
+  mutate(date = format(date, '%B %d, %Y')) %>% 
+  pull(date) -> last_update
+
+mass_shootings %>% 
+  slice(n()) %>%
+  select(date) %>% 
+  mutate(date = format(date, '%B %d, %Y')) %>% 
+  pull(date) -> first_event
+
+mass_shootings %>%
+  mutate(year = lubridate::year(date)) %>%
+  group_by(year) %>%
+  summarize(n = n()) -> mass_shootings_yearly
+
+mass_shootings_yearly %>%
+  filter(year <= 1999) %>%
+  summarize(n = sum(n)) %>% pull(n) -> nobs80s90s
+
+mass_shootings_yearly %>%
+  filter(year >= 2017) %>%
+  summarize(n = sum(n)) %>% pull(n) -> nobssince2017
+
+today <- format(Sys.time(), '%B %d, %Y')
+
+mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
+mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
+mjms_caption = paste0("Data: Mother Jones. Methodology: mass shootings include at least four deaths from 1982 to Jan. 2013 and included at least three deaths thereafter. Figure last updated on ", today, ".")
 ```
 
 
 
-```{r leadimage, echo=F, eval=F, results="asis", cache=F}
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
 add_jekyll_image('/images/gilroy-strong.jpg', "Artist Ignacio 'Nacho' Moya carries a sign he made during a vigil for the victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area News Group)", "400", "right")
  
@@ -82,6 +121,7 @@ ghp100k %>%
   mutate(cy = paste0(country,"\n(", year, ")")) %>%
   ggplot(.,aes(reorder(cy, -ghp100k), ghp100k)) +
   theme_steve_web() +
+  post_bg() +
   geom_bar(stat="identity", alpha=0.6, color="black") +
   geom_text(aes(label=round(ghp100k, 2)), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4, family="Open Sans") +
@@ -137,12 +177,13 @@ ghp100k %>%
   arrange(country, year) %>%
   ggplot(.,aes(year, ghp100k)) + geom_line(size=1.1) +
   theme_steve_web() +
+  post_bg() +
   facet_wrap(~country) +
   labs(title = "The Gun Homicide Rate for Select Countries, by Year",
        x = "Year",
        y = "Homicide by Firearm Rate (per 100,000 population)",
        subtitle = "Some countries (Italy, prominently) have done well to address gun violence over time. It's only increased in the U.S. since 2009.",
-       caption = "Data: gunpolicy.org, through various other sources (e.g. UNODC, CDC, WHO).")
+       caption = "Data: GunPolicy.org, through various other sources (e.g. UNODC, CDC, WHO).")
 
 ```
 
@@ -150,7 +191,7 @@ Finally, you can start thinking about automating a script to scan [the Mother Jo
 
 Because it's only getting worse.
 
-```{r us-mass-shootings-by-year-1982-present-mother-jones, echo=T, eval=T, cache=F, warning=F, fig.width=13, fig.height=8}
+```{r us-mass-shootings-script, echo=T, eval=F, cache=F, warning=F}
 
 library(gsheet)
 
@@ -186,14 +227,14 @@ mass_shootings_yearly %>%
 
 today <- format(Sys.time(), '%B %d, %Y')
 
-# mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
-# mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
-# 
-# mjms_caption = paste0("Data: Mother Jones. Methodology: pretty sure these are shooting incidents in which at least three people died. Earlier classifications of mass shootings counted four or more casualties, if I recall correctly.\nIf I'm updating this plot, it likely means there was another mass shooting today, ", today, ".")
+mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
+mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
+mjms_caption = paste0("Data: Mother Jones. Methodology: mass shootings include at least four deaths from 1982 to Jan. 2013 and included at least three deaths thereafter. Figure last updated on ", today, ".")
 
 mass_shootings_yearly %>%
   ggplot(.,aes(year, n)) +
   theme_steve_web() +
+  post_bg() +
   geom_bar(stat="identity", alpha=0.4, fill="#619cff",color="black") +
   scale_x_continuous(breaks = seq(1980, 2020, by = 4)) +
   scale_y_continuous(breaks = seq(0, 14, by =2)) +
@@ -201,9 +242,27 @@ mass_shootings_yearly %>%
             position=position_dodge(.9), size=4, family="Open Sans") +
   labs(y = "Number of Mass Shootings in a Calendar Year",
        x = "Year",
-       title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update),
-       subtitle =  paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,"."), 
-       caption = paste0("Data: Mother Jones. Methodology: pretty sure these are shooting incidents in which at least three people died. Earlier classifications of mass shootings counted four or more casualties, if I recall correctly.\nIf I'm updating this plot, it likely means there was another mass shooting today, ", today, "."))
+       title = mjms_title,
+       subtitle =  mjms_subtitle, 
+       caption = mjms_caption)
+```
+
+```{r us-mass-shootings-by-year-1982-present, fig.width=13, fig.height=9}
+
+mass_shootings_yearly %>%
+  ggplot(.,aes(year, n)) +
+  theme_steve_web() +
+  post_bg() +
+  geom_bar(stat="identity", alpha=0.4, fill="#619cff",color="black") +
+  scale_x_continuous(breaks = seq(1980, 2020, by = 4)) +
+  scale_y_continuous(breaks = seq(0, 14, by =2)) +
+  geom_text(aes(label=n), vjust=-.5, colour="black",
+            position=position_dodge(.9), size=4, family="Open Sans") +
+  labs(y = "Number of Mass Shootings in a Calendar Year",
+       x = "Year",
+       title = mjms_title,
+       subtitle =  mjms_subtitle, 
+       caption = mjms_caption)
 ```
 
 ```{r knitchunk, echo=F, eval=F}
