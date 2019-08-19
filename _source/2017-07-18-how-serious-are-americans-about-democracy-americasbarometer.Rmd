@@ -34,10 +34,6 @@ library(kableExtra)
 library(labelled)
 library(forcats)
 
-post_bg <- function() {
-  theme(plot.background = element_rect(fill = "#fdfdfd"),
-        panel.background = element_rect(fill = "#fdfdfd"))
-}
 ```
 
 {% include image.html url="/images/trump-ny-rally.jpg" caption="A recurring theme among partisans (Reuters/Stephen Yang)" width=400 align="right" %}
@@ -352,8 +348,9 @@ Data %>%
   ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) +
   theme_steve_web() +
   post_bg() +
-  geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+  geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
+  scale_fill_brewer(palette="Set1") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Very\nSatisfied","Satisfied","Dissatisfied", "Very\nDissatisfied")) + 
    geom_text(aes(label=percper), vjust=-.5, colour="black",
@@ -392,7 +389,8 @@ Data %>%
   ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) +
   theme_steve_web() +
   post_bg() +
-  geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+  geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
+  scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Very\nDemocratic","Somewhat\nDemocratic","Not Very\nDemocratic", "Not At All\nDemocratic")) + 
@@ -431,14 +429,15 @@ Data %>%
     ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + 
   theme_steve_web() +
   post_bg() +
-    geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+    geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
+  scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Disagree", "On the Fence", "Agree")) + 
    geom_text(aes(label=percper), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4) +
   theme(legend.position = "bottom")  +
-  ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition.") +
+  ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition") +
    labs(caption="Data: AmericasBarometer (2008-2012). Note: the 2008 survey occurred in April of that year, before the general election.",
         fill = "Party ID",
        title="Democrats Became More Open to the President Limiting Political Opposition When Obama was President",
@@ -468,14 +467,15 @@ Data %>%
     ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + 
   theme_steve_web() +
   post_bg() +
-    geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+    geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
+  scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Strongly\nDisagree", "Does Not Strongly\nDisagree")) + 
    geom_text(aes(label=percper), vjust=1.5, colour="black",
             position=position_dodge(.9), size=4) +
   theme(legend.position = "bottom")  +
-  ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition.") +
+  ylab("Percent in Category") + xlab("The President Should Limit the Voice/Vote of Political Opposition") +
    labs(caption="Data: AmericasBarometer (2008-2012). Note: the 2008 survey occurred in April of that year, before the general election.",
         fill = "Party ID",
        title="Democrats Became More Open to the President Limiting Political Opposition When Obama was President",
@@ -508,7 +508,8 @@ Data %>%
     ggplot(aes(x=factor(closecong), y =perc, fill=`Party ID`)) +
   theme_steve_web() +
   post_bg() +
-    geom_bar(stat="identity", position="dodge", color="black") + # aes(fill=`Party ID`), position=position_dodge(),
+    geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
+  scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
     scale_x_discrete(labels=c("Not\nJustified", "Justified")) + 
