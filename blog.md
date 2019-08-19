@@ -13,7 +13,7 @@ I blog semi-regularly about stuff. Most of my blog entries involve professional 
     {% assign year = y %}
     <h2 class="blogyear">{{ y}}</h2>
   {% endif %}
-<li class="archiveposturl"><span><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></span><br/>
+<li class="archiveposturl"><span><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></span><br/>
 <span class = "postlower"><strong>Author:</strong> {{post.author}} 
 <strong>Category:</strong>  {% if post.categories %}
  
@@ -22,7 +22,7 @@ I blog semi-regularly about stuff. Most of my blog entries involve professional 
   {% endfor %}
 
 {% endif %} <!-- {{ post.categories | first }} -->
-<strong style="font-size:100%; font-family: 'Titillium Web', sans-serif; float:right">{{ post.date | date: '%d %b %Y' }}</strong> 
+<strong style="font-size:100%; font-family: 'Titillium Web', sans-serif; float:right; padding-right: .5em">{{ post.date | date: '%d %b %Y' }}</strong> 
 </span> 
 
 </li>
