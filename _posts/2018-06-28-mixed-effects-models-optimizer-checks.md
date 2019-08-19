@@ -7,17 +7,18 @@ permalink:
 categories:
   - R
 excerpt: "Computation time is a premium in estimating mixed effects models, but you can always make sure the heuristics you choose aren't influencing your results with the allFit function."
+image: r-logo.png
 ---
 
 
 
-{% include image.html url="/images/r-logo.png" caption="The R Logo, just 'cause." width=350 align="right" %}
+{% include image.html url="/images/r-logo.png" caption="The R logo, just 'cause." width=350 align="right" %}
 
-My goals for writing this are two-fold. First, it'd been a long time since my last blog post. I usually average 7-10 posts a year and this will only be the second one. Second, I've been meaning to offer some tips/tutorials for mixed effects modelers who are still new to the craft. Mixed effects modeling is my method of choice for evaluating and explaining social/political phenomenon. I think I've become pretty good at it over the past 10 years, but everything I know I ultimately taught myself through trial and error. Stackoverflow is nice but I was always reticent to post there to search for answers I feel I should've known already. It does mean that while everything I know is self-taught, I've learned a lot of tricks along the way and I think it would be good to share them.
+My goals for writing this are two-fold. First, it'd been a long time since my last blog post. I usually average 7-10 posts a year and this will only be the second one. Second, I've been meaning to offer some tips/tutorials for mixed effects modelers who are still new to the craft. Mixed effects modeling is my method of choice for evaluating and explaining social/political phenomenon. I think I've become pretty good at it over the past 10 years, but everything I know I ultimately taught myself through trial and error. Stackoverflow is nice but I was always reticent to post there to search for answers I feel I should've known already. It does mean that while I everything I know is self-taught, I've learned a lot of tricks along the way and I think it would be good to share them.
 
-Here, I start what might be a series of similar posts with one of the nagging issues of mixed effects modeling: computation time. Computation time can drag in the mixed effects modeling framework in R because `lme4`, the most popular mixed effects modeling tool in R, performs a myriad of convergence checks that can take a lot of time. Nothing is easily parallelized (to the best of my knowledge) and the computation time issue is worse in the Bayesian framework as well. Modeling several hundred thousand observations (like I routinely do with the World Values Survey) can further compound the problem.
+Here, I start what might be a series of similar posts with one of the nagging issues of mixed effects modeling: computation time. Computation time can drag in the mixed effects modeling framework in R because `lme4`, the most popular mixed effects modeling tool in R, performs a myriad of convergence checks that can drag on forever. Modeling several hundred thousand observations (like I routinely do with the World Values Survey) can compound the problem.
 
-Here, I offer some tips on how to make the most of your computation time by selecting the fastest optimizer and, importantly, benchmarking the fast optimizer you choose against a series of different optimizers using the `allFit` function. I will start with the sample data I'll be using for this post.
+Here, I offer some tips on how to make the most computation times by selecting the fastest optimizer and, importantly, benchmarking the fast optimizer you choose against a series of different optimizers using the `allFit` function. I will start with the sample data I'll be using for this post.
 
 ## A Brief Description of the Data
 
@@ -73,16 +74,12 @@ You can conveniently refit your statistical model with multiple different optimi
 
 The standard generalized linear mixed effects model estimation does parameter optimization through a combination of BOBYQA and the [Nelder-Mead "downhill simplex" method](https://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method). This approach is "standard" for estimation but, in practice, creates much longer computation times as the optimization goes through a series of convergence checks. It's understandable for a precaution; sometimes the model needs these convergence checks and the researcher should know the results of these convergence checks. However, it can create a wait for your results and it may not matter, contingent on the model you estimate.
 
-`allFit` will test whether your optimization choice you make for convenience may change the results of the model by re-estimating your model with a series of different optimizers. These are the aforementioned Nelder-Mead method and the BOBYQA method. It'll use those same optimizers, but permit additional stopping criteria through non-linear optimization (`nlopt`) if the optimization procedures believes it has found the optimum. This speeds up computation at the expense of additional convergence checks. Additional optimization methods include large-scale, quasi-Newton, bound-constrained optimization of [the Byrd et al. (1995) method](https://epubs.siam.org/doi/abs/10.1137/0916069) (`L-BFGS-B`), iterative derivative-free *k*-bounded optimization of the Nelder-Mead method (`nmkb`), and [non-linear minimization with box constraints](https://epubs.siam.org/doi/abs/10.1137/S1052623493253991) (`nlminb`). My worry is I forgot one of these optimizers that `allFit` has, so these are the optmizers with which I'm most familiar.
+`allFit` will test whether your optimization choice you make for convenience may change the results of the model. It will re-estimate your model with a series of different optimizers. These are the aforementioned Nelder-Mead method and the BOBYQA method. It'll use those same optimizers, but permit additional stopping criteria through non-linear optimization (`nlopt`) if the optimization procedures believes it has found the optimum. This speeds up computation at the expense of additional convergence checks. Additional optimization methods include large-scale, quasi-Newton, bound-constrained optimization of [the Byrd et al. (1995) method](https://epubs.siam.org/doi/abs/10.1137/0916069) (`L-BFGS-B`), [iterative derivative-free *k*-bounded optimization](https://archive.siam.org/books/textbooks/fr18_book.pdf) of the Nelder-Mead method (`nmkb`), and [non-linear minimization with box constraints](https://epubs.siam.org/doi/abs/10.1137/S1052623493253991) (`nlminb`). My worry is I forgot one of these optimizers that `allFit` has, so these are the optmizers with which I'm most familiar.
 
 Here's how you would perform these additional optimizer checks in my sample analysis.
 
 
 ```r
-require(RCurl)
-afurl <- "https://raw.githubusercontent.com/lme4/lme4/master/inst/utils/allFit.R"
-eval(parse(text=getURL(afurl)))
-
 AF1 <- allFit(M1, verbose=F)
 AF2 <- allFit(M2, verbose=F)
 ```
@@ -104,7 +101,9 @@ bind_rows(AF1_lliks, AF2_lliks) %>%
   group_by(model) %>%
   gather(., Optimizer, llik, 2:ncol(.)) %>%
   ggplot(.,aes(Optimizer, llik)) + geom_point() +
-  facet_wrap(~model) + coord_flip() + theme_steve_web2() +
+  facet_wrap(~model) + coord_flip() +
+  theme_steve_web() +
+  post_bg() +
   ylab("Log-Likelihood") +
   labs(title = "The Log-Likelihoods of Seven Different Optimizers in Our Two Models")
 ```
@@ -149,7 +148,8 @@ tidy(AF2[[1]]) %>%
 
 bind_rows(AF1_zcai, AF2_zcai) %>%
   ggplot(.,aes(Optimizer, statistic)) + geom_point() +
-    theme_steve_web2() +
+  theme_steve_web() +
+  post_bg() +
   coord_flip() + facet_wrap(~Model) +
   geom_hline(yintercept = 1.96, linetype="dashed") +
   ylab("z-statistic") +
@@ -161,25 +161,6 @@ bind_rows(AF1_zcai, AF2_zcai) %>%
 
 `allFit` will helpfully store the estimation times of these models as well. This will be useful as you figure out which optimizer gives you the most "bang for your buck" (i.e. what converges the fastest, especially if you're short on memory and time). The results suggest you can get the most bang for your buck through non-linear optimization of the Nelder-Mead and BOBYQA methods. This is unsurprising, at least in our example, because these optimization procedures permit stopping convergence checks earlier if it the procedure believes it has already found an approximate optimum. The differences may not matter as much for linear models in the mixed effects framework. These already estimate quickly, all things considered.
 
-```r
-cbind(as.data.frame(summary(AF1)$times), rownames(summary(AF1)$times)) %>%
-  tbl_df() %>%
-  rename(Optimizer = `rownames(summary(AF1)$times)`) %>%
-  mutate(Model = "Linear Mixed Effects Model") -> AF1times
-
-cbind(as.data.frame(summary(AF2)$times), rownames(summary(AF2)$times)) %>%
-  tbl_df() %>%
-  rename(Optimizer = `rownames(summary(AF2)$times)`) %>%
-  mutate(Model = "Logistic Mixed Effects Model") -> AF2times
-
-bind_rows(AF1times, AF2times) %>%
-  ggplot(.,aes(Optimizer, elapsed)) + geom_point() +
-  facet_wrap(~Model) + coord_flip() +
-  theme_steve_web2() +
-  ylab("Elapsed Time") +
-  labs(title = "A Comparison of Estimation Times Across Seven Different Optimizers")
-```
-
 ![plot of chunk allfittimes](/images/allfittimes-1.png)
 
 
@@ -189,3 +170,5 @@ bind_rows(AF1times, AF2times) %>%
 Optimizer performance is an advanced topic for those fluent in the mixed effects modeling framework in R. However, it's useful information for beginners as they explore model estimation and, importantly, want to estimate as many models as they can within as short of a time as possible.
 
 It's useful for researchers to take advantage of the `allFit` function in R, at least as a robustness check for the appendix of the paper. You can use this wrapper function to re-estimate the statistical model with multiple optimizers to see if the log-likelihoods of the model chosen for presentation is sensitive to the particular optimizer of the model. The researcher can also compare *z*/*t* statistics for a particular coefficent across multiple optimizers. A researcher just learning about the mixed effects modeling framework can also use the `allFit` function to identify what optimizers converge the fastest. If you're like me, who learned mixed effects models by estimating hundreds of models just to see how the process worked, this is useful information. You don't need to be advanced in the method to appreciate it.
+
+
