@@ -25,7 +25,7 @@ image: "1946-may-day.jpg"
 
 {% include image.html url="/images/1946-may-day.jpg" caption="Diverse workers of various affiliations march together at a 1946 May Day parade in New York City. (Bettmann Archive via Getty Images)" width=400 align="right" %}
 
-*Last updated: August 03, 2019*
+<!-- *Last updated: August 20, 2019* -->
 
 Count this as a post I've always wanted to write for myself because I wish I could go back in time to show this to me in graduate school when I was trying (and struggling) to learn Bayesian methods.
 
@@ -251,6 +251,7 @@ A careful eye might be able to spot a collinearity problem in the industrial con
 uniondensity %>%
   ggplot(.,aes(concen, size)) +
   theme_steve_web() +
+  post_bg() +
   geom_point(size=1.5) +
   geom_smooth(method="lm") +
   geom_text_repel(aes(label=country), family="Open Sans") +
@@ -368,9 +369,9 @@ tribble(
 <tbody>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 100.74 (63.83) </td>
-   <td style="text-align:center;"> -2.80 </td>
-   <td style="text-align:center;"> 205.58 </td>
+   <td style="text-align:center;"> 99.56 (62.07) </td>
+   <td style="text-align:center;"> -0.01 </td>
+   <td style="text-align:center;"> 199.81 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -390,8 +391,8 @@ tribble(
   <tr>
    <td style="text-align:left;"> Left Government </td>
    <td style="text-align:center;"> 0.27 (0.08) </td>
-   <td style="text-align:center;"> 0.14 </td>
-   <td style="text-align:center;"> 0.40 </td>
+   <td style="text-align:center;"> 0.13 </td>
+   <td style="text-align:center;"> 0.41 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -410,9 +411,9 @@ tribble(
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -6.66 (4.21) </td>
-   <td style="text-align:center;"> -13.55 </td>
-   <td style="text-align:center;"> 0.14 </td>
+   <td style="text-align:center;"> -6.58 (4.12) </td>
+   <td style="text-align:center;"> -13.14 </td>
+   <td style="text-align:center;"> 0.01 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -431,9 +432,9 @@ tribble(
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> -0.74 (21.35) </td>
-   <td style="text-align:center;"> -35.83 </td>
-   <td style="text-align:center;"> 33.77 </td>
+   <td style="text-align:center;"> -0.39 (20.73) </td>
+   <td style="text-align:center;"> -34.92 </td>
+   <td style="text-align:center;"> 33.28 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -530,25 +531,25 @@ bind_rows(B1_draws, B2_draws) %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 70.66 </td>
-   <td style="text-align:center;"> 20.79 </td>
-   <td style="text-align:center;"> 36.54 </td>
-   <td style="text-align:center;"> 104.04 </td>
+   <td style="text-align:center;"> 70.87 </td>
+   <td style="text-align:center;"> 20.85 </td>
+   <td style="text-align:center;"> 37.22 </td>
+   <td style="text-align:center;"> 105.31 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 83.24 </td>
-   <td style="text-align:center;"> 33.34 </td>
-   <td style="text-align:center;"> 27.33 </td>
-   <td style="text-align:center;"> 137.09 </td>
+   <td style="text-align:center;"> 82.80 </td>
+   <td style="text-align:center;"> 33.16 </td>
+   <td style="text-align:center;"> 27.05 </td>
+   <td style="text-align:center;"> 138.81 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Left Government </td>
    <td style="text-align:center;"> 0.27 </td>
    <td style="text-align:center;"> 0.08 </td>
-   <td style="text-align:center;"> 0.15 </td>
+   <td style="text-align:center;"> 0.14 </td>
    <td style="text-align:center;"> 0.40 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
@@ -562,34 +563,34 @@ bind_rows(B1_draws, B2_draws) %>%
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -4.78 </td>
-   <td style="text-align:center;"> 1.89 </td>
-   <td style="text-align:center;"> -7.92 </td>
-   <td style="text-align:center;"> -1.70 </td>
+   <td style="text-align:center;"> -4.80 </td>
+   <td style="text-align:center;"> 1.88 </td>
+   <td style="text-align:center;"> -7.94 </td>
+   <td style="text-align:center;"> -1.71 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -5.50 </td>
+   <td style="text-align:center;"> -5.45 </td>
    <td style="text-align:center;"> 2.10 </td>
-   <td style="text-align:center;"> -8.85 </td>
-   <td style="text-align:center;"> -1.95 </td>
+   <td style="text-align:center;"> -8.95 </td>
+   <td style="text-align:center;"> -1.91 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 9.40 </td>
-   <td style="text-align:center;"> 4.79 </td>
-   <td style="text-align:center;"> 1.76 </td>
-   <td style="text-align:center;"> 17.32 </td>
+   <td style="text-align:center;"> 9.41 </td>
+   <td style="text-align:center;"> 4.86 </td>
+   <td style="text-align:center;"> 1.33 </td>
+   <td style="text-align:center;"> 17.25 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 4.59 </td>
-   <td style="text-align:center;"> 12.81 </td>
-   <td style="text-align:center;"> -16.48 </td>
-   <td style="text-align:center;"> 25.78 </td>
+   <td style="text-align:center;"> 4.63 </td>
+   <td style="text-align:center;"> 12.78 </td>
+   <td style="text-align:center;"> -16.81 </td>
+   <td style="text-align:center;"> 25.56 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
 </tbody>
@@ -670,6 +671,7 @@ tidy(B3) %>% mutate(model = "Informative, Italy Omitted", category = "Wallerstei
                                          "Labor Force Size (logged)")) %>%
   ggplot(.,aes(category, estimate, ymin=lower, ymax=upper, color=model, shape=model)) +
   theme_steve_web() +
+  post_bg() +
   scale_colour_brewer(palette = "Set1") +
   geom_pointrange(position = position_dodge(width = .5)) + coord_flip() +
   facet_wrap(~term, scales="free_x", ncol=4) + geom_hline(yintercept = 0, linetype="dashed") +

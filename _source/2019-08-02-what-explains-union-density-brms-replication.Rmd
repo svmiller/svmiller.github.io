@@ -19,7 +19,7 @@ categories:
 image: "1946-may-day.jpg"
 ---
 
-```{r setup, include=FALSE, cache=F}
+```{r setup-what-explains-union-density, include=FALSE, cache=F}
 
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
@@ -31,8 +31,8 @@ add_jekyll_image <- function(url, caption, width, align) {
 }
 
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
-knitr::opts_chunk$set(fig.path = fig_path,
-                      cache.path = '../cache/',
+knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
+                      cache.path = '../cache/what-explans-union-density/',
                       message=FALSE, warning=FALSE,
                       cache = TRUE) 
 
@@ -46,7 +46,7 @@ add_jekyll_image('/images/1946-may-day.jpg', "Diverse workers of various affilia
  
 ```
 
-*Last updated: `r format(Sys.time(), '%B %d, %Y')`*
+<!-- *Last updated: `r format(Sys.time(), '%B %d, %Y')`* -->
 
 Count this as a post I've always wanted to write for myself because I wish I could go back in time to show this to me in graduate school when I was trying (and struggling) to learn Bayesian methods.
 
@@ -118,6 +118,7 @@ A careful eye might be able to spot a collinearity problem in the industrial con
 uniondensity %>%
   ggplot(.,aes(concen, size)) +
   theme_steve_web() +
+  post_bg() +
   geom_point(size=1.5) +
   geom_smooth(method="lm") +
   geom_text_repel(aes(label=country), family="Open Sans") +
@@ -359,6 +360,7 @@ tidy(B3) %>% mutate(model = "Informative, Italy Omitted", category = "Wallerstei
                                          "Labor Force Size (logged)")) %>%
   ggplot(.,aes(category, estimate, ymin=lower, ymax=upper, color=model, shape=model)) +
   theme_steve_web() +
+  post_bg() +
   scale_colour_brewer(palette = "Set1") +
   geom_pointrange(position = position_dodge(width = .5)) + coord_flip() +
   facet_wrap(~term, scales="free_x", ncol=4) + geom_hline(yintercept = 0, linetype="dashed") +
