@@ -46,7 +46,11 @@ Gibler, Douglas M. and Steven V. Miller. 2012. "[Comparing the Foreign Aid Polic
 
 Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Negotiated Compromises](http://cmp.sagepub.com/content/28/3/261)." *Conflict Management and Peace Science* 28(3): 261-279.
 
-## Working Papers and Works in Progress
+## Book Chapters
+
+Miller, Steven V., Jaroslav Tir, and John A. Vasquez. Forthcoming. "Geography, Territory, and Conflict." *Oxford Research Encyclopedia of International Studies*.
+
+## Select Working Papers and Works in Progress
 
 "Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East"
 
