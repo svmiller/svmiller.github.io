@@ -22,7 +22,7 @@ image: "gilroy-strong.jpg"
 
 {% include image.html url="/images/gilroy-strong.jpg" caption="Artist Ignacio 'Nacho' Moya carries a sign he made during a vigil for the victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area News Group)" width=400 align="right" %}
 
-*Last updated: August 19, 2019*
+*Last updated: September 01, 2019*
 
 [Another day, another mass shooting](https://www.cnn.com/2019/08/03/us/el-paso-shooting/index.html) for literally the only country of its size and development where this happens on a routine basis. This one in El Paso may (reportedly) have some domestic terrorist overtones to it, but ~~barring confirmation of the shooter and the shooter's motives for the moment~~([nevermind](https://www.nytimes.com/2019/08/03/us/patrick-crusius-el-paso-shooter-manifesto.html)), this post will focus on just the gun violence and the mass shooting angle here.
 
