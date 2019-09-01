@@ -8,7 +8,7 @@ knit: (function(inputFile, encoding) {
    rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-03'
-excerpt: "America's gun violence/mass shooting problem is bad. Conspicuously bad and it's getting worse despite obvious soluations for which there's no political will."
+excerpt: "America's gun violence/mass shooting problem is bad. It's Conspicuously bad and it's getting worse despite obvious solutions for which there's no political will."
 layout: post
 categories:
   - R
