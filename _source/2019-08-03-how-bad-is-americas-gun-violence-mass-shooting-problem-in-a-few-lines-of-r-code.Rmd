@@ -52,6 +52,14 @@ mass_shootings %>%
   pull(date) -> last_update
 
 mass_shootings %>% 
+  slice(1) %>% 
+  pull(case) -> most_recent_case
+
+mass_shootings %>% 
+  slice(1) %>% 
+  pull(location) -> most_recent_location
+
+mass_shootings %>% 
   slice(n()) %>%
   select(date) %>% 
   mutate(date = format(date, '%B %d, %Y')) %>% 
@@ -74,7 +82,7 @@ today <- format(Sys.time(), '%B %d, %Y')
 
 mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
 mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
-mjms_caption = paste0("Data: Mother Jones. Methodology: mass shootings include at least four deaths from 1982 to Jan. 2013 and included at least three deaths thereafter. Figure last updated on ", today, ".")
+mjms_caption = paste0("Data: Mother Jones. Methodology: mass shootings include at least four deaths from 1982 to Jan. 2013 and include at least three deaths thereafter.\nFigure last updated on ", today, " in the wake of the ", most_recent_case," in ",most_recent_location,".") 
 ```
 
 
@@ -207,6 +215,14 @@ mass_shootings %>%
   pull(date) -> last_update
 
 mass_shootings %>% 
+  slice(1) %>% 
+  pull(case) -> most_recent_case
+
+mass_shootings %>% 
+  slice(1) %>% 
+  pull(location) -> most_recent_location
+
+mass_shootings %>% 
   slice(n()) %>%
   select(date) %>% 
   mutate(date = format(date, '%B %d, %Y')) %>% 
@@ -229,7 +245,7 @@ today <- format(Sys.time(), '%B %d, %Y')
 
 mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
 mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
-mjms_caption = paste0("Data: Mother Jones. Methodology: mass shootings include at least four deaths from 1982 to Jan. 2013 and included at least three deaths thereafter. Figure last updated on ", today, ".")
+mjms_caption = paste0("Data: Mother Jones. Methodology: mass shootings include at least four deaths from 1982 to Jan. 2013 and include at least three deaths thereafter.\nFigure last updated on ", today, " in the wake of the ", most_recent_case," in ",most_recent_location,".") 
 
 mass_shootings_yearly %>%
   ggplot(.,aes(year, n)) +
@@ -262,7 +278,9 @@ mass_shootings_yearly %>%
        x = "Year",
        title = mjms_title,
        subtitle =  mjms_subtitle, 
-       caption = mjms_caption)
+       caption = mjms_caption
+       )
+
 ```
 
 ```{r knitchunk, echo=F, eval=F}
