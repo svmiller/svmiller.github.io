@@ -15,11 +15,11 @@ knitr::opts_chunk$set(fig.path='images/')
 
 ```
 
-*Last updated: `r format(Sys.time(), '%B %d, %Y')`*
+<!-- *Last updated: `r format(Sys.time(), '%B %d, %Y')`* -->
 
 I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. This can be perilous in my field. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, [can be misleading](https://www.cambridge.org/core/journals/american-political-science-review/article/assessing-the-dyadic-nature-of-the-democratic-peace-191888/54C72B38A813D9B0753D1F94320883F4). The proof is [not as convincing as it seems](https://journals.sagepub.com/doi/10.1177/0022002796040004006). A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
 
-However, students can go from freshmen to senior without acquiring this ability. I know I did when I was an undergraduate. Quantitative methods classes can be specialty classes. Only a motivated few self-select into acquiring this tool though a more widespread knowledge among political science students would be beneficial.
+However, students can go from freshmen to seniors without acquiring this ability. I never learned this stuff when I was an undergraduate, which, granted, was many years ago. Quantitative methods classes are often specialty classes in political science. Only a motivated few self-select into acquiring this tool though a more widespread knowledge among political science students would be beneficial.
 
 What follows is a guide for undergraduate students in reading a regression table. Where it is just one blog post, this guide will be "quick and dirty" and will leave a more exhaustive discussion of core concepts and theories to a quantitative methods class (that [you could also take with me!][1]). My audience for this post consists of my students in more general topic courses that nonetheless feature an emphasis on quantitative research.
 
@@ -33,16 +33,16 @@ library(stargazer)
 data(voteincome)
 ```
 
-To illustrate this step, I am going to call in a simple data set in R. This is the `voteincome` data set that comes standard with the `Zelig` package.[^1] I'll start by discussing the data set and its purpose.
+To illustrate this step, I am going to call in a simple data set in R. This is the `voteincome` data set that comes standard with the `Zelig` package.[^1] I'll start by discussing the data set and its purpose.
 
 [^1]: I also have a beginner's guide to using R if the reader is interested in which I also discuss that data set.
 
 
-Let's say we want to know what explains whether someone is a registered voter. This is our goal and this is the phenomenon we want to explain. We believe that we can explain who is a registered voter by reference to a person's age, their income level, education, and gender. This is all rather basic sociodemographic stuff, but we believe they give us leverage over the problem of who is a registered voter.
+Let's say we want to know what explains whether someone is a registered voter. This is our goal and this is the phenomenon we want to explain. We believe that we can explain who is a registered voter by reference to a person's age, the income level, education, and gender. This is all rather basic sociodemographic stuff, but we believe they give us leverage over the variation in who is a registered voter.
 
-We obviously can't get data on the 300 million or so Americans in this country. We can, however, get a random sample of that population and infer from the sample to the population. If our sample is truly random, our sample statistic (plus/minus sampling error) is our best estimate of the population parameter of interest. This is the process of [inferential statistics][2] (i.e. inferring from a sample of a population to the population itself).
+We obviously can't get data on the 300 million or so Americans in this country. We can, however, get a random sample of that population and infer from the sample to the population. If our sample is truly random, our sample statistic (plus/minus sampling error) is our best estimate of the population parameter of interest. This is the process of [inferential statistics][2] (i.e. inferring from a sample of a population to the population itself).
 
-We obtained data from 1,500 Americans in November 2000 from the [2000 Current Population Survey][3]. 500 respondents are from Arkansas and 1,000 respondents are from South Carolina. The dependent variable (i.e. the variation of which we want to explain) is called `vote`. It takes on two values (0 = not a registered voter, 1 = registered voter. `age` is, intuitively, the age of the respondent in years. The youngest is 18 and the oldest is 85. `income` is an ordered variable between 4 and 17. In this variable, a 4 captures a person who makes less than $5,000 a year. A 17 codes a person who makes more than $75,000 a year. `education` takes on values of 1 (did not complete high school), 2, 3, and 4 (had more than a college education). `female` is another binary variable where 0 = men and 1 = women. A summary of the data follows.
+We obtained data from 1,500 Americans in November 2000 from the [2000 Current Population Survey][3]. 500 respondents are from Arkansas and 1,000 respondents are from South Carolina. The dependent variable (i.e. the variation of which we want to explain) is called `vote`. It takes on two values (0 = not a registered voter, 1 = registered voter). `age` is, intuitively, the age of the respondent in years. The youngest is 18 and the oldest is 85. `income` is an ordered variable between 4 and 17. In this variable, a 4 captures a person who makes less than $5,000 a year. A 17 codes a person who makes more than $75,000 a year. `education` takes on values of 1 (did not complete high school), 2, 3, and 4 (has more than a college education). `female` is another binary variable where 0 = men and 1 = women. A summary of the data follows.
 
 ```{r, echo=F, eval=T}
 # library(Zelig) # quietly run, check _source
@@ -52,13 +52,13 @@ summary(voteincome)
 
 <!-- {% include image.html url="/images/voteincome-summary.png" caption="A summary of the voteincome data set in Zelig." align="center" width=744 %} -->
 
-This summary is an illustration for the purpose of this blog post. When the student reads his/her article assignment, the student's job should include reading the research design to get a sense, however general, of what the author is trying to do and what the data look like.
+This summary is an illustration for the purpose of this blog post. When the student reads her/his article assignment, the student's job should include reading the research design to get a sense, however general, of what the author is trying to do and what the data look like.
 
-## Step Two: Understanding What the Regression Table is Saying
+## Step Two: Understanding What the Regression Table is Saying
 
 This section will omit a more comprehensive discussion of the logic of regression and fitting a regression itself. Long story short, a regression is a tool for understanding a phenomenon of interest as [a linear function][4] of some other combination of predictor variables. The regression formula itself has a strong resemblance to the slope-intercept equation (y = mx + b) that students should remember from high school.
 
-In our illustration, we believe we can model whether someone is a registered voter as a linear equation of the person's age, gender, education level, and income. In short: `vote = age + female + education + income` in our data set. When we do this, we get output that [looks like this][5].
+In our illustration, we believe we can model whether someone is a registered voter as a linear equation of the person's age, gender, education level, and income. In short: `vote = age + female + education + income` in our data set. When we do this, we get output that [looks like this][5].
 
 ```{r, echo=T, eval=T}
 summary(M1 <- glm(vote ~ age + female + education + income, 
@@ -90,9 +90,9 @@ The student who first encounters a regression table will see three things.
 
 ### The Regression Coefficient
 
-We will discuss these now, starting with the second item. The number you see *not* in parentheses is called a **regression coefficient**. The regression coefficient provides the expected change in the dependent variable (here: `vote`) for a one-unit increase in the independent variable.
+We will discuss these now, starting with the second item. The number you see *not* in parentheses is called a **regression coefficient**. The regression coefficient provides the expected change in the dependent variable (here: `vote`) for a one-unit increase in the independent variable.
 
-I encourage students new to regression to observe two elements of the regression coefficient. Namely, is it positive or negative? A positive coefficient indicates a positive relationship. As the independent variable increases, the dependent variable increases. Also, the dependent variable decreases as the independent variable decreases.
+I encourage students new to regression to observe two elements of the regression coefficient. Namely, is it positive or negative? A positive coefficient indicates a positive relationship. As the independent variable increases, the dependent variable increases. Also, the dependent variable decreases as the independent variable decreases.
 
 A negative coefficient indicates a negative relationship. As the independent variable increases, the dependent variable decreases. A negative relationship also indicates that the dependent variable increases as the independent variable decreases.
 
@@ -106,13 +106,13 @@ However, the standard error is not a quantity of interest by itself. It depends 
 
 The asterisks in a regression table correspond with a legend at the bottom of the table. In our case, one asterisk means "*p* < .1". Two asterisks mean "*p* < .05"; and three asterisks mean "*p* < .01". What do these mean?
 
-Asterisks in a regression table indicate the level of the **statistical significance** of a regression coefficient. The logic here is built off the principle of random sampling. If we took another random sample of the population of the United States, how likely would we get a random draw in which women were no different from men in their proclivity to be registered voters? 
+Asterisks in a regression table indicate the level of the **statistical significance** of a regression coefficient. The logic here is built off the principle of random sampling. If there truly is no difference between (for example) men and women in their proclivity to be registered voters, then how likely would we get the "draw" we got that suggested such a difference?
 
-The answer here is "unlikely", assuming a random sample. The rule of thumb in our discipline privileges *p* < .05. In our case, a random sample of the population would yield a result in which there was no difference between women and men five random draws of 100, on average. Or, to be more technical, given the null hypothesis of zero relationship in the population (i.e. no difference between men and women in the population from which we obtained the sample), the probability of obtaining a result as extreme in which we saw gender differences is at or less than .05. Put another way, we would expect to see the same positive, non-zero effect of gender 95 times of 100 samples. That is a lot "confidence" one can have in the estimate.[^2]
+The answer here is "unlikely", assuming a random sample. The rule of thumb in our discipline privileges *p* < .05. In our case, a random sample resulting in the regression coefficient and standard error that we observed---if there was truly no difference between men and women---would occur in five random draws of 100, on average. Or, to be more technical, given the null hypothesis of zero relationship in the population (i.e. no difference between men and women in the population from which we obtained the sample), the probability of obtaining a result as extreme in which we saw gender differences is at or less than .05. Put another way, we would expect to see the same positive, non-zero effect of gender 95 times of 100 samples. That is a lot "confidence" one can have in the estimate.[^2]
 
-[^2]: That said, there is still [considerable confusion among even social scientists](http://www.ejwagenmakers.com/inpress/HoekstraEtAlPBR.pdf) as to what a confidence interval communicates in the frequentist framework from which it comes. That is a topic for another class, though.
+[^2]: That said, there is still [considerable confusion among even social scientists](http://www.ejwagenmakers.com/inpress/HoekstraEtAlPBR.pdf) as to what a confidence interval communicates in the frequentist framework from which it comes. This paragraph also takes some liberties with the precision of what *p* values communicate in order to relay a more basic point to a wider audience beyond those interested in more advanced topics in statistical methodology. There are definitely classes that allow a student to dig into these weeds, though.
 
-*p* values are determined by dividing the regression coefficient over the standard error to determine statistical significance. I think "stargazing" (i.e. looking for asterisks) as undergraduates is acceptable, though.
+*p* values are determined by dividing the regression coefficient over the standard error to get a *t* (or *z*) statistic. That statistic will coincide with a *p* value used to determine statistical significance and  the rule of thumb in our field is the a *p* value under .05 is an indicator of "statistical significance." However, those intermediate things are more information than necessary for an undergraduate student trying to evaluation a regression table. Thus, I think "stargazing" (i.e. looking for asterisks) as undergraduates is acceptable. Just look for the "stars."
 
 In our case, we would conclude that age, gender, education, and income *independently* all have a "statistically significant" relationship with the likelihood of being a registered voter. Further, all have a positive relationship with the likelihood of voting that is unlikely to be zero.
 
@@ -122,17 +122,17 @@ This section concludes with some cautions and warnings about interpreting regres
 
 ### Mind the Distribution of the Dependent Variable
 
-Regression coefficients in linear regression are easier for students new to the topic. In linear regression, a regression coefficient communicates an expected change in the value of the dependent variable for a one-unit increase in the independent variable. Linear regressions are contingent upon having normally distributed interval-level data. Students will see linear regressions more often in political economy research using data like trade, national income, and so on.
+Regression coefficients in linear regression are easier for students new to the topic. In linear regression, a regression coefficient communicates an expected change in the value of the dependent variable for a one-unit increase in the independent variable. Linear regressions are contingent upon having normally distributed interval-level data. Students will see linear regressions more often in political economy research using data like trade, national income, and so on.
 
-In a logistic regression that I use here---which I believe is more common in international conflict research---the dependent variable is just 0 or 1 and a similar interpretation would be misleading. To be more precise, a regression coefficient in logistic regression communicates the change in the natural logged odds (i.e. [a logit][6]) of the dependent variable being a 1. These are closely related with the more familiar term "probability", which is bound between 0 and 1. Basically, the regression coefficient can be exponentiated as an odds ratio to get a probability.
+In a logistic regression that I use here---which I believe is more common in international conflict research---the dependent variable is just 0 or 1 and a similar interpretation would be misleading. To be more precise, a regression coefficient in logistic regression communicates the change in the natural logged odds (i.e. [a logit][6]) of the dependent variable being a 1. These are closely related with the more familiar term "probability", which is bound between 0 and 1. Basically, the regression coefficient can be exponentiated as an odds ratio to get a probability.
 
 ### Mind the Distribution of the Independent Variable
 
-Put another way: [statistically significant is not itself "significant"][7]. One of the most common mistakes I see students make with interpreting regression results is mistaking "statistically significant" with "large" or "very important". Whether this was R.A. Fisher's intention to conflate "statistically significant" with "large effect" to promote his method is not my concern for now. Suffice to say, "statistically significant" is one word that made a recent list of [terms that scientists wish the general public would stop misusing][8].
+Put another way: [statistically significant is not itself "significant"][7]. One of the most common mistakes I see students make with interpreting regression results is mistaking "statistically significant" with "large" or "very important". Whether this was R.A. Fisher's intention to conflate "statistically significant" with "large effect" to promote his method is not my concern for now. Suffice to say, "statistically significant" is one word that made a recent list of [terms that scientists wish the general public would stop misusing][8].
 
 > "Statistically significant" is one of those phrases scientists would love to have a chance to take back and rename. "Significant" suggests importance; but the test of statistical significance, developed by the British statistician R.A. Fisher, doesn't measure the importance or size of an effect; only whether we are able to distinguish it, using our keenest statistical tools, from zero. "Statistically noticeable" or "Statistically discernible" would be much better.
 
-On a related note, it would be misleading to think that gender has the largest power in explaining who is a registered voter. `female`, the independent variable for gender, can only be 0 or 1. This will increase the size of the regression coefficient, but it will increase the standard error as well. Meanwhile, `education` has four categories and `income` has 12 different values. All else equal, this drives down the effect of a one-unit change in the regression coefficient.
+On a related note, it would be misleading to think that gender has the largest effect in explaining who is a registered voter. `female`, the independent variable for gender, can only be 0 or 1. This will increase the size of the regression coefficient, but it will increase the standard error as well. Meanwhile, `education` has four categories and `income` has 12 different values. All else equal, this drives down the effect of a one-unit change in the regression coefficient.
 
 None of the four independent variables in the regression share a common scale so a quick comparison of regression coefficient sizes as a determinant of effect size would be incorrect.
 
