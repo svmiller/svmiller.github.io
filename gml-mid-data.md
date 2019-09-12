@@ -8,7 +8,7 @@ permalink: /gml-mid-data/
 
 This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from Gibler, Miller and Little's project published in *International Studies Quarterly*.
 
-![Version 2.1](https://img.shields.io/badge/release-v2.1-blue.svg)
+![Version 2.1.1](https://img.shields.io/badge/release-v2.1.1-blue.svg)
 
 ## Overview
 
@@ -33,7 +33,7 @@ Please contact me (svmille@clemson.edu) with any inquiries about the script and 
 
 ## Data and Documentation
 
-- [**Version 2.1**](http://bit.ly/gml_mid_21)
+- [**Version 2.1.1**](http://bit.ly/gml_mid_211)
 
 Contents of this zip file include:
 
