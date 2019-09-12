@@ -12,8 +12,8 @@ This is the parent page for a list of resources for students of mine at Clemson 
 
 These links will be as useful for students as they will be for me. I find myself looking for these every now and then.
 
-- [Academic calendar](http://www.registrar.clemson.edu/html/acad_cal.htm)
-- [Exam schedule](http://www.registrar.clemson.edu/html/examSched.htm)
+- [Academic calendar](https://www.clemson.edu/registrar/academic-calendars/)
+- [Exam schedule](https://www.clemson.edu/registrar/student-menu/examinations.html)
 
 ## Writing Resources
 
