@@ -23,11 +23,11 @@ I'll be teaching a quantitative public policy analysis class for [Clemson Univer
 
 There will have to be some discussion of endogeneity. Yes, that "E-word" is one that is easy to use to dismiss someone's research. It's so easy that invoking it may come across as a signal of laziness or contempt. Still, it's an important topic the extent to which an endogenous treatment variable for a quantitative policy analysis can influence the kind of precision we want to communicate about treatment effects. After all, endogeneity emerges when a treatment is correlated with the error term and it's ideal to address that in a regression framework. This post will offer an illustration of how to do that with an instrumental variable and a two-stage least squares (2SLS) regression.
 
-First, let's build a correlation matrix that communicates correlations among four types of variables. The first, `x` is a standard statistical control that is not terribly interesting to us as researchers but we'll include it anyway for a multiple regression. `treat` is the treatment of interest to us and `instr` is a possible instrument for `treat` that we have in the data. `e` is the error term.
+First, let's build a correlation matrix that communicates correlations among four types of variables. The first, `control`, is a standard statistical control that is not terribly interesting to us as researchers but we'll include it anyway for a multiple regression. `treat` is the treatment of interest to us and `instr` is a possible instrument for `treat` that we have in the data. `e` is the error term.
 
 
 ```r
-vars = c("x", "treat", "instr", "e")
+vars = c("control", "treat", "instr", "e")
 Correlations <- matrix(cbind(1, 0.001, 0.001, 0.001,
                              0.001, 1, 0.85, -0.5,
                              0.001, 0.85, 1, 0.001,
@@ -35,7 +35,7 @@ Correlations <- matrix(cbind(1, 0.001, 0.001, 0.001,
 rownames(Correlations) <- colnames(Correlations) <- vars
 ```
 
-The specified correlation matrix suggests the following relationships. First, `x` is fundamentally uncorrelated with anything else. Its correlations with the treatment variable, the potential instrument, and the errors are only .001. As a result, we are not too interested in this variable for the sake of this exercise. Second, the correlation between the treatment variable (`treat`) and the errors is -.5. This implies there is a fairly large---however imprecise that language is---negative correlation between the treatment variable that most concerns us and the error term. This makes the treatment endogenous to the errors. Third, the correlation between the treatment variable and the potential instrument is strong; a correlation of .85 is a strong positive relationship. Finally, the correlation between the instrumental variable and the errors is only .001. That means that instrumental variable (`instr`) satisfies the [exclusion restriction](https://stats.stackexchange.com/questions/281323/instrumental-variable-exclusion-restriction); it will only affect the outcome through the treatment variable (`treat`).
+The specified correlation matrix suggests the following relationships. First, `control` is fundamentally uncorrelated with anything else. Its correlations with the treatment variable, the potential instrument, and the errors are only .001. As a result, we are not too interested in this variable for the sake of this exercise. Second, the correlation between the treatment variable (`treat`) and the errors is -.5. This implies there is a fairly large---however imprecise that language is---negative correlation between the treatment variable that most concerns us and the error term. This makes the treatment endogenous to the errors. Third, the correlation between the treatment variable and the potential instrument is strong; a correlation of .85 is a strong positive relationship. Finally, the correlation between the instrumental variable and the errors is only .001. That means that instrumental variable (`instr`) satisfies the [exclusion restriction](https://stats.stackexchange.com/questions/281323/instrumental-variable-exclusion-restriction); it will only affect the outcome through the treatment variable (`treat`).
 
 We can generate some fake data to illustrate these correlations, though this exercise requires some Cholesky decomposition and more matrix-related stuff than I enjoy doing with data.
 
@@ -64,22 +64,22 @@ The actual correlation matrix of the simulated data corresponds well enough with
 <center>
 
 <table style="text-align:center"><caption><strong>A Correlation Matrix of the Data</strong></caption>
-<tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td>X</td><td>Treatment</td><td>Instrument</td><td>e</td></tr>
-<tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">X</td><td>1</td><td>0.020</td><td>0.016</td><td>0.003</td></tr>
+<tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td>Control</td><td>Treatment</td><td>Instrument</td><td>e</td></tr>
+<tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Control</td><td>1</td><td>0.020</td><td>0.016</td><td>0.003</td></tr>
 <tr><td style="text-align:left">Treatment</td><td>0.020</td><td>1</td><td>0.854</td><td>-0.502</td></tr>
 <tr><td style="text-align:left">Instrument</td><td>0.016</td><td>0.854</td><td>1</td><td>-0.011</td></tr>
 <tr><td style="text-align:left">e</td><td>0.003</td><td>-0.502</td><td>-0.011</td><td>1</td></tr>
 <tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr></table>
 <br /></center>
 
-Let's further assume that there is some outcome `y` that is a linear function some slope-intercept (or "constant") + `x`, `treat`, and the error term `e`. Such that:
+Let's further assume that there is some outcome `y` that is a linear function some slope-intercept (or "constant") + `control`, `treat`, and the error term `e`. Such that:
 
 
 ```r
-Data$y <- with(Data, 5 + 1*x + 1*treat + e)
+Data$y <- with(Data, 5 + 1*control + 1*treat + e)
 ```
 
-In other words, the true underlying effect of `x` and `treat` on the outcome `y` is 1 and the estimated value of `y` when all other parameters are at 0 is 5. A simple ordinary least squares model (i.e. `M1 <- lm(y ~ x + treat, data=Data)`) would produce the following results.
+In other words, the true underlying effect of `control` and `treat` on the outcome `y` is 1 and the estimated value of `y` when all other parameters are at 0 is 5. A simple ordinary least squares model (i.e. `M1 <- lm(y ~ control + treat, data=Data)`) would produce the following results.
 
 <center>
 
@@ -87,7 +87,7 @@ In other words, the true underlying effect of `x` and `treat` on the outcome `y`
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
 <tr><td></td><td colspan="1" style="border-bottom: 1px solid black"></td></tr>
 <tr><td style="text-align:left"></td><td>Y (Outcome)</td></tr>
-<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">X (Control)</td><td>1.012<sup>***</sup></td></tr>
+<tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Control</td><td>1.012<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.027)</td></tr>
 <tr><td style="text-align:left"></td><td></td></tr>
 <tr><td style="text-align:left">Treatment</td><td>0.511<sup>***</sup></td></tr>
@@ -114,13 +114,13 @@ In our case, this pertains to just one variable (`treat`) that we know is endoge
 
 ```r
 # First-stage model...
-FSM <- lm(treat ~ x + instr, data=Data)
+FSM <- lm(treat ~ control + instr, data=Data)
 
 # Generate treat_hat variable
 Data$treat_hat <- fitted(FSM)
 
 # Second-stage model...
-SSM <- lm(y  ~ x + treat_hat, data=Data)
+SSM <- lm(y  ~ control + treat_hat, data=Data)
 ```
 
 The following table will show the results of all three analyses. 
@@ -132,7 +132,7 @@ The following table will show the results of all three analyses.
 <tr><td></td><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
 <tr><td style="text-align:left"></td><td>OLS (Endogenous Treatment)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>First-Stage Model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Second-Stage Model</td></tr>
 <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td></tr>
-<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">X (Control)</td><td>1.012<sup>***</sup></td><td>0.006</td><td>1.003<sup>***</sup></td></tr>
+<tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Control</td><td>1.012<sup>***</sup></td><td>0.006</td><td>1.003<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.027)</td><td>(0.017)</td><td>(0.016)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td><td></td></tr>
 <tr><td style="text-align:left">Treatment</td><td>0.511<sup>***</sup></td><td></td><td></td></tr>
@@ -154,7 +154,7 @@ The following table will show the results of all three analyses.
 </table>
 <br /></center>
 
-The first model is the OLS model that showed a clear downward bias in the coefficient size for the treatment when the treatment is correlated with the error term. The true effect of the treatment on the response variable `y` is 1 but the OLS coefficient for the treatment is only .511. The first-stage model attempts to remove the variation in the treatment that is correlated with the error term by regressing the treatment variable on the control variable `x` and the instrumental variable that is correlated with the treatment but not the error term. This results in fitted values for the treatment (`treat_hat`) that are substituted for the endogenous treatment variable in the second-stage model. This second-stage model is identical in form to the OLS model, but only with a treatment variable where the sources of endogeneity have been stripped from the variable. The coefficient for this fitted treatment variable approaches 1, which is what the true effect is from the data-generating process.
+The first model is the OLS model that showed a clear downward bias in the coefficient size for the treatment when the treatment is correlated with the error term. The true effect of the treatment on the response variable `y` is 1 but the OLS coefficient for the treatment is only .511. The first-stage model attempts to remove the variation in the treatment that is correlated with the error term by regressing the treatment variable on the control variable and the instrumental variable that is correlated with the treatment but not the error term. This results in fitted values for the treatment (`treat_hat`) that are substituted for the endogenous treatment variable in the second-stage model. This second-stage model is identical in form to the OLS model, but only with a treatment variable where the sources of endogeneity have been stripped from the variable. The coefficient for this fitted treatment variable approaches 1, which is what the true effect is from the data-generating process.
 
 The goal for this post is to offer something more accessible to my future students in quantitative public policy analysis on how to deal with endogeneity in important treatment variables. There are a number of approaches here but instrumental varables and 2SLS are particularly attractive. Econometrics textbooks can make this seem daunting but students who learn more by application than by notation will find these tools relatively straightforward.
 
