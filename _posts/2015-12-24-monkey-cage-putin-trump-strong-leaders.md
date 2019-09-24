@@ -4,7 +4,7 @@ author: steve
 layout: post
 permalink:
 categories:
-  - Shameless self promotion
+  - Political Science
 excerpt: "I guested on *The Monkey Cage* to offer insight to what Putin and Trump supporters have in common and what they expect of their heads of state."
 ---
 
