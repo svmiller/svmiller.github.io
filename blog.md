@@ -4,11 +4,11 @@ title: Blog
 permalink: /blog/
 ---
 
-I blog semi-regularly about stuff. My blog entries typically focus on some professional development stuff for an intended audience of graduate students in my discipline. I also blog about some parlor tricks in LaTeX, R, or Markdown that I have taught myself and that might be worth sharing with the general public. A full listing of my blog posts follows.
+I blog semi-regularly about stuff. My blog entries typically focus on some professional development stuff for an intended audience of undergraduate or graduate students in my discipline. Topics vary, but most focus on political science or parlor tricks in R or R Markdown that I think are worth sharing with the general public. To date, <a href="/categories">categories on my blog</a> (and number of blog posts in that category) include {% assign sorted_cats = site.categories | sort  %}{% for category in sorted_cats %}{% if forloop.last == true %}and {% endif %}<a href="/categories/#{{category[0]}}" style="font-weight:normal;">{{category[0] | camelcase }}</a> ({{ category[1].size  }}){% if forloop.last == false %},{% endif %} {% endfor %}. A full listing of my blog posts follows.
 
 
+<!-- {% assign sorted_cats = site.categories | sort  %}{% for category in sorted_cats %}{% if forloop.last == true %}and {% endif %}<a href="/categories/#{{category[0]}}" style="font-weight:normal;">{{category[0] | camelcase }}</a> ({{ category[1].size  }}){% if forloop.last == false %},{% endif %} {% endfor %} -->
 
-<!-- {% assign sorted_cats = site.categories | sort  %}{% for category in sorted_cats %}<a href="" style="font-weight:normal;">{{category[0] | camelcase }}</a> ({{ category[1].size }}), {% endfor %} -->
 
 
 <ul id="archive">
