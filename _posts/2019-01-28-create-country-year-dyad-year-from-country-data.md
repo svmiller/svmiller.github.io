@@ -5,7 +5,9 @@ date: '2019-01-28'
 excerpt: A few lines in R (thanks to tidyverse) can create the basic country-year and dyad-year data frames you need for international conflict research.
 layout: post
 permalink: null
-categories: R
+categories:
+  - R
+  - Political Science
 ---
 
 

@@ -12,6 +12,7 @@ excerpt: "A few lines in R (thanks to tidyverse) can take raw rivalry data from 
 layout: post
 categories:
   - R
+  - Political Science
 image: "bettanier-black-spot-1887.jpg"
 ---
 
