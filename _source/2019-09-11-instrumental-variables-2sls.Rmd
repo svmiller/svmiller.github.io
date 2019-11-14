@@ -100,7 +100,7 @@ stargazer(Cordata, type="html", title="A Correlation Matrix of the Data")
 ```
 <br /></center>
 
-Let's further assume that there is some outcome `y` that is a linear function some slope-intercept (or "constant") + `control`, `treat`, and the error term `e`. Such that:
+Let's further assume that there is some outcome `y` that is a linear function of some slope-intercept (or "constant") + `control`, `treat`, and the error term `e`. Such that:
 
 ```{r makey, echo=T, eval=T}
 Data$y <- with(Data, 5 + 1*control + 1*treat + e)

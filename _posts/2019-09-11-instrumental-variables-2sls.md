@@ -72,7 +72,7 @@ The actual correlation matrix of the simulated data corresponds well enough with
 <tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr></table>
 <br /></center>
 
-Let's further assume that there is some outcome `y` that is a linear function some slope-intercept (or "constant") + `control`, `treat`, and the error term `e`. Such that:
+Let's further assume that there is some outcome `y` that is a linear function of some slope-intercept (or "constant") + `control`, `treat`, and the error term `e`. Such that:
 
 
 ```r
