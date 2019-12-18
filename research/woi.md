@@ -1,24 +1,24 @@
 ---
 layout: page
-title: "White Outgroup Intolerance and Declining Support for American Democracy"
-permalink: /research/white-outgroup-intolerance-democratic-support/
+title: "The Effect of White Social Prejudice on Support for American Democracy"
+permalink: /research/white-social-prejudice-support-american-democracy/
 ---
 
 {% include image.html url="/images/charlottesville-white-pride-rally.jpg" caption="A man marching with white nationalists makes a slashing motion across his throat toward counter-protester in Charlottesville's white pride rally. (Chip Somodevilla/Getty Images)" width="400" align="right" %}
 
 <!--## Article and Supporting Materials  --> 
 
-- [Manuscript](https://github.com/svmiller/woi/blob/master/woi.pdf)
-- [Appendix](https://github.com/svmiller/woi/blob/master/appendix/woi-appendix.pdf)
+- [Manuscript](https://github.com/svmiller/woi/blob/master/ms.pdf)
+- [Appendix](https://github.com/svmiller/woi/blob/master/appendix/appendix.pdf)
 - [Replication materials](https://github.com/svmiller/woi)
 
 <hr style="clear:both;visibility: hidden;" />  
 
 ## Abstract
 
-*Co-authored with [Nicholas T. Davis](http://www.nicholastdavis.com/)*
+*Co-authored with [Nicholas T. Davis](http://www.nicholastdavis.com/). Forthcoming at [Journal of Race, Ethnicity, and Politics](https://www.cambridge.org/core/journals/journal-of-race-ethnicity-and-politics).*
 
-Social intolerance embodies an unwillingness to associate or fraternize with individuals whose cultural, racial, or religious ideas or ways differ from one's own group. Such prejudice is a particularly thorny problem in the context of democracy, which is predicated upon extending representational access to all citizens irrespective of race or creed. To what extent, then, does this social intolerance affect individuals' support for democratic institutions? Using World Values Surveys from 1995 to 2011, we find that intolerance toward cultural, ethnic, or racial 'others'  reduces the value that white Americans assign to democracy. Perhaps more troubling, these attitudes also increase white individuals' openness to undemocratic alternatives -- white Americans who exhibit social intolerance are more likely to dismiss the value of separation of powers and to support army rule. We close with a discussion of how our analyses inform American politics in the age of Trump and how political scientists can better understand the connection between social intolerance and anti-democratic orientations.
+Social prejudice constitutes an unwillingness to associate with individuals whose cultural or racial background differs from one's own group. Such prejudice is a particularly thorny problem in the context of democracy, which requires citizens to minimally respect such differences. In this manuscript, we assess the relationships between these attitudes and support for democratic institutions. Using World Values Survey data from 1995 to 2011, we find that prejudice toward cultural, ethnic, or racial 'others' reduces the value that white Americans assign to democracy. We also find white Americans who exhibit these attitudes are more likely to dismiss the value of separation of powers and are more likely to support army rule. These findings imply that exclusionary rhetoric targeted toward nonwhite groups is accompanied by lower baseline support for democracy. We close with a discussion of how our analyses inform the study of Americans' attitudes toward democracy.
 
 ## Elsewhere
 

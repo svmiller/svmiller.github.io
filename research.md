@@ -20,6 +20,8 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 
 ## Publications
 
+Miller, Steven V. and Nicholas T. Davis. Forthcoming. "[White Outgroup Intolerance and Declining Support for American Democracy](/research/white-social-prejudice-support-american-democracy/)." *Journal of Race, Ethnicity, and Politics.*
+
 Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[The Importance of Correct Measurement](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly*.
 
 Miller, Steven V. 2019. "[What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016](/research/what-americans-really-think-about-gun-control/)". *Social Science Quarterly* 100(1): 272-288.
@@ -57,7 +59,5 @@ Miller, Steven V., Jaroslav Tir, and John A. Vasquez. Forthcoming. "Geography, T
 "U.S. Presidents, Human Rights, and Economic Aid from Truman to Obama: A Mixed Effects Approach"
 
 "Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders"
-
-"[White Outgroup Intolerance and Declining Support for American Democracy](/research/white-outgroup-intolerance-democratic-support/)" 
 
 "[Economic Anxiety or Racial Resentment? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2016](/research/economic-anxiety-racial-resentment-immigration-1992-2016/)" 
