@@ -37,7 +37,6 @@ library(tidyverse)
 library(stevemisc)
 library(knitr)
 
-
 library(gsheet)
 
 gsheet2tbl('https://docs.google.com/spreadsheets/d/1b9o6uDO18sLxBqPwl_Gh9bnhW-ev_dABH83M5Vb5L8o/htmlview?sle=true#gid=0') %>%
@@ -263,9 +262,11 @@ mass_shootings_yearly %>%
        caption = mjms_caption)
 ```
 
-```{r us-mass-shootings-by-year-1982-present, fig.width=13, fig.height=9}
+`fdsfss
 
-mass_shootings_yearly %>%
+``{r us-mass-shootings-by-year-1982-present, fig.width=13, fig.height=99, eval=T, echo=F
+m
+ass_shootings_yearly %>%
   ggplot(.,aes(year, n)) +
   theme_steve_web() +
   post_bg() +
@@ -279,7 +280,7 @@ mass_shootings_yearly %>%
        title = mjms_title,
        subtitle =  mjms_subtitle, 
        caption = mjms_caption
-       )
+
 
 ```
 

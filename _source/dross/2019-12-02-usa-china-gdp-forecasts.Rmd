@@ -1,0 +1,160 @@
+---
+title: "When Will China Overtake the U.S. in Nominal GDP? Fun With Forecasting Packages in R"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+knit: (function(inputFile, encoding) {
+   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
+author: "steve"
+date: '2019-12-02'
+excerpt: "A few lines in R (thanks to tidyverse) can take raw rivalry data from Thompson and Dreyer (2012) and create some usable data frames for conflict research."
+layout: post
+categories:
+  - R
+  - Political Science
+image: "dollar-renmibi.jpg"
+---
+
+```{r setup-usa-chn-gdp-forecasts, include=FALSE, cache=F}
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- "images/"
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
+                      cache.path = '../cache/usa-china-gdp-forecasts/',
+                      message=FALSE, warning=FALSE,
+                      cache = TRUE) 
+
+library(WDI)
+library(stevemisc)
+library(tidyverse)
+library(lubridate)
+library(fable)
+library(tsibble)
+# library(prophet)
+
+WDI(country=c("US","CN","JP"),
+    indicator = "NY.GDP.MKTP.KD",
+    start=1960) %>%
+  rename(gdp = "NY.GDP.MKTP.KD") %>%
+  select(-iso2c) %>%
+  arrange(country, year) %>%
+  na.omit %>% tbl_df()  -> GDP
+ 
+ 
+# https://www.bloomberg.com/opinion/articles/2019-03-08/will-china-overtake-u-s-gdp-depends-how-you-count
+
+```
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+ 
+add_jekyll_image('/images/dollar-renmibi.jpg', "When will China overtake the U.S. in GDP? It's tough to say.", "400", "right")
+ 
+```
+
+I'm nearing the end of the semester in [my introductory class on international relations](http://posc1020.svmiller.com/). Therein, my final lecture on [the future of international politics](http://posc1020.svmiller.com/future-1/posc1020-lecture-future-1.pdf) involves some armchair forecasting about the biggest questions IR scholars have about what the future holds. The "rise of China" features prominently in that discussion because China's rise would also spell the end of the post-WWII American hegemony.
+
+When will that happen? It's of interest to American lawmakers, even if lawmakers like Marco Rubio are [more eager to whine about it](https://www.scmp.com/news/china/diplomacy/article/3037557/us-senators-propose-economic-security-strategy-act-counter) than they are to do [the practical, substantive things that might better position the U.S.](https://www.bloomberg.com/news/articles/2016-06-15/china-spends-more-on-infrastructure-than-the-u-s-and-europe-combined) for the future. We'd have to grant that we know what a "rise" is and how we can measure the concept with confidence. As my lecture notes, grand statements of China's "rise" belies that most military comparisons between China and the United States would note that China's military beats the U.S. on crude (but surely important) metrics of manpower and never on "quality" metrics like equipment and technology. In practice, these forecasts of when China will rise focus on GDP comparisons. They note the more rapid growth by China in recent years when compared to the U.S. and suggest the "rise" is imminent. Toward that end, we can have some fun trying to forecast the year this would happen with some forecasting packages in R. Here are the packages I'll be using in this post.
+
+```{r packages, echo=T, eval=F, warning=F}
+library(WDI)
+library(stevemisc)
+library(tidyverse)
+library(lubridate)
+library(fable)
+library(tsibble)
+
+```
+
+I'm old enough to know that we've actually surpassed a lot of these predictions and that China's "rise" forecasts might be the modern-day, political equivalent of [apocalypse forecasts of centuries past](https://en.wikipedia.org/wiki/List_of_dates_predicted_for_apocalyptic_events). [A 2014 OECD forecast](https://data.oecd.org/gdp/gdp-long-term-forecast.htm) said it would happen in 2021. [Forbes said it would be 2018](https://www.forbes.com/sites/mikepatton/2016/04/29/global-economic-news-china-will-surpass-the-u-s-in-2018/), in 2016. This year (2019), [the Standard Chartered Bank said it will happen next year (2020)](https://www.businessinsider.com/us-economy-to-fall-behind-china-within-a-year-standard-chartered-says-2019-1). So, we've either blown past some of these predictions or recent predictions that could still happen are highly unlikely to happen given the current state of both economies.
+
+There are any number of reasons for this. Forecasting GDP is a tricky enterprise and there are a lot of assumptions that we take for granted in doing it. You'd have to assume a rate of growth and hold it constant. You should always factor in upper and lower bounds on forecasts, but predictions are always interested in the point prediction and never the uncertainty around the prediction. In the case of China, an interested citizen should be mindful of [the structural problems China faces](https://www.foreignaffairs.com/articles/china/2019-03-11/whats-causing-chinas-economic-slowdown) even as forecasts are more interested in the U.S.' structural problems that would enable China's "rise."
+
+The case of Japan and the United States should illustrate this well. Much of what we're saying about China's economy right now is cribbed from stuff we were saying about Japan. Indeed, the fears about Japan's growing economic might were so big that some lawmakers expressed their paranoia by [smashing Japanese boomboxes on the Capitol Hill lawn](https://paleofuture.gizmodo.com/that-time-republicans-smashed-a-boombox-with-sledgehamm-1775418875). Japan never surpassed the U.S. in GDP for [a variety of reasons](https://www.brookings.edu/opinions/japans-shrinking-economy/), but, by 1990, it looked like it might. Certainly the upper bounds for Japanese forecasts from 1990 were approaching the lower bounds of U.S. forecasts at 2010.
+
+```{r jpn-usa-gdp-forecasts-1990-2010, echo=F, eval=T, cache=F, warning=F, fig.width=13}
+
+GDP %>% 
+  filter(year <= 1990 & country %in% c("Japan", "United States")) %>% 
+  as_tsibble(index = year, key=country) %>%
+  model(
+    simpleets = ETS(gdp)
+  ) %>% 
+  forecast(h = "20 years") %>%
+  hilo(level = 90) %>%
+  rowwise() %>% unnest() %>%
+  rename(predgdp = gdp) %>%
+  left_join(GDP, .) %>%
+  filter(country %in% c("Japan", "United States")) %>%
+  mutate(gdp = ifelse(!is.na(predgdp), predgdp, gdp),
+         category = "Forecasted (from 1990)") %>%
+  select(country:year, .lower:category) %>%
+  bind_rows(GDP, .) %>%
+  filter(country %in% c("Japan", "United States")) %>%
+  mutate(category = ifelse(is.na(category), "Observed", category)) %>%
+    mutate(category = forcats::fct_relevel(category,
+                                         "Observed", "Forecasted (from 1990)" )) %>%
+  mutate_at(vars("gdp", ".lower", ".upper"), list(~. / 1e12)) %>%
+  filter(year <= 2010) %>%
+
+  ggplot(.,aes(year, gdp,  linetype=category, color = country, fill=country)) +
+  theme_steve_web() +
+  post_bg() +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.4, show.legend=F) +
+  geom_line(size=1.5) +
+  scale_color_brewer(palette = "Set1") +
+  scale_linetype_discrete(guide = FALSE) +
+  scale_x_continuous(breaks = seq(1960, 2050, by = 5)) +
+  xlab("") + ylab("Gross Domestic Product (Observed and Forecasted) in Trillions Constant 2010 US$") +
+  labs(color = "Country",
+       title = "Nominal GDP for the U.S. and Japan (With Post-1990 Forecast Estimates), 1960-2010",
+       subtitle = "Japanese forecasts from 1990 to 2010 (dashed line) expected more GDP growth than Japan observed (solid line).",
+       caption = "Data: World Bank national accounts data, and OECD National Accounts data files. Forecasts done with a simple exponential smoothing state space model in R.") 
+```
+
+However, the interest here is in forecasting China and the United States, given the most recent data. We'll first get GDP data from the World Bank using the `WDI` package.
+
+```{r gdp-data, echo=T, eval=F, warning=F}
+
+# Let's get the data here too.
+# GDP (constant 2010 US$)
+# Note: see _source file since this is where I also got the Japanese data for the above graph.
+
+WDI(country=c("US","CN","JP"),
+    indicator = "NY.GDP.MKTP.KD",
+    start=1960) %>%
+  rename(gdp = "NY.GDP.MKTP.KD") %>%
+  select(-iso2c) %>%
+  arrange(country, year) %>%
+  na.omit %>% tbl_df()  -> GDP
+```
+
+The [`fable` package](https://fable.tidyverts.org/) will be doing the heavy lifting here since it's a `tidyverse`-friendly wrapper for a lot of forecasting functions that people like Rob Hyndman have developed elsewhere. Specifying what particular forecasting model you want is easy too.
+
+```{r gdp-usa-chn, echo=T, eval=F, warning=F}
+
+GDP %>% 
+  filter(country %in% c("China", "United States")) %>% 
+  as_tsibble(index = year, key=country) %>%
+  model(
+    simpleets = ETS(gdp)
+  ) %>% 
+  fablelite::forecast(h = "30 years")
+  hilo(level = 90) %>%
+  rowwise() %>% unnest() 
+
+```
+
+```{r knitchunk, echo=F, eval=F}
+setwd("~/Dropbox/svmiller.github.io/_source")
+knitr::knit("2019-12-02-usa-china-gdp-forecasts.Rmd",
+            output = "../_posts/2019-12-02-usa-china-gdp-forecasts.md")
+```
