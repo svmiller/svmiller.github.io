@@ -262,7 +262,7 @@ Basically: think long and hard about grouping effects in your data since they ca
 
 ## Ecological Fallacy
 
-The ecological fallacy is one of the classic limit ions about correlation about which we have long known. Namely: inferences and correlations at the individual-level need not be equivalent at the group-level.
+The ecological fallacy is one of the classic limitations about correlation about which we have long known. Namely: inferences and correlations at the individual-level need not be equivalent at the group-level.
 
 We have [W.S. Robinson (1950)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents) to thank for this classic cautionary tale. His case concerns illiteracy rates from the 1930 Census, later cleaned and amended by [Grotenhuis et al. (2011)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents), and included in my `post8000r` package as the `Illiteracy30` data frame.
 
