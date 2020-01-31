@@ -74,7 +74,7 @@ I'm teaching [a grad-level methods class](http://post8000.svmiller.com) this sem
 
 It's also a blessing because it's giving me some opportunity to rethink/retool how I teach this stuff for a wide audience. Along the way, I'm compiling some instructional tools into [an R package, `post8000r`](https://github.com/svmiller/post8000r), that is right now on [my Github](https://github.com/svmiller/). My goals here are multiple. First: disseminate sample data sets for in-class instruction of these topics of interest to both my students and researchers/teachers who would like a handy package for methods instruction. Second, I'm also trying to teach my students, by example, how to code some things within a [tidyverse](https://www.tidyverse.org/) workflow. Every class I teach this semester has a Tuesday lecture/discussion with a Thursday lab, where students learn to implement the week's topics in R.
 
-This week is all about assocation and causality, even though the lab session will focus more on some associational techniques like correlation along with a discussion of where correlation analysis can go awry. Here are some of the applications, starting with first a list of packages I'll be using in this workflow.
+This week is all about association and causality, even though the lab session will focus more on some associational techniques like correlation along with a discussion of where correlation analysis can go awry. Here are some of the applications, starting with first a list of packages I'll be using in this workflow.
 
 ```{r show-these-packages, eval=F, echo=T}
 library(tidyverse) # you should know what this is
@@ -147,7 +147,7 @@ Basically: look at your data. Look at your model too.
 
 ## Simpson's Paradox
 
-[Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a well-known problem of correlation in which a correlation analysis, almost always done in a bivariate context, may reveal a correlation that is reversed upon the introduction of some third factor. Every stylized case I've seen of Simpson's paradox conceptualizes  the third factor as some kind of grouping/category effect (certainly of interest to me as a mixed effects modeler), even if this may not be necessary to show a Simpson reversal.
+[Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a well-known problem of correlation in which a correlation analysis, almost always done in a bivariate context, may reveal a relationship that is reversed upon the introduction of some third variable. Every stylized case I've seen of Simpson's paradox conceptualizes  the third factor as some kind of grouping/category effect (certainly of interest to me as a mixed effects modeler), even if this may not be necessary to show a Simpson reversal.
 
 One of the classic pedagogical cases of a Simpson's paradox is from [Deborah Lynne Guber's (1999)](https://pdfs.semanticscholar.org/29c3/0e9dc77b56340faa5e6ad35e0741a5a83d49.pdf) study of public school expenditures and SAT performance in 1994-95 across all 50 states. There are other cases I've seen of a Simpson reversal, incidentally most involving education, but these data were readily available and are part of my `post8000r` package as the `Guber99` data frame.
 
@@ -225,11 +225,11 @@ Basically: think long and hard about grouping effects in your data since they ca
 
 ## Ecological Fallacy
 
-The ecological fallacy is one of the classic limitions about correlation about which we have long known. Namely: inferences/correlations at the individual-level cannot be generalized to the group-level.
+The ecological fallacy is one of the classic limit ions about correlation about which we have long known. Namely: inferences and correlations at the individual-level need not be equivalent at the group-level.
 
-We have [W.S. Robinson (1950)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents) to thank for this classic cautionary tale. His case revolves around illiteracy rates as collected/documented in the 1930 Census, later cleaned/amended by [Grotenhuis et al. (2011)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents), and included in my `post8000r` package as the `Illiteracy30` data frame.
+We have [W.S. Robinson (1950)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents) to thank for this classic cautionary tale. His case concerns illiteracy rates from the 1930 Census, later cleaned and amended by [Grotenhuis et al. (2011)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents), and included in my `post8000r` package as the `Illiteracy30` data frame.
 
-It's not too problematic to note that literacy rates in the U.S. cluster on race and immigrant status, certainly by the early 20th century when Robinson conducted this analysis. The explanations here are multiple, for which a summary of which Europeans migrated to the U.S. and why will illustrate the issue. The unequal allocation of public goods (like education) on race will add further background. It should be unsurprising that there were higher illiteracy rates for those 10 years old or above among non-white, non-native-born people in the U.S. relative to the white, native-born population in the U.S.
+It's not too problematic to note that literacy rates in the U.S. cluster on race and immigrant status, certainly by the early 20th century when Robinson conducted this analysis. The explanations here are multiple, for which a summary of which Europeans migrated to the U.S. and why will illustrate the issue. The unequal allocation of public goods (like education) on race---certainly during the Jim Crow era---will add further background. It should be unsurprising that there were higher illiteracy rates for those 10 years old or above among non-white, non-native-born people in the U.S. relative to the white, native-born population in the U.S.
 
 ```{r illiteracy-rates-group}
 Illiteracy30 %>%
@@ -252,7 +252,7 @@ Illiteracy30 %>%
         align=c("l","c"))
 ```
 
-However, there is interesting variation in the data by level of analysis. Consider the case of interest to Robinson for the foreign-born population (evidently recorded as "foreign-born white" in the Census data). Clearly the foreign-born population are more likely to be illiterate. Almost 10% of the foreign-born white population is illiterate relative to 4% of the total population (and 1.8% of the native-born white population). In a comparison of states, the correlation between the percentage of the state population that is foreign-born and the percentage of the foreign-born in the state that is illiterate is .188 but the correlation between the percentage of the state that is foreign-born and the percentage of the overall state that is illiterate is -.524. Two very different correlations and two different levels, which makes sense when you understand where immigrants tended to settle when they arrived in the U.S.
+However, there is interesting variation in the data by level of analysis. Consider the case of interest to Robinson for the foreign-born population (evidently recorded as "foreign-born white" in the Census data). Clearly, the foreign-born population are more likely to be illiterate. Almost 10% of the foreign-born white population is illiterate relative to 4% of the total population (and 1.8% of the native-born white population). In a comparison of states, the correlation between the percentage of the state population that is foreign-born and the percentage of the foreign-born in the state that is illiterate is .188 but the correlation between the percentage of the state that is foreign-born and the percentage of the overall state that is illiterate is -.524. These are two very different correlations at two different levels, which makes sense when you understand where immigrants tended to settle when they arrived in the U.S.
 
 ```{r robinson-1950-ecological-fallacy-foreign-born-illiteracy, echo=T, eval=T, cache=T, warning=F, fig.width=14, fig.height = 8}
 
