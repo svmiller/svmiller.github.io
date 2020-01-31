@@ -462,7 +462,7 @@ Mfgn %>%
   facet_wrap(~statename) +
   theme_steve_web() + post_bg() +
   scale_x_date(date_breaks = "1 year", date_minor_breaks = "1 month", date_labels = "%Y") +
-  labs(title = "The 12-Month Difference in Manufacturing Jobs by State, January 2018 to December 2019",
+  labs(title = "The 12-Month Difference in Manufacturing Jobs in 12 States, January 2018 to December 2019",
        x = "",
        caption = "Data: U.S. Bureau of Labor Statistics, via Federal Reserve Bank of St. Louis",
        y = "12-month difference in manufacturing jobs (in thousands of persons)",
