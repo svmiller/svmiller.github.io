@@ -1,5 +1,5 @@
 ---
-title: "Graphing the Manufacturing Woes Under the Trump Presidency, in R"
+title: "Graphing the Manufacturing Trends Under the Trump Presidency, in R"
 output:
   md_document:
     variant: gfm
@@ -8,7 +8,7 @@ knit: (function(inputFile, encoding) {
    rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-01-31'
-excerpt: "Stories of ."
+excerpt: "Stories are increasingly documenting localized recessions emerging in key manufacturing states during the Trump presidency. Here's how to see what that looks like in R."
 layout: post
 categories:
   - R
