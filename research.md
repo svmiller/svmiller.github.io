@@ -50,7 +50,17 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 ## Book Chapters
 
-Miller, Steven V., Jaroslav Tir, and John A. Vasquez. Forthcoming. "Geography, Territory, and Conflict." *Oxford Research Encyclopedia of International Studies*.
+Miller, Steven V., Jaroslav Tir, and John A. Vasquez. 2020. "[Geography, Territory, and Conflict](https://oxfordre.com/internationalstudies/view/10.1093/acrefore/9780190846626.001.0001/acrefore-9780190846626-e-320)." *Oxford Research Encyclopedia of International Studies.* `doi:` [10.1093/acrefore/9780190846626.013.320](https://oxfordre.com/internationalstudies/view/10.1093/acrefore/9780190846626.001.0001/acrefore-9780190846626-e-320)
+
+## Book Reviews
+
+Miller, Steven V. 2019. "[National Identity and Territory in a World of Changing Scale](https://academic.oup.com/isr/advance-article-abstract/doi/10.1093/isr/viy051/5026359?redirectedFrom=fulltext)" *International Studies Review* 20(4): 728--730
+
+- Review of Herb, Guntram M. and David H. Kaplan. 2017. *Scaling Identities: Nationalism and Territoriality*. Lanham, MD: Rowman & Littlefield.
+
+## Reports
+
+Miller, Steven V. 2020. "[School Choice Advocacy Report Plays Regression Modeling Games to Make Its Case Against Public Schools](https://nepc.info/newsletter/2019/12/school-satisfaction)." National Education Policy Center.
 
 ## Select Working Papers and Works in Progress
 
