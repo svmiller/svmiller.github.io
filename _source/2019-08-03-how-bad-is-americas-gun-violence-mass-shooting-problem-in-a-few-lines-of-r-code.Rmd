@@ -262,11 +262,8 @@ mass_shootings_yearly %>%
        caption = mjms_caption)
 ```
 
-`fdsfss
-
-``{r us-mass-shootings-by-year-1982-present, fig.width=13, fig.height=99, eval=T, echo=F
-m
-ass_shootings_yearly %>%
+```{r us-mass-shootings-by-year-1982-present, fig.width=13, fig.height=9, eval=T, echo=F}
+mass_shootings_yearly %>%
   ggplot(.,aes(year, n)) +
   theme_steve_web() +
   post_bg() +
@@ -279,7 +276,7 @@ ass_shootings_yearly %>%
        x = "Year",
        title = mjms_title,
        subtitle =  mjms_subtitle, 
-       caption = mjms_caption
+       caption = mjms_caption)
 
 
 ```
