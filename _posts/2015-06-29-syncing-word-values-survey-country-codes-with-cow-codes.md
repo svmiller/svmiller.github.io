@@ -16,7 +16,7 @@ WVS further compounds the opacity of its country classification system with docu
 
 [^1]: Even the incredibly useful `countrycode` package struggles with matching Serbia as successor state to the former Yugoslavia (from a CoW perspective).
 
-The [R code I prove on my Github][5] tries to address this for those who use WVS to understand the contextual (i.e. country-level) influences on individual-level political attitudes. The code is rather simple and makes important use of the `countrycode` package everyone should have installed in R anyway. I'll belabor the code and the contents of this Github directory below.
+The [R code I provide on my Github][5] tries to address this for those who use WVS to understand the contextual (i.e. country-level) influences on individual-level political attitudes. The code is rather simple and makes important use of the `countrycode` package everyone should have installed in R anyway. I'll belabor the code and the contents of this Github directory below.
 
 First, I cannot distribute the 1981-2014 longitudinal data file from WVS. You will have to download that yourself. Notice the file name in the R code is unchanged for transparency's sake. I load this in the R script as an object intuitively titled `WVS`.
 
