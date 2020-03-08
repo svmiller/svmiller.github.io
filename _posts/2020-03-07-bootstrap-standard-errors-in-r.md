@@ -708,7 +708,7 @@ bootCrime %>%
           ~mutate(.x, resample = .y)) -> tidybootCrime
 ```
 
-If you're curious, this basically just ganked all the "tidied" output of our 1,000 simulations and binded them as rows to each other, with helpful indices in the `resample` column. Observe:
+If you're curious, this basically just ganked all the "tidied" output of our 1,000 regressions and binded them as rows to each other, with helpful indices in the `resample` column. Observe:
 
 
 ```r
