@@ -145,7 +145,7 @@ A fitted-residual plot will also suggest we don't have neat-looking variances ei
 
 ![plot of chunk fitted-resid-plot-crime-data](/images/fitted-resid-plot-crime-data-1.png)
 
-The implication of this kind of heteroskedasticity is less about our coefficients and more about the standard errors around them. Under these conditions, it makes sense to boostrap the standard errors to compare them to what the OLS model produces.
+The implication of this kind of heteroskedasticity is less about our coefficients and more about the standard errors around them. Under these conditions, it makes sense to bootstrap the standard errors to compare them to what the OLS model produces.
 
 ## Bootstrapping, the Tidy Way
 
