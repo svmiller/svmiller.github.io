@@ -693,7 +693,7 @@ If you were curious, you could look at a particular OLS result with the followin
 # here's the first linear regression result
 bootCrime$tidy[[1]]
 
-# here's the 1000th, one
+# here's the 1000th one
 bootCrime$tidy[[1000]]
 ```
 
