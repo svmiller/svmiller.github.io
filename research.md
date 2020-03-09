@@ -64,12 +64,12 @@ Miller, Steven V. 2019. "[National Identity and Territory in a World of Changing
 
 Miller, Steven V. 2020. "[School Choice Advocacy Report Plays Regression Modeling Games to Make Its Case Against Public Schools](https://nepc.info/newsletter/2019/12/school-satisfaction)." National Education Policy Center.
 
-## Select Working Papers and Works in Progress
+<!-- ## Select Working Papers and Works in Progress
 
 "Understanding Carrots and Sticks in U.S. Aid Allocation: The Case of the Middle East"
 
 "U.S. Presidents, Human Rights, and Economic Aid from Truman to Obama: A Mixed Effects Approach"
 
-"Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders"
+"Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders" -->
 
 
