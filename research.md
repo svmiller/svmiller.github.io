@@ -20,6 +20,8 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 
 ## Publications
 
+Miller, Steven V. "[Economic Anxiety or Racial Resentment? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2016](/research/economic-anxiety-racial-resentment-immigration-1992-2016/)" *Conditionally accepted at Social Science Journal.*
+
 Miller, Steven V. and Nicholas T. Davis. Forthcoming. "[The Effect of White Social Prejudice on Support for American Democracy](/research/white-social-prejudice-support-american-democracy/)." *Journal of Race, Ethnicity, and Politics.*
 
 Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[The Importance of Correct Measurement](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly*.
@@ -70,4 +72,4 @@ Miller, Steven V. 2020. "[School Choice Advocacy Report Plays Regression Modelin
 
 "Convergence or Divergence? The Unique Effect of Territorial Threats on Attitudes toward Authoritarian Leaders"
 
-"[Economic Anxiety or Racial Resentment? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2016](/research/economic-anxiety-racial-resentment-immigration-1992-2016/)" 
+
