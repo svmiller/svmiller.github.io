@@ -2,6 +2,7 @@
 layout: page
 title: "Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017"
 permalink: /research/economic-anxiety-ethnocentrism-immigration-1992-2017/
+image: "trump-supporter-myrtle-beach.jpg"
 ---
 
 {% include image.html url="/images/trump-supporter-myrtle-beach.jpg" caption="I don't think this attitude is motivated by exposure to automation/outsourcing. (ARON P. BERNSTEIN/ GETTY IMAGES)" width="400" align="right" %}
