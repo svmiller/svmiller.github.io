@@ -10,7 +10,7 @@ image: "trump-supporter-myrtle-beach.jpg"
 <!--## Article and Supporting Materials  --> 
 
 - [Manuscript](https://github.com/svmiller/earr/blob/master/ms.pdf)
-- [Replication materials](https://github.com/svmiller/ms)
+- [Replication materials](https://github.com/svmiller/earr)
 
 
 <hr style="clear:both;visibility: hidden;" />  
