@@ -1,0 +1,131 @@
+---
+title: "The Dow Jones' No Good, Very Bad Day, in R Code"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+knit: (function(inputFile, encoding) {
+   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
+author: "steve"
+date: '2020-03-12'
+excerpt: "Here is some R code contextualizing the Dow Jones' recent slide, because gallows humor is the only thing that keeps me warm at night."
+layout: post
+categories:
+  - R
+image: "dow-jones-dude.jpg"
+---
+
+```{r setup-bootstrap-ses, include=FALSE, cache=F}
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- "images/"
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = '../cache/dow-jones-no-good-very-bad-day/',
+                      message=FALSE, warning=FALSE,
+                      cache = TRUE) 
+
+library(stevemisc)
+library(tidyverse)
+library(lubridate)
+library(quantmod)
+library(knitr)
+library(kableExtra)
+
+getSymbols("^DJI", src="yahoo", from= as.Date("2020-01-01"))
+
+DJI %>% data.frame %>%
+  rownames_to_column() %>% tbl_df() %>%
+  rename(date = rowname,
+         djia = DJI.Close) %>%
+  mutate(date = as_date(date)) %>%
+  select(date, djia)  -> QDJI
+
+bind_rows(DJIA, QDJI) %>%
+  bind_rows(.,tibble(date=as_date("2020-03-12"),
+                     djia = 21200.62)) -> DJIA
+
+
+```
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+ 
+add_jekyll_image('/images/dow-jones-dude.jpg', "That feeling when you realize you're not going to retire until your 70s. (Photo: Spencer Platt/Getty Images)", "400", "right")
+ 
+```
+
+[What he said](https://knowyourmeme.com/memes/shits-on-fire-yo).
+
+Anyway, I'm of the mentality that reading too much into large nominal numbers in the Dow Jones Industrial Average is a fool's errand. The U.S. is absolutely wealthier on the balance now than it was at almost every other point in the Dow Jones' history. It means gains in nominal numbers will be larger. Losses in nominal numbers will be larger as well. 
+
+That said, the Dow Jones' day today was clearly no good, and very bad. You can contextualize that with some basic R code.
+
+First, [my `stevemisc` package](https://github.com/svmiller/stevemisc) has Dow Jones Industrial Average data dating all the way to 1885 in the data frame `DJIA`. I updated it not long ago to include the end of 2019. I haven't added any 2020 observations to it yet, but that is easy to grab with the `quantmod` package. As of writing, the data for March 12, 2020 haven't been loaded yet. However, the close right now is reported at 21,200.62 for today. We can impute that simply.
+
+```r
+library(stevemisc)
+library(tidyverse)
+library(lubridate)
+library(quantmod)
+
+getSymbols("^DJI", src="yahoo", from= as.Date("2020-01-01"))
+
+DJI %>% data.frame %>%
+  rownames_to_column() %>% tbl_df() %>%
+  rename(date = rowname,
+         djia = DJI.Close) %>%
+  mutate(date = as_date(date)) %>%
+  select(date, djia)  -> QDJI
+
+bind_rows(DJIA, QDJI) %>%
+  bind_rows(.,tibble(date=as_date("2020-03-12"),
+                     djia = 21200.62)) -> DJIA
+```
+
+Here would be the worst single-day losses as a percentage loss from the previous trading day's close.
+
+```{r calculate-largest-worst-days}
+DJIA %>%
+  arrange(date) %>%
+  mutate(l1_djia = lag(djia, 1),
+         percchange = round(((djia - lag(djia,1))/lag(djia, 1))*100, 2)) %>%
+  arrange(percchange) %>% head(10) %>%
+ kable(., format="html", table.attr='id="stevetable"',
+        col.names=c("Date", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
+        caption = "The Ten Worst Trading Days in Dow Jones History, 1885-2020",
+        align=c("l","c","c","c"))
+```
+
+Here's where the five worst losses since 2017 rank all-time.
+
+```{r calculate-largest-worst-days-since-2017}
+DJIA %>%
+  arrange(date) %>%
+  mutate(l1_djia = lag(djia, 1),
+         percchange = ((djia - lag(djia,1))/lag(djia, 1))*100) %>%
+  arrange(percchange) %>%
+  mutate(rank = seq(1:n())) %>%
+  filter(year(date) >= 2017) %>%
+  head(5) %>%
+  mutate(percchange = round(percchange, 2)) %>%
+   kable(., format="html", table.attr='id="stevetable"',
+        col.names=c("Date", "DJIA (Close)", "DJIA (Close, Previous)", "% Change", "Rank Among Worst All-Time"),
+        caption = "The Five Worst Trading Days Since 2017, Ranked to All-Time Worst Days",
+        align=c("l","c","c","c","c"))
+  
+```
+
+This is fine.
+
+```{r knitchunk, echo=F, eval=F}
+setwd("~/Dropbox/svmiller.github.io/_source")
+knitr::knit("2020-03-12-dow-jones-no-good-very-bad-day.Rmd",
+            output = "../_posts/2020-03-12-dow-jones-no-good-very-bad-day.md")
+```
