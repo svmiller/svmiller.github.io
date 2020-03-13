@@ -1,5 +1,5 @@
 ---
-title: "The Dow Jones' No Good, Very Bad Day, in R Code"
+title: "The Dow Jones' No Good, Very Bad Day in Context"
 output:
   md_document:
     variant: gfm
@@ -15,7 +15,7 @@ categories:
 image: "dow-jones-dude.jpg"
 ---
 
-```{r setup-bootstrap-ses, include=FALSE, cache=F}
+```{r setup, include=FALSE, cache=F}
 
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
@@ -46,11 +46,41 @@ DJI %>% data.frame %>%
   rename(date = rowname,
          djia = DJI.Close) %>%
   mutate(date = as_date(date)) %>%
-  select(date, djia)  -> QDJI
+  select(date, djia) %>%
+  bind_rows(DJIA, .) -> DJI
 
-bind_rows(DJIA, QDJI) %>%
-  bind_rows(.,tibble(date=as_date("2020-03-12"),
-                     djia = 21200.62)) -> DJIA
+Presidents %>%
+  # add Trump
+  bind_rows(.,tibble(president="Donald J. Trump",
+                     start = ymd("2017-01-20"),
+                     end = ymd("2020-03-12"))) %>%
+  # Grover Cleveland had two non-consecutive terms.
+  mutate(president = ifelse(president == "Grover Cleveland" & start == "1885-03-04", "Grover Cleveland 1", president),
+         president = ifelse(president == "Grover Cleveland" & start == "1893-03-04", "Grover Cleveland 2", president)) %>%
+  # rowwise, list-seq, and unnest...
+  rowwise() %>%
+  mutate(date = list(seq(start, end, by = '1 day'))) %>%
+  unnest(date) %>%
+  # get just the president and date to left_join into the Dow data.
+  select(president, date) %>%
+  # Note: this will create some duplicates because of how terms start/end
+  # It won't be much a problem for what we're doing here.
+  left_join(DJI, .) %>%
+  mutate(president = fct_inorder(president)) -> Data
+
+# Data %>%
+#   group_by(president) %>%
+#   mutate(l1_djia = lag(djia, 1),
+#          percchange = round(((djia - lag(djia,1))/lag(djia, 1))*100, 2),
+#          index = (djia/first(djia))-1) %>%
+#   ggplot(.,aes(date, index)) + 
+#   theme_steve_web() + 
+#   geom_line() +
+#   scale_x_date(date_labels = "%Y") +
+#   facet_wrap(~president, scales = "free_x")
+
+
+
 
 
 ```
@@ -63,17 +93,19 @@ add_jekyll_image('/images/dow-jones-dude.jpg', "That feeling when you realize yo
 
 [What he said](https://knowyourmeme.com/memes/shits-on-fire-yo).
 
-Anyway, I'm of the mentality that reading too much into large nominal numbers in the Dow Jones Industrial Average is a fool's errand. The U.S. is absolutely wealthier on the balance now than it was at almost every other point in the Dow Jones' history. It means gains in nominal numbers will be larger. Losses in nominal numbers will be larger as well. 
+Anyway, I'm of the mentality that reading too much into large nominal numbers in the Dow Jones Industrial Average is a fool's errand. The U.S. is absolutely wealthier on the balance now than it was at almost every other point in the Dow Jones' history. It means gains in nominal numbers will be larger. Losses in nominal numbers will be larger as well. Humility and scale are important in communicating information and trends from the Dow Jones.
 
-That said, the Dow Jones' day today was clearly no good, and very bad. You can contextualize that with some basic R code.
+That said, the Dow Jones' day was clearly no good, and very bad. Here's how you can contextualize that.
 
-First, [my `stevemisc` package](https://github.com/svmiller/stevemisc) has Dow Jones Industrial Average data dating all the way to 1885 in the data frame `DJIA`. I updated it not long ago to include the end of 2019. I haven't added any 2020 observations to it yet, but that is easy to grab with the `quantmod` package. As of writing, the data for March 12, 2020 haven't been loaded yet. However, the close right now is reported at 21,200.62 for today. We can impute that simply.
+First, [my `stevemisc` package](https://github.com/svmiller/stevemisc) has Dow Jones Industrial Average data dating all the way to 1885 in the data frame `DJIA`. I updated it not long ago to include the end of 2019. I haven't added any 2020 observations to it yet, but that is easy to grab with the `quantmod` package. I also have presidential term data as part of the `Presidents` data set. Trump is not included in these data (because his term is still ongoing), but added him is simple in a tidyverse pipe.
 
 ```r
 library(stevemisc)
 library(tidyverse)
 library(lubridate)
 library(quantmod)
+library(knitr)
+library(kableExtra)
 
 getSymbols("^DJI", src="yahoo", from= as.Date("2020-01-01"))
 
@@ -82,47 +114,106 @@ DJI %>% data.frame %>%
   rename(date = rowname,
          djia = DJI.Close) %>%
   mutate(date = as_date(date)) %>%
-  select(date, djia)  -> QDJI
+  select(date, djia) %>%
+  bind_rows(DJIA, .) -> DJI
 
-bind_rows(DJIA, QDJI) %>%
-  bind_rows(.,tibble(date=as_date("2020-03-12"),
-                     djia = 21200.62)) -> DJIA
+Presidents %>%
+  # add Trump
+  bind_rows(.,tibble(president="Donald J. Trump",
+                     start = ymd("2017-01-20"),
+                     end = ymd("2020-03-12"))) %>%
+  # Grover Cleveland had two non-consecutive terms.
+  mutate(president = ifelse(president == "Grover Cleveland" & start == "1885-03-04", "Grover Cleveland 1", president),
+         president = ifelse(president == "Grover Cleveland" & start == "1893-03-04", "Grover Cleveland 2", president)) %>%
+  # rowwise, list-seq, and unnest...
+  rowwise() %>%
+  mutate(date = list(seq(start, end, by = '1 day'))) %>%
+  unnest(date) %>%
+  # get just the president and date to left_join into the Dow data.
+  select(president, date) %>%
+  # Note: this will create some duplicates because of how terms start/end
+  # It won't be much a problem for what we're doing here.
+  left_join(DJI, .) %>%
+  mutate(president = fct_inorder(president)) -> Data
 ```
 
-Here would be the worst single-day losses as a percentage loss from the previous trading day's close.
+One way of faithfully communicating Dow data---or any economic data, for that matter---is to index the data to some point. It's why a lot of manufacturing data, for example, are indexed to 2010 or 2012 on FRED. Since the interest here is political (i.e. politicians like to take credit for good days on the Dow and deflect blame for bad days on the Dow), we can index the Dow trends within presidential administrations to the starting day of the presidency. Most indices start at 100, but we can have this start at 0 to more readily communicate growth and contraction in the Dow Jones Industrial Average within presidencies.
 
-```{r calculate-largest-worst-days}
-DJIA %>%
-  arrange(date) %>%
-  mutate(l1_djia = lag(djia, 1),
-         percchange = round(((djia - lag(djia,1))/lag(djia, 1))*100, 2)) %>%
-  arrange(percchange) %>% head(10) %>%
- kable(., format="html", table.attr='id="stevetable"',
-        col.names=c("Date", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
-        caption = "The Ten Worst Trading Days in Dow Jones History, 1885-2020",
-        align=c("l","c","c","c"))
+```{r dow-jones-industrial-average-by-presidency, echo=T, eval=T, cache=T, warning=F, fig.width=13, fig.height = 8}
+Data %>%
+  # Note: Arthur isn't going to have a lot to look at here.
+  group_by(president) %>%
+  mutate(index = (djia/first(djia))-1) %>% 
+  ungroup() %>%
+  mutate(cat = ifelse(index < 0, "Negative", "Positive")) %>%
+  ggplot(.,aes(date, index,color=cat)) + 
+  theme_steve_web() + post_bg() +
+  geom_line() +
+  geom_hline(yintercept = 0, linetype="dashed", alpha=0.4) +
+  # I think '%y is the best I can do because of FDR's tenure.
+  scale_x_date(date_labels = "'%y", 
+               date_breaks = "1 year") +
+  facet_wrap(~president, scales = "free_x") +
+  scale_color_manual(values=c("#990000", "#009900")) +
+  theme(legend.position = "none") +
+  labs(title = "The Dow Jones Industrial Average, Indexed to the Starting Point of Every Administration",
+       subtitle = "The trends of the 'roaring '20s', the Great Depression, 1950s and 1990s growth, and post-collapse recoveries for FDR and Obama are apparent.",
+       x = "Date",
+       y = "Dow Jones Industrial Average, Indexed at Zero to the First Day of Trading for the Administration",
+       caption = "Data: Dow Jones Industrial Average (Yahoo Finance, Measuring Worth), in the DJIA data (github.com/svmiller/stevemisc)")
 ```
 
-Here's where the five worst losses since 2017 rank all-time.
+The data do well to show the scale of growth and contraction that defined these various presidencies. For example, we know the 1980s and 1990s were a period of high growth for the United States. This was made possible through a variety of factors, whether deregulation, technological change and innovation, and the Boomers entering their peak earning years. However, Ronald Reagan's last day close was 2,235 (up from 951) and Bill Clinton's last day close was 10,588 (up from 3,242). I'm old enough to remember the Dow crossing 10,000 for the first time being a big deal. However, those nominal numbers look paltry in modern times.
 
-```{r calculate-largest-worst-days-since-2017}
-DJIA %>%
-  arrange(date) %>%
-  mutate(l1_djia = lag(djia, 1),
+The other way of faithfully communicating good and bad trends in the Dow Jones Industrial Average is through a percentage change from some other benchmark's close. In most applications, this would be the previous day's close. Thus, what stands out from the blood-letting on the market on March 12, 2020 is less that it was the largest absolute drop from the previous day's close in the Dow's history. Again, it's a fool's errand to compare nominal numbers on the Dow. More importantly, it was the fourth-largest drop from the previous day's close in the Dow's history. That's a bigger deal.
+
+Calculating percentage changes in a time series is simple. Here, would be the 10 worst days in the Dow Jones' history and the presidencies with which they concided.
+
+```{r calculate-largest-worst-days, eval=T}
+Data %>%
+  # We have some duplicates because of start/end dates for presidencies.
+  # This should fix that
+  group_by(president) %>%
+  mutate(l1_djia = lag(djia,1),
          percchange = ((djia - lag(djia,1))/lag(djia, 1))*100) %>%
   arrange(percchange) %>%
-  mutate(rank = seq(1:n())) %>%
-  filter(year(date) >= 2017) %>%
-  head(5) %>%
-  mutate(percchange = round(percchange, 2)) %>%
+  select(date, president, everything()) %>%
+  head(10) %>%
+  ungroup() %>%
+  mutate_if(is.numeric, ~round(., 2)) %>%
    kable(., format="html", table.attr='id="stevetable"',
-        col.names=c("Date", "DJIA (Close)", "DJIA (Close, Previous)", "% Change", "Rank Among Worst All-Time"),
-        caption = "The Five Worst Trading Days Since 2017, Ranked to All-Time Worst Days",
-        align=c("l","c","c","c","c"))
+        col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
+        caption = "The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020",
+        align=c("l","l","c","c","c","c"))
+```
+
+There are not a whole lot of surprises. Ronald Reagan's no-good-very-bad "Black Monday" crash was an all-timer and may not ever be topped. I forget the exact trading curbs initiated for the Dow Jones, but it's likely trading would stop before that threshold is met in the future. Trump's no-good-very-bad Thursday ranks fourth all-time and is surrounded by three Herbert Hoover observations at the core of the Great Depression.
+
+For additional context, here's every president's worst trading day in Dow Jones history. Here, the data are ranked worst to best and the first appearance for all presidents is provided in this table.
+
+```{r each-presidents-worst-day, eval=T}
+Data %>%
+  # We have some duplicates because of start/end dates for presidencies.
+  # This should fix that
+  group_by(president) %>%
+  mutate(l1_djia = lag(djia,1),
+         percchange = ((djia - lag(djia,1))/lag(djia, 1))*100) %>%
+  arrange(percchange) %>%
+  ungroup() %>%
+  mutate(rank = seq(1:n())) %>%
+  group_by(president) %>%
+  filter(row_number() == 1) %>%
+  mutate_if(is.numeric, ~round(., 2)) %>%
+  select(date, president, everything()) %>%
+    kable(., format="html", table.attr='id="stevetable"',
+        col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change", "Rank Among All-Time Worst Days"),
+        caption = "The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020",
+        align=c("l","l","c","c","c","c"))
   
 ```
 
-This is fine.
+One mild surprise here is Lyndon Johnson. Among all presidents through the history of the Dow Jones Industrial Average, Johnson had---for lack of better term---the "second-best worst" trading day in history. The worst trading day of his presidency came on October 3, 1966, a contraction of just over 2% from the previous day's close. His presidency was turbulent in more than a few ways and it's any wonder he didn't have a worse day.
+
 
 ```{r knitchunk, echo=F, eval=F}
 setwd("~/Dropbox/svmiller.github.io/_source")

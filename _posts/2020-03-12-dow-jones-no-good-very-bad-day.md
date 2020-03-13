@@ -1,5 +1,5 @@
 ---
-title: "The Dow Jones' No Good, Very Bad Day, in R Code"
+title: "The Dow Jones' No Good, Very Bad Day in Context"
 output:
   md_document:
     variant: gfm
@@ -21,17 +21,19 @@ image: "dow-jones-dude.jpg"
 
 [What he said](https://knowyourmeme.com/memes/shits-on-fire-yo).
 
-Anyway, I'm of the mentality that reading too much into large nominal numbers in the Dow Jones Industrial Average is a fool's errand. The U.S. is absolutely wealthier on the balance now than it was at almost every other point in the Dow Jones' history. It means gains in nominal numbers will be larger. Losses in nominal numbers will be larger as well. 
+Anyway, I'm of the mentality that reading too much into large nominal numbers in the Dow Jones Industrial Average is a fool's errand. The U.S. is absolutely wealthier on the balance now than it was at almost every other point in the Dow Jones' history. It means gains in nominal numbers will be larger. Losses in nominal numbers will be larger as well. Humility and scale are important in communicating information and trends from the Dow Jones.
 
-That said, the Dow Jones' day today was clearly no good, and very bad. You can contextualize that with some basic R code.
+That said, the Dow Jones' day was clearly no good, and very bad. Here's how you can contextualize that.
 
-First, [my `stevemisc` package](https://github.com/svmiller/stevemisc) has Dow Jones Industrial Average data dating all the way to 1885 in the data frame `DJIA`. I updated it not long ago to include the end of 2019. I haven't added any 2020 observations to it yet, but that is easy to grab with the `quantmod` package. As of writing, the data for March 12, 2020 haven't been loaded yet. However, the close right now is reported at 21,200.62 for today. We can impute that simply.
+First, [my `stevemisc` package](https://github.com/svmiller/stevemisc) has Dow Jones Industrial Average data dating all the way to 1885 in the data frame `DJIA`. I updated it not long ago to include the end of 2019. I haven't added any 2020 observations to it yet, but that is easy to grab with the `quantmod` package. I also have presidential term data as part of the `Presidents` data set. Trump is not included in these data (because his term is still ongoing), but added him is simple in a tidyverse pipe.
 
 ```r
 library(stevemisc)
 library(tidyverse)
 library(lubridate)
 library(quantmod)
+library(knitr)
+library(kableExtra)
 
 getSymbols("^DJI", src="yahoo", from= as.Date("2020-01-01"))
 
@@ -40,33 +42,89 @@ DJI %>% data.frame %>%
   rename(date = rowname,
          djia = DJI.Close) %>%
   mutate(date = as_date(date)) %>%
-  select(date, djia)  -> QDJI
+  select(date, djia) %>%
+  bind_rows(DJIA, .) -> DJI
 
-bind_rows(DJIA, QDJI) %>%
-  bind_rows(.,tibble(date=as_date("2020-03-12"),
-                     djia = 21200.62)) -> DJIA
+Presidents %>%
+  # add Trump
+  bind_rows(.,tibble(president="Donald J. Trump",
+                     start = ymd("2017-01-20"),
+                     end = ymd("2020-03-12"))) %>%
+  # Grover Cleveland had two non-consecutive terms.
+  mutate(president = ifelse(president == "Grover Cleveland" & start == "1885-03-04", "Grover Cleveland 1", president),
+         president = ifelse(president == "Grover Cleveland" & start == "1893-03-04", "Grover Cleveland 2", president)) %>%
+  # rowwise, list-seq, and unnest...
+  rowwise() %>%
+  mutate(date = list(seq(start, end, by = '1 day'))) %>%
+  unnest(date) %>%
+  # get just the president and date to left_join into the Dow data.
+  select(president, date) %>%
+  # Note: this will create some duplicates because of how terms start/end
+  # It won't be much a problem for what we're doing here.
+  left_join(DJI, .) %>%
+  mutate(president = fct_inorder(president)) -> Data
 ```
 
-Here would be the worst single-day losses as a percentage loss from the previous trading day's close.
+One way of faithfully communicating Dow data---or any economic data, for that matter---is to index the data to some point. It's why a lot of manufacturing data, for example, are indexed to 2010 or 2012 on FRED. Since the interest here is political (i.e. politicians like to take credit for good days on the Dow and deflect blame for bad days on the Dow), we can index the Dow trends within presidential administrations to the starting day of the presidency. Most indices start at 100, but we can have this start at 0 to more readily communicate growth and contraction in the Dow Jones Industrial Average within presidencies.
 
 
 ```r
-DJIA %>%
-  arrange(date) %>%
-  mutate(l1_djia = lag(djia, 1),
-         percchange = round(((djia - lag(djia,1))/lag(djia, 1))*100, 2)) %>%
-  arrange(percchange) %>% head(10) %>%
- kable(., format="html", table.attr='id="stevetable"',
-        col.names=c("Date", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
-        caption = "The Ten Worst Trading Days in Dow Jones History, 1885-2020",
-        align=c("l","c","c","c"))
+Data %>%
+  # Note: Arthur isn't going to have a lot to look at here.
+  group_by(president) %>%
+  mutate(index = (djia/first(djia))-1) %>% 
+  ungroup() %>%
+  mutate(cat = ifelse(index < 0, "Negative", "Positive")) %>%
+  ggplot(.,aes(date, index,color=cat)) + 
+  theme_steve_web() + post_bg() +
+  geom_line() +
+  geom_hline(yintercept = 0, linetype="dashed", alpha=0.4) +
+  # I think '%y is the best I can do because of FDR's tenure.
+  scale_x_date(date_labels = "'%y", 
+               date_breaks = "1 year") +
+  facet_wrap(~president, scales = "free_x") +
+  scale_color_manual(values=c("#990000", "#009900")) +
+  theme(legend.position = "none") +
+  labs(title = "The Dow Jones Industrial Average, Indexed to the Starting Point of Every Administration",
+       subtitle = "The trends of the 'roaring '20s', the Great Depression, 1950s and 1990s growth, and post-collapse recoveries for FDR and Obama are apparent.",
+       x = "Date",
+       y = "Dow Jones Industrial Average, Indexed at Zero to the First Day of Trading for the Administration",
+       caption = "Data: Dow Jones Industrial Average (Yahoo Finance, Measuring Worth), in the DJIA data (github.com/svmiller/stevemisc)")
+```
+
+![plot of chunk dow-jones-industrial-average-by-presidency](/images/dow-jones-industrial-average-by-presidency-1.png)
+
+The data do well to show the scale of growth and contraction that defined these various presidencies. For example, we know the 1980s and 1990s were a period of high growth for the United States. This was made possible through a variety of factors, whether deregulation, technological change and innovation, and the Boomers entering their peak earning years. However, Ronald Reagan's last day close was 2,235 (up from 951) and Bill Clinton's last day close was 10,588 (up from 3,242). I'm old enough to remember the Dow crossing 10,000 for the first time being a big deal. However, those nominal numbers look paltry in modern times.
+
+The other way of faithfully communicating good and bad trends in the Dow Jones Industrial Average is through a percentage change from some other benchmark's close. In most applications, this would be the previous day's close. Thus, what stands out from the blood-letting on the market on March 12, 2020 is less that it was the largest absolute drop from the previous day's close in the Dow's history. Again, it's a fool's errand to compare nominal numbers on the Dow. More importantly, it was the fourth-largest drop from the previous day's close in the Dow's history. That's a bigger deal.
+
+Calculating percentage changes in a time series is simple. Here, would be the 10 worst days in the Dow Jones' history and the presidencies with which they concided.
+
+
+```r
+Data %>%
+  # We have some duplicates because of start/end dates for presidencies.
+  # This should fix that
+  group_by(president) %>%
+  mutate(l1_djia = lag(djia,1),
+         percchange = ((djia - lag(djia,1))/lag(djia, 1))*100) %>%
+  arrange(percchange) %>%
+  select(date, president, everything()) %>%
+  head(10) %>%
+  ungroup() %>%
+  mutate_if(is.numeric, ~round(., 2)) %>%
+   kable(., format="html", table.attr='id="stevetable"',
+        col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
+        caption = "The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020",
+        align=c("l","l","c","c","c","c"))
 ```
 
 <table id="stevetable">
-<caption>The Ten Worst Trading Days in Dow Jones History, 1885-2020</caption>
+<caption>The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Date </th>
+   <th style="text-align:left;"> President </th>
    <th style="text-align:center;"> DJIA (Close) </th>
    <th style="text-align:center;"> DJIA (Close, Previous) </th>
    <th style="text-align:center;"> % Change </th>
@@ -75,136 +133,319 @@ DJIA %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> 1987-10-19 </td>
-   <td style="text-align:center;"> 1738.7400 </td>
-   <td style="text-align:center;"> 2246.7400 </td>
+   <td style="text-align:left;"> Ronald Reagan </td>
+   <td style="text-align:center;"> 1738.74 </td>
+   <td style="text-align:center;"> 2246.74 </td>
    <td style="text-align:center;"> -22.61 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1929-10-28 </td>
-   <td style="text-align:center;"> 260.6400 </td>
-   <td style="text-align:center;"> 298.9700 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 260.64 </td>
+   <td style="text-align:center;"> 298.97 </td>
    <td style="text-align:center;"> -12.82 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1929-10-29 </td>
-   <td style="text-align:center;"> 230.0700 </td>
-   <td style="text-align:center;"> 260.6400 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 230.07 </td>
+   <td style="text-align:center;"> 260.64 </td>
    <td style="text-align:center;"> -11.73 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2020-03-12 </td>
-   <td style="text-align:center;"> 21200.6200 </td>
-   <td style="text-align:center;"> 23553.2207 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 21200.62 </td>
+   <td style="text-align:center;"> 23553.22 </td>
    <td style="text-align:center;"> -9.99 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1929-11-06 </td>
-   <td style="text-align:center;"> 232.1300 </td>
-   <td style="text-align:center;"> 257.6800 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 232.13 </td>
+   <td style="text-align:center;"> 257.68 </td>
    <td style="text-align:center;"> -9.92 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1899-12-18 </td>
-   <td style="text-align:center;"> 42.6865 </td>
-   <td style="text-align:center;"> 46.7669 </td>
+   <td style="text-align:left;"> William McKinley </td>
+   <td style="text-align:center;"> 42.69 </td>
+   <td style="text-align:center;"> 46.77 </td>
    <td style="text-align:center;"> -8.72 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1895-12-20 </td>
-   <td style="text-align:center;"> 29.4223 </td>
-   <td style="text-align:center;"> 32.1601 </td>
+   <td style="text-align:left;"> Grover Cleveland 2 </td>
+   <td style="text-align:center;"> 29.42 </td>
+   <td style="text-align:center;"> 32.16 </td>
    <td style="text-align:center;"> -8.51 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1932-08-12 </td>
-   <td style="text-align:center;"> 63.1100 </td>
-   <td style="text-align:center;"> 68.9000 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 63.11 </td>
+   <td style="text-align:center;"> 68.90 </td>
    <td style="text-align:center;"> -8.40 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1907-03-14 </td>
-   <td style="text-align:center;"> 55.8434 </td>
-   <td style="text-align:center;"> 60.8908 </td>
+   <td style="text-align:left;"> Theodore Roosevelt </td>
+   <td style="text-align:center;"> 55.84 </td>
+   <td style="text-align:center;"> 60.89 </td>
    <td style="text-align:center;"> -8.29 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1987-10-26 </td>
-   <td style="text-align:center;"> 1793.9300 </td>
-   <td style="text-align:center;"> 1950.7600 </td>
+   <td style="text-align:left;"> Ronald Reagan </td>
+   <td style="text-align:center;"> 1793.93 </td>
+   <td style="text-align:center;"> 1950.76 </td>
    <td style="text-align:center;"> -8.04 </td>
   </tr>
 </tbody>
 </table>
 
-Here's where the five worst losses since 2017 rank all-time.
+There are not a whole lot of surprises. Ronald Reagan's no-good-very-bad "Black Monday" crash was an all-timer and may not ever be topped. I forget the exact trading curbs initiated for the Dow Jones, but it's likely trading would stop before that threshold is met in the future. Trump's no-good-very-bad Thursday ranks fourth all-time and is surrounded by three Herbert Hoover observations at the core of the Great Depression.
+
+For additional context, here's every president's worst trading day in Dow Jones history. Here, the data are ranked worst to best and the first appearance for all presidents is provided in this table.
 
 
 ```r
-DJIA %>%
-  arrange(date) %>%
-  mutate(l1_djia = lag(djia, 1),
+Data %>%
+  # We have some duplicates because of start/end dates for presidencies.
+  # This should fix that
+  group_by(president) %>%
+  mutate(l1_djia = lag(djia,1),
          percchange = ((djia - lag(djia,1))/lag(djia, 1))*100) %>%
   arrange(percchange) %>%
+  ungroup() %>%
   mutate(rank = seq(1:n())) %>%
-  filter(year(date) >= 2017) %>%
-  head(5) %>%
-  mutate(percchange = round(percchange, 2)) %>%
-   kable(., format="html", table.attr='id="stevetable"',
-        col.names=c("Date", "DJIA (Close)", "DJIA (Close, Previous)", "% Change", "Rank Among Worst All-Time"),
-        caption = "The Five Worst Trading Days Since 2017, Ranked to All-Time Worst Days",
-        align=c("l","c","c","c","c"))
+  group_by(president) %>%
+  filter(row_number() == 1) %>%
+  mutate_if(is.numeric, ~round(., 2)) %>%
+  select(date, president, everything()) %>%
+    kable(., format="html", table.attr='id="stevetable"',
+        col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change", "Rank Among All-Time Worst Days"),
+        caption = "The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020",
+        align=c("l","l","c","c","c","c"))
 ```
 
 <table id="stevetable">
-<caption>The Five Worst Trading Days Since 2017, Ranked to All-Time Worst Days</caption>
+<caption>The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Date </th>
+   <th style="text-align:left;"> President </th>
    <th style="text-align:center;"> DJIA (Close) </th>
    <th style="text-align:center;"> DJIA (Close, Previous) </th>
    <th style="text-align:center;"> % Change </th>
-   <th style="text-align:center;"> Rank Among Worst All-Time </th>
+   <th style="text-align:center;"> Rank Among All-Time Worst Days </th>
   </tr>
  </thead>
 <tbody>
   <tr>
+   <td style="text-align:left;"> 1987-10-19 </td>
+   <td style="text-align:left;"> Ronald Reagan </td>
+   <td style="text-align:center;"> 1738.74 </td>
+   <td style="text-align:center;"> 2246.74 </td>
+   <td style="text-align:center;"> -22.61 </td>
+   <td style="text-align:center;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-10-28 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 260.64 </td>
+   <td style="text-align:center;"> 298.97 </td>
+   <td style="text-align:center;"> -12.82 </td>
+   <td style="text-align:center;"> 2 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> 2020-03-12 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
    <td style="text-align:center;"> 21200.62 </td>
    <td style="text-align:center;"> 23553.22 </td>
    <td style="text-align:center;"> -9.99 </td>
    <td style="text-align:center;"> 4 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2020-03-09 </td>
-   <td style="text-align:center;"> 23851.02 </td>
-   <td style="text-align:center;"> 25864.78 </td>
-   <td style="text-align:center;"> -7.79 </td>
-   <td style="text-align:center;"> 13 </td>
+   <td style="text-align:left;"> 1899-12-18 </td>
+   <td style="text-align:left;"> William McKinley </td>
+   <td style="text-align:center;"> 42.69 </td>
+   <td style="text-align:center;"> 46.77 </td>
+   <td style="text-align:center;"> -8.72 </td>
+   <td style="text-align:center;"> 6 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2020-03-11 </td>
-   <td style="text-align:center;"> 23553.22 </td>
-   <td style="text-align:center;"> 25018.16 </td>
-   <td style="text-align:center;"> -5.86 </td>
-   <td style="text-align:center;"> 42 </td>
+   <td style="text-align:left;"> 1895-12-20 </td>
+   <td style="text-align:left;"> Grover Cleveland 2 </td>
+   <td style="text-align:center;"> 29.42 </td>
+   <td style="text-align:center;"> 32.16 </td>
+   <td style="text-align:center;"> -8.51 </td>
+   <td style="text-align:center;"> 7 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2018-02-05 </td>
-   <td style="text-align:center;"> 24345.75 </td>
-   <td style="text-align:center;"> 25520.96 </td>
-   <td style="text-align:center;"> -4.60 </td>
-   <td style="text-align:center;"> 106 </td>
+   <td style="text-align:left;"> 1907-03-14 </td>
+   <td style="text-align:left;"> Theodore Roosevelt </td>
+   <td style="text-align:center;"> 55.84 </td>
+   <td style="text-align:center;"> 60.89 </td>
+   <td style="text-align:center;"> -8.29 </td>
+   <td style="text-align:center;"> 9 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> 2020-02-27 </td>
-   <td style="text-align:center;"> 25766.64 </td>
-   <td style="text-align:center;"> 26957.59 </td>
-   <td style="text-align:center;"> -4.42 </td>
-   <td style="text-align:center;"> 116 </td>
+   <td style="text-align:left;"> 2008-10-15 </td>
+   <td style="text-align:left;"> George W. Bush </td>
+   <td style="text-align:center;"> 8577.91 </td>
+   <td style="text-align:center;"> 9310.99 </td>
+   <td style="text-align:center;"> -7.87 </td>
+   <td style="text-align:center;"> 11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1933-07-21 </td>
+   <td style="text-align:left;"> Franklin D. Roosevelt </td>
+   <td style="text-align:center;"> 88.71 </td>
+   <td style="text-align:center;"> 96.26 </td>
+   <td style="text-align:center;"> -7.84 </td>
+   <td style="text-align:center;"> 12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1917-02-01 </td>
+   <td style="text-align:left;"> Woodrow Wilson </td>
+   <td style="text-align:center;"> 88.52 </td>
+   <td style="text-align:center;"> 95.43 </td>
+   <td style="text-align:center;"> -7.24 </td>
+   <td style="text-align:center;"> 18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1997-10-27 </td>
+   <td style="text-align:left;"> Bill Clinton </td>
+   <td style="text-align:center;"> 7161.15 </td>
+   <td style="text-align:center;"> 7715.41 </td>
+   <td style="text-align:center;"> -7.18 </td>
+   <td style="text-align:center;"> 19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1989-10-13 </td>
+   <td style="text-align:left;"> George Bush </td>
+   <td style="text-align:center;"> 2569.26 </td>
+   <td style="text-align:center;"> 2759.84 </td>
+   <td style="text-align:center;"> -6.91 </td>
+   <td style="text-align:center;"> 26 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1955-09-26 </td>
+   <td style="text-align:left;"> Dwight Eisenhower </td>
+   <td style="text-align:center;"> 455.56 </td>
+   <td style="text-align:center;"> 487.45 </td>
+   <td style="text-align:center;"> -6.54 </td>
+   <td style="text-align:center;"> 33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1962-05-28 </td>
+   <td style="text-align:left;"> John F. Kennedy </td>
+   <td style="text-align:center;"> 576.93 </td>
+   <td style="text-align:center;"> 611.88 </td>
+   <td style="text-align:center;"> -5.71 </td>
+   <td style="text-align:center;"> 47 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1946-09-03 </td>
+   <td style="text-align:left;"> Harry S. Truman </td>
+   <td style="text-align:center;"> 178.68 </td>
+   <td style="text-align:center;"> 189.19 </td>
+   <td style="text-align:center;"> -5.56 </td>
+   <td style="text-align:center;"> 51 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2011-08-08 </td>
+   <td style="text-align:left;"> Barack Obama </td>
+   <td style="text-align:center;"> 10809.85 </td>
+   <td style="text-align:center;"> 11444.61 </td>
+   <td style="text-align:center;"> -5.55 </td>
+   <td style="text-align:center;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1928-12-08 </td>
+   <td style="text-align:left;"> Calvin Coolidge </td>
+   <td style="text-align:center;"> 257.33 </td>
+   <td style="text-align:center;"> 271.05 </td>
+   <td style="text-align:center;"> -5.06 </td>
+   <td style="text-align:center;"> 75 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1913-01-20 </td>
+   <td style="text-align:left;"> William Howard Taft </td>
+   <td style="text-align:center;"> 59.74 </td>
+   <td style="text-align:center;"> 62.82 </td>
+   <td style="text-align:center;"> -4.90 </td>
+   <td style="text-align:center;"> 87 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1890-11-10 </td>
+   <td style="text-align:left;"> Benjamin Harrison </td>
+   <td style="text-align:center;"> 35.89 </td>
+   <td style="text-align:center;"> 37.44 </td>
+   <td style="text-align:center;"> -4.15 </td>
+   <td style="text-align:center;"> 148 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1886-05-17 </td>
+   <td style="text-align:left;"> Grover Cleveland 1 </td>
+   <td style="text-align:center;"> 35.11 </td>
+   <td style="text-align:center;"> 36.59 </td>
+   <td style="text-align:center;"> -4.05 </td>
+   <td style="text-align:center;"> 165 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1974-11-18 </td>
+   <td style="text-align:left;"> Gerald Ford </td>
+   <td style="text-align:center;"> 624.92 </td>
+   <td style="text-align:center;"> 647.61 </td>
+   <td style="text-align:center;"> -3.50 </td>
+   <td style="text-align:center;"> 255 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1921-06-20 </td>
+   <td style="text-align:left;"> Warren G. Harding </td>
+   <td style="text-align:center;"> 64.90 </td>
+   <td style="text-align:center;"> 67.25 </td>
+   <td style="text-align:center;"> -3.49 </td>
+   <td style="text-align:center;"> 256 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1973-11-26 </td>
+   <td style="text-align:left;"> Richard Nixon </td>
+   <td style="text-align:center;"> 824.95 </td>
+   <td style="text-align:center;"> 854.00 </td>
+   <td style="text-align:center;"> -3.40 </td>
+   <td style="text-align:center;"> 274 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1979-10-09 </td>
+   <td style="text-align:left;"> Jimmy Carter </td>
+   <td style="text-align:center;"> 857.59 </td>
+   <td style="text-align:center;"> 884.04 </td>
+   <td style="text-align:center;"> -2.99 </td>
+   <td style="text-align:center;"> 375 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1966-10-03 </td>
+   <td style="text-align:left;"> Lyndon B. Johnson </td>
+   <td style="text-align:center;"> 757.96 </td>
+   <td style="text-align:center;"> 774.22 </td>
+   <td style="text-align:center;"> -2.10 </td>
+   <td style="text-align:center;"> 947 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1885-02-27 </td>
+   <td style="text-align:left;"> Chester Arthur </td>
+   <td style="text-align:center;"> 31.77 </td>
+   <td style="text-align:center;"> 32.33 </td>
+   <td style="text-align:center;"> -1.75 </td>
+   <td style="text-align:center;"> 1427 </td>
   </tr>
 </tbody>
 </table>
 
-This is fine.
+One mild surprise here is Lyndon Johnson. Among all presidents through the history of the Dow Jones Industrial Average, Johnson had---for lack of better term---the "second-best worst" trading day in history. The worst trading day of his presidency came on October 3, 1966, a contraction of just over 2% from the previous day's close. His presidency was turbulent in more than a few ways and it's any wonder he didn't have a worse day.
+
 
 
