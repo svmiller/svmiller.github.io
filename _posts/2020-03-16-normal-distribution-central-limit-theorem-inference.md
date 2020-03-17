@@ -204,7 +204,7 @@ Here are some descriptive statistics to drive home how ugly these data are. If y
  
 Undergraduates who first learn about variables would see a clear bimodality problem in these data. Namely, that "average" (i.e. the mean) doesn't look "average" at all. It'd be a stretch to say that the typical American adult, in a country with around 250 million adults, has a thermometer rating of about 40 for Donald Trump. 
 
-However, let's see if we can illustrate central limit theorem even with ugly data like these. I'll use the `rbnorm()` function in my `stevemisc` package to generate 250,000 observations (paired down for ease of computation) from a scaled beta distribution (euphemstically called "bounded normal" by me). The data will have the above characteristics and will serve as the entire population of data from which we can sample.
+However, let's see if we can illustrate central limit theorem even with ugly data like these. I'll use the `rbnorm()` function in my `stevemisc` package to generate 250,000 observations (paired down for ease of computation) from a scaled beta distribution (euphemistically called "bounded normal" by me). The data will have the above characteristics and will serve as the entire population of data from which we can sample.
 
 
 ```r
