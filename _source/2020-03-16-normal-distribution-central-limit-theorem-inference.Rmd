@@ -356,7 +356,9 @@ Basically, if you can't get infinity samples and have only one shot at a random 
 
 ## Inference from a Sample, or: The Probability of Observing the Sample Statistic Given a Population Parameter {#inferencefromsample}
 
-That island sample mean in the 1,000 category offers both pause and an instructional moment that will lead us to inference. Here, for clarity, are the sample means for each sample from the above graph.
+That island sample mean in the 1,000 category offers both pause and an instructional moment that will lead us to inference.[^oops] Here, for clarity, are the sample means for each sample from the above graph.
+
+[^oops]: I only now realize that I wrote that script with `replace = TRUE` when I wanted `replace = FALSE`. Oops. To be clear, that is immaterial to the basic takeaways I communicate here even though sampling without replacement better approximates sampling in the real world (at least from a survey perspective).
 
 ```{r, echo=F, eval=T}
 Samps %>%
