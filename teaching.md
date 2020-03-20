@@ -29,7 +29,7 @@ This page includes my teaching philosophy and an empirical assessment of my teac
 
 #### Graduate Classes
 
-- [POST 8000](https://github.com/svmiller/post8000) (Foundations of Social Science Research for Public Policy)
+- [POST 8000](http://post8000.svmiller.com) (Foundations of Social Science Research for Public Policy)
 
 #### Proposed Classes
 
