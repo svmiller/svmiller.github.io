@@ -21,7 +21,7 @@ image: "british-immigration.jpg"
 
 {% include image.html url="/images/british-immigration.jpg" caption="Immigration has overtaken the NHS as the most commonly mentioned worry of the British voter, according to an Ipsos Mori poll. (Photo: REX, via The Telegraph)" width=400 align="right" %}
 
-This is a companion blog post to a presentation I was invited to give to some politics students in the United Kingdom, though this in-person presentation was unfortunately cancelled in light of the COVID-19 pandemic. 
+This is a companion blog post to a presentation I was invited to give to some politics students in the United Kingdom, though this in-person presentation was unfortunately canceled in light of the COVID-19 pandemic. 
 
 What follows should not be interpreted as exhaustive of all the covariates of anti-immigration sentiment in the United Kingdom, or more generally. It clearly is not. Instead, the purpose of this presentation is to introduce these students to a quantitative approach to a social scientific problem in only 15 minutes and assuming no background knowledge on quantitative methods for the intended audience. As such, consider it an update to one of the most widely read pieces on my blog on [how students should think about evaluating a regression table](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/). It will ideally improve upon that, but I'll leave that determination if it does to the reader.
 
