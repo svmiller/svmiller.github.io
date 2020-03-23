@@ -46,7 +46,7 @@ Here's a table of contents as well.
 2. [A Quantitative Approach](#quantapproach)
 3. [What Can We Say About Pro-Immigration Sentiment in the UK from This Measure?](#whatcanwesay)
 4. [Inference By "Ruling Things Out"](#inferencerulingout)
-5. [Regression as More Inference By "Ruling Things Out"](#inferencerulingout)
+5. [Regression as More Inference By "Ruling Things Out"](#regressioninferencerulingout)
 6. [Some Concluding Thoughts](#conclusion)
 
 ## Introduction {#introduction}
@@ -343,7 +343,7 @@ If you're curious, our rule of thumb for making such a judgment call is the afor
 
 [^notquite]: Related to this conversation, but [the 68-90-95-99 rule](https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule) is technically wrong as well. For example, 68% of the distribution is within about 0.9944579 standard units from zero in a normal distribution, 90% of the distribution is within about 1.6448536 standard units from zero, 95% of the distribution is within about 1.959964 standard units while 99% of the distribution is within about 2.5758293 standard units from zero in the normal distribution. That much is immaterial here for this exercise the extent to which those cutoffs clearly approximate what they're supposed to approximate. Still, some humility from academics would be warranted in evaluating *p*-values.
 
-## Regression as More Inference By "Ruling Things Out" {#inferencerulingout}
+## Regression as More Inference By "Ruling Things Out" {#regressioninferencerulingout}
 
 This same basic approach extends to regression. It would be impossible in the space and time allocated to fully explain all the properties of a linear regression, especially its assumptions and when those assumptions are violated. Those typically require whole textbooks---some classics even span [almost 1,000(!) pages](https://www.amazon.com/Basic-Econometrics-Damodar-N-Gujarati/dp/0073375772/ref=sr_1_3?keywords=gujarati+regression&qid=1583350352&sr=8-3)---and at least one semester of dedicated instruction. Instead, I will only note here as I did elsewhere on my blog [almost six years ago](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/) that linear regression is a tool for understanding a phenomenon of interest (here: pro-immigration sentiment) as a linear function of some combination of predictor variables. The regression formula itself has a strong resemblance to the slope-intercept equation that students should remember from their secondary education. However, whereas students may have seen it before as `y = mx + b`, statisticians prefer a slightly different notation of the concept that is flexible and expands when there are more predictor variables included.
 
