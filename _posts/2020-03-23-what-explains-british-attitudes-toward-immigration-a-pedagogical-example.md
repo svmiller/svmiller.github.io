@@ -21,6 +21,10 @@ image: "british-immigration.jpg"
 
 {% include image.html url="/images/british-immigration.jpg" caption="Immigration has overtaken the NHS as the most commonly mentioned worry of the British voter, according to an Ipsos Mori poll. (Photo: REX, via The Telegraph)" width=400 align="right" %}
 
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
 This is a companion blog post to a presentation I was invited to give to some politics students in the United Kingdom, though this in-person presentation was unfortunately canceled in light of the COVID-19 pandemic. 
 
 What follows should not be interpreted as exhaustive of all the covariates of anti-immigration sentiment in the United Kingdom, or more generally. It clearly is not. Instead, the purpose of this presentation is to introduce these students to a quantitative approach to a social scientific problem in only 15 minutes and assuming no background knowledge on quantitative methods for the intended audience. As such, consider it an update to one of the most widely read pieces on my blog on [how students should think about evaluating a regression table](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/). It will ideally improve upon that, but I'll leave that determination if it does to the reader.
@@ -360,7 +364,15 @@ ESS9GB %>%
   mutate(female = gndr - 1) -> ESS9GB
 ```
 
-Next, we're going to treat the `immigsent` variable as a linear function of these independent variables. Informally, `immigsent = agea + female + eduyrs + uempla + hinctnta + lrscale + e`. I want to briefly note two things about this equation, stylized as it is. First, each of those predictors can clearly have different effects on `immigsent`. That's in part what we're trying to tease out in a regression model and it'll be something I highlight in the summary below. Second, pay careful attention to that `e` term. We call that an "error term" or the "residuals." Basically, `e` isn't a predictor of interest, per se. It represents everything that's not included in our model that explains the variation in `immigsent` that our linear function won't capture. Without sidetracking too much into a discussion of minimizing the sum of squares (i.e. "ordinary least squares") in regression, we expect the linear regression to draw a line of best fit through the data, but it won't 100% capture every point in the data. The difference between what our regression predicts for a particular observation and the value of the particular observation is that "residual" or "error."
+Next, we're going to treat the `immigsent` variable as a linear function of these independent variables. Informally, `immigsent = agea + female + eduyrs + uempla + hinctnta + lrscale + e`. More formally:
+
+$$\begin{eqnarray}
+\textrm{Immigration Sentiment}_i &=& \beta_0 + \beta_1*\textrm{Age}_i + \beta_2*\textrm{Female}_i + \beta_3*\textrm{Years of Education}_i +   \nonumber \\
+   &&   \beta_4*\textrm{Unemployed}_i +  \beta_5*\textrm{Household Income}_i +  \nonumber \\
+   &&  \beta_6*\textrm{Ideology}_i + \epsilon_i \nonumber 
+\end{eqnarray}$$
+
+I want to briefly note two things about this equation, stylized as it is. First, each of those predictors can clearly have different effects on `immigsent`, the dependent variable of immigration sentiment. That's in part what we're trying to tease out in a regression model and it'll be something I highlight in the summary below. Second, the $$i$$ notation you see is to denote the individual observation (i.e. individual survey respondent in our data). The values of a given variable for a particular respondent will vary but the estimated effects of a given variable on immigration sentiment (i.e. $$\beta$$) will be the same for all observations. Third, pay careful attention to that $$\epsilon$$ term. We call that an "error term" or the "residuals" from the regression. Basically, $$\epsilon$$ isn't a predictor of interest. It represents everything that's not included in our model that explains the variation in immigration sentiment that our linear function won't capture. Without sidetracking too much into a discussion of minimizing the sum of squares (i.e. "ordinary least squares") in regression, we expect the linear regression to draw a line of best fit through the data, but it won't 100% capture every point in the data. The difference between what our regression predicts for a particular observation and the value of the particular observation is that "residual" or "error."
 
 Running a linear regression in R is simple. The commands below will do it while some code I hide will format the tables I present. Again, check [the `_source` file](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd).
 
