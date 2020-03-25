@@ -12,7 +12,29 @@ excerpt: "I believe that the ability to read a regression table is an important 
 
 
 
-<!-- *Last updated: September 04, 2019* -->
+<dl id="" class="wp-caption aligncenter" style="max-width:100%; text-align: left; padding-top: 8px">
+
+<dt><span style="font-weight:bold; font-size: 1em; padding-left: 8px">Consider Reading This Post Instead ⤵️</span></dt>
+
+<dd style = "padding-bottom: 8px">This post is by far the most widely read post on my blog and I appreciate that it's been so useful to so many people. However, this post is from 2014 and I've learned a great deal over time on how to communicate regression and inference to students. I think this post to which I am redirecting you does not only a better job in explaining (linear) regression, but provides a better and more timely example. The same information is there; indeed I copy-pasted a fair bit from this post. I just think it's a better answer to the motivating question that led you here (i.e. "how do I interpret a regression table?").</dd>
+<ul id="archive">
+
+  
+<li class="archiveposturl" style="padding-bottom:1px"><span><a href="/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/" title="What Do We Know About British Attitudes Toward Immigration? A Pedagogical Exercise of Sample Inference and Regression">What Do We Know About British Attitudes Toward Immigration? A Pedagogical Exercise of Sample Inference and Regression</a></span><br />
+<span class="postlower">
+What explains British attitudes toward immigration? Here is a pedagogical example from the European Social Survey in 2018-19 that's more useful in teaching students about inference from a sample and how to read a regression table.
+<!--<strong>Author:</strong> steve -->
+
+<strong style="font-size:100%; font-family: 'Titillium Web', sans-serif; float:right; padding-right: .5em">23 Mar 2020</strong> 
+</span> 
+
+</li>
+</ul>
+</dl>
+
+
+
+<!-- *Last updated: March 25, 2020* -->
 
 I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. This can be perilous in my field. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, [can be misleading](https://www.cambridge.org/core/journals/american-political-science-review/article/assessing-the-dyadic-nature-of-the-democratic-peace-191888/54C72B38A813D9B0753D1F94320883F4). The proof is [not as convincing as it seems](https://journals.sagepub.com/doi/10.1177/0022002796040004006). A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
 
@@ -39,20 +61,20 @@ We obtained data from 1,500 Americans in November 2000 from the [2000 Current Po
 
 
 ```
-##  state          year           vote            income        education    
-##  AR: 500   Min.   :2000   Min.   :0.0000   Min.   : 4.00   Min.   :1.000  
-##  SC:1000   1st Qu.:2000   1st Qu.:1.0000   1st Qu.: 9.00   1st Qu.:2.000  
-##            Median :2000   Median :1.0000   Median :13.00   Median :3.000  
-##            Mean   :2000   Mean   :0.8553   Mean   :12.46   Mean   :2.651  
-##            3rd Qu.:2000   3rd Qu.:1.0000   3rd Qu.:16.00   3rd Qu.:4.000  
-##            Max.   :2000   Max.   :1.0000   Max.   :17.00   Max.   :4.000  
-##       age            female      
-##  Min.   :18.00   Min.   :0.0000  
-##  1st Qu.:36.00   1st Qu.:0.0000  
-##  Median :49.00   Median :1.0000  
-##  Mean   :49.26   Mean   :0.5593  
-##  3rd Qu.:62.00   3rd Qu.:1.0000  
-##  Max.   :85.00   Max.   :1.0000
+##  state          year           vote            income        education          age       
+##  AR: 500   Min.   :2000   Min.   :0.0000   Min.   : 4.00   Min.   :1.000   Min.   :18.00  
+##  SC:1000   1st Qu.:2000   1st Qu.:1.0000   1st Qu.: 9.00   1st Qu.:2.000   1st Qu.:36.00  
+##            Median :2000   Median :1.0000   Median :13.00   Median :3.000   Median :49.00  
+##            Mean   :2000   Mean   :0.8553   Mean   :12.46   Mean   :2.651   Mean   :49.26  
+##            3rd Qu.:2000   3rd Qu.:1.0000   3rd Qu.:16.00   3rd Qu.:4.000   3rd Qu.:62.00  
+##            Max.   :2000   Max.   :1.0000   Max.   :17.00   Max.   :4.000   Max.   :85.00  
+##      female      
+##  Min.   :0.0000  
+##  1st Qu.:0.0000  
+##  Median :1.0000  
+##  Mean   :0.5593  
+##  3rd Qu.:1.0000  
+##  Max.   :1.0000
 ```
 
 <!-- {% include image.html url="/images/voteincome-summary.png" caption="A summary of the voteincome data set in Zelig." align="center" width=744 %} -->

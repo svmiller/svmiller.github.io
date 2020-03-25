@@ -15,6 +15,28 @@ knitr::opts_chunk$set(fig.path='images/')
 
 ```
 
+<dl id="" class="wp-caption aligncenter" style="max-width:100%; text-align: left; padding-top: 8px">
+
+<dt><span style="font-weight:bold; font-size: 1em; padding-left: 8px">Consider Reading This Post Instead ⤵️</span></dt>
+
+<dd style = "padding-bottom: 8px">This post is by far the most widely read post on my blog and I appreciate that it's been so useful to so many people. However, this post is from 2014 and I've learned a great deal over time on how to communicate regression and inference to students. I think this post to which I am redirecting you does not only a better job in explaining (linear) regression, but provides a better and more timely example. The same information is there; indeed I copy-pasted a fair bit from this post. I just think it's a better answer to the motivating question that led you here (i.e. "how do I interpret a regression table?").</dd>
+<ul id="archive">
+
+  
+<li class="archiveposturl" style="padding-bottom:1px"><span><a href="/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/" title="What Do We Know About British Attitudes Toward Immigration? A Pedagogical Exercise of Sample Inference and Regression">What Do We Know About British Attitudes Toward Immigration? A Pedagogical Exercise of Sample Inference and Regression</a></span><br />
+<span class="postlower">
+What explains British attitudes toward immigration? Here is a pedagogical example from the European Social Survey in 2018-19 that's more useful in teaching students about inference from a sample and how to read a regression table.
+<!--<strong>Author:</strong> steve -->
+
+<strong style="font-size:100%; font-family: 'Titillium Web', sans-serif; float:right; padding-right: .5em">23 Mar 2020</strong> 
+</span> 
+
+</li>
+</ul>
+</dl>
+
+
+
 <!-- *Last updated: `r format(Sys.time(), '%B %d, %Y')`* -->
 
 I believe that the ability to read a regression table is an important task for undergraduate students in political science. All too often, the actual analysis in an assigned article becomes a page-turner for a student eager to say s/he "read" the assignment without actually reading it, understanding it, and evaluating it. This can be perilous in my field. Sometimes, regression tables, ostensibly presented as definitive proof in favor of some argument, [can be misleading](https://www.cambridge.org/core/journals/american-political-science-review/article/assessing-the-dyadic-nature-of-the-democratic-peace-191888/54C72B38A813D9B0753D1F94320883F4). The proof is [not as convincing as it seems](https://journals.sagepub.com/doi/10.1177/0022002796040004006). A student capable of reading and evaluating a regression table is better able to evaluate competing empirical claims about important topics in political science. I also believe that learning this tool makes a student a better prospect on the job market after graduation and may make the student a better democratic citizen in a world moving toward quantification.
