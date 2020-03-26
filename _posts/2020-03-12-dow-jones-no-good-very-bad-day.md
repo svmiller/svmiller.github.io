@@ -19,6 +19,8 @@ image: "dow-jones-dude.jpg"
 
 {% include image.html url="/images/dow-jones-dude.jpg" caption="That feeling when you realize you're not going to retire until your 70s. (Photo: Spencer Platt/Getty Images)" width=400 align="right" %}
 
+*Last updated: March 26, 2020* 
+
 [What he said](https://knowyourmeme.com/memes/shits-on-fire-yo).
 
 Anyway, I'm of the mentality that reading too much into large nominal numbers in the Dow Jones Industrial Average is a fool's errand. The U.S. is absolutely wealthier on the balance now than it was at almost every other point in the Dow Jones' history. It means gains in nominal numbers will be larger. Losses in nominal numbers will be larger as well. Humility and scale are important in communicating information and trends from the Dow Jones.
@@ -49,7 +51,7 @@ Presidents %>%
   # add Trump
   bind_rows(.,tibble(president="Donald J. Trump",
                      start = ymd("2017-01-20"),
-                     end = ymd("2020-03-12"))) %>%
+                     end = ymd(today()))) %>%
   # Grover Cleveland had two non-consecutive terms.
   mutate(president = ifelse(president == "Grover Cleveland" & start == "1885-03-04", "Grover Cleveland 1", president),
          president = ifelse(president == "Grover Cleveland" & start == "1893-03-04", "Grover Cleveland 2", president)) %>%
@@ -115,12 +117,12 @@ Data %>%
   mutate_if(is.numeric, ~round(., 2)) %>%
    kable(., format="html", table.attr='id="stevetable"',
         col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
-        caption = "The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020",
+        caption = "The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to the Present",
         align=c("l","l","c","c","c","c"))
 ```
 
 <table id="stevetable">
-<caption>The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020</caption>
+<caption>The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to the Present</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Date </th>
@@ -137,6 +139,13 @@ Data %>%
    <td style="text-align:center;"> 1738.74 </td>
    <td style="text-align:center;"> 2246.74 </td>
    <td style="text-align:center;"> -22.61 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2020-03-16 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 20188.52 </td>
+   <td style="text-align:center;"> 23185.62 </td>
+   <td style="text-align:center;"> -12.93 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1929-10-28 </td>
@@ -194,13 +203,6 @@ Data %>%
    <td style="text-align:center;"> 60.89 </td>
    <td style="text-align:center;"> -8.29 </td>
   </tr>
-  <tr>
-   <td style="text-align:left;"> 1987-10-26 </td>
-   <td style="text-align:left;"> Ronald Reagan </td>
-   <td style="text-align:center;"> 1793.93 </td>
-   <td style="text-align:center;"> 1950.76 </td>
-   <td style="text-align:center;"> -8.04 </td>
-  </tr>
 </tbody>
 </table>
 
@@ -225,12 +227,12 @@ Data %>%
   select(date, president, everything()) %>%
     kable(., format="html", table.attr='id="stevetable"',
         col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change", "Rank Among All-Time Worst Days"),
-        caption = "The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020",
+        caption = "The Worst Trading Days in Dow Jones History for Each President, Feb. 16, 1885 to the Present",
         align=c("l","l","c","c","c","c"))
 ```
 
 <table id="stevetable">
-<caption>The Ten Worst Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020</caption>
+<caption>The Worst Trading Days in Dow Jones History for Each President, Feb. 16, 1885 to the Present</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Date </th>
@@ -251,20 +253,20 @@ Data %>%
    <td style="text-align:center;"> 1 </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> 2020-03-16 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 20188.52 </td>
+   <td style="text-align:center;"> 23185.62 </td>
+   <td style="text-align:center;"> -12.93 </td>
+   <td style="text-align:center;"> 2 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> 1929-10-28 </td>
    <td style="text-align:left;"> Herbert Hoover </td>
    <td style="text-align:center;"> 260.64 </td>
    <td style="text-align:center;"> 298.97 </td>
    <td style="text-align:center;"> -12.82 </td>
-   <td style="text-align:center;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2020-03-12 </td>
-   <td style="text-align:left;"> Donald J. Trump </td>
-   <td style="text-align:center;"> 21200.62 </td>
-   <td style="text-align:center;"> 23553.22 </td>
-   <td style="text-align:center;"> -9.99 </td>
-   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> 3 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1899-12-18 </td>
@@ -272,7 +274,7 @@ Data %>%
    <td style="text-align:center;"> 42.69 </td>
    <td style="text-align:center;"> 46.77 </td>
    <td style="text-align:center;"> -8.72 </td>
-   <td style="text-align:center;"> 6 </td>
+   <td style="text-align:center;"> 7 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1895-12-20 </td>
@@ -280,7 +282,7 @@ Data %>%
    <td style="text-align:center;"> 29.42 </td>
    <td style="text-align:center;"> 32.16 </td>
    <td style="text-align:center;"> -8.51 </td>
-   <td style="text-align:center;"> 7 </td>
+   <td style="text-align:center;"> 8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1907-03-14 </td>
@@ -288,7 +290,7 @@ Data %>%
    <td style="text-align:center;"> 55.84 </td>
    <td style="text-align:center;"> 60.89 </td>
    <td style="text-align:center;"> -8.29 </td>
-   <td style="text-align:center;"> 9 </td>
+   <td style="text-align:center;"> 10 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2008-10-15 </td>
@@ -296,7 +298,7 @@ Data %>%
    <td style="text-align:center;"> 8577.91 </td>
    <td style="text-align:center;"> 9310.99 </td>
    <td style="text-align:center;"> -7.87 </td>
-   <td style="text-align:center;"> 11 </td>
+   <td style="text-align:center;"> 12 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1933-07-21 </td>
@@ -304,7 +306,7 @@ Data %>%
    <td style="text-align:center;"> 88.71 </td>
    <td style="text-align:center;"> 96.26 </td>
    <td style="text-align:center;"> -7.84 </td>
-   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 13 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1917-02-01 </td>
@@ -312,7 +314,7 @@ Data %>%
    <td style="text-align:center;"> 88.52 </td>
    <td style="text-align:center;"> 95.43 </td>
    <td style="text-align:center;"> -7.24 </td>
-   <td style="text-align:center;"> 18 </td>
+   <td style="text-align:center;"> 19 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1997-10-27 </td>
@@ -320,7 +322,7 @@ Data %>%
    <td style="text-align:center;"> 7161.15 </td>
    <td style="text-align:center;"> 7715.41 </td>
    <td style="text-align:center;"> -7.18 </td>
-   <td style="text-align:center;"> 19 </td>
+   <td style="text-align:center;"> 20 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1989-10-13 </td>
@@ -328,7 +330,7 @@ Data %>%
    <td style="text-align:center;"> 2569.26 </td>
    <td style="text-align:center;"> 2759.84 </td>
    <td style="text-align:center;"> -6.91 </td>
-   <td style="text-align:center;"> 26 </td>
+   <td style="text-align:center;"> 27 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1955-09-26 </td>
@@ -336,7 +338,7 @@ Data %>%
    <td style="text-align:center;"> 455.56 </td>
    <td style="text-align:center;"> 487.45 </td>
    <td style="text-align:center;"> -6.54 </td>
-   <td style="text-align:center;"> 33 </td>
+   <td style="text-align:center;"> 34 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1962-05-28 </td>
@@ -344,7 +346,7 @@ Data %>%
    <td style="text-align:center;"> 576.93 </td>
    <td style="text-align:center;"> 611.88 </td>
    <td style="text-align:center;"> -5.71 </td>
-   <td style="text-align:center;"> 47 </td>
+   <td style="text-align:center;"> 49 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1946-09-03 </td>
@@ -352,7 +354,7 @@ Data %>%
    <td style="text-align:center;"> 178.68 </td>
    <td style="text-align:center;"> 189.19 </td>
    <td style="text-align:center;"> -5.56 </td>
-   <td style="text-align:center;"> 51 </td>
+   <td style="text-align:center;"> 53 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2011-08-08 </td>
@@ -360,7 +362,7 @@ Data %>%
    <td style="text-align:center;"> 10809.85 </td>
    <td style="text-align:center;"> 11444.61 </td>
    <td style="text-align:center;"> -5.55 </td>
-   <td style="text-align:center;"> 52 </td>
+   <td style="text-align:center;"> 54 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1928-12-08 </td>
@@ -368,7 +370,7 @@ Data %>%
    <td style="text-align:center;"> 257.33 </td>
    <td style="text-align:center;"> 271.05 </td>
    <td style="text-align:center;"> -5.06 </td>
-   <td style="text-align:center;"> 75 </td>
+   <td style="text-align:center;"> 77 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1913-01-20 </td>
@@ -376,7 +378,7 @@ Data %>%
    <td style="text-align:center;"> 59.74 </td>
    <td style="text-align:center;"> 62.82 </td>
    <td style="text-align:center;"> -4.90 </td>
-   <td style="text-align:center;"> 87 </td>
+   <td style="text-align:center;"> 89 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1890-11-10 </td>
@@ -384,7 +386,7 @@ Data %>%
    <td style="text-align:center;"> 35.89 </td>
    <td style="text-align:center;"> 37.44 </td>
    <td style="text-align:center;"> -4.15 </td>
-   <td style="text-align:center;"> 148 </td>
+   <td style="text-align:center;"> 151 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1886-05-17 </td>
@@ -392,7 +394,7 @@ Data %>%
    <td style="text-align:center;"> 35.11 </td>
    <td style="text-align:center;"> 36.59 </td>
    <td style="text-align:center;"> -4.05 </td>
-   <td style="text-align:center;"> 165 </td>
+   <td style="text-align:center;"> 168 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1974-11-18 </td>
@@ -400,7 +402,7 @@ Data %>%
    <td style="text-align:center;"> 624.92 </td>
    <td style="text-align:center;"> 647.61 </td>
    <td style="text-align:center;"> -3.50 </td>
-   <td style="text-align:center;"> 255 </td>
+   <td style="text-align:center;"> 258 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1921-06-20 </td>
@@ -408,7 +410,7 @@ Data %>%
    <td style="text-align:center;"> 64.90 </td>
    <td style="text-align:center;"> 67.25 </td>
    <td style="text-align:center;"> -3.49 </td>
-   <td style="text-align:center;"> 256 </td>
+   <td style="text-align:center;"> 259 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1973-11-26 </td>
@@ -416,7 +418,7 @@ Data %>%
    <td style="text-align:center;"> 824.95 </td>
    <td style="text-align:center;"> 854.00 </td>
    <td style="text-align:center;"> -3.40 </td>
-   <td style="text-align:center;"> 274 </td>
+   <td style="text-align:center;"> 277 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1979-10-09 </td>
@@ -424,7 +426,7 @@ Data %>%
    <td style="text-align:center;"> 857.59 </td>
    <td style="text-align:center;"> 884.04 </td>
    <td style="text-align:center;"> -2.99 </td>
-   <td style="text-align:center;"> 375 </td>
+   <td style="text-align:center;"> 379 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1966-10-03 </td>
@@ -432,7 +434,7 @@ Data %>%
    <td style="text-align:center;"> 757.96 </td>
    <td style="text-align:center;"> 774.22 </td>
    <td style="text-align:center;"> -2.10 </td>
-   <td style="text-align:center;"> 947 </td>
+   <td style="text-align:center;"> 951 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1885-02-27 </td>
@@ -440,12 +442,332 @@ Data %>%
    <td style="text-align:center;"> 31.77 </td>
    <td style="text-align:center;"> 32.33 </td>
    <td style="text-align:center;"> -1.75 </td>
-   <td style="text-align:center;"> 1427 </td>
+   <td style="text-align:center;"> 1431 </td>
   </tr>
 </tbody>
 </table>
 
 One mild surprise here is Lyndon Johnson. Among all presidents through the history of the Dow Jones Industrial Average, Johnson had---for lack of better term---the "second-best worst" trading day in history. The worst trading day of his presidency came on October 3, 1966, a contraction of just over 2% from the previous day's close. His presidency was turbulent in more than a few ways and it's any wonder he didn't have a worse day.
+
+### Update for March 26, 2020
+
+You could also extend this approach to look at the worst 30-day trading windows to further contextualize what's happening now. All it takes is change the lagged variable (`l1_djia`) from 1 to 30 (i.e. `l30_djia = lag(djia, 30)`. This would create a 30-day rolling window, within presidential administrations, to calculate the worst 30-day slides from time point *t* to time point *t+30*. Here, for example, are the 20 worst rolling windows over a 30-day period.
+
+<table id="stevetable">
+<caption>The 20 Worst 30-Day Rolling Windows in Dow Jones History, Feb. 16, 1885 to the Present</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Date </th>
+   <th style="text-align:left;"> President </th>
+   <th style="text-align:center;"> DJIA (Close) </th>
+   <th style="text-align:center;"> DJIA (Close, Previous) </th>
+   <th style="text-align:center;"> % Change </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1929-11-13 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 198.69 </td>
+   <td style="text-align:center;"> 329.95 </td>
+   <td style="text-align:center;"> -39.78 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-12 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 209.74 </td>
+   <td style="text-align:center;"> 344.50 </td>
+   <td style="text-align:center;"> -39.12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-10-05 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 86.48 </td>
+   <td style="text-align:center;"> 140.78 </td>
+   <td style="text-align:center;"> -38.57 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2020-03-23 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 18591.93 </td>
+   <td style="text-align:center;"> 29102.51 </td>
+   <td style="text-align:center;"> -36.12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-10-29 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 230.07 </td>
+   <td style="text-align:center;"> 359.00 </td>
+   <td style="text-align:center;"> -35.91 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-11 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 220.39 </td>
+   <td style="text-align:center;"> 342.57 </td>
+   <td style="text-align:center;"> -35.67 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2020-03-20 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 19173.98 </td>
+   <td style="text-align:center;"> 29379.77 </td>
+   <td style="text-align:center;"> -34.74 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-18 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 227.56 </td>
+   <td style="text-align:center;"> 345.72 </td>
+   <td style="text-align:center;"> -34.18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-12-17 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 73.79 </td>
+   <td style="text-align:center;"> 112.01 </td>
+   <td style="text-align:center;"> -34.12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-12-14 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 77.22 </td>
+   <td style="text-align:center;"> 115.60 </td>
+   <td style="text-align:center;"> -33.20 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-14 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 217.28 </td>
+   <td style="text-align:center;"> 325.17 </td>
+   <td style="text-align:center;"> -33.18 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-10-03 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 92.77 </td>
+   <td style="text-align:center;"> 138.66 </td>
+   <td style="text-align:center;"> -33.10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-15 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 228.73 </td>
+   <td style="text-align:center;"> 341.36 </td>
+   <td style="text-align:center;"> -32.99 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-12-16 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 76.49 </td>
+   <td style="text-align:center;"> 113.98 </td>
+   <td style="text-align:center;"> -32.89 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-12-15 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 78.60 </td>
+   <td style="text-align:center;"> 116.79 </td>
+   <td style="text-align:center;"> -32.70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-06 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 232.13 </td>
+   <td style="text-align:center;"> 344.87 </td>
+   <td style="text-align:center;"> -32.69 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-26 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 235.35 </td>
+   <td style="text-align:center;"> 347.24 </td>
+   <td style="text-align:center;"> -32.22 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-19 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 234.02 </td>
+   <td style="text-align:center;"> 345.00 </td>
+   <td style="text-align:center;"> -32.17 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1987-10-19 </td>
+   <td style="text-align:left;"> Ronald Reagan </td>
+   <td style="text-align:center;"> 1738.74 </td>
+   <td style="text-align:center;"> 2561.38 </td>
+   <td style="text-align:center;"> -32.12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2020-03-19 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 20087.19 </td>
+   <td style="text-align:center;"> 29290.85 </td>
+   <td style="text-align:center;"> -31.42 </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+You can also drive the point home about how precarious our current situation is by flipping one line of script in the above R code that calculates the worst individual trading days in Dow Jones history. See the above code that reads? `arrange(percchange)`? Replace it with `arrange(-percchange)` to get the best individual days in Dow history. Here, we'll select the top 20.
+
+<table id="stevetable">
+<caption>The 20 Best Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Date </th>
+   <th style="text-align:left;"> President </th>
+   <th style="text-align:center;"> DJIA (Close) </th>
+   <th style="text-align:center;"> DJIA (Close, Previous) </th>
+   <th style="text-align:center;"> % Change </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 1931-10-06 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 99.34 </td>
+   <td style="text-align:center;"> 86.48 </td>
+   <td style="text-align:center;"> 14.87 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-10-30 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 258.47 </td>
+   <td style="text-align:center;"> 230.07 </td>
+   <td style="text-align:center;"> 12.34 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2020-03-24 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 20704.91 </td>
+   <td style="text-align:center;"> 18591.93 </td>
+   <td style="text-align:center;"> 11.37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1932-09-21 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 75.16 </td>
+   <td style="text-align:center;"> 67.49 </td>
+   <td style="text-align:center;"> 11.36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2008-10-13 </td>
+   <td style="text-align:left;"> George W. Bush </td>
+   <td style="text-align:center;"> 9387.61 </td>
+   <td style="text-align:center;"> 8451.19 </td>
+   <td style="text-align:center;"> 11.08 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2008-10-28 </td>
+   <td style="text-align:left;"> George W. Bush </td>
+   <td style="text-align:center;"> 9065.12 </td>
+   <td style="text-align:center;"> 8175.77 </td>
+   <td style="text-align:center;"> 10.88 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1987-10-21 </td>
+   <td style="text-align:left;"> Ronald Reagan </td>
+   <td style="text-align:center;"> 2027.85 </td>
+   <td style="text-align:center;"> 1841.01 </td>
+   <td style="text-align:center;"> 10.15 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1932-08-03 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 58.22 </td>
+   <td style="text-align:center;"> 53.16 </td>
+   <td style="text-align:center;"> 9.52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1932-02-11 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 78.60 </td>
+   <td style="text-align:center;"> 71.80 </td>
+   <td style="text-align:center;"> 9.47 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2020-03-13 </td>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:center;"> 23185.62 </td>
+   <td style="text-align:center;"> 21200.62 </td>
+   <td style="text-align:center;"> 9.36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1929-11-14 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 217.28 </td>
+   <td style="text-align:center;"> 198.69 </td>
+   <td style="text-align:center;"> 9.36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-12-18 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 80.69 </td>
+   <td style="text-align:center;"> 73.79 </td>
+   <td style="text-align:center;"> 9.35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1932-02-13 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 85.82 </td>
+   <td style="text-align:center;"> 78.60 </td>
+   <td style="text-align:center;"> 9.19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1932-05-06 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 59.01 </td>
+   <td style="text-align:center;"> 54.10 </td>
+   <td style="text-align:center;"> 9.08 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1933-04-19 </td>
+   <td style="text-align:left;"> Franklin D. Roosevelt </td>
+   <td style="text-align:center;"> 68.31 </td>
+   <td style="text-align:center;"> 62.65 </td>
+   <td style="text-align:center;"> 9.03 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-10-08 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 105.79 </td>
+   <td style="text-align:center;"> 97.32 </td>
+   <td style="text-align:center;"> 8.70 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1932-06-10 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 48.94 </td>
+   <td style="text-align:center;"> 45.32 </td>
+   <td style="text-align:center;"> 7.99 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1939-09-05 </td>
+   <td style="text-align:left;"> Franklin D. Roosevelt </td>
+   <td style="text-align:center;"> 148.12 </td>
+   <td style="text-align:center;"> 138.09 </td>
+   <td style="text-align:center;"> 7.26 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1931-06-03 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 130.37 </td>
+   <td style="text-align:center;"> 121.70 </td>
+   <td style="text-align:center;"> 7.12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1932-01-06 </td>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:center;"> 76.31 </td>
+   <td style="text-align:center;"> 71.24 </td>
+   <td style="text-align:center;"> 7.12 </td>
+  </tr>
+</tbody>
+</table>
+
+It's worth saying growth in trading is ideally supposed to be incremental over the long-run. Huge volatility in trading runs both ways, never seeming to coincide with something good on the balance.
 
 
 
