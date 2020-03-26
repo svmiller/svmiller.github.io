@@ -161,7 +161,7 @@ I'll come back and update this when the states roll out their updates, but it do
 
 Standardizing initial claims to the (growing) civilian labor force of the United States lends to some worry that estimate might be too low. Basically, the initial claims as a proportion of the civilian labor force, right now, is **four times** what it was at the peak of the Great Recession and the early 1980s recession. Therein, the unemployment rate was between 10-11%. The extent to which initial claims is a sneak peek of the monthly unemployment rate, 30% might be too low an estimate.
 
-Alas, I'll defer to the President of the FRED's division in St. Louis. He'll know more than me. I just know how to play with the data they release.
+Alas, I'll defer to the President of the FRED's division in St. Louis. He'll know more than me. I just know how to play with the data that his research division releases.
 
 
 
