@@ -218,7 +218,7 @@ One mild surprise here is Lyndon Johnson. Among all presidents through the histo
 
 ### Update for `r format(Sys.time(), '%B %d, %Y')`
 
-You could also extend this approach to look at the worst 30-day trading windows to further contextualize what's happening now. All it takes is change the lagged variable (`l1_djia`) from 1 to 30 (i.e. `l30_djia = lag(djia, 30)`. This would create a 30-day rolling window, within presidential administrations, to calculate the worst 30-day slides from time point *t* to time point *t+30*. Here, for example, are the 20 worst rolling windows over a 30-day period.
+You could also extend this approach to look at the worst 30-day trading windows to further contextualize what's happening now. All it takes is change the lagged variable (`l1_djia`) from 1 to 30 (i.e. `l30_djia = lag(djia, 30)`. This would create a 30-day rolling window, within presidential administrations, to calculate the worst 30-day slides from time point *t* to time point *t+30*. Here, for example, are the 10 worst rolling windows over a 30-day period.
 
 ```{r calculate-worst-30-day-windows, eval=T, echo=F}
 Data %>%
@@ -229,12 +229,12 @@ Data %>%
          percchange = ((djia - lag(djia,30))/lag(djia, 30))*100) %>%
   arrange(percchange) %>%
   select(date, president, everything()) %>%
-  head(20) %>%
+  head(10) %>%
   ungroup() %>%
   mutate_if(is.numeric, ~round(., 2)) %>%
    kable(., format="html", table.attr='id="stevetable"',
         col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
-        caption = "The 20 Worst 30-Day Rolling Windows in Dow Jones History, Feb. 16, 1885 to the Present",
+        caption = "The Ten Worst 30-Day Rolling Windows in Dow Jones History, Feb. 16, 1885 to the Present",
         align=c("l","l","c","c","c","c"))
 ```
 

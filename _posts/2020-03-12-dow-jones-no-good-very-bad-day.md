@@ -19,7 +19,7 @@ image: "dow-jones-dude.jpg"
 
 {% include image.html url="/images/dow-jones-dude.jpg" caption="That feeling when you realize you're not going to retire until your 70s. (Photo: Spencer Platt/Getty Images)" width=400 align="right" %}
 
-*Last updated: March 26, 2020* 
+*Last updated: March 27, 2020* 
 
 [What he said](https://knowyourmeme.com/memes/shits-on-fire-yo).
 
@@ -449,12 +449,12 @@ Data %>%
 
 One mild surprise here is Lyndon Johnson. Among all presidents through the history of the Dow Jones Industrial Average, Johnson had---for lack of better term---the "second-best worst" trading day in history. The worst trading day of his presidency came on October 3, 1966, a contraction of just over 2% from the previous day's close. His presidency was turbulent in more than a few ways and it's any wonder he didn't have a worse day.
 
-### Update for March 26, 2020
+### Update for March 27, 2020
 
-You could also extend this approach to look at the worst 30-day trading windows to further contextualize what's happening now. All it takes is change the lagged variable (`l1_djia`) from 1 to 30 (i.e. `l30_djia = lag(djia, 30)`. This would create a 30-day rolling window, within presidential administrations, to calculate the worst 30-day slides from time point *t* to time point *t+30*. Here, for example, are the 20 worst rolling windows over a 30-day period.
+You could also extend this approach to look at the worst 30-day trading windows to further contextualize what's happening now. All it takes is change the lagged variable (`l1_djia`) from 1 to 30 (i.e. `l30_djia = lag(djia, 30)`. This would create a 30-day rolling window, within presidential administrations, to calculate the worst 30-day slides from time point *t* to time point *t+30*. Here, for example, are the 10 worst rolling windows over a 30-day period.
 
 <table id="stevetable">
-<caption>The 20 Worst 30-Day Rolling Windows in Dow Jones History, Feb. 16, 1885 to the Present</caption>
+<caption>The Ten Worst 30-Day Rolling Windows in Dow Jones History, Feb. 16, 1885 to the Present</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Date </th>
@@ -534,76 +534,6 @@ You could also extend this approach to look at the worst 30-day trading windows 
    <td style="text-align:center;"> 77.22 </td>
    <td style="text-align:center;"> 115.60 </td>
    <td style="text-align:center;"> -33.20 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1929-11-14 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 217.28 </td>
-   <td style="text-align:center;"> 325.17 </td>
-   <td style="text-align:center;"> -33.18 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1931-10-03 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 92.77 </td>
-   <td style="text-align:center;"> 138.66 </td>
-   <td style="text-align:center;"> -33.10 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1929-11-15 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 228.73 </td>
-   <td style="text-align:center;"> 341.36 </td>
-   <td style="text-align:center;"> -32.99 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1931-12-16 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 76.49 </td>
-   <td style="text-align:center;"> 113.98 </td>
-   <td style="text-align:center;"> -32.89 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1931-12-15 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 78.60 </td>
-   <td style="text-align:center;"> 116.79 </td>
-   <td style="text-align:center;"> -32.70 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1929-11-06 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 232.13 </td>
-   <td style="text-align:center;"> 344.87 </td>
-   <td style="text-align:center;"> -32.69 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1929-11-26 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 235.35 </td>
-   <td style="text-align:center;"> 347.24 </td>
-   <td style="text-align:center;"> -32.22 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1929-11-19 </td>
-   <td style="text-align:left;"> Herbert Hoover </td>
-   <td style="text-align:center;"> 234.02 </td>
-   <td style="text-align:center;"> 345.00 </td>
-   <td style="text-align:center;"> -32.17 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1987-10-19 </td>
-   <td style="text-align:left;"> Ronald Reagan </td>
-   <td style="text-align:center;"> 1738.74 </td>
-   <td style="text-align:center;"> 2561.38 </td>
-   <td style="text-align:center;"> -32.12 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 2020-03-19 </td>
-   <td style="text-align:left;"> Donald J. Trump </td>
-   <td style="text-align:center;"> 20087.19 </td>
-   <td style="text-align:center;"> 29290.85 </td>
-   <td style="text-align:center;"> -31.42 </td>
   </tr>
 </tbody>
 </table>
