@@ -19,7 +19,7 @@ image: "dow-jones-dude.jpg"
 
 {% include image.html url="/images/dow-jones-dude.jpg" caption="That feeling when you realize you're not going to retire until your 70s. (Photo: Spencer Platt/Getty Images)" width=400 align="right" %}
 
-*Last updated: March 27, 2020* 
+*Last updated: March 28, 2020* 
 
 [What he said](https://knowyourmeme.com/memes/shits-on-fire-yo).
 
@@ -77,21 +77,21 @@ Data %>%
   mutate(index = (djia/first(djia))-1) %>% 
   ungroup() %>%
   mutate(cat = ifelse(index < 0, "Negative", "Positive")) %>%
-  ggplot(.,aes(date, index,color=cat)) + 
+  ggplot(.,aes(date, index,color=(index < 0))) + 
   theme_steve_web() + post_bg() +
-  geom_line() +
+  geom_line(aes(group=1)) +
   geom_hline(yintercept = 0, linetype="dashed", alpha=0.4) +
   # I think '%y is the best I can do because of FDR's tenure.
   scale_x_date(date_labels = "'%y", 
                date_breaks = "1 year") +
   facet_wrap(~president, scales = "free_x") +
-  scale_color_manual(values=c("#990000", "#009900")) +
+  scale_color_manual(values=c("#009900", "#990000")) +
   theme(legend.position = "none") +
   labs(title = "The Dow Jones Industrial Average, Indexed to the Starting Point of Every Administration",
        subtitle = "The trends of the 'roaring '20s', the Great Depression, 1950s and 1990s growth, and post-collapse recoveries for FDR and Obama are apparent.",
        x = "Date",
        y = "Dow Jones Industrial Average, Indexed at Zero to the First Day of Trading for the Administration",
-       caption = "Data: Dow Jones Industrial Average (Yahoo Finance, Measuring Worth), in the DJIA data (github.com/svmiller/stevemisc)")
+       caption = "Data: Dow Jones Industrial Average (Yahoo Finance, Pinnacle Systems, Measuring Worth), in the DJIA data (github.com/svmiller/stevemisc)")
 ```
 
 ![plot of chunk dow-jones-industrial-average-by-presidency](/images/dow-jones-industrial-average-by-presidency-1.png)
@@ -137,7 +137,7 @@ Data %>%
    <td style="text-align:left;"> 1987-10-19 </td>
    <td style="text-align:left;"> Ronald Reagan </td>
    <td style="text-align:center;"> 1738.74 </td>
-   <td style="text-align:center;"> 2246.74 </td>
+   <td style="text-align:center;"> 2246.73 </td>
    <td style="text-align:center;"> -22.61 </td>
   </tr>
   <tr>
@@ -248,7 +248,7 @@ Data %>%
    <td style="text-align:left;"> 1987-10-19 </td>
    <td style="text-align:left;"> Ronald Reagan </td>
    <td style="text-align:center;"> 1738.74 </td>
-   <td style="text-align:center;"> 2246.74 </td>
+   <td style="text-align:center;"> 2246.73 </td>
    <td style="text-align:center;"> -22.61 </td>
    <td style="text-align:center;"> 1 </td>
   </tr>
@@ -319,8 +319,8 @@ Data %>%
   <tr>
    <td style="text-align:left;"> 1997-10-27 </td>
    <td style="text-align:left;"> Bill Clinton </td>
-   <td style="text-align:center;"> 7161.15 </td>
-   <td style="text-align:center;"> 7715.41 </td>
+   <td style="text-align:center;"> 7161.20 </td>
+   <td style="text-align:center;"> 7715.40 </td>
    <td style="text-align:center;"> -7.18 </td>
    <td style="text-align:center;"> 20 </td>
   </tr>
@@ -346,7 +346,7 @@ Data %>%
    <td style="text-align:center;"> 576.93 </td>
    <td style="text-align:center;"> 611.88 </td>
    <td style="text-align:center;"> -5.71 </td>
-   <td style="text-align:center;"> 49 </td>
+   <td style="text-align:center;"> 48 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1946-09-03 </td>
@@ -386,7 +386,7 @@ Data %>%
    <td style="text-align:center;"> 35.89 </td>
    <td style="text-align:center;"> 37.44 </td>
    <td style="text-align:center;"> -4.15 </td>
-   <td style="text-align:center;"> 151 </td>
+   <td style="text-align:center;"> 154 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1886-05-17 </td>
@@ -394,7 +394,15 @@ Data %>%
    <td style="text-align:center;"> 35.11 </td>
    <td style="text-align:center;"> 36.59 </td>
    <td style="text-align:center;"> -4.05 </td>
-   <td style="text-align:center;"> 168 </td>
+   <td style="text-align:center;"> 172 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 1921-06-20 </td>
+   <td style="text-align:left;"> Warren G. Harding </td>
+   <td style="text-align:center;"> 64.90 </td>
+   <td style="text-align:center;"> 67.57 </td>
+   <td style="text-align:center;"> -3.95 </td>
+   <td style="text-align:center;"> 186 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1974-11-18 </td>
@@ -402,15 +410,7 @@ Data %>%
    <td style="text-align:center;"> 624.92 </td>
    <td style="text-align:center;"> 647.61 </td>
    <td style="text-align:center;"> -3.50 </td>
-   <td style="text-align:center;"> 258 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1921-06-20 </td>
-   <td style="text-align:left;"> Warren G. Harding </td>
-   <td style="text-align:center;"> 64.90 </td>
-   <td style="text-align:center;"> 67.25 </td>
-   <td style="text-align:center;"> -3.49 </td>
-   <td style="text-align:center;"> 259 </td>
+   <td style="text-align:center;"> 265 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1973-11-26 </td>
@@ -418,7 +418,7 @@ Data %>%
    <td style="text-align:center;"> 824.95 </td>
    <td style="text-align:center;"> 854.00 </td>
    <td style="text-align:center;"> -3.40 </td>
-   <td style="text-align:center;"> 277 </td>
+   <td style="text-align:center;"> 283 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1979-10-09 </td>
@@ -426,7 +426,7 @@ Data %>%
    <td style="text-align:center;"> 857.59 </td>
    <td style="text-align:center;"> 884.04 </td>
    <td style="text-align:center;"> -2.99 </td>
-   <td style="text-align:center;"> 379 </td>
+   <td style="text-align:center;"> 389 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1966-10-03 </td>
@@ -434,7 +434,7 @@ Data %>%
    <td style="text-align:center;"> 757.96 </td>
    <td style="text-align:center;"> 774.22 </td>
    <td style="text-align:center;"> -2.10 </td>
-   <td style="text-align:center;"> 951 </td>
+   <td style="text-align:center;"> 971 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 1885-02-27 </td>
@@ -442,7 +442,7 @@ Data %>%
    <td style="text-align:center;"> 31.77 </td>
    <td style="text-align:center;"> 32.33 </td>
    <td style="text-align:center;"> -1.75 </td>
-   <td style="text-align:center;"> 1431 </td>
+   <td style="text-align:center;"> 1438 </td>
   </tr>
 </tbody>
 </table>
@@ -543,7 +543,7 @@ You could also extend this approach to look at the worst 30-day trading windows 
 You can also drive the point home about how precarious our current situation is by flipping one line of script in the above R code that calculates the worst individual trading days in Dow Jones history. See the above code that reads? `arrange(percchange)`? Replace it with `arrange(-percchange)` to get the best individual days in Dow history. Here, we'll select the top 20.
 
 <table id="stevetable">
-<caption>The 20 Best Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020</caption>
+<caption>The 20 Best Trading Days in Dow Jones History, Feb. 16, 1885 to the Present</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Date </th>
@@ -699,5 +699,99 @@ You can also drive the point home about how precarious our current situation is 
 
 It's worth saying growth in trading is ideally supposed to be incremental over the long-run. Huge volatility in trading runs both ways, never seeming to coincide with something good on the balance.
 
+### Update for March 28, 2020
+
+You can also use these data to assess just how confident we should be in magnitude gains from Monday to Friday. For example, [multiple](https://www.barrons.com/articles/dow-jones-industrial-average-has-best-week-since-1938-time-to-go-shopping-for-stocks-51585354856) [outlets](https://www.forbes.com/sites/sergeiklebnikov/2020/03/27/stocks-have-best-week-since-1938-after-trump-signs-2-trillion-coronavirus-stimulus-bill/#6e69b2be5ae4) are claiming that this week is the best week for trading since 1938, notwithstanding the loss on Friday. Consider this summary from Barrons:
+
+> After the index’s eighth losing Friday in nine weeks, the Dow ended the week up 2,462.80 points, or 12.84%, to 21,636.78—its best week since 1938. The S&P 500 index gained 10.26%, to 2,541.47, and the Nasdaq Composite rose 9.05%, to 7502.38.
+
+Here's how you can assess that claim with some context (check [the file in the `_source` directory](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-12-dow-jones-no-good-very-bad-day.Rmd) for full code).
+
+<table id="stevetable">
+<caption>The 10 Best Trading Weeks in Dow Jones History, Feb. 16, 1885 to the Present</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> President </th>
+   <th style="text-align:left;"> Week Starting </th>
+   <th style="text-align:center;"> DJIA (Start of the Week) </th>
+   <th style="text-align:center;"> DJIA (Close, Last Day of the Week) </th>
+   <th style="text-align:center;"> % Change </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:left;"> 1932-08-01 </td>
+   <td style="text-align:center;"> 54.26 </td>
+   <td style="text-align:center;"> 62.60 </td>
+   <td style="text-align:center;"> 15.37 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Franklin D. Roosevelt </td>
+   <td style="text-align:left;"> 1938-06-20 </td>
+   <td style="text-align:center;"> 113.23 </td>
+   <td style="text-align:center;"> 129.06 </td>
+   <td style="text-align:center;"> 13.98 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Donald J. Trump </td>
+   <td style="text-align:left;"> 2020-03-23 </td>
+   <td style="text-align:center;"> 19173.98 </td>
+   <td style="text-align:center;"> 21636.78 </td>
+   <td style="text-align:center;"> 12.84 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Franklin D. Roosevelt </td>
+   <td style="text-align:left;"> 1933-03-13 </td>
+   <td style="text-align:center;"> 53.84 </td>
+   <td style="text-align:center;"> 60.73 </td>
+   <td style="text-align:center;"> 12.80 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:left;"> 1932-07-25 </td>
+   <td style="text-align:center;"> 47.84 </td>
+   <td style="text-align:center;"> 53.89 </td>
+   <td style="text-align:center;"> 12.65 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Herbert Hoover </td>
+   <td style="text-align:left;"> 1931-10-05 </td>
+   <td style="text-align:center;"> 92.77 </td>
+   <td style="text-align:center;"> 104.46 </td>
+   <td style="text-align:center;"> 12.60 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gerald Ford </td>
+   <td style="text-align:left;"> 1974-10-07 </td>
+   <td style="text-align:center;"> 584.56 </td>
+   <td style="text-align:center;"> 658.17 </td>
+   <td style="text-align:center;"> 12.59 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Franklin D. Roosevelt </td>
+   <td style="text-align:left;"> 1933-10-23 </td>
+   <td style="text-align:center;"> 83.64 </td>
+   <td style="text-align:center;"> 93.22 </td>
+   <td style="text-align:center;"> 11.45 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Theodore Roosevelt </td>
+   <td style="text-align:left;"> 1903-08-10 </td>
+   <td style="text-align:center;"> 34.71 </td>
+   <td style="text-align:center;"> 38.68 </td>
+   <td style="text-align:center;"> 11.44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> George W. Bush </td>
+   <td style="text-align:left;"> 2008-10-27 </td>
+   <td style="text-align:center;"> 8378.95 </td>
+   <td style="text-align:center;"> 9325.01 </td>
+   <td style="text-align:center;"> 11.29 </td>
+  </tr>
+</tbody>
+</table>
+
+A recurring trend in these posts is that I'm skeptical that many of the boastful claims about the performance of the Dow Jones industrial average of late is wishful thinking absent any type of context of the other times the Dow Jones had great days or great weeks. It's akin to [Homer Simpson chasing his roast pig](https://www.youtube.com/watch?v=MWvevkE0kAI). "It's still good! It's still good!" Buddy, it might be gone.
 
 

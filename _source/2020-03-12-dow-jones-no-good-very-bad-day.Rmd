@@ -148,21 +148,21 @@ Data %>%
   mutate(index = (djia/first(djia))-1) %>% 
   ungroup() %>%
   mutate(cat = ifelse(index < 0, "Negative", "Positive")) %>%
-  ggplot(.,aes(date, index,color=cat)) + 
+  ggplot(.,aes(date, index,color=(index < 0))) + 
   theme_steve_web() + post_bg() +
-  geom_line() +
+  geom_line(aes(group=1)) +
   geom_hline(yintercept = 0, linetype="dashed", alpha=0.4) +
   # I think '%y is the best I can do because of FDR's tenure.
   scale_x_date(date_labels = "'%y", 
                date_breaks = "1 year") +
   facet_wrap(~president, scales = "free_x") +
-  scale_color_manual(values=c("#990000", "#009900")) +
+  scale_color_manual(values=c("#009900", "#990000")) +
   theme(legend.position = "none") +
   labs(title = "The Dow Jones Industrial Average, Indexed to the Starting Point of Every Administration",
        subtitle = "The trends of the 'roaring '20s', the Great Depression, 1950s and 1990s growth, and post-collapse recoveries for FDR and Obama are apparent.",
        x = "Date",
        y = "Dow Jones Industrial Average, Indexed at Zero to the First Day of Trading for the Administration",
-       caption = "Data: Dow Jones Industrial Average (Yahoo Finance, Measuring Worth), in the DJIA data (github.com/svmiller/stevemisc)")
+       caption = "Data: Dow Jones Industrial Average (Yahoo Finance, Pinnacle Systems, Measuring Worth), in the DJIA data (github.com/svmiller/stevemisc)")
 ```
 
 The data do well to show the scale of growth and contraction that defined these various presidencies. For example, we know the 1980s and 1990s were a period of high growth for the United States. This was made possible through a variety of factors, whether deregulation, technological change and innovation, and the Boomers entering their peak earning years. However, Ronald Reagan's last day close was 2,235 (up from 951) and Bill Clinton's last day close was 10,588 (up from 3,242). I'm old enough to remember the Dow crossing 10,000 for the first time being a big deal. However, those nominal numbers look paltry in modern times.
@@ -216,7 +216,7 @@ Data %>%
 
 One mild surprise here is Lyndon Johnson. Among all presidents through the history of the Dow Jones Industrial Average, Johnson had---for lack of better term---the "second-best worst" trading day in history. The worst trading day of his presidency came on October 3, 1966, a contraction of just over 2% from the previous day's close. His presidency was turbulent in more than a few ways and it's any wonder he didn't have a worse day.
 
-### Update for `r format(Sys.time(), '%B %d, %Y')`
+### Update for March 27, 2020
 
 You could also extend this approach to look at the worst 30-day trading windows to further contextualize what's happening now. All it takes is change the lagged variable (`l1_djia`) from 1 to 30 (i.e. `l30_djia = lag(djia, 30)`. This would create a 30-day rolling window, within presidential administrations, to calculate the worst 30-day slides from time point *t* to time point *t+30*. Here, for example, are the 10 worst rolling windows over a 30-day period.
 
@@ -256,12 +256,51 @@ Data %>%
   mutate_if(is.numeric, ~round(., 2)) %>%
    kable(., format="html", table.attr='id="stevetable"',
         col.names=c("Date", "President", "DJIA (Close)", "DJIA (Close, Previous)", "% Change"),
-        caption = "The 20 Best Trading Days in Dow Jones History, Feb. 16, 1885 to March 12, 2020",
+        caption = "The 20 Best Trading Days in Dow Jones History, Feb. 16, 1885 to the Present",
         align=c("l","l","c","c","c","c"))
 ```
 
 It's worth saying growth in trading is ideally supposed to be incremental over the long-run. Huge volatility in trading runs both ways, never seeming to coincide with something good on the balance.
 
+### Update for `r format(Sys.time(), '%B %d, %Y')`
+
+You can also use these data to assess just how confident we should be in magnitude gains from Monday to Friday. For example, [multiple](https://www.barrons.com/articles/dow-jones-industrial-average-has-best-week-since-1938-time-to-go-shopping-for-stocks-51585354856) [outlets](https://www.forbes.com/sites/sergeiklebnikov/2020/03/27/stocks-have-best-week-since-1938-after-trump-signs-2-trillion-coronavirus-stimulus-bill/#6e69b2be5ae4) are claiming that this week is the best week for trading since 1938, notwithstanding the loss on Friday. Consider this summary from Barrons:
+
+> After the index’s eighth losing Friday in nine weeks, the Dow ended the week up 2,462.80 points, or 12.84%, to 21,636.78—its best week since 1938. The S&P 500 index gained 10.26%, to 2,541.47, and the Nasdaq Composite rose 9.05%, to 7502.38.
+
+Here's how you can assess that claim with some context (check [the file in the `_source` directory](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-12-dow-jones-no-good-very-bad-day.Rmd) for full code).
+
+```{r best-monday-friday-gains, eval=T, echo=F}
+# Make some dates from first day of trading to the present
+tribble(~date,
+        seq(ymd('1885-02-16'),ymd(today()), by = '1 day')) %>%
+        unnest(date) -> Dates
+
+Dates %>%
+  left_join(., Data) %>%
+  # omit days with no trading
+  na.omit %>%
+  # Make a week group that starts on every Monday
+  mutate(day = wday(date, label=TRUE),
+         l1_djia = lag(djia, 1),
+         week = cut(date, "week", start.on.monday = TRUE)) %>%
+  # The Dow used to reliably trade on Saturdays
+  # Let's omit them to standardize this to a claim of five-day Mon-Fri windows
+  filter(day != "Sat") %>%
+  group_by(president, week) %>% 
+  summarize(startval = first(l1_djia),
+            endval = last(djia),
+            diff = ((endval - startval)/startval)*100) %>%
+  arrange(-diff) %>% head(10) %>%
+  mutate_if(is.numeric, ~round(., 2)) %>%
+   kable(., format="html", table.attr='id="stevetable"',
+        col.names=c("President", "Week Starting", "DJIA (Start of the Week)", "DJIA (Close, Last Day of the Week)", "% Change"),
+        caption = "The 10 Best Trading Weeks in Dow Jones History, Feb. 16, 1885 to the Present",
+        align=c("l","l","c","c","c","c"))
+
+```
+
+A recurring trend in these posts is that I'm skeptical that many of the boastful claims about the performance of the Dow Jones industrial average of late is wishful thinking absent any type of context of the other times the Dow Jones had great days or great weeks. It's akin to [Homer Simpson chasing his roast pig](https://www.youtube.com/watch?v=MWvevkE0kAI). "It's still good! It's still good!" Buddy, it might be gone.
 
 ```{r knitchunk, echo=F, eval=F}
 setwd("~/Dropbox/svmiller.github.io/_source")
