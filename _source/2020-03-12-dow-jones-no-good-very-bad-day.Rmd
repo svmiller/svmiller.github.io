@@ -300,7 +300,7 @@ Dates %>%
 
 ```
 
-A recurring trend in these posts is that I'm skeptical that many of the boastful claims about the performance of the Dow Jones industrial average of late is wishful thinking absent any type of context of the other times the Dow Jones had great days or great weeks. It's akin to [Homer Simpson chasing his roast pig](https://www.youtube.com/watch?v=MWvevkE0kAI). "It's still good! It's still good!" Buddy, it might be gone.
+A recurring trend in these posts is that I'm skeptical that many of the boastful claims about the performance of the Dow Jones industrial average of late amount to wishful thinking absent any type of context of the other times the Dow Jones had great days or great weeks. It's akin to [Homer Simpson chasing his roast pig](https://www.youtube.com/watch?v=MWvevkE0kAI). "It's still good! It's still good!" Buddy, it might be gone.
 
 ```{r knitchunk, echo=F, eval=F}
 setwd("~/Dropbox/svmiller.github.io/_source")
