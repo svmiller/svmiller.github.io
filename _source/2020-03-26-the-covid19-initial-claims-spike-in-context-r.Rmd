@@ -1,5 +1,5 @@
 ---
-title: "The COVID-19 Initial Unemployment Claims Spike, in Context"
+title: "The COVID-19 Initial Unemployment Claims Spike in Context"
 output:
   md_document:
     variant: gfm
