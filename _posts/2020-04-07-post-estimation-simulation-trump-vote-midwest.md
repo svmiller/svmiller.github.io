@@ -509,9 +509,9 @@ SimM2 %>%
   scale_color_manual(values = c("#377EB8", "#E41A1C")) +
   geom_pointrange(size=.8) +
   labs(color = "", shape = "",
-       x = "", y = "Expected Probability of Voting for Donald Trump (with 95% Intervals)",
-       title = "The Effect of Cognitive Racism on Voting for Donald Trump in 2016, by Partisanship",
-       subtitle = "Increasing levels of cogitive racism started to break white voters for Donald Trump among the not-strong Democrats.",
+       x = "Level of Partisanship", y = "Expected Probability of Voting for Donald Trump (with 95% Intervals)",
+       title = "The Effect of Cognitive Racism on the Likelihood of Voting for Donald Trump in 2016, by Partisanship",
+       subtitle = "Increasing levels of cognitive racism started to break white voters for Donald Trump among the not-strong Democrats.",
        caption = "Data: CCES, 2016. Sample: white respondents residing in IN, MI, OH, PA, and WI.")
 ```
 
