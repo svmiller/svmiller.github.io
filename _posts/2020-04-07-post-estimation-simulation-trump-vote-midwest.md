@@ -12,6 +12,8 @@ excerpt: "You can't just run a regression, show a table interpreting statistical
 layout: post
 categories:
   - R
+  - Political Science
+  - Teaching
 image: "2015-anti-trump-rally-chicago.jpg"
 ---
 
