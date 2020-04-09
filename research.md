@@ -20,11 +20,12 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 
 ## Publications
 
+Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[The Importance of Correct Measurement](https://doi.org/10.1093/isq/sqaa011)." *International Studies Quarterly*.
+
 Miller, Steven V. Forthcoming. "[Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017](/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)." *Social Science Journal.*
 
 Miller, Steven V. and Nicholas T. Davis. Forthcoming. "[The Effect of White Social Prejudice on Support for American Democracy](/research/white-social-prejudice-support-american-democracy/)." *Journal of Race, Ethnicity, and Politics.*
 
-Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[The Importance of Correct Measurement](http://dmgibler.people.ua.edu/mid-replication.html)." *International Studies Quarterly*.
 
 Miller, Steven V. 2019. "[What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016](/research/what-americans-really-think-about-gun-control/)". *Social Science Quarterly* 100(1): 272-288.
 
