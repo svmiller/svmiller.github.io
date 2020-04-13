@@ -8,7 +8,7 @@ knit: (function(inputFile, encoding) {
    rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-04-13'
-excerpt: "You can't just run a regression, show a table interpreting statistical significance, and call it a day. Here's a guide for how I approach making the most of regression modeling (i.e. two-SD standardization and post-estimation simulation)."
+excerpt: "Ordinal mixed models don't have great built-in prediction support, but simulating the model coefficients from a multivariate normal distribution is a useful workaround."
 layout: post
 categories:
   - R
