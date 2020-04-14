@@ -427,14 +427,14 @@ simM1 %>%
                      "Somewhat Disagree", "Strongly Disagree"))) %>%
   mutate_if(is.numeric, ~round(., 3)) %>%
    kable(., format="html", table.attr='id="stevetable"',
-         col.names=c("Ideology Group", "Level of Acknowledgement of White Privilege", "Mean(Probability)", "Lower Bound", "Upper Bound"),
+         col.names=c("Ideology", "Level of Acknowledgement of White Privilege", "Mean(Probability)", "Lower Bound", "Upper Bound"),
          align = c("l","l","c","c","c"))
 ```
 
 <table id="stevetable">
  <thead>
   <tr>
-   <th style="text-align:left;"> Ideology Group </th>
+   <th style="text-align:left;"> Ideology </th>
    <th style="text-align:left;"> Level of Acknowledgement of White Privilege </th>
    <th style="text-align:center;"> Mean(Probability) </th>
    <th style="text-align:center;"> Lower Bound </th>
