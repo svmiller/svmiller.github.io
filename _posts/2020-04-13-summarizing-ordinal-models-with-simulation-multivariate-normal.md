@@ -223,11 +223,11 @@ simM1 %>% # we're going to name things to match up nicely with the above output
   scale_colour_brewer(palette = "Set1") +
   geom_hline(yintercept =  0, linetype="dashed") +
   geom_pointrange(position = position_dodge(width = .5)) + coord_flip()+
-  labs(title = "The Effect of Various Attributes on Disagreeing About White Structural Advantages",
+  labs(title = "A Mixed Effects Ordinal Logistic Regression on Acknowledging Structural White Privilege",
        x = "", y = "Coefficient (with 95% Intervals)",
-       subtitle = "Nothing here is terribly surprising and simulating allows an other means to summarize uncertainty around the parameters.",
+       subtitle = "Nothing here is terribly surprising and simulating allows another means to summarize uncertainty around the parameters.",
        shape = "", color="",
-       caption = "Data: CCES, 2016. Sample: white respondents residing in IN, MI, OH, PA, and WI.")
+       caption = "Data: CCES, 2016. Sample: white respondents residing in IN, MI, OH, PA, and WI. Random effect of state omitted for presentation.\nHigher values = more disagreement with a prompt that proposes whites have had structural advantages due to their skin color.")
 ```
 
 ![plot of chunk various-attributes-effect-acknowledging-white-advantage-cces16](/images/various-attributes-effect-acknowledging-white-advantage-cces16-1.png)
