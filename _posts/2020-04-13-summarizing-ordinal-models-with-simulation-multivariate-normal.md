@@ -25,9 +25,9 @@ image: "white-privilege-is-racism-crop.jpg"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-This is a simple add-on to my previous post on [how to make the most of your regression model](http://svmiller.com/blog/2020/04/post-estimation-simulation-trump-vote-midwest/). Therein, part of that post, largely targeted to [my grad-level methods class](http://post8000.svmiller.com/), talked about extracting quantities of interest from the regression model through simulation. Therein, I mention a pseudo-Bayesian (or "informal Bayesian", per [Gelman and Hill's (2007, Chp. 7) language](http://www.stat.columbia.edu/~gelman/arm/)) approach that leans on the multivariate normal distribution. Subject to approximate regularity conditions and sample size, the conditional distribution of a quantity of interest, given the observed data, can be approximated with a multivariate normal distribution with parameters derived from the regression model. These are the betas from the regression model with a variance provided by the variance-covariance matrix. This is a clever approach, even as the pseudo-Bayesian aspect of it is that there is no prior distribution on the model parameters even as prior distributions are sine qua non features of Bayesian analysis. Instead, this approach sweeps the importance of prior assumptions under the rug because the dependence of the posterior distribution on prior assumptions disappears with large enough posterior samples. Typically, 1,000 simulations are enough to do the trick.
+This is a simple add-on to my previous post on [how to make the most of your regression model](http://svmiller.com/blog/2020/04/post-estimation-simulation-trump-vote-midwest/). Part of that post, largely targeted to [my grad-level methods class](http://post8000.svmiller.com/), talked about extracting quantities of interest from the regression model through simulation. I mention a pseudo-Bayesian (or "informal Bayesian", per [Gelman and Hill's (2007, Chp. 7) language](http://www.stat.columbia.edu/~gelman/arm/)) approach that leans on the multivariate normal distribution. Subject to approximate regularity conditions and sample size, the conditional distribution of a quantity of interest, given the observed data, can be approximated with a multivariate normal distribution with parameters derived from the regression model. These are the betas from the regression model with a variance provided by the variance-covariance matrix. This is a clever approach, even as the pseudo-Bayesian aspect of it is that there is no prior distribution on the model parameters even as prior distributions are sine qua non features of Bayesian analysis. Instead, this approach sweeps the importance of prior assumptions under the rug because the dependence of the posterior distribution on prior assumptions disappears with large enough posterior samples. Typically, 1,000 simulations are enough to do the trick.
 
-This approach is well supported for two types of models: 1) linear models and 2) generalized linear models with binary dependent variables. Those are at least the applications with which I'm most familiar and it's where I've seen this approach done the most. It's also where I've done it the most myself. I haven't seen it as often with ordinal models. To be clear, [the `sim()` function in the `arm` package](https://github.com/cran/arm/blob/master/R/sim.R) offers support for `polr()` function in the `MASS` package. However, there is no functionality for ordinal models estimated from the `ordinal` package. This is unfortunate because the ordinal package has the fullest suite of ordinal models and has great support for all sorts of mixed model extensions. Compounding matters, however, is the absence of intuitive prediction functions for those mixed models.
+This approach is well supported for two types of models: 1) linear models and 2) generalized linear models with binary dependent variables. Those are at least the applications with which I'm most familiar and it's where I've seen this approach done the most. It's also where I've done it the most myself. I haven't seen it as often with ordinal models. To be clear, [the `sim()` function in the `arm` package](https://github.com/cran/arm/blob/master/R/sim.R) offers support for `polr()` function in the `MASS` package. However, there is no functionality for ordinal models estimated from the `ordinal` package. This is unfortunate because the ordinal package has the most comprehensive suite of ordinal models and has great support for all sorts of mixed model extensions. Compounding matters, however, is the absence of intuitive prediction functions for those mixed ordinal models in the `ordinal` package.
 
 I think what I offer here is a reasonable workaround for these limitations while still hewing to how Gelman and Hill (2007) talk about model simulation. I offer this with three caveats. First, I really need to think of a wrapper function for this that can account for the varying levels in the dependent variable. Everything here is hand-coded. Second, I'm going to focus on just simulations of the fixed effects parameters. I think this is reasonable since most quantities of interest a reviewer will want to see in my field (political science) will care just about the fixed effects. Third, and related to the second point, more complicated simulations and predictions including things like random slopes in addition to varying levels of the random effect are probably better done with a fully Bayesian approach. `tidybayes` and `brms` offer great support for these approaches.
 
@@ -43,7 +43,7 @@ library(knitr) # for tables
 library(kableExtra) # for pretty tables
 ```
 
-Here's a table of contents as well.
+And here's a table of contents.
 
 1. [The Data and the Model(s)](#datamodels)
 2. [Better Summarize the Uncertainty of the Model Parameters](#summarizeuncertainty)
@@ -53,7 +53,7 @@ Here's a table of contents as well.
 
 Much like [the previous post](http://svmiller.com/blog/2020/04/post-estimation-simulation-trump-vote-midwest/), I'll be using a subset of white voters in five Midwestern states shortly after the 2016 presidential election. These five states are Indiana, Michigan, Ohio, Pennsylvania, and Wisconsin. The data ultimately come from the 2016 Cooperative Congressional Election Study (CCES), but are made available in the `TV16` data frame from [my `post8000r` package](https://github.com/svmiller/post8000r).
 
-We want an ordinal model in lieu of the binary GLM from the previous post. So, this post will see to explain variation in one of the four racism variables that are included in the data. We'll focus on the `whiteadv` question in the data. Herein, a respondent is given a statement of "white people in the U.S. have certain advantages because of the color of their skin." The respondent's response to this prompt ranges from 1 (Strongly agree) to 5 (Strongly disagree). Per [Christopher D. DeSante and Candis W. Smith](https://www.christopherdesante.com/wp-content/uploads/2018/08/dsFIREapsa18.pdf), higher values indicate higher levels of cognitive racism. Conceptually, this is defining racism as a respondents’ awareness of racism, or lack thereof.
+We want an ordinal model in lieu of the binary GLM from the previous post. So, this post will see to explain variation in one of the four racism variables that are included in the data. We'll focus on the `whiteadv` question in the data. Herein, a respondent is given a statement of "white people in the U.S. have certain advantages because of the color of their skin." The respondent's response to this prompt ranges from 1 (strongly agree) to 5 (strongly disagree). Per [Christopher D. DeSante and Candis W. Smith](https://www.christopherdesante.com/wp-content/uploads/2018/08/dsFIREapsa18.pdf), higher values indicate higher levels of cognitive racism. Conceptually, this is capturing/coding the concept of racism as a respondents’ awareness (or lack thereof) of structural racism and white privilege that have been defining features of American life for centuries.
 
 We'll propose a simple---and to be clear: not causal---model that regresses this dependent variable on five covariates: the respondent's age, whether the respondent is a woman, whether the respondent has a college diploma, the household income of the respondent, the respondent's ideology (L to C, five-point scale), and the respondent's partisanship (D to R, seven-point scale). We'll add a random effect for the state, but we won't unpack it here. Again, I think this approach is better when focused on just the fixed effects.
 
@@ -163,11 +163,11 @@ Here's a summary via the `knitr` and `kableExtra` packages, done quietly to hide
 
 Ordinal logistic regression coefficients are chores to interpret, but here's how you'd take a stab at relaying this model output to the audience. Observe, for example, that the college education coefficient is -.638. That is negative and statistically significant (i.e. the absolute value of the *z*-value is over 11). Thus, the natural logged odds of observing a 5 versus a 1, 2, 3, or 4 decreases by about -.638 for a one-unit increase in college education (i.e. going from not having a four-year college diploma to having a college diploma). The natural logged odds of observing a 4 versus a 3, 2, or 1 for the same one-unit increase decreases by -.638. These are contingent on the assumptions of the ordinal logistic model (i.e. parallel lines) that I don't belabor here.
 
-I noticed in [my grad-level methods lab](https://github.com/svmiller/post8000/blob/master/lab-scripts/ordinal-logistic-regression-lab.R) and [seemingly to a sympathetic audience on Twitter](https://twitter.com/stevenvmiller/status/1245426370425085953) that ordinal models are a pain in the ass to both estimate for a lay audience and communicate to a lay audience. If this is the DV you're handed, they're more honest than the OLS model even as the latent variable assumption of the ordinal model maps (kinda) well (enough) to OLS. Alas, be prepared to communicate your model graphically, and with quantities of interest, if this is the model you're running.
+I noted in [my grad-level methods lab](https://github.com/svmiller/post8000/blob/master/lab-scripts/ordinal-logistic-regression-lab.R) and [seemingly to a sympathetic audience on Twitter](https://twitter.com/stevenvmiller/status/1245426370425085953) that ordinal models are a pain in the ass to both estimate for a lay audience and communicate to a lay audience. If this is the DV you're handed, they're more honest than the OLS model even as the latent variable assumption of the ordinal model maps (kinda) well (enough) to what the OLS estimator does. Alas, be prepared to communicate your model graphically, and with quantities of interest, if this is the model you're running.
 
 ## Better Summarize the Uncertainty of the Model Parameters {#summarizeuncertainty}
 
-I'll refer the reader to [Chapter 7 of Gelman and Hill (2007)](http://www.stat.columbia.edu/~gelman/arm/) for how the multivariate normal distribution is a novel way of simulating uncertainty regarding the model output from a generalized linear model. I'll only note here that simulating values from a multivariate normal distribution of the ordinal model reequires only the vector of regression coefficients and the variance-covariance matrix of the fitted model. I'll also reiterate that the simulations we'll be doing won't include the random effect. I'm sure I could add it to the coefficient vector if I wanted but most applications (i.e. reviewers) don't care about the random effect and I again refer the reader to fully Bayesian solutions if they want to include it.
+I'll refer the reader to [Chapter 7 of Gelman and Hill (2007)](http://www.stat.columbia.edu/~gelman/arm/) for how the multivariate normal distribution is a novel way of simulating uncertainty regarding the model output from a generalized linear model. I'll only note here that simulating values from a multivariate normal distribution of the ordinal model requires only the vector of regression coefficients and the variance-covariance matrix of the fitted model. I'll also reiterate that the simulations we'll be doing won't include the random effect. I'm sure I could add it to the coefficient vector if I wanted to do it, but most applications (i.e. most reviewers) don't care about the random effect because the random effect in the mixed effects model is mostly there to make standard errors for contextual effects (i.e. state-level covariates in a context like this, had I included them) more conservative.  I again refer the reader to fully Bayesian solutions with `brms` and `tidybayes` if they wanted to do this.
 
 With that in mind, let's extract the vector of coefficient estimates, the variance-covariance matrix (omitting the random effect of the state), and get 1,000 simulations from a multivariate normal distribution with these parameters. The `MASS` package has this as the `mvrnorm()` function, but I won't directly load the `MASS` package because of function clashes with `tidyverse`.
 
@@ -180,7 +180,7 @@ vcovM1 <- vcovM1[-nrow(vcovM1), -ncol(vcovM1)] # vcov, sans state random effect
 set.seed(8675309) # Jenny, I got your number...
 simM1 <- MASS::mvrnorm(1000, coefM1, vcovM1) %>% tbl_df() %>% # 1,000 sims, convert matrix to tbl
   mutate(sim = seq(1:1000)) %>% # create simulation identifier
-  dplyr::select(sim, everything()) # make it first in the data
+  dplyr::select(sim, everything()) # make sim column first in the data
 ```
 
 From here, you can offer another summary of the uncertainty of the model's parameters. This code will admittedly be a little convoluted.
@@ -238,7 +238,9 @@ Not a whole lot changes but you can envision situations where interpretations of
 
 I offer this as a potential solution for how to make predictions based on the model output and how to summarize the uncertainty around those predictions without an analytic solution. This had been dogging me for a while. Apparently I'm not the only one, judging from [a search of stackoverflow](https://www.google.com/search?q=make+predictions+ordinal+model+clmm+site:stackoverflow.com). Here's how I think you can do this.
 
-First, get about 1,000 simulations from a multivariate normal distribution, given the model's parameters. We already did this and saved them as the `simM1` object. Second, get some hypothetical data as a quantity of interest. In my humble opinion, this is critical for anyone estimating and presenting ordinal models and the quantity of interest should be tailored to a quantity of interest. It will be imperative for the researcher to keep things simple and intuitive, given how much goes into an ordinal model. With that in mind, let's use the `data_grid()` function from modelr to create two observations that are typical in every way except one. One observation is a person who is very liberal. The other observation is a person who is very conservative. Do note, we're going to eschew matrix multiplication so we're going to repeat the data a bit.
+First, get about 1,000 simulations from a multivariate normal distribution, given the model's parameters. We already did this and saved the simulations as the `simM1` object. Second, get some hypothetical data as a quantity of interest. In my humble opinion, this is critical for anyone estimating and presenting ordinal models and the quantity of interest should be tailored to a quantity of interest. It will be imperative for the researcher to keep things simple and intuitive, given how much goes into an ordinal model. Tailor the quantity of interest to the story you want to tell from your model.
+
+With that in mind, let's use the `data_grid()` function from `modelr` to create two observations that are typical in every way except one. One observation is a person who is very liberal. The other observation is a person who is very conservative. Do note, we're going to eschew matrix multiplication so we're going to repeat the data a bit.
 
 
 ```r
@@ -248,6 +250,7 @@ Data %>%
   # We should expect to see large magnitude differences.
   data_grid(.model = M1, z_ideo = c(min(z_ideo, na.rm=T), max(z_ideo, na.rm=T))) %>%
   # because we got 1000 sims, we need to repeat this 1000 times
+  # ordinal has a slice function that will clash with dplyr
   dplyr::slice(rep(row_number(), 1000)) ->  newdatM1
 
 newdatM1
@@ -300,7 +303,7 @@ simM1
 ## # … with 1,990 more rows
 ```
 
-Thereafter, we're going to rename the columns coinciding with the betas to have a prefix of `coef` because we're going to `bind_cols()` the hypothetical data with it. We don't want column name clashes.
+Thereafter, we're going to rename the columns coinciding with the betas to have a prefix of `coef` because we're going to `bind_cols()` the hypothetical data with it. We don't want column name clashes and we also want the column names to be a bit clearer and more informative.
 
 
 ```r
@@ -308,27 +311,27 @@ simM1 %>%
   # rename these to be clear they're simulated coefficients
   rename_at(vars("z_age", "z_famincr", "z_pid7na", "female", "collegeed", "z_ideo"),
             ~paste0("coef", .)) %>%
-  bind_cols(., newdatOrd1) -> simM1
+  bind_cols(., newdatM1) -> simM1
 
 simM1
 ```
 
 ```
 ## # A tibble: 2,000 x 18
-##      sim `1|2`  `2|3` `3|4` `4|5` coefz_age coeffemale coefcollegeed coefz_famincr coefz_ideo coefz_pid7na
-##    <int> <dbl>  <dbl> <dbl> <dbl>     <dbl>      <dbl>         <dbl>         <dbl>      <dbl>        <dbl>
-##  1     1 -1.94 -0.286 0.659  1.69   0.0662     -0.0212        -0.567       -0.213        1.61        0.977
-##  2     1 -1.94 -0.286 0.659  1.69   0.0662     -0.0212        -0.567       -0.213        1.61        0.977
-##  3     2 -1.97 -0.390 0.614  1.58  -0.00404    -0.0660        -0.621       -0.237        1.50        0.970
-##  4     2 -1.97 -0.390 0.614  1.58  -0.00404    -0.0660        -0.621       -0.237        1.50        0.970
-##  5     3 -1.91 -0.340 0.639  1.62   0.137      -0.0262        -0.559       -0.182        1.56        1.00 
-##  6     3 -1.91 -0.340 0.639  1.62   0.137      -0.0262        -0.559       -0.182        1.56        1.00 
-##  7     4 -2.04 -0.378 0.546  1.53   0.0359     -0.0695        -0.778       -0.0637       1.60        0.839
-##  8     4 -2.04 -0.378 0.546  1.53   0.0359     -0.0695        -0.778       -0.0637       1.60        0.839
-##  9     5 -2.01 -0.404 0.590  1.60  -0.0658     -0.0578        -0.638       -0.187        1.72        0.879
-## 10     5 -2.01 -0.404 0.590  1.60  -0.0658     -0.0578        -0.638       -0.187        1.72        0.879
-## # … with 1,990 more rows, and 7 more variables: z_ideo <dbl>, z_age <dbl>, z_famincr <dbl>,
-## #   z_pid7na <dbl>, female <dbl>, collegeed <dbl>, state <chr>
+##      sim `1|2`  `2|3` `3|4` `4|5` coefz_age coeffemale coefcollegeed coefz_famincr coefz_ideo
+##    <int> <dbl>  <dbl> <dbl> <dbl>     <dbl>      <dbl>         <dbl>         <dbl>      <dbl>
+##  1     1 -1.94 -0.286 0.659  1.69   0.0662     -0.0212        -0.567       -0.213        1.61
+##  2     1 -1.94 -0.286 0.659  1.69   0.0662     -0.0212        -0.567       -0.213        1.61
+##  3     2 -1.97 -0.390 0.614  1.58  -0.00404    -0.0660        -0.621       -0.237        1.50
+##  4     2 -1.97 -0.390 0.614  1.58  -0.00404    -0.0660        -0.621       -0.237        1.50
+##  5     3 -1.91 -0.340 0.639  1.62   0.137      -0.0262        -0.559       -0.182        1.56
+##  6     3 -1.91 -0.340 0.639  1.62   0.137      -0.0262        -0.559       -0.182        1.56
+##  7     4 -2.04 -0.378 0.546  1.53   0.0359     -0.0695        -0.778       -0.0637       1.60
+##  8     4 -2.04 -0.378 0.546  1.53   0.0359     -0.0695        -0.778       -0.0637       1.60
+##  9     5 -2.01 -0.404 0.590  1.60  -0.0658     -0.0578        -0.638       -0.187        1.72
+## 10     5 -2.01 -0.404 0.590  1.60  -0.0658     -0.0578        -0.638       -0.187        1.72
+## # … with 1,990 more rows, and 8 more variables: coefz_pid7na <dbl>, z_ideo <dbl>, z_age <dbl>,
+## #   female <dbl>, collegeed <dbl>, z_famincr <dbl>, z_pid7na <dbl>, state <chr>
 ```
 
 This next part will involve manual calculations of the four component of the ordinal logistic regression in `M1`. First, to reduce redundancy in code, we'll calculate the estimated value from the design matrix of simulated regression coefficients. Observe how each value of `sim` appears twice. The coefficients of one of the given 1,000 simulations are identical, as are the hypothetical data except for the one difference (i.e. one person is very liberal and another is very conservative).
@@ -358,7 +361,7 @@ simM1
 ##  9     5 -1.68 -2.01 -0.404 0.590  1.60  -0.0658     -0.0578        -0.638       -0.187        1.72
 ## 10     5  1.47 -2.01 -0.404 0.590  1.60  -0.0658     -0.0578        -0.638       -0.187        1.72
 ## # … with 1,990 more rows, and 8 more variables: coefz_pid7na <dbl>, z_ideo <dbl>, z_age <dbl>,
-## #   z_famincr <dbl>, z_pid7na <dbl>, female <dbl>, collegeed <dbl>, state <chr>
+## #   female <dbl>, collegeed <dbl>, z_famincr <dbl>, z_pid7na <dbl>, state <chr>
 ```
 
 Now, we'll calculate the four logits in the model. Recall, as I made this mistake earlier, most ordinal software packages *subtract* the design matrix from the particular thetas/alphas. While we're at it, we'll convert the logits to probabilities.
@@ -383,9 +386,9 @@ simM1 %>%
          p3 = logit3_p - logit2_p,
          p4 = logit4_p - logit3_p,
          p5 = 1 - logit4_p,
+         # sump should be 1. Let's check.
          sump = p1 + p2 + p3 + p4 + p5) -> simM1
 
-# sump should be 1
 simM1 %>%
   dplyr::select(sim, z_ideo, p1:p5, sump)
 ```
@@ -424,7 +427,7 @@ simM1 %>%
                      "Somewhat Disagree", "Strongly Disagree"))) %>%
   mutate_if(is.numeric, ~round(., 3)) %>%
    kable(., format="html", table.attr='id="stevetable"',
-         col.names=c("Ideology Group", "Level of Agreement with White Privilege/Advantage", "Mean(Probability)", "Lower Bound", "Upper Bound"),
+         col.names=c("Ideology Group", "Level of Acknowledgement of White Privilege", "Mean(Probability)", "Lower Bound", "Upper Bound"),
          align = c("l","l","c","c","c"))
 ```
 
@@ -432,7 +435,7 @@ simM1 %>%
  <thead>
   <tr>
    <th style="text-align:left;"> Ideology Group </th>
-   <th style="text-align:left;"> Level of Agreement with White Privilege/Advantage </th>
+   <th style="text-align:left;"> Level of Acknowledgement of White Privilege </th>
    <th style="text-align:center;"> Mean(Probability) </th>
    <th style="text-align:center;"> Lower Bound </th>
    <th style="text-align:center;"> Upper Bound </th>
