@@ -26,13 +26,5 @@ And yes, as soon as I can figure out more of [Jekyll](https://jekyllrb.com/) to 
 {% endfor %}
 
 </ul>
-<!--
-<ul id="archive">
 
-{% for image in site.static_files %}
-{% capture filename %}{{ filename | remove:remove }}{% endcapture %}
-    {% if image.path contains 'graphs' %}
-        <li class="archiveposturl"><span><a href="{{ site.baseurl }}{{ image.path }}" alt="image" >{{ image.path | remove: '/graphs/' }}</a></span></li>
-    {% endif %}
-{% endfor %}
-</ul> -->
+
