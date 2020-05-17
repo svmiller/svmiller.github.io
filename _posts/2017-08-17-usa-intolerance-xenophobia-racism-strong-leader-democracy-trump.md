@@ -7,6 +7,7 @@ permalink:
 categories:
   - Political Science
 excerpt: "World Values Survey data suggest outgroup intolerance and bigotry in the United States also coincide with lukewarm attitudes about democracy."
+image: "charlottesville-white-pride-rally.jpg"
 ---
 
 

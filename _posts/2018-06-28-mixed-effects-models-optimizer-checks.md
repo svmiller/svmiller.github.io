@@ -7,7 +7,7 @@ permalink:
 categories:
   - R
 excerpt: "Computation time is a premium in estimating mixed effects models, but you can always make sure the heuristics you choose aren't influencing your results with the allFit function."
-image: r-logo.png
+image: "r-logo.png"
 ---
 
 

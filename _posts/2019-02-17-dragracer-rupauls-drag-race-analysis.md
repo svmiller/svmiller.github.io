@@ -8,6 +8,7 @@ permalink: null
 categories:
   - R
   - RuPaul's Drag Race
+image: "kameron-michaels.jpg"
 ---
 
 

@@ -7,6 +7,7 @@ categories:
   - Jekyll
   - Github
 excerpt: "I made a derivate template of my no-good-very-bad template, but for course websites."
+image: "jekyll-logo.jpg"
 ---
 
 

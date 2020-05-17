@@ -7,6 +7,7 @@ layout: post
 permalink: null
 categories:
   - R Markdown
+image: "taylor-swift-never-getting-back-together-video.jpg"
 ---
 
 

@@ -7,6 +7,7 @@ permalink:
 categories:
   - Teaching
 excerpt: "This is a guide about how to use Google Scholar to find journal articles that appear as class readings on the syllabus."
+image: "google-scholar-1.png"
 ---
 
 

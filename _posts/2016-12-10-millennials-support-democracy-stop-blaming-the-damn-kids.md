@@ -6,6 +6,7 @@ permalink:
 categories:
   - Political Science
 excerpt: "Millennials get a bad wrap for perceived lack of support for democracy, but we should not confuse 'don't know' with 'don't support'. Data come from LAPOP and World Values Survey."
+image: "democracy-protest-spring.jpg"
 ---
 
 {% include image.html url="/images/democracy-protest-spring.jpg" caption="This Arizona woman leads a chant as voting-rights demonstrators stage a sit-in at the Capitol. She's not part of the problem. (A﻿P Photo / J. Scott Applewhite)" width=450 align="right" %}

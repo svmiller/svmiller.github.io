@@ -6,6 +6,7 @@ permalink:
 categories:
   - Political Science
 excerpt: "John Bonifaz and J. Alex Halderman think they have evidence of vote hacking in Wisconsin. I don't think they do."
+image: "votinglines600.jpg"
 ---
 
 {% include image.html url="/images/votinglines600.jpg" caption="Voters line up at the Kenosha Public Museum to cast their votes in Wisconsin's recall election. (Zbigniew Bzdak, Chicago Tribune)" width=450 align="right" %}

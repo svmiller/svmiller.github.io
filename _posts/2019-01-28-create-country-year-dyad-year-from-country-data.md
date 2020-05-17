@@ -8,6 +8,7 @@ permalink: null
 categories:
   - R
   - Political Science
+image: "authagraph.jpg"
 ---
 
 

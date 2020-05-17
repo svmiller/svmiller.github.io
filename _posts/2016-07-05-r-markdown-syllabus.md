@@ -6,6 +6,7 @@ permalink:
 categories:
   - R Markdown
 excerpt: "I have a series of templates for R Markdown. Here's one for an syllabus. I offer a guide on how to use it."
+image: "itsinsyllabus.gif"
 ---
 
 {% include image.html url="/images/itsinsyllabus.gif" caption="Via PhD Comics, naturally." width=450 align="right" %}

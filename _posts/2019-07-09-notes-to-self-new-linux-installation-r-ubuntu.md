@@ -8,6 +8,7 @@ permalink: null
 categories:
   - R
   - Linux
+image: "monsoon-screenfetch.png"
 ---
 
 

@@ -7,6 +7,7 @@ permalink:
 categories:
   - R Markdown
 excerpt: "I have a series of templates for R Markdown. Here's one for a Xaringan presentation. I offer a guide on how to use it."
+image: "sheena-easton-morning-train.jpg"
 ---
 
 
