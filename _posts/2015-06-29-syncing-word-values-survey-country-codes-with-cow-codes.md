@@ -6,6 +6,7 @@ permalink: /blog/2015/06/syncing-word-values-survey-country-codes-with-cow-codes
 categories:
   - R
 excerpt: "World Values Survey country codes don't sync well with other country classification systems. Here, I use the countrycode package in R and some recoding to sync them."
+image: "world-values-survey.jpg"
 ---
 
 

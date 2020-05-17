@@ -5,6 +5,7 @@ title:  "A Beginner’s Guide to Using R"
 date:   2014-08-09 15:16:01
 categories: R
 excerpt: "R seems daunting, but it shouldn't be. I write a beginner's guide to using R and estimating regressions in it."
+image: "r-logo.png"
 ---
 
 

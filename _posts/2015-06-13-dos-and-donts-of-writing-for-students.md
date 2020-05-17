@@ -6,6 +6,7 @@ permalink: /blog/2015/06/dos-and-donts-of-writing-for-students/
 categories:
   - Teaching 
 excerpt: "A list of dos and dont's for writing for students in political science."
+image: "stephen-king-road-to-hell.jpg"
 ---
 
 *Updated: March 7, 2016*

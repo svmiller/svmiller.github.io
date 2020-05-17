@@ -6,6 +6,7 @@ permalink:
 categories:
   - Teaching
 excerpt: "Students should know that there is a robust positive relationship between in-class attendance and final grades."
+image: "phdcomics-grade-conscious.gif"
 ---
 
 {% include image.html url="/images/phdcomics-grade-conscious.gif" caption="I'll keep lectures slides available for now, but... (PHD Comics, naturally)" width=500 align="right" %}

@@ -7,6 +7,7 @@ categories:
   - Jekyll
   - Github
 excerpt: "I recently moved my academic website from a shared hosting plan to Github. You should too."
+image: "jekyll-and-octocat.jpg"
 ---
 
 

@@ -6,6 +6,7 @@ permalink:
 categories:
   - R Markdown
 excerpt: "I have a series of templates for R Markdown. Here's one for an academic CV. I offer a guide on how to use it."
+image: "rmarkdown-cv.png"
 ---
 
 {% include image.html url="/images/rmarkdown-cv.png" caption="What my CV looks like with this template." width=450 align="right" %}

@@ -6,8 +6,28 @@ permalink: /blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-
 categories:
   - R
 excerpt: "I wish the stargazer package in R would automatically generate random effect statistics from the lme4 package. Here's a backward way to get those and include them in stargazer output.   "
+image: "stars-cake.jpg"
 ---
 
+<dl id="" class="wp-caption aligncenter" style="max-width:100%; text-align: left; padding-top: 8px">
+
+<dt><span style="font-weight:bold; font-size: 1em; padding-left: 8px">Consider Reading This Post Instead ⤵️</span></dt>
+
+<dd style = "padding-bottom: 8px">You can read this if you'd like, but I recently wrote about a better solution for the motivating question that probably brought you here.</dd>
+<ul id="archive">
+
+  
+<li class="archiveposturl" style="padding-bottom:1px"><span><a href="/blog/2020/05/better-way-to-include-random-effects-stargazer/" title="A Better Way to Include Random Effects for Mixed Effects Models in a Stargazer Table">A Better Way to Include Random Effects for Mixed Effects Models in a Stargazer Table</a></span><br />
+<span class="postlower">
+There's a better way to include effects about random parameters from a mixed effects model in a table made by R's stargazer package.
+<!--<strong>Author:</strong> steve -->
+
+<strong style="font-size:100%; font-family: 'Titillium Web', sans-serif; float:right; padding-right: .5em">15 May 2020</strong> 
+</span> 
+
+</li>
+</ul>
+</dl>
 
 
 <!--more-->

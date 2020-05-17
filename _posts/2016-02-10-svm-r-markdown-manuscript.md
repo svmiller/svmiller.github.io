@@ -6,6 +6,7 @@ permalink:
 categories:
   - R Markdown
 excerpt: "I have a series of templates for R Markdown. Here's one for academic manuscripts. I offer a guide on how to use it."
+image: "rmarkdown-academic.png"
 ---
 
 {% include image.html url="/images/rmarkdown-academic.png" caption="The frontmatter to an R Markdown document." width=450 align="right" %}

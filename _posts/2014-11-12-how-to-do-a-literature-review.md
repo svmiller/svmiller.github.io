@@ -6,6 +6,7 @@ permalink: /blog/2014/11/how-to-do-a-literature-review/
 categories:
   - Teaching
 excerpt: "How to do a literature review is not obvious for students in political science. Here, I offer a guide to get new students started. "
+image: "stack-of-books.jpg"
 ---
 
 *Updated: January 17, 2017*, PDF version: [here](https://www.dropbox.com/s/q6j5zfg5ctbbynd/svm-literature-review.pdf?dl=0)
