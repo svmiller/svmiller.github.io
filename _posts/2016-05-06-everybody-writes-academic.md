@@ -5,7 +5,8 @@ layout: post
 permalink:
 categories:
   - Teaching
-excerpt: "Ann Handley's *Everybody Writes* offers a novel approach for students on how to write."  
+excerpt: "Ann Handley's *Everybody Writes* offers a novel approach for students on how to write."
+image: "everybody-writes-wide.png"
 ---
 
 {% include image.html url="/images/handley-everybody-writes.png" caption="Everybody Writes" width=300 align="right" href="https://www.amazon.com/Everybody-Writes-Go-Creating-Ridiculously-ebook/dp/B00LMB5P0G" %}

@@ -6,6 +6,7 @@ permalink:
 categories:
   - Teaching
 excerpt: "Laptops are terrible learning devices. Put them away during class."
+image: "old-compaq-laptop.jpg"
 ---
 
 [Mueller and Oppenheimer (2014)](http://pss.sagepub.com/content/25/6/1159) published the best articulated argument against the use of laptops during class. [Carter et al. (2016)](https://seii.mit.edu/wp-content/uploads/2016/05/SEII-Discussion-Paper-2016.02-Payne-Carter-Greenberg-and-Walker-2.pdf) having a working paper that reiterates the same point.
