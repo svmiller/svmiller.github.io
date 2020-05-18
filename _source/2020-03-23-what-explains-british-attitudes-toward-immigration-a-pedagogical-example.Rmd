@@ -425,7 +425,7 @@ I encourage students new to regression to observe two elements of the regression
 
 A negative coefficient indicates a negative relationship. As the independent variable increases, the dependent variable decreases. A negative relationship also indicates that the dependent variable increases as the independent variable decreases.
 
-In our case, we can see two intuitive stories emerge. Higher levels of education (i.e. more years of education) coincide with more pro-immigration sentiment. As years of education goes up, so too does the pro-immigration sentiment variable. That's a positive relationship. Ideological placement further to the right on an 11-point left-right scale coincides with lower levels of pro-immigration sentiment. Conversely, those who place themselves closer to the ideological left are more likely to have higher levels of pro-immigration sentiment. As one goes up, the other goes down, and vice-versa. That's a negative relationship.
+In our case, we can see two intuitive stories emerge. Higher levels of education (i.e. more years of education) coincide with more pro-immigration sentiment. As years of education go up, so too does the pro-immigration sentiment variable. That's a positive relationship. Ideological placement further to the right on an 11-point left-right scale coincides with lower levels of pro-immigration sentiment. Conversely, those who place themselves closer to the ideological left are more likely to have higher levels of pro-immigration sentiment. As one goes up, the other goes down, and vice-versa. That's a negative relationship.
 
 ### The Standard Error
 
