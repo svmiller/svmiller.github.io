@@ -28,7 +28,7 @@ add_jekyll_image <- function(url, caption, width, align) {
 
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
-                      cache.path = '../cache/random-error/',
+                      cache.path = '~/Dropbox/svmiller.github.io/cache/random-error/',
                       message=FALSE, warning=FALSE,
                       cache = TRUE) 
 
@@ -50,9 +50,10 @@ add_jekyll_image('/images/bullseyes.png', "I think we all get the bullseyes as m
 
 I'm preparing a week's lecture/discussion section and lab on measurement error in [my graduate-level methods class](http://post8000.svmiller.com/). The thought occurred to put some of what I intend to do in that class here on my website so, next time I see it, I could think of ways to improve it in the next iteration of the class in another semester. New preps are always a pain and a first class is a guinea pig of a kind.
 
-Briefly: students learning quantitative methods must consider two forms of measurement error. The first is random (stochastic) measurement error. These are deviations in the recorded value that is neither a function of the "true" signal being measured nor deviations that emerge in predictable and constant ways. Systematic measurement error is when the recorded values differ from the "true" values to be measured in a way that is both consistent and predictable. Students learn that neither is necessarily ideal but that systematic measurement error is a bigger concern than random measurement error. For one, random measurement error is built into a lot of what applied statisticians do. Indeed, random assignment purposesly introduces random error into our design the extent to which treatment and control groups could differ, if randomly, beyond the systematic introduction of a treatment. Second, systematic measurement error has the unwelcome effect of pulling our measurements off their "true" value in the population. Thus, systematic measurement error creates *mismeasures* of the "concept" or "signal" in question. Again: the bullseyes illustrate this.
+Briefly: students learning quantitative methods must consider two forms of measurement error. The first is random (stochastic) measurement error. These are deviations in the recorded value that is neither a function of the "true" signal being measured nor deviations that emerge in predictable and constant ways. Systematic measurement error is when the recorded values differ from the "true" values to be measured in a way that is both consistent and predictable. Students learn that neither is necessarily ideal but that systematic measurement error is a bigger concern than random measurement error. For one, random measurement error is built into a lot of what applied statisticians do. Indeed, random assignment purposesly introduces random error into our design the extent to which treatment and control groups could differ, if randomly, beyond the systematic introduction of a treatment. Second, systematic measurement error has the unwelcome effect of pulling our measurements off their "true" value in the population. Thus, systematic measurement error creates *mismeasures* of the "concept" or "signal" in question. The bullseyes illustrate this and most textbooks use them as a metaphor for the two concepts.
 
-This understanding of systematic and random measurement error will touch on related things students learn. Again, briefly, systematic measurement error coincides with measurement "bias." In the measurement sense, "bias" means the measure includes something else that is fundamental beyond just what the measurement purports to capture. My go-to for a social science audience is [the problem of measuring "political tolerance" during the Cold War](https://www.cambridge.org/core/journals/american-political-science-review/article/an-alternative-conceptualization-of-political-tolerance-illusory-increases-1950s1970s/1FC27090011442D83E587F0E6DFEB810) by reference to whether Americans would allow communists or atheists to run for elected office or give a speech in the respondent's town. The measure that follows, by assuming "least-liked groups" of communists and atheists, measured political tolerance. It also measured political ideology, religiosity, and variable fear of the Soviet Union that gradually waned from the peak of the mid-1950s through the mid-1970s. The "political tolerance" example is nice jumping-off point to what "bias" implies for inferences. Bias means our measures are "invalid" and our inferences are likely to be "biased" as well. This careens us as researchers into "Type 1 error" territory, in which we are inclined to say a relationship exists involving our biased measure despite the fact that no such relationship exists in the population.
+This understanding of systematic and random measurement error will touch on related things students learn. Again, briefly, systematic measurement error coincides with measurement "bias." In the measurement sense, "bias" means the measure includes something else beyond just what the measurement purports to capture. My go-to for a social science audience is [the problem of measuring "political tolerance" during the Cold War](https://www.cambridge.org/core/journals/american-political-science-review/article/an-alternative-conceptualization-of-political-tolerance-illusory-increases-1950s1970s/1FC27090011442D83E587F0E6DFEB810) by reference to whether Americans would allow communists or atheists to run for elected office or give a speech in the respondent's town. The measure that follows, by assuming "least-liked groups" of communists and atheists, measured political tolerance. It also measured political ideology, religiosity, and variable fear of the Soviet Union that gradually waned from the peak of the mid-1950s through the mid-1970s. The "political tolerance" example is nice jumping-off point to what "bias" implies for inferences. Bias means our measures are "invalid" and our inferences are likely to be "biased" as well. 
+<!-- This careens us as researchers into "Type 1 error" territory, in which we are inclined to say a relationship exists involving our biased measure despite the fact that no such relationship exists in the population. -->
 
 Random measurement error creates some problems as well, though we don't treat these as the same scale of danger as we do the problems typically associated with systematic measurement error. Generally, random measurement error coincides with "unreliable" estimates that have a higher "variance." The noise in our estimates often eliminates the possibility of making inferences. We call this a "Type 2 error." In other words, a true relationship exists but we are unable to proverbially detect the signal from the din we measured. To be fair, this is unwelcome and we should not be content with it. But, we tell students (and learned ourselves) that it is worse to misrepresent a relationship that does not objectively exist than it is to fail to detect a relationship that actually does exist.
 
@@ -219,7 +220,7 @@ Data %>%
 
 Random measurement error in the dependent variable will not really bias the regression coefficients. The intercept will want to travel in the direction of the random measurement error in `y`, which isn't too surprising when you internalize that the intercept is the estimate of *y* when all covariates are set to zero. However, the regression coefficients for `x1` and `x2` don't materially move much. They just get noisier. Random measurement error in an independent variable will push its coefficient to zero. Random measurement error in the dependent variable will extend out the standard errors for the independent variables.
 
-```{r random-measurement-error-y, echo=F, eval=T, cache=T, warning=F, fig.width=12, fig.height = 8}
+```{r random-measurement-error-y, echo=F, eval=T, cache=T, warning=F, fig.width=13, fig.height = 8}
 
 Ymods %>%
   mutate(term = ifelse(grepl("ynv", term), "y", term)) %>%
@@ -237,13 +238,11 @@ Ymods %>%
   labs(x = "Every 10th Observation of y is Recoded to This Value",
        y = "Coefficient (with 95% Intervals)",
        title = "The Effect of Random Measurement Error in y",
-       subtitle = "Increasing random measurement error in y amounts trying to systematically model noise. There is little in the way of bias, plenty in the way of variance.",
+       subtitle = "Increasing random measurement error in y means a regression will try to systematically model noise. There is little in the way of bias, but plenty in the way of variance.",
        caption = "Shaded area communicates 95% Intervals from OLS with no measurement error.")
-
-
 ```
 
-Comparing the R-squared values will illustrate what's happening here. Random measurement error, whether in an independent variable or a dependent variable, decreases R-squared. This has implications for the standard error since R-squared appears in the numerator of [the standard error of the slope](http://seismo.berkeley.edu/~kirchner/eps_120/Toolkits/Toolkit_10.pdf). Standard errors increase as R-square increases.
+Comparing the R-squared values will illustrate what's happening here. Random measurement error, whether in an independent variable or a dependent variable, decreases R-squared. The model does not fit the data well because the data are noise.
 
 ```{r random-measurement-error-y-rsq, echo=F, eval=T, cache=T, warning=F, fig.width=12, fig.height = 8}
 Ymods %>% 
@@ -267,7 +266,7 @@ Ymods %>%
 I should think soon about extending this framework to explore systematic measurement error and bias in this setup. Already, [my post on instrumental variables](http://svmiller.com/blog/2019/09/instrumental-variables-2sls/) does this. However, I wanted something on my website that at least unpacks random measurement error as well.
 
 ```{r knitchunk, echo=F, eval=F}
-setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("2020-02-08-random-measurement-error.Rmd",
-            output = "../_posts/2020-02-08-random-measurement-error.md")
+#setwd("~/Dropbox/svmiller.github.io/_source")
+knitr::knit("_source/2020-02-08-random-measurement-error.Rmd",
+            output = "_posts/2020-02-08-random-measurement-error.md")
 ```
