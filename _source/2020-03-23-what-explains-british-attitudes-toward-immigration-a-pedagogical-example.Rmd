@@ -550,7 +550,7 @@ M2 <- lm(immigsent ~ z_agea + female + z_eduyrs + uempla + z_hinctnta  + z_lrsca
 
 The results from the regression does offer some preliminary evidence that the years of education variable has the strongest magnitude effect. It is also the most precise. On a common scale, the absolute value of the effects of ideology and household income look comparable as well whereas that may not have been obvious in the unstandardized model.
 
-<center>
+<div id="stargazer">
 ```{r, echo=F, eval=T, message=F, results="asis"}
 ESS9GB %>%
   mutate(agea = r2sd(agea),
@@ -571,7 +571,7 @@ stargazer(M1, M2, type="html",
           omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"),
           dep.var.caption  = "<em>Pro-Immigration Sentiment</em>")
 ```
-<br /></center>
+<br /></div>
 
 Further, as another word of caution, more asterisks do not mean more "significance." Greater levels of statistical significance (i.e. more "stars") suggest only more precise estimates, not bigger or "more important" effects. Significance is an assessment only of precision and discernibility from some other counterclaim (of zero in the regression context).
 

@@ -562,7 +562,7 @@ M2 <- lm(immigsent ~ z_agea + female + z_eduyrs + uempla + z_hinctnta  + z_lrsca
 
 The results from the regression does offer some preliminary evidence that the years of education variable has the strongest magnitude effect. It is also the most precise. On a common scale, the absolute value of the effects of ideology and household income look comparable as well whereas that may not have been obvious in the unstandardized model.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom</strong></caption>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Pro-Immigration Sentiment</em></td></tr>
@@ -594,7 +594,7 @@ The results from the regression does offer some preliminary evidence that the ye
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td colspan="2" style="text-align:right"><small>Data: ESS, Round 9 (United Kingdom).</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 Further, as another word of caution, more asterisks do not mean more "significance." Greater levels of statistical significance (i.e. more "stars") suggest only more precise estimates, not bigger or "more important" effects. Significance is an assessment only of precision and discernibility from some other counterclaim (of zero in the regression context).
 
