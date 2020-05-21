@@ -396,7 +396,7 @@ M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data
 summary(M1)
 ```
 
-<center>
+<div id="stargazer">
 ```{r, echo=F, eval=T, results="asis"}
 M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
 
@@ -407,7 +407,7 @@ stargazer(M1, type="html",
           dep.var.labels="Pro-Immigration Sentiment",
           omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
 ```
-<br /></center>
+<br /></div>
 
 Here I'm inclined to parrot what I noted in [my guide from six years ago](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/). The tl;dr (if you will) for students looking at a regression table is to take inventory of three things.
 

@@ -76,7 +76,7 @@ M1 <- glm(votetrump ~ age + female + collegeed + famincr +
 
 Here is a simple summary of that result by way of the `stargazer` package. This is the kind of regression table a novice researcher would create and present to the reader of a manuscript.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>Modeling the Trump Vote in the Midwest (CCES, 2016)</strong></caption>
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
@@ -116,7 +116,7 @@ Here is a simple summary of that result by way of the `stargazer` package. This 
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td style="text-align:right"><small>Sample: white respondents in the CCES (2016) residing in IN, MI, OH, PA, and WI.</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 The takeaways here aren't terribly novel or surprising. Everything is in the expected direction and most everything is significant. The only null effects are for whether the respondent is a woman and the household income variable. Informally, we don't observe a statistically discernible difference between white men and white women in these five Midwestern states in their proclivity to have voted for Donald Trump, all else equal. Likewise, we see no discernible effect of increasing income as well. Generally speaking, and hewing the language to the covariates in the model: older white people were more likely than younger white people to say they voted for Donald Trump in these five Midwestern states. Those without a college diploma were more likely to vote for him than those with a college diploma. Those whose self-reported ideology is closer to conservative than liberal were more likely to have voted for him (duh) as were those whose political affinities gravitate toward the GOP relative to the Democratic party (again, duh). Being a born-again Christian raises the natural logged odds of voting for Donald Trump by .342 (also, duh). Increasing levels of cognitive racism and empathetic racism also raise the natural logged odds of a respondent saying they voted for Donald Trump.
 

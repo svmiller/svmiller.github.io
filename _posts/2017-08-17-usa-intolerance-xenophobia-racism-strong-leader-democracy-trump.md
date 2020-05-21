@@ -67,7 +67,7 @@ The three regressions I summarize in Table 1 all suggest a positive effect of wh
 
 Interestingly, the only other effect that is positive and robust across all three models is the education variable. Those with a high school education or less were more likely to want a strong leader or the army to rule the government. They were also more likely to oppose democracy as a political system for the United States. 
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>The Effect of White Outgroup Intolerance on Support for Democracy (White Americans, WVS)</strong></caption>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="3"><em>Dependent variable:</em></td></tr>
@@ -114,7 +114,7 @@ Interestingly, the only other effect that is positive and robust across all thre
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="3" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td colspan="3" style="text-align:right"><small>Models include random effects for Census region, year, and Census-years.</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 I next offer some quantities of interest to illustrate the effect that outgroup intolerance has on white Republican men in their attitudes toward democracy in these models. I take draws from a multivariate normal distribution of the model and isolate values for white, employed Republican men of average age and ideology. The outgroup intolerance measure and education variable are all that change in simulating these model outcomes.
 

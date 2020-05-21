@@ -156,7 +156,7 @@ M2 <- glm(votetrump ~ z_age + female + collegeed + z_famincr +
 
 Here's a table that directly compares the coefficients when they're standardized to when they're not standardized.
 
-<center>
+<div id="stargazer">
 ```{r second-stargazer-table, echo=F, results="asis"}
 Data %>%
     mutate_at(vars("age", "famincr","pid7na","ideo","lcograc","lemprac"),
@@ -182,7 +182,7 @@ stargazer(M1, Mod,  type="html",
           notes="<small>Sample: white respondents in the CCES (2016) residing in IN, MI, OH, PA, and WI.</small>",
            omit.stat=c("aic","ll","bic"))
 ```
-<br /></center>
+<br /></div>
 
 Standardizing the coefficients will offer preliminary evidence that partisanship is the largest predictor of voting for Donald Trump in this sample. The second largest effect might indeed be that cognitive racism variable, which might have a stronger effect than the respondent's reported ideology. The constant becomes more meaningful too. This "typical white male" has an estimated natural logged odds of voting for Donald Trump of -.230. This is a predicted probability of about .442, far more plausible than the probability of .002 for the implausible person first described above.
 

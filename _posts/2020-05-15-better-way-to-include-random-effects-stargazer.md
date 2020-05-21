@@ -132,12 +132,12 @@ stargazer(M1, M2, M2, type="html",
 
 ```
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="3"><em>Dependent variable:</em></td></tr>
 <tr><td></td><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
 <tr><td style="text-align:left"></td><td colspan="3">Pro-Immigration Sentiment</td></tr>
-<tr><td style="text-align:left"></td><td>OLS</td><td>Linear Mixed Effects&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Linear Mixed Effects<br />(Bayesian)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td style="text-align:left"></td><td>OLS</td><td>Linear Mixed Effects</td><td>Linear Mixed Effects<br />(Bayesian)</td></tr>
 <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td></tr>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Age</td><td>-0.068</td><td>-0.103</td><td>-0.021</td></tr>
 <tr><td style="text-align:left"></td><td>(0.372)</td><td>(0.372)</td><td>(0.373)</td></tr>
@@ -168,7 +168,7 @@ stargazer(M1, M2, M2, type="html",
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="3" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td colspan="3" style="text-align:right"><small>Data: ESS, Round 9 (United Kingdom)</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 This approach is flexible to your own needs and particular set of models, but I want to highlight these important components. First, notice that Model 3 in the presentation was actually called as Model 2. Minimally, the function is `stargazer(M1, M2, M2)` because Model 3 (`M3`) is of class `blmerMod`. The overlap between `blmerMod` for Model 3 and `lmerMod` for Model 2 is obviously substantial, but `stargazer` will only process the latter and not the former. Thus, technically, Model 3 in the table was actually called as Model 2 again.
 

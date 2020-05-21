@@ -381,7 +381,7 @@ M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data
 summary(M1)
 ```
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom</strong></caption>
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
@@ -412,7 +412,7 @@ summary(M1)
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td style="text-align:right"><small>Data: ESS, Round 9 (United Kingdom)</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 Here I'm inclined to parrot what I noted in [my guide from six years ago](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/). The tl;dr (if you will) for students looking at a regression table is to take inventory of three things.
 

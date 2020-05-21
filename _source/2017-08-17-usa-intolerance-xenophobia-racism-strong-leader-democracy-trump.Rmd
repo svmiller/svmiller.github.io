@@ -402,7 +402,7 @@ The three regressions I summarize in Table 1 all suggest a positive effect of wh
 
 Interestingly, the only other effect that is positive and robust across all three models is the education variable. Those with a high school education or less were more likely to want a strong leader or the army to rule the government. They were also more likely to oppose democracy as a political system for the United States. 
 
-<center>
+<div id="stargazer">
 ```{r, echo=F, eval=T, results="asis", cache=T}
 
 M1 <- glmer(sldummy ~ z_age + I(z_age^2) + female +
@@ -442,7 +442,7 @@ stargazer(M1, M2, M3, type="html",
            omit.stat=c("aic","ll","bic"), omit="Constant",
           dep.var.labels=c("Strong Leader", "Army Rule", "Opposition to Democracy"))
 ```
-<br /></center>
+<br /></div>
 
 I next offer some quantities of interest to illustrate the effect that outgroup intolerance has on white Republican men in their attitudes toward democracy in these models. I take draws from a multivariate normal distribution of the model and isolate values for white, employed Republican men of average age and ideology. The outgroup intolerance measure and education variable are all that change in simulating these model outcomes.
 

@@ -191,7 +191,7 @@ stargazer(M1, M2, M2, type="html",
 
 ```
 
-<center>
+<div id="stargazer">
 ```{r, echo=F, eval=T, results="asis"}
 stargazer(M1, M2, M2, type="html",
           omit.table.layout = "s",
@@ -202,11 +202,11 @@ stargazer(M1, M2, M2, type="html",
           notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
           dep.var.labels="Pro-Immigration Sentiment",
           model.names = FALSE,
-          column.labels = c("OLS", "Linear Mixed Effects&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", "Linear Mixed Effects<br />(Bayesian)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+          column.labels = c("OLS", "Linear Mixed Effects", "Linear Mixed Effects<br />(Bayesian)")
           )
 
 ```
-<br /></center>
+<br /></div>
 
 This approach is flexible to your own needs and particular set of models, but I want to highlight these important components. First, notice that Model 3 in the presentation was actually called as Model 2. Minimally, the function is `stargazer(M1, M2, M2)` because Model 3 (`M3`) is of class `blmerMod`. The overlap between `blmerMod` for Model 3 and `lmerMod` for Model 2 is obviously substantial, but `stargazer` will only process the latter and not the former. Thus, technically, Model 3 in the table was actually called as Model 2 again.
 
