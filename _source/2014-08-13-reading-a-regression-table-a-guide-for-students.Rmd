@@ -90,7 +90,7 @@ summary(M1 <- glm(vote ~ age + female + education + income,
 
 A polished result would resemble this table, though this particular rendering requires the `stargazer` package in R.
 
-<center>
+<div id="stargazer">
 ```{r, echo=F, eval=T, results="asis"}
 stargazer(M1, type="html",
           covariate.labels = c("Age","Female","Education","Income","Constant"),
@@ -99,7 +99,7 @@ stargazer(M1, type="html",
           dep.var.labels="Is Respondent a Voter?",
           omit.stat = c("aic","ll"))
 ```
-<br /></center>
+<br /></div>
 
 <!--{% include image.html url="/images/voteincome-table.png" caption="A regression table" align="right" width=198 %} -->
 
@@ -160,7 +160,7 @@ None of the four independent variables in the regression share a common scale so
 
 Prior to post-estimation simulation, one way around this is [standardization, especially by two standard deviations instead of one][9]. Dividing by two standard deviations allows continuous predictors to be roughly similar in scale to binary variables. When we do this (with the `arm` package in R), the effect of `female` doesn't seem so large relative to the other predictors.
 
-<center>
+<div id="stargazer">
 ```{r, echo=F, eval=T, message=F, results="asis"}
 library(arm)
 age <- arm::rescale(voteincome$age)
@@ -180,7 +180,7 @@ stargazer(M1, M2, type="html",
           omit.stat = c("aic","ll"),
           dep.var.caption  = "<em>Is Respondent a Voter?</em>")
 ```
-<br /></center>
+<br /></div>
 
 <!--```r
 > M2 <- glm(vote ~ z.age + female + z.education + z.income, data=voteincome, family=binomial(link="logit"))

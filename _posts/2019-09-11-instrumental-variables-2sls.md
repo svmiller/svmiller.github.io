@@ -61,7 +61,7 @@ Data = t(X) %>% as.data.frame() %>% tbl_df()
 
 The actual correlation matrix of the simulated data corresponds well enough with the specified correlation matrix.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>A Correlation Matrix of the Data</strong></caption>
 <tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td>Control</td><td>Treatment</td><td>Instrument</td><td>e</td></tr>
@@ -70,7 +70,7 @@ The actual correlation matrix of the simulated data corresponds well enough with
 <tr><td style="text-align:left">Instrument</td><td>0.016</td><td>0.854</td><td>1</td><td>-0.011</td></tr>
 <tr><td style="text-align:left">e</td><td>0.003</td><td>-0.502</td><td>-0.011</td><td>1</td></tr>
 <tr><td colspan="5" style="border-bottom: 1px solid black"></td></tr></table>
-<br /></center>
+<br /></div>
 
 Let's further assume that there is some outcome `y` that is a linear function of some slope-intercept (or "constant") + `control`, `treat`, and the error term `e`. Such that:
 
@@ -81,7 +81,7 @@ Data$y <- with(Data, 5 + 1*control + 1*treat + e)
 
 In other words, the true underlying effect of `control` and `treat` on the outcome `y` is 1 and the estimated value of `y` when all other parameters are at 0 is 5. A simple ordinary least squares model (i.e. `M1 <- lm(y ~ control + treat, data=Data)`) would produce the following results.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>A Simple OLS Model Where the Treatment is Correlated With the Errors</strong></caption>
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
@@ -101,7 +101,7 @@ In other words, the true underlying effect of `control` and `treat` on the outco
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td style="text-align:right"></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 Notice the effect of the treatment variable is biased downward because of its negative correlation with the error term `e`. The true relationship is 1 but the coefficient is nowhere near it and 95% confidence intervals around the coefficient won't be anywhere close to 1 either.
 
@@ -125,12 +125,12 @@ SSM <- lm(y  ~ control + treat_hat, data=Data)
 
 The following table will show the results of all three analyses. 
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>A Comparison of OLS and Two-Stage Least Squares (2SLS) Regression</strong></caption>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="3"><em>Model</em></td></tr>
 <tr><td></td><td colspan="3" style="border-bottom: 1px solid black"></td></tr>
-<tr><td style="text-align:left"></td><td>OLS (Endogenous Treatment)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>First-Stage Model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Second-Stage Model</td></tr>
+<tr><td style="text-align:left"></td><td>OLS (Endogenous Treatment)</td><td>First-Stage Model</td><td>Second-Stage Model</td></tr>
 <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td></tr>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Control</td><td>1.012<sup>***</sup></td><td>0.006</td><td>1.003<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.027)</td><td>(0.017)</td><td>(0.016)</td></tr>
@@ -152,7 +152,7 @@ The following table will show the results of all three analyses.
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="3" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td colspan="3" style="text-align:right"></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 The first model is the OLS model that showed a clear downward bias in the coefficient size for the treatment when the treatment is correlated with the error term. The true effect of the treatment on the response variable `y` is 1 but the OLS coefficient for the treatment is only .511. The first-stage model attempts to remove the variation in the treatment that is correlated with the error term by regressing the treatment variable on the control variable and the instrumental variable that is correlated with the treatment but not the error term. This results in fitted values for the treatment (`treat_hat`) that are substituted for the endogenous treatment variable in the second-stage model. This second-stage model is identical in form to the OLS model, but only with a treatment variable where the sources of endogeneity have been stripped from the variable. The coefficient for this fitted treatment variable approaches 1, which is what the true effect is from the data-generating process.
 

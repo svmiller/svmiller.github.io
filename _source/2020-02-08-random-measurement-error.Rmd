@@ -89,7 +89,7 @@ Data$y <- with(Data, 1 + 1*x1 + 1*x2 + e)
 
 Here is a simple OLS model regressing `y` on `x1` and `x2` (along with some other regressions looking at just `x1` and `x2`). The coefficients that emerge from the OLS model are in orbit what the true population effects are. However, it is worth noting the effect of `x1` is more than two standard errors from the true population effect. The difference is not huge or necessarily immediately noticeable, but it's worth mentioning.
 
-<center>
+<div id="stargazer">
 ```{r, echo=F, eval=T, results="asis"}
 M1 <- lm(y ~ x1, data=Data)
 M2 <- lm(y ~ x2, data=Data)
@@ -102,7 +102,7 @@ stargazer(M1, M2, M3, type="html",
           column.labels  = c("Just x1", "Just x2", "Full Model"),
           omit.stat = c("aic","ll", "rsq","f","ser"))
 ```
-<br /></center>
+<br /></div>
 
 ### Random Measurement Error in X
 

@@ -126,7 +126,7 @@ summary(M1 <- glm(vote ~ age + female + education + income,
 
 A polished result would resemble this table, though this particular rendering requires the `stargazer` package in R.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>Explaining Registered Voters in 2000 (Arkansas, South Carolina)</strong></caption>
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td><em>Dependent variable:</em></td></tr>
@@ -151,7 +151,7 @@ A polished result would resemble this table, though this particular rendering re
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td style="text-align:right"><small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 <!--{% include image.html url="/images/voteincome-table.png" caption="A regression table" align="right" width=198 %} -->
 
@@ -212,7 +212,7 @@ None of the four independent variables in the regression share a common scale so
 
 Prior to post-estimation simulation, one way around this is [standardization, especially by two standard deviations instead of one][9]. Dividing by two standard deviations allows continuous predictors to be roughly similar in scale to binary variables. When we do this (with the `arm` package in R), the effect of `female` doesn't seem so large relative to the other predictors.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>Explaining Registered Voters in 2000 (Arkansas, South Carolina)</strong></caption>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Is Respondent a Voter?</em></td></tr>
@@ -238,7 +238,7 @@ Prior to post-estimation simulation, one way around this is [standardization, es
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td colspan="2" style="text-align:right"><small>Data come from <code>voteincome</code> data in <code>Zelig</code> package.</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 <!--```r
 > M2 <- glm(vote ~ z.age + female + z.education + z.income, data=voteincome, family=binomial(link="logit"))

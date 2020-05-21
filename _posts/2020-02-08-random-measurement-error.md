@@ -66,7 +66,7 @@ Data$y <- with(Data, 1 + 1*x1 + 1*x2 + e)
 
 Here is a simple OLS model regressing `y` on `x1` and `x2` (along with some other regressions looking at just `x1` and `x2`). The coefficients that emerge from the OLS model are in orbit what the true population effects are. However, it is worth noting the effect of `x1` is more than two standard errors from the true population effect. The difference is not huge or necessarily immediately noticeable, but it's worth mentioning.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>A Simple OLS Model</strong></caption>
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="3"><em>Dependent variable:</em></td></tr>
@@ -88,7 +88,7 @@ Here is a simple OLS model regressing `y` on `x1` and `x2` (along with some othe
 <tr><td colspan="4" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="3" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td colspan="3" style="text-align:right"></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 ### Random Measurement Error in X
 
