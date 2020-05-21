@@ -155,7 +155,7 @@ M2 <- glm(votetrump ~ z_age + female + collegeed + z_famincr +
 
 Here's a table that directly compares the coefficients when they're standardized to when they're not standardized.
 
-<center>
+<div id="stargazer">
 
 <table style="text-align:center"><caption><strong>Modeling the Trump Vote in the Midwest (CCES, 2016)</strong></caption>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Did Respondent Vote for Trump?</em></td></tr>
@@ -196,7 +196,7 @@ Here's a table that directly compares the coefficients when they're standardized
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
 <tr><td style="text-align:left"></td><td colspan="2" style="text-align:right"><small>Sample: white respondents in the CCES (2016) residing in IN, MI, OH, PA, and WI.</small></td></tr>
 </table>
-<br /></center>
+<br /></div>
 
 Standardizing the coefficients will offer preliminary evidence that partisanship is the largest predictor of voting for Donald Trump in this sample. The second largest effect might indeed be that cognitive racism variable, which might have a stronger effect than the respondent's reported ideology. The constant becomes more meaningful too. This "typical white male" has an estimated natural logged odds of voting for Donald Trump of -.230. This is a predicted probability of about .442, far more plausible than the probability of .002 for the implausible person first described above.
 
