@@ -344,6 +344,7 @@ SimM2 %>%
   theme_steve_web() + post_bg() +
   scale_color_manual(values = c("#377EB8", "#E41A1C")) +
   geom_pointrange(size=.8) +
+  scale_y_continuous(limits = c(0, 1)) +
   labs(color = "", shape = "",
        x = "Level of Partisanship", y = "Expected Probability of Voting for Donald Trump (with 95% Intervals)",
        title = "The Effect of Cognitive Racism on the Likelihood of Voting for Donald Trump in 2016, by Partisanship",

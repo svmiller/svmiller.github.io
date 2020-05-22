@@ -482,19 +482,19 @@ SimM2
 ```
 
 ```
-## # A tibble: 14,000 x 4
-##          y   sim pid7na pidcat                 
-##      <dbl> <dbl>  <int> <fct>                  
-##  1 -2.53       1      1 Strong Democrat        
-##  2 -1.74       1      2 Not a Strong Democrat  
-##  3 -0.951      1      3 Ind., Lean Democrat    
-##  4 -0.161      1      4 Independent            
-##  5  0.630      1      5 Ind., Lean Republican  
-##  6  1.42       1      6 Not a Strong Republican
-##  7  2.21       1      7 Strong Republican      
-##  8 -0.843      1      1 Strong Democrat        
-##  9 -0.0524     1      2 Not a Strong Democrat  
-## 10  0.738      1      3 Ind., Lean Democrat    
+## # A tibble: 14,000 x 6
+##         y   sim z_pid7na z_lcograc pid7na pidcat                 
+##     <dbl> <dbl>    <dbl>     <dbl>  <int> <fct>                  
+##  1 0.0736     1  -0.679          0      1 Strong Democrat        
+##  2 0.149      1  -0.444          0      2 Not a Strong Democrat  
+##  3 0.279      1  -0.209          0      3 Ind., Lean Democrat    
+##  4 0.460      1   0.0254         0      4 Independent            
+##  5 0.653      1   0.260          0      5 Ind., Lean Republican  
+##  6 0.806      1   0.495          0      6 Not a Strong Republican
+##  7 0.901      1   0.730          0      7 Strong Republican      
+##  8 0.301      1  -0.679          1      1 Strong Democrat        
+##  9 0.487      1  -0.444          1      2 Not a Strong Democrat  
+## 10 0.677      1  -0.209          1      3 Ind., Lean Democrat    
 ## # … with 13,990 more rows
 ```
 
@@ -514,6 +514,7 @@ SimM2 %>%
   theme_steve_web() + post_bg() +
   scale_color_manual(values = c("#377EB8", "#E41A1C")) +
   geom_pointrange(size=.8) +
+  scale_y_continuous(limits = c(0, 1)) +
   labs(color = "", shape = "",
        x = "Level of Partisanship", y = "Expected Probability of Voting for Donald Trump (with 95% Intervals)",
        title = "The Effect of Cognitive Racism on the Likelihood of Voting for Donald Trump in 2016, by Partisanship",
@@ -521,9 +522,7 @@ SimM2 %>%
        caption = "Data: CCES, 2016. Sample: white respondents residing in IN, MI, OH, PA, and WI.")
 ```
 
-```
-## Error in ifelse(z_lcograc == 0, "Average Cognitive Racism", "Two S.D. Increase in Cognitive Racism"): object 'z_lcograc' not found
-```
+![plot of chunk expected-probability-voting-trump-2016-midwest-racism-partisanship](/images/expected-probability-voting-trump-2016-midwest-racism-partisanship-1.png)
 
 The substantive takeaway a graph like this communicates would square well with [my 2017 analysis](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/). Namely, racism's effect on the vote choice in 2016 seems to be asymmetric. Increasing levels of racism saw Democrats start to break for Donald Trump, which we see again in this sample of white respondents in five Midwestern states. However, decreasing levels of cognitive racism (the mean, in this application) did not break Republicans for Hillary Clinton (or some other candidate). Namely, Republicans seem to be more steadfast in their partisanship than Democrats and perhaps it looks like it was Donald Trump's racial appeals that were enough to get Democrats to start switching their votes. Given the margin of the vote in some of these states, ignoring [voter suppression in Wisconsin](https://www.motherjones.com/politics/2017/10/voter-suppression-wisconsin-election-2016/) for the moment, that could have been the difference. 
 
