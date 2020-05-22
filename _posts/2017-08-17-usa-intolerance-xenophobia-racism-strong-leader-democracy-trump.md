@@ -10,6 +10,18 @@ excerpt: "World Values Survey data suggest outgroup intolerance and bigotry in t
 image: "charlottesville-white-pride-rally.jpg"
 ---
 
+<dl id="" class="wp-caption aligncenter" style="max-width:100%; text-align: left; padding-top: 8px">
+
+<dt><span style="font-weight:bold; font-size: 1em; padding-left: 8px">This blog post is now a peer-reviewed paper. ⤵️</span></dt>
+
+<dd style = "padding-bottom: 8px">I thank <a href="https://www.nicholastdavis.com/">Nicholas T. Davis</a> for joining this project via open call on Twitter. Together, we published this in <em>Journal of Race, Ethnicity, and Politics</em>. The analysis here is 95% the same; I think I changed how I handled NAs in the emancipative values variable. That's it. The framing changed as reviewers ultimately wanted it more about the more immediately measurable concept of "prejudice" rather than antecedent conditions like "intolerance." It's big case of six-of-one for the substantive takeaways.</dd> 
+
+<dt><span style="font-weight:bold; font-size: 1em; padding-left: 8px">Suggested Citation:️</span></dt>
+<dd style = "padding-bottom: 8px">
+Miller, Steven V. and Nicholas T. Davis. 2020. "<a href="http://svmiller.com/research/white-social-prejudice-support-american-democracy/">The Effect of White Social Prejudice on Support for American Democracy</a>." <em>Journal of Race, Ethnicity, and Politics.</em>
+</dd>
+</dl>
+
 
 {% include image.html url="/images/charlottesville-white-pride-rally.jpg" caption="A man marching with white nationalists makes a slashing motion across his throat toward counter-protester in Charlottesville's white pride rally. (Chip Somodevilla/Getty Images)" width=400 align="right" %}
 
