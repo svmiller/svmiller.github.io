@@ -8,7 +8,7 @@ knit: (function(inputFile, encoding) {
    rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-05-27'
-excerpt: "A brief aside on what I normally do to discuss what made Jackie Cox's lip-sync against Widow Von'Du so great."
+excerpt: "A brief aside from what I normally do to discuss what made Jackie Cox's lip-sync against Widow Von'Du so great."
 layout: post
 categories:
   - RuPaul's Drag Race
