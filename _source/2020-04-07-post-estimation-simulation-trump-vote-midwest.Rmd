@@ -363,4 +363,4 @@ At the very least, it's a story you can tell by doing some post-estimation simul
 knitr::knit("_source/2020-04-07-post-estimation-simulation-trump-vote-midwest.Rmd",
             output = "_posts/2020-04-07-post-estimation-simulation-trump-vote-midwest.md")
 
-  ```
+```
