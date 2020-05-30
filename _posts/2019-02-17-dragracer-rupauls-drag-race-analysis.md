@@ -43,7 +43,7 @@ Here's a table of contents for this post, especially if you want to jump past th
     - [Which Contestants Were "Robbed" in Their Season?](#robbed)
     - [A Simple Item Response Model for Ranking All Contestants](#simpleirt)
 3. [Conclusion: As 🔥 Takes](#conclusion)
-    - [Season 10 🔥 Takes](#season10takes)
+    - [Assorted Season 1-10 🔥 Takes](#season10takes)
     - [Season 11 🔥 Takes](#season11takes)
     - [Season 12 🔥 Takes](#season12takes)
 
@@ -772,7 +772,7 @@ BenDeLaCreme and Katya are the only contestants without top four finishes on thi
 
 I don't have much to conclude, but I do have a few #takes that I'll offer as heaters here.
 
-### Season 10 🔥 Takes {#season10takes}
+### Assorted Season 1-10 🔥 Takes {#season10takes}
 
 - The scorecard is pretty clear Tyra Sanchez deserved to win Season 2, but I bet RuPaul wishes she could go back and do that one again.
 - Kameron Michaels should've won Season 10. Hey, I didn't say these takes were good, just that they were hot.[^kameronshouldawon]
