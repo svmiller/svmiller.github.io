@@ -53,9 +53,16 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 ## Book Chapters
 
+Gibler, Douglas M. and Steven V. Miller. Forthcoming. "The Territorial Peace." *What Do We Know About War?* (3rd ed.). Routledge.
+
 Miller, Steven V., Jaroslav Tir, and John A. Vasquez. 2020. "[Geography, Territory, and Conflict](https://oxfordre.com/internationalstudies/view/10.1093/acrefore/9780190846626.001.0001/acrefore-9780190846626-e-320)." *Oxford Research Encyclopedia of International Studies.* `doi:` [10.1093/acrefore/9780190846626.013.320](https://oxfordre.com/internationalstudies/view/10.1093/acrefore/9780190846626.001.0001/acrefore-9780190846626-e-320)
 
 ## Book Reviews
+
+Miller, Steven V. 2020. "[Power without Victory: Woodrow Wilson and the American Internationalist Experiment](https://www.tandfonline.com/doi/full/10.1080/07343469.2020.1761051)" *Congress & the Presidency*.
+
+- Review of Throntveit, Trygve. 2017. *Power without Victory: Woodrow Wilson and the American Internationalist Experiment*. Chicago, IL: University of Chicago Press.
+
 
 Miller, Steven V. 2019. "[National Identity and Territory in a World of Changing Scale](https://academic.oup.com/isr/advance-article-abstract/doi/10.1093/isr/viy051/5026359?redirectedFrom=fulltext)" *International Studies Review* 20(4): 728--730
 
