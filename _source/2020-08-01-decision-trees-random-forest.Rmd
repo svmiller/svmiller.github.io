@@ -198,7 +198,7 @@ You can graph it as well.
 plot(partykit::as.party(mDT))
 ```
 
-This is where some subject expertise is not only handy, but necessary in the machine learning context. The model output implies that the white vote for Donald Trump in the Midwest. is most easily predicted by just two things: partisanship and the respondent's attitudes about the structural advantages for white people relative to non-white people. Generally, echoing my previous analyses  on [the Trump vote in 2016 in the Midwest](http://svmiller.com/blog/2020/04/post-estimation-simulation-trump-vote-midwest/) and [nationwide](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/), the takeaway here seems to be that you only need two things to understand the Trump vote in the Midwest: partisanship and attitudes on race.
+This is where some subject expertise is not only handy, but necessary in the machine learning context. The model output implies that the white vote for Donald Trump in the Midwest is most easily predicted by just two things: partisanship and the respondent's attitudes about the structural advantages for white people relative to non-white people. Generally, echoing my previous analyses  on [the Trump vote in 2016 in the Midwest](http://svmiller.com/blog/2020/04/post-estimation-simulation-trump-vote-midwest/) and [nationwide](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/), the takeaway here seems to be that you only need two things to understand the Trump vote in the Midwest: partisanship and attitudes on race.
 
 <!-- Observe that first split for partisanship (in the model output, not the graph), which punts (white, Midwestern) Democrats and leaners into one node and independents and Republicans/leaners to the other. Among the Democrats and Democratic leaners, those whose disagreed or strongly disagreed that white people have structural advantages relative to non-whites had a Trump vote rate of about 31.73%. Those who agreed (or at least did not disagree) with the prompt had a Trump vote rate of just about 6%. On the other side of the tree, for Republicans and Republican leaners, those who agreed or strongly agreed with the prompt of white structural advantages had a Trump vote rate of 71.73%. Those who did not agree had a Trump vote rate of 92.43%. -->
 
@@ -430,7 +430,7 @@ TV16 %>%
 
 The following graph compares the predictive accuracy of the null model (green triangle), the decision tree (red circle), and the random forest (blue square) for predicting the Trump vote among white voters in states not included in the training data. Overall, training two models on white voters in some select Midwestern (i.e. Big Ten) states does comparably well in predicting the white Trump vote in out of state samples as it does on testing data in these same states. That is: the inputs that predict the white Trump vote in those states generally port well to other state contexts. There are three exceptions, though. First, Idaho and especially Utah stand out as having much lower predictive accuracy than every other state. The predictive accuracy of the decision tree model and the random forest model hover around the mid-to-high 80s (and even the low 90s in some states like South Carolina). However, the predictive accuracy in Idaho is in the low 80s and the predictive accuracy in Utah is low-to-mid 70s. Thinking of the Utah case, in particular, it suggests there are either 1) missing inputs, unique to these contexts, that could help explain what the model is missing relative to other contexts and/or 2) that features included in the training model might not have the same kind of effect in Utah as they have in almost every other context. Subject domain expertise of the political attitudes of white people in Idaho and Utah may help tailor a predictive model to explain those observations. Subject domain expertise will also caution that training on white Midwestern respondents to predict attitudes in Idaho and Utah is going to miss some important things.
 
-```{r accuracy-predictions-trump-vote-other-states-2016, echo=F, eval=T, cache=T, warning=F, fig.width=13, fig.height = 12}
+```{r accuracy-predictions-trump-vote-other-states-2016, echo=F, eval=T, cache=T, warning=F, fig.width=14, fig.height = 12}
 
 accuracyStates %>%
   # Can't decide if I want to facet by...
@@ -446,7 +446,7 @@ accuracyStates %>%
        shape = "",
        color = "",
        title = "A Comparison of Predictive Models of the White Trump Vote for Out of State Samples",
-       subtitle = "Random forests and decision trees almost always do better than the null model (except in DC) and the random forest slightly outperforms the decision tree almost every time.",
+       subtitle = "Random forests and decision trees almost always do better than the null model (except in DC) and the random forest slightly outperforms the decision tree in most states.",
        caption = "Data: CCES, 2016.")
  
 ```
