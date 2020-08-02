@@ -13,7 +13,6 @@ layout: post
 categories:
   - R
   - Political Science
-  - Teaching
 image: "not-so-random-trees.jpg"
 ---
   
@@ -294,7 +293,7 @@ To be clear, I offer this with some hesitation because I've seen no one do this 
 
 ## Assessing Model Performance {#assessingmodelperformance}
 
-There are a number of ways to assess model performance, but a modeler most interested in prediction will probably start with an assessment of the model's predictive accuracy. In the maching learning context, this is called a "confusion matrix." This is, to be polite, an unintuitive way of naming a procedure that looks at model predictions to determine how often they're correctly predicting the observed 0s and 1s, but that's what it really is. The "confusion matrix" is a 2x2 table that communicates 1) the observed 0s that were predicted to be 0 [correct], 2) the observed 0s that were predicted to be 1 [incorrect], 3) the observed 1s that were predicted to be 0 [also incorrect], and 4) the observed 1s that were predicted to be 1 [correct].
+There are a number of ways to assess model performance, but a modeler most interested in prediction will probably start with an assessment of the model's predictive accuracy. In the machine learning context, this is called a "confusion matrix." This is, to be polite, an unintuitive way of naming a procedure that looks at model predictions to determine how often they're correctly predicting the observed 0s and 1s, but that's what it really is. The "confusion matrix" is a 2x2 table that communicates 1) the observed 0s that were predicted to be 0 [correct], 2) the observed 0s that were predicted to be 1 [incorrect], 3) the observed 1s that were predicted to be 0 [also incorrect], and 4) the observed 1s that were predicted to be 1 [correct].
 
 So, let's do a series of these forms of model assessment. First, we'll calculate confusion matrices for the training data with predictions derived from the decision tree model and the random forest model. Then, we'll get predictions on the testing data of white, Midwestern respondents. These are observations that did not inform the decision tree model or random forest model and thus could be used for this kind of task. Thereafter, we'll go even further out of sample to assess how well our training data of white, Midwestern voters does in explaining the vote choice of white respondents in other states that did not comprise the sample.
 
