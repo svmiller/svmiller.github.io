@@ -11,6 +11,7 @@ date: '2020-08-15'
 excerpt: "Here is how you can make a ggplot calendar to add to your R Markdown syllabi."
 layout: post
 categories:
+  - R Markdown
   - R
 image: "ggplot-hex.png"
 ---

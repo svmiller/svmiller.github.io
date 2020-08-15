@@ -12,6 +12,7 @@ excerpt: "Here is how you can make a ggplot calendar to add to your R Markdown s
 layout: post
 categories:
   - R Markdown
+  - R
 image: "ggplot-hex.png"
 ---
   
