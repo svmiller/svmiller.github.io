@@ -123,7 +123,7 @@ Cal %>%
   labs(fill = "", x="", y="",
        title = "A Hypothetical Semester Calendar for Your Particular Class",
        subtitle = "Customize this to make it yours.",
-       caption = "Notable dates: Fall Break (Nov. 3... please vote), Thanskgiving Break (Nov. 23-27)")
+       caption = "Notable dates: Fall Break (Nov. 3... please vote), Thanksgiving Break (Nov. 23-27)")
 ```
 
 ![plot of chunk a-ggplot-calendar-example](/images/a-ggplot-calendar-example-1.png)
