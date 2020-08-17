@@ -128,7 +128,7 @@ Cal %>%
 
 ![plot of chunk a-ggplot-calendar-example](/images/a-ggplot-calendar-example-1.png)
 
-Make this code yours as you see fit, but I think your students may benefit from the including a semester calendar to help them internalize important dates. It's deceptively not a lot of code
+Make this code yours as you see fit, but I think your students may benefit from the including a semester calendar to help them internalize important dates. It's deceptively not a lot of code.
 
 
 
