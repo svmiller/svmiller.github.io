@@ -14,7 +14,7 @@ This page includes my teaching philosophy and an empirical assessment of my teac
 ## Teaching Documents
 
 - [Teaching Philosophy](/docs/svm-teaching-philosophy.pdf)
-- [An Empirical Assessment of My Teaching Effectiveness](/docs/svm-teaching-evals.pdf?dl=0)
+- [An Empirical Assessment of My Teaching Effectiveness](/docs/svm-teaching-evals.pdf)
 
 ## Course Directory
 
@@ -23,7 +23,7 @@ This page includes my teaching philosophy and an empirical assessment of my teac
 #### Undergraduate Classes
 
 - [POSC 1020](http://posc1020.svmiller.com) (Introduction to International Relations)
-- [POSC 3410](/teaching/posc-3410-quantitative-methods-in-political-science/) (Quantitative Methods in Political Science)
+- [POSC 3410](http://posc3410.svmiller.com) (Quantitative Methods in Political Science)
 - [POSC 3610](http://posc3610.svmiller.com) (International Conflict)
 - [POSC 3630](/teaching/posc-3630-united-states-foreign-policy/) (United States Foreign Policy)
 
