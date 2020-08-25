@@ -14,7 +14,7 @@ This page includes my teaching philosophy and an empirical assessment of my teac
 ## Teaching Documents
 
 - [Teaching Philosophy](/docs/svm-teaching-philosophy.pdf)
-- [An Empirical Assessment of My Teaching Effectiveness](/docs/svm-teaching-evals.pdf)
+- [An Empirical Assessment of My Teaching Effectiveness](/docs/svm-teaching-reflection.pdf)
 
 ## Course Directory
 
