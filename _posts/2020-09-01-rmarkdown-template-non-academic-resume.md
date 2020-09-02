@@ -1,5 +1,5 @@
 ---
-title: "An R Markdown Template for a Non Academic Résumé"
+title: "An R Markdown Template for a Non-Academic Résumé"
 output:
   md_document:
     variant: gfm
