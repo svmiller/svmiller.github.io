@@ -97,7 +97,7 @@ And here's a table of contents.
 3. [Different Summary Methods](#differentsummarymethods)
 4. [A Comparison of Population Means](#populationmeans)
 5. [A Comparison of Subpopulation (School Type) Means](#subpopmeans)
-6. [Recapturing Systemating Effects on API](#regression)
+6. [Recapturing Systematic Effects on API](#regression)
 7. [Conclusion](#conclusion)
 
 ## The Data {#data}
@@ -555,7 +555,7 @@ Notice the intervals are wider for middle school and high schools because there 
 
 One thing that stands out (to me, at least) is my bootstrapping approach almost perfectly mimics the results from a declared survey design. For stratified samples, a bootstrapping approach simply needed to resample (with replacement) while considering the sources of oversampling (i.e. middle schools and high schools). For the cluster sample, it was a matter of randomly selecting the clusters that were themselves randomly sampled and again resampling (with replacement) from that (often times smaller) sample while also considering potential oversampling. It is true that the bootstrapped intervals are a bit wider than the survey design intervals, but that's also a natural byproduct of bootstrapping. Namely, unless you're dealing with high-dimensional data with myriad complex clusters (in which case you may encounter some problems), a bootstrap gives more flexibility over how you summarize the data and can even easily extend into the regression context.
 
-## Recapturing Systemating Effects on API {#regression}
+## Recapturing Systematic Effects on API {#regression}
 
 How well do these methods capture the systematic effects of subsidized meal eligibility, fully qualified teachers, and college-educated parents on the school's API score? To this point, a comparison of methods has focused on just sample means. Here, we'll compare 1) linear models (naive approach), 2) survey GLMs, 3) regressions on bootstrapped data, and 4) a linear mixed effects model with random effects for school type and county. The code here is super convoluted, so I suppress it here and present just a visual summary of these regressions. Check the underlying code in the associated .Rmd file in [the `_source` directory for my blog](https://github.com/svmiller/svmiller.github.io/tree/master/_source).
 
