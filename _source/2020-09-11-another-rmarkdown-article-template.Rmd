@@ -108,7 +108,7 @@ Of particular note, though, are two fields. The first is `sansfont:`, which is a
 
 ```{r dont-sans-it-up, echo=F, eval=T, results="asis", cache=F}
  
-add_jekyll_image('/images/dont-sans-it-up.png', "What it looks like when you don't sans it up.", "859", "center")
+add_jekyll_image('/images/dont-sans-it-up.png', "What it looks like when you don't sans it up.", "664", "center")
  
 ```
 
@@ -118,7 +118,7 @@ If you do choose to "sans it up", the template will look like this. This kinda c
 
 ```{r sans-it-up, echo=F, eval=T, results="asis", cache=F}
  
-add_jekyll_image('/images/sans-it-up.png', "What it looks like when you decide to sans it up.", "869", "center")
+add_jekyll_image('/images/sans-it-up.png', "What it looks like when you decide to sans it up.", "652", "center")
  
 ```
 

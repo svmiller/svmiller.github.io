@@ -74,13 +74,13 @@ I want to highlight a few things about this particular version of the YAML vis-a
 
 Of particular note, though, are two fields. The first is `sansfont:`, which is a feature that comes with the use of `xelatex`. As a Linux user, I've noted that the sans serif of the libertine font family from the ACM template is basically [the Linux Biolinum O font](https://fonts2u.com/linux-biolinum-o.font) that I think we Linux users get by default. You may as well? No matter, it's [a free download](https://fonts2u.com/linux-biolinum-o.font)  and you may want to install it on your end. The second is `sansitup:`. By default, this is set to FALSE for generalizable functionality for different users who may or may not have this font. I treat Linux Biolinum O as my default sans serif font and call it intermittently as the default sans serif font. If you don't have this sans serif font, I think the default sans serif font looks kinda gaudy and I would not recommend using it. So, I give the user the choice to "sans (it) up" their document. If you don't want to "sans up" your document, the ensuing template will look kinda like this.
 
-{% include image.html url="/images/dont-sans-it-up.png" caption="What it looks like when you don't sans it up." width=859 align="center" %}
+{% include image.html url="/images/dont-sans-it-up.png" caption="What it looks like when you don't sans it up." width=664 align="center" %}
 
 <!-- ![](../../../../../../images/dont-sans-it-up.png#center) -->
 
 If you do choose to "sans it up", the template will look like this. This kinda captures the ACM template pretty well (I think). Because italicized sans serif doesn't look quite right, I make these subsections to be bold and the serif subsections called above to be italicized.
 
-{% include image.html url="/images/sans-it-up.png" caption="What it looks like when you decide to sans it up." width=869 align="center" %}
+{% include image.html url="/images/sans-it-up.png" caption="What it looks like when you decide to sans it up." width=652 align="center" %}
 
 <!-- ![](../../../../../../images/sans-it-up.png#center) -->
 
