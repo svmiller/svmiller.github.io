@@ -6,8 +6,14 @@ HIDEME
 /cache
 /docs/hidden
 /docs/job-materials
-docs/**/*.Rmd
 /rda
+
+# I don't need anyone to see these files
+# They're intermediate output or private info
+docs/**/*.Rmd
+.tex
+.log
+
 
 # ignore temp files w/ trailing ~
 *~
