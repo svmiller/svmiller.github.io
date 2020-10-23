@@ -7,6 +7,7 @@ HIDEME
 /docs/hidden
 /docs/job-materials
 docs/**/*.Rmd
+/rda
 
 # ignore temp files w/ trailing ~
 *~
@@ -16,3 +17,4 @@ docs/**/*.Rmd
 
 # don't ignore the .gitignore file
 !.gitignore
+.Rproj.user
