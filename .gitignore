@@ -6,6 +6,7 @@ HIDEME
 /cache
 /docs/hidden
 /docs/job-materials
+/docs/non-academic-jobs
 /rda
 
 # I don't need anyone to see these files
@@ -13,7 +14,8 @@ HIDEME
 docs/**/*.Rmd
 .tex
 .log
-
+.Rproj
+.Rproj.user
 
 # ignore temp files w/ trailing ~
 *~
@@ -23,4 +25,4 @@ docs/**/*.Rmd
 
 # don't ignore the .gitignore file
 !.gitignore
-.Rproj.user
+
