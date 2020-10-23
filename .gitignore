@@ -8,13 +8,14 @@ HIDEME
 /docs/job-materials
 /docs/non-academic-jobs
 /rda
+/figure
 
 # I don't need anyone to see these files
 # They're intermediate output or private info
 docs/**/*.Rmd
-.tex
-.log
-.Rproj
+docs/**/*.tex
+docs/**/*.log
+*.Rproj
 .Rproj.user
 
 # ignore temp files w/ trailing ~
