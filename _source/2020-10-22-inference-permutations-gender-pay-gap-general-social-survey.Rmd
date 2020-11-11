@@ -169,7 +169,16 @@ broom::tidy(t.test(y ~ group, data=Example)) %>%
 
 Notice the peculiar language of "by chance." The "by chance" language refers to what we know about sampling distributions from central limit theorem and what we know about a normal distribution, all things I riffed on [elsewhere on my blog](http://svmiller.com/blog/2020/03/normal-distribution-central-limit-theorem-inference/) (and have already mentioned by this point in a semester for the quantitative methods students). The inference here is fundamentally theoretical by reference to these foundation assumptions. One way of mimicking this is through permutation.
 
-Simply, permutation leans on the idea that it's possible that we could randomly shuffle the data in a myriad of ways and observe the sample statistic of interest (i.e. a *t*-test, a regression coefficient, a mean) as a plausible outcome. Shuffling the dependent variable seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `tidyverse` partisan, I'm drawn to `modelr`'s `permute()` function and will use it in the analyses below.
+Simply, permutation leans on the idea that it's possible that we could randomly shuffle the data in a myriad of ways and observe the sample statistic of interest (i.e. a *t*-test, a regression coefficient, a mean) as a plausible outcome. In the simple `Example` data I introduced above, the shuffling or "permuting" process would look something like this for just a few permutations. Notice the treatment/control variable is the same, but the outcomes are shuffled.
+
+```{r}
+Example %>%
+  mutate(y1 = sample(y), y2 = sample(y),
+         y3 = sample(y), y4 = sample(y),
+         y5 = sample(y), y6 = sample(y))
+```
+
+This process of permutation is repeatable for, in most applications, more permutations than the researcher would plausibly need or want. The more observations, the more plausible permutations in order to generate a null distribution to approximate hypothetical repeated sampling of the population. This process seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `tidyverse` partisan, I'm drawn to `modelr`'s `permute()` function and will use it in the analyses below.
 
 ## Permutation and Linear Regression {#permutationols}
 

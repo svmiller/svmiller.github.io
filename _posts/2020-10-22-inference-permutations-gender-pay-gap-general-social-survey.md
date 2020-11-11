@@ -35,7 +35,7 @@ img[src*='#center'] {
 
 I'm teaching [my quantitative methods class](http://posc3410.svmiller.com/) this semester for the first time in three and a half years, an exigency brought on by both a hiring/spending freeze and a faculty departure. The impromptu nature of teaching this class along with the COVID-19 fog that has consumed us all mean I'm basically teaching the same class, with just a few updates, that I last taught three and a half years ago. My quantitative skills have improved greatly since then, as have my computational skills. It's led me to think of ways I can improve what I teach should I have to teach it again soon.
 
-I stumbled across [this tweet](https://twitter.com/grant_mcdermott/status/1175576565863702528) from [Grant McDermott](https://t.co/IYuIHtwlXG?amp=1). It's from last year and I missed it entirely when he first posted it, but it appeared in my timeline again amid some other ongoing conversation. The link is to [a keynote speech](https://www.youtube.com/watch?v=5Dnw46eC-0o&feature=youtu.be) from [John Rauser](https://twitter.com/jrauser?lang=en). Rauser's main point in the keynote, echoed by McDermott, is that computational means to inference are more accessible and better illustrate the underlying point we try to teach students than doing something like calculating standard errors of sample means, calculating *t*-values or *z*-values, and finding the approximate area underneath a Student's *t*-distribution or normal distribution that corresponds with that score. McDermott's comment is that it's only for outdated pedagogy that we don't teach what computational power has made more practical and accessible. I'll stop short of saying that here. After all, bootstrapping was ultimately [Bradley Efron's (1979) answer](https://projecteuclid.org/euclid.aos/1176344552) to [his own question](https://www.youtube.com/watch?v=1aB8tW6LV8U) of what the jackknife was trying to approximate (i.e. a random sampling distribution better done via bootstrap). There is---at least I'm thinking right now---more value in understanding what things like bootstrapping and permutations are trying to approximate before showing how the computational implementations can provide nifty answers to the questions we may have. That said, there might be a missed opportunity that I'm not seeing yet, especially for instructors who teach quantitative methods by reference to smaller-*n* experiments or something like that.
+I stumbled across [this tweet](https://twitter.com/grant_mcdermott/status/1175576565863702528) from [Grant McDermott](https://t.co/IYuIHtwlXG?amp=1). It's from last year and I missed it entirely when he first posted it, but it appeared in my timeline again amid some other ongoing conversation. The link is to [a keynote speech](https://www.youtube.com/watch?v=5Dnw46eC-0o&feature=youtu.be) from [John Rauser](https://twitter.com/jrauser?lang=en).  Rauser's main point in the keynote, echoed by McDermott, is that computational means to inference are more accessible and better illustrate the underlying point we try to teach students than doing something like calculating standard errors of sample means, calculating *t*-values or *z*-values, and finding the approximate area underneath a Student's *t*-distribution or normal distribution that corresponds with that score. McDermott's comment is that it's only for outdated pedagogy that we don't teach what computational power has made more practical and accessible. I'll stop short of saying that here. After all, bootstrapping was ultimately [Bradley Efron's (1979) answer](https://projecteuclid.org/euclid.aos/1176344552) to [his own question](https://www.youtube.com/watch?v=1aB8tW6LV8U) of what the jackknife was trying to approximate (i.e. a random sampling distribution better done via bootstrap). There is---at least I'm thinking right now---more value in understanding what things like bootstrapping and permutations are trying to approximate before showing how the computational implementations can provide nifty answers to the questions we may have. That said, there might be a missed opportunity that I'm not seeing yet, especially for instructors who teach quantitative methods by reference to smaller-*n* experiments or something like that.
 
 There might be some value in getting students to think about computational means to inference and showing them how to do it. I already have [a blog post on how to bootstrap](http://svmiller.com/blog/2020/03/bootstrap-standard-errors-in-r/), so I'm going to use this post for showing how to do random permutations as a means to making some inferential statements.
 
@@ -167,7 +167,33 @@ broom::tidy(t.test(y ~ group, data=Example))
 
 Notice the peculiar language of "by chance." The "by chance" language refers to what we know about sampling distributions from central limit theorem and what we know about a normal distribution, all things I riffed on [elsewhere on my blog](http://svmiller.com/blog/2020/03/normal-distribution-central-limit-theorem-inference/) (and have already mentioned by this point in a semester for the quantitative methods students). The inference here is fundamentally theoretical by reference to these foundation assumptions. One way of mimicking this is through permutation.
 
-Simply, permutation leans on the idea that it's possible that we could randomly shuffle the data in a myriad of ways and observe the sample statistic of interest (i.e. a *t*-test, a regression coefficient, a mean) as a plausible outcome. Shuffling the dependent variable seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `tidyverse` partisan, I'm drawn to `modelr`'s `permute()` function and will use it in the analyses below.
+Simply, permutation leans on the idea that it's possible that we could randomly shuffle the data in a myriad of ways and observe the sample statistic of interest (i.e. a *t*-test, a regression coefficient, a mean) as a plausible outcome. In the simple `Example` data I introduced above, the shuffling or "permuting" process would look something like this for just a few permutations. Notice the treatment/control variable is the same, but the outcomes are shuffled.
+
+
+```r
+Example %>%
+  mutate(y1 = sample(y), y2 = sample(y),
+         y3 = sample(y), y4 = sample(y),
+         y5 = sample(y), y6 = sample(y))
+```
+
+```
+## # A tibble: 10 x 9
+##    group           e     y    y1    y2    y3    y4    y5    y6
+##    <chr>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+##  1 Treatment -0.0547  49.9  45.2  45.2  46.4  50.7  46.4  50.7
+##  2 Treatment  0.738   50.7  45.6  51.0  44.2  44.4  51.0  49.9
+##  3 Treatment  0.448   50.4  44.2  46.4  45.6  50.4  44.4  50.4
+##  4 Treatment  1.02    51.0  50.4  45.6  51.0  45.2  50.7  51.0
+##  5 Treatment -0.138   49.9  49.9  44.4  50.7  49.9  50.4  44.4
+##  6 Control    0.210   45.2  51.0  49.9  49.9  46.4  49.9  44.2
+##  7 Control   -0.643   44.4  44.4  50.7  45.2  49.9  45.6  45.2
+##  8 Control    1.39    46.4  49.9  50.4  50.4  45.6  45.2  49.9
+##  9 Control   -0.820   44.2  46.4  49.9  44.4  51.0  49.9  45.6
+## 10 Control    0.571   45.6  50.7  44.2  49.9  44.2  44.2  46.4
+```
+
+This process of permutation is repeatable for, in most applications, more permutations than the researcher would plausibly need or want. The more observations, the more plausible permutations in order to generate a null distribution to approximate hypothetical repeated sampling of the population. This process seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `tidyverse` partisan, I'm drawn to `modelr`'s `permute()` function and will use it in the analyses below.
 
 ## Permutation and Linear Regression {#permutationols}
 
