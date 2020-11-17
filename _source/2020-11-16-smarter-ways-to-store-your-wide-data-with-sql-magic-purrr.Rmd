@@ -1,0 +1,386 @@
+---
+title: "Clever Uses of Relational (SQL) Databases to Store Your Wider Data (with Some Assistance from dplyr and purrr)"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+knit: (function(inputFile, encoding) {
+   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
+author: "steve"
+date: '2020-11-17'
+excerpt: "Here's a guide on how to use relational databases (here: PostgreSQL) to store some popular survey data sets. Hat tip to dplyr and purrr in the tidyverse."
+layout: post
+categories:
+  - R
+image: "postgres.jpg"
+---
+
+```{r setup, include=FALSE, cache=F}
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- "images/"
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = '~/Dropbox/svmiller.github.io/cache/postgres-sqlite-wvs-gss/',
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE) 
+```
+
+```{r loaddatadostuff, echo=F, cache=F}
+library(tidyverse) # for all things workflow
+library(stevemisc) # my toy R package, via devtools::install_github("svmiller/stevemisc")
+library(stevedata) # my toy data package, via devtools::install_github("svmiller/stevedata")
+library(knitr) # for tables
+library(kableExtra) # for prettier tables
+
+wvspgcon <- DBI::dbConnect(RPostgres::Postgres(), dbname="wvs")
+gsspgcon <- DBI::dbConnect(RPostgres::Postgres(), dbname="gss")
+
+```
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+ 
+add_jekyll_image('/images/postgres.jpg', "Postgres is a pretty powerful relational database system.", "350", "right")
+ 
+```
+
+<style>
+img[src*='#center'] { 
+    display: block;
+    margin: auto;
+}
+</style>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+For some time, I've wrestled with how to elegantly store two data sets I use a great deal in my own research or navel-gazing. The first is the General Social Survey (GSS) and the second is the World Values Survey (WVS). The GSS contains 32 survey waves, done roughly every two years, spanning 1972 and 2018 in the United States. The temporal reach of the data are broadly useful for tracking trends in public opinion over time, but different questions come and go at different points in time. The data as I have it are not particularly long (64,814 rows), but they are *very* wide (6,108 columns). The data are well-annotated with variable labels too, which compounds how tedious it is to load and explore. The WVS (v. 1-6) is similarly gnarly to load. The data contains surveys of roughly 100 countries in 28 different years spanning 1981 and 2009. The data are mercifully more standardized across countries and waves than the GSS, but, at 348,532 rows and 1,445 columns, they too are tedious to load and explore. To this point, my experiences have suggested to say nuts to the native formats of these data and save them [as R serialized data frames](http://svmiller.com/blog/2019/01/how-should-you-store-load-bigger-data-sets-wvs/) or [serialize them with the `qs` package](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/).
+
+However, I've been wanting to dedicate more time to learning about relational databases and using them in my own workflow. My expertise with relational databases is mostly intermediate; I think I'm great with the rudimentary `SELECT * FROM data WHERE foo HAVING bar LIMIT 0,10;`. But, workflow around database systems feature more prominently in the private sector. Thus, a bit more SQL know-how is useful not only for students, but for me, [just in case](https://www.nature.com/articles/d41586-020-01518-y). Integrating SQL into my workflow around these two data sets in particular has been gnawing at me for a while. Here's how I ended up doing it for both, preceded by a table of contents.
+
+1. [Set Up PostgreSQL on Your Computer](#setup)
+2. ["Selectively Select" and Populate the Databases](#selectivelyselect)
+3. [Harness `dplyr` and `purrr` to Make the Most of These Databases](#harness)
+
+## Set Up PostgreSQL on Your Computer {#setup}
+
+First, I installed PostgreSQL on my Ubuntu desktop. The most current stable release is already at version 13, though the default version in my Ubuntu 18.04.2 release is version 10. That much won't matter for the task at hand. You could also use really any relational database (including MySQL), but PostgreSQL is just a bit more powerful than MySQL.
+
+```bash
+sudo apt-get update
+sudo apt-get install postgresql-client-10 postgresql-common
+```
+
+Thereafter, log into the PostgreSQL server with the following `sudo` command in the terminal. Technically, you're executing the `psql` program as if you were the default superuser `postgres`.
+
+```bash
+sudo -u postgres psql
+```
+
+Next, create a relational database shell to store these particular databases.
+
+```sql
+CREATE DATABASE wvs;
+CREATE DATABASE gss;
+```
+
+There's a convoluted way of doing this entirely within PostgreSQL, but I'll opt for R wrappers around these.
+
+## Load the GSS and WVS Data
+
+Next, fire up an R session, load the GSS and WVS data, along with various packages to assist in the process. Do note that the versions of the data I have are from the `qs` package. [I discuss these here](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/). I also hate all-caps column names, so I made sure to put those in lowercase in the GSS data (but forgot to do that for the WVS data). I'll also note that some of the things I propose downstream are augmented by having a unique identifier for each observation in the data. I manually create that (`uid`) here.
+
+```{r, eval=F}
+library(tidyverse)
+library(stevemisc)
+
+WVS <- qs::qread("~/Dropbox/data/wvs/wvs6wave-20180912.qs") %>% 
+  rename_all(tolower) %>% mutate(uid = seq(1:n())) %>%
+  select(s001, s002, uid, everything())
+GSS <- qs::qread("~/Dropbox/data/gss/GSS_spss-2018/gss7218.qs") %>%
+  mutate(uid = seq(1:n())) %>%
+  select(year, uid, everything())
+```
+
+The process I propose leans on the `group_split()` function in `dplyr`. I'm going to split the data into multiple data frames by survey wave (in the WVS data) and survey year (in the GSS data). `dplyr` will return these as lists. Recall, however, the basic problem of the data. The problem of loading the data is in large part a function of how wide the data are. The width of the data comes from the temporal reach of each (and, in the case of the WVS, the spatial reach as well). Some questions appear at some points of time, but not others. The GSS, for example, asked questions about the 1972 election between Richard Nixon and George McGovern [every year from 1973 to 1977](https://gssdataexplorer.norc.org/variables/vfilter?utf8=%E2%9C%93&user_search_id=&state_id=&search_type=&keyword=mcgovern&doslider=1&yrmin=1972&yrmax=2018&years=&subjects=&ssearch=&commit=SEARCH). After 1977, the question no longer became interesting to ask. If, however, you load the data because you're interested in more current topics, you'll get that data too. So, for both the GSS and the WVS, I omit columns if all the responses were NA for the particular split. This requires defining a custom function, though.
+
+## "Selectively Select" and Populate the Databases {#selectivelyselect}
+
+```r
+not_all_na <- function(x) any(!is.na(x))
+```
+
+Thereafter, let's split the GSS and WVS data by these waves/survey years and select only the columns that are not completely missing/unavailable in a given wave/year. This is where some knowledge of `purrr` will emphasize how amazing the package is for tasks like these. The `map()` function is basically applying one function to six (in the WVS data) or 32 (in the GSS data) different data frames contained in the list.
+
+```{r, eval=F}
+WVS %>% haven::zap_labels() %>%
+  group_split(s002) %>%
+  map(~select_if(., not_all_na)) -> splitWVS
+
+
+GSS %>% 
+  haven::zap_labels() %>%
+  group_split(year) -> splitGSS
+
+ # strip vector information out
+splitGSS <- as.list(splitGSS)
+
+splitGSS %>%
+  # this will take a while...
+  map(~select_if(., not_all_na)) -> splitGSS
+
+```
+
+Observe what this does to the data in the case of the World Values Survey.
+
+
+```{r, echo=F, eval=T}
+
+tribble(~data, ~nrow, ~ncol,
+        "WVS (Waves 1-6)", 348532, 1445,
+        "WVS (Wave 1)", 13586, 187,
+        "WVS (Wave 2)", 24558, 480,
+        "WVS (Wave 3)", 77818, 339,
+        "WVS (Wave 4)", 59030, 434,
+        "WVS (Wave 5)", 83975, 417,
+        "WVS (Wave 6)", 89565, 398,) %>%
+  mutate_if(is.numeric, ~prettyNum(.,big.mark=",")) %>%
+  kable(., format="html",
+        table.attr='id="stevetable"',
+        col.names=c("Data", "Number of Rows", "Number of Columns"),
+        caption = "The Dimensions of the World Values Survey (Waves 1-6, Combined and Disaggregated)",
+        align=c("l","c","c"))
+
+```
+
+Thereafter, I'm going to use R as a wrapper to connect to PostgreSQL, starting with the WVS data.
+
+```{r, eval=F}
+wvspgcon <- DBI::dbConnect(RPostgres::Postgres(), dbname="wvs")
+```
+
+Here's what I'm going to do next. My `splitWVS` object is split by the survey waves (`s002`), which are minimally 1, 2, 3, 4, 5, and 6. In this `wvs` PostgreSQL database, those will be my table names coinciding with the individual survey waves I split. The next is just looping through the data and creating those tables with those names.
+
+```{r, eval=F}
+wvs_waves <- seq(1:6)
+
+for (i in 1:length(splitWVS)) {
+  l <- as.character(wvs_waves[i])
+  copy_to(wvspgcon, as.data.frame(splitWVS[[i]]), l,
+          temporary=FALSE)
+  
+}
+```
+
+From there, the real benefits of relational databases and `dplyr`'s interface with them shines. The data load quickly and the user can explore the data [as "lazily" as possible](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html). Observe by just spitting out the entire sixth survey wave as a tibble:
+
+```{r}
+tbl(wvspgcon, "6")
+```
+
+`dplyr`'s interface with relational databases like PostgreSQL is not exhaustive, but it is pretty comprehensive. For example, I could see how many countries are in the first and sixth survey wave.
+
+```{r}
+tbl(wvspgcon, "1") %>%
+  # s003 = country code
+  select(s003) %>%
+  distinct(s003) %>% pull() %>% length()
+
+tbl(wvspgcon, "6") %>%
+  select(s003) %>%
+  distinct(s003) %>% pull() %>% length()
+```
+
+Now, it's time to do the same with the GSS data. Here, though, the tables in the database are named by the survey year.
+
+```{r, eval=F}
+gsspgcon <- DBI::dbConnect(RPostgres::Postgres(), dbname="gss")
+
+GSS %>% distinct(year) %>% pull(year) %>% as.vector() -> gss_years
+
+for (i in 1:length(splitGSS)) {
+  l <- as.character(gss_years[i])
+  copy_to(gsspgcon, as.data.frame(splitGSS[[i]]), l,
+          temporary=FALSE)
+  
+}
+```
+
+## Harness `dplyr` and `purrr` to Make the Most of These Databases {#harness}
+
+The next step is to harness `dplyr` and especially `purrr` to make the most of storing the data in these databases like this. The only real downside to what I propose here is you're going to have to get somewhat comfortable with these data in order to more effectively maneuver your way around them in this format.
+
+For example, I routinely use the WVS data to teach methods students about various topics with an application to various political issues. One hobby horse of mine is teaching students about abortion opinions in the United States. From experience, I know the United States' country code (`s003`) is 840 and that the WVS asks about the justifiability of abortion on a 1-10 scale where 1 = never justifiable and 10 = justifiable. That particular prompt appears as `f120` in the data. Let's assume I wanted to grab just those data from all six survey waves from the database.[^notin2] How might I do that? Here, a native `purrr` solution is not so straightforward since lists of data frames are alien concepts in the SQL world. 
+
+[^notin2]: The United States does not appear to be in the second survey wave provided in the six-wave WVS data.
+
+However, a database of tables is a close corollary, and that is native in SQL. So, here's a clever workaround in `purrr`. First, create a vector of characters coinciding with the names of the tables in the database. This isn't too hard in the WVS database I created since the names coincide with the survey waves.
+
+
+```{r}
+waves <- as.character(seq(1:6))
+```
+
+Now, let's write a function in `map()` that will do the following. For each of the waves specified in the `waves` character, we're going to filter the observations to just the United States (`s003 == 840`) and select (for clarity) just the survey wave (`s002`), the country code (`s003 == 840`), the survey year (`s020`). More importantly, we're going to grab the respondent's attitude about the justifiability of abortion on a 1-10 scale (`f120`) and the unique identifier (`uid`). Then, we're going to condense them into a single "lazy" tibble (`f120_query`) using the `union()` function. Here, I want to note, is where having the unique identifier for each row is useful. If you don't have the unique identifier, the ensuing query will produce a row of 55 observations for each unique combination of survey wave, country code, survey year, and abortion opinion across all waves. We want the raw data, not a summary of them.
+
+```{r}
+waves %>%
+  map(~{
+    tbl(wvspgcon, .x) %>%
+      filter(s003 == 840) %>%
+      select(uid, s002, s003, s020, f120)
+  }) %>%
+  reduce(function(x, y) union(x, y)) -> f120_query
+
+f120_query
+```
+
+If you'd like, you can see underlying SQL query here.
+
+```{r}
+show_query(f120_query)
+```
+
+You could do a few more SQL operations within `dplyr`/`dbplyr` syntax.
+
+```{r}
+f120_query %>%
+  group_by(s020) %>%
+  summarize(mean_aj = mean(f120)) -> query_aj_mean
+
+query_aj_mean
+
+show_query(query_aj_mean)
+```
+
+More important, when you're done with the SQL side of things and you want to get more into the stuff for which you need full R functionality, you can use the `collect()` function on these data and proceed from there. Here, let's show you can get basic percentages of responses in a particular category for a given survey year. The following code will do the important stuff, though code I hide after the fact will format the data into a graph.
+
+```{r, echo=T, eval=F}
+f120_query %>%
+  collect() %>%
+  group_by(s020, f120) %>%
+  tally() %>% na.omit %>%
+  group_by(s020) %>%
+  mutate(tot = sum(n),
+         perc = n/tot,
+         # mround2 is in stevemisc
+         lab = paste0(mround2(perc),"%"))
+```
+
+
+```{r abortion-attitudes-united-states-wvs-1981-2011, echo=F, eval=T, cache=T, warning=F, fig.width=11, fig.height = 8}
+f120_query %>%
+  collect() %>%
+  group_by(s020, f120) %>%
+  tally() %>% na.omit %>%
+  group_by(s020) %>%
+  mutate(tot = sum(n),
+         perc = n/tot,
+         # mround2 is in stevemisc
+         lab = paste0(mround2(perc),"%")) %>%
+  ggplot(.,aes(as.factor(f120), perc)) + 
+  geom_bar(stat="identity", color="black", fill="#619cff") +
+  theme_steve_web() + post_bg() +
+  scale_y_continuous(labels = scales::percent) +
+  scale_x_discrete(labels = c("Never\nJustifiable", "2", "3", "4", "5",
+                              "6", "7", "8", "9", "Always\nJustifiable")) +
+  facet_wrap(~s020) +
+  geom_text(aes(label=lab), color="black",
+            position=position_dodge(width=.9), 
+            size=3, family="Open Sans", vjust = -.5) +
+  labs(title = "Attitudes About the Justifiability of Abortion in the United States",
+       subtitle = "Generally: Americans have become more permissive about abortion over time. Most survey data show that, even the WVS.",
+       caption = "Data: World Values Survey",
+       x = "", y = "Percent of Responses in Category in Given Survey Year")
+  
+```
+
+Helpfully, you can also use `dplyr` syntax to do even lazier queries. Here's one example in the GSS data. The GSS has periodically asked its respondents [this interesting question](https://gssdataexplorer.norc.org/variables/590/vshow) (`fepres`): "If your party nominated a woman for President, would you vote for her if she were qualified for the job?". There is a lot to unpack here. It's an interesting question to ask and, helpfully, the GSS made sure to qualify the question with "your party." The GSS asked it in most survey waves between 1972 and 2010, but not since 2010. Let's grab it. Let's also grab the data for whether the respondent believes the United States is spending too little, about the right amount, or too much on highways and bridges (`natroad`). This was asked every survey year from 1984 to 2018. I'm not going to do anything with this data, but I'm going to use it to emphasize how lazy of a query you can do here thanks to `dplyr`.
+
+```{r, warning=F}
+all_years <- db_list_tables(gsspgcon)
+
+all_years %>%
+  map(~{
+    tbl(gsspgcon, .x) %>%
+    select(one_of("year", "uid", "fepres", "natroad"))
+  }) %>%
+  reduce(function(x, y) union(x, y)) -> gss_query
+
+```
+
+This will produce warnings, but the use of `one_of()` in the `select()` function means the warnings will just advise you about data unavailability. We knew that would happen and did it by design. Here's the ensuing output.
+
+```{r}
+gss_query %>% arrange(year, uid)
+```
+
+Likewise, when you've finished your query, use `collect()` to more fully use R's functionality to do data analysis.
+
+```{r, eval=F}
+gss_query %>%
+  collect() %>%
+  # There are so few "wouldn't votes" (only 4 total in just two waves)
+  # Let's ignore them
+  mutate(feprescat = case_when(
+    fepres == 1 ~ "Yes",
+    fepres == 2 ~ "No"
+  )) %>%
+  mutate(feprescat = fct_relevel(feprescat, "Yes", "No")) %>%
+  group_by(year, feprescat) %>%
+  tally() %>% na.omit %>%
+  group_by(year) %>%
+  mutate(tot = sum(n),
+         perc = n/tot)
+```
+
+```{r gss-would-vote-for-a-women-for-president, echo=F, eval=T, cache=T, warning=F, fig.width=11, fig.height = 8}
+gss_query %>%
+  collect() %>%
+  # There are so few "wouldn't votes" (only 4 total in just two waves)
+  # Let's ignore them
+  mutate(feprescat = case_when(
+    fepres == 1 ~ "Yes",
+    fepres == 2 ~ "No"
+  )) %>%
+  mutate(feprescat = fct_relevel(feprescat, "Yes", "No")) %>%
+  group_by(year, feprescat) %>%
+  tally() %>% na.omit %>%
+  group_by(year) %>%
+  mutate(tot = sum(n),
+         perc = n/tot) %>%
+  ggplot(.,aes(year, perc, color=feprescat, linetype=feprescat)) +
+  geom_line(size=1.5) +
+  theme_steve_web() + post_bg() +
+  scale_x_continuous(breaks = seq(1972, 2010, by = 2)) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Nearly Every Person in the GSS by 2010 Said They'd Vote for a Woman for President",
+       x = "", y = "Percent",
+       color = "", linetype="",
+       caption = "Data: General Social Survey (1972-2010)",
+       subtitle = "*If* their party nominated them and they 'were qualified.' Supposedly. Feel free to be skeptical, given what happened in 2016.")
+```
+
+The goal of this post is more about the method than the substance. Here's how I'd recommend storing your wide/tedious-to-load data as tables in a relational database. `dplyr` and `purrr` can get a lot out of these databases with just a little bit of code and knowledge about the underlying data. There's more I can/should do here (e.g. stripping out the "Inapplicables" as missing data in the GSS), but you may find this useful. It's a smart way to store your bigger data sets in the social/political sciences so you can explore them as quickly and conveniently as possible. You can also learn a bit more about SQL syntax along the way.
+
+When you're done, remember to "disconnect" from the database.
+
+```{r}
+DBI::dbDisconnect(wvspgcon)
+DBI::dbDisconnect(gsspgcon)
+```
+
+```{r knitchunk, echo=F, eval=F}
+#setwd("~/Dropbox/svmiller.github.io/_source")
+knitr::knit("_source/2020-11-16-smarter-ways-to-store-your-wide-data-with-sql-magic-purrr.Rmd",
+            output = "_posts/2020-11-16-smarter-ways-to-store-your-wide-data-with-sql-magic-purrr.md")
+
+```
