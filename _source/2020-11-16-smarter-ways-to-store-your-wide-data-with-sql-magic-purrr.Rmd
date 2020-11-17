@@ -216,7 +216,7 @@ for (i in 1:length(splitGSS)) {
 
 ## Harness `dplyr` and `purrr` to Make the Most of These Databases {#harness}
 
-The next step is to harness `dplyr` and especially `purrr` to make the most of storing the data in these databases like this. The only real downside to what I propose here is you're going to have to get somewhat comfortable with these data in order to more effectively maneuver your way around them in this format.
+The next step is to harness `dplyr` and especially `purrr` to make the most of storing the data in databases like this. The only real downside to what I propose here is you're going to have to get somewhat comfortable with these data in order to more effectively maneuver your way around them in this format.
 
 For example, I routinely use the WVS data to teach methods students about various topics with an application to various political issues. One hobby horse of mine is teaching students about abortion opinions in the United States. From experience, I know the United States' country code (`s003`) is 840 and that the WVS asks about the justifiability of abortion on a 1-10 scale where 1 = never justifiable and 10 = justifiable. That particular prompt appears as `f120` in the data. Let's assume I wanted to grab just those data from all six survey waves from the database.[^notin2] How might I do that? Here, a native `purrr` solution is not so straightforward since lists of data frames are alien concepts in the SQL world. 
 
