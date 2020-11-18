@@ -32,9 +32,9 @@ img[src*='#center'] {
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-For some time, I've wrestled with how to elegantly store two data sets I use a great deal in my own research or navel-gazing. The first is the General Social Survey (GSS) and the second is the World Values Survey (WVS). The GSS contains 32 survey waves, done roughly every two years, spanning 1972 and 2018 in the United States. The temporal reach of the data are broadly useful for tracking trends in public opinion over time, but different questions come and go at different points in time. The data as I have it are not particularly long (64,814 rows), but they are *very* wide (6,108 columns). The data are well-annotated with variable labels too, which compounds how tedious it is to load and explore. The WVS (v. 1-6) is similarly gnarly to load. The data contains surveys of roughly 100 countries in 28 different years spanning 1981 and 2009. The data are mercifully more standardized across countries and waves than the GSS, but, at 348,532 rows and 1,445 columns, they too are tedious to load and explore. To this point, my experiences have suggested to say nuts to the native formats of these data and save them [as R serialized data frames](http://svmiller.com/blog/2019/01/how-should-you-store-load-bigger-data-sets-wvs/) or [serialize them with the `qs` package](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/).
+For some time, I've wrestled with how to elegantly store two data sets I use a great deal in my own research or navel-gazing. The first is the General Social Survey (GSS) and the second is the World Values Survey (WVS). The GSS contains 32 survey waves, done roughly every two years, spanning 1972 and 2018 in the United States. The temporal reach of the data are broadly useful for tracking trends in public opinion over time, but different questions come and go at different points in time. The data as I have it are not particularly long (64,814 rows), but they are *very* wide (6,108 columns). The data are well-annotated with variable labels too, which compounds how tedious it is to load and explore. The WVS (v. 1-6) is similarly gnarly to load. The data contains surveys of roughly 100 countries in 28 different years spanning 1981 to 2009. The data are mercifully more standardized across countries and waves than the GSS, but, at 348,532 rows and 1,445 columns, they too are tedious to load and explore. To this point, my experiences have suggested to say nuts to the native formats of these data and save them [as R serialized data frames](http://svmiller.com/blog/2019/01/how-should-you-store-load-bigger-data-sets-wvs/) or [serialize them with the `qs` package](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/).
 
-However, I've been wanting to dedicate more time to learning about relational databases and using them in my own workflow. My expertise with relational databases is mostly intermediate; I think I'm great with the rudimentary `SELECT * FROM data WHERE foo HAVING bar LIMIT 0,10;`. But, workflow around database systems feature more prominently in the private sector. Thus, a bit more SQL know-how is useful not only for students, but for me, [just in case](https://www.nature.com/articles/d41586-020-01518-y). Integrating SQL into my workflow around these two data sets in particular has been gnawing at me for a while. Here's how I ended up doing it for both, preceded by a table of contents.
+However, I've been wanting to dedicate more time to unpacking relational databases and using them more in my own workflow. My expertise with relational databases is mostly intermediate; I think I'm great with the rudimentary `SELECT * FROM data WHERE foo HAVING bar LIMIT 0,10;`. But, workflow around database systems feature more prominently in the private sector. Thus, a bit more SQL know-how is useful not only for students, but for me, [just in case](https://www.nature.com/articles/d41586-020-01518-y). Integrating SQL into my workflow around these two data sets in particular has been gnawing at me for a while. Here's how I ended up doing it for both, preceded by a table of contents.
 
 1. [Set Up PostgreSQL on Your Computer](#setup)
 2. ["Selectively Select" and Populate the Databases](#selectivelyselect)
@@ -49,13 +49,13 @@ sudo apt-get update
 sudo apt-get install postgresql-client-10 postgresql-common
 ```
 
-Thereafter, log into the PostgreSQL server with the following `sudo` command in the terminal. Technically, you're executing the `psql` program as if you were the default superuser `postgres`.
+Thereafter, I logged into the PostgreSQL server with the following `sudo` command in the terminal. Technically, you're executing the `psql` program as if you were the default superuser `postgres`. You can (and perhaps should) create your own account with appropriate privileges, but [this may require adjusting authentication methods](https://www.postgresql.org/docs/9.1/auth-methods.html). 
 
 ```bash
 sudo -u postgres psql
 ```
 
-Next, create a relational database shell to store these particular databases.
+Next, I created two relational database shells to store these data.
 
 ```sql
 CREATE DATABASE wvs;
@@ -66,7 +66,7 @@ There's a convoluted way of doing this entirely within PostgreSQL, but I'll opt 
 
 ## Load the GSS and WVS Data
 
-Next, fire up an R session, load the GSS and WVS data, along with various packages to assist in the process. Do note that the versions of the data I have are from the `qs` package. [I discuss these here](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/). I also hate all-caps column names, so I made sure to put those in lowercase in the GSS data (but forgot to do that for the WVS data). I'll also note that some of the things I propose downstream are augmented by having a unique identifier for each observation in the data. I manually create that (`uid`) here.
+Next, fire up an R session, load the GSS and WVS data, along with various packages to assist in the process. Do note that the versions of the data I have are from the `qs` package. [I discuss these here](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/). I also hate all-caps column names, so I made sure to put those in lowercase in the GSS data (but evidently forgot to do that for the WVS data). I'll also note that some of the things I propose downstream are augmented by having a unique identifier for each observation in the data. I manually create that (`uid`) here.
 
 
 ```r
@@ -89,7 +89,7 @@ The process I propose leans on the `group_split()` function in `dplyr`. I'm goin
 not_all_na <- function(x) any(!is.na(x))
 ```
 
-Thereafter, let's split the GSS and WVS data by these waves/survey years and select only the columns that are not completely missing/unavailable in a given wave/year. This is where some knowledge of `purrr` will emphasize how amazing the package is for tasks like these. The `map()` function is basically applying one function to six (in the WVS data) or 32 (in the GSS data) different data frames contained in the list.
+Thereafter, I split the GSS and WVS data by these waves/survey years and select only the columns that are not completely missing/unavailable in a given wave/year. This is where some knowledge of `purrr` will emphasize how amazing the package is for tasks like these. The `map()` function is basically applying one function to six (in the WVS data) or 32 (in the GSS data) different data frames contained in the list.
 
 
 ```r
@@ -110,7 +110,7 @@ splitGSS %>%
   map(~select_if(., not_all_na)) -> splitGSS
 ```
 
-Observe what this does to the data in the case of the World Values Survey.
+Observe what this does to the data in the case of the World Values Survey. Do note the dimensions I report here omit the unique identifier (`uid`) I created.
 
 
 <table id="stevetable">
@@ -168,7 +168,7 @@ Thereafter, I'm going to use R as a wrapper to connect to PostgreSQL, starting w
 wvspgcon <- DBI::dbConnect(RPostgres::Postgres(), dbname="wvs")
 ```
 
-Here's what I'm going to do next. My `splitWVS` object is split by the survey waves (`s002`), which are minimally 1, 2, 3, 4, 5, and 6. In this `wvs` PostgreSQL database, those will be my table names coinciding with the individual survey waves I split. The next is just looping through the data and creating those tables with those names.
+Here's what I'm going to do next. My `splitWVS` object is split by the survey waves (`s002`), which are minimally 1, 2, 3, 4, 5, and 6. In this `wvs` PostgreSQL database, those will be my table names coinciding with the individual survey waves I split. The next part just loops through the data and creates those tables with those names.
 
 
 ```r
@@ -182,7 +182,7 @@ for (i in 1:length(splitWVS)) {
 }
 ```
 
-From there, the real benefits of relational databases and `dplyr`'s interface with them shines. The data load quickly and the user can explore the data [as "lazily" as possible](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html). Observe by just spitting out the entire sixth survey wave as a tibble:
+From there, the real benefits of relational databases and `dplyr`'s interface with them shine. The data load quickly and the user can explore the data [as "lazily" as possible](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html). Observe by just spitting out the entire sixth survey wave as a tibble:
 
 
 ```r
@@ -263,9 +263,9 @@ for (i in 1:length(splitGSS)) {
 
 ## Harness `dplyr` and `purrr` to Make the Most of These Databases {#harness}
 
-The next step is to harness `dplyr` and especially `purrr` to make the most of storing the data in databases like this. The only real downside to what I propose here is you're going to have to get somewhat comfortable with these data in order to more effectively maneuver your way around them in this format.
+The next step is to harness `dplyr` and especially `purrr` to make the most of storing the data in databases like this. The only real downside to what I propose here is you're going to have to get somewhat comfortable with these data in order to more effectively maneuver your way around them in this format. That'll come with time and experience using the data in question.
 
-For example, I routinely use the WVS data to teach methods students about various topics with an application to various political issues. One hobby horse of mine is teaching students about abortion opinions in the United States. From experience, I know the United States' country code (`s003`) is 840 and that the WVS asks about the justifiability of abortion on a 1-10 scale where 1 = never justifiable and 10 = justifiable. That particular prompt appears as `f120` in the data. Let's assume I wanted to grab just those data from all six survey waves from the database.[^notin2] How might I do that? Here, a native `purrr` solution is not so straightforward since lists of data frames are alien concepts in the SQL world. 
+Here's one example. I routinely use the WVS data to teach methods students about various methodological topics with an application to various political issues. One hobby horse of mine is teaching students about abortion opinions in the United States. From experience, I know the United States' country code (`s003`) is 840 and that the WVS asks about the justifiability of abortion on a 1-10 scale where 1 = never justifiable and 10 = justifiable. That particular prompt appears as `f120` in the data. Let's assume I wanted to grab just those data from all six survey waves from the database.[^notin2] How might I do that? Here, a native `purrr` solution is not so straightforward since lists of data frames are alien concepts in the SQL world. 
 
 [^notin2]: The United States does not appear to be in the second survey wave provided in the six-wave WVS data.
 
@@ -277,7 +277,7 @@ However, a database of tables is a close corollary, and that is native in SQL. S
 waves <- as.character(seq(1:6))
 ```
 
-Now, let's write a function in `map()` that will do the following. For each of the waves specified in the `waves` character, we're going to filter the observations to just the United States (`s003 == 840`) and select (for clarity) just the survey wave (`s002`), the country code (`s003 == 840`), the survey year (`s020`). More importantly, we're going to grab the respondent's attitude about the justifiability of abortion on a 1-10 scale (`f120`) and the unique identifier (`uid`). Then, we're going to condense them into a single "lazy" tibble (`f120_query`) using the `union()` function. Here, I want to note, is where having the unique identifier for each row is useful. If you don't have the unique identifier, the ensuing query will produce a row of 55 observations for each unique combination of survey wave, country code, survey year, and abortion opinion across all waves. We want the raw data, not a summary of them.
+Now, let's write a function in `map()` that will do the following. For each of the waves specified in the `waves` character, we're going to filter the observations to just the United States (`s003 == 840`) and select (for clarity) just the survey wave (`s002`), the country code (`s003 == 840`), the survey year (`s020`). More importantly, we're going to grab the respondent's attitude about the justifiability of abortion on a 1-10 scale (`f120`) and the unique identifier (`uid`). Then, we're going to condense them into a single "lazy" tibble (`f120_query`) using the `union()` function. Here, I want to note, is where having the unique identifier for each row is useful. If you don't have the unique identifier, the ensuing query will produce a row of 55 observations for each unique combination of survey wave, country code, survey year, and abortion opinion across all waves. We want the raw data, not a summary of the unique combination of values in them.
 
 
 ```r
@@ -396,7 +396,7 @@ show_query(query_aj_mean)
 ## UNION
 ## (SELECT "uid", "s002", "s003", "s020", "f120"
 ## FROM "6"
-## WHERE ("s003" = 840.0))) "dbplyr_157"
+## WHERE ("s003" = 840.0))) "dbplyr_007"
 ## GROUP BY "s020"
 ```
 
@@ -432,7 +432,7 @@ all_years %>%
   reduce(function(x, y) union(x, y)) -> gss_query
 ```
 
-This will produce warnings, but the use of `one_of()` in the `select()` function means the warnings will just advise you about data unavailability. We knew that would happen and did it by design. Here's the ensuing output.
+This will produce warnings, but the use of `one_of()` in the `select()` function means the warnings will just advise you about data unavailability. We knew that would happen and did it by design. Here's the ensuing output. Observe that the use of `one_of()` in `select()`, alongside other `dplyr` mechanics, just created NAs for cases where one of the two variables was not asked in one of the survey waves.
 
 
 ```r
