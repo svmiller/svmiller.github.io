@@ -14,9 +14,18 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
  
 <hr style="clear:both;visibility: hidden;" />  
 
-## Original Data
+## Data Sets Created/Maintained
 
 [*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/) ![Version 2.2.1](https://img.shields.io/badge/release-v2.2.1-blue.svg) <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
+
+[*Territorial Change*](https://correlatesofwar.org/data-sets/territorial-change) ![Version 6](https://img.shields.io/badge/release-v6-blue.svg) <br /> This data set records all peaceful and violent changes of territory from 1816-2018.
+
+## Software Created
+
+[`dragracer`](https://github.com/svmiller/dragracer) [![](https://www.r-pkg.org/badges/version/dragracer?color=green)](https://cran.r-project.org/package=dragracer) [![](http://cranlogs.r-pkg.org/badges/grand-total/dragracer?color=green)](https://cran.r-project.org/package=dragracer): R package for learning R functions around data from RuPaul's Drag Race  
+[`stevedata`](https://github.com/svmiller/stevedata): R package for miscellaneous data sets I've use for in-class instruction  
+[`stevemisc`](https://github.com/svmiller/stevemisc): R package of various helper functions (esp. for mixed models and BTSCS models)  
+[`stevetemplates`](https://github.com/svmiller/stevetemplates) [![](https://www.r-pkg.org/badges/version/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates): R package for [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) 
 
 ## Publications
 
