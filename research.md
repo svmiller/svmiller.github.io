@@ -23,11 +23,13 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 ## Software Created
 
 [`dragracer`](https://github.com/svmiller/dragracer) [![](https://www.r-pkg.org/badges/version/dragracer?color=green)](https://cran.r-project.org/package=dragracer) [![](http://cranlogs.r-pkg.org/badges/grand-total/dragracer?color=green)](https://cran.r-project.org/package=dragracer): R package for learning R functions around data from RuPaul's Drag Race  
-[`stevedata`](https://github.com/svmiller/stevedata): R package for miscellaneous data sets I've use for in-class instruction  
+[`stevedata`](https://github.com/svmiller/stevedata) [![](https://www.r-pkg.org/badges/version/stevedata?color=green)](https://cran.r-project.org/package=stevedata) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevedata?color=green)](https://cran.r-project.org/package=stevedata): R package for miscellaneous data sets I've use for in-class instruction  
 [`stevemisc`](https://github.com/svmiller/stevemisc): R package of various helper functions (esp. for mixed models and BTSCS models)  
 [`stevetemplates`](https://github.com/svmiller/stevetemplates) [![](https://www.r-pkg.org/badges/version/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates): R package for [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) 
 
 ## Publications
+
+Curtis, K. Amber and Steven V. Miller. Forthcoming. "A (Supra)Nationalist Personality? The Big Five’s Effects on Political-Territorial Identification."  *European Union Politics*.
 
 Gibler, Douglas M., Steven V. Miller, and Erin K. Little. Forthcoming. "[The Importance of Correct Measurement](https://doi.org/10.1093/isq/sqaa011)." *International Studies Quarterly*.
 
