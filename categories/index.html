@@ -24,7 +24,8 @@ comments: false
 		<ul id="archive">
     {% for post in site.categories[this_word] %}{% if post.title != null %}
       <li class="archiveposturl"><span><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></span><br/>
-<span style="font-size:85%"><strong>Author:</strong> {{post.author}}</span></li>
+<span style="font-size:85%"><strong>Author:</strong> {{post.author}}<strong style="font-size:100%; font-family: 'Titillium Web', sans-serif; float:right; padding-right: .5em">{{ post.date | date: '%d %b %Y' }}</strong> 
+</span> </li>
     {% endif %}{% endfor %}
 		</ul>
 	</article><!-- /.hentry -->
