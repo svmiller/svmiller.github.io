@@ -1,0 +1,294 @@
+---
+title: "What Do We Know About British Attitudes Toward Immigration? A Pedagogical Exercise of Regression"
+author: Steven V. Miller
+institute: Department of Political Science
+titlegraphic: /Dropbox/teaching/clemson-academic.png
+fontsize: 10pt
+output:
+ beamer_presentation:
+    template: ~/Dropbox/miscelanea/svm-r-markdown-templates/svm-latex-beamer.tex
+    latex_engine: xelatex
+    dev: cairo_pdf
+    fig_caption: false
+    slide_level: 3
+make149: true
+mainfont: "Open Sans"
+titlefont: "Titillium Web"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE,
+                      message=FALSE, warning=FALSE,
+                      fig.path='figs/',
+                      cache.path = '_cache/',
+                      fig.process = function(x) {
+                      x2 = sub('-\\d+([.][a-z]+)$', '\\1', x)
+                      if (file.rename(x, x2)) x2 else x
+                      })
+
+options(knitr.kable.NA = '')
+library(tidyverse)
+library(stevemisc)
+library(stevedata)
+
+# ESS <- haven::read_sav("~/Dropbox/data/ess/ESS9e01_2.sav")
+
+ESS9GB
+
+library(stargazer)
+
+```
+
+
+# What Do We Know About British Attitudes Toward Immigration?
+## Introduction
+### Goal for Today
+
+1. Learn about immigration sentiment in the UK.
+2. Teach students how to evaluate a regression table.
+
+### Check My Blog at svmiller.com/blog
+
+![](svmiller-blog.png)
+
+
+### A Regression Roadmap
+
+Regression as we use it is a combination of hypothesis-testing and story-telling.
+
+1. Know the bigger picture/puzzle.
+1. Know the data.
+2. Understand what the regression table is saying.
+3. Understand what the regression table *isn't* saying.
+
+## Know the Bigger Picture/Puzzle
+### Know the Bigger Picture/Puzzle
+
+How positively do British people regard immigration/immigrants?
+
+\bigskip
+
+\includegraphics[width=.8\textwidth]{uk-visa.jpg}
+
+\bigskip
+
+\begin{center}Why is this important? How can we know?\end{center}
+
+## Know the Data
+### Know the Data
+
+Scan the research design section for the following information:
+
+1. The (primary) source of the data
+2. The **unit of analysis** (i.e. who/what is being studied)
+3. The **dependent variable** (i.e. the variable to be explained)
+4. The **independent variable(s)** (i.e. what we be believe explains the dependent variable)
+
+### Know the Data
+
+1. The **data:** European Social Survey (2018) for the UK
+2. The **unit of analysis:** the individual respondent in the survey
+    - Note: I subset the analysis to just those who were born in the UK.
+
+### Know the Data
+
+The **dependent variable** (*DV*) is an additive index [0:30] of three prompts:
+
+- Is it generally bad or good for the UK’s economy that immigrants come to live here? 
+    - (`imbgeco`) [0:10; bad:good]
+- Is the UK’s cultural life is generally undermined or enriched by immigrants? 
+    - (`imueclt`) [0:10; undermined:enriched]
+- Is the UK made a worse or a better place to live by immigrants?
+    - (`imwbcnt`) [0:10; worse:better]
+
+Higher values = more pro-immigration sentiment.
+
+###
+
+```{r histogram, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F}
+ESS9GB %>%
+  group_by(immigsent) %>% # group_by unique values of immigsent
+  summarize(n = n()) %>% # return number of times that particular value was coded for variable
+  na.omit %>% # drop NAs, which won't matter much here.
+  ggplot(.,aes(as.factor(immigsent), n)) +  # create foundation ggplot
+  # bar chart, with some prettiness
+  geom_bar(stat="identity", alpha=0.8, color="black", fill="#619cff") +
+  theme_steve_web() + # my custom ggplot theme + post bg for my website
+  labs(y = "Number of Responses",
+       x = "Value of the Pro-Immigration Sentiment Variable",
+       caption = "Data: European Social Survey, Round 9 in the United Kingdom",
+       title = "A Bar Chart of Pro-Immigration Sentiment in the United Kingdom from the ESS Data (Round 9)",
+       subtitle = "There's a natural heaping of 0s and 30s but the mean (16.891) approximates the median (17). I'd feel comfortable communicating exact differences on this scale.")
+```
+
+### Know the Data
+
+The **independent variables** (*IVs*):
+
+- *Age* (in years)
+- *Education* (in years of education)
+- *Gender* (1 if respondent is a woman)
+- *Employment status* (1 if respondent is unemployed, but looking for work)
+- *Household income* (in deciles)
+- *Ideology* (on 11-point L-R scale)
+
+### Know the Data
+
+| **Variable**  | **Mean**  | **Std. Dev.**  | **Median** | **Min.** | **Max.** | **N** |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| *Immigration Sentiment*  |  16.891 | 6.991  | 17 | 0 | 30 | 1850  |
+| *Age*  | 53.673  | 18.392  | 55 | 15 | 90 |  1893   |
+| *Female*  | .541  | .011  | 1 | 0 | 1 | 1905  |
+| *Years of Education*  | 14.049  | 3.630  | 13 |  3 | 41 | 1893  |
+| *Unemployed*  | .019  |  .003  | 0 | 0 | 1 | 1905  |
+| *Household Income (Deciles)*  | 5.171  | 2.972 | 5 | 1 | 10 | 1615  |
+| *Ideology (L to R)*  | 4.96  | 1.945 | 5 |  0 | 10 |1726  |
+
+Table: Descriptive Statistics for the Variables in Our Regression
+
+## Understand What the Regression is Saying
+###  Understand What the Regression is Saying
+
+**(Linear/OLS) Regression** is a tool for understanding a phenomenon of interest (immigration sentiment) as a linear function of some combination of predictors.
+
+- Strong resemblance to the slope-intercept equation (`y = mx + b`)
+- Flexible to include multiple predictors (i.e. **multiple regression**)
+
+###  Understand What the Regression is Saying
+
+We believe we can explain the *DV* for an individual ($i$) as:
+
+\begin{eqnarray}
+\textrm{Immigration Sentiment} &=& \beta_0 + \beta_1*\textrm{Age} + \beta_2*\textrm{Female} + \beta_3*\textrm{Years of Education} +   \nonumber \\
+   &&   \beta_4*\textrm{Unemployed} +  \beta_5*\textrm{Household Income} +  \nonumber \\
+   &&  \beta_6*\textrm{Ideology} + \epsilon \nonumber 
+\end{eqnarray}
+
+Of note:
+
+- $\beta_0$: estimated immigration sentiment when all predictors are set to zero (i.e. *y*-intercept)
+- $\beta_{1, 2, 3, 4, 5, 6}$: estimated slopes of each *IV* on the *DV*
+- $\epsilon$: prediction errors, an unmeasured variable
+
+
+###
+
+```{r reg-table, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F, results="asis"}
+M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
+
+stargazer(M1, type="latex",
+          style="ajps", header=FALSE,
+          font.size="small",
+          covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
+          title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+         #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
+          dep.var.labels="Pro-Immigration Sentiment",
+          omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
+```
+
+
+### Unpacking the Regression Table
+
+Take stock of three things from a regression table:
+
+1. The numbers inside parentheses next to a variable.
+2. The numbers *not* in parentheses next to a variable.
+3. Some of those numbers not in parentheses have some asterisks next to them.
+
+Let's start with the second item.
+
+### The Regression Coefficient
+
+The number *not* inside a parentheses is a **regression coefficient**.
+
+- These communicated the *estimated* change in the *DV* for a one-unit change in a particular *IV*.
+- They are the betas ($\beta$) in the formula.
+- The "Constant" is the *y*-intercept ($\beta_0$).
+
+Use the coefficients to assess **negative** and **positive relationships**.
+
+- **Positive:** as an *IV* increases, the *DV* also increases (and vice-versa).
+- **Negative:** as an *IV* decreases, the *DV* increases (and vice-versa).
+
+###
+
+```{r reg-table-2, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F, results="asis"}
+M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
+
+stargazer(M1, type="latex",
+          style="ajps", header=FALSE,
+          font.size="small",
+          covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
+          title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+         #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
+          dep.var.labels="Pro-Immigration Sentiment",
+          omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
+```
+
+### The Standard Error
+
+The number inside parentheses is the **standard error** of the regression coefficient.
+
+- i.e. it's a measure of uncertainty around the estimate.
+
+However, this is not an important quality by itself.
+
+- It depends on its relationship with the regression coefficient.
+
+<!-- This leads to the third item of interest. -->
+
+### The Asterisks
+
+The asterisks are an indicator of **statistical significance**.
+
+- Divide the regression coefficient over its standard error.
+- This gives you a **t-statistic**.
+- If the absolute value of the **t-statistic** is greater than 1.96 ("about 2"), you can feel confident rejecting a claim of zero.
+
+**tl;dr**: what is the probability of us observing this coefficient and standard error if the true effect is zero?
+
+- The asterisks are your visual cue to identify a "statistically significant" effect.
+
+In our case, only education, income, and ideology have statistically significant effects.
+
+
+###
+
+```{r reg-table-3, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F, results="asis"}
+M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
+
+stargazer(M1, type="latex",
+          style="ajps", header=FALSE,
+          font.size="small",
+          covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
+          title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+         #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
+          dep.var.labels="Pro-Immigration Sentiment",
+          omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
+```
+
+## Understand What the Regression Table *Isn't* Saying
+### Understand What the Regression Table *Isn't* Saying
+
+1. The "constant" (or *y*-intercept) is not a "variable."
+    - It's just an estimate of *y* when everything else is zero.
+2. The regression table doesn't test the regression model's multiple assumptions.
+    - Look at your data and your model.
+3. "Statistically significant is not itself 'significant.'"
+    - "Significance" says nothing about the magnitude of the effect, only if you can discern it from zero.
+4. More asterisks do not mean "more significance."
+    - It won't tell you if one effect is greater than another, only that it's more precise.
+    
+## Conclusion
+### Conclusion
+
+Regression is both hypothesis-testing and story-telling. Some takeaways:
+
+1. Make sure you're reading about the bigger picture/puzzle.
+2. Take stock of the data.
+    - (i.e. *DV*, *IVs*, unit of analysis, and data source).
+3. Evaluate a regression table you read by the direction of the relationship (+ or -) and what effects are "significant."
+4. Internalize what the regression table *isn't* telling you.
+    - (i.e. magnitude effects, whether the model's assumptions are met).
+    
+See more information on my blog about this exercise: `http://svmiller.com/blog`
