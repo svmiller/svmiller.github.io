@@ -4,7 +4,7 @@ title: Presentations
 permalink: /presentations/
 ---
 
-I occasionally get asked to give presentations to audiences that are not directly connected to a manuscript. I put a link to those here for posterity. An astute reader will note that the underlying code for these presentations exists in [a subdirectory on the Github repository for my website](https://github.com/svmiller/svmiller.github.io/tree/master/presentations).
+I occasionally get asked to give presentations on topics that are not directly connected to a manuscript/working paper. I put a link to those here for posterity. An astute reader will note that the underlying code for these presentations exists in [a subdirectory on the Github repository for my website](https://github.com/svmiller/svmiller.github.io/tree/master/presentations).
 
 ### [Quantifying the Gender Pay Gap in the United States: Two Different Paths to the Same Inference](http://svmiller.com/presentations/gender-pay-gap-permutations/gender-pay-gap-permutations.pdf)
 
