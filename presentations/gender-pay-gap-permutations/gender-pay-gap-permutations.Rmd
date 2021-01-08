@@ -1,5 +1,5 @@
 ---
-title: "Inference and Permutations With An Application to the Gender Pay Gap in the United States"
+title: "Quantifying the Gender Pay Gap in the United States: Two Different Paths to the Same Inference"
 # subtitle: POSC 3410  -- Quantitative Methods in Political Science
 author: Steven V. Miller
 institute: Department of Political Science
