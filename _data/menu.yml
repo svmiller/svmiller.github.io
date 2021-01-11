@@ -33,7 +33,7 @@
       subhref: "http://post8000.svmiller.com/"
 
 - title: "Miscelánea"
-  href: "/miscelanea/"
+  href: ""
   subcategories:
     - subtitle: "Presentations"
       subhref: "/presentations/"
