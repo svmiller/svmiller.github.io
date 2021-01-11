@@ -7,13 +7,13 @@
 - title: "CV"
   href: "/cv/"
 
-- title: "For Students"
-  href: "/for-students/"
-  subcategories:
-    - subtitle: "Letters of Recommendation"
-      subhref: "/for-students/letters-of-recommendation/"
-    - subtitle: "Pi Sigma Alpha"
-      subhref: "/for-students/pi-sigma-alpha/"
+# - title: "For Students"
+#   href: "/for-students/"
+#   subcategories:
+#     - subtitle: "Letters of Recommendation"
+#       subhref: "/for-students/letters-of-recommendation/"
+#     - subtitle: "Pi Sigma Alpha"
+#       subhref: "/for-students/pi-sigma-alpha/"
 
 - title: "Research"
   href: "/research/"
@@ -29,3 +29,21 @@
       subhref: "http://posc3610.svmiller.com"
     - subtitle: "POSC 3630 – United States Foreign Policy"
       subhref: "/teaching/posc-3630-united-states-foreign-policy/"
+    - subtitle: "POST 8000 - Foundations of Social Science Research for Public Policy"
+      subhref: "http://post8000.svmiller.com/"
+
+- title: "Miscelánea"
+  href: "/miscelanea/"
+  subcategories:
+    - subtitle: "Presentations"
+      subhref: "/presentations/"
+    - subtitle: "Letters of Recommendation"
+      subhref: "/for-students/letters-of-recommendation/"
+    - subtitle: "Pi Sigma Alpha"
+      subhref: "/for-students/pi-sigma-alpha/"
+    # - subtitle: "Clean USAID Greenbook Data (2014)"
+    #   subhref: "/miscellany/clean-usaid-greenbook-data/"
+    # - subtitle: "Journal of Peace Research *.bst File (2014)"
+    #   subhref: "/miscellany/journal-of-peace-research-bst-file/"
+    # - subtitle: "My Custom Beamer Style (2015)"
+    #   subhref: "/miscellany/my-custom-clemson-themed-beamer-style/"
