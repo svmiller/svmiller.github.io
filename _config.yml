@@ -1,29 +1,22 @@
 # Site settings
-title: Steven V. Miller
-email: svmille@clemson.edu
+title: Srikrishnan Research Group
+email: vs498@cornell.edu
 description: > # this means to ignore newlines until "baseurl:"
-  I'm a political scientist at Clemson University with research interests in
-  international conflict and political behavior. Topics on my site include
-  my teaching interests, R, LaTeX, and professional development.
+  This is the website for the Srikrishnan Research Group at Cornell BEE. We study the impact of dynamic environmental hazards, particularly those intensified by climate change, on infrastructure performance and management. We are interested in a broad range of applications.
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://svmiller.com" # the base hostname & protocol for your site
-twitter_username: stevenvmiller
-github_username:  svmiller
-orcid_id: 0000-0003-4072-6263
-google_scholar_id: BNr-fb8AAAAJ
+url: "/" # the base hostname & protocol for your site
+github:  srikrishnan-lab
+office: 318 Riley-Robb Hall
+department: Biological & Environmental Engineering
+city: Ithaca, NY
+zip: 14853-5701
 
 # Build settings
 markdown: kramdown
 
 # Other options
 permalink: blog/:year/:month/:title/
-jobtitle: "Associate Professor"
 excerpt_separator: "<!--more-->"
-
-# SEO stuff
-google_author: "https://plus.google.com/u/0/110288225974212014913"
-google_site_verification: "nfd8hkZSc3GmIivrLCudAdTq5m1kI0Ao7P1UyIt9z5Q"
-bing_webmastertools_id: "E24D33E8D53D5730794478CB209F15E5"
 
 plugins_dir:
   - jekyll-sitemap
