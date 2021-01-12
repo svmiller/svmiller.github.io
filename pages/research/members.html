@@ -29,6 +29,10 @@ permalink: members/
       {{ person.position }}
     </h3>
     <div>
+      {% if person.pronouns %}
+      <img src="https://img.shields.io/static/v1?label=pronouns&message={{ person.pronouns }}&color=red&style=flat-square"
+        alt="Pronouns">
+      {% endif %}
     {% if person.email %}
     <a href="mailto:{{ person.email }}">
       <img
@@ -84,12 +88,7 @@ permalink: members/
   </div>
   <!-- bio and description -->
   {% if person.bio %}
-  </br>
   <p>{{ person.bio | markdownify }}</p>
-  {% endif %}
-  {% if person.pronouns %}
-  <img src="https://img.shields.io/static/v1?label=pronouns&message={{ person.pronouns }}&color=red&style=flat-square"
-    alt="Pronouns">
   {% endif %}
 </div>
 </div>

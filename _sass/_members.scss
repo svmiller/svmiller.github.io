@@ -3,17 +3,18 @@
   */
 
 .group-member-photo {
-  grid-column: span 4;
+  grid-column: span 3;
   align-content: center;
   justify-content: center;
 }
 
 .group-member-bio {
-  grid-column: span 8;
+  grid-column: span 9;
 }
 
 .group-member-photo img {
   width: 200px;
+  padding-top: 50px;
 }
 
 .group-member-bio h3 {
@@ -21,4 +22,17 @@
   font-style: normal;
   color: #222222;
   font-size: $base-font-size * 1.5;
+}
+
+@media (max-width: 480px) {
+  .group-member-photo {
+    grid-column: span 4;
+  }
+}
+
+@media (max-width: 768px) {
+  .group-member-photo {
+    padding-top: 0;
+    grid-column: span 8;
+  }
 }
