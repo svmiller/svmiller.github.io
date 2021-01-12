@@ -1,6 +1,7 @@
 ---
 title: "Excited to join Cornell BEE"
 subtitle: "I'm very excited to announce that I will join the Cornell Department of Biological & Environmental Engineering in July 2021"
+author: Vivek Srikrishnan
 tags: news
 category: Announcements
 layout: post
