@@ -251,6 +251,13 @@ article ul#archive > li:before {
   content: none;
 }
 
+.archivelink {
+  text-align: right;
+}
+
+.archivelink a:link {
+  color: $cornell-red;
+}
 
 /* ul#archive li span {
        color: #000;
