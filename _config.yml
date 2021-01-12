@@ -18,6 +18,10 @@ markdown: kramdown
 permalink: blog/:year/:month/:title/
 excerpt_separator: "<!--more-->"
 
+# logos and images
+logo_group: /assets/img/logos/sea_level_rise_banner.png
+logo_cornell: /assets/img/logos/cornell-reduced-red.svg
+
 plugins_dir:
   - jekyll-sitemap
 
