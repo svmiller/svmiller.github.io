@@ -1,39 +1,20 @@
-#stevetable {
-	width: 100%;
-	margin-bottom: 15px;
-	border-collapse: collapse;
-
+.news ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
-#stevetable caption {
-	font-weight: bold;
-	padding-bottom: 5px;
+.news ul li {
+	border: 1px solid #ddd;
+	margin-top: -1px;
+	background-color: #f7f7f7;
+	padding: 12px;
 }
 
-#stevetable th {
-	font-weight: bold;
-	color: #fff;
-	border-bottom: 1px #ddd solid;
-	background: $cornell-red;
-	padding: 7px 3px 7px 10px
+.news p {
+	font-size: $small-font-size;
 }
 
-
-#stevetable td {
-	padding: 3px 3px 3px 10px;
-	border-bottom: 1px #ddd solid;
-}
-
-#stevetable tr:nth-child(even) {background: #f9f9f9}
-#stevetable tr:nth-child(odd) {background: #fdfdfd}
-
-
-#stargazer table {
-  margin: 0px auto;
-}
-
-
-#stargazer td {
-  padding-left: 10px;
-  padding-right: 10px;
+.news h4 {
+	font-size: $base-font-size;
 }
