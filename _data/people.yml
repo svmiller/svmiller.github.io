@@ -1,0 +1,16 @@
+# Information about lab members goes here. HTML code can be included.
+
+- first_name: Vivek # your first name
+  last_name: Srikrishnan # your last name
+  title: Dr. # Mr., Mrs., Ms., Dr., etc
+  anchor: vsrikrish # allows you to link to a specific person
+  position: Principal Investigator # your role within the group
+  photo: vsrikrish.png # your photo in /assets/img/members/
+  cv: https://srikrishnan-lab.github.io/assets/pdf/Srikrishnan-CV.pdf # URL for your CV -- optional, but recommended
+  email: vs498@cornell.edu
+  github: vsrikrish # your github user name
+  scholar: CY_JxugAAAAJ # your google scholar id
+  orcid: 0000-0003-0049-3805 # your orcid id
+  pronouns: he/him/his # your preferred pronouns
+  bio: # format with Markdown
+    Vivek Srikrishnan is an Assistant Research Professor in the Earth and Environmental Systems Institute at the Pennsylvania State University, as well as a Visiting Assistant Professor in the department of Biological & Environmental Engineering at Cornell. He will join BEE in July 2021 as an Assistant Professor. He works on climate risk management, at the interface of systems engineering, climate dynamics, economics, data science, and decision science. Dr. Srikrishnan received an M.S. and Ph.D in Energy & Mineral Engineering from Penn State and a B.S. in Mathematics and a B.A. in Philosophy from the University of Illinois at Urbana-Champaign.

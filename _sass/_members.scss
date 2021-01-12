@@ -1,0 +1,24 @@
+/**
+  * Group member layouts
+  */
+
+.group-member-photo {
+  grid-column: span 4;
+  align-content: center;
+  justify-content: center;
+}
+
+.group-member-bio {
+  grid-column: span 8;
+}
+
+.group-member-photo img {
+  width: 200px;
+}
+
+.group-member-bio h3 {
+  font-family: "Mulish", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  color: #222222;
+  font-size: $base-font-size * 1.5;
+}
