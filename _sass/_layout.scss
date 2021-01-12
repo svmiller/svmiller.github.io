@@ -59,9 +59,15 @@
     text-align: center;
 }
 
-.site-footer img {
-  padding-top: 20px;
+.footer {
+  grid-column: span 12
+  text-align: center;
 }
+
+.footer img {
+  padding-top: 15px
+}
+
 /**
  * Page content
  */
