@@ -1,26 +1,26 @@
 #stevetable {
 	width: 100%;
 	margin-bottom: 15px;
-	border-collapse: collapse; 
+	border-collapse: collapse;
 
 }
 
 #stevetable caption {
 	font-weight: bold;
 	padding-bottom: 5px;
-} 
+}
 
 #stevetable th {
 	font-weight: bold;
 	color: #fff;
 	border-bottom: 1px #ddd solid;
-	background: $clemson-purple;
+	background: $cornell-red;
 	padding: 7px 3px 7px 10px
 }
 
 
 #stevetable td {
-	padding: 3px 3px 3px 10px;	
+	padding: 3px 3px 3px 10px;
 	border-bottom: 1px #ddd solid;
 }
 

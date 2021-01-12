@@ -1,75 +1,3 @@
-
-
-/* .site-nav {
-    float: right;
-    line-height: 40px;
-		margin-top: 15px;
-
-    .menu-icon {
-        display: none;
-    }
-
-    .page-link {
-        color: #ffffff;
-    background: #f66733;
-        line-height: $base-line-height;
-
-        // Gaps between nav items, but not on the first one
-        &:not(:first-child) {
-            margin-left: 20px;
-        }
-    }
-
-
-
-    @include media-query($on-palm) {
-        position: absolute;
-        top: 9px;
-        right: 30px;
-        background-color: $background-color;
-        border: 1px solid $grey-color-light;
-        border-radius: 5px;
-        text-align: right;
-
-        .menu-icon {
-            display: block;
-            float: right;
-            width: 36px;
-            height: 26px;
-            line-height: 0;
-            padding-top: 10px;
-            text-align: center;
-
-            > svg {
-                width: 18px;
-                height: 15px;
-
-                path {
-                    fill: $grey-color-dark;
-                }
-            }
-        }
-
-        .trigger {
-            clear: both;
-            display: none;
-        }
-
-        &:hover .trigger {
-            display: block;
-            padding-bottom: 5px;
-        }
-
-        .page-link {
-            display: block;
-            padding: 5px 10px;
-        }
-    }
-}
-*/ 
-
-
-
 /**
  * Site footer
  */
@@ -183,8 +111,8 @@ h1 /* .post-title */ {
 /*    font-size: 42px; */
     letter-spacing: -1px;
     line-height: 1;
-		font-family: 'Titillium Web', sans-serif;
-		color: $clemson-purple;
+		font-family: 'Muli', sans-serif;
+		color: $cornell-red;
 
     @include media-query($on-laptop) {
 /*        font-size: 36px; */
@@ -223,8 +151,8 @@ h1 /* .post-title */ {
 }
 
 						.footnotes ol li {list-style-type:decimal;}
-						.footnotes ol {font-size:.85em; color:#666666;}	
-	
+						.footnotes ol {font-size:.85em; color:#666666;}
+
 html {
   overflow-y: scroll;
 }
@@ -237,7 +165,7 @@ ul.listing {
 ul.listing li.listing-seperator {
 	padding-top: 15px;
 	font-weight: bold;
-	font-family: 'Titillium Web', sans-serif;
+	font-family: 'Jaldi', sans-serif;
 	font-size: 1.17em;
 }
 
@@ -250,9 +178,9 @@ ul.listing li.listing-item time {
 }
 
 ul.listing li.listing-item a {
-	color: $clemson-purple;
+	color: $cornell-grey;
 	font-weight: 400;
-	font-family: 'Titillium Web', sans-serif;
+	font-family: 'Jaldi', sans-serif;
 }
 
 
@@ -291,9 +219,9 @@ ul#archive li.alt {
 }
 
 ul#archive li span a {
-       color: $clemson-purple;
+       color: $cornell-grey;
 	font-weight: bold;
-font-family: 'Titillium Web', sans-serif;
+font-family: 'Jaldi', sans-serif;
 }
 
 
@@ -316,7 +244,7 @@ article ul {
 article ul > li:before {
   content: "–"; /* en dash */
   position: absolute;
-  margin-left: -1.1em; 
+  margin-left: -1.1em;
 }
 
 article ul#archive > li:before {
