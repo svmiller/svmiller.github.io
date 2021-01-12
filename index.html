@@ -40,12 +40,12 @@ layout: default
 			<ul>
 			{% for post in site.tags.news limit:4 %}
       {% if post.category != "album" %}
-      <a href="{{ post.url }}">
+      <li><a href="{{ post.url }}">
 				<small
             style:"text-align: right">{{ post.date | date_to_string }}</small>
         <h4>{{ post.title }}</h4>
         <p>{{ post.subtitle }}</p>
-      </a>
+      </a></li>
       {% endif %}
       {% endfor %}
 		</ul>
