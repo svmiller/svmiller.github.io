@@ -6,7 +6,7 @@
 
 
 // Our variables
-$base-font-family: 'Jaldi', Helvetica, Arial, sans-serif;
+$base-font-family: 'Metrophobic', Helvetica, Arial, sans-serif;
 $base-font-size:   .95em;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
@@ -57,5 +57,6 @@ $on-laptop:        950px;
         "layout",
         "syntax-highlighting",
 	"fancy-image",
-	"table"
+	"table",
+  "logos"
 ;
