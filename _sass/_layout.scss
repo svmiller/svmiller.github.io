@@ -1,4 +1,51 @@
 /**
+  * Grid system
+  */
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 10px;
+}
+
+.blank {
+  grid-column: span 2;
+}
+
+.main {
+  grid-column: span 8;
+  justify-content: center;
+}
+
+.submain  {
+  grid-column: span 4;
+  justify-content: center;
+}
+
+.news {
+  grid-column: span 4;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  .news {
+    grid-column: span 8;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .news {
+    grid-column: span 4;
+  }
+}
+
+
+/**
  * Site footer
  */
 .site-footer {
