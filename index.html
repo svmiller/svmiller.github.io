@@ -2,16 +2,51 @@
 layout: default
 ---
 
+	<div class="grouplogo">
+	</div>
+	<br>
+
+<div class="container">
+	<div class="blank">
+	</div>
+	<div class="main">
+
+	<h1>Climate, Risk, and Complex Systems</h1>
+
+	<p>Climate change is a systems problem. Managing climate risk requires infrastructure investments aimed at reducing greenhouse gas emissions and adapting to changes in extreme events. These investment strategies need to account for deep uncertainty and complex dynamics across sectors and between the natural and human systems. They affect stakeholders with diverse values and preferences, and have the potential to increase equity, resilience, and justice.</p>
+
+	<p>The Srikrishnan Research Group works on improving the resilience of societal units, from individual to global, to deeply uncertain and dynamic environmental risks. Our interdisciplinary, mission-oriented research addresses a broad set of problems, from flood risk management to energy-system investments.</p>
+
+	</div>
 
 
-<div class="home">
-	
-<h1>Welcome</h1>
-	
-	<p>This is my academic website, where you can find information on my current research and the classes that I teach. I am an associate professor in the <a href="http://www.clemson.edu/cbbs/departments/political-science/">Department of Political Science</a> at <a href="http://www.clemson.edu/">Clemson University</a> and a <a href="https://www.bitss.org/people/steven-miller/">BITSS Catalyst</a> with the <a href="https://www.bitss.org">Berkeley Initiative for Transparency in the Social Sciences</a>.</p>
+	<div class="submain">
+		<h2>Research Areas</h2>
 
-	<p>I use statistics and machine learning to understand why people adopt authoritarian political beliefs or embrace autocratic leaders in response to real or perceived threats. This puts my research and teaching interests at the broad intersection of international conflict and political behavior. My research outputs have appeared in peer-reviewed journals like <em>Comparative Political Studies</em>, <em>International Studies Quarterly</em>, <em>Journal of Conflict Resolution</em>, <em>Journal of Peace Research</em>, <em>Political Behavior</em>, and <em>Political Research Quarterly</em>, to name a few. More recent research is funded by the National Science Foundation and has even been highlighted in newspapers like <em>The New York Times</em> and <em>The Washington Post</em>.</p>
+		<p>Find out more about our current research areas. We do mission-oriented basic research addressing a broad range of stakeholder-driven climate risk management problems.</p>
 
-{% include image.html url="/images/buckeyeprotesteriran.jpg" caption="A supporter of defeated Iranian presidential candidate Mir Hossein Mousavi gestures during a rally in Tehran on June 15, 2009 (AFP/Getty Images)." width=580 align="center" %}
+		<a href="/areas/">Learn More &rarr;</a>
+	</div>
+	<div class="submain">
+		<h2>Join The Team!</h2>
 
+		<p>We are an inclusive group working on interdisciplinary, societally impactful problems, at the interface of statistics, decision-making, and systems engineering.</p>
+
+		<a href="/join/">Learn More &rarr;</a>
+	</div>
+
+	<div class="news">
+		<h2>News &amp; Updates</h3>
+			<ul>
+			{% for post in site.tags.news limit:4 %}
+      {% if post.category != "album" %}
+      <a href="{{ post.url }}">
+        <h4><small
+            style:"text-align: right">{{ post.date | date_to_string }}</small>{{ post.title }}</h4>
+        <p>{{ post.subtitle }}</p>
+      </a>
+      {% endif %}
+      {% endfor %}
+		</ul>
+</div>
 </div>
