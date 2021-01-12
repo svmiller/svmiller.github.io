@@ -1,49 +1,19 @@
-- title: "About"
-  href: "/about/"
-
-- title: "Blog"
-  href: "/blog/"
-
-- title: "CV"
-  href: "/cv/"
-
-# - title: "For Students"
-#   href: "/for-students/"
-#   subcategories:
-#     - subtitle: "Letters of Recommendation"
-#       subhref: "/for-students/letters-of-recommendation/"
-#     - subtitle: "Pi Sigma Alpha"
-#       subhref: "/for-students/pi-sigma-alpha/"
+- title: "Members"
+  href: "/members/"
 
 - title: "Research"
   href: "/research/"
+  subcategories:
+    - title: "Research Areas"
+      href: /areas/
+    - title: "Publications"
+      href: /publications/
 
 - title: "Teaching"
   href: "/teaching/"
-  subcategories:
-    - subtitle: "POSC 1020 – Introduction to International Relations"
-      subhref: "http://posc1020.svmiller.com"
-    - subtitle: "POSC 3410 – Quantitative Methods in Political Science"
-      subhref: "http://posc3410.svmiller.com"
-    - subtitle: "POSC 3610 – International Conflict"
-      subhref: "http://posc3610.svmiller.com"
-    - subtitle: "POSC 3630 – United States Foreign Policy"
-      subhref: "/teaching/posc-3630-united-states-foreign-policy/"
-    - subtitle: "POST 8000 - Foundations of Social Science Research for Public Policy"
-      subhref: "http://post8000.svmiller.com/"
 
-- title: "Miscelánea"
-  href: ""
-  subcategories:
-    - subtitle: "Presentations"
-      subhref: "/presentations/"
-    - subtitle: "Letters of Recommendation"
-      subhref: "/for-students/letters-of-recommendation/"
-    - subtitle: "Pi Sigma Alpha"
-      subhref: "/for-students/pi-sigma-alpha/"
-    # - subtitle: "Clean USAID Greenbook Data (2014)"
-    #   subhref: "/miscellany/clean-usaid-greenbook-data/"
-    # - subtitle: "Journal of Peace Research *.bst File (2014)"
-    #   subhref: "/miscellany/journal-of-peace-research-bst-file/"
-    # - subtitle: "My Custom Beamer Style (2015)"
-    #   subhref: "/miscellany/my-custom-clemson-themed-beamer-style/"
+- title: "Join Us"
+  href: "/join/"
+
+- title: "Contact"
+  href: "/contact/"

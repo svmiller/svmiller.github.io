@@ -3,9 +3,9 @@
  */
 .site-header {
     border-top: 0px solid $grey-color-dark;
-	border-bottom: 4px solid $clemson-purple;
+	border-bottom: 4px solid $cornell-red;
     min-height: 56px;
-    background: #f66733;
+    background: $cornell-grey;
     // Positioning context for the mobile navigation icon
     position: relative;
 
@@ -19,11 +19,11 @@
     margin-bottom: 0;
     float: left;
     font-weight: 500;
-		font-family: 'Titillium Web', sans-serif;
-    color: #ffffff;
+		font-family: 'Lato', sans-serif;
+    color: #f7f7f7;
     &,
     &:visited {
-        color: #ffffff;
+        color: #f7f7f7;
     }
     &,
     &:hover {
@@ -37,7 +37,7 @@
 }
 
 .site-nav ul li a {
-	color: #fff;
+	color: #f7f7f7;
 }
 
 .site-nav ul {
@@ -53,7 +53,7 @@
 	padding: 0;
 	list-style-type: none;
 	text-transform: uppercase;
-		font-family: 'Titillium Web', sans-serif;
+		font-family: 'Lato', sans-serif;
 
 }
 
@@ -70,7 +70,7 @@
 
 .site-nav a {
 	display: block;
-        color: #ffffff;
+        color: #f7f7f7;
 }
 
 /* Sub Menu */
@@ -82,23 +82,23 @@
 	letter-spacing: 0;
 	line-height: 1.2em;
 	padding: 4px 10px;
-color: $clemson-purple;
+color: $cornell-red;
 
 }
 
 .site-nav .sub-menu a:hover {
-	color: $clemson-orange;
+	color: $cornell-red;
 }
 .site-nav  .sub-menu {
-	background: #ffffff;
-	border-color: $clemson-purple;
+	background: #f7f7f7;
+	border-color: $cornell-red;
 	min-width: 265px;
 
 	z-index:2147483647;
 }
 .site-nav .sub-menu li.current-menu-item > a {
-	border-left-color: $clemson-orange;
-	border-right-color: $clemson-orange;
+	border-left-color: $cornell-red;
+	border-right-color: $cornell-red;
 	border-right: 0px;
 
 }
@@ -156,8 +156,8 @@ z-index:999;
     }
 
     .page-link {
-        color: #ffffff;
-    background: $clemson-orange;
+        color: #f7f7f7;
+//    background: $cornell-red;
         line-height: $base-line-height;
 
         // Gaps between nav items, but not on the first one
@@ -170,10 +170,10 @@ z-index:999;
 
     @include media-query($on-palm) {
         position: absolute;
-        top: 9px;
+        top: 20px;
         right: 30px;
-        background-color: $background-color;
-        border: 1px solid $grey-color-light;
+      //  background-color: $background-color;
+//        border: 1px solid $grey-color-light;
         border-radius: 5px;
         text-align: right;
 
@@ -191,7 +191,7 @@ z-index:999;
                 height: 15px;
 
                 path {
-                    fill: $grey-color-dark;
+                    fill: #f7f7f7;
                 }
             }
         }
@@ -209,8 +209,7 @@ z-index:999;
         .page-link {
             display: block;
             padding: 5px 10px;
+            color: $cornell-red;
         }
     }
 }
-
-
