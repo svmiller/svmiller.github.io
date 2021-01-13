@@ -338,7 +338,20 @@ create_stateyears()
 ```
 
 ```
-## Error in create_stateyears(): could not find function "create_stateyears"
+## # A tibble: 16,731 x 3
+##    ccode statenme                  year
+##    <dbl> <chr>                    <int>
+##  1     2 United States of America  1816
+##  2     2 United States of America  1817
+##  3     2 United States of America  1818
+##  4     2 United States of America  1819
+##  5     2 United States of America  1820
+##  6     2 United States of America  1821
+##  7     2 United States of America  1822
+##  8     2 United States of America  1823
+##  9     2 United States of America  1824
+## 10     2 United States of America  1825
+## # … with 16,721 more rows
 ```
 
 ### Create a State-Year Panel of Gleditsch-Ward states {#creategw}
@@ -351,7 +364,20 @@ create_stateyears(system="gw")
 ```
 
 ```
-## Error in create_stateyears(system = "gw"): could not find function "create_stateyears"
+## # A tibble: 18,289 x 3
+##    gwcode statename                 year
+##     <dbl> <chr>                    <int>
+##  1      2 United States of America  1816
+##  2      2 United States of America  1817
+##  3      2 United States of America  1818
+##  4      2 United States of America  1819
+##  5      2 United States of America  1820
+##  6      2 United States of America  1821
+##  7      2 United States of America  1822
+##  8      2 United States of America  1823
+##  9      2 United States of America  1824
+## 10      2 United States of America  1825
+## # … with 18,279 more rows
 ```
 
 ### Create a Panel of ISO Codes {#createiso}
@@ -369,7 +395,20 @@ ISO_3166_1 %>% as_tibble() %>%
 ```
 
 ```
-## Error in as_tibble(.): object 'ISO_3166_1' not found
+## # A tibble: 249 x 2
+##    Alpha_3 Name                
+##    <chr>   <chr>               
+##  1 ABW     Aruba               
+##  2 AFG     Afghanistan         
+##  3 AGO     Angola              
+##  4 AIA     Anguilla            
+##  5 ALA     Åland Islands       
+##  6 ALB     Albania             
+##  7 AND     Andorra             
+##  8 ARE     United Arab Emirates
+##  9 ARG     Argentina           
+## 10 ARM     Armenia             
+## # … with 239 more rows
 ```
 
 `ISOcodes` does have another data frame for "retired" codes. This is `ISO_3166_3` in the `ISOcodes` package. I encourage my student to take stock of how applicable some of these observations are for their particular analysis. My previous point about ISO codes---they don't neatly communicate a temporal dimension---still holds.
@@ -381,10 +420,205 @@ ISO_3166_3 %>% as_tibble() %>%
   select(-Alpha_4, -Numeric)
 ```
 
-
-```
-## Error in as_tibble(.): object 'ISO_3166_3' not found
-```
+<table id="stevetable">
+<caption>A Table of Retired ISO Countries/Observations</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> ISO (3) </th>
+   <th style="text-align:left;"> Name </th>
+   <th style="text-align:center;"> Date Withdrawn </th>
+   <th style="text-align:left;"> Comment </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> AFI </td>
+   <td style="text-align:left;"> French Afars and Issas </td>
+   <td style="text-align:center;"> 1977 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ANT </td>
+   <td style="text-align:left;"> Netherlands Antilles </td>
+   <td style="text-align:center;"> 1993-07-12 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ATB </td>
+   <td style="text-align:left;"> British Antarctic Territory </td>
+   <td style="text-align:center;"> 1979 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> BUR </td>
+   <td style="text-align:left;"> Burma, Socialist Republic of the Union of </td>
+   <td style="text-align:center;"> 1989-12-05 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> BYS </td>
+   <td style="text-align:left;"> Byelorussian SSR Soviet Socialist Republic </td>
+   <td style="text-align:center;"> 1992-06-15 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> CSK </td>
+   <td style="text-align:left;"> Czechoslovakia, Czechoslovak Socialist Republic </td>
+   <td style="text-align:center;"> 1993-06-15 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SCG </td>
+   <td style="text-align:left;"> Serbia and Montenegro </td>
+   <td style="text-align:center;"> 2006-06-05 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> CTE </td>
+   <td style="text-align:left;"> Canton and Enderbury Islands </td>
+   <td style="text-align:center;"> 1984 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> DDR </td>
+   <td style="text-align:left;"> German Democratic Republic </td>
+   <td style="text-align:center;"> 1990-10-30 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> DHY </td>
+   <td style="text-align:left;"> Dahomey </td>
+   <td style="text-align:center;"> 1977 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ATF </td>
+   <td style="text-align:left;"> French Southern and Antarctic Territories </td>
+   <td style="text-align:center;"> 1979 </td>
+   <td style="text-align:left;"> now split between AQ and TF </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> FXX </td>
+   <td style="text-align:left;"> France, Metropolitan </td>
+   <td style="text-align:center;"> 1997-07-14 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> GEL </td>
+   <td style="text-align:left;"> Gilbert and Ellice Islands </td>
+   <td style="text-align:center;"> 1979 </td>
+   <td style="text-align:left;"> now split into Kiribati and Tuvalu </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> HVO </td>
+   <td style="text-align:left;"> Upper Volta, Republic of </td>
+   <td style="text-align:center;"> 1984 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> JTN </td>
+   <td style="text-align:left;"> Johnston Island </td>
+   <td style="text-align:center;"> 1986 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> MID </td>
+   <td style="text-align:left;"> Midway Islands </td>
+   <td style="text-align:center;"> 1986 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> NHB </td>
+   <td style="text-align:left;"> New Hebrides </td>
+   <td style="text-align:center;"> 1980 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ATN </td>
+   <td style="text-align:left;"> Dronning Maud Land </td>
+   <td style="text-align:center;"> 1983 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> NTZ </td>
+   <td style="text-align:left;"> Neutral Zone </td>
+   <td style="text-align:center;"> 1993-07-12 </td>
+   <td style="text-align:left;"> formerly between Saudi Arabia and Iraq </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> PCI </td>
+   <td style="text-align:left;"> Pacific Islands (trust territory) </td>
+   <td style="text-align:center;"> 1986 </td>
+   <td style="text-align:left;"> divided into FM, MH, MP, and PW </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> PUS </td>
+   <td style="text-align:left;"> US Miscellaneous Pacific Islands </td>
+   <td style="text-align:center;"> 1986 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> PCZ </td>
+   <td style="text-align:left;"> Panama Canal Zone </td>
+   <td style="text-align:center;"> 1980 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> RHO </td>
+   <td style="text-align:left;"> Southern Rhodesia </td>
+   <td style="text-align:center;"> 1980 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SKM </td>
+   <td style="text-align:left;"> Sikkim </td>
+   <td style="text-align:center;"> 1975 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SUN </td>
+   <td style="text-align:left;"> USSR, Union of Soviet Socialist Republics </td>
+   <td style="text-align:center;"> 1992-08-30 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> TMP </td>
+   <td style="text-align:left;"> East Timor </td>
+   <td style="text-align:center;"> 2002-05-20 </td>
+   <td style="text-align:left;"> was Portuguese Timor </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> VDR </td>
+   <td style="text-align:left;"> Viet-Nam, Democratic Republic of </td>
+   <td style="text-align:center;"> 1977 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> WAK </td>
+   <td style="text-align:left;"> Wake Island </td>
+   <td style="text-align:center;"> 1986 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> YMD </td>
+   <td style="text-align:left;"> Yemen, Democratic, People's Democratic Republic of </td>
+   <td style="text-align:center;"> 1990-08-14 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> YUG </td>
+   <td style="text-align:left;"> Yugoslavia, Socialist Federal Republic of </td>
+   <td style="text-align:center;"> 1993-07-28 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ZAR </td>
+   <td style="text-align:left;"> Zaire, Republic of </td>
+   <td style="text-align:center;"> 1997-07-14 </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+</tbody>
+</table>
 
 ### Create a State-Year Panel of ISO Codes {#createstateyeariso}
 
@@ -405,7 +639,20 @@ ISO_3166_1 %>% as_tibble() %>%
 ```
 
 ```
-## Error in as_tibble(.): object 'ISO_3166_1' not found
+## # A tibble: 2,739 x 3
+##    Alpha_3 Name   year
+##    <chr>   <chr> <int>
+##  1 ABW     Aruba  2010
+##  2 ABW     Aruba  2011
+##  3 ABW     Aruba  2012
+##  4 ABW     Aruba  2013
+##  5 ABW     Aruba  2014
+##  6 ABW     Aruba  2015
+##  7 ABW     Aruba  2016
+##  8 ABW     Aruba  2017
+##  9 ABW     Aruba  2018
+## 10 ABW     Aruba  2019
+## # … with 2,729 more rows
 ```
 
 ### Create a Panel of UN M49 Codes {#createunm49}
@@ -420,7 +667,20 @@ UN_M.49_Countries %>% as_tibble() %>%
 ```
 
 ```
-## Error in as_tibble(.): object 'UN_M.49_Countries' not found
+## # A tibble: 249 x 2
+##    Code  Name               
+##    <chr> <chr>              
+##  1 004   Afghanistan        
+##  2 248   Åland Islands      
+##  3 008   Albania            
+##  4 012   Algeria            
+##  5 016   American Samoa     
+##  6 020   Andorra            
+##  7 024   Angola             
+##  8 660   Anguilla           
+##  9 010   Antarctica         
+## 10 028   Antigua and Barbuda
+## # … with 239 more rows
 ```
 
 ### Use `countrycode` for Matching/Merging Across Classification Systems {#usecountrycode}
@@ -439,15 +699,322 @@ ISO_3166_1 %>% as_tibble() %>%
 ```
 
 ```
-## Error in as_tibble(.): object 'ISO_3166_1' not found
+## Warning: Problem with `mutate()` input `ccode`.
+## ℹ Some values were not matched unambiguously: ABW, AIA, ALA, ASM, ATA, ATF, BES, BLM, BMU, BVT, CCK, COK, CUW, CXR, CYM, ESH, FLK, FRO, GGY, GIB, GLP, GRL, GUF, GUM, HKG, HMD, IMN, IOT, JEY, MAC, MAF, MNP, MSR, MTQ, MYT, NCL, NFK, NIU, PCN, PRI, PSE, PYF, REU, SGS, SHN, SJM, SPM, SRB, SXM, TCA, TKL, UMI, VGB, VIR, WLF
+## 
+## ℹ Input `ccode` is `countrycode(Alpha_3, "iso3c", "cown")`.
+```
+
+```
+## Warning in countrycode(Alpha_3, "iso3c", "cown"): Some values were not matched unambiguously: ABW, AIA, ALA, ASM, ATA, ATF, BES, BLM, BMU, BVT, CCK, COK, CUW, CXR, CYM, ESH, FLK, FRO, GGY, GIB, GLP, GRL, GUF, GUM, HKG, HMD, IMN, IOT, JEY, MAC, MAF, MNP, MSR, MTQ, MYT, NCL, NFK, NIU, PCN, PRI, PSE, PYF, REU, SGS, SHN, SJM, SPM, SRB, SXM, TCA, TKL, UMI, VGB, VIR, WLF
+```
+
+```
+## # A tibble: 249 x 3
+##    Alpha_3 Name                 ccode
+##    <chr>   <chr>                <dbl>
+##  1 ABW     Aruba                   NA
+##  2 AFG     Afghanistan            700
+##  3 AGO     Angola                 540
+##  4 AIA     Anguilla                NA
+##  5 ALA     Åland Islands           NA
+##  6 ALB     Albania                339
+##  7 AND     Andorra                232
+##  8 ARE     United Arab Emirates   696
+##  9 ARG     Argentina              160
+## 10 ARM     Armenia                371
+## # … with 239 more rows
 ```
 
 I do want the reader to observe something. `countrycode()` cannot perfectly match observations. In those circumstances, the ensuing output is an NA. Here are the NAs returned from this output.
 
-
-```
-## Error in as_tibble(.): object 'ISO_3166_1' not found
-```
+<table id="stevetable">
+<caption>ISO Codes Without CoW Codes</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> ISO (3) </th>
+   <th style="text-align:left;"> Name </th>
+   <th style="text-align:center;"> CoW Code </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> ABW </td>
+   <td style="text-align:left;"> Aruba </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> AIA </td>
+   <td style="text-align:left;"> Anguilla </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ALA </td>
+   <td style="text-align:left;"> Åland Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ASM </td>
+   <td style="text-align:left;"> American Samoa </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ATA </td>
+   <td style="text-align:left;"> Antarctica </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ATF </td>
+   <td style="text-align:left;"> French Southern Territories </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> BES </td>
+   <td style="text-align:left;"> Bonaire, Sint Eustatius and Saba </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> BLM </td>
+   <td style="text-align:left;"> Saint Barthélemy </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> BMU </td>
+   <td style="text-align:left;"> Bermuda </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> BVT </td>
+   <td style="text-align:left;"> Bouvet Island </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> CCK </td>
+   <td style="text-align:left;"> Cocos (Keeling) Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> COK </td>
+   <td style="text-align:left;"> Cook Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> CUW </td>
+   <td style="text-align:left;"> Curaçao </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> CXR </td>
+   <td style="text-align:left;"> Christmas Island </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> CYM </td>
+   <td style="text-align:left;"> Cayman Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> ESH </td>
+   <td style="text-align:left;"> Western Sahara </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> FLK </td>
+   <td style="text-align:left;"> Falkland Islands (Malvinas) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> FRO </td>
+   <td style="text-align:left;"> Faroe Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> GGY </td>
+   <td style="text-align:left;"> Guernsey </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> GIB </td>
+   <td style="text-align:left;"> Gibraltar </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> GLP </td>
+   <td style="text-align:left;"> Guadeloupe </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> GRL </td>
+   <td style="text-align:left;"> Greenland </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> GUF </td>
+   <td style="text-align:left;"> French Guiana </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> GUM </td>
+   <td style="text-align:left;"> Guam </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> HKG </td>
+   <td style="text-align:left;"> Hong Kong </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> HMD </td>
+   <td style="text-align:left;"> Heard Island and McDonald Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> IMN </td>
+   <td style="text-align:left;"> Isle of Man </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> IOT </td>
+   <td style="text-align:left;"> British Indian Ocean Territory </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> JEY </td>
+   <td style="text-align:left;"> Jersey </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> MAC </td>
+   <td style="text-align:left;"> Macao </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> MAF </td>
+   <td style="text-align:left;"> Saint Martin (French part) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> MNP </td>
+   <td style="text-align:left;"> Northern Mariana Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> MSR </td>
+   <td style="text-align:left;"> Montserrat </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> MTQ </td>
+   <td style="text-align:left;"> Martinique </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> MYT </td>
+   <td style="text-align:left;"> Mayotte </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> NCL </td>
+   <td style="text-align:left;"> New Caledonia </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> NFK </td>
+   <td style="text-align:left;"> Norfolk Island </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> NIU </td>
+   <td style="text-align:left;"> Niue </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> PCN </td>
+   <td style="text-align:left;"> Pitcairn </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> PRI </td>
+   <td style="text-align:left;"> Puerto Rico </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> PSE </td>
+   <td style="text-align:left;"> Palestine, State of </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> PYF </td>
+   <td style="text-align:left;"> French Polynesia </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> REU </td>
+   <td style="text-align:left;"> Réunion </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SGS </td>
+   <td style="text-align:left;"> South Georgia and the South Sandwich Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SHN </td>
+   <td style="text-align:left;"> Saint Helena, Ascension and Tristan da Cunha </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SJM </td>
+   <td style="text-align:left;"> Svalbard and Jan Mayen </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SPM </td>
+   <td style="text-align:left;"> Saint Pierre and Miquelon </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SRB </td>
+   <td style="text-align:left;"> Serbia </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> SXM </td>
+   <td style="text-align:left;"> Sint Maarten (Dutch part) </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> TCA </td>
+   <td style="text-align:left;"> Turks and Caicos Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> TKL </td>
+   <td style="text-align:left;"> Tokelau </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> UMI </td>
+   <td style="text-align:left;"> United States Minor Outlying Islands </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> VGB </td>
+   <td style="text-align:left;"> Virgin Islands, British </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> VIR </td>
+   <td style="text-align:left;"> Virgin Islands, U.S. </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> WLF </td>
+   <td style="text-align:left;"> Wallis and Futuna </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+</tbody>
+</table>
 
 
 Some of this is by design. For example, there's now CoW code for Aruba (`ABW`) because Aruba does not exist in the CoW system. That'll be the bulk of the warnings returned by `countrycode()` for a case like this and you can safely ignore those. Some of this is, well, a headache you'll need to fix yourself. For example, Serbia (`SRB`) always throws `countrycode()` for a loop, but Serbia has always been 345 in the CoW system. You can fix that yourself with addendum to the `mutate()` wrapper. Something like `ccode = ifelse(Alpha_3 == "SRB", 345, ccode)` will work. 

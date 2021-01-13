@@ -39,6 +39,8 @@ library(tidyverse) # for all things workflow
 library(stevemisc) # my toy R package, via devtools::install_github("svmiller/stevemisc")
 library(stevedata) # my toy data package, via devtools::install_github("svmiller/stevedata")
 library(countrycode)
+library(peacesciencer)
+library(ISOcodes)
 library(knitr) # for tables
 library(kableExtra) # for prettier tables
 
