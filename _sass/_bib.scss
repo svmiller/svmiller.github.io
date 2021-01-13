@@ -2,17 +2,26 @@
   * bibliography styling
 */
 
-.bibcard {
-  grid-column: span 8;
-  background: #f7f7f7;
+.card {
+  width: 80%;
   border: 1px solid #222222;
+  margin: 20px;
 }
 
-.bibcard-body {
+.bibcard-ref {
   width: 100%;
+  padding: 5px;
 }
 
 .bibcard-notes {
   width: 100%;
   background: #222222;
+  padding: 0px;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.bibcard-notes a {
+  padding: 10px;
 }

@@ -5,7 +5,7 @@ description: > # this means to ignore newlines until "baseurl:"
   This is the website for the Srikrishnan Research Group at Cornell BEE. We study the impact of dynamic environmental hazards, particularly those intensified by climate change, on infrastructure performance and management. We are interested in a broad range of applications.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "/" # the base hostname & protocol for your site
-github:  srikrishnan-lab
+github:  vsrikrish
 office: 318 Riley-Robb Hall
 department: Biological & Environmental Engineering
 city: Ithaca, NY
@@ -42,8 +42,6 @@ exclude:
   - ".DS_Store"
   - "assets/less/"
   - "vendor"
-  - "pages/research/publications.html"
-  - "_layouts/bib.html"
 
 scholar:
   style: american-geophysical-union
