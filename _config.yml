@@ -30,7 +30,7 @@ repo: srikrishnan-lab.github.io
 branch: master
 destination: _site
 production_url: https://srikrishnan-lab.github.io
-source_url: https://github.com/srikrishnan-lab/srikrishnan-lab.github.io/
+source_url: https://github.com/srikrishnan-lab/srikrishnan-lab.github.io
 
 plugins_dir: "_plugins"
 plugins:
