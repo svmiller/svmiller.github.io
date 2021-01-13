@@ -34,7 +34,7 @@ source_url: https://github.com/srikrishnan-lab/srikrishnan-lab.github.io/
 
 plugins_dir: "_plugins"
 plugins:
-  - jekyll_scholar
+  - jekyll-scholar
 
 exclude:
   - "scripts"
