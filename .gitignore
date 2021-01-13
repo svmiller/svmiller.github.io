@@ -1,28 +1,25 @@
-_site
-.sass-cache
-/dross
-HIDEME
-/drafts
-/cache
-/docs/hidden
-/docs/job-materials
-/docs/non-academic-jobs
-/figure
+.DS_Store
 
-# I don't need anyone to see these files
-# They're intermediate output or private info
-docs/**/*.Rmd
-docs/**/*.tex
-docs/**/*.log
-*.Rproj
-.Rproj.user
+# Jekyll build
+/_site/
+.jekyll-metadata
+.jekyll-cache/
+#Gemfile.lock
 
-# ignore temp files w/ trailing ~
-*~
-
-# ignore hidden files
-.*
-
-# don't ignore the .gitignore file
-!.gitignore
-
+# site build
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+vendor
+Gemfile.lock
+node_modules
