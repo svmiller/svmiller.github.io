@@ -32,8 +32,9 @@ destination: _site
 production_url: https://srikrishnan-lab.github.io
 source_url: https://github.com/srikrishnan-lab/srikrishnan-lab.github.io/
 
-plugins_dir:
-  - jekyll-sitemap
+plugins_dir: "_plugins"
+plugins:
+  - jekyll_scholar
 
 exclude:
   - "scripts"
@@ -41,3 +42,13 @@ exclude:
   - ".DS_Store"
   - "assets/less/"
   - "vendor"
+
+scholar:
+  style: american-geophysical-union
+  source: ./_bibliography
+  bibliography: library.bib
+  bibliography_template: bib
+  sort_by: date,year,month
+  order: descending
+  bibliography_list_tag: div
+  bibliography_item_tag: div

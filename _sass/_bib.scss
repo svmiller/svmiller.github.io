@@ -1,0 +1,18 @@
+/**
+  * bibliography styling
+*/
+
+.bibcard {
+  grid-column: span 8;
+  background: #f7f7f7;
+  border: 1px solid #222222;
+}
+
+.bibcard-body {
+  width: 100%;
+}
+
+.bibcard-notes {
+  width: 100%
+  background: #222222;
+}
