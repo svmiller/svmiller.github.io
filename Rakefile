@@ -64,23 +64,13 @@ namespace :site do
 
     sh "bundle exec jekyll build"
 
-    Dir.mktmpdir do |tmp|
-      cp_r DESTINATION_DIR, tmp
-
-      pwd = Dir.pwd
-      Dir.chdir tmp
-      Dir.chdir DESTINATION_DIR
-
-      system "git init"
-      system "git add ."
-      message = "Site updated at #{Time.now.utc}"
-      system "git commit -m #{message.inspect}"
-      system "git remote add origin git@github.com:#{USERNAME}/#{REPO}.git"
-      system "git branch #{DESTINATION_BRANCH}"
-      system "git checkout #{DESTINATION_BRANCH}"
-      system "git push origin #{DESTINATION_BRANCH} --force"
-
-      Dir.chdir pwd
+    # Commit and push to github
+    sha = `git log`.match(/[a-z0-9]{40}/)[0]
+    Dir.chdir(CONFIG["destination"]) do
+      sh "git add --all ."
+      sh "git commit -m 'Updating to #{USERNAME}/#{REPO}@#{sha}.'"
+      sh "git push --quiet origin #{DESTINATION_BRANCH}"
+      puts "Pushed updated branch #{DESTINATION_BRANCH} to GitHub Pages"
     end
   end
 end
