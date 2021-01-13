@@ -42,7 +42,7 @@ exclude:
   - ".DS_Store"
   - "assets/less/"
   - "vendor"
-  - "pages/publications.html"
+  - "pages/research/publications.html"
   - "_layouts/bib.html"
 
 scholar:
