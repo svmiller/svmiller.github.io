@@ -55,4 +55,4 @@ jobs:
         CLEAN: true
         GIT_CONFIG_NAME: "Github Action"
         GIT_CONFIG_EMAIL: actions@github.com
-        COMMIT_MESSAGE: "Site update at $TIME -- ${{ github.event.head.commit_message }}""
+        COMMIT_MESSAGE: "Site update at $TIME -- ${{ github.event.head.commit_message }}"
