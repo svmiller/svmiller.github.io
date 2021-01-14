@@ -42,6 +42,14 @@ namespace :site do
     sh "bundle exec jekyll serve --watch"
   end
 
+  desc "Generate the site and push changes to remote origin"
+  task :deploy do
+    # Detect pull request
+    if ENV['TRAVIS_PULL_REQUEST'].to_s.to_i > 0
+      puts 'Pull request detected. Not proceeding with deploy.'
+      exit
+    end
+
     # Make sure destination folder exists as git repo
     check_destination
 
