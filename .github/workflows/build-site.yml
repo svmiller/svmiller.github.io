@@ -38,16 +38,8 @@ jobs:
         gem install bundler
         bundle install
         bundle exec jekyll build
-    - name: Get Time
-      id: time
-      uses: nanzm/get-time-action@v1.1
-      with:
-        timeZone: 8
-        format: 'YYYY-MM-DD HH:mm:ss'
     - name: Commit and push
       uses: JamesIves/github-pages-deploy-action@3.7.1
-      env:
-        TIME: "${{ steps.time.outputs.time }}"
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
@@ -55,4 +47,4 @@ jobs:
         CLEAN: true
         GIT_CONFIG_NAME: "Github Action"
         GIT_CONFIG_EMAIL: actions@github.com
-        COMMIT_MESSAGE: "Site update at $TIME -- ${{ github.event.head.commit_message }}"
+        COMMIT_MESSAGE: ${{ github.event.head.commit_message }}
