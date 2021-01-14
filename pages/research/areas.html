@@ -1,13 +1,13 @@
 ---
 layout: page
 title: Research Areas
-permalink: /research/areas
-___
+permalink: /research/areas/
+---
 
+<div class="container">
 {% assign pages = site.pages | sort:"order" %}
 {% for page in pages %}
 {% if page.path contains 'research-areas/' and page.path contains '.md' %}
-<div class="container">
   <div class="col-4">
     {% if page.image %}
       <img src="{{ page.image }}" style="padding-right: 20px" align="left" alt={{ page.title }} width=250px />
