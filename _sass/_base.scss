@@ -68,6 +68,10 @@ ul, ol {
     margin-left: $spacing-unit;
 }
 
+.past {
+  list-style-type: disc;
+}
+
 li {
     > ul,
     > ol {

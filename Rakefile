@@ -68,9 +68,11 @@ namespace :site do
     sha = `git log`.match(/[a-z0-9]{40}/)[0]
     Dir.chdir(CONFIG["destination"]) do
       system "git init"
+
       system "git add ."
       message = "Site updated at #{Time.now.utc}"
       system "git commit -m #{message.inspect}"
+      system "git remote add origin git@github.com:#{USERNAME}/#{REPO}.git"
       system "git branch #{DESTINATION_BRANCH}"
       system "git checkout #{DESTINATION_BRANCH}"
       system "git push origin #{DESTINATION_BRANCH} --force"
