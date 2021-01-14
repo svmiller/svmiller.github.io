@@ -32,4 +32,4 @@ jobs:
     - name: Build site
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: bundle exec rake site:build
+      run: bundle exec rake site:deploy
