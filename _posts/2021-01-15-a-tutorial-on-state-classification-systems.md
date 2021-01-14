@@ -688,7 +688,7 @@ UN_M.49_Countries %>% as_tibble() %>%
 
 While I encourage the student/reader to treat one classification system as a "master", it's highly unlikely the classification system that is the "master" will be the only one encountered in a particular project. For example, let's assume our master system is the three-character ISO code. However, we're going to merge in data (say: [CoW's trade data](https://correlatesofwar.org/data-sets/bilateral-trade)) that uses the CoW state system classification. `countrycode` will be very useful in matching one classification to another.
 
-`countrycode()` is the primary function in Arel-Bundock's for that purpose. Namely, the user should create a column using the `countrycode()` function that identifies the source column (here: `Alpha_3`), identifies what type of classification that is (here: `"iso3c"`), and returns the equivalent code we want (`"cown"`, for Correlates of War numeric code).
+`countrycode()` is the primary function in Arel-Bundock's package for that purpose. The user should create a column using the `countrycode()` function that identifies the source column (here: `Alpha_3`), identifies what type of classification that is (here: `"iso3c"`), and returns the equivalent code we want (`"cown"`, for Correlates of War numeric code).
 
 
 ```r
@@ -1018,7 +1018,7 @@ I do want the reader to observe something. `countrycode()` cannot perfectly matc
 </table>
 
 
-Some of this is by design. For example, there's no CoW code for Aruba (`ABW`) because Aruba does not exist in the CoW system. That'll be the bulk of the warnings returned by `countrycode()` for a case like this and you can safely ignore those. Some of this is, well, a headache you'll need to fix yourself. For example, Serbia (`SRB`) always throws `countrycode()` for a loop, but Serbia has always been 345 in the CoW system. You can fix that yourself with addendum to the `mutate()` wrapper. Something like `ccode = ifelse(Alpha_3 == "SRB", 345, ccode)` will work. 
+Some of this is by design. For example, there's no CoW code for Aruba (`ABW`) because Aruba does not exist in the CoW system. That'll be the bulk of the warnings returned by `countrycode()` for a case like this and you can safely ignore those. Some of this is, well, a headache you'll need to fix yourself. For example, Serbia (`SRB`) always throws `countrycode()` for a loop, but Serbia has always been 345 in the CoW system. You can fix that yourself with an addendum to the `mutate()` wrapper. Something like `ccode = ifelse(Alpha_3 == "SRB", 345, ccode)` will work. 
 
 I use this to underscore that `countrycode` is one of the most useful R packages merging and matching across different state/country classification systems. However, it is not magic and should not be used uncritically. Always inspect the output.
 
