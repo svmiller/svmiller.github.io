@@ -21,6 +21,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
@@ -41,17 +43,16 @@ jobs:
       uses: nanzm/get-time-action@v1.1
       with:
         timeZone: 8
-        format: 'YYYY-MM-DD HH-mm-ss'
-    - name: Commit files
+        format: 'YYYY-MM-DD HH:mm:ss'
+    - name: Commit and push
+      uses: JamesIves/github-pages-deploy-action@3.7.1
       env:
         TIME: "${{ steps.time.outputs.time }}"
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Site updated at $TIME UTC"
-    - name: Deploy site
-      env:
-        BRANCH: 'gh-pages'
-      run:
-        git push origin ${BRANCH}
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: _site
+        CLEAN: true
+        GIT_CONFIG_NAME: "Github Action"
+        GIT_CONFIG_EMAIL: actions@github.com
+        COMMIT_MESSAGE: "Site update at $TIME -- ${{ github.event.head.commit_message }}""
