@@ -1020,6 +1020,33 @@ I do want the reader to observe something. `countrycode()` cannot perfectly matc
 
 Some of this is by design. For example, there's no CoW code for Aruba (`ABW`) because Aruba does not exist in the CoW system. That'll be the bulk of the warnings returned by `countrycode()` for a case like this and you can safely ignore those. Some of this is, well, a headache you'll need to fix yourself. For example, Serbia (`SRB`) always throws `countrycode()` for a loop, but Serbia has always been 345 in the CoW system. You can fix that yourself with an addendum to the `mutate()` wrapper. Something like `ccode = ifelse(Alpha_3 == "SRB", 345, ccode)` will work. 
 
+
+```r
+ISO_3166_1 %>% as_tibble() %>%
+  # Alpha_2 = iso2c, if you wanted it.
+  # I want the three-character one.
+  select(Alpha_3, Name) %>%
+  mutate(ccode = countrycode(Alpha_3, "iso3c", "cown"),
+         ccode = ifelse(Alpha_3 == "SRB", 345, ccode)) 
+```
+
+```
+## # A tibble: 249 x 3
+##    Alpha_3 Name                 ccode
+##    <chr>   <chr>                <dbl>
+##  1 ABW     Aruba                   NA
+##  2 AFG     Afghanistan            700
+##  3 AGO     Angola                 540
+##  4 AIA     Anguilla                NA
+##  5 ALA     Åland Islands           NA
+##  6 ALB     Albania                339
+##  7 AND     Andorra                232
+##  8 ARE     United Arab Emirates   696
+##  9 ARG     Argentina              160
+## 10 ARM     Armenia                371
+## # … with 239 more rows
+```
+
 I use this to underscore that `countrycode` is one of the most useful R packages merging and matching across different state/country classification systems. However, it is not magic and should not be used uncritically. Always inspect the output.
 
 
