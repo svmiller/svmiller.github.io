@@ -30,6 +30,28 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Build site
+      run: |
+        set -xo pipefail
+        rm -rf _site/*
+        gem install bundler
+        bundle install
+        bundle exec jekyll build
+    - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 8
+          format: 'YYYY-MM-DD HH-mm-ss'
+    - name: Commit files
       env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: bundle exec rake site:deploy
+        TIME: "${{ steps.time.outputs.time }}"
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Site updated at $TIME UTC"
+    - name: Deploy site
+      env:
+        BRANCH: 'gh-pages'
+      run:
+        git push origin ${BRANCH}
