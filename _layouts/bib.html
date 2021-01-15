@@ -12,36 +12,36 @@
  {% capture link %}{{ entry.url }}{% endcapture %}
  {% endif %}
  {% if entry.open == "true" and link %}
- <a href="{{ link }}">
+ <a href="{{ link }}" target="_blank">
      <img src="https://img.shields.io/static/v1?label=&message=Open Access&color=green&style=flat" alt="Link">
  </a>
  {% endif %}
  {% if entry.open != "true" and link %}
- <a href="{{ link }}">
+ <a href="{{ link }}" target="_blank">
      <img src="https://img.shields.io/static/v1?label=&message=Published&color=blue&style=flat" alt="Link">
  </a>
  {% endif %}
  {% if entry.repo %}
  {%  if entry.repo contains "github" %}
- <a href="{{ entry.repo }}" color="#000000">
+ <a href="{{ entry.repo }}" color="#000000" target="_blank">
      <img src="https://img.shields.io/static/v1?style=flat&logo=github&label=&message=Open Source" alt="GitHub Repository">
  </a>
  {% elsif entry.repo contains "bitbucket" %}
- <a href="{{ entry.repo }}">
+ <a href="{{ entry.repo }}" target="_blank">
      <img src="https://img.shields.io/static/v1?style=flat&logo=bitbucket&label=&message=Open Source" alt="Bitbucket Repository">
  </a>
  {% elsif entry.repo contains "gitlab" %}
- <a href="{{ entry.repo }}">
+ <a href="{{ entry.repo }}" target="_blank">
      <img src="https://img.shields.io/static/v1?style=flat&logo=gitlab&label=&message=Open Source" alt="GitLab Repository">
  </a>
  {% else" %}
- <a href="{{ entry.repo }}">
+ <a href="{{ entry.repo }}" target="_blank">
      <img src="https://img.shields.io/static/v1?style=flat&label=code&message=Open Source" alt="Code Repository">
  </a>
  {% endif %}
  {% endif %}
  {% if entry.preprint %}
- <a href="{{ entry.preprint }}">
+ <a href="{{ entry.preprint }}" target="_blank">
      <img src="https://img.shields.io/static/v1?label=&message=Preprint&color=purple&logo=arxiv&style=flat" alt="Link">
  </a>
  {% endif %}
