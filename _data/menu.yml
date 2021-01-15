@@ -5,11 +5,11 @@
   href: "/research/"
   subcategories:
     - title: "Research Areas"
-      href: /research/areas.html
+      href: /research/areas/
     - title: "Publications"
       href: /research/publications/
     - title: "Funding"
-      href: /research/funding.html
+      href: /research/funding/
 
 - title: "Teaching"
   href: "/teaching/"
