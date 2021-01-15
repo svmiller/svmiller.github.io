@@ -10,6 +10,7 @@ office: 318 Riley-Robb Hall
 department: Biological & Environmental Engineering
 city: Ithaca, NY
 zip: 14853-5701
+labguide: https://srikrishnan-lab.github.io/lab-manual
 
 # Build settings
 markdown: kramdown
