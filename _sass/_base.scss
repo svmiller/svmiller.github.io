@@ -69,7 +69,11 @@ ul, ol {
 }
 
 .past {
-  list-style-type: disc;
+  list-style-type: none;
+}
+
+.past li {
+  list-style-type: none;
 }
 
 li {
