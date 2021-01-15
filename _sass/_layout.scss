@@ -29,6 +29,10 @@
   grid-row: 1 / 2
 }
 
+.col-12 {
+  grid-column: span 12;
+}
+
 .col-8 {
   grid-column: span 8;
 }
