@@ -2,7 +2,8 @@
 layout: default
 ---
 <div class="post">
-
+  <div class="container">
+  <div class="main">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
     <p class="post-meta">Posted on {{ page.date | date: "%B %-d, %Y" }} by {% if page.author %} {{ page.author }}{% endif %}
@@ -19,4 +20,25 @@ layout: default
   <article class="post-content">
     {{ content }}
   </article>
+</div>
+
+<div class="news">
+  <h2>News &amp; Updates</h3>
+    <ul>
+    {% for post in site.tags.news limit:4 %}
+    {% if post.category != "album" %}
+    <li><a href="{{ post.url }}">
+      <small
+          style:"text-align: right">{{ post.date | date_to_string }}</small>
+      <h4>{{ post.title }}</h4>
+      <p>{{ post.subtitle }}</p>
+    </a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+    <div class="archivelink">
+    <a href="/archive/">View Full Archive &rarr;</a>
+  </div>
+</div>
+</div>
 </div>
