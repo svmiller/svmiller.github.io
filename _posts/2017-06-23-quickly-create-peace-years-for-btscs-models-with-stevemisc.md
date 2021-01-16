@@ -1,5 +1,5 @@
 ---
-title: "Quickly Create Peace Years for BTSCS Models with sbtscs in stevemisc"
+title: "Quickly Create Peace Years for BTSCS Models with sbtscs in {stevemisc}"
 author: steve
 layout: post
 date: "2017-06-26"

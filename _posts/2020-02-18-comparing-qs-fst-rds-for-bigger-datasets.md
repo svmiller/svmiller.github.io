@@ -1,5 +1,5 @@
 ---
-title: "Comparing the Read/Save Times for RDS, qs, and fst Formats (or: All Hail qs)"
+title: "Comparing the Read/Save Times for RDS, qs, and fst Formats (or: All Hail {qs})"
 output:
   md_document:
     variant: gfm

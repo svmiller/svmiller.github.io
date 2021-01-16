@@ -1,5 +1,5 @@
 ---
-title: "What Explains Union Density? A Replication of an Old Article with the brms Package"
+title: "What Explains Union Density? A Replication of an Old Article with the {brms} Package"
 output:
   md_document:
     variant: gfm
