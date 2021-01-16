@@ -1,5 +1,5 @@
 ---
-title: "Clever Uses of Relational (SQL) Databases to Store Your Wider Data (with Some Assistance from dplyr and purrr)"
+title: "Clever Uses of Relational (SQL) Databases to Store Your Wider Data (with Some Assistance from {dplyr} and {purrr})"
 output:
   md_document:
     variant: gfm
