@@ -36,7 +36,6 @@ knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
 ```{r loaddatadostuff, echo=F, cache=F}
 options(knitr.kable.NA = '')
 library(tidyverse) # for all things workflow (includes dplyr)
-library(stevemisc)
 library(stevedata) # for pwt_sample
 library(pwt9) # for Penn World Table (9.1) data.
 library(knitr) # for tables
@@ -91,7 +90,6 @@ Before getting into the various `*_join()` functions, I'm going to start with a 
 
 ```{r, echo=T, eval=F}
 library(tidyverse) # for all things workflow (includes dplyr)
-library(stevemisc) # for %nin% as Negate(%in%)
 library(stevedata) # for pwt_sample
 library(pwt9) # for Penn World Table (9.1) data.
 ```

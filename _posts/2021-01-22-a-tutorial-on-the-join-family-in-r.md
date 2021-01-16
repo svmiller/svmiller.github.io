@@ -59,7 +59,6 @@ Before getting into the various `*_join()` functions, I'm going to start with a 
 
 ```r
 library(tidyverse) # for all things workflow (includes dplyr)
-library(stevemisc) # for %nin% as Negate(%in%)
 library(stevedata) # for pwt_sample
 library(pwt9) # for Penn World Table (9.1) data.
 ```
