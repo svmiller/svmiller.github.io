@@ -19,7 +19,7 @@ image: "sql-joins.jpeg"
 
 
 
-{% include image.html url="/images/sql-joins.jpeg" caption="It's not technically SQL, but it is in spirit." width=400 align="right" %}
+{% include image.html url="/images/sql-joins.jpeg" caption="It's not technically SQL, but it is in spirit." width=375 align="right" %}
 
 <style>
 img[src*='#center'] { 

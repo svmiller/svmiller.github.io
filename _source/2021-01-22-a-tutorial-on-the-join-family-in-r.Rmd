@@ -49,7 +49,7 @@ pwt_sample %>% distinct(country) %>% arrange(country) %>% pull(country) -> rich_
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
-add_jekyll_image('/images/sql-joins.jpeg', "It's not technically SQL, but it is in spirit.", "400", "right")
+add_jekyll_image('/images/sql-joins.jpeg', "It's not technically SQL, but it is in spirit.", "375", "right")
  
 ```
 
