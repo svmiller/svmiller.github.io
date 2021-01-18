@@ -31,7 +31,10 @@ What follows should not be interpreted as exhaustive of all the covariates of an
 
 The post will also include some R code necessary to generate these results. There is only so much I can do within the allocated time to introduce students to a quantitative approach to social science. I don't get the opportunity to show them R code, though I would love if space and time permitted it. Toward that end, I will reference how I'm doing this in R with some code chunks in the post. The [`_source`](https://github.com/svmiller/svmiller.github.io/tree/master/_source) directory on [the Github directory for my site](https://github.com/svmiller/svmiller.github.io) will have the full code for this post. The particular [source file is here](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd). 
 
-Here are all the R packages that I'll use for the important stuff in this post.
+Here are all the R packages that I'll use for the important stuff in this post.[^stevedata]
+
+[^stevedata]: I've since published [`{stevedata}` on CRAN](https://cran.r-project.org/web/packages/stevedata/index.html), which has the `ESS9GB` data I'm creating here.
+
 
 ```r
 # use install.packages() in case you don't have any of these
@@ -61,7 +64,7 @@ Every quantitative approach to a social scientific topic starts with a question,
 
 Fortunately, there is no shortage of data on immigration attitudes in the United Kingdom given the importance of this topic in the UK and elsewhere in Europe. The [European Social Survey](https://www.europeansocialsurvey.org), for example, recently concluded a poll of about 2,000 residents of the United Kingdom as part of [its ninth round of survey data](https://www.europeansocialsurvey.org/data/download.html?r=9) and asked three interesting questions on how UK residents evaluated immigrants. I downloaded the SPSS binary available at that link and unzipped its contents (`ESS9e01_2.sav`) to `~/Dropbox/data/ess`, which is a subdirectory for ESS data in the data subdirectory on my [Dropbox](https://www.dropbox.com) account.[^whyspss] Let's load it into the R console. Then, let's subset the data to just the British respondents who were also born in the United Kingdom.[^race] This gives us 1,905 observations before missing data drops some rows from the analyses to follow.
 
-[^race]: My scholarship in the American context strongly implies [attitudes toward immigration are functions of attitudes on race](http://svmiller.com/research/economic-anxiety-ethnocentrism-immigration-1992-2017/). More sophisticated/rigorous analyses in the British context may want to incorporate that, but this more sophisticated/rigorous design falls outside the scope of the intended goal of this post/analysis. The primary goal here is to introduce students to a quantitative approach to understanding a social scientific topic, not necessarily to exhauste all the important covariates on immigration attitudes.
+[^race]: My scholarship in the American context strongly implies [attitudes toward immigration are functions of attitudes on race](http://svmiller.com/research/economic-anxiety-ethnocentrism-immigration-1992-2017/). More sophisticated/rigorous analyses in the British context may want to incorporate that, but this more sophisticated/rigorous design falls outside the scope of the intended goal of this post/analysis. The primary goal here is to introduce students to a quantitative approach to understanding a social scientific topic, not necessarily to exhaust all the important covariates on immigration attitudes.
 
 
 ```r
