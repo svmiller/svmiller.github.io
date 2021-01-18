@@ -291,4 +291,12 @@ Regression is both hypothesis-testing and story-telling. Some takeaways:
 4. Internalize what the regression table *isn't* telling you.
     - (i.e. magnitude effects, whether the model's assumptions are met).
     
-See more information on my blog about this exercise: `http://svmiller.com/blog`
+### Recommended Reading
+
+Check my blog! (`svmiller.com/blog`)
+
+- ["Permutations and Inference with an Application to the Gender Pay Gap in the General Social Survey"](http://svmiller.com/blog/2020/10/inference-permutations-gender-pay-gap-general-social-survey/)
+- ["What Do We Know About British Attitudes Toward Immigration? A Pedagogical Exercise of Sample Inference and Regression"](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/)
+- ["The Normal Distribution, Central Limit Theorem, and Inference from a Sample"](http://svmiller.com/blog/2020/03/normal-distribution-central-limit-theorem-inference/)
+
+Check out the presentation as well (`svmiller.com/presentations`).
