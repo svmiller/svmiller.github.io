@@ -14,6 +14,18 @@ output:
 make149: true
 mainfont: "Open Sans"
 titlefont: "Titillium Web"
+header-includes:
+- \usepackage{dcolumn}
+- \usepackage{booktabs}
+- \usepackage{longtable}
+- \usepackage{array}
+- \usepackage{multirow}
+- \usepackage{wrapfig}
+- \usepackage{float}
+- \usepackage{colortbl}
+- \usepackage{pdflscape}
+- \usepackage{tabu}
+- \usepackage{threeparttable}
 ---
 
 ```{r setup, include=FALSE}
@@ -30,12 +42,14 @@ options(knitr.kable.NA = '')
 library(tidyverse)
 library(stevemisc)
 library(stevedata)
+library(kableExtra)
 
 # ESS <- haven::read_sav("~/Dropbox/data/ess/ESS9e01_2.sav")
 
 ESS9GB
 
 library(stargazer)
+library(modelsummary)
 
 ```
 
@@ -139,7 +153,7 @@ The **independent variables** (*IVs*):
 | *Immigration Sentiment*  |  16.891 | 6.991  | 17 | 0 | 30 | 1850  |
 | *Age*  | 53.673  | 18.392  | 55 | 15 | 90 |  1893   |
 | *Female*  | .541  | .011  | 1 | 0 | 1 | 1905  |
-| *Years of Education*  | 14.049  | 3.630  | 13 |  3 | 41 | 1893  |
+| *Years of Education*  | 14.049  | 3.630  | 13 |  3 | 32 | 1893  |
 | *Unemployed*  | .019  |  .003  | 0 | 0 | 1 | 1905  |
 | *Household Income (Deciles)*  | 5.171  | 2.972 | 5 | 1 | 10 | 1615  |
 | *Ideology (L to R)*  | 4.96  | 1.945 | 5 |  0 | 10 |1726  |
@@ -159,16 +173,16 @@ Table: Descriptive Statistics for the Variables in Our Regression
 We believe we can explain the *DV* for an individual ($i$) as:
 
 \begin{eqnarray}
-\textrm{Immigration Sentiment} &=& \beta_0 + \beta_1*\textrm{Age} + \beta_2*\textrm{Female} + \beta_3*\textrm{Years of Education} +   \nonumber \\
-   &&   \beta_4*\textrm{Unemployed} +  \beta_5*\textrm{Household Income} +  \nonumber \\
-   &&  \beta_6*\textrm{Ideology} + \epsilon \nonumber 
+\textrm{Immigration Sentiment}_i &=& \beta_0 + \beta_1*\textrm{Age}_i + \beta_2*\textrm{Female}_i +   \nonumber \\
+   &&  \beta_3*\textrm{Years of Education}_i +  \beta_4*\textrm{Unemployed}_i +    \nonumber \\
+   &&  \beta_5*\textrm{Household Income}_i + \beta_6*\textrm{Ideology}_i + \epsilon_i \nonumber 
 \end{eqnarray}
 
 Of note:
 
 - $\beta_0$: estimated immigration sentiment when all predictors are set to zero (i.e. *y*-intercept)
 - $\beta_{1, 2, 3, 4, 5, 6}$: estimated slopes of each *IV* on the *DV*
-- $\epsilon$: prediction errors, an unmeasured variable
+- $\epsilon$: error term (unmeasured)
 
 
 ###
@@ -176,14 +190,30 @@ Of note:
 ```{r reg-table, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F, results="asis"}
 M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
 
-stargazer(M1, type="latex",
-          style="ajps", header=FALSE,
-          font.size="small",
-          covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
-          title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
-         #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
-          dep.var.labels="Pro-Immigration Sentiment",
-          omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
+# c("l","D{.}{.}{-1}")
+modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
+             title = "A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+             stars = TRUE, gof_omit = "IC|F|Log.|R2$|R2",
+             coef_map = c("agea" = "Age",
+                          "female" = "Female",
+                          "eduyrs" = "Years of Education",
+                          "uempla" = "Unemployed",
+                          "hinctnta" = "Household Income (Deciles)",
+                          "lrscale" = "Ideology (L to R)",
+                          "(Intercept)" = "Intercept"),
+             align = "lc") %>%
+  row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
+  row_spec(0, bold=TRUE)  %>%
+  column_spec(1, italic = FALSE, color='#000000')
+
+# stargazer(M1, type="latex",
+#           style="ajps", header=FALSE,
+#           font.size="small",
+#           covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
+#           title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+#          #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
+#           dep.var.labels="Pro-Immigration Sentiment",
+#           omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
 ```
 
 
@@ -215,14 +245,31 @@ Use the coefficients to assess **negative** and **positive relationships**.
 ```{r reg-table-2, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F, results="asis"}
 M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
 
-stargazer(M1, type="latex",
-          style="ajps", header=FALSE,
-          font.size="small",
-          covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
-          title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
-         #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
-          dep.var.labels="Pro-Immigration Sentiment",
-          omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
+# stargazer(M1, type="latex",
+#           style="ajps", header=FALSE,
+#           font.size="small",
+#           covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
+#           title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+#          #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
+#           dep.var.labels="Pro-Immigration Sentiment",
+#           omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
+
+modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
+             title = "A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+             stars = TRUE, gof_omit = "IC|F|Log.|R2$|R2",
+             coef_map = c("agea" = "Age",
+                          "female" = "Female",
+                          "eduyrs" = "Years of Education",
+                          "uempla" = "Unemployed",
+                          "hinctnta" = "Household Income (Deciles)",
+                          "lrscale" = "Ideology (L to R)",
+                          "(Intercept)" = "Intercept"),
+             align = "lc") %>%
+  row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
+  row_spec(c(5,6,9,10), color="#0000cc") %>%
+  row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
+  row_spec(0, bold=TRUE) %>%
+  column_spec(1, italic = FALSE, color='#000000')
 ```
 
 ### The Standard Error
@@ -257,14 +304,23 @@ In our case, only education, income, and ideology have statistically significant
 ```{r reg-table-3, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F, results="asis"}
 M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
 
-stargazer(M1, type="latex",
-          style="ajps", header=FALSE,
-          font.size="small",
-          covariate.labels = c("Age","Female","Years of Education", "Unemployed", "Household Income (Deciles)", "Ideology (L to R)"),
-          title="A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
-         #  notes="<small>Data: ESS, Round 9 (United Kingdom)</small>",
-          dep.var.labels="Pro-Immigration Sentiment",
-          omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
+modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
+             title = "A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
+             stars = TRUE, gof_omit = "IC|F|Log.|R2$|R2",
+             coef_map = c("agea" = "Age",
+                          "female" = "Female",
+                          "eduyrs" = "Years of Education",
+                          "uempla" = "Unemployed",
+                          "hinctnta" = "Household Income (Deciles)",
+                          "lrscale" = "Ideology (L to R)",
+                          "(Intercept)" = "Intercept"),
+             align = "lc") %>%
+  row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
+  row_spec(c(5,6,9,10), color="#0000cc") %>%
+  row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
+  row_spec(c(5,6,9,10,11,12), bold=TRUE) %>%
+  row_spec(0, bold=TRUE) %>%
+  column_spec(1, italic = FALSE, color='#000000')
 ```
 
 ## Understand What the Regression Table *Isn't* Saying
