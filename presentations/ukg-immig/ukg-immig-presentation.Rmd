@@ -201,7 +201,11 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
                           "hinctnta" = "Household Income (Deciles)",
                           "lrscale" = "Ideology (L to R)",
                           "(Intercept)" = "Intercept"),
-             align = "lc") %>%
+             align = "lc",
+             booktabs = T, longtable=TRUE) %>%
+    footnote(general = "\\\\raggedright * p $<$ 0.05",
+           general_title = "",
+           escape = FALSE) %>%
   row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
   row_spec(0, bold=TRUE)  %>%
   column_spec(1, italic = FALSE, color='#000000')
@@ -254,7 +258,7 @@ M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data
 #           dep.var.labels="Pro-Immigration Sentiment",
 #           omit.stat = c("aic","ll", "rsq", "adj.rsq", "f","ser"))
 
-modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
+modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex", longtable=TRUE,
              title = "A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
              stars = TRUE, gof_omit = "IC|F|Log.|R2$|R2",
              coef_map = c("agea" = "Age",
@@ -265,6 +269,9 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
                           "lrscale" = "Ideology (L to R)",
                           "(Intercept)" = "Intercept"),
              align = "lc") %>%
+    footnote(general = "* p $<$ 0.05",
+           general_title = "",
+           escape = FALSE) %>%
   row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
   row_spec(c(5,6,9,10), color="#0000cc") %>%
   row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
@@ -296,7 +303,7 @@ The asterisks are an indicator of **statistical significance**.
 
 - The asterisks are your visual cue to identify a "statistically significant" effect.
 
-In our case, only education, income, and ideology have statistically significant effects.
+<!-- In our case, only education, income, and ideology have statistically significant effects. -->
 
 
 ###
@@ -304,9 +311,9 @@ In our case, only education, income, and ideology have statistically significant
 ```{r reg-table-3, echo=F, eval=T, fig.width = 14, fig.height = 8.5, warning = F, message = F, results="asis"}
 M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
 
-modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
+modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",  longtable=TRUE,
              title = "A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
-             stars = TRUE, gof_omit = "IC|F|Log.|R2$|R2",
+             gof_omit = "IC|F|Log.|R2$|R2",
              coef_map = c("agea" = "Age",
                           "female" = "Female",
                           "eduyrs" = "Years of Education",
@@ -314,7 +321,10 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
                           "hinctnta" = "Household Income (Deciles)",
                           "lrscale" = "Ideology (L to R)",
                           "(Intercept)" = "Intercept"),
-             align = "lc") %>%
+             align = "lc",  stars = c('*' = .05), stars_note = TRUE) %>%
+  footnote(general = "* p $<$ 0.05",
+           general_title = "",
+           escape = FALSE) %>%
   row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
   row_spec(c(5,6,9,10), color="#0000cc") %>%
   row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
