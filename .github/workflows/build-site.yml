@@ -27,7 +27,7 @@ jobs:
         submodules: true
     - name: update submodules
       run: |
-        git submodule update --remote --init --merge
+        git submodule update --remote --init
         git add .
         git commit -m "updated submodule"
         git push origin master
