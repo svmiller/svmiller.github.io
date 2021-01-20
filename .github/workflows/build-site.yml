@@ -10,6 +10,8 @@ name: Ruby
 on:
   push:
     branches: [ master ]
+  repository_dispatch:
+    types: [push-bib]
 
 jobs:
   build:
