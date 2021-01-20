@@ -26,15 +26,16 @@ jobs:
         persist-credentials: false
         submodules: true
     - name: update submodules
+      env: GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git submodule update --remote --init
+        git config user.email "actions@github.com"
+        git config user.name "Github Action"
+        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        git checkout master
         git add .
         git commit -m "updated submodule"
         git push origin master
-      with:
-        GIT_CONFIG_NAME: "Github Action"
-        GIT_CONFIG_EMAIL: actions@github.com
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
