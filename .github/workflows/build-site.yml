@@ -26,7 +26,11 @@ jobs:
         persist-credentials: false
         submodules: true
     - name: update submodules
-      run: git submodule update --remote --init
+      run: |
+        git submodule update --remote --init --merge
+        git add .
+        git commit -m "updated submodule"
+        git push origin master
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
