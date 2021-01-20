@@ -9,7 +9,6 @@ name: Ruby
 
 on:
   repository_dispatch:
-    types: [push-bib]
   push:
     branches: [ master ]
 
@@ -26,6 +25,7 @@ jobs:
       with:
         persist-credentials: false
         submodules: recursive
+    - run: echo ${{ github.event.client_payload.sha }}
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
