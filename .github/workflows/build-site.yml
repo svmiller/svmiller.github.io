@@ -24,7 +24,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         persist-credentials: false
-        submodules: recursive
+        submodules: true
     - run: echo ${{ github.event.client_payload.sha }}
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
