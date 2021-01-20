@@ -46,7 +46,7 @@ exclude:
 
 scholar:
   style: american-geophysical-union
-  source: ./_bibliography
+  source: _bibliography
   bibliography: library.bib
   bibliography_template: bib
   sort_by: date,year,month
