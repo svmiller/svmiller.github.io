@@ -7,7 +7,7 @@ output:
 knit: (function(inputFile, encoding) {
    rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
-date: '2021-01-16'
+date: '2021-01-22'
 excerpt: "This is a quick tutorial on mutating and filtering joins in {dplyr}, as well as a discussion on how to think about them."
 layout: post
 categories:

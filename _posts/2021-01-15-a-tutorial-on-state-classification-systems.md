@@ -7,7 +7,7 @@ output:
 knit: (function(inputFile, encoding) {
    rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
-date: '2021-01-13'
+date: '2021-01-15'
 excerpt: "This is a quick tutorial on various state (country) classification systems you'll encounter in political science/policy analysis research."
 layout: post
 categories:
