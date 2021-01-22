@@ -56,10 +56,11 @@ library(modelsummary)
 
 # What Do We Know About British Attitudes Toward Immigration?
 ## Introduction
-### Goal for Today
+### Goals for Today
 
 1. Learn about immigration sentiment in the UK.
 2. Teach students how to evaluate a regression table.
+3. Tell you a bit more about myself.
 
 ### Check My Blog at svmiller.com/blog
 
@@ -193,7 +194,7 @@ M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data
 # c("l","D{.}{.}{-1}")
 modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
              title = "A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
-             stars = TRUE, gof_omit = "IC|F|Log.|R2$|R2",
+             gof_omit = "IC|F|Log.|R2$|R2",
              coef_map = c("agea" = "Age",
                           "female" = "Female",
                           "eduyrs" = "Years of Education",
@@ -201,7 +202,7 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
                           "hinctnta" = "Household Income (Deciles)",
                           "lrscale" = "Ideology (L to R)",
                           "(Intercept)" = "Intercept"),
-             align = "lc",
+             align = "lc",  stars = c('*' = .05), stars_note = TRUE,
              booktabs = T, longtable=TRUE) %>%
     footnote(general = "\\\\raggedright * p $<$ 0.05",
            general_title = "",
@@ -260,7 +261,7 @@ M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data
 
 modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex", longtable=TRUE,
              title = "A Simple OLS Model of Pro-Immigration Sentiment in the United Kingdom",
-             stars = TRUE, gof_omit = "IC|F|Log.|R2$|R2",
+             gof_omit = "IC|F|Log.|R2$|R2",
              coef_map = c("agea" = "Age",
                           "female" = "Female",
                           "eduyrs" = "Years of Education",
@@ -268,7 +269,7 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex", longtable=T
                           "hinctnta" = "Household Income (Deciles)",
                           "lrscale" = "Ideology (L to R)",
                           "(Intercept)" = "Intercept"),
-             align = "lc") %>%
+             align = "lc",  stars = c('*' = .05), stars_note = TRUE) %>%
     footnote(general = "* p $<$ 0.05",
            general_title = "",
            escape = FALSE) %>%
