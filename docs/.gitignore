@@ -1,1 +1,7 @@
+!.gitignore
+
 *.Rmd
+
+# Specialty documents that are often ad hocs things a given employer may want to see.
+# Basically, I don't care if people know I'm applying for jobs. I just don't want Git to think it can track these things.
+
