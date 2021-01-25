@@ -27,7 +27,11 @@ jobs:
         persist-credentials: false
         submodules: true
     - name: Update submodules
-      run: git submodule foreach git pull origin main
+      run: |
+        cd _bibliography/
+        git branch -u origin/main main
+        cd ..
+        git submodule update --recursive --remote
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
