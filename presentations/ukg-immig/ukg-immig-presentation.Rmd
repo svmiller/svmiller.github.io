@@ -89,7 +89,7 @@ How positively do British people regard immigration/immigrants?
 
 <!-- \begin{center}Why is this important? How can we know?\end{center} -->
 
-## Know the Data
+
 <!-- ### Know the Data -->
 
 <!-- Scan the research design section for the following information: -->
@@ -99,6 +99,7 @@ How positively do British people regard immigration/immigrants?
 <!-- 3. The **dependent variable** (i.e. the variable to be explained) -->
 <!-- 4. The **independent variable(s)** (i.e. what we be believe explains the dependent variable) -->
 
+## Know the Data
 ### Know the Data
 
 1. The **data:** European Social Survey (2018) for the UK
