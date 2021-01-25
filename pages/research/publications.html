@@ -5,13 +5,10 @@ permalink: /research/publications/
 ---
 
   <h2>Journal Articles</h2>
-    {% bibliography --query @article %}
+    {% bibliography -f library --query @article %}
 
   <h2>Papers In Review or In Press</h2>
-    {% bibliography --query @misc[keyword=unpublished] %}
+    {% bibliography -f library --query @misc %}
 
   <h2>Conference Papers</h2>
-    {% bibliography --query @inproceedings %}
-
-  <h2>Conference Presentations and Posters</h2>
-    {% bibliography --query @misc[keyword!=unpublished] %}
+    {% bibliography -f library --query @inproceedings %}
