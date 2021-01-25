@@ -327,11 +327,9 @@ Regression is both hypothesis-testing and story-telling. Some takeaways:
 
 1. Make sure you're reading about the bigger picture/puzzle.
 2. Take stock of the data.
-    - (i.e. *DV*, *IVs*, unit of analysis, and data source).
 3. Evaluate a regression table you read by the direction of the relationship (+ or -) and what effects are "significant."
 4. Internalize what the regression table *isn't* telling you.
-    - (i.e. magnitude effects, whether the model's assumptions are met).
-    
+
 ### Recommended Reading
 
 Check my blog! (`svmiller.com/blog`)
