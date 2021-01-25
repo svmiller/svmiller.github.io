@@ -72,9 +72,9 @@ library(modelsummary)
 Regression as we use it is a combination of hypothesis-testing and story-telling.
 
 1. Know the bigger picture/puzzle.
-1. Know the data.
-2. Understand what the regression table is saying.
-3. Understand what the regression table *isn't* saying.
+2. Know the data.
+3. Understand what the regression table is (and *isn't*) saying.
+<!-- 3. Understand what the regression table *isn't* saying. -->
 
 ## Know the Bigger Picture/Puzzle
 ### Know the Bigger Picture/Puzzle
@@ -89,15 +89,15 @@ How positively do British people regard immigration/immigrants?
 
 \begin{center}Why is this important? How can we know?\end{center}
 
-## Know the Data
-### Know the Data
+<!-- ## Know the Data -->
+<!-- ### Know the Data -->
 
-Scan the research design section for the following information:
+<!-- Scan the research design section for the following information: -->
 
-1. The (primary) source of the data
-2. The **unit of analysis** (i.e. who/what is being studied)
-3. The **dependent variable** (i.e. the variable to be explained)
-4. The **independent variable(s)** (i.e. what we be believe explains the dependent variable)
+<!-- 1. The (primary) source of the data -->
+<!-- 2. The **unit of analysis** (i.e. who/what is being studied) -->
+<!-- 3. The **dependent variable** (i.e. the variable to be explained) -->
+<!-- 4. The **independent variable(s)** (i.e. what we be believe explains the dependent variable) -->
 
 ### Know the Data
 
@@ -147,19 +147,7 @@ The **independent variables** (*IVs*):
 - *Household income* (in deciles)
 - *Ideology* (on 11-point L-R scale)
 
-### Know the Data
 
-| **Variable**  | **Mean**  | **Std. Dev.**  | **Median** | **Min.** | **Max.** | **N** |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|
-| *Immigration Sentiment*  |  16.891 | 6.991  | 17 | 0 | 30 | 1850  |
-| *Age*  | 53.673  | 18.392  | 55 | 15 | 90 |  1893   |
-| *Female*  | .541  | .011  | 1 | 0 | 1 | 1905  |
-| *Years of Education*  | 14.049  | 3.630  | 13 |  3 | 32 | 1893  |
-| *Unemployed*  | .019  |  .003  | 0 | 0 | 1 | 1905  |
-| *Household Income (Deciles)*  | 5.171  | 2.972 | 5 | 1 | 10 | 1615  |
-| *Ideology (L to R)*  | 4.96  | 1.945 | 5 |  0 | 10 |1726  |
-
-Table: Descriptive Statistics for the Variables in Our Regression
 
 ## Understand What the Regression is Saying
 ###  Understand What the Regression is Saying
@@ -169,21 +157,6 @@ Table: Descriptive Statistics for the Variables in Our Regression
 - Strong resemblance to the slope-intercept equation (`y = mx + b`)
 - Flexible to include multiple predictors (i.e. **multiple regression**)
 
-###  Understand What the Regression is Saying
-
-We believe we can explain the *DV* for an individual ($i$) as:
-
-\begin{eqnarray}
-\textrm{Immigration Sentiment}_i &=& \beta_0 + \beta_1*\textrm{Age}_i + \beta_2*\textrm{Female}_i +   \nonumber \\
-   &&  \beta_3*\textrm{Years of Education}_i +  \beta_4*\textrm{Unemployed}_i +    \nonumber \\
-   &&  \beta_5*\textrm{Household Income}_i + \beta_6*\textrm{Ideology}_i + \epsilon_i \nonumber 
-\end{eqnarray}
-
-Of note:
-
-- $\beta_0$: estimated immigration sentiment when all predictors are set to zero (i.e. *y*-intercept)
-- $\beta_{1, 2, 3, 4, 5, 6}$: estimated slopes of each *IV* on the *DV*
-- $\epsilon$: error term (unmeasured)
 
 
 ###
@@ -224,7 +197,7 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",
 
 ### Unpacking the Regression Table
 
-Take stock of three things from a regression table:
+Here are the three things you probably noticed from this table: 
 
 1. The numbers inside parentheses next to a variable.
 2. The numbers *not* in parentheses next to a variable.
@@ -236,9 +209,9 @@ Let's start with the second item.
 
 The number *not* inside a parentheses is a **regression coefficient**.
 
-- These communicated the *estimated* change in the *DV* for a one-unit change in a particular *IV*.
-- They are the betas ($\beta$) in the formula.
-- The "Constant" is the *y*-intercept ($\beta_0$).
+- These communicate the *estimated* change in the *DV* for a one-unit change in a particular *IV*.
+<!-- - They are the betas ($\beta$) in the formula. -->
+<!-- - The "Constant" is the *y*-intercept ($\beta_0$). -->
 
 Use the coefficients to assess **negative** and **positive relationships**.
 
@@ -274,7 +247,7 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex", longtable=T
            general_title = "",
            escape = FALSE) %>%
   row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
-  row_spec(c(5,6,9,10), color="#0000cc") %>%
+  row_spec(c(5,6,9,10), color="#00cc00") %>%
   row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
   row_spec(0, bold=TRUE) %>%
   column_spec(1, italic = FALSE, color='#000000')
@@ -296,9 +269,9 @@ However, this is not an important quality by itself.
 
 The asterisks are an indicator of **statistical significance**.
 
-- Divide the regression coefficient over its standard error.
-- This gives you a **t-statistic**.
-- If the absolute value of the **t-statistic** is greater than 1.96 ("about 2"), you can feel confident rejecting a claim of zero.
+- Divide the regression coefficient over its standard error to get a **t-statistic**.
+<!-- - This gives you a **t-statistic**. -->
+- If the absolute value of the **t-statistic** is at least "about 2", you can feel confident rejecting a claim of zero effect.
 
 **tl;dr**: what is the probability of us observing this coefficient and standard error if the true effect is zero?
 
@@ -327,7 +300,7 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",  longtable=
            general_title = "",
            escape = FALSE) %>%
   row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
-  row_spec(c(5,6,9,10), color="#0000cc") %>%
+  row_spec(c(5,6,9,10), color="#00cc00") %>%
   row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
   row_spec(c(5,6,9,10,11,12), bold=TRUE) %>%
   row_spec(0, bold=TRUE) %>%
@@ -343,8 +316,9 @@ modelsummary(list("Pro-Immigration Sentiment" = M1), output="latex",  longtable=
     - Look at your data and your model.
 3. "Statistically significant is not itself 'significant.'"
     - "Significance" says nothing about the magnitude of the effect, only if you can discern it from zero.
-4. More asterisks do not mean "more significance."
-    - It won't tell you if one effect is greater than another, only that it's more precise.
+    
+<!-- 4. More asterisks do not mean "more significance." -->
+<!-- - It won't tell you if one effect is greater than another, only that it's more precise. -->
     
 ## Conclusion
 ### Conclusion
@@ -367,3 +341,34 @@ Check my blog! (`svmiller.com/blog`)
 - ["The Normal Distribution, Central Limit Theorem, and Inference from a Sample"](http://svmiller.com/blog/2020/03/normal-distribution-central-limit-theorem-inference/)
 
 Check out the presentation as well (`svmiller.com/presentations`).
+
+
+### Know the Data
+
+| **Variable**  | **Mean**  | **Std. Dev.**  | **Median** | **Min.** | **Max.** | **N** |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|
+| *Immigration Sentiment*  |  16.891 | 6.991  | 17 | 0 | 30 | 1850  |
+| *Age*  | 53.673  | 18.392  | 55 | 15 | 90 |  1893   |
+| *Female*  | .541  | .011  | 1 | 0 | 1 | 1905  |
+| *Years of Education*  | 14.049  | 3.630  | 13 |  3 | 32 | 1893  |
+| *Unemployed*  | .019  |  .003  | 0 | 0 | 1 | 1905  |
+| *Household Income (Deciles)*  | 5.171  | 2.972 | 5 | 1 | 10 | 1615  |
+| *Ideology (L to R)*  | 4.96  | 1.945 | 5 |  0 | 10 |1726  |
+
+Table: Descriptive Statistics for the Variables in Our Regression
+
+###  Understand What the Regression is Saying
+
+We believe we can explain the *DV* for an individual ($i$) as:
+
+\begin{eqnarray}
+\textrm{Immigration Sentiment}_i &=& \beta_0 + \beta_1*\textrm{Age}_i + \beta_2*\textrm{Female}_i +   \nonumber \\
+   &&  \beta_3*\textrm{Years of Education}_i +  \beta_4*\textrm{Unemployed}_i +    \nonumber \\
+   &&  \beta_5*\textrm{Household Income}_i + \beta_6*\textrm{Ideology}_i + \epsilon_i \nonumber 
+\end{eqnarray}
+
+Of note:
+
+- $\beta_0$: estimated immigration sentiment when all predictors are set to zero (i.e. *y*-intercept)
+- $\beta_{1, 2, 3, 4, 5, 6}$: estimated slopes of each *IV* on the *DV*
+- $\epsilon$: error term (unmeasured)
