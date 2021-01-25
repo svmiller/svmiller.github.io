@@ -85,11 +85,11 @@ How positively do British people regard immigration/immigrants?
 
 \includegraphics[width=.8\textwidth]{uk-visa.jpg}
 
-\bigskip
+<!-- \bigskip -->
 
-\begin{center}Why is this important? How can we know?\end{center}
+<!-- \begin{center}Why is this important? How can we know?\end{center} -->
 
-<!-- ## Know the Data -->
+## Know the Data
 <!-- ### Know the Data -->
 
 <!-- Scan the research design section for the following information: -->
