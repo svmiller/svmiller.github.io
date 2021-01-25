@@ -25,14 +25,6 @@ jobs:
       with:
         persist-credentials: false
         submodules: true
-    - name: update submodules
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git submodule update --remote --init
-        cd bibliography
-        git pull origin main
-        cd ..
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
