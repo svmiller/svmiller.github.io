@@ -41,29 +41,35 @@ permalink: /members/
     </a>
     {% endif %}
     {% if person.website %}
-    <a href="{{ person.website }}">
+    <a href="{{ person.website }}" target="_blank">
       <img src="https://img.shields.io/website?style=flat-square&url={{ person.website|urlencode }}" alt="Website">
     </a>
     {% endif %}
     {% if person.cv %}
-    <a href="{{ person.cv }}">
+    <a href="{{ person.cv }}" target="_blank">
       <img src="https://img.shields.io/website?style=flat-square&url={{ person.cv|urlencode }}&label=Curriculum Vitae"
         alt="CV">
     </a>
     {% endif %}
     <!-- Academic identity -->
     {% if person.orcid %}
-    <a href="https://orcid.org/{{ person.orcid }}">
+    <a href="https://orcid.org/{{ person.orcid }}" target="_blank">
       <img
         src="https://img.shields.io/static/v1?label=ORCID&message={{ person.orcid }}&color=green&style=flat-square&logo=orcid"
         alt="ORCID Profile">
     </a>
     {% endif %}
     {% if person.scholar %}
-    <a href="https://scholar.google.com/citations?user={{ person.scholar }}">
+    <a href="https://scholar.google.com/citations?user={{ person.scholar }}" target="_blank">
       <img
         src="https://img.shields.io/static/v1?label=&message=Google%20Scholar&color=gray&style=flat-square&logo=google-scholar"
         alt="Google Scholar">
+    </a>
+    {% endif %}
+    {% if person.researchgate %}
+    <a href="https://researchgate.net/profile/{{ person.researchgate }}" target="_blank">
+      <img src="https://img.shields.io/static/v1?label=&message=ResearchGate&color=gray&style=flat-square&logo=researchgate"
+      alt="ResearchGate">
     </a>
     {% endif %}
     <!-- Social media identity -->
@@ -74,13 +80,13 @@ permalink: /members/
     </a>
     {% endif %}
     {% if person.linkedin %}
-    <a href="https://www.linkedin.com/in/{{ person.linkedin }}">
+    <a href="https://www.linkedin.com/in/{{ person.linkedin }}" target="_blank">
       <img src="https://img.shields.io/static/v1?label=&message=LinkedIn&color=0077B5&style=flat-square&logo=linkedin"
         alt="LinkedIn">
     </a>
     {% endif %}
     {% if person.github %}
-    <a href="http://github.com/{{ person.github }}">
+    <a href="http://github.com/{{ person.github }}" target="_blank">
       <img src="https://img.shields.io/github/followers/{{ person.github }}?label=Github&logo=github&style=flat-square"
         alt="GitHub Profile">
     </a>
