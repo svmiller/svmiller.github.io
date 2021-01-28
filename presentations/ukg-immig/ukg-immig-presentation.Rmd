@@ -260,7 +260,7 @@ The number inside parentheses is the **standard error** of the regression coeffi
 
 - i.e. it's a measure of uncertainty around the estimate.
 
-However, this is not an important quality by itself.
+However, this is not an important quantity by itself.
 
 - It depends on its relationship with the regression coefficient.
 
