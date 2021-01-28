@@ -279,7 +279,7 @@ The asterisks are an indicator of **statistical significance**.
 - The asterisks are your visual cue to identify a "statistically significant" effect.
 
 <!-- In our case, only education, income, and ideology have statistically significant effects. -->
-
+ 
 
 ###
 
