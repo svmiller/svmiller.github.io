@@ -1,16 +1,16 @@
-- name: Lab Guide
-  link: https://srikrishnan-lab.github.io/lab-guide
+- name: Lab Manual
+  href: https://srikrishnan-lab.github.io/lab-manual
   category: 0-group
 
 - name: Github
-  link: https://github.com/srikrishnan-lab
+  href: https://github.com/srikrishnan-lab
   category: 1-social
 
 - name: Cornell BEE
-  link: https://bee.cals.cornell.edu
+  href: https://bee.cals.cornell.edu
   category: 2-Cornell
 
 - name: Cornell CALS
-  link: https://cals.cornell.edu
+  href: https://cals.cornell.edu
   category: 2-Cornell
   
