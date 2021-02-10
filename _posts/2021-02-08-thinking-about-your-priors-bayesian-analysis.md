@@ -398,7 +398,7 @@ uniondensity %>%
 ## 1 18.75283 54.065 46.88208 1.387893 28.85946   145.092 0.05332528
 ```
 
-The only major divergence is that `{rstanarm}` eschews the half-*t* or half-normal distribution for the residual standard deviation and slaps an exponential distribution with rate equal to 1 over the standard deviation of the dependent variable. Here's what it would look like compared to a "half"-*t* that `{brms}` would employ. Both are weakly informative, but I rather like the `{rstanarm}` approach here in that 1) it's explicitly non-negative and 2) slightly more informative than the more diffuse "half"-*t* that `{brms}` is using. I've yet to see a residual standard deviation of like 2,000. I'm sure it's out there, but I haven't seen it in my gravels.
+The only major divergence is that `{rstanarm}` eschews the half-*t* or half-normal distribution for the residual standard deviation and slaps an exponential distribution with rate equal to 1 over the standard deviation of the dependent variable. Here's what it would look like compared to a "half"-*t* that `{brms}` would employ. Both are weakly informative, but I rather like the `{rstanarm}` approach here in that 1) it's explicitly non-negative and 2) slightly more informative than the more diffuse "half"-*t* that `{brms}` is using. I've yet to see a residual standard deviation of like 2,000. I'm sure it's out there, but I haven't seen it in my travels.
 
 ![plot of chunk comparing-exponential-half-t-rstanarm-brms](/images/comparing-exponential-half-t-rstanarm-brms-1.png)
 
