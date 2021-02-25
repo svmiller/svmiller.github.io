@@ -192,6 +192,10 @@ Data %>%
 Data
 ```
 
+Alternatively, upon publication of this post, the package author reached out via Twitter and recommended this approach prior to the `WDI()` call.
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">What a great post, thanks! (And timed perfectly for lunch break.) The only thing I&#39;d note is that WDI automatically renames your columns if your vector of indicators is named. I find it&#39;s pretty handy and transparent to just define a &quot;dictionary&quot; before calling the function. <a href="https://t.co/Xi3IQht4dC">pic.twitter.com/Xi3IQht4dC</a></p>&mdash; Vincent Arel-Bundock (@VincentAB) <a href="https://twitter.com/VincentAB/status/1364993426517876740?ref_src=twsrc%5Etfw">February 25, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 From here, you're good to start playing around with the data acquired from the World Bank. You will, in all likelihood, want to consider getting rid of those regional/income aggregates in the data, but that will be a topic for another post. For example, here's a chart on the inflation rate in Mexico over the available data. Of note: you should be able to see the 1980s debt crises and the Mexican peso crisis in these data.
 
 ```{r inflation-rate-mexico-1960-2020, echo=T, eval=T, cache=T, warning=F, fig.width=11, fig.height = 6}
