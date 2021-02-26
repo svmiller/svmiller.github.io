@@ -78,7 +78,7 @@ Here's a table of contents for what follows.
 
 My student is primarily interested in international political economy and it would be a boon to their research to be able to access economic data with some ease. This seems like it should be no issue at all, but there are a few potential pitfalls. These may not be a big issue, per se, but they're also not obvious. For one, several economic data sets are often available just as flat files. The [Penn World Table](https://www.rug.nl/ggdc/productivity/pwt/?lang=en) stands out as illustrative here. There are [a few](https://cran.r-project.org/web/packages/pwt/index.html) [R packages](https://cran.r-project.org/web/packages/pwt9/index.html) for [these data](https://cran.r-project.org/web/packages/pwt10/index.html), but they are really just R packages of the flat files themselves. A student who downloads these packages will need to be mindful of the version they are using and take inventory of where they are storing it. This will compound some issues of reproducibility or transparency since students who share their research are not often able to share the entirety of their raw data. Perhaps you also don't want to be like me either; since about 2008 (when I got on Dropbox), I've hoarded about 75.8 GB of raw data for my research.
 
-One of the most convenient things to do here is to avoid "downloading" economic data of interest in favor of ganking it from the internet through an application programming interface (API). Many agencies/data repositories have APIs through which more talented programmers than me can interface with it to seamless retrieve data. In my own travels, I have APIs set up through the U.S. Census, the National Oceanic and Atmospheric Administration, the Federal Reserve Bank of St. Louis, and the Bureau of Labor Statistics. Those are topics for another time. There is an API at the International Monetary Fund (IMF), though I'll confess the available interfaces through the IMF have made zero sense to me. I think one of the easiest ones, and certainly one of the most useful for my student, is the World Bank's API. Here, we again thank [Vincent Arel-Bundock](http://arelbundock.com) for his many contributions to social science research. I may not know what the World Bank's API looks like underneath the hood, but `{WDI}` makes it seem super simple.
+One of the most convenient things to do here is to avoid "downloading" economic data of interest in favor of ganking it from the internet through an application programming interface (API). Many agencies/data repositories have APIs through which more talented programmers than me can interface with it to seamlessly retrieve data. In my own travels, I have APIs set up through the U.S. Census, the National Oceanic and Atmospheric Administration, the Federal Reserve Bank of St. Louis, and the Bureau of Labor Statistics. Those are topics for another time. There is an API at the International Monetary Fund (IMF), though I'll confess the available interfaces through the IMF have made zero sense to me. I think one of the easiest ones, and maybe the most useful for my student, is the World Bank's API. Here, we again thank [Vincent Arel-Bundock](http://arelbundock.com) for his many contributions to social science research. I may not know what the World Bank's API looks like underneath the hood, but `{WDI}` makes it seem super simple.
 
 First, install `{WDI}` if you have not already.
 
@@ -97,7 +97,7 @@ library(kableExtra) # for tables, where appropriate
 
 ## How {WDI} Works {#howitworks}
 
-A typical call in `{WDI}` will use the eponymous `WDI()` function and will look something like this. Related, if you run `WDI()` in R, this will be what is actually executed.
+A typical call in `{WDI}` will use the eponymous `WDI()` function and will look something like this. Related, if you run `WDI()` in R with nothing else specified, this will be what is actually executed.
 
 ```{r, eval=F}
 WDI(
@@ -120,13 +120,13 @@ Run the `WDI()` function and you'll get output that looks like this.
 WDI() %>% as_tibble()
 ```
 
-`WDI()` returns the country/spatial unit (with the two-character ISO code, recalling [a previous post on this matter](http://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/)), a name for the unit (`country`), the indicator(s) you wanted, and the year. Of note, you can specify `extra = TRUE` to get more identifying information about the country/spatial unit beyond the two-character ISO code and name. I recommend against this since it's just more output than you probably want. Further, the indicator you want is returned "as is." In other words, the column name is the exact code of the World Bank indicator. You'll probably want to rename this for convenience. 
+This returns the country/spatial unit (with the two-character ISO code, recalling [a previous post on this matter](http://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/)), a name for the unit (`country`), the indicator(s) you wanted, and the year. Of note, you can specify `extra = TRUE` to get more identifying information about the country/spatial unit beyond the two-character ISO code and name. I recommend against this since it's just more output than you probably want. Further, the indicator you want is returned "as is." In other words, the column name is the exact code of the World Bank indicator. You'll probably want to rename this for convenience. 
 
 ## How I Recommend Using {WDI} {#myrecommendations}
 
-`{WDI}` is a super simple application, but, if you're not careful, it can seem really daunting. I don't think that's any fault of `{WDI}`. It just does a lot and unless you know exactly what you want, it may seem difficult to get what you want (and get it quickly) from `{WDI}`.
+`{WDI}` is a super simple application, but, if you're not careful, it can seem really daunting. I don't think that's any fault of the package; it just does a lot and has a lot to offer. Unless you know exactly what you want, it may seem difficult to get what you want (and get it quickly) from `{WDI}`.
 
-For example, `{WDI}` has a search function. What if you're just curious what data the World Bank has that `{WDI}` can access? Related, what if you don't know exactly is the GDP data you want? You can use the `WDIsearch()` function to help you potentially find the GDP data you want. However, I caution against using this for reasons that will be obvious soon.
+Consider that`{WDI}` has a search function. What if you're just curious what data the World Bank has that the package can access? Related, what if you don't know for sure what data you want? You can use the `WDIsearch()` function to help you potentially find the data you want. However, I caution against using this for reasons that will be obvious soon. Let's use the example of GDP.
 
 ```{r}
 WDIsearch("GDP") %>% as_tibble()
@@ -134,7 +134,7 @@ WDIsearch("GDP") %>% as_tibble()
 
 Basically, GDP is a ubiquitous economic indicator and appears in a lot of stuff you don't want. The default output in `{WDI}` is not a tibble, so your console will get spammed with stuff that you may or may not find helpful.
 
-Admittedly, GDP is a *broad* search. If you were interested in something much more narrow, like the "ease of doing business" scores, the output is much easier to manage.
+Admittedly, this is a *broad* search knowing how common GDP is in economic indicators. If you were interested in something much more narrow, like the "ease of doing business" scores, the output is much easier to manage.
 
 ```{r}
 WDIsearch("ease of") %>% as_tibble()
