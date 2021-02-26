@@ -297,7 +297,7 @@ Data %>%
 
 ![plot of chunk inflation-rate-mexico-1960-2020](/images/inflation-rate-mexico-1960-2020-1.png)
 
-There's more fun to be had with some of these other data, I'm sure. I just happen to know the inflation data the best of these indicators that grabbed through `{WDI}`. No matter, the World Bank's API seems really accessible for a lot of things, mostly thanks to the `{WDI}` package.
+There's more fun to be had with some of these other data, I'm sure. I just happen to know the inflation data the best of these indicators that I grabbed in this simple application. No matter, the World Bank's API seems really accessible for a lot of things, mostly thanks to the `{WDI}` package. Provided [data.worldbank.org](https://data.worldbank.org) has the data you want, use `{WDI}` as your first choice for collecting it in R.
 
 
 
