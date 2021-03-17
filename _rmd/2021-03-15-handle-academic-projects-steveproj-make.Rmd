@@ -12,6 +12,7 @@ excerpt: "This is an introduction to an R package, in development, for managing 
 layout: post
 categories:
   - R
+  - R Markdown
 image: "steveproj-hexlogo.png"
 ---
 
