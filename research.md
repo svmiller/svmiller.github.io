@@ -64,7 +64,7 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 ## Book Chapters and Edited Volumes
 
-Miller, Steven V. Forthcoming "Territorial Disputes." *Encyclopedia of Violence, Peace & Conflict* (3rd ed.). Elsevier.
+Miller, Steven V. Forthcoming. "Territorial Disputes." *Encyclopedia of Violence, Peace & Conflict* (3rd ed.). Elsevier.
 
 Gibler, Douglas M. and Steven V. Miller. Forthcoming. "The Territorial Peace." [*What Do We Know About War?* (3rd ed.)](https://rowman.com/ISBN/9781538140086/What-Do-We-Know-about-War-Third-Edition). Rowman & Littlefield.
 
