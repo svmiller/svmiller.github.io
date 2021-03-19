@@ -1,5 +1,6 @@
 !.gitignore
 
+_dross/
 *.Rmd
 
 # Specialty documents that are often ad hocs things a given employer may want to see.
