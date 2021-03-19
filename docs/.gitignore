@@ -9,3 +9,7 @@ svm-resume.pdf
 svm-research-teaching-materials.pdf
 svm-2013-clemson-gatech-crop-2.jpg
 svm-teaching-materials.pdf
+
+# for CVs...
+make_cv.R
+svm-cv-jm.pdf
