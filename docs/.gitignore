@@ -11,6 +11,8 @@ svm-research-teaching-materials.pdf
 svm-2013-clemson-gatech-crop-2.jpg
 svm-teaching-materials.pdf
 
-# for CVs...
+# for various docs on my website
+# These are more for making sure no sensitive info gets out
+# Basically, make_cv has my phone number and *-jm.pdf is my job market PDF with my references (along with phone num)
 make_cv.R
 svm-cv-jm.pdf
