@@ -9,3 +9,9 @@ $(BUILD)/%.md: $(SRC)/%.Rmd
     
 posts: $(RMD_OUT)
 	@echo "Done"
+
+
+cv: docs/svm-cv.pdf docs/svm-cv-jm.pdf
+
+docs/svm-cv.pdf docs/svm-cv-jm.pdf:	docs/svm-cv.Rmd
+	Rscript -e 'source("docs/make_cv.R")'
