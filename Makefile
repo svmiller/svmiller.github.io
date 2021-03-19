@@ -16,6 +16,7 @@ posts: $(RMD_OUT)
 
 cv: docs/svm-cv.pdf docs/svm-cv-jm.pdf
 research: docs/svm-research-statement.pdf
+resume: docs/svm-resume.pdf
 societal: docs/svm-societal-interaction.pdf
 teaching: docs/svm-teaching-reflection.pdf docs/svm-teaching-philosophy.pdf
 
@@ -25,6 +26,9 @@ docs/svm-cv.pdf docs/svm-cv-jm.pdf:	docs/svm-cv.Rmd
 	
 docs/svm-research-statement.pdf: docs/svm-research-statement.Rmd
 	Rscript -e 'source("docs/make_research.R")'
+	
+docs/svm-resume.pdf: docs/svm-resume.Rmd
+	Rscript -e 'source("docs/make_resume.R")'
 	
 docs/svm-societal-interaction.pdf: docs/svm-societal-interaction.Rmd
 	Rscript -e 'source("docs/make_societal.R")'
