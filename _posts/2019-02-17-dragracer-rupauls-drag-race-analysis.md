@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-02-17'
 excerpt: "My wife got me into watching RuPaul's Drag Race, so here's an empirical analysis of the top performers of the show with the idea of starting a grease fire on the subreddit."
@@ -23,7 +21,7 @@ image: "kameron-michaels.jpg"
 
 <!-- {% include image.html url="/images/kameron-michaels.jpg" caption="Kameron Michaels isn't quite sure what's happening below, but she's certainly a little revolted at the sight." width=410 align="right" %} -->
 
-*Last updated: May 30, 2020*
+*Last updated: March 20, 2021*
 
 My wife got me hooked into watching RuPaul's Drag Race with her. The long and short of it is I didn't need to have my arm twisted to watch or enjoy the show. Indeed, drag nights at Icon in Tuscaloosa---incidentally home to [the performer who gave Trinity her "Tuck" moniker](https://twitter.com/leland2genesis?lang=en)---are some of my fondest memories of graduate school. A performer who routinely served as opening act for her---[and sadly passed away](http://obits.al.com/obituaries/birmingham/obituary.aspx?n=kevin-thomas&pid=188344432&fhid=6039) last year---was among the sweetest/kindest people I knew in town.[^herdoc] I had a receptiveness to drag as concept and creative outlet, but oddly did not know about the show until my wife told me about it.
 
@@ -31,7 +29,7 @@ My wife got me hooked into watching RuPaul's Drag Race with her. The long and sh
 
 My wife also informed me of the debates that fans have about the show, some of which can be quite heated. Several of these---at least the ones that aren't completely subjective or involve questions that quickly devolve to total grease fires---involve concerns of measurement and ranking. Certainly, the show has evolved from Season 1 to Season 10, but how would a fan rank, say, Jinkx Monsoon's run to the crown in Season 5 versus Bianca Del Rio in Season 6? Or Bob the Drag Queen in Season 8?
 
-This creates a lot of conversation on the subreddit for the show and spawns numerous videos where fans can upvote or downvote a particular performer or carry on these debates. I hear it as an opportunity to scrape [the wiki for the show](https://rupaulsdragrace.fandom.com) and create a few data sets to see if I can measure these things myself. Toward that end, I'm creating a package in R ([`dragracer`](https://github.com/svmiller/dragracer)) that will contain various data sets for this. Mostly, I just wanted to call dibs on having an R package for the show named `dragracer`.
+This creates a lot of conversation on the subreddit for the show and spawns numerous videos where fans can upvote or downvote a particular performer or carry on these debates. I hear it as an opportunity to scrape [the wiki for the show](https://rupaulsdragrace.fandom.com) and create a few data sets to see if I can measure these things myself. Toward that end, I'm created a package in R ([`{dragracer}`](https://github.com/svmiller/dragracer)), now on CRAN, that will contain various data sets for this. Mostly, I just wanted to call dibs on having an R package for the show named `{dragracer}`.
 
 Here's a table of contents for this post, especially if you want to jump past the data/methods section and into the 🔥 takes.
 
@@ -64,47 +62,7 @@ There are some additional caveats.
 
 ## An Empirical Analysis of RuPaul's Drag Race Performances {#empirical}
 
-The data are far from perfect or complete, but they're workable for an empirical analysis of contestant performance for the 11 main seasons of RuPaul's Drag Race. Here, I'll explore some of the best performers in the herstory of the show with some rudimentary metrics. Namely, which contestants had the highest percentage of competitive (i.e. non-special, but non-finale) episodes in which they won, or scored high/won? Which queens scored the highest on the ["Dusted or Busted" scoring system](https://rupaulsdragrace.fandom.com/wiki/%22Dusted_or_Busted%22_Scoring_System)? The data aren't too hard to generate and require a few lines in `tidyverse`. The [source code](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2019-02-17-dragracer-rupauls-drag-race-analysis.Rmd), along with version herstory, is available on the `_source` directory for my website. 
-
-<!-- Notice the case exclusion rules, which I think are justifiable in this context.[^nominic]
-
-
-[^nominic]: For now, I'm omitting mini-challenge wins from consideration because I don't think the data I have are too reliable.  -->
-
-
-<!--
-```r
-rdr_contep %>% 
-  filter(participant == 1 & finale == 0 & penultimate == 0) %>%
-  mutate(high = ifelse(outcome == "HIGH", 1, 0),
-         win = ifelse(outcome == "WIN", 1, 0),
-         low = ifelse(outcome == "LOW", 1, 0),
-         safe = ifelse(outcome == "SAFE", 1, 0),
-         highsafe = ifelse(outcome %in% c("HIGH", "SAFE"), 1, 0),
-         winhigh = ifelse(outcome %in% c("HIGH", "WIN"), 1, 0),
-        btm = ifelse(outcome == "BTM", 1, 0),
-         lowbtm = ifelse(outcome %in% c("BTM", "LOW"), 1, 0)) %>%
-  group_by(season,Contestant,Rank) %>%
-  mutate(numcontests = n()) %>%
-  group_by(season,Contestant, numcontests, Rank) %>%
-  summarize(perc_high = sum(high)/unique(numcontests),
-            perc_win = sum(win)/unique(numcontests),
-            perc_winhigh = sum(winhigh)/unique(numcontests),
-            perc_low = sum(low)/unique(numcontests),
-            perc_btm = sum(btm)/unique(numcontests),
-            perc_lowbtm = sum(lowbtm)/unique(numcontests),
-            num_high = sum(high),
-            num_win = sum(win),
-            num_winhigh = sum(winhigh),
-            num_btm = sum(btm),
-            num_low = sum(low),
-            num_lowbtm = sum(lowbtm),
-            bd_score = 2*sum(win, na.rm=T) +
-              1*sum(high, na.rm=T) +
-              (sum(safe, na.rm=T)*0) +
-              (sum(low, na.rm=T)*-1) + (sum(btm, na.rm=T)*-2)) -> rdr_contestant_outcomes
-```
--->
+The data are far from perfect or complete, but they're workable for an empirical analysis of contestant performance for the 11 main seasons of RuPaul's Drag Race. Here, I'll explore some of the best performers in the herstory of the show with some rudimentary metrics. Namely, which contestants had the highest percentage of competitive (i.e. non-special, but non-finale) episodes in which they won, or scored high/won? Which queens scored the highest on the ["Dusted or Busted" scoring system](https://rupaulsdragrace.fandom.com/wiki/%22Dusted_or_Busted%22_Scoring_System)? The data aren't too hard to generate and require a few lines in `{tidyverse}`. The [source code](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2019-02-17-dragracer-rupauls-drag-race-analysis.Rmd), along with version herstory, is available on the `_source` directory for my website. 
 
 ### Comparing the Season Winners {#comparingseasonwinners}
 
@@ -795,7 +753,7 @@ Btw, nailed it. This was from February.
 Jaymes Mansfield might appreciate this reference, but Silky for me was the first performer in the show's herstory to have what pro wrestling fans call ["X-Pac Heat."](https://allthetropes.fandom.com/wiki/X_Pac_Heat) There have been other villains in the show's herstory you want to see vanquished or defeated. Phi'Phi O'Hara (Season 4), Roxxxy Andrews (Season 5), and The Vixen (Season 10)  come to mind here as performers who took on a villain role but were still enjoyable to watch the extent to which a viewer wanted to see some measure of comeuppance. However, like the canonical case of X-Pac, I didn't want to see Silky get her just deserts. I just wanted her off my television so I could enjoy the other performers.
 
 I think Chris says it best here. Nina was great on Season 11 because her character on the show augmented other performers around her (prominently Brooke in the L.A.D.P. challenge). Silky just sucked up and rerouted the energy in the room in a way that doesn't make for good television and isn't compelling to watch.
-
+ 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Trying to be a Nina West in a Silky Ganache world. (Be brave enough to be kind)</p>&mdash; Chris Skovron (@cskovron) <a href="https://twitter.com/cskovron/status/1119403735237709824?ref_src=twsrc%5Etfw">April 20, 2019</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -844,7 +802,3 @@ Related: I'm not saying RuPaul has it out for the San Francisco drag scene, but 
 I think I have a good intuition to what RuPaul wants to do in a given season. [I called Yvie winning Season 11](https://twitter.com/stevenvmiller/status/1101109692498132998?ref_src=twsrc%5Etfw"). My wife can attest that I had pegged All Stars 2 and All Stars 4 to be victory laps for Alaska and Trinity (still counts), respectively. I got it wrong this season. My intuition was Ru was looking for a "political" winner in the season preceding a presidential election. I thought that would be Jackie, and it was not. At least [Jackie gave us the season's best lip-sync](http://svmiller.com/blog/2020/05/jackie-cox-rupauls-drag-race-firework-lipsync/). 
 
 Do I get partial credit for the season's winner being the one who won the political challenge, though? For the three seasons that have preceded a presidential election (Seasons 4, 8, and 12), the winners of the season's political challenge won the crown at the season's end.
-
-
-
-
