@@ -684,7 +684,7 @@ UN_M.49_Countries %>% as_tibble() %>%
 ## # … with 239 more rows
 ```
 
-### Use `countrycode` for Matching/Merging Across Classification Systems {#usecountrycode}
+### Use `{countrycode}` for Matching/Merging Across Classification Systems {#usecountrycode}
 
 While I encourage the student/reader to treat one classification system as a "master", it's highly unlikely the classification system that is the "master" will be the only one encountered in a particular project. For example, let's assume our master system is the three-character ISO code. However, we're going to merge in data (say: [CoW's trade data](https://correlatesofwar.org/data-sets/bilateral-trade)) that uses the CoW state system classification. `{countrycode}` will be very useful in matching one classification to another.
 
