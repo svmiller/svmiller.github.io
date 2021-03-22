@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2021-01-22'
 excerpt: "This is a quick tutorial on mutating and filtering joins in {dplyr}, as well as a discussion on how to think about them."
@@ -36,7 +34,7 @@ My graduate studies program director asked me to teach an independent study for 
 
 [^theythem]: I'll be using they/them pronouns here mostly for maximum anonymity.
 
-The particular student is pursuing a research program in international political economy. Substantively, much of what they want to do is outside my wheelhouse. However, I can offer some things to help the student with their research. The first lesson was [a tutorial on various state (country) classification systems](http://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/). This tutorial will be about merging data with the `*_join()` family of functions available in `dplyr`. 
+The particular student is pursuing a research program in international political economy. Substantively, much of what they want to do is outside my wheelhouse. However, I can offer some things to help the student with their research. The first lesson was [a tutorial on various state (country) classification systems](http://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/). This tutorial will be about merging data with the `*_join()` family of functions available in `{dplyr}`. 
 
 Here's a table of contents for what follows.
 
@@ -63,11 +61,11 @@ library(stevedata) # for pwt_sample
 library(pwt9) # for Penn World Table (9.1) data.
 ```
 
-`tidyverse` has most (if not all) of `dplyr`'s functionality, so I opt to load it rather than load just `dplyr`. The other two packages contain the data we'll be using for this exercise.
+`{tidyverse}` has most (if not all) of `{dplyr}`'s functionality, so I opt to load it rather than load just `{dplyr}`. The other two packages contain the data we'll be using for this exercise.
 
 First, `pwt_sample` is a toy data frame I use for various instructional purposes (i.e. about grouping and skew in cross-sectional data). It's some demographic/macroeconomic data for 21 select (rich) countries based on version 9.1 of the Penn World Table. The data are minimal, including just the country name (`country`), the country's three-character ISO code (`isocode`), the year of the observation (`year`), the population in millions (`pop`), the index of human capital per person, based on years of schooling and returns to education (`hc`), the real GDP at constant 2011 national prices in million 2011 USD (`rgdpna`), and the share of labor compensation in GDP at current national prices (`labsh`). The countries included are Australia, Austria, Belgium, Canada, Chile, Denmark, Finland, France, Germany, Greece, Iceland, Ireland, Italy, Japan, Netherlands, Portugal, Spain, Sweden, Switzerland, United Kingdom, and United States of America.
 
-`pwt9` includes the whole Penn World Table data (version 9.1). I'm going to grab just a few columns from these data, but nevertheless keep all countries and years. The variables we'll grab are the three-character ISO code (`isocode`), the year of observation (`year`), the average depreciation rate of the capital stock (`delta`), and the exchange ration (national currency/USD) (`xr`).
+`{pwt9}` includes the whole Penn World Table data (version 9.1). I'm going to grab just a few columns from these data, but nevertheless keep all countries and years. The variables we'll grab are the three-character ISO code (`isocode`), the year of observation (`year`), the average depreciation rate of the capital stock (`delta`), and the exchange ration (national currency/USD) (`xr`).
 
 
 ```r
@@ -161,7 +159,7 @@ Here's a breakdown of the two data frames. The temporal domains are identical bu
 
 ## Mutating Joins {#mutatingjoins}
 
-Mutating joins in `dplyr` add columns from one data frames to another based on matching rows on the shared columns. You can think of these matching rows/columns as "keys" or "join predicates." These joins are as follow.
+Mutating joins in `{dplyr}` add columns from one data frames to another based on matching rows on the shared columns. You can think of these matching rows/columns as "keys" or "join predicates." These joins are as follow.
 
 ### `inner_join()`
 
@@ -431,7 +429,7 @@ PWT %>%
 
 Notice the number of rows exploded. You (well: I) screwed up.
 
-Thus, I encourage my student (and the reader) to take the initiative to know what your matching columns are beforehand and rename them to match before the merge. The `*_join()` functions in `dplyr` are smart enough to look for columns that have the same name. The user should likewise be smart enough to know that those are matching columns. Don't use the `by` parameter in a `*_join()` function unless 1) you must for whatever reason or 2) you're doing a parlor trick in R. On the second point, I only caution that parlor tricks in R are *my* domain and I'm quite protective of my turf.
+Thus, I encourage my student (and the reader) to take the initiative to know what your matching columns are beforehand and rename them to match before the merge. The `*_join()` functions in `{dplyr}` are smart enough to look for columns that have the same name. The user should likewise be smart enough to know that those are matching columns. Don't use the `by` parameter in a `*_join()` function unless 1) you must for whatever reason or 2) you're doing a parlor trick in R. On the second point, I only caution that parlor tricks in R are *my* domain and I'm quite protective of my turf.
 
 ### Think "Left-Handed" (i.e. Lean on `left_join()`)
 
