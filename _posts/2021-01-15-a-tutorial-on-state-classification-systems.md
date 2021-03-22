@@ -51,7 +51,7 @@ It should not shock a graduate student in political science/policy analysis to l
 
 Take, for example, the following classification systems. The first, [Correlates of War (CoW)](https://correlatesofwar.org/data-sets/state-system-membership), leans on integers that range from 2 (the United States) to 990 (Samoa) to code states from 1816 to 2016. The second, the [Gleditsch-Ward system](http://ksgleditsch.com/data-4.html), is a slight derivation of the CoW system. The overlap is substantial and the numerical range is effectively the same, but important distinctions emerge as Gleditsch-Ward interpret independent states differently. The third is two-character and three-character codes provided by [the Organisation Internationale de Normalisation (ISO) 3166 Maintenance Agency](https://www.iso.org/iso-3166-country-codes.html), one that Americans will at least recognize as having tight integration with [the American National Standards Institute](https://en.wikipedia.org/wiki/American_National_Standards_Institute) as well as broad use elsewhere. The fourth is [the United Nations' M49 classification system](https://unstats.un.org/unsd/methodology/m49/). The fifth is [the Geopolitical Entities, Names, and Codes (GENC) Standard](https://nsgreg.nga.mil/genc/discovery) (in both two-character and three-character form), which provides names and codes for U.S. recognized entities and subdivisions. GENC supplanted the Federal Information Processing Standard (FIPS) about 10 years ago for this purpose. To round things out, we'll include [the Eurostat classification system](https://ec.europa.eu/eurostat/data/classifications) (which greatly resembles ISO's two-character code), the FIPS codes (which also looks a lot like ISO's two-character code), and the World Bank code (which is very similar to but slightly incompatible with ISO's three-character code).
 
-Here is how a few territorial units are coded, selected on whether their English country name starts with "T" and as these codes appear in the `countrycode` package.
+Here is how a few territorial units are coded, selected on whether their English country name starts with "T" and as these codes appear in the `{countrycode}` package.
 
 <table id="stevetable">
 <caption>Select Territorial Units and Their Various Codes</caption>
@@ -306,7 +306,7 @@ No matter, take inventory of the temporal domain you want *first*. State codes c
 
 ## Make One Classification System a "Master", and Don't Use the Country Name {#makeamaster}
 
-Vincent Arel-Bundock's `countrycode` package---which I'll discuss later---is going to be useful for getting different classification systems to integrate with each other. However, my student (and the reader) should be reticent to treat `countrycode` as magic or to use it uncritically. Namely, my student and the reader should treat one classification system as a "master" system for the particular project.
+Vincent Arel-Bundock's `{countrycode}` package---which I'll discuss later---is going to be useful for getting different classification systems to integrate with each other. However, my student (and the reader) should be reticent to treat `{countrycode}` as magic or to use it uncritically. Namely, my student and the reader should treat one classification system as a "master" system for the particular project.
 
 The system that the student/reader makes the "master" system is to their discretion. However, the master system should probably be the system that emerges as a center of gravity for the particular project. For example, I do *a lot* of research on inter-state conflict across time and space. The bulk of the data I use is in [the CoW ecosystem](https://correlatesofwar.org/data-sets). Naturally, CoW's state system membership is ultimately my "master" system. It integrates perfectly with other components of the CoW data ecosystem (e.g. trade, material capabilities). One data source I integrate into these projects---the Polity regime type data---has a different classification system. When that arises, I standardize---as well as I can---the Polity system codes to the CoW codes and integrate into my data based on the matching CoW codes. Again, `countrycode` is wonderful for this purpose (more on that later), but it is not magic and there's always going to be some cleanup issues to address in the process. But, it's imperative on me, in my case, to treat the CoW system as a master system because it's the center of gravity for what I'm doing. It makes my job ultimately easier.
 
@@ -331,7 +331,7 @@ I do want the student/reader to notice one thing I'm doing here. Namely, I have 
 
 ### Create a State-Year Panel of CoW States {#createcow}
 
-This comes pre-processed in my `peacesciencer` package. `create_stateyears()` defaults to returning CoW state system members for all available years from 1816 to the most recently concluded calendar year.
+This comes pre-processed in my `{peacesciencer}` package. `create_stateyears()` defaults to returning CoW state system members for all available years from 1816 to the most recently concluded calendar year.
 
 
 ```r
@@ -383,7 +383,7 @@ create_stateyears(system="gw")
 
 ### Create a Panel of ISO Codes {#createiso}
 
-ISO codes are ubiquitous in economic data. I do have some misgivings about using `countrycode` to create a panel of countries, even for the ISO codes. Recall my concern that ISO codes are not very transparent about when (or even if) a code changes at particular point in time. No matter, the `ISOcodes` package has this information
+ISO codes are ubiquitous in economic data. I do have some misgivings about using `{countrycode}` to create a panel of countries, even for the ISO codes. Recall my concern that ISO codes are not very transparent about when (or even if) a code changes at particular point in time. No matter, the `{ISOcodes}` package has this information
 
 Recall my earlier plea, though: pick one system as a "master" system, even among ISO codes. I'm partial to the three-character ISO codes so I'll use that here.
 
@@ -412,7 +412,7 @@ ISO_3166_1 %>% as_tibble() %>%
 ## # … with 239 more rows
 ```
 
-`ISOcodes` does have another data frame for "retired" codes. This is `ISO_3166_3` in the `ISOcodes` package. I encourage my student to take stock of how applicable some of these observations are for their particular analysis. My previous point about ISO codes---they don't neatly communicate a temporal dimension---still holds.
+`{ISOcodes}` does have another data frame for "retired" codes. This is `ISO_3166_3` in the `{ISOcodes}` package. I encourage my student to take stock of how applicable some of these observations are for their particular analysis. My previous point about ISO codes---they don't neatly communicate a temporal dimension---still holds.
 
 
 ```r
@@ -658,7 +658,7 @@ ISO_3166_1 %>% as_tibble() %>%
 
 ### Create a Panel of UN M49 Codes {#createunm49}
 
-`ISOcodes` also has UN M49 codes as well (`UN_M.49_Countries`) , though this requires some light cleaning.
+`{ISOcodes}` also has UN M49 codes as well (`UN_M.49_Countries`) , though this requires some light cleaning.
 
 
 ```r
@@ -686,7 +686,7 @@ UN_M.49_Countries %>% as_tibble() %>%
 
 ### Use `countrycode` for Matching/Merging Across Classification Systems {#usecountrycode}
 
-While I encourage the student/reader to treat one classification system as a "master", it's highly unlikely the classification system that is the "master" will be the only one encountered in a particular project. For example, let's assume our master system is the three-character ISO code. However, we're going to merge in data (say: [CoW's trade data](https://correlatesofwar.org/data-sets/bilateral-trade)) that uses the CoW state system classification. `countrycode` will be very useful in matching one classification to another.
+While I encourage the student/reader to treat one classification system as a "master", it's highly unlikely the classification system that is the "master" will be the only one encountered in a particular project. For example, let's assume our master system is the three-character ISO code. However, we're going to merge in data (say: [CoW's trade data](https://correlatesofwar.org/data-sets/bilateral-trade)) that uses the CoW state system classification. `{countrycode}` will be very useful in matching one classification to another.
 
 `countrycode()` is the primary function in Arel-Bundock's package for that purpose. The user should create a column using the `countrycode()` function that identifies the source column (here: `Alpha_3`), identifies what type of classification that is (here: `"iso3c"`), and returns the equivalent code we want (`"cown"`, for Correlates of War numeric code).
 
@@ -704,10 +704,6 @@ ISO_3166_1 %>% as_tibble() %>%
 ## ℹ Some values were not matched unambiguously: ABW, AIA, ALA, ASM, ATA, ATF, BES, BLM, BMU, BVT, CCK, COK, CUW, CXR, CYM, ESH, FLK, FRO, GGY, GIB, GLP, GRL, GUF, GUM, HKG, HMD, IMN, IOT, JEY, MAC, MAF, MNP, MSR, MTQ, MYT, NCL, NFK, NIU, PCN, PRI, PSE, PYF, REU, SGS, SHN, SJM, SPM, SRB, SXM, TCA, TKL, UMI, VGB, VIR, WLF
 ## 
 ## ℹ Input `ccode` is `countrycode(Alpha_3, "iso3c", "cown")`.
-```
-
-```
-## Warning in countrycode(Alpha_3, "iso3c", "cown"): Some values were not matched unambiguously: ABW, AIA, ALA, ASM, ATA, ATF, BES, BLM, BMU, BVT, CCK, COK, CUW, CXR, CYM, ESH, FLK, FRO, GGY, GIB, GLP, GRL, GUF, GUM, HKG, HMD, IMN, IOT, JEY, MAC, MAF, MNP, MSR, MTQ, MYT, NCL, NFK, NIU, PCN, PRI, PSE, PYF, REU, SGS, SHN, SJM, SPM, SRB, SXM, TCA, TKL, UMI, VGB, VIR, WLF
 ```
 
 ```
@@ -1047,6 +1043,6 @@ ISO_3166_1 %>% as_tibble() %>%
 ## # … with 239 more rows
 ```
 
-I use this to underscore that `countrycode` is one of the most useful R packages merging and matching across different state/country classification systems. However, it is not magic and should not be used uncritically. Always inspect the output.
+I use this to underscore that `{countrycode}` is one of the most useful R packages merging and matching across different state/country classification systems. However, it is not magic and should not be used uncritically. Always inspect the output.
 
 
