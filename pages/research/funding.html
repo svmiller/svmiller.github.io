@@ -12,7 +12,7 @@ permalink: /research/funding/
     {% if funder.current %}
       <div class="col-2">
         {% if funder.logo %}
-        <a href="{{ funder.agency_url }}"><img src="{{ funder.logo }}" width=150px></img></a>
+        <a href="{{ funder.agency_url }}" target="_blank"><img src="{{ funder.logo }}" width=150px></img></a>
         {% endif %}
         {% if funder.program_url %}
         <p>{{ funder.agency }} <br> <a href="{{ funder.program_url }}">{{ funder.program }}</a></p>
