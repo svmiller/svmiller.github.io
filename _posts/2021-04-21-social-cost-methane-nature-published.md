@@ -11,7 +11,7 @@ We have a paper (with [Frank Errickson](https://cpree.princeton.edu/people/frank
 
 We show how several factors influence estimates of the SC-CH<sub>4</sub>, including how:
 
-* accounting for climate-system uncertainty results in a decreased estimate compared to that used by the US government, partially due to nonlinear relationships between uncertainties related to temperature dynamics;
+* accounting for climate-system uncertainty by calibrating a climate model to historical observations results in a decreased estimate compared to that used by the US government, partially due to nonlinear relationships between uncertainties related to temperature dynamics;
 * the sensitivity of SC-CH<sub>4</sub> to scenarios of future warming is of a comparable magnitude to that resulting from different discount rates;
 * the SC-CH<sub>4</sub> estimates vary little when different climate models are used, but show large sensitivities to the choice of damage function (which is usually the most contentious part of any monetized climate impacts analysis); and
 * the use of equity-weighting instead of constant discount rates results in large increases in the SC-CH<sub>4</sub> for wealthier regions such as the US compared to regions which consume less, justifying higher mitigation expenditures in high-income countries, and these increases dwarf the decreases from climate uncertainties.
