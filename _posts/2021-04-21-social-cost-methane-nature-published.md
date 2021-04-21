@@ -15,3 +15,5 @@ We show how several factors influence estimates of the SC-CH<sub>4</sub>, includ
 * the sensitivity of SC-CH<sub>4</sub> to scenarios of future warming is of a comparable magnitude to that resulting from different discount rates;
 * the SC-CH<sub>4</sub> estimates vary little when different climate models are used, but show large sensitivities to the choice of integrated assessment model; and
 * the use of equity-weighting instead of constant discount rates results in large increases in the SC-CH<sub>4</sub> for wealthier regions such as the US compared to regions which consume less, justifying higher mitigation expenditures in high-income countries, and these increases dwarf the decreases from climate uncertainties.
+
+The paper is not open access, but the News and Views perspective is available [here](https://www.nature.com/articles/d41586-021-00972-6){:target="_blank"}.
