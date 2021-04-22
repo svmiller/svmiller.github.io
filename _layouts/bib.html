@@ -41,9 +41,14 @@
  {% endif %}
  {% endif %}
  {% if entry.preprint %}
+ {% if entry.preprint contains "arxiv" %}
  <a href="{{ entry.preprint }}" target="_blank">
      <img src="https://img.shields.io/static/v1?label=&message=Preprint&color=purple&logo=arxiv&style=flat" alt="Link">
  </a>
+ {% else %}
+ <a href="{{ entry.preprint }}" target="_blank">
+     <img src="https://img.shields.io/static/v1?label=&message=Preprint&color=purple&style=flat" alt="Link">
+ {% endif %}
  {% endif %}
 </div>
 </div>
