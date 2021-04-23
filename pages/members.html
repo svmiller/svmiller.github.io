@@ -42,7 +42,7 @@ permalink: /members/
     {% endif %}
     {% if person.website %}
     <a href="{{ person.website }}" target="_blank">
-      <img src="https://img.shields.io/website?style=flat-square&url={{ person.website|urlencode }}" alt="Website">
+      <img src="https://img.shields.io/website?style=flat-square&cacheSeconds=600&url={{ person.website|urlencode }}" alt="Website">
     </a>
     {% endif %}
     {% if person.cv %}
