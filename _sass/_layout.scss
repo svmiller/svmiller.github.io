@@ -21,7 +21,6 @@
 .submain  {
   grid-column: span 4;
   justify-content: center;
-  grid-row: 2;
 }
 
 .news {
@@ -54,7 +53,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .container {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -64,6 +63,11 @@
   }
 }
 
+@media (min-width: 600px) {
+  .submain {
+    grid-row: 2;
+  }
+}
 
 /**
  * Site footer
