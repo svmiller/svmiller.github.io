@@ -20,7 +20,6 @@
 
 .submain  {
   grid-column: span 4;
-  justify-content: left;
 }
 
 .news {
@@ -60,6 +59,9 @@
   .news {
     grid-column: span 4;
     grid-row: 4;
+  }
+  .submain {
+    width: 100%;
   }
 }
 
