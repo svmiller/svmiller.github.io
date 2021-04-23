@@ -47,7 +47,7 @@ permalink: /members/
     {% endif %}
     {% if person.cv %}
     <a href="{{ person.cv }}" target="_blank">
-      <img src="https://img.shields.io/website?style=flat-square&url={{ person.cv|urlencode }}&label=Curriculum Vitae"
+      <img src="https://img.shields.io/website?style=flat-square&cacheSeconds=600&url={{ person.cv|urlencode }}&label=Curriculum Vitae"
         alt="CV">
     </a>
     {% endif %}
