@@ -177,12 +177,17 @@ ggplot() +
 
 ### My Perspective
 
-1. *If you can learn about programming a computer to do something, you have direct access to the deepest, most fundamental ideas in statistics.*
-2. Statistics aren't *that* mystifying (but the notation can be unintuitive).
+*If you can learn about programming a computer to do something, you have direct access to the deepest, most fundamental ideas in statistics.*
 
-You just need a problem you want to solve. 
-
+- You just need a problem you want to solve. 
 - Your computer will solve it for you.
+
+
+<!-- 2. Statistics aren't *that* mystifying (but the notation can be unintuitive). -->
+
+<!-- You just need a problem you want to solve.  -->
+
+<!-- - Your computer will solve it for you. -->
 
 # The Gender Pay Gap
 ### Motivating Issue: The Gender Pay Gap
@@ -230,12 +235,13 @@ On average, women earn $10,670 less than men (or 82% of the average man's income
 
 ###
 
-**Skeptic's argument**: A $10,670 difference in income between men and women could have been observed just by random chance.
-
+<!-- **Skeptic's argument**: A $10,670 difference in income between men and women could have been observed just by random chance. -->
+**Skeptic's argument**: That difference could have been observed just by random chance. 
 
 \bigskip 
 
-**Advocate's argument**: A $10,670 difference in income between men and women is an important difference and is unlikely to have been observed by random chance.
+<!-- **Advocate's argument**: A $10,670 difference in income between men and women is an important difference and is unlikely to have been observed by random chance. -->
+**Advocate's argument**: That difference is an important difference and is unlikely to have been observed by random chance.
 
 ## The STAT 101 (analytical) Method
 ###
@@ -334,21 +340,21 @@ Since |-2.41| > 1.9628, we can reject the skeptic's argument.
 But there's got to be a better way.
 
 
-### In R
+<!-- ### In R -->
 
-For one, make the computer do it for you.
+<!-- For one, make the computer do it for you. -->
 
-```{r}
+<!-- ```{r} -->
 
-broom::tidy(t.test(realrinc20 ~ gender, 
-                   data = wages10_matched)) %>%
-  # estimate1 = mean for women. estimate2 = mean for men
-  rename(diff = estimate,
-         t_stat = statistic,
-         df = parameter) %>%
-  select(diff:df)
+<!-- broom::tidy(t.test(realrinc20 ~ gender,  -->
+<!--                    data = wages10_matched)) %>% -->
+<!--   # estimate1 = mean for women. estimate2 = mean for men -->
+<!--   rename(diff = estimate, -->
+<!--          t_stat = statistic, -->
+<!--          df = parameter) %>% -->
+<!--   select(diff:df) -->
 
-```
+<!-- ``` -->
 
 ## The Computational Method
 ### The Computational Method
@@ -356,10 +362,11 @@ broom::tidy(t.test(realrinc20 ~ gender,
 A computational alternative, called "permutations", may be more accessible.
 
 - Permutations randomly shuffle the outcome variable and recalculate statistics of interest.
+- This allows us to regenerate data to to test the skeptic's argument.
 
-Recall the skeptic's argument: there are no meaningful differences by gender; the difference is due to chance.
+<!-- Recall the skeptic's argument: there are no meaningful differences by gender; the difference is due to chance. -->
 
-- Permutation allows us to regenerate data to test the skeptic's argument.
+<!-- - Permutation allows us to regenerate data to test the skeptic's argument. -->
 
 ###
 
@@ -679,7 +686,7 @@ perm_ttests %>%
 
 ### Inference by Computation/Permutations
 
-Recall the skeptic's argument: there are no meaningful differences by gender; the observed difference is due to chance. We retort:
+Recall the skeptic's argument. Our retort:
 
 - We simulated this argument through 10,000 permutations.
 - The observed difference is very rare. Only 62 of 10,000 permutations yielded more extreme differences.
