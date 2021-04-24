@@ -132,6 +132,7 @@ Here's a table of contents for this post, especially if you want to jump past th
     - [Assorted Season 1-10 `r emo::ji('fire')` Takes](#season10takes)
     - [Season 11 `r emo::ji('fire')` Takes](#season11takes)
     - [Season 12 `r emo::ji('fire')` Takes](#season12takes)
+    - [Season 13 `r emo::ji('fire')` Takes](#season13takes)
 
 ## About the Data/Methods {#datamethods}
 
@@ -147,14 +148,15 @@ There are some additional caveats.
 - The episode-level data has a `numqueens` column that codes the number of participants who were active in the episode. There were several cases where RuPaul reintroduced a performer---or, in the case of Season 7, an entire damn cast---at the start of the episode. In more than a few cases, those reintroduced were eliminated the exact same episode.
 - Related to that: I code that episode in Season 7 as a case where Pearl and Trixie Mattel were joint winners.
 - The finales for Season 9 and Season 10 are cases where the runner-up(s) (e.g. Peppermint, Season 9) scored high and those who lost the semifinals (e.g. Trinity Taylor, Season 9) were bottoms for that episode. Again, these are finales so the user should subset them out when comparing queens across different seasons.
+- Season 13 is going to be a clear outlier in comparing across seasons. If you wanted to standardize and compare across seasons in an honest way, you should probably omit the first three episodes as "uncompetitive" or "specials." My own interpretation is that a non-finale episode is "competitive" when there is a bottom-two lip-sync and someone could go home (even if it's a double-shantay). I elect to not do that here, just for ease.
 
 ## An Empirical Analysis of RuPaul's Drag Race Performances {#empirical}
 
-The data are far from perfect or complete, but they're workable for an empirical analysis of contestant performance for the 11 main seasons of RuPaul's Drag Race. Here, I'll explore some of the best performers in the herstory of the show with some rudimentary metrics. Namely, which contestants had the highest percentage of competitive (i.e. non-special, but non-finale) episodes in which they won, or scored high/won? Which queens scored the highest on the ["Dusted or Busted" scoring system](https://rupaulsdragrace.fandom.com/wiki/%22Dusted_or_Busted%22_Scoring_System)? The data aren't too hard to generate and require a few lines in `{tidyverse}`. The [source code](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2019-02-17-dragracer-rupauls-drag-race-analysis.Rmd), along with version herstory, is available on the `_source` directory for my website. 
+The data are far from perfect or complete, but they're workable for an empirical analysis of contestant performance for all seasons of RuPaul's Drag Race (excluding All-Stars, which would be a mess to standardize). Here, I'll explore some of the best performers in the herstory of the show with some rudimentary metrics. Namely, which contestants had the highest percentage of competitive (i.e. non-special, but non-finale) episodes in which they won, or scored high/won? Which queens scored the highest on the ["Dusted or Busted" scoring system](https://rupaulsdragrace.fandom.com/wiki/%22Dusted_or_Busted%22_Scoring_System)? The data aren't too hard to generate and require a few lines in `{tidyverse}`. The [source code](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2019-02-17-dragracer-rupauls-drag-race-analysis.Rmd), along with version herstory, is available on the `_source` directory for my website. 
 
 ### Comparing the Season Winners {#comparingseasonwinners}
 
-This will facilitate some kind of comparison, say, among the season-winners by reference to thier performance in main challenges/runways through the course of a season. I choose to focus on the percentage of wins, bottoms, etc. because the number of competitive episodes varies considerably through the 12 seasons. For example, Bebe Zahara Benet had just six episodes before the finale in which she could've been eliminated. Raja, Season's 3 winner, had the most (12). Seasons since then have had 10 or 11 competitive episodes, excluding the eight competitive episodes in Season 8.
+This will facilitate some kind of comparison, say, among the season-winners by reference to thier performance in main challenges/runways through the course of a season. I choose to focus on the percentage of wins, bottoms, etc. because the number of competitive episodes varies considerably through the 12 seasons. For example, Bebe Zahara Benet had just six episodes before the finale in which she could've been eliminated. Raja, Season's 3 winner, had 12. Seasons since then have had 10 or 11 competitive episodes, excluding the eight competitive episodes in Season 8. Season 13 was particularly long.
 
 ```{r tabseasonwinners, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
 
@@ -173,7 +175,7 @@ D %>%
          `D/B Score` = db_score) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
-        caption = "Ranking the RuPaul's Drag Race Winners from Season 1 to Season 12",
+        caption = "Ranking the RuPaul's Drag Race Winners Across All Seasons",
         align=c("c","l","c","c","c","c","c"))
 
 
@@ -195,7 +197,7 @@ The conclusion of Season 11 and addition of Yvie Oddly to this list of winners m
 
 I added an indicator to the contestant-episode data after season 12 noting which contestant was Miss Congeniality for the season. From there, we can compare the Miss Congenialities (sic?) across seasons.
 
-```{r comparemisscons, echo=F, eval=T, cache=T, warning=F, message =F}
+```{r comparemisscons, echo=F, eval=T, warning=F, message =F}
 
 D %>%
   left_join(., rpdr_contep %>% distinct(season, contestant, missc)) %>%
@@ -209,7 +211,7 @@ D %>%
   kable(., format="html",
         table.attr='id="stevetable"',
         col.names = c("Season", "Contestant", "Rank", "% Wins", "% Wins/Highs", "% Bottom", "% Bottom/Low", "D/B Score"),
-        caption = "Comparing Miss Congenialities, Season 1 to Season 12",
+        caption = "Comparing Miss Congenialities, All Seasons",
         align = c("c", "l", "c","c","c","c","c"))
 ```
 
@@ -219,13 +221,13 @@ Nina Flowers has a special place in Drag Race herstory. It is highly unlikely th
 
 Second, my modeling of the data is particularly sanguine about Katya and BenDeLaCreme and how good they were in their respective seasons. As it is, my simple item response model later in this post features them prominently in the list of top 25 performers in the show's herstory, which is almost entirely comprised of season winners and runners-up. They are basically the lowest-ranked performers to appear in that top 25 list. Both were incidentally the Miss Congeniality winners for the season. 
 
-Finally, the most recent Miss Congeniality (as of writing) comes out as having the lowest D/B score among the Miss Congeniality winners. However, those who just watched the show know Heidi is a case of a performer gradually coming into her own as the season progressed and a case where metrics of season performance don't capture how enjoyable she was. Yet, she spent half the season in the bottom two or with a low evaluation.
+Finally, Heidi N Closet emerges as having the lowest D/B score among the Miss Congeniality winners. However, those who just watched the show know Heidi is a case of a performer gradually coming into her own as the season progressed and a case where metrics of season performance don't capture how enjoyable she was. Yet, she spent half the season in the bottom two or with a low evaluation.
 
 ### Who Were the Lowest-Ranked Performers to Land in the Top Four? {#lowesttop4}
 
-The data can also be used to identify the lowest-scoring performers to get a top four finish in the show's 12 seasons. There are several metrics available for ranking these performers, but I'll go in descending order, by "Dusted or Busted" score.
+The data can also be used to identify the lowest-scoring performers to get a top four finish across all seasons. There are several metrics available for ranking these performers, but I'll go in descending order, by "Dusted or Busted" score.
 
-```{r tablowesttop4, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
+```{r tablowesttop4, echo=F, eval=T, fig.width=13, fig.height=8, warning=F, message =F}
 D %>%
   filter(rank <= 4) %>%
   arrange(db_score) %>%
@@ -242,7 +244,7 @@ D %>%
          `D/B Score` = db_score) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
-        caption = "The Lowest Ranked Top Four Performers from Season 1 to Season 12",
+        caption = "The Lowest Ranked Top Four Performers Across All Seasons",
         align=c("c","c","l","c","c","c","c","c"))
 
 
@@ -260,13 +262,13 @@ Jackie Cox's entry into this list does hurt a little, the extent to which she wa
 
 ### Which Contestants Were "Robbed" in Their Season? {#robbed}
 
-I added this table after Season 11 ended because the selection of the champion is arguably a bit controversial. Not only does Yvie have the lowest "Dusted or Busted" score of any champion in a given season, but the queen she beat in the finale, Brooke Lynn Hytes, had a "Dusted or Busted" score a full three points higher. In fact, a latent variable analysis that I provide below will contend Brooke Lynne Hytes had the eighth best season of any performer in the show's herstory.
+I added this table after Season 11 ended because the selection of the champion is arguably a bit controversial. Not only does Yvie have the lowest "Dusted or Busted" score of any champion in a given season, but the queen she beat in the finale, Brooke Lynn Hytes, had a "Dusted or Busted" score a full three points higher. In fact, a latent variable analysis that I provide below will contend Brooke Lynne Hytes had one of the best seasons of any performer in the show's herstory.
 
 This would not be the first time a queen was "robbed" from winning her particular season (at least, if that's how you want to spin it). Long-time fans of the show probably know Ru started the first season with the idea of crowning BeBe Zahara Benet at the end, forgetting along the way that it meant Nina Flowers had a better season and finished second. The most prominent case of this might have been Shea Couleé, who entered the semifinals as the top performer in that season and was bulldozed in the semifinal by arguably the best individual lip sync in the show's herstory. Sasha Velour deserved to advance on the merits of the lip sync but it did mean Shea Couleé, who had arguably the third best run in the show's herstory to that point, did not snatch the crown.
 
-There are four such cases I show below where an individual performer had a higher "Dusted or Busted" score than the eventual winner that season. All four have unique situations. Nina finished second despite having the overall better record than Bebe Zahara Benet, but Ongina was woefully underplaced in her season. She too had a better "Dusted or Busted" score than the eventual champion, but finished in fifth place. Shea Couleé had arguably the best season run in the show's herstory but was eliminated in the semifinals. More recently, Brooke Lynn Hytes can now boast the biggest point differential in show herstory over an eventual champion. Her three-point cushion over the eventual season champion may not be topped.
+There are a few cases I show below where an individual performer had a higher "Dusted or Busted" score than the eventual winner that season, with more of them coming in more recent seasons. All have unique situations. Nina finished second despite having the overall better record than Bebe Zahara Benet, but Ongina was woefully underplaced in her season. She too had a better "Dusted or Busted" score than the eventual champion, but finished in fifth place. Shea Couleé had arguably the best season run in the show's herstory but was eliminated in the semifinals. More recently, Brooke Lynn Hytes can now boast the biggest point differential in show herstory over an eventual champion. Her three-point cushion over the eventual season champion may not be topped.
 
-```{r robbedqueens1, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
+```{r robbedqueens1, echo=F, eval=T, fig.width=13, fig.height=8, warning=F, message =F}
 
 D %>%
   group_by(season) %>%
@@ -285,7 +287,7 @@ D %>%
          `D/B Score` = db_score) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
-        caption = "Queens Whose D/B Scores Were Greater Than the Season Champion",
+        caption = "Queens Whose D/B Scores Were Greater Than the Season Champion, All Seasons",
         align=c("c","l","c","c","c","c","c"))
 
 
@@ -294,7 +296,7 @@ D %>%
 One other metric for classifying "robbed" queens is to locate those queens who 1) finished outside the top four in a season but 2) had a higher "Dusted or Busted" score than the lowest-ranked performer to land in the top four. There are 44 such instances in the data, but much of that is in Season 6 because Darienne Lake had such a low score by the end of the season that even contestants like Gia Gunn and Laganja Estranja had comfortably outperformed her. The table below subsets that list to just the cases of performers who had the highest such difference in a given season and arranges them by largest difference.
 
 
-```{r robbedqueens2, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
+```{r robbedqueens2, echo=F, eval=T, fig.width=13, fig.height=8, warning=F, message =F}
 D %>%
   filter(rank <= 4) %>%
   group_by(season) %>%
@@ -337,7 +339,7 @@ Finally, I decided to run a simple graded response model on the data for all con
 
 The top 25 participants on this metric are listed below, with accompanying standard errors around the latent estimate.
 
-```{r top-rupauls-drag-race-performers, echo=F, eval=T, cache=T, warning=F, fig.width=12, fig.height = 8}
+```{r top-rupauls-drag-race-performers, echo=F, eval=T,  warning=F, fig.width=12, fig.height = 8}
 D %>%
   mutate(seasoncontestant = paste0(contestant, " (",season,")")) %>%
   select(seasoncontestant, everything()) %>%
@@ -356,13 +358,13 @@ D %>%
                     lwd = 1/2, position = position_dodge(width = 1/2),
                      fill = "white", color="#000000", shape=22)  +
   xlab("Contestant") + ylab("Latent Performance Score for RuPaul's Drag Race Season Participant")  +
-  labs(title = "A Ranking of Latent Performance Scores for RuPaul's Drag Race Participants, Seasons 1-12",
+  labs(title = "A Ranking of Latent Performance Scores for RuPaul's Drag Race Participants, All Seasons",
        subtitle = "The model is admittedly crude, but it seems to want to penalize Bob the Drag Queen for being on a somewhat abbreviated season.",
        caption = "Data: dragracer (github.com/svmiller/dragracer)")
 
 ```
 
-Fans of the show are free to read into this what they want. I'm not too invested in what this demonstrates, but a few things are worth mentioning as quick hitters.
+Fans of the show are free to read into this what they want. Several Season 13 scores are going to be functions of those first three episodes, which will artificially prop up some scores even if (I think) they were uncompetitive. I'm not too invested in what this demonstrates, but a few things are worth mentioning as quick hitters.
 
 ```{r bendelagoinghome, echo=F, eval=T, results="asis", cache=F}
  
@@ -453,3 +455,17 @@ Related: I'm not saying RuPaul has it out for the San Francisco drag scene, but 
 I think I have a good intuition to what RuPaul wants to do in a given season. [I called Yvie winning Season 11](https://twitter.com/stevenvmiller/status/1101109692498132998?ref_src=twsrc%5Etfw"). My wife can attest that I had pegged All Stars 2 and All Stars 4 to be victory laps for Alaska and Trinity (still counts), respectively. I got it wrong this season. My intuition was Ru was looking for a "political" winner in the season preceding a presidential election. I thought that would be Jackie, and it was not. At least [Jackie gave us the season's best lip-sync](http://svmiller.com/blog/2020/05/jackie-cox-rupauls-drag-race-firework-lipsync/). 
 
 Do I get partial credit for the season's winner being the one who won the political challenge, though? For the three seasons that have preceded a presidential election (Seasons 4, 8, and 12), the winners of the season's political challenge won the crown at the season's end.
+
+### Season 13 `r emo::ji('fire')` Takes {#season13takes}
+
+This season had some promise at the onset but felt like a slog to finish. It didn't help that Season 13's longevity clashed with the restart of the second season of Drag Race UK. The latter was infinitely more enjoyable. As far as I'm concerned, Victoria Green is the uncrowned, people's champion of Drage Race UK and probably Season 13 as well.
+
+I do appreciate that Season 13 allowed for a few non-competitive episodes before sending the first performer home. Thus, the viewer got to see more of someone like Kahmora Hall that better showcased her drag before giving her the first-out label. And that's good! Imagine the kinds of things we'd have seen from Kelly Mantle or Jaymes Mansfield if they had that opportunity as well. However, it just felt like a chore near the end. The season definitely did not need a double shantay.
+
+Related, and at the risk of naming names, there is a subset of performer for whom "to spill the tea" and "to be honest with you" amounts to an ability to give criticism and not receive it. We all know those people and they're not a whole lot of fun.
+
+I think part of the issue was the show had two unfortunate problems that kind of undercut it as the season progressed. For one, the performers for whom we thought there was the most promise---thinking of Olivia Lux and Utica Queen---really ran out of steam near the end. In some cases, it amounted to a pivot into car-crash television for the show. Related, the performers who were abruptly eliminated became performers we wish we could see more. Denali especially stands out here. I could offer a similar comment about Elliott with 2 Ts and Joey Jay. Joey Jay, in particular, was a lot of fun to watch and Elliott's dancing ability really showed.
+
+For the life of me, I don't understand why it became a theme of this season that Rosé tried to be "too perfect" or "too polished." Like, what even is that? I'll say this from my perspective. I'm a university professor who has endeavored my entire life to cultivate and develop my passions from my youth. I find things that interest me and I invest time and energy into knowing everything I can about them while trying to be as good as I feasibly can be at them. This ranges from what led me to get a PhD to other interests in things like luthiery and computer programming. I'm also a guy who has struggled my entire life with understanding how people work and how society operates. At some base level, I really don't get it. I don't understand how other people operate (beyond all things political, given my training). I'm also aware I can't be an asshole and try to impose my will on others amid my confusion. Being a good, socially responsible person is in part about identifying contraints---things you cannot do nor say---and operating within them. These are constraints that emerge because saying or doing these things impose harm on others, if not yourself, and things fall apart pretty quickly if everyone violates these constraints and the end result makes everyone worse off. Toward that end, that's really the only thing at some base level that made sense to me about living in society. If you're a mindful person with good intentions, and the kind of person prone to analysis paralysis, it means you're probably going to be super mindful of your Ps and Qs so that you don't say something that accidentally makes someone uncomfortable. Few things give me hives quite like being misinterpreted, either because I did not know how to perfectly say what I intended to say, or because I spoke off the cuff and said something the wrong way that hurt someone. From my perspective, someone like Rosé was super relatable. She's passionate about what she does. She's (clearly) great at what she does. She's also super mindful about what she says and she does as she focuses on her craft. I don't know if she struggles with these things as well as I mentioned them, but those particular criticisms leveled against her---I'll be polite---make zero sense. It was just a weird character arc this season, made even weirder that those were comments raised by both fellow performers and the show's judges.
+
+I don't think it's hyperbole to say Denali might be the most interesting contestant they've ever had, at least when combining the queen we see on television with the details of the performer behind the queen. [Denali's wiki](https://rupaulsdragrace.fandom.com/wiki/Denali#Trivia) has a whole host of things that I wish came up on the show or were discussed more.
