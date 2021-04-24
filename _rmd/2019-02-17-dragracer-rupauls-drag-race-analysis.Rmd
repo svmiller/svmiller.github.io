@@ -339,12 +339,12 @@ Finally, I decided to run a simple graded response model on the data for all con
 
 The top 25 participants on this metric are listed below, with accompanying standard errors around the latent estimate.
 
-```{r top-rupauls-drag-race-performers, echo=F, eval=T,  warning=F, fig.width=12, fig.height = 8}
+```{r top-rupauls-drag-race-performers, echo=F, eval=T,  warning=F, fig.width=12, fig.height = 9}
 D %>%
   mutate(seasoncontestant = paste0(contestant, " (",season,")")) %>%
   select(seasoncontestant, everything()) %>%
   arrange(-lperform) %>%
-  head(25) %>%
+  head(30) %>%
  ggplot(.,aes(reorder(seasoncontestant, lperform), lperform)) + 
   theme_steve_web() + post_bg() +
   geom_point(colour = "#000000", size = 3, shape =22) +
