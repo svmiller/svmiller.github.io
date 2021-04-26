@@ -20,6 +20,8 @@
 
 .submain  {
   grid-column: span 4;
+	grid-row: 2;
+	justify-content: center;
 }
 
 .news {
@@ -61,14 +63,9 @@
     grid-row: 4;
   }
   .submain {
-    width: 100%;
-  }
-}
-
-@media (min-width: 600px) {
-  .submain {
-    grid-row: 2;
-    justify-content: center;
+    grid-column: span 10;
+		grid-row: auto;
+		justify-content: left;
   }
 }
 
