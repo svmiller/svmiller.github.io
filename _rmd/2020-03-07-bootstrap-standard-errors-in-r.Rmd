@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-03-07'
 excerpt: "Here is a how-to on bootstrapping standard errors in R in a flexible way, using some tidyverse-friendly packages like modelr and purrr."
@@ -30,17 +28,17 @@ knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
                       cache.path = '../cache/bootstrap-ses/',
                       message=FALSE, warning=FALSE,
-                      cache = TRUE) 
+                      cache = F) 
 
 library(tidyverse) # main workflow, which has purrr and forcats (IIRC)
 library(stevemisc) # misc. functions of interest to me, Steve
-library(post8000r) # data for my grad-methods class
+library(stevedata) # data for my grad-methods class
 library(lmtest) # for a Breusch-Pagan test for heteroskedasticity
 # library(broom) # for tidying model output, but not directly loaded
 library(knitr) # for tables
 library(kableExtra) # for pretty tables
 library(modelr) # for bootstrap
-
+library(ggrepel) # one-off for one graph
 ```
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
@@ -49,11 +47,13 @@ add_jekyll_image('/images/system-of-a-down.jpg', "The Toxicity of Heteroskedasti
  
 ```
 
-This will be another post I wish I can go back in time to show myself how to do when I was in graduate school. It's something I recently taught [my grad class](http://post8000.svmiller.com/) how to do as part of [a lab session](https://github.com/svmiller/post8000/blob/master/lab-scripts/ols-diagnostics-lab.R).
+*Last updated: `r format(Sys.time(), '%d %B %Y')`* 
+
+This will be another post I wish I can go back in time to show myself how to do when I was in graduate school. It's something I recently taught [my grad class](http://post8000.svmiller.com/) how to do as part of [a lab session](http://post8000.svmiller.com/lab-scripts/ols-diagnostics-lab.html).
 
 Most of my research questions don't have solutions easily amenable to ordinary least squares (OLS) regression, whether because my main outcomes of interest are non-interval or because I'm freely confessing up front that I have important spatial/temporal heterogeneity that is important to model on its own terms. Still, the quantitative policy studies people love OLS and we all learn it first. However, as I caution, a model is only as useful as the assumptions that underpin it. When the assumptions that underpin it are violated, the model's output becomes suspect in some ways.
 
-One of those important assumptions of an OLS model that's easy to violate in a social science application is that of [homoskedasticity](https://en.wikipedia.org/wiki/Homoscedasticity). In as many words, the variability of our variable is unequal across the range of our variables that we believe explain it. This is ["heteroskedasticity."](http://www.statsmakemecry.com/smmctheblog/confusing-stats-terms-explained-heteroscedasticity-heteroske.html) More formally, the deviation between fitted value and the prediction error depends on an *x*-value. We often see this manifest in [a "cone of shame"](https://www.statisticshowto.datasciencecentral.com/wp-content/uploads/2014/02/Heteroscedasticity.jpg), though this is just the most obvious/illustrative way we observe it.  The implications for violating this assumption of homoskedasticity mostly concern our standard errors around our coefficients. They may be too large or too small, which could lead to either a Type 1 or Type 2 error.
+One of those important assumptions of an OLS model that's easy to violate in a social science application is that of [homoskedasticity](https://en.wikipedia.org/wiki/Homoscedasticity). The flip side of this, in as many words, is that the variability of our variable is unequal across the range of our variables that we believe explain it. This is ["heteroskedasticity."](http://www.statsmakemecry.com/smmctheblog/confusing-stats-terms-explained-heteroscedasticity-heteroske.html) More formally, the deviation between fitted value and the prediction error depends on an *x*-value. We often see this manifest in [a "cone of shame"](https://www.statisticshowto.datasciencecentral.com/wp-content/uploads/2014/02/Heteroscedasticity.jpg), though this is just the most obvious/illustrative way we observe it.  The implications for violating this assumption of homoskedasticity mostly concern our standard errors around our coefficients. They may be too large or too small, which could lead to either a Type 1 or Type 2 error.
 
 There are various "solutions" for heteroskedasticity, which are less "solutions" (since it may hinge on the kind of heteroskedasticity and whether you know it or not). In practice, these solutions are more robustness tests to compare with your standard error estimates derived from a simple OLS model. One of those solutions is "bootstrapping", which was first introduced by [Efron (1979)](https://projecteuclid.org/euclid.aos/1176344552) as an extension of the "jackknife" approach. Briefly, the "jackknife" approach first introduced by [Quenouille (1949)](https://projecteuclid.org/euclid.aoms/1177729989), and given its name by [Tukey (1958)](https://doi.org/10.1214%2Faoms%2F1177706647), is a "leave-one-out" resampling method that recalculates a statistic of interest iteratively until each observation has been removed once. One limitation from this, beyond how tricky it is to adapt to more complex data structures, is jackknifing struggles with smaller data sets and the number of resamples is capped at the number of observations. Bootstrapping, a resampling with replacement approach to calculating statistics of interest (e.g. standard errors from a regression), is far more versatile and flexible.
 
@@ -64,22 +64,23 @@ First, here are the R packages that I will be using for this exercise, followed 
 ```r
 library(tidyverse) # main workflow, which has purrr and forcats (IIRC)
 library(stevemisc) # misc. functions of interest to me, Steve
-library(post8000r) # data for my grad-methods class
+library(stevedata) # my toy data package
 library(lmtest) # for a Breusch-Pagan test for heteroskedasticity
 # library(broom) # for tidying model output, but not directly loaded
 library(knitr) # for tables
 library(kableExtra) # for pretty tables
 library(modelr) # for bootstrap
+library(ggrepel) # one-off use for annotating a fitted-residual plot
 ```
 
 ## The Data and the Problem {#data}
 
-The data I'm using are probably familiar to those who learned statistics by Stata. It's some statewide crime data from around 1993 or so that come available in Agresti and Finlay's *Statistical Methods for the Social Sciences* since around its third edition in 1997. I [ganked these data](http://users.stat.ufl.edu/~aa/social/data.html) from the internet and added it to [my `post8000r` package](https://github.com/svmiller/post8000r) as the `Crime` data. The data include 51 observations (i.e. 50 states + DC, [which should be a state](https://statehood.dc.gov/)) and you can [read more about it here](https://github.com/svmiller/post8000r/blob/master/man/Crime.Rd). I used this data set for this application because I know in advance these data are going to flunk a Breusch-Pagan test for heteroskedasticity.
+The data I'm using are probably familiar to those who learned statistics by Stata. It's some statewide crime data from around 1993 or so that come available in Agresti and Finlay's *Statistical Methods for the Social Sciences* since around its third edition in 1997. I [ganked these data](http://users.stat.ufl.edu/~aa/social/data.html) from the internet and added it to [my `{stevedata}` package](http://svmiller.com/stevedata) as the `af_crime93` data. The data include 51 observations (i.e. 50 states + DC, [which should be a state](https://statehood.dc.gov/)) and you can [read more about it here](http://svmiller.com/stevedata/reference/af_crime93.html). I used this data set for this application because I know in advance these data are going to flunk a Breusch-Pagan test for heteroskedasticity.
 
-Supposed we wanted to explain the violent crime rate per 100,000 people in the population (`violent`) as a function of the percentage of the state with income below the poverty level (`poverty`), the percentage of families in the state headed by a single parent (`single`), the percent of population in metropolitan areas (`metro`), the percentage of the state that is white (`white`), and the percentage of the state that graduated from high school (`highschool`). The ensuing regression formula---and pretty output with help from the `broom`, `knitr`, and `kableExtra` packages---would look like this. The ensuing output suggests all but the `white` variable and the `highschool` variable have statistically significant effects. Remember that *p*-value for the `white` variable, since it's hovering around .10. This would be almost statistically significant at a lower threshold that we typically use for smaller data sets.
+Supposed we wanted to explain the violent crime rate per 100,000 people in the population (`violent`) as a function of the percentage of the state with income below the poverty level (`poverty`), the percentage of families in the state headed by a single parent (`single`), the percent of population in metropolitan areas (`metro`), the percentage of the state that is white (`white`), and the percentage of the state that graduated from high school (`highschool`). The ensuing regression formula---and pretty output with help from the `{broom}`, `{knitr}`, and `{kableExtra}` packages---would look like this. The output suggests all but the `white` variable and the `highschool` variable have statistically significant effects. Remember that *p*-value for the `white` variable, since it's hovering around .10. This would be almost statistically significant at a lower threshold that we typically use for smaller data sets.
 
 ```{r m1, eval = T}
-M1 <- lm(violent ~ poverty + single + metro + white + highschool, Crime)
+M1 <- lm(violent ~ poverty + single + metro + white + highschool, af_crime93)
 ```
 
 ```{r broom-m1, eval=T, echo=F}
@@ -96,7 +97,7 @@ broom::tidy(M1) %>%
 
 ```
 
-However, people who report OLS models should also provide some diagnostic tests to explore whether the assumptions of the model hold. One of those assumptions is homoskedasticity, which can be tested with a Breusch-Pagan test from the `lmtest` package. Here, the test output is testing a null hypothesis of homoskedastic variances. If the p-value is low enough to your particular threshold---we'll go with *p* < .05---you should reject the null hypothesis of homoskedastic variance and assert you instead have heteroskedastic variances in your model. The output of the Breusch-Pagan test suggests we've violated the assumption of homoskedasticity with these data.
+However, people who report OLS models should also provide some diagnostic tests to explore whether the assumptions of the model hold. One of those assumptions is homoskedasticity, which can be tested with a Breusch-Pagan test from the `{lmtest}` package. Here, the test output is testing a null hypothesis of homoskedastic variances. If the p-value is low enough to your particular threshold---we'll go with *p* < .05---you should reject the null hypothesis of homoskedastic variance and assert you instead have heteroskedastic variances in your model. The output of the Breusch-Pagan test suggests we've violated the assumption of homoskedasticity with these data.
 
 ```{r bptest, eval=T, echo=T}
 broom::tidy(bptest(M1)) %>%
@@ -108,9 +109,8 @@ broom::tidy(bptest(M1)) %>%
 
 A fitted-residual plot will also suggest we don't have neat-looking variances either.
 
-```{r fitted-resid-plot-crime-data, echo=F, eval=T, cache=T, warning=F, fig.width=12, fig.height = 8}
-
-Crime %>%
+```{r fitted-resid-plot-crime-data, echo=F, eval=T, cache=F, warning=F, fig.width=12, fig.height = 8}
+af_crime93 %>%
   mutate(fitted = fitted(M1),
          resid = resid(M1)) %>%
   ggplot(.,aes(fitted, resid)) + geom_point() +
@@ -126,16 +126,16 @@ The implication of this kind of heteroskedasticity is less about our coefficient
 
 ## Bootstrapping, the Tidy Way
 
-`modelr` and `purrr` will make bootstrapping a cinch. Recall that a bootstrap approach is a resampling method, with replacement, that can be done as many times as you want. Since the `Crime` dataset is rather small and the model is simple, let's go for a 1,000 bootstrap resamples with `modelr`. Let's also set a reproducible seed so anyone following along will get identical results. Do note that `modelr` has a separate `bootstrap()` function (that we want in this case) that will conflict with a different `bootstrap()` function in `broom`. It's why I tend to never directly load `broom` in my workflow.
+`{modelr}` and `{purrr}` will make bootstrapping a cinch. Recall that a bootstrap approach is a resampling method, with replacement, that can be done as many times as you want. Since the `af_crime93` dataset is rather small and the model is simple, let's go for a 1,000 bootstrap resamples with `{modelr}`. Let's also set a reproducible seed so anyone following along will get identical results. Do note that `{modelr}` has a separate `bootstrap()` function that will conflict with a different `bootstrap()` function in `{broom}`. I want the `{modelr}` version and situations like this is why I tend to never directly load `{broom}` in my workflow.
 
 ```{r seed-bootstrap, eval=T, echo=T}
 set.seed(8675309) # Jenny, I got your number...
 
-Crime %>%
+af_crime93 %>%
   bootstrap(1000) -> bootCrime
 ```
 
-The `bootstrap()` function from `modelr` created a special [tibble](https://tibble.tidyverse.org/) that contains 1,000 resamples (with replacement, importantly) of our original data. This means some observations in a given resample will appear more than once. You can peek inside these as well. For example, let's look at the first resample and arrange it by state to see how some states appear more than once, and some don't appear at all. Notice how Oregon and Rhode Island (for example) appear three times in these 51 rows, but Montana and Wisconsin (for example) don't appear at all. That's fine because there's no doubt Montana and Wisconsin will be represented well across the 999 other resamples we're doing and that not every resample is going to have Oregon three times.
+The `bootstrap()` function from `{modelr}` created a special [tibble](https://tibble.tidyverse.org/) that contains 1,000 resamples (with replacement, importantly) of our original data. This means some observations in a given resample will appear more than once. You can peek inside these as well. For example, let's look at the first resample and arrange it by state to see how some states appear more than once, and some don't appear at all. Notice some observations appear multiple times. Illinois appears three times in these 51 rows; Colorado is even in there five times! Some states, like Alaska and Wyoming, don't appear at all. That's fine because there's no doubt Alaska and Wyoming will be represented well across the 999 other resamples we're doing and that not every resample is going to have Colorado in it five times.
 
 ```{r peek-inside-first-bootstrap, eval=T, echo=T}
 bootCrime %>% 
@@ -153,7 +153,7 @@ bootCrime %>%
 
 ```
 
-Now, here's where the magic happens that will show how awesome `purrr` is for these things if you take some time to learn it. For each of these 1,000 resamples, we're going to run the same regression from above and store the results in our special tibble as a column named `lm`. Next, we're going to create another column (`tidy`) that tidies up those linear models. Yes, that's actually a thousand linear regressions we're running and saving a tibble. Tibbles are awesome.
+Now, here's where the magic happens that will show how awesome `{purrr}` is for these things if you take some time to learn it. For each of these 1,000 resamples, we're going to run the same regression from above and store the results in our special tibble as a column named `lm`. Next, we're going to create another column (`tidy`) that tidies up those linear models. Yes, that's actually a thousand linear regressions we're running and saving a tibble. Tibbles are awesome.
 
 ```{r boot-lm, eval=T, echo=T}
 
@@ -179,7 +179,7 @@ bootCrime$tidy[[1]]
 bootCrime$tidy[[1000]]
 ```
 
-Now, this is where you're going to start summarizing the results from your thousand regressions. Next, we should pull the tidy lists from the `bootCrime` tibble and "map" over them into a new tibble. This is where the investment into learning `purrr` starts to pay off. It would be quite time-consuming to do this in some other way.
+Now, this is where you're going to start summarizing the results from your thousand regressions. Next, we should pull the tidy lists from the `bootCrime` tibble and "map" over them into a new tibble. This is where the investment into learning `{purrr}` starts to pay off. It would be quite time-consuming to do this in some other way.
 
 ```{r map2dfbootcrime, eval=T, echo=T}
 
@@ -211,7 +211,7 @@ tidybootCrime %>%
 
 When you bootstrap your standard errors under these conditions, you should compare the results of these bootstrapped standard errors with the standard OLS standard errors for the parameters in your model. Here, we'll do it visually. The ensuing plot suggests the standard errors most influenced by the heteroskedasticity in our model are those for the single family home variable and especially the percentage of the state that is white variable. In the former case, the bootstrapping still produced standard errors that could rule out a counterclaim of zero relationship, but the percentage of the state that is white variable becomes much more diffuse when its standard errors are bootstrapped. Sure, the 90% confidence intervals that we're using here (given the small number of observations) would still slightly overlap zero with the OLS estimates, but it was close. It's not close when the standard errors are bootstrapped. We should be cautious about wanting to make an argument for a precise effect there in our model.
 
-```{r bootstrapped-ses-crime-data, echo=T, eval=T, cache=T, warning=F, fig.width=14, fig.height = 10}
+```{r bootstrapped-ses-crime-data, echo=T, eval=T, warning=F, fig.width=14, fig.height = 10}
 broom::tidy(M1) %>%
   mutate(category = "Normal OLS Standard Errors") %>%
   # This will be convoluted, but I know what I'm doing.
@@ -244,12 +244,6 @@ broom::tidy(M1) %>%
 
 ## Conclusion
 
-Once you understand what bootstrapping is, and appreciate how easy it is to do with `modelr` and some `purrr` magic, you might better appreciate its flexibility. If you have a small enough data set with a simple enough OLS model---which admittedly seems like a relic of another time in political science---bootstrapping with this approach offers lots of opportunities. One intriguing application here is bootstrapping predictions from these 1,000 regressions. In other words, we could hold all but the poverty variable constant, set the poverty variable at a standard deviation above and below its mean, and get predictions across those 1,000 regressions and summarize them accordingly.
+Once you understand what bootstrapping is, and appreciate how easy it is to do with `{modelr}` and some `{purrr}` magic, you might better appreciate its flexibility. If you have a small enough data set with a simple enough OLS model---which admittedly seems like a relic of another time in political science---bootstrapping with this approach offers lots of opportunities. One intriguing application here is bootstrapping predictions from these 1,000 regressions. In other words, we could hold all but the poverty variable constant, set the poverty variable at a standard deviation above and below its mean, and get predictions across those 1,000 regressions and summarize them accordingly.
 
 Either way, bootstrapping is a lot easier/straightforward than some texts let on. If it's not too computationally demanding (i.e. your data set is small and doesn't present other issues of spatial or temporal clustering), you could do lots of cool things with bootstrapping. The hope is this guide made it easier.
-
-```{r knitchunk, echo=F, eval=F}
-setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("2020-03-07-bootstrap-standard-errors-in-r.Rmd",
-            output = "../_posts/2020-03-07-bootstrap-standard-errors-in-r.md")
-```
