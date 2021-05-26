@@ -903,7 +903,7 @@ dDisp %>%
   mutate(dispongoing = 1) -> dDisp
 ```
 
-The onset variable will require a little bit more work. In most (really: almost all) applications, the first dyadic dispute-year observation will be the onset. Most conflicts are bilateral and very few conflicts are as complex as World War II or as weird as that 2011-12 NATO-Russia MID referenced above. Further, cases where a side is dropping in/out in the same calendar year will routinely have more than a calendar year of separation between entry points. The Netherlands in what became the Iraq War (MID#4273) is a nice illustration of this. The Netherlands first appeared in MID#4273 in 1999 for a one-day incident. It next appears in March 2003, leading into the war itself.
+The onset variable will require a little bit more work. In most (really: almost all) applications, the first dyadic dispute-year observation will be the onset. Most conflicts are bilateral and very few conflicts are as complex as World War II or as weird as that 2011-12 NATO-Russia MID referenced above. Further, cases where a side is dropping in/out will routinely have more than a calendar year of separation between entry points. The Netherlands in what became the Iraq War (MID#4273) is a nice illustration of this. The Netherlands first appeared in MID#4273 in 1999 for a one-day incident. It next appears in March 2003, leading into the war itself.
 
 In other words, you can get almost all onset cases in the data by assigning the onset to the first dyadic observation and cases where the previous dyadic dispute-year is separated by more than a year.
 
