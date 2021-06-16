@@ -30,7 +30,7 @@ I maintain the following software packages, all for the R programming language.
 [`stevedata`](http://svmiller.com/stevedata/) [![](https://www.r-pkg.org/badges/version/stevedata?color=green)](https://cran.r-project.org/package=stevedata) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevedata?color=green)](https://cran.r-project.org/package=stevedata): miscellaneous data sets I use for in-class instruction  
 [`stevemisc`](http://svmiller.com/stevemisc/) [![](https://www.r-pkg.org/badges/version/stevemisc?color=green)](https://cran.r-project.org/package=stevemisc) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevemisc?color=green)](https://cran.r-project.org/package=stevemisc): various helper functions (esp. for mixed models and BTSCS models)  
 [`steveproj`](http://svmiller.com/steveproj): academic project management with Make and R Markdown  
-[`stevetemplates`](https://github.com/svmiller/stevetemplates) [![](https://www.r-pkg.org/badges/version/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates): write R Markdown documents with [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) 
+[`stevetemplates`](http://svmiller.com/stevetemplates) [![](https://www.r-pkg.org/badges/version/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates): write R Markdown documents with [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) 
 
 ## Publications
 
