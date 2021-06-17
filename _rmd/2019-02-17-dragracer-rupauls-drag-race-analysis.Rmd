@@ -97,7 +97,6 @@ cbind(D, rrscores) %>%
          lperform_se = SE_F1) %>%
   tbl_df() -> D
 
-
 ```
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
