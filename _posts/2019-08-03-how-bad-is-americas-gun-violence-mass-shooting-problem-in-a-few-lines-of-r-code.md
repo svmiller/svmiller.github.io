@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-03'
 excerpt: "America's gun violence/mass shooting problem is bad. It's conspicuously bad and it's getting worse despite obvious solutions for which there's no political will."
@@ -22,7 +20,7 @@ image: "gilroy-strong.jpg"
 
 {% include image.html url="/images/gilroy-strong.jpg" caption="Artist Ignacio 'Nacho' Moya carries a sign he made during a vigil for the victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area News Group)" width=400 align="right" %}
 
-*Last updated: February 28, 2020*
+*Last updated: 17 June 2021*
 
 [Another day, another mass shooting](https://www.cnn.com/2019/08/03/us/el-paso-shooting/index.html) for literally the only country of its size and development where this happens on a routine basis. This one in El Paso may (reportedly) have some domestic terrorist overtones to it, but ~~barring confirmation of the shooter and the shooter's motives for the moment~~([nevermind](https://www.nytimes.com/2019/08/03/us/patrick-crusius-el-paso-shooter-manifesto.html)), this post will focus on just the gun violence and the mass shooting angle here.
 
@@ -41,7 +39,7 @@ First, [GunPolicy.org](https://www.gunpolicy.org) is an excellent repository of 
 
 <!-- United Nations Office on Drugs and Crime data (see: [here](https://www.unodc.org/documents/data-and-analysis/statistics/Homicide/Homicides_by_firearms.xls)) will emphasize how the U.S. stands out among peer countries. I link to the spreadsheet in this post. It's an *ugly* spreadsheet that requires some tidying and eye-balling things in LibreOffice for slicing, but it can be done all the same. Do note: the data are mostly limited to 2009/2010 observations, not that it should meaningfully change the takeaway here. The U.S. will conspicuously be an island among peer countries (i.e. Canada, Australia, New Zealand, and Western/Northern Europe) for its homicide by firearm rate. -->
 
-I gathered data for 25 peer countries to the U.S. (i.e. Western Europe, Northern Europe, Canada, Australia, and New Zealand) in addition to data for the U.S. on gun homicides per 100,000 people in the population. I created a data frame for it (`ghp100k`) and added it to [my `stevemisc` package.](https://github.com/svmiller/stevemisc). You can [read more about the data here](https://github.com/svmiller/stevemisc/blob/master/man/ghp100k.Rd) and, better yet, [check the underlying sources here](https://www.gunpolicy.org).
+I gathered data for 25 peer countries to the U.S. (i.e. Western Europe, Northern Europe, Canada, Australia, and New Zealand) in addition to data for the U.S. on gun homicides per 100,000 people in the population. I created a data frame for it (`ghp100k`) and added it to [my `{stevedata}` package.](http://svmiller.com/stevedata). You can [read more about the data here](http://svmiller.com/stevedata/reference/ghp100k.html) and, better yet, [check the underlying sources here](https://www.gunpolicy.org).
 
 We can first assess the scope of the problem by selecting on the latest years for all 25 countres in the data. Here, it's apparent the U.S. will conspicuously be an island among peer countries for its gun homicide rate. The U.S. had a gun homicide rate (per 100,000 people) in 2017 of an astounding 4.46. The next closest country is Canada, with a rate .75. The U.S. rate is almost six times the next closest country in gun homicides.
 
@@ -49,19 +47,20 @@ We can first assess the scope of the problem by selecting on the latest years fo
 
 ```r
 # require(tidyverse)
-# require(stevemisc)
+# require(stevedata)
 # data(ghp100k)
 
 ghp100k %>%
   arrange(country, year) %>%
   group_by(country) %>%
   slice(n()) %>%
-  mutate(cy = paste0(country,"\n(", year, ")")) %>%
-  ggplot(.,aes(reorder(cy, -ghp100k), ghp100k)) +
+  mutate(cy = paste0(country,"\n(", year, ")"),
+         cy = fct_lump(cy, value)) %>%
+  ggplot(.,aes(cy, value)) +
   theme_steve_web() +
   post_bg() +
   geom_bar(stat="identity", alpha=0.6, color="black") +
-  geom_text(aes(label=round(ghp100k, 2)), vjust=-.5, colour="black",
+  geom_text(aes(label=round(value, 2)), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4, family="Open Sans") +
   theme(axis.text.x = element_text(angle = 45)) +
   labs(x = "Country (Year)",
@@ -71,7 +70,7 @@ ghp100k %>%
        subtitle = "Other countries are reducing what are already low rates. The U.S. rate is only increasing.")
 ```
 
-![plot of chunk firearm-homicide-rate-data-usa-peer-countries](/images/firearm-homicide-rate-data-usa-peer-countries-1.png)
+![plot of chunk firearm-homicide-rate-data-usa-peer-countries](/images/how-bad-is-americas-gun-violence-mass-shooting-problem-in-a-few-lines-of-r-code/firearm-homicide-rate-data-usa-peer-countries-1.png)
 
 In the event someone may want to copy-paste this information in lieu of showing this graph, you can see the pertinent information here.
 
@@ -339,7 +338,7 @@ By comparison, they're improving in every other country, prominently Italy.
 ```r
 ghp100k %>%
   arrange(country, year) %>%
-  ggplot(.,aes(year, ghp100k)) + geom_line(size=1.1) +
+  ggplot(.,aes(year, value)) + geom_line(size=1.1) +
   theme_steve_web() +
   post_bg() +
   facet_wrap(~country) +
@@ -350,7 +349,7 @@ ghp100k %>%
        caption = "Data: GunPolicy.org, through various other sources (e.g. UNODC, CDC, WHO).")
 ```
 
-![plot of chunk firearm-homicide-rate-data-usa-peer-countries-yearly-faceted](/images/firearm-homicide-rate-data-usa-peer-countries-yearly-faceted-1.png)
+![plot of chunk firearm-homicide-rate-data-usa-peer-countries-yearly-faceted](/images/how-bad-is-americas-gun-violence-mass-shooting-problem-in-a-few-lines-of-r-code/firearm-homicide-rate-data-usa-peer-countries-yearly-faceted-1.png)
 
 Finally, you can start thinking about automating a script to scan [the Mother Jones database on mass shootings](https://www.motherjones.com/politics/2012/12/mass-shootings-mother-jones-full-data/) to note how this problem is only getting worse. In subsequent updates, I might try to fully automate this with built-in assessments of how much worse the problem is getting.
 
@@ -420,6 +419,6 @@ mass_shootings_yearly %>%
        caption = mjms_caption)
 ```
 
-![plot of chunk us-mass-shootings-by-year-1982-present](/images/us-mass-shootings-by-year-1982-present-1.png)
+![plot of chunk us-mass-shootings-by-year-1982-present](/images/how-bad-is-americas-gun-violence-mass-shooting-problem-in-a-few-lines-of-r-code/us-mass-shootings-by-year-1982-present-1.png)
 
 
