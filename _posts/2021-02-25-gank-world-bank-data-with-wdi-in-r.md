@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2021-02-25'
 excerpt: "This is a quick tutorial on using the {WDI} package for grabbing data from the World Bank."
@@ -49,7 +47,7 @@ Here's a table of contents for what follows.
 
 My student is primarily interested in international political economy and it would be a boon to their research to be able to access economic data with some ease. This seems like it should be no issue at all, but there are a few potential pitfalls. These may not be a big issue, per se, but they're also not obvious. For one, several economic data sets are often available just as flat files. The [Penn World Table](https://www.rug.nl/ggdc/productivity/pwt/?lang=en) stands out as illustrative here. There are [a few](https://cran.r-project.org/web/packages/pwt/index.html) [R packages](https://cran.r-project.org/web/packages/pwt9/index.html) for [these data](https://cran.r-project.org/web/packages/pwt10/index.html), but they are really just R packages of the flat files themselves. A student who downloads these packages will need to be mindful of the version they are using and take inventory of where they are storing it. This will compound some issues of reproducibility or transparency since students who share their research are not often able to share the entirety of their raw data. Perhaps you also don't want to be like me either; since about 2008 (when I got on Dropbox), I've hoarded about 75.8 GB of raw data for my research.
 
-One of the most convenient things to do here is to avoid "downloading" economic data of interest in favor of ganking it from the internet through an application programming interface (API). Many agencies/data repositories have APIs through which more talented programmers than me can interface with it to seamlessly retrieve data. In my own travels, I have APIs set up through the U.S. Census, the National Oceanic and Atmospheric Administration, the Federal Reserve Bank of St. Louis, and the Bureau of Labor Statistics. Those are topics for another time. There is an API at the International Monetary Fund (IMF), though I'll confess the available interfaces through the IMF have made zero sense to me. I think one of the easiest ones, and maybe the most useful for my student, is the World Bank's API. Here, we again thank [Vincent Arel-Bundock](http://arelbundock.com) for his many contributions to social science research. I may not know what the World Bank's API looks like underneath the hood, but `{WDI}` makes it seem super simple.
+One of the most convenient things to do here is to avoid "downloading" economic data of interest in favor of grabbing it from the internet through an application programming interface (API). Many agencies/data repositories have APIs through which more talented programmers than me can interface with it to seamlessly retrieve data. In my own travels, I have APIs set up through the U.S. Census, the National Oceanic and Atmospheric Administration, the Federal Reserve Bank of St. Louis, and the Bureau of Labor Statistics. Those are topics for another time. There is an API at the International Monetary Fund (IMF), though I'll confess the available interfaces through the IMF have made zero sense to me. I think one of the easiest ones, and maybe the most useful for my student, is the World Bank's API. Here, we again thank [Vincent Arel-Bundock](http://arelbundock.com) for his many contributions to social science research. I may not know what the World Bank's API looks like underneath the hood, but `{WDI}` makes it seem super simple.
 
 First, install `{WDI}` if you have not already.
 
@@ -93,23 +91,20 @@ Run the `WDI()` function and you'll get output that looks like this.
 
 ```r
 WDI() %>% as_tibble()
-```
-
-```
-## # A tibble: 16,104 x 4
-##    iso2c country    NY.GDP.PCAP.KD  year
-##    <chr> <chr>               <dbl> <int>
-##  1 1A    Arab World            NA   2020
-##  2 1A    Arab World          6429.  2019
-##  3 1A    Arab World          6456.  2018
-##  4 1A    Arab World          6446.  2017
-##  5 1A    Arab World          6518.  2016
-##  6 1A    Arab World          6424.  2015
-##  7 1A    Arab World          6353.  2014
-##  8 1A    Arab World          6331.  2013
-##  9 1A    Arab World          6266.  2012
-## 10 1A    Arab World          6009.  2011
-## # … with 16,094 more rows
+#> # A tibble: 16,104 x 4
+#>    iso2c country    NY.GDP.PCAP.KD  year
+#>    <chr> <chr>               <dbl> <int>
+#>  1 1A    Arab World            NA   2020
+#>  2 1A    Arab World          6429.  2019
+#>  3 1A    Arab World          6456.  2018
+#>  4 1A    Arab World          6446.  2017
+#>  5 1A    Arab World          6518.  2016
+#>  6 1A    Arab World          6424.  2015
+#>  7 1A    Arab World          6353.  2014
+#>  8 1A    Arab World          6331.  2013
+#>  9 1A    Arab World          6266.  2012
+#> 10 1A    Arab World          6009.  2011
+#> # … with 16,094 more rows
 ```
 
 This returns the country/spatial unit (with the two-character ISO code, recalling [a previous post on this matter](http://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/)), a name for the unit (`country`), the indicator(s) you wanted, and the year. Of note, you can specify `extra = TRUE` to get more identifying information about the country/spatial unit beyond the two-character ISO code and name. I recommend against this since it's just more output than you probably want. Further, the indicator you want is returned "as is." In other words, the column name is the exact code of the World Bank indicator. You'll probably want to rename this for convenience. 
@@ -123,23 +118,20 @@ Consider that`{WDI}` has a search function. What if you're just curious what dat
 
 ```r
 WDIsearch("GDP") %>% as_tibble()
-```
-
-```
-## # A tibble: 539 x 2
-##    indicator            name                                                  
-##    <chr>                <chr>                                                 
-##  1 5.51.01.10.gdp       "Per capita GDP growth"                               
-##  2 6.0.GDP_current      "GDP (current $)"                                     
-##  3 6.0.GDP_growth       "GDP growth (annual %)"                               
-##  4 6.0.GDP_usd          "GDP (constant 2005 $)"                               
-##  5 6.0.GDPpc_constant   "GDP per capita, PPP (constant 2011 international $) "
-##  6 BG.GSR.NFSV.GD.ZS    "Trade in services (% of GDP)"                        
-##  7 BG.KAC.FNEI.GD.PP.ZS "Gross private capital flows (% of GDP, PPP)"         
-##  8 BG.KAC.FNEI.GD.ZS    "Gross private capital flows (% of GDP)"              
-##  9 BG.KLT.DINV.GD.PP.ZS "Gross foreign direct investment (% of GDP, PPP)"     
-## 10 BG.KLT.DINV.GD.ZS    "Gross foreign direct investment (% of GDP)"          
-## # … with 529 more rows
+#> # A tibble: 539 x 2
+#>    indicator            name                                                  
+#>    <chr>                <chr>                                                 
+#>  1 5.51.01.10.gdp       "Per capita GDP growth"                               
+#>  2 6.0.GDP_current      "GDP (current $)"                                     
+#>  3 6.0.GDP_growth       "GDP growth (annual %)"                               
+#>  4 6.0.GDP_usd          "GDP (constant 2005 $)"                               
+#>  5 6.0.GDPpc_constant   "GDP per capita, PPP (constant 2011 international $) "
+#>  6 BG.GSR.NFSV.GD.ZS    "Trade in services (% of GDP)"                        
+#>  7 BG.KAC.FNEI.GD.PP.ZS "Gross private capital flows (% of GDP, PPP)"         
+#>  8 BG.KAC.FNEI.GD.ZS    "Gross private capital flows (% of GDP)"              
+#>  9 BG.KLT.DINV.GD.PP.ZS "Gross foreign direct investment (% of GDP, PPP)"     
+#> 10 BG.KLT.DINV.GD.ZS    "Gross foreign direct investment (% of GDP)"          
+#> # … with 529 more rows
 ```
 
 Basically, GDP is a ubiquitous economic indicator and appears in a lot of stuff you don't want. The default output in `{WDI}` is not a tibble, so your console will get spammed with stuff that you may or may not find helpful.
@@ -149,24 +141,21 @@ Admittedly, this is a *broad* search knowing how common GDP is in economic indic
 
 ```r
 WDIsearch("ease of") %>% as_tibble()
-```
-
-```
-## # A tibble: 12 x 2
-##    indicator                      name                                             
-##    <chr>                          <chr>                                            
-##  1 IC.BUS.DFRN.XQ                 Ease of doing business score (0 = lowest perform…
-##  2 IC.BUS.EASE.DFRN.DB1014        Global: Ease of doing business score (DB10-14 me…
-##  3 IC.BUS.EASE.DFRN.DB15          Ease of doing business score (DB15 methodology)  
-##  4 IC.BUS.EASE.DFRN.DB16          Global: Ease of doing business score (DB15 metho…
-##  5 IC.BUS.EASE.DFRN.XQ.DB1719     Global: Ease of doing business score (DB17-20 me…
-##  6 IC.BUS.EASE.XQ                 Ease of doing business index (1=most business-fr…
-##  7 LP.LPI.ITRN.RK                 Ease of arranging competitively priced internati…
-##  8 LP.LPI.ITRN.XQ                 Logistics performance index: Ease of arranging c…
-##  9 PROT.MINOR.INV.EASE.SHARE.LGL… Protecting minority investors: Ease of sharehold…
-## 10 PROT.MINOR.INV.EASE.SHARE.LGL… Protecting minority investors: Ease of sharehold…
-## 11 PROT.MINOR.INV.EASE.SSI.XD.00… Protecting minority investors: Ease of sharehold…
-## 12 PROT.MINOR.INV.EASE.SSI.XD.00… Protecting minority investors: Ease of sharehold…
+#> # A tibble: 12 x 2
+#>    indicator                     name                                           
+#>    <chr>                         <chr>                                          
+#>  1 IC.BUS.DFRN.XQ                Ease of doing business score (0 = lowest perfo…
+#>  2 IC.BUS.EASE.DFRN.DB1014       Global: Ease of doing business score (DB10-14 …
+#>  3 IC.BUS.EASE.DFRN.DB15         Ease of doing business score (DB15 methodology)
+#>  4 IC.BUS.EASE.DFRN.DB16         Global: Ease of doing business score (DB15 met…
+#>  5 IC.BUS.EASE.DFRN.XQ.DB1719    Global: Ease of doing business score (DB17-20 …
+#>  6 IC.BUS.EASE.XQ                Ease of doing business index (1=most business-…
+#>  7 LP.LPI.ITRN.RK                Ease of arranging competitively priced interna…
+#>  8 LP.LPI.ITRN.XQ                Logistics performance index: Ease of arranging…
+#>  9 PROT.MINOR.INV.EASE.SHARE.LG… Protecting minority investors: Ease of shareho…
+#> 10 PROT.MINOR.INV.EASE.SHARE.LG… Protecting minority investors: Ease of shareho…
+#> 11 PROT.MINOR.INV.EASE.SSI.XD.0… Protecting minority investors: Ease of shareho…
+#> 12 PROT.MINOR.INV.EASE.SSI.XD.0… Protecting minority investors: Ease of shareho…
 ```
 
 Knowing what you (should) know about the data of interest, that tells you the indicator for the ease of doing business score is `IC.BUS.DFRN.XQ`. Make a note of it.
@@ -221,24 +210,21 @@ WDI(indicator = c("EG.ELC.ACCS.ZS", # access to electricity
     start = 1960, end = 2020) %>% as_tibble() -> Data
 
 Data
-```
-
-```
-## # A tibble: 16,104 x 8
-##    iso2c country  year EG.ELC.ACCS.ZS BN.CAB.XOKA.GD.… IC.BUS.DFRN.XQ
-##    <chr> <chr>   <int>          <dbl>            <dbl>          <dbl>
-##  1 1A    Arab W…  1960             NA               NA             NA
-##  2 1A    Arab W…  1961             NA               NA             NA
-##  3 1A    Arab W…  1962             NA               NA             NA
-##  4 1A    Arab W…  1963             NA               NA             NA
-##  5 1A    Arab W…  1964             NA               NA             NA
-##  6 1A    Arab W…  1965             NA               NA             NA
-##  7 1A    Arab W…  1966             NA               NA             NA
-##  8 1A    Arab W…  1967             NA               NA             NA
-##  9 1A    Arab W…  1968             NA               NA             NA
-## 10 1A    Arab W…  1969             NA               NA             NA
-## # … with 16,094 more rows, and 2 more variables: FP.CPI.TOTL.ZG <dbl>,
-## #   FR.INR.LNDP <dbl>
+#> # A tibble: 16,104 x 8
+#>    iso2c country  year EG.ELC.ACCS.ZS BN.CAB.XOKA.GD.… IC.BUS.DFRN.XQ
+#>    <chr> <chr>   <int>          <dbl>            <dbl>          <dbl>
+#>  1 1A    Arab W…  1960             NA               NA             NA
+#>  2 1A    Arab W…  1961             NA               NA             NA
+#>  3 1A    Arab W…  1962             NA               NA             NA
+#>  4 1A    Arab W…  1963             NA               NA             NA
+#>  5 1A    Arab W…  1964             NA               NA             NA
+#>  6 1A    Arab W…  1965             NA               NA             NA
+#>  7 1A    Arab W…  1966             NA               NA             NA
+#>  8 1A    Arab W…  1967             NA               NA             NA
+#>  9 1A    Arab W…  1968             NA               NA             NA
+#> 10 1A    Arab W…  1969             NA               NA             NA
+#> # … with 16,094 more rows, and 2 more variables: FP.CPI.TOTL.ZG <dbl>,
+#> #   FR.INR.LNDP <dbl>
 ```
 
 You'll definitely want to rename those indicators to something more intuitive. Renaming by column index is perilous, so be careful that you know what column you're renaming.
@@ -253,23 +239,20 @@ Data %>%
          ratespread = 8) -> Data
 
 Data
-```
-
-```
-## # A tibble: 16,104 x 8
-##    iso2c country     year elecperpop   cab   edb   cpi ratespread
-##    <chr> <chr>      <int>      <dbl> <dbl> <dbl> <dbl>      <dbl>
-##  1 1A    Arab World  1960         NA    NA    NA    NA         NA
-##  2 1A    Arab World  1961         NA    NA    NA    NA         NA
-##  3 1A    Arab World  1962         NA    NA    NA    NA         NA
-##  4 1A    Arab World  1963         NA    NA    NA    NA         NA
-##  5 1A    Arab World  1964         NA    NA    NA    NA         NA
-##  6 1A    Arab World  1965         NA    NA    NA    NA         NA
-##  7 1A    Arab World  1966         NA    NA    NA    NA         NA
-##  8 1A    Arab World  1967         NA    NA    NA    NA         NA
-##  9 1A    Arab World  1968         NA    NA    NA    NA         NA
-## 10 1A    Arab World  1969         NA    NA    NA    NA         NA
-## # … with 16,094 more rows
+#> # A tibble: 16,104 x 8
+#>    iso2c country     year elecperpop   cab   edb   cpi ratespread
+#>    <chr> <chr>      <int>      <dbl> <dbl> <dbl> <dbl>      <dbl>
+#>  1 1A    Arab World  1960         NA    NA    NA    NA         NA
+#>  2 1A    Arab World  1961         NA    NA    NA    NA         NA
+#>  3 1A    Arab World  1962         NA    NA    NA    NA         NA
+#>  4 1A    Arab World  1963         NA    NA    NA    NA         NA
+#>  5 1A    Arab World  1964         NA    NA    NA    NA         NA
+#>  6 1A    Arab World  1965         NA    NA    NA    NA         NA
+#>  7 1A    Arab World  1966         NA    NA    NA    NA         NA
+#>  8 1A    Arab World  1967         NA    NA    NA    NA         NA
+#>  9 1A    Arab World  1968         NA    NA    NA    NA         NA
+#> 10 1A    Arab World  1969         NA    NA    NA    NA         NA
+#> # … with 16,094 more rows
 ```
 
 Alternatively, upon publication of this post, the package author reached out via Twitter and recommended this approach prior to the `WDI()` call.
@@ -295,9 +278,7 @@ Data %>%
        subtitle = "Debt crises and currency devaluations will account for the spikes you see.")
 ```
 
-![plot of chunk inflation-rate-mexico-1960-2020](/images/inflation-rate-mexico-1960-2020-1.png)
+![plot of chunk inflation-rate-mexico-1960-2020](/images/gank-world-bank-data-with-wdi-in-r/inflation-rate-mexico-1960-2020-1.png)
 
 There's more fun to be had with some of these other data, I'm sure. I just happen to know the inflation data the best of these indicators that I grabbed in this simple application. No matter, the World Bank's API seems really accessible for a lot of things, mostly thanks to the `{WDI}` package. Provided [data.worldbank.org](https://data.worldbank.org) has the data you want, use `{WDI}` as your first choice for collecting it in R.
-
-
 
