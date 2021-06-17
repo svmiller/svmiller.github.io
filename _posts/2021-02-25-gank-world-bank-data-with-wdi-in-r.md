@@ -19,17 +19,6 @@ image: "world-bank.jpeg"
 
 {% include image.html url="/images/world-bank.jpeg" caption="The World Bank" width=440 align="right" %}
 
-<style>
-img[src*='#center'] { 
-    display: block;
-    margin: auto;
-}
-</style>
-
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
 My graduate studies program director asked me to teach an independent study for a graduate student this semester. The goal is to better train the student for their research agenda beyond what I could plausibly teach them in a given semester.[^theythem] Toward that end, I'm going to offer most (if not all) of the independent study sessions as posts on my blog. This should help the student and possibly help others who stumble onto my website. Going forward, I'm probably just going to copy-paste this introduction for future posts for this independent study.
 
 [^theythem]: I'll be using they/them pronouns here mostly for maximum anonymity.
