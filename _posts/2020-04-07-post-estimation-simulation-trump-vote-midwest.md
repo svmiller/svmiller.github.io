@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-04-07'
 excerpt: "You can't just run a regression, show a table interpreting statistical significance, and call it a day. Here's a guide for how I approach making the most of regression modeling (i.e. two-SD standardization and post-estimation simulation)."
@@ -21,22 +19,18 @@ image: "2015-anti-trump-rally-chicago.jpg"
 
 {% include image.html url="/images/2015-anti-trump-rally-chicago.jpg" caption="Demonstrators hold up a piñata of Republican Presidential candidate Donald Trump during a protest on October 12, 2015 in Chicago, Illinois. (GETTY IMAGES)" width=400 align="right" %}
 
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
 Reading quantitative articles from 20-30 years is a treat because it highlights how little was required of authors conducting and reporting statistical analyses. There are exceptions, of course; [Dixon's (1994) article](https://www.cambridge.org/core/journals/american-political-science-review/article/democracy-and-the-peaceful-settlement-of-international-conflict/414774D3152349AFA09CB284FC993005) linking democratic peace with peaceful conflict resolution is an exemplar on this front and others for someone versed in IR scholarship. However, it used to be enough to run a garden variety linear model (or generalized linear model, if you were feeling fancy), interpret the statistical significance of the results as they pertained to a pet hypothesis of interest, and call it a day.
 
 This is no longer minimally adequate. [King et al. (2000)](https://gking.harvard.edu/files/abs/making-abs.shtml) come to mind as pushing the discipline to the fore of what I learned as the "quantities of interest" movement in quantitative political science. The argument here is straightforward, even if a lot of what follows here is my language as I internalized what King et al. (2000) were trying to do. Regression modeling is also storytelling. Traditionally, null hypothesis significance testing is the protagonist of this "story" but that story by itself is both 1) kinda boring and 2) only a part of what the audience wants to hear. "Significance", as we [hopefully all know](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/) [by now](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/), is better understood as "discernibility" of a parameter from some counterclaim (traditionally zero, or "null effect"). It says nothing of the scope of the effect or its magnitude. It says little of what the effect "looks like."
 
-Fortunately, this has become much easier over time. King's group at Harvard made sure to roll out software to assist researchers in getting quantities of interest from the model. This was [Clarify](https://gking.harvard.edu/clarify) for Stata users or [Zelig](https://zeligproject.org/) for R users. Not long after King and company's *AJPS* article, [Gelman and Hill (2007)](http://www.stat.columbia.edu/~gelman/arm/) were also arguing that you should do this while providing another software package [`arm`](https://cran.r-project.org/web/packages/arm/index.html). In the background, Bayesians have been waving their hands wildly about posterior distributions and simulation for model summaries [for decades](https://www.jstor.org/stable/2287162#metadata_info_tab_contents).
+Fortunately, this has become much easier over time. King's group at Harvard made sure to roll out software to assist researchers in getting quantities of interest from the model. This was [Clarify](https://gking.harvard.edu/clarify) for Stata users or [Zelig](https://zeligproject.org/) for R users. Not long after King and company's *AJPS* article, [Gelman and Hill (2007)](http://www.stat.columbia.edu/~gelman/arm/) were also arguing that you should do this while providing another software package [`{arm}`](https://cran.r-project.org/web/packages/arm/index.html). In the background, Bayesians have been waving their hands wildly about posterior distributions and simulation for model summaries [for decades](https://www.jstor.org/stable/2287162#metadata_info_tab_contents).
 
-Much of what I do in light of these works lean more toward Gelman's techniques. Gelman's techniques don't require a full application suite like Zelig. Once you understand what's happening, it becomes a lot easier to play with the underlying code to serve your own ends. This post will be lengthy, much like my other recent posts. Here are the R packages I'll call into this post, though I will only note you should also install the [`arm`](https://cran.r-project.org/web/packages/arm/index.html) package even as I won't directly call it.[^armconflict]
+Much of what I do in light of these works lean more toward Gelman's techniques. Gelman's techniques don't require a full application suite like Zelig. Once you understand what's happening, it becomes a lot easier to play with the underlying code to serve your own ends. This post will be lengthy, much like my other recent posts. Here are the R packages I'll call into this post, though I will only note you should also install the [`{arm}`](https://cran.r-project.org/web/packages/arm/index.html) package even as I won't directly call it.[^armconflict]
 
 ```r
 library(tidyverse) # for everything
-library(stevemisc) # for get_sims() and r2sd(), devtools::install_github("svmiller/stevemisc")
-library(post8000r) # for the TV16 data, devtools::install_github("svmiller/stevemisc")
+library(stevemisc) # for get_sims() and r2sd()
+library(stevedata) # for the TV16 data
 library(lme4) # for mixed effects models
 library(stargazer) # for HTML regression tables
 library(modelr) # for data_grid
@@ -44,7 +38,7 @@ library(knitr) # for tables
 library(kableExtra) # for pretty tables
 ```
 
-[^armconflict]: `arm` has a `select()` function that will conflict with the `select()` function in `dplyr`.
+[^armconflict]: `{arm}` has a `select()` function that will conflict with the `select()` function in `{dplyr}`.
 
 Here's a table of contents as well.
 
@@ -55,9 +49,9 @@ Here's a table of contents as well.
 
 ## The Data and the Model(s) {#datamodels}
 
-The data for this exercise will greatly resemble [this 2017 post of mine](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/). Herein, I took the 2016 Cooperative Congressional Election Study (CCES) data and modeled the individual-level Trump vote. I recreated this analysis for [my grad-level methods class](http://post8000.svmiller.com/) and saved the data in [my `post8000r` package](https://github.com/svmiller/post8000r) as the `TV16` (Trump vote, 2016) data. The data frame has 64,600 rows and 22 columns.
+The data for this exercise will greatly resemble [this 2017 post of mine](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/). Herein, I took the 2016 Cooperative Congressional Election Study (CCES) data and modeled the individual-level Trump vote. I recreated this analysis for [my grad-level methods class](http://post8000.svmiller.com/) and saved the data in [`{stevedata}`](http://svmiller.com/stevedata/) as the `TV16` (Trump vote, 2016) data. The data frame has 64,600 rows and 22 columns.
 
-Let's do something simple for this exercise. We'll subset the data to just the white respondents in Indiana, Michigan, Ohio, Pennsylvania, and Wisconsin. These are five conspicuous states in the Midwest that Barack Obama won in 2008 but Donald Trump won in 2016. We'll estimate two generalized linear models from this subset of the data. The first is a pooled logistic regression modeling the `trumpvote` as a function of the respondent's age, gender, whether the respondent has a college diploma, household income, partisanship (D to R on a seven-point scale), ideology (L to C on a five-point scale), whether the respondent says s/he is a born-again Christian, and two latent estimates of the respondent's racism. I explain these in the 2017 post as new estimates of "cognitive" racism  (i.e. a respondents’ awareness of racism, or lack thereof) and the respondent's "empathetic" racism  (i.e. sympathy [or lack thereof] for the experiences of racial minorities). We owe this conceputalization to work from [Christopher D. DeSante and Candis W. Smith](https://www.christopherdesante.com/wp-content/uploads/2018/08/dsFIREapsa18.pdf).
+Let's do something simple for this exercise. We'll subset the data to just the white respondents in Indiana, Michigan, Ohio, Pennsylvania, and Wisconsin. These are five conspicuous states in the Midwest that Barack Obama won in 2008 but Donald Trump won in 2016. We'll estimate two generalized linear models from this subset of the data. The first is a pooled logistic regression modeling the `trumpvote` as a function of the respondent's age, gender, whether the respondent has a college diploma, household income, partisanship (D to R on a seven-point scale), ideology (L to C on a five-point scale), whether the respondent says s/he is a born-again Christian, and two latent estimates of the respondent's racism. I explain these in the 2017 post as new estimates of "cognitive" racism  (i.e. a respondents’ awareness of racism, or lack thereof) and the respondent's "empathetic" racism  (i.e. sympathy [or lack thereof] for the experiences of racial minorities). We owe this conceptualization to work from [Christopher D. DeSante and Candis W. Smith](https://www.christopherdesante.com/wp-content/uploads/2018/08/dsFIREapsa18.pdf).
 
 I'll start with the simple logistic regression first because I already know the first model improvement trick will improve the estimation of the mixed effects model later.
 
@@ -74,7 +68,7 @@ M1 <- glm(votetrump ~ age + female + collegeed + famincr +
 
 ## The Problem of Coefficient Comparison and the Constant {#coefconstant}
 
-Here is a simple summary of that result by way of the `stargazer` package. This is the kind of regression table a novice researcher would create and present to the reader of a manuscript.
+Here is a simple summary of that result by way of the `{stargazer}` package. This is the kind of regression table a novice researcher would create and present to the reader of a manuscript.
 
 <div id="stargazer">
 
@@ -103,13 +97,13 @@ Here is a simple summary of that result by way of the `stargazer` package. This 
 <tr><td style="text-align:left">Born-Again Christian</td><td>0.342<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.104)</td></tr>
 <tr><td style="text-align:left"></td><td></td></tr>
-<tr><td style="text-align:left">Cognitive Racism</td><td>1.173<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Cognitive Racism</td><td>1.172<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.075)</td></tr>
 <tr><td style="text-align:left"></td><td></td></tr>
 <tr><td style="text-align:left">Empathetic Racism</td><td>0.705<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.098)</td></tr>
 <tr><td style="text-align:left"></td><td></td></tr>
-<tr><td style="text-align:left">Constant</td><td>-6.026<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Constant</td><td>-6.027<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.277)</td></tr>
 <tr><td style="text-align:left"></td><td></td></tr>
 <tr><td colspan="2" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>5,803</td></tr>
@@ -138,7 +132,7 @@ Second, the constant/$$y$$-intercept is now meaningful. It becomes, in this case
 
 Third, not only is it the case that anything that's scaled can be directly compared to something that also shares the scale, but this scale will approximate the unscaled binary inputs as well. For example, assume a dummy independent variable that has a 50/50 split. Gender typically looks like this even as there are a few more women than men. If the dummy variable has a 50/50 split, then $$p(dummy = 1) = .5$$. Further, the standard deviation would also equal .5 because $$\sqrt{.5*.5} = \sqrt{.25} = .5$$. We can compare the coefficient of this dummy variable with our new standardized continuous/ordinal input variables. We can clarify that almost no independent variable is truly 50/50, but the nature of calculating standard deviations for binary variables means this will work well in most cases except when $$p(dummy = 1)$$ is really small. For example, when $$p(dummy = 1) = .25$$, then the standard deviation is$$\sqrt{.25*.75} = .4330127$$.
 
-It doesn't take much effort to calculate this. Here's a tidy-friendly approach that leans on the `r2sd()` function in my `stevemisc` package along with a re-estimation of the model.
+It doesn't take much effort to calculate this. Here's a tidy-friendly approach that leans on the `r2sd()` function in my `{stevemisc}` package along with a re-estimation of the model.
 
 
 ```r
@@ -178,18 +172,18 @@ Here's a table that directly compares the coefficients when they're standardized
 <tr><td style="text-align:left"></td><td>(0.027)</td><td>(0.117)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
 <tr><td style="text-align:left">Ideology (L to C)</td><td>0.643<sup>***</sup></td><td>1.400<sup>***</sup></td></tr>
-<tr><td style="text-align:left"></td><td>(0.062)</td><td>(0.136)</td></tr>
+<tr><td style="text-align:left"></td><td>(0.062)</td><td>(0.135)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
 <tr><td style="text-align:left">Born-Again Christian</td><td>0.342<sup>***</sup></td><td>0.342<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.104)</td><td>(0.104)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Cognitive Racism</td><td>1.173<sup>***</sup></td><td>1.789<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Cognitive Racism</td><td>1.172<sup>***</sup></td><td>1.787<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.075)</td><td>(0.114)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
 <tr><td style="text-align:left">Empathetic Racism</td><td>0.705<sup>***</sup></td><td>0.676<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.098)</td><td>(0.094)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
-<tr><td style="text-align:left">Constant</td><td>-6.026<sup>***</sup></td><td>-0.230<sup>***</sup></td></tr>
+<tr><td style="text-align:left">Constant</td><td>-6.027<sup>***</sup></td><td>-0.230<sup>***</sup></td></tr>
 <tr><td style="text-align:left"></td><td>(0.277)</td><td>(0.083)</td></tr>
 <tr><td style="text-align:left"></td><td></td><td></td></tr>
 <tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>5,803</td><td>5,803</td></tr>
@@ -212,7 +206,7 @@ King et al.'s (2000) approach connects the concept of uncertainty to King, Keoha
 
 Gelman and Hill (2007, chp. 7) make a similar case and I prefer both their method and their language. Their approach again leans on the multivariate normal distribution to offer an approach that is pseudo-Bayesian (or "informal Bayesian", as they describe it). Subject to approximate regularity conditions and sample size, the conditional distribution of a quantity of interest, given the observed data, can be approximated with a multivariate normal distribution with parameters derived from the regression model. The pseudo-Bayesian aspect of it is there really is no prior distribution on the model parameters; prior distributions are sine qua non features of Bayesian analysis. Indeed, this approach papers over this issue of prior distributions because the dependence on prior assumptions fades through large enough posterior samples. 1,000 simulations of the model parameters are typically adequate for drawing posterior predictive samples.
 
-You can take your pick of different software approaches but my approach is indebted to Gelman's `arm` package. In particular, `arm` has a `sim()` function that runs simulations of the model parameters from a multivariate normal distribution given the model output. From there, I derived the `get_sims()` function in my `stevemisc` package for obtaining posterior predictive samples for a particular quantity of interest..
+You can take your pick of different software approaches but my approach is indebted to Gelman's `{arm}` package. In particular, `{arm}` has a `sim()` function that runs simulations of the model parameters from a multivariate normal distribution given the model output. From there, I derived the `get_sims()` function in my `{stevemisc}` package for obtaining posterior predictive samples for a particular quantity of interest..
 
 Let's do a few things here. First, I'm going to re-run `M2` as a mixed effects model with a random effect for state. The results are not going to substantively change at all from this; all the covariates are at the individual-level and the real differences between pooled models and a partially pooled model---like a mixed effects model---are the contextual influences (e.g. state-level unemployment rate, had I included it). Further, I waited to do this until after the standardization discussion because mixed effects models have convergence issues in the absence of naturally occurring zeroes. Finally, I wanted to show that my `get_sims()` function works well with both pooled models (i.e. regular ol' linear models and generalized linear models) and the mixed effects models (for which I primarily wrote the function).
 
@@ -223,7 +217,7 @@ M3 <- glmer(votetrump ~ z_age + female + collegeed + z_famincr +
              data = Data, na.action=na.exclude,family=binomial(link="logit"))
 ```
 
-Now, let's create a hypothetical set of observations for which we wanted a quantity of interest. Here's one: for `M3`, what is the likelihood of voting for Donald Trump for a typical white male who is a born-again Christian versus a typical white male who is *not* a born-again Christian. The `data_grid()` function from `modelr` will help us with this.
+Now, let's create a hypothetical set of observations for which we wanted a quantity of interest. Here's one: for `M3`, what is the likelihood of voting for Donald Trump for a typical white male who is a born-again Christian versus a typical white male who is *not* a born-again Christian. The `data_grid()` function from `{modelr}` will help us with this.
 
 
 ```r
@@ -265,7 +259,7 @@ newdatM3 %>%
    <td style="text-align:center;"> 0.0021988 </td>
    <td style="text-align:center;"> 0.0253688 </td>
    <td style="text-align:center;"> -0.0392981 </td>
-   <td style="text-align:center;"> 0.015081 </td>
+   <td style="text-align:center;"> 0.0149647 </td>
    <td style="text-align:center;"> 0.0123015 </td>
   </tr>
   <tr>
@@ -278,7 +272,7 @@ newdatM3 %>%
    <td style="text-align:center;"> 0.0021988 </td>
    <td style="text-align:center;"> 0.0253688 </td>
    <td style="text-align:center;"> -0.0392981 </td>
-   <td style="text-align:center;"> 0.015081 </td>
+   <td style="text-align:center;"> 0.0149647 </td>
    <td style="text-align:center;"> 0.0123015 </td>
   </tr>
 </tbody>
@@ -293,23 +287,20 @@ From there, my `get_sims()` function will ask for, in order, the statistical mod
 SimsM3 <- get_sims(M3, newdatM3, 1000, 8675309)
 
 SimsM3
-```
-
-```
-## # A tibble: 2,000 x 2
-##           y   sim
-##       <dbl> <dbl>
-##  1 -0.156       1
-##  2  0.200       1
-##  3 -0.00199     2
-##  4  0.401       2
-##  5 -0.173       3
-##  6  0.175       3
-##  7 -0.0557      4
-##  8  0.364       4
-##  9  0.00349     5
-## 10  0.324       5
-## # … with 1,990 more rows
+#> # A tibble: 2,000 x 2
+#>           y   sim
+#>       <dbl> <dbl>
+#>  1 -0.156       1
+#>  2  0.200       1
+#>  3 -0.00213     2
+#>  4  0.401       2
+#>  5 -0.173       3
+#>  6  0.175       3
+#>  7 -0.0559      4
+#>  8  0.364       4
+#>  9  0.00337     5
+#> 10  0.324       5
+#> # … with 1,990 more rows
 ```
 
 Observe that the column `y` is, importantly, the *natural logged odds* of voting for Donald Trump. The simulations will always return quantities of interest on their original scale (here: a logit). The `sim` column refers to the simulation number, which is maxed at 1,000 (because we asked for 1,000 simulations). Notice that each unique value in the `sim` column appears twice because that's how many rows there are in `newdatM3`. Stare carefully enough at it and you'll see the first row for the first simulation is the natural logged odds of voting for Donald Trump for someone who is not a born-again Christian. The second row in the first simulation is the natural logged odds of voting for Donald Trump for someone who *is* a born-again Christian.
@@ -327,23 +318,20 @@ newdatM3 %>%
 
 SimsM3 %>%
   dplyr::select(y, sim, bornagain)
-```
-
-```
-## # A tibble: 2,000 x 3
-##        y   sim bornagain
-##    <dbl> <dbl>     <dbl>
-##  1 0.461     1         0
-##  2 0.550     1         1
-##  3 0.500     2         0
-##  4 0.599     2         1
-##  5 0.457     3         0
-##  6 0.544     3         1
-##  7 0.486     4         0
-##  8 0.590     4         1
-##  9 0.501     5         0
-## 10 0.580     5         1
-## # … with 1,990 more rows
+#> # A tibble: 2,000 x 3
+#>        y   sim bornagain
+#>    <dbl> <dbl>     <dbl>
+#>  1 0.461     1         0
+#>  2 0.550     1         1
+#>  3 0.499     2         0
+#>  4 0.599     2         1
+#>  5 0.457     3         0
+#>  6 0.544     3         1
+#>  7 0.486     4         0
+#>  8 0.590     4         1
+#>  9 0.501     5         0
+#> 10 0.580     5         1
+#> # … with 1,990 more rows
 ```
 
 From here, you can summarize the data any way you'd like. For example, here are simulated first differences of being born-again on voting for Donald Trump among white people in these states.
@@ -399,7 +387,7 @@ SimsM3 %>%
 
 Basically, the mean of first differences is .086, suggesting that being born again increases the probability of voting for Donald Trump, on average, by .086. 95% of the distribution of first differences is between .036 and .136, which does not overlap 0. Indeed, none of the first differences were negative. Negative first differneces would be inconsistent with a hypothesis that being a born-again Christian raises the probability of voting for Donald Trump. All of this is surely intuitive, but here's a way of presenting that information that acknowledges both estimation uncertainty and fundamental certainty in both a creative and flexible way.
 
-You can also summarize the probability of voting for Donald Trump at different values of a given independent variable. Here, let's return to the simple logistic regression (`M2`) and use `data_grid()` in `modelr` to create a new data frame where everything is set to the typical value, but 1) the partisanship variable ranges from the minimum to the maximum and, 2) for each value of partisanship, the cognitive racism variable alternates between 0 (i.e. the mean) and 1 (i.e. a two standard deviation increase from the mean).
+You can also summarize the probability of voting for Donald Trump at different values of a given independent variable. Here, let's return to the simple logistic regression (`M2`) and use `data_grid()` in `{modelr}` to create a new data frame where everything is set to the typical value, but 1) the partisanship variable ranges from the minimum to the maximum and, 2) for each value of partisanship, the cognitive racism variable alternates between 0 (i.e. the mean) and 1 (i.e. a two standard deviation increase from the mean).
 
 
 ```r
@@ -411,23 +399,20 @@ Data %>% # Note: I could recode the scaled stuff to be 0 but modelr will just re
 
 SimM2 <- get_sims(M2, newdatM2, 1000, 8675309)
 SimM2
-```
-
-```
-## # A tibble: 14,000 x 2
-##          y   sim
-##      <dbl> <dbl>
-##  1 -2.53       1
-##  2 -1.74       1
-##  3 -0.951      1
-##  4 -0.161      1
-##  5  0.630      1
-##  6  1.42       1
-##  7  2.21       1
-##  8 -0.843      1
-##  9 -0.0524     1
-## 10  0.738      1
-## # … with 13,990 more rows
+#> # A tibble: 14,000 x 2
+#>          y   sim
+#>      <dbl> <dbl>
+#>  1 -2.53       1
+#>  2 -1.74       1
+#>  3 -0.951      1
+#>  4 -0.160      1
+#>  5  0.631      1
+#>  6  1.42       1
+#>  7  2.21       1
+#>  8 -0.845      1
+#>  9 -0.0538     1
+#> 10  0.737      1
+#> # … with 13,990 more rows
 ```
 
 This `SimM2` object will obviously be much more complex than the `SimM3` object. But some tidy magic will help make more sense of it.
@@ -443,23 +428,20 @@ newdatM2 %>%
   dplyr::select(y, sim, z_pid7na, z_lcograc) -> SimM2
 
 SimM2
-```
-
-```
-## # A tibble: 14,000 x 4
-##         y   sim z_pid7na z_lcograc
-##     <dbl> <dbl>    <dbl>     <dbl>
-##  1 0.0736     1  -0.679          0
-##  2 0.149      1  -0.444          0
-##  3 0.279      1  -0.209          0
-##  4 0.460      1   0.0254         0
-##  5 0.653      1   0.260          0
-##  6 0.806      1   0.495          0
-##  7 0.901      1   0.730          0
-##  8 0.301      1  -0.679          1
-##  9 0.487      1  -0.444          1
-## 10 0.677      1  -0.209          1
-## # … with 13,990 more rows
+#> # A tibble: 14,000 x 4
+#>         y   sim z_pid7na z_lcograc
+#>     <dbl> <dbl>    <dbl>     <dbl>
+#>  1 0.0736     1  -0.679          0
+#>  2 0.149      1  -0.444          0
+#>  3 0.279      1  -0.209          0
+#>  4 0.460      1   0.0254         0
+#>  5 0.653      1   0.260          0
+#>  6 0.806      1   0.495          0
+#>  7 0.901      1   0.730          0
+#>  8 0.301      1  -0.679          1
+#>  9 0.487      1  -0.444          1
+#> 10 0.676      1  -0.209          1
+#> # … with 13,990 more rows
 ```
 
 However, there is still some confusion here. Namely, where are the "strong Democrats"? What value of `z_pid7na` is a pure independent? The answer is actually in there if you look carefully. Recall that I arranged the data frame by the `z_lcograc` variable in `newdatM2`. This means the partisanship variable counts up from its minimum to its maximum, twice (for different values of `z_lcograc`), multiplied 1,000 times. I also remember from the codebook and [my previous analysis](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/) on the topic. Thus, I can just count from 1 to 7 2,000 times to match the standardized partisanship variable to the raw partisanship variable. I can also add some labels to them as well.
@@ -479,23 +461,20 @@ SimM2 %>%
          pidcat = fct_inorder(pidcat)) -> SimM2
 
 SimM2
-```
-
-```
-## # A tibble: 14,000 x 6
-##         y   sim z_pid7na z_lcograc pid7na pidcat                 
-##     <dbl> <dbl>    <dbl>     <dbl>  <int> <fct>                  
-##  1 0.0736     1  -0.679          0      1 Strong Democrat        
-##  2 0.149      1  -0.444          0      2 Not a Strong Democrat  
-##  3 0.279      1  -0.209          0      3 Ind., Lean Democrat    
-##  4 0.460      1   0.0254         0      4 Independent            
-##  5 0.653      1   0.260          0      5 Ind., Lean Republican  
-##  6 0.806      1   0.495          0      6 Not a Strong Republican
-##  7 0.901      1   0.730          0      7 Strong Republican      
-##  8 0.301      1  -0.679          1      1 Strong Democrat        
-##  9 0.487      1  -0.444          1      2 Not a Strong Democrat  
-## 10 0.677      1  -0.209          1      3 Ind., Lean Democrat    
-## # … with 13,990 more rows
+#> # A tibble: 14,000 x 6
+#>         y   sim z_pid7na z_lcograc pid7na pidcat                 
+#>     <dbl> <dbl>    <dbl>     <dbl>  <int> <fct>                  
+#>  1 0.0736     1  -0.679          0      1 Strong Democrat        
+#>  2 0.149      1  -0.444          0      2 Not a Strong Democrat  
+#>  3 0.279      1  -0.209          0      3 Ind., Lean Democrat    
+#>  4 0.460      1   0.0254         0      4 Independent            
+#>  5 0.653      1   0.260          0      5 Ind., Lean Republican  
+#>  6 0.806      1   0.495          0      6 Not a Strong Republican
+#>  7 0.901      1   0.730          0      7 Strong Republican      
+#>  8 0.301      1  -0.679          1      1 Strong Democrat        
+#>  9 0.487      1  -0.444          1      2 Not a Strong Democrat  
+#> 10 0.676      1  -0.209          1      3 Ind., Lean Democrat    
+#> # … with 13,990 more rows
 ```
 
 The cool thing about post-estimation simulation is the considerable flexibility the researcher has in summarizing these quantities of interest. The previous example looked at simulated first differences for a typical white man and reported those first differences in a table. Here, let's summarize these simulations as expected probabilities (with uncertainty) of voting for Donald Trump across the range of the data.
@@ -522,11 +501,8 @@ SimM2 %>%
        caption = "Data: CCES, 2016. Sample: white respondents residing in IN, MI, OH, PA, and WI.")
 ```
 
-![plot of chunk expected-probability-voting-trump-2016-midwest-racism-partisanship](/images/expected-probability-voting-trump-2016-midwest-racism-partisanship-1.png)
+![plot of chunk expected-probability-voting-trump-2016-midwest-racism-partisanship](/images/post-estimation-simulation-trump-vote-midwest/expected-probability-voting-trump-2016-midwest-racism-partisanship-1.png)
 
 The substantive takeaway a graph like this communicates would square well with [my 2017 analysis](http://svmiller.com/blog/2017/04/age-income-racism-partisanship-trump-vote-2016/). Namely, racism's effect on the vote choice in 2016 seems to be asymmetric. Increasing levels of racism saw Democrats start to break for Donald Trump, which we see again in this sample of white respondents in five Midwestern states. However, decreasing levels of cognitive racism (the mean, in this application) did not break Republicans for Hillary Clinton (or some other candidate). Namely, Republicans seem to be more steadfast in their partisanship than Democrats and perhaps it looks like it was Donald Trump's racial appeals that were enough to get Democrats to start switching their votes. Given the margin of the vote in some of these states, ignoring [voter suppression in Wisconsin](https://www.motherjones.com/politics/2017/10/voter-suppression-wisconsin-election-2016/) for the moment, that could have been the difference. 
 
 At the very least, it's a story you can tell by doing some post-estimation simulation from a multivariate normal distribution using the regression model's parameters. That's more the point of this post: the method less the substance. Yet, the method is the vehicle to tell the substance (i.e. the story). I offer this, mostly for [my grad-level methods class](http://post8000.svmiller.com/), on how to do this in their own research, but share it publicly for anyone else interested in doing post-estimation simulation from a multivariate normal distribution for their own research.
-
-
-
