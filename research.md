@@ -36,11 +36,11 @@ I maintain the following software packages, all for the R programming language.
 
 Gibler, Douglas M. and Steven V. Miller. Forthcoming. "An Appraisal of Project Mars and the Divided Armies Argument." Conditionally accepted at *International Studies Quarterly*.
 
-Curtis, K. Amber and Steven V. Miller. Forthcoming. "A (Supra)Nationalist Personality? The Big Five’s Effects on Political-Territorial Identification."  *European Union Politics*.
-
 Miller, Steven V. Forthcoming. "[Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017](/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)." *Social Science Journal.*
 
 Miller, Steven V. and Nicholas T. Davis. Forthcoming. "[The Effect of White Social Prejudice on Support for American Democracy](/research/white-social-prejudice-support-american-democracy/)." *Journal of Race, Ethnicity, and Politics.*
+
+Curtis, K. Amber and Steven V. Miller. 2021. "[A (Supra)Nationalist Personality? The Big Five’s Effects on Political-Territorial Identification](https://journals.sagepub.com/doi/abs/10.1177/1465116520988907)."  *European Union Politics* 22(2): 202--226. 
 
 Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2020. "[The Importance of Correct Measurement](https://doi.org/10.1093/isq/sqaa011)." *International Studies Quarterly* 64(2): 476--479.
 
