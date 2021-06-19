@@ -19,7 +19,7 @@ image: "postgres.jpg"
 
 {% include image.html url="/images/postgres.jpg" caption="Postgres is a pretty powerful relational database system." width=350 align="right" %}
 
-*Last updated: 17 June 2021. Namely, the function described here is now [`db_lselect()`](http://svmiller.com/stevemisc/reference/db_lselect.html) in [`{stevemisc}`](http://svmiller.com/stevemisc/). You can download this package on CRAN.*
+*Last updated: 19 June 2021. Namely, the function described here is now [`db_lselect()`](http://svmiller.com/stevemisc/reference/db_lselect.html) in [`{stevemisc}`](http://svmiller.com/stevemisc/). You can download this package on CRAN.*
 
 
 For some time, I've wrestled with how to elegantly store two data sets I use a great deal in my own research or navel-gazing. The first is the General Social Survey (GSS) and the second is the World Values Survey (WVS). The GSS contains 32 survey waves, done roughly every two years, spanning 1972 and 2018 in the United States. The temporal reach of the data are broadly useful for tracking trends in public opinion over time, but different questions come and go at different points in time. The data as I have it are not particularly long (64,814 rows), but they are *very* wide (6,108 columns). The data are well-annotated with variable labels too, which compounds how tedious it is to load and explore. The WVS (v. 1-6) is similarly gnarly to load. The data contains surveys of roughly 100 countries in 28 different years spanning 1981 to 2009. The data are mercifully more standardized across countries and waves than the GSS, but, at 348,532 rows and 1,445 columns, they too are tedious to load and explore. To this point, my experiences have suggested to say nuts to the native formats of these data and save them [as R serialized data frames](http://svmiller.com/blog/2019/01/how-should-you-store-load-bigger-data-sets-wvs/) or [serialize them with the `{qs}` package](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/).
@@ -212,7 +212,7 @@ tbl(wvspgcon, "6")
 #> #   b008 <dbl>, b030 <dbl>, b031 <dbl>, c001 <dbl>, c002 <dbl>, …
 ```
 
-`dplyr`'s interface with relational databases like PostgreSQL is not exhaustive, but it is pretty comprehensive. For example, I could see how many countries are in the first and sixth survey wave.
+`{dplyr}`'s interface with relational databases like PostgreSQL is not exhaustive, but it is pretty comprehensive. For example, I could see how many countries are in the first and sixth survey wave.
 
 
 ```r
@@ -248,11 +248,11 @@ for (i in 1:length(splitGSS)) {
 
 The next step is to harness `{dplyr}` and especially `{purrr}` to make the most of storing the data in databases like this. The only real downside to what I propose here is you're going to have to get somewhat comfortable with these data in order to more effectively maneuver your way around them in this format. That'll come with time and experience using the data in question.
 
-Here's one example. I routinely use the WVS data to teach methods students about various methodological topics with an application to various political issues. One hobby horse of mine is teaching students about abortion opinions in the United States. From experience, I know the United States' country code (`s003`) is 840 and that the WVS asks about the justifiability of abortion on a 1-10 scale where 1 = never justifiable and 10 = justifiable. That particular prompt appears as `f120` in the data. Let's assume I wanted to grab just those data from all six survey waves from the database.[^notin2] How might I do that? Here, a native `purrr` solution is not so straightforward since lists of data frames are alien concepts in the SQL world. 
+Here's one example. I routinely use the WVS data to teach methods students about various methodological topics with an application to various political issues. One hobby horse of mine is teaching students about abortion opinions in the United States. From experience, I know the United States' country code (`s003`) is 840 and that the WVS asks about the justifiability of abortion on a 1-10 scale where 1 = never justifiable and 10 = justifiable. That particular prompt appears as `f120` in the data. Let's assume I wanted to grab just those data from all six survey waves from the database.[^notin2] How might I do that? Here, a native `{purrr}` solution is not so straightforward since lists of data frames are alien concepts in the SQL world. 
 
 [^notin2]: The United States does not appear to be in the second survey wave provided in the six-wave WVS data.
 
-However, a database of tables is a close corollary, and that is native in SQL. So, here's a clever workaround in `purrr`. First, create a vector of characters coinciding with the names of the tables in the database. This isn't too hard in the WVS database I created since the names coincide with the survey waves.
+However, a database of tables is a close corollary, and that is native in SQL. So, here's a clever workaround in `{purrr}`. First, create a vector of characters coinciding with the names of the tables in the database. This isn't too hard in the WVS database I created since the names coincide with the survey waves.
 
 
 
