@@ -18,8 +18,9 @@ categories:
 
 
 
+{% include updatebox.html announce="This functionality is now in <a href='http://svmiller.com/peacesciener'><code class='highlighter-rouge'>{peacesciencer}</code></a> ⤵️" text="This post became the basis for <a href='http://svmiller.com/peacesciener'><code class='highlighter-rouge'>{peacesciencer}</code></a>, which you can now install on CRAN. The processes described here ultimately became <code class='highlighter-rouge'>create_dyadyears()</code> and <code class='highlighter-rouge'>create_stateyears()</code> in that package. Please check out the package’s website for its continued development." %}
 
-*Last updated: 19 June 2021. This post became the basis for [`{peacesciencer}`](http://svmiller.com/peacesciencer), which you can now install on CRAN. The processes described here ultimately became `create_dyadyears()` and `create_stateyears()` in that package. Please check out the package's website for its continued development.*
+<!-- *Last updated: 19 June 2021. This post became the basis for [`{peacesciencer}`](http://svmiller.com/peacesciencer), which you can now install on CRAN. The processes described here ultimately became `create_dyadyears()` and `create_stateyears()` in that package. Please check out the package's website for its continued development.* -->
 
 {% include image.html url="/images/authagraph.jpg" caption="The most accurate map in the world, just 'cause." width=450 align="right" %}
 
