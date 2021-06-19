@@ -104,7 +104,7 @@ DDY %>% filter(ccode2 > ccode1) -> NDY
 ```
 
 
-*Last updated: `r format(Sys.time(), '%e %B %Y')`. This post became the basis for [`{peacesciencer}`](http://svmiller.com/peacesciener), which you can now install on CRAN. The processes described here ultimately became `create_dyadyears()` and `create_stateyears()` in that package. Please check out the package's website for its continued development.*
+*Last updated: `r format(Sys.time(), '%e %B %Y')`. This post became the basis for [`{peacesciencer}`](http://svmiller.com/peacesciencer), which you can now install on CRAN. The processes described here ultimately became `create_dyadyears()` and `create_stateyears()` in that package. Please check out the package's website for its continued development.*
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
