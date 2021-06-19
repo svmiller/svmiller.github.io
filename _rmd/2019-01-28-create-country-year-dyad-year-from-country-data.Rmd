@@ -137,7 +137,7 @@ I also remember [EUGene](http://www.eugenesoftware.org/), an invaluable program 
 
 Fortunately, I learned a few lines of R code can create country-year and dyad-year panel data frames from basic country-level information as the remainder of this post will show. The lines necessary to create this code became even fewer when `{plyr}` gave way to `{dplyr}` in my workflow. All the user needs is [the Correlates of War State System Membership data](http://correlatesofwar.org/data-sets/state-system-membership). I'll be using v2016 but any version should be fine for this purpose.
 
-Read in the data (wherever you stored it) into your R session and load the `tidyverse` package before it.
+Read in the data (wherever you stored it) into your R session and load the `{tidyverse}` package before it.
 
 ```r
 library(tidyverse)
