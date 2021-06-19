@@ -1,19 +1,31 @@
 ---
 title: "Create Country-Year and (Non)-Directed Dyad-Year Data With Just a Few Lines in R"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
 author: "steve"
 date: '2019-01-28'
-excerpt: A few lines in R (thanks to tidyverse) can create the basic country-year and dyad-year data frames you need for international conflict research.
+excerpt: A few lines in R (thanks to {tidyverse} functionality) can create the basic country-year and dyad-year data frames you need for international conflict research.
 layout: post
 permalink: null
 categories:
   - R
   - Political Science
-image: "authagraph.jpg"
 ---
 
 
 
+
+
+
+*Last updated: 19 June 2021. This post became the basis for [`{peacesciencer}`](http://svmiller.com/peacesciener), which you can now install on CRAN. The processes described here ultimately became `create_dyadyears()` and `create_stateyears()` in that package. Please check out the package's website for its continued development.*
+
 {% include image.html url="/images/authagraph.jpg" caption="The most accurate map in the world, just 'cause." width=450 align="right" %}
+
+
+
+<!-- {% include image.html url="/images/authagraph.jpg" caption="The most accurate map in the world, just 'cause." width=450 align="right" %} -->
 
 I'm writing this mostly as a note to myself since I have to remind myself how I do this every time I do it.
 
@@ -21,7 +33,7 @@ The long and short of this post is I remember being in grad school and working w
 
 I also remember [EUGene](http://www.eugenesoftware.org/), an invaluable program at the time that could seamlessly generate non-directed dyad-year conflict data, directed dyad-year conflict data, and country-year data, complete with several covariates and conflict data of interest to the researcher, in just minutes. Yet my professional development occurred at a juncture when EUGene started to lose some of its value. The causes here were multiple and the reader should not interpret this as the fault of the developers. For one, EUGene existed only as a Windows binary. I got proficient at installing [Wine](https://www.winehq.org/) and using it to make EUGene install on my Linux desktop (and later my Macbook). Yet, this is a tedious extra step. Further, EUGene was limited to the data it had and still mostly served its original purpose: to facilitate analyses and replications of analyses from the 1990s still indebted to version 2.1 of the Correlates of War Militarized Interstate Dispute (MID) data. Updates that could incorporate newer conflict data (i.e. the update to version 3 in 2004 and version 4 in 2014) and the [revisions my adviser and I were proposing](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext) to the MID data lagged behind user demand for these features. Thus, I had to figure out how to do what EUGene was previously doing for me.
 
-Fortunately, I learned a few lines of R code can create country-year and dyad-year panel data frames from basic country-level information as the remainder of this post will show. The lines necessary to create this code became even fewer when `plyr` gave way to `dplyr` in my workflow. All the user needs is [the Correlates of War State System Membership data](http://correlatesofwar.org/data-sets/state-system-membership). I'll be using v2016 but any version should be fine for this purpose.
+Fortunately, I learned a few lines of R code can create country-year and dyad-year panel data frames from basic country-level information as the remainder of this post will show. The lines necessary to create this code became even fewer when `{plyr}` gave way to `{dplyr}` in my workflow. All the user needs is [the Correlates of War State System Membership data](http://correlatesofwar.org/data-sets/state-system-membership). I'll be using v2016 but any version should be fine for this purpose.
 
 Read in the data (wherever you stored it) into your R session and load the `tidyverse` package before it.
 
@@ -239,7 +251,7 @@ I want to belabor a few points about the nature of the directed dyad-year data I
 
 First, when populating a dyad-year (directed or non-directed) panel data frame with some covariates (e.g. Polity data, GDP data, whatever), be prepared to merge in data "twice." That is, the data frame with which the user is primarily working is dyad-year, but the data the user wants to add into the dyad-year panel frame are country-year (e.g. the Polity score for France or Prussia/Germany in 1826, 1827, 1828, and so on). Thus, the user will need to merge it "twice" by first recoding the country-year country code variable to be something like `ccode1`. Merge and that assigns the data to pertain to `ccode1` in the dyad-year data. Rename the country-year country code variable again to be something like `ccode2`. Repeat, and that assigns the data to pertain to `ccode2` in the dyad-year data.
 
-For what it's worth, the `left_join()` function in `dplyr` is sophisticated enough to allow you to merge on two different keys. That's what the `by` field is doing in the `left_join()` part of the piped chain of functions above.
+For what it's worth, the `left_join()` function in `{dplyr}` is sophisticated enough to allow you to merge on two different keys. That's what the `by` field is doing in the `left_join()` part of the piped chain of functions above.
 
 Second, the filtering of the years will make sure the user is not left with any observations where the countries did not exist at the same time. For example, Kuwait and Baden were never independent states at the same time. That is an important detail. Obviously states like Belize and Wuerttemberg can't have a conflict with each other when they never existed at the same time.
 
