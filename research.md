@@ -24,13 +24,41 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 
 I maintain the following software packages, all for the R programming language.
 
+<style>
+
+table {
+
+padding-bottom: 15px
+}
+
+th {
+
+padding-left: 5px;
+}
+
+tbody td { padding: 5px;
+    font-size: .9em;}
+</style>
+
+| *Package* | *Downloads* | *tl;dr Description* |
+|:----------|:-----------:|:--------------------|
+| [`{codename}`](http://svmiller.com/codename) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/codename?color=green)](https://cran.r-project.org/package=codename) | generate unique code names for things (comes in various styles, like [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu_version_history#Naming_convention) and [Wu-Tang](https://www.mess.be/inickgenwuname.php)) |
+| [`{dragracer}`](https://github.com/svmiller/dragracer) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/dragracer?color=green)](https://cran.r-project.org/package=dragracer) | learn R functions around data from RuPaul's Drag Race |
+| [`{peacesciencer}`](http://svmiller.com/peacesciencer) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/peacesciencer?color=green)](https://cran.r-project.org/package=peacesciencer) | data generation tools for quantitative peace science (an R analog to [EUGene](https://www.tandfonline.com/doi/abs/10.1080/03050620008434965?casa_token=-fany9aop7QAAAAA:AFUqdPivrRDCwrAjIrx0trABUQhNfSuPU1lROzjQqluNSa8Lo5VO17GEOC76zxNczMC8PiSumAn9))  |
+| [`{stevedata}`](http://svmiller.com/stevedata) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/stevedata?color=green)](https://cran.r-project.org/package=stevedata) |   miscellaneous data sets I use for in-class instruction |
+| [`{stevemisc}`](http://svmiller.com/stevemisc) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/stevemisc?color=green)](https://cran.r-project.org/package=stevemisc) |  various helper functions for research and presentation (esp. for mixed models and BTSCS models) |
+| [`{steveproj}`](http://svmiller.com/steveproj) |  | a Make and R Markdown approach to academic project management |
+| [`{stevetemplates}`](http://svmiller.com/stevetemplates) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) |  write R Markdown documents with [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) |
+
+
+<!--
 [`codename`](http://svmiller.com/codename/) [![](https://www.r-pkg.org/badges/version/codename?color=green)](https://cran.r-project.org/package=codename) [![](http://cranlogs.r-pkg.org/badges/grand-total/codename?color=green)](https://cran.r-project.org/package=codename): generate unique code names for things (comes in various styles, like [Ubuntu](https://en.wikipedia.org/wiki/Ubuntu_version_history#Naming_convention) and [Wu-Tang](https://www.mess.be/inickgenwuname.php))  
 [`dragracer`](https://github.com/svmiller/dragracer) [![](https://www.r-pkg.org/badges/version/dragracer?color=green)](https://cran.r-project.org/package=dragracer) [![](http://cranlogs.r-pkg.org/badges/grand-total/dragracer?color=green)](https://cran.r-project.org/package=dragracer): learn R functions around data from RuPaul's Drag Race  
 [`peacesciencer`](http://svmiller.com/peacesciencer) [![](https://www.r-pkg.org/badges/version/peacesciencer?color=green)](https://cran.r-project.org/package=peacesciencer) [![](http://cranlogs.r-pkg.org/badges/grand-total/peacesciencer?color=green)](https://cran.r-project.org/package=peacesciencer): data generation tools for quantitative peace science (an R analog to [EUGene](https://www.tandfonline.com/doi/abs/10.1080/03050620008434965?casa_token=-fany9aop7QAAAAA:AFUqdPivrRDCwrAjIrx0trABUQhNfSuPU1lROzjQqluNSa8Lo5VO17GEOC76zxNczMC8PiSumAn9))  
 [`stevedata`](http://svmiller.com/stevedata/) [![](https://www.r-pkg.org/badges/version/stevedata?color=green)](https://cran.r-project.org/package=stevedata) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevedata?color=green)](https://cran.r-project.org/package=stevedata): miscellaneous data sets I use for in-class instruction  
 [`stevemisc`](http://svmiller.com/stevemisc/) [![](https://www.r-pkg.org/badges/version/stevemisc?color=green)](https://cran.r-project.org/package=stevemisc) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevemisc?color=green)](https://cran.r-project.org/package=stevemisc): various helper functions (esp. for mixed models and BTSCS models)  
 [`steveproj`](http://svmiller.com/steveproj): academic project management with Make and R Markdown  
-[`stevetemplates`](http://svmiller.com/stevetemplates) [![](https://www.r-pkg.org/badges/version/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates): write R Markdown documents with [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) 
+[`stevetemplates`](http://svmiller.com/stevetemplates) [![](https://www.r-pkg.org/badges/version/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates): write R Markdown documents with [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) -->
 
 ## Publications
 
