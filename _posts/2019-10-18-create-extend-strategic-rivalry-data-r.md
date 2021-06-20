@@ -4,11 +4,9 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-10-18'
-excerpt: "A few lines in R (thanks to tidyverse) can take raw rivalry data from Thompson and Dreyer (2012) and create some usable data frames for conflict research."
+excerpt: "A few lines in R (thanks to {tidyverse}) can take raw rivalry data from Thompson and Dreyer (2012) and create some usable data frames for conflict research."
 layout: post
 categories:
   - R
@@ -16,6 +14,11 @@ categories:
 image: "bettanier-black-spot-1887.jpg"
 ---
 
+
+
+
+
+{% include updatebox.html announce="This functionality is now in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> ⤵️" text="The processes described here have been includded in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a>, an R package for the creation of all kinds of peace science data. The <a href='http://svmiller.com/stevemisc/reference/strategic_rivalries.html'><code class='highlighter-rouge'>strategic_rivalries</code></a> data frame is still in <a href='http://svmiller.com/stevemisc'><code class='highlighter-rouge'>{stevemisc}</code></a> as a legacy. A slightly modified version is included in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> as the <code class='highlighter-rouge'>td_rivalries</code> data. You can add strategic rivalry data to state-year or dyad-year data in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> with the <a href='http://svmiller.com/peacesciencer/reference/add_strategic_rivalries.html'><code class='highlighter-rouge'>add_strategic_rivalries()</code></a> function. Please check out the website for <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> for updates on its continued development." %}
 
 
 {% include image.html url="/images/bettanier-black-spot-1887.jpg" caption="Alfred Bettanier's (1887) painting stylizes the Franco-German enmity and its focal point at the 'black spot' of Alsace-Lorraine." width=400 align="right" %}
@@ -37,7 +40,7 @@ However, the ensuing data are less of a data set one can download and more a his
 
 ## The (Raw) Data {#rawdata}
 
-I scanned Thompson and Dreyer's (2012) book at the appendix and created a spreadsheet that I make available in [my `stevemisc` package](https://github.com/svmiller/stevemisc) as a data object titled `strategic_rivalries`. Alternatively, a .csv of the data [is available here](https://gist.github.com/svmiller/63dace4aa5a00eddce307d964c7bac23). Let's load that raw data and take a gander at it. The data are purposely minimal right now because it's a quick scan of the information from the appendix. The goal is to record it in a spreadsheet and extend it later.
+I scanned Thompson and Dreyer's (2012) book at the appendix and created a spreadsheet that I make available in [my `{stevemisc}` package](http://svmiller.com/stevemisc) as a data object titled `strategic_rivalries`. Alternatively, a .csv of the data [is available here](https://gist.github.com/svmiller/63dace4aa5a00eddce307d964c7bac23). Let's load that raw data and take a gander at it. The data are purposely minimal right now because it's a quick scan of the information from the appendix. The goal is to record it in a spreadsheet and extend it later.
 
 
 ```r
@@ -141,7 +144,7 @@ strategic_rivalries %>%
 
 `region` is where Thompson and Dreyer code the rivalry as occurring. These regions that Thompson and Dreyer describe are multiple and mostly consistent across time and space, but users interested in regional rivalries may want to explore these locations and standardize them further. For example, the "Germany-United States 2" rivalry (1933-1945) and "Russia-United States 2" (2007-present) rivalries are both in "Multiple" regions despite some different focal points between the two whereas the "Russia-United States 1" (1945-1989) rivalry is in the "Global" region. Of note: European great power rivalries have their own region ("European GPs").
 
-Finally, `type1`, `type2`, and `type3` variables describe the nature of the rivalry and what it concerned, in order of importance. Not every rivalry has a second or third dimension, but every rivalry must have a primary dimension coded in the `type1` variable. There are four categories of rivalry in the Thompson and Dreyer (2012) data. "Spatial" rivalries are contested over the control of territory, broadly defined. The Armenia-Azerbaijan rivalry (1991-present) is a good example of an exclusively spatial rivalry since most of the relationship concerns Nagorno-Karabakh. "Positional" rivalries are competitions for relative shares of influence in a region. The Iran-Israel rivalry (1979-present) is a good example of an exclusively positional rivalry since the concern largely hinges on Israel's misgivings about Iran's aspirations in the region after the overthrow of the Shah in 1979. "Ideological" rivalries are relationships where two sides contest virtues of competing economic/political systems. The "Costa Rica-Nicaragua 2" (1948-1990) rivalry is the only exclusively ideological rivalry in the data. Therein, democratic Costa Rica and Marxist Nicaragua actively advocated regime change for the other side. "Interventionary" rivalries are new types of rivalries that Thompson and Dreyer introduce to this project. These are relationships in which states intrude into the internal affairs of other states for sake of leverage in the other state's decision-making. They are often done without clear spatial, positional, or even ideological reasons. The concept borrows from [Cliffe's (1999) discussion of "mutual intervention"](https://www.jstor.org/stable/3993184?seq=1#metadata_info_tab_contents) in the Horn of Africa and it should be no surprise that all interventionary rivalries in the data are located in Central Africa or East Africa.
+Finally, `type1`, `type2`, and `type3` variables describe the nature of the rivalry and what it concerned, in order of importance. Not every rivalry has a second or third dimension, but every rivalry must have a primary dimension coded in the `type1` variable. There are four categories of rivalry in the Thompson and Dreyer (2012) data. "Spatial" rivalries are contested over the control of territory, broadly defined. The Armenia-Azerbaijan rivalry (1991-present) is a good example of an exclusively spatial rivalry since most of the relationship concerns Nagorno-Karabakh. "Posiitonal" rivalries are competitions for relative shares of influence in a region. The Iran-Israel rivalry (1979-present) is a good example of an exclusively positional rivalry since the concern largely hinges on Israel's misgivings about Iran's aspirations in the region after the overthrow of the Shah in 1979. "Ideological" rivalries are relationships where two sides contest virtues of competing economic/political systems. The "Costa Rica-Nicaragua 2" (1948-1990) rivalry is the only exclusively ideological rivalry in the data. Therein, democratic Costa Rica and Marxist Nicaragua actively advocated regime change for the other side. "Interventionary" rivalries are new types of rivalries that Thompson and Dreyer introduce to this project. These are relationships in which states intrude into the internal affairs of other states for sake of leverage in the other state's decision-making. They are often done without clear spatial, positional, or even ideological reasons. The concept borrows from [Cliffe's (1999) discussion of "mutual intervention"](https://www.jstor.org/stable/3993184?seq=1#metadata_info_tab_contents) in the Horn of Africa and it should be no surprise that all interventionary rivalries in the data are located in Central Africa or East Africa.
 
 Many rivalries have a second dimension but very few have three dimensions. The West Germany-East Germany rivalry (1949-1973) is an accessible three-dimensional rivalry in this data. Therein, the rivalry was primarily ideological (`type1`), but had a secondary positional aspect (`type2`) and a minimal, but still important, spatial/territorial element (`type3`) on top of that.
 
@@ -261,10 +264,11 @@ We can also do a basic summary of the distribution of rivalries by primary rival
 
 
 ```r
+
 strategic_rivalries %>% group_by(type1) %>% 
   summarize(n = n()) %>% ungroup() %>%
   arrange(-n) %>%
-  mutate(percent = paste0(mround2(n/sum(n)),"%")) %>%
+  mutate(percent = paste0(mround(n/sum(n)),"%")) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
         caption = "The Distribution of Rivalries by Primary Rivalry Type, 1494-2010",
@@ -308,7 +312,7 @@ strategic_rivalries %>% group_by(type1) %>%
 
 A user will need to prep the data a little to get some usable dyad-year data from this raw list of strategic rivalries. Importantly, the data are non-directed but the dyad is "ordered" alphabetically rather than by a numeric coding system (a la Correlates of War [CoW] state system membership). This will make for some headaches in standard dyad-year data because Portugal (ccode: 235) precedes Spain (ccode: 230) in the rivalry list, but will never precede Spain in a non-directed dyad-year design that relies on CoW system membership data.
 
-Fortunately, [the `countrycode` package](https://cran.r-project.org/web/packages/countrycode/index.html) is great for this. We'll first convert `sidea` and `sideb` to a `ccodea` and `ccodeb`. The package will take care of almost everything here, though there are a few caveats that I'll highlight in the code below.
+Fortunately, [the `{countrycode}` package](https://cran.r-project.org/web/packages/countrycode/index.html) is great for this. We'll first convert `sidea` and `sideb` to a `ccodea` and `ccodeb`. The package will take care of almost everything here, though there are a few caveats that I'll highlight in the code below.
 
 
 ```r
@@ -344,6 +348,7 @@ Next, we'll create a `ccode1` and `ccode2` variable that makes these non-directe
 
 
 ```r
+
 strategic_rivalries %>%
   mutate(ccode1 = ifelse(ccodeb > ccodea, ccodea, ccodeb),
          ccode2 = ifelse(ccodeb > ccodea, ccodeb, ccodea)) -> strategic_rivalries
@@ -369,6 +374,7 @@ strategic_rivalries %>%
   unnest() %>%
   # Minor note: ccode change for Austria, post-1918 for rivalryno 79.
   mutate(ccode1 = ifelse(ccode1 == 300 & year >= 1919, 305, ccode1)) -> NRY
+
 ```
 
 This dynamic document isn't also creating non-directed dyad-year data, but merging non-directed *rivalry*-year data into non-directed *dyad*-year data is easy since there would be common keys of `ccode1`, `ccode2`, and `year`. It would look like this.
@@ -388,8 +394,7 @@ NRY %>%
   mutate(ongorivalry = ifelse(is.na(ongorivalry), 0, ongorivalry)) -> NDY
 ```
 
-That's it. Doing this takes a table of 197 rivalries in Thompson and Dreyer's appendix, entered to a spreadsheet in about 30 minutes (if I recall that effort correctly), saved as an R data set, and extends it into rivalry-year data to be quickly merged into dyad-year data. Just a few lines of R code from `tidyerse` with some light maintenance from the `countrycode` package are all you need.
-
+That's it. Doing this takes a table of 197 rivalries in Thompson and Dreyer's appendix, entered to a spreadsheet in about 30 minutes (if I recall that effort correctly), saved as an R data set, and extends it into rivalry-year data to be quickly merged into dyad-year data. Just a few lines of R code from `{tidyerse}` with some light maintenance from the `{countrycode}` package are all you need.
 
 
 

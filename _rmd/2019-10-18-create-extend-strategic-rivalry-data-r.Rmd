@@ -4,11 +4,9 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-10-18'
-excerpt: "A few lines in R (thanks to tidyverse) can take raw rivalry data from Thompson and Dreyer (2012) and create some usable data frames for conflict research."
+excerpt: "A few lines in R (thanks to {tidyverse}) can take raw rivalry data from Thompson and Dreyer (2012) and create some usable data frames for conflict research."
 layout: post
 categories:
   - R
@@ -16,22 +14,40 @@ categories:
 image: "bettanier-black-spot-1887.jpg"
 ---
 
-```{r setup-correlated-errors, include=FALSE, cache=F}
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
 
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
-knitr::opts_chunk$set(fig.path = fig_path, dev = 'svg',
-                      cache.path = '../cache/strategic-rivalry/',
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = TRUE) 
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+```
+
+```{r loaddatadostuff, include=FALSE, cache=F}
 
 library(tidyverse)
 library(stevemisc)
@@ -41,6 +57,14 @@ library(stargazer)
  
 
 ```
+
+```{r updatebox, echo=F, eval=T, results="asis", cache=F}
+ 
+add_update(announce = "This functionality is now in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> ⤵️", 
+           text = "The processes described here have been includded in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a>, an R package for the creation of all kinds of peace science data. The <a href='http://svmiller.com/stevemisc/reference/strategic_rivalries.html'><code class='highlighter-rouge'>strategic_rivalries</code></a> data frame is still in <a href='http://svmiller.com/stevemisc'><code class='highlighter-rouge'>{stevemisc}</code></a> as a legacy. A slightly modified version is included in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> as the <code class='highlighter-rouge'>td_rivalries</code> data. You can add strategic rivalry data to state-year or dyad-year data in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> with the <a href='http://svmiller.com/peacesciencer/reference/add_strategic_rivalries.html'><code class='highlighter-rouge'>add_strategic_rivalries()</code></a> function. Please check out the website for <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> for updates on its continued development.")
+ 
+```
+
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
@@ -65,7 +89,7 @@ However, the ensuing data are less of a data set one can download and more a his
 
 ## The (Raw) Data {#rawdata}
 
-I scanned Thompson and Dreyer's (2012) book at the appendix and created a spreadsheet that I make available in [my `stevemisc` package](https://github.com/svmiller/stevemisc) as a data object titled `strategic_rivalries`. Alternatively, a .csv of the data [is available here](https://gist.github.com/svmiller/63dace4aa5a00eddce307d964c7bac23). Let's load that raw data and take a gander at it. The data are purposely minimal right now because it's a quick scan of the information from the appendix. The goal is to record it in a spreadsheet and extend it later.
+I scanned Thompson and Dreyer's (2012) book at the appendix and created a spreadsheet that I make available in [my `{stevemisc}` package](http://svmiller.com/stevemisc) as a data object titled `strategic_rivalries`. Alternatively, a .csv of the data [is available here](https://gist.github.com/svmiller/63dace4aa5a00eddce307d964c7bac23). Let's load that raw data and take a gander at it. The data are purposely minimal right now because it's a quick scan of the information from the appendix. The goal is to record it in a spreadsheet and extend it later.
 
 ```{r loaddata, echo=T, eval=T}
 # library(tidyverse)
@@ -116,7 +140,7 @@ We can also do a basic summary of the distribution of rivalries by primary rival
 strategic_rivalries %>% group_by(type1) %>% 
   summarize(n = n()) %>% ungroup() %>%
   arrange(-n) %>%
-  mutate(percent = paste0(mround2(n/sum(n)),"%")) %>%
+  mutate(percent = paste0(mround(n/sum(n)),"%")) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
         caption = "The Distribution of Rivalries by Primary Rivalry Type, 1494-2010",
@@ -128,7 +152,7 @@ strategic_rivalries %>% group_by(type1) %>%
 
 A user will need to prep the data a little to get some usable dyad-year data from this raw list of strategic rivalries. Importantly, the data are non-directed but the dyad is "ordered" alphabetically rather than by a numeric coding system (a la Correlates of War [CoW] state system membership). This will make for some headaches in standard dyad-year data because Portugal (ccode: 235) precedes Spain (ccode: 230) in the rivalry list, but will never precede Spain in a non-directed dyad-year design that relies on CoW system membership data.
 
-Fortunately, [the `countrycode` package](https://cran.r-project.org/web/packages/countrycode/index.html) is great for this. We'll first convert `sidea` and `sideb` to a `ccodea` and `ccodeb`. The package will take care of almost everything here, though there are a few caveats that I'll highlight in the code below.
+Fortunately, [the `{countrycode}` package](https://cran.r-project.org/web/packages/countrycode/index.html) is great for this. We'll first convert `sidea` and `sideb` to a `ccodea` and `ccodeb`. The package will take care of almost everything here, though there are a few caveats that I'll highlight in the code below.
 
 ```{r create-ccodea-ccodeb, echo=T, eval=T, warning=F}
 require(countrycode)
@@ -211,7 +235,7 @@ NRY %>%
   mutate(ongorivalry = ifelse(is.na(ongorivalry), 0, ongorivalry)) -> NDY
 ```
 
-That's it. Doing this takes a table of 197 rivalries in Thompson and Dreyer's appendix, entered to a spreadsheet in about 30 minutes (if I recall that effort correctly), saved as an R data set, and extends it into rivalry-year data to be quickly merged into dyad-year data. Just a few lines of R code from `tidyerse` with some light maintenance from the `countrycode` package are all you need.
+That's it. Doing this takes a table of 197 rivalries in Thompson and Dreyer's appendix, entered to a spreadsheet in about 30 minutes (if I recall that effort correctly), saved as an R data set, and extends it into rivalry-year data to be quickly merged into dyad-year data. Just a few lines of R code from `{tidyerse}` with some light maintenance from the `{countrycode}` package are all you need.
 
 ```{r rivalries-by-year-europe, echo=F, eval=F, warning=F}
 NRY %>%
@@ -224,8 +248,3 @@ NRY %>%
   facet_wrap(~ccode1)
 ```
 
-```{r knitchunk, echo=F, eval=F}
-setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("2019-10-18-create-extend-strategic-rivalry-data-r.Rmd",
-            output = "../_posts/2019-10-18-create-extend-strategic-rivalry-data-r.md")
-```
