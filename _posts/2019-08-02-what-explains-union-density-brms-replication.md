@@ -20,11 +20,9 @@ image: "1946-may-day.jpg"
 ---
 
 
+*Last updated: 22 June 2021. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 {% include image.html url="/images/1946-may-day.jpg" caption="Diverse workers of various affiliations march together at a 1946 May Day parade in New York City. (Bettmann Archive via Getty Images)" width=400 align="right" %}
-
-
-*Last updated: 22 June 2021. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 Count this as a post I've always wanted to write for myself because I wish I could go back in time to show this to me in graduate school when I was trying (and struggling) to learn Bayesian methods.
 
