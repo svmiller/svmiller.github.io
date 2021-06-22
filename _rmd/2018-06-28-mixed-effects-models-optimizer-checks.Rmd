@@ -10,13 +10,53 @@ excerpt: "Computation time is a premium in estimating mixed effects models, but 
 image: r-logo.png
 ---
 
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
 
 
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/", rmd_name, "/")
 
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
-{% include image.html url="/images/r-logo.png" caption="The R logo, just 'cause." width=350 align="right" %}
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
 
-*Last updated: 22 June 2021. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well.* 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+```
+
+```{r loaddatadostuff, include=FALSE}
+library(tidyverse) # for most things
+library(stevemisc) # helper functions/formatting
+library(stevedata) # the data
+library(lme4) # for mixed models
+```
+
+```{r leadimage2, echo=F, eval=T, results="asis", cache=F}
+ 
+add_jekyll_image('/images/r-logo.png', "The R logo, just 'cause.", "350", "right")
+ 
+```
+
+*Last updated: `r format(Sys.time(), '%e %B %Y')`. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well.* 
 
 My goals for writing this are two-fold. First, it'd been a long time since my last blog post. I usually average 7-10 posts a year and this will only be the second one. Second, I've been meaning to offer some tips/tutorials for mixed effects modelers who are still new to the craft. Mixed effects modeling is my method of choice for evaluating and explaining social/political phenomenon. I think I've become pretty good at it over the past 10 years, but everything I know I ultimately taught myself through trial and error. Stackoverflow is nice but I was always reticent to post there to search for answers I feel I should've known already. It does mean that while I everything I know is self-taught, I've learned a lot of tricks along the way and I think it would be good to share them.
 
@@ -39,8 +79,7 @@ I'll keep the list of covariates simple. The models include the respondent's age
 
 You can see the exact code I'm using below, along with the rescaling I do.
 
-
-```r
+```{r, echo=T, eval=T}
 wvs_usa_abortion %>%
   mutate(ajd = carr(aj, "1=0; 2:10=1")) %>%
   # r2sd_at() is in {stevemisc}
@@ -63,7 +102,35 @@ I provide the results below with my optimizer of choice. I am partial to bound o
 
 The results below are substantively intuitive. Age might have a negative effect on attitudes toward abortion, but we see that in the logistic model and not the linear model. It should be unsurprising that increasing ideology to the right and increasing religiosity (i.e. the importance of God in the respondent's life) decrease attitudes toward abortion's justifiability. The child autonomy index has a positive effect on the justifiability of abortion, which is consistent with received wisdom from "modernization" and "values" scholarship.
 
-![plot of chunk ajdwplots](/images/mixed-effects-models-optimizer-checks/ajdwplots-1.png)
+```{r ajdwplots, echo=F, eval=T, fig.width=13, fig.height=8}
+broom::tidy(M1) %>%
+  mutate(model = "Linear Mixed Effects Model") %>%
+  bind_rows(., broom::tidy(M2) %>% mutate(model = "Logistic Mixed Effects Model")) %>%
+  filter(effect == "fixed")  %>%
+  mutate(term = fct_reorg(term,
+                           "Intercept" = "(Intercept)",
+                           "Importance of God in\nRespondent's Life" = "z_godimportant",
+                           "Child Autonomy Index" = "z_cai",
+                          "Financial Satisfaction" = "z_satisfinancial",
+                          "Ideology" = "z_ideology",
+                          "Female" = "female",
+                          "Age" = "z_age",)) %>%
+  filter(term != "Intercept") %>%
+  # I know this is technically wrong for the linear mixed model. It's also convenient.
+  mutate(lwr = estimate - p_z(.05)*std.error,
+         upr = estimate + p_z(.05)*std.error) %>%
+  ggplot(., aes(term, estimate, ymin=lwr, ymax=upr, color = model, shape = model)) +
+  theme_steve_web() +
+  post_bg() +
+  scale_colour_brewer(palette = "Set1") +
+  geom_pointrange(position = position_dodge(width = .5)) + coord_flip() +
+  geom_hline(yintercept = 0, linetype="dashed") +
+  labs(title = "Mixed Effects Models of Attitudes Toward the Justifiability of Abortion",
+       subtitle = "Increasing ideology and religiosity dampen attitudes toward abortion's justifiability.",
+       caption = "Random effects: survey years (1982, 1990, 1995, 1999, 2006, 2011). Number of observations: 9,258.",
+       color = "", shape = "",
+       y = "Coefficient (with 95% Intervals)", x ="")
+```
 
 ## Performing Optimizer Checks
 
@@ -75,8 +142,7 @@ The standard generalized linear mixed effects model estimation does parameter op
 
 Here's how you would perform these additional optimizer checks in my sample analysis. Do note that `{lme4}` only "suggests" and does not "import" the `{optimx}` and `{dfoptim}` packages. Both are necessary for the `allFit()` function, so make sure to install those. If you have them installed, `{lme4}` will load them both when you call this function.
 
-
-```r
+```{r optimizercheck, echo=T, eval=T,  fig.width=13, fig.height=8, message=F, warning=F, error=F}
 AF1 <- allFit(M1, verbose=F)
 AF2 <- allFit(M2, verbose=F)
 ```
@@ -84,8 +150,7 @@ AF2 <- allFit(M2, verbose=F)
 
 You can leverage `allFit()` in multiple ways. First, it would be useful information for the appendix of your paper, should you choose the fastest optimizer you want at the expense of multiple and potentially redundant convergence checks, to report the log-likelihoods of the various models that `allFit()` estimated. I do this graphically below.
 
-
-```r
+```{r optimizerlls, echo=T, eval=T, fig.width=11, fig.height=8, message=F, warning=F, error=F}
 
 AF1_lliks <- sort(sapply(AF1,logLik))
 AF2_lliks <- sort(sapply(AF2,logLik))
@@ -102,16 +167,14 @@ bind_rows(AF1_lliks, AF2_lliks) %>%
   post_bg() +
   ylab("Log-Likelihood") +
   labs(title = "The Log-Likelihoods of Seven Different Optimizers in Our Two Models")
-```
 
-![plot of chunk optimizerlls](/images/mixed-effects-models-optimizer-checks/optimizerlls-1.png)
+```
 
 The easiest way to interpret this is that these log-likelihoods should all be within thousandths of a decimal point from each other. The optimizer does not influence the parameter estimates if these facets all have dots in a single column like this. Here, we can be assured that the model's parameters we report do not depend on the optimizer we chose.
 
 You could also do something similar with the *z*-statistics and *t*-statistics of a particular variable from the model. Let's assume I'm interested, for theoretical reasons, in the effect of the child autonomy index on attitudes toward abortion in my model. I'm trying to build an argument about this relationship we observe and demonstrate to reviewers that the effect is not sensitive to the optimizer. Toward that end, I can pool all the coefficients for the child autonomy index variable across all the optimizers and present them as a faceted plot like above. The intuition here is straightforward, as it was above. If the points on the plot below all form a single column across both facets, then the parameter for the variable is robust to the particular optimizer.
 
-
-```r
+```{r optimizerzts, echo=T, eval=T,  fig.width=11, fig.height=8, message=F, warning=F, error=F}
 
 lapply(AF1, broom::tidy) %>%
   map2_df(.,
@@ -146,13 +209,34 @@ bind_rows(AF1_zcai, AF2_zcai) %>%
   labs(caption = "Vertical line represents a z-value (or t-value, in the linear model) of 1.96, the conventional cutoff for statistical significance.",
        title = "A Comparison of the Effect of the Child Autonomy Index Across Multiple Optimizers",
        x = "", y = "Test Statistic (t/z)")
-```
 
-![plot of chunk optimizerzts](/images/mixed-effects-models-optimizer-checks/optimizerzts-1.png)
+```
 
 `allFit()` will helpfully store the estimation times of these models as well. This will be useful as you figure out which optimizer gives you the most "bang for your buck" (i.e. what converges the fastest, especially if you're short on memory and time). The results suggest you can get the most bang for your buck through non-linear optimization of the BOBYQA method or the BOBYQA method itself. The non-linear optimization result is unsurprising because this procedure permits stopping convergence checks earlier if it believes it has already found an approximate optimum. The differences may not matter as much for linear models in the mixed effects framework. These already estimate quickly, all things considered. No matter, BOBYQA might be the way to go if you want a quick and honest look at the results of your logistic mixed effects model.
 
-![plot of chunk allfittimes](/images/mixed-effects-models-optimizer-checks/allfittimes-1.png)
+```{r allfittimes, echo=F, eval=T, fig.width = 12, warning=F, error=F, fig.height=10}
+
+cbind(as.data.frame(summary(AF1)$times), rownames(summary(AF1)$times)) %>%
+  tbl_df() %>%
+  rename(Optimizer = `rownames(summary(AF1)$times)`) %>%
+  mutate(Model = "Linear Mixed Effects Model") -> AF1times
+
+cbind(as.data.frame(summary(AF2)$times), rownames(summary(AF2)$times)) %>%
+  tbl_df() %>%
+  rename(Optimizer = `rownames(summary(AF2)$times)`) %>%
+  mutate(Model = "Logistic Mixed Effects Model") -> AF2times
+
+bind_rows(AF1times, AF2times) %>%
+  ggplot(.,aes(Optimizer, elapsed)) + geom_point() +
+  facet_wrap(~Model) + coord_flip() +
+  theme_steve_web() +
+  post_bg() +
+  ylab("Elapsed Time") +
+  labs(title = "A Comparison of Estimation Times Across Seven Different Optimizers",
+       x = "")
+
+
+```
 
 
 ## Conclusion
