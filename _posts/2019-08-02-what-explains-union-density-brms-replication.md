@@ -19,7 +19,6 @@ categories:
 image: "1946-may-day.jpg"
 ---
 
-
 *Last updated: 22 June 2021. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 {% include image.html url="/images/1946-may-day.jpg" caption="Diverse workers of various affiliations march together at a 1946 May Day parade in New York City. (Bettmann Archive via Getty Images)" width=400 align="right" %}
@@ -30,7 +29,7 @@ If someone were to press me to name my top ten favorite political science articl
 
 Western and Jackman's (1994) article would appear on my list with all that in mind largely because it's the clearest articulation of what Bayesians want and why. The topic is simple but important. The statistical application is clearly simple and others have done more advanced Bayesian analyses, but it was sophisticated for the time. It more importantly served a use clarifying an empirical debate about a topic that was of great scholarly interest in the comparative politics literature at the time and that my undergraduates would already kind of understand jumping into the article cold. It's why it appears in any quantitative methods class I teach.
 
-While I always understood the basic crux of what the authors were doing, I struggled with a replication of it. The concept of Bayesian inference was simpler for me than the implementation of it. However, [the `brms` package](https://cran.r-project.org/web/packages/brms/index.html) has made Bayesian statistical modeling (through [Stan](https://mc-stan.org/)) so much simpler. In this case, someone can replicate this article in a matter of minutes.
+While I always understood the basic crux of what the authors were doing, I struggled with a replication of it. The concept of Bayesian inference was simpler for me than the implementation of it. However, [the `{brms}` package](https://cran.r-project.org/web/packages/brms/index.html) has made Bayesian statistical modeling (through [Stan](https://mc-stan.org/)) so much simpler. In this case, someone can replicate this article in a matter of minutes.
 
 1. [Some Basic Background](#somebackground)
 2. [The Replication](#replication)
