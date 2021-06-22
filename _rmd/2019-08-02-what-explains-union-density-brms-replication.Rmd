@@ -1,12 +1,12 @@
 ---
-title: "What Explains Union Density? A Replication of an Old Article with the brms Package"
-output:
-  md_document:
-    variant: gfm
-    preserve_yaml: TRUE
-    pandoc_args: [ 
-      "--ascii"
-    ]
+title: "What Explains Union Density? A Replication of an Old Article with the {brms} Package"
+# output:
+#   md_document:
+#     variant: gfm
+#     preserve_yaml: TRUE
+#     pandoc_args: [ 
+#       "--ascii"
+#     ]
 # knit: (function(inputFile, encoding) {
 #   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
@@ -19,26 +19,38 @@ categories:
 image: "1946-may-day.jpg"
 ---
 
-```{r setup-what-explains-union-density, include=FALSE, cache=F}
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
 
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
-knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
-                      cache.path = '../cache/what-explans-union-density/',
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = TRUE) 
-
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
 ```
-
-
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
@@ -46,7 +58,8 @@ add_jekyll_image('/images/1946-may-day.jpg', "Diverse workers of various affilia
  
 ```
 
-<!-- *Last updated: `r format(Sys.time(), '%B %d, %Y')`* -->
+
+*Last updated: `r format(Sys.time(), '%e %B %Y')`. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 Count this as a post I've always wanted to write for myself because I wish I could go back in time to show this to me in graduate school when I was trying (and struggling) to learn Bayesian methods.
 
@@ -78,29 +91,26 @@ There is a major statistical problem that both authors encounter. Looking at the
 
 ## The Replication {#replication}
 
-This replication will depend on just a few packages. `tidyverse` is at the fore of my workflow, followed by my toy `stevemisc` package. This package, importantly, has the union density data. Finally, the `brms` package will estimate the statistical models. I'm going to use `kableExtra` to help format some tables for this blogpost and use `ggrepel` for a graph. `broom` will do some model processing and `tidybayes` will do some model summaries from `brms` objects. I'll call in a few `forcats` functions for processing information for graphs, but won't load the package.
+This replication will depend on just a few packages. `{tidyverse}` is at the fore of my workflow, followed by my toy `{stevemisc}` and `{stevedata}` packages. `{stevedata}` has the union density data. Finally, the `{brms}` package will estimate the statistical models. I'm going to use `{kableExtra}` to help format some tables for this blog post and use `{ggrepel}` for a graph. `{broom}` will do some model processing and `{tidybayes}` will do some model summaries from `{brms}` objects.
 
 ```{r loadstuff, cache=T}
-
 library(tidyverse)
 library(stevemisc)
+library(stevedata)
 library(brms)
 library(kableExtra)
 library(ggrepel)
 library(broom)
 library(tidybayes)
-
 ```
 
 ### The Data {#data}
 
-The data frame is stored in my `stevemisc` package as `uniondensity`. It has 20 rows with four columns. The first column, `country`, is intuitively the country name. The second column, `union`, is the dependent variable of interest. It captures the percentage of the work force that is unionized in this cross-section of data. The next column, `left`, is a control variable of sorts. In otherwords, Wallerstein and Stephens differ in their competing hypotheses of civilian labor force size and industrial concentration, but agree that left-wing governments have a positive effect on union density. It's measured from [Wilensky's (1981) cumulative index of left-wing governments](https://books.google.com/books?id=H4_ojgEACAAJ), for which the reader will have to go to a university library to find more detail about the measure.
+The data frame is stored in my `{stevedata}` package as `uniondensity`. It has 20 rows with four columns. The first column, `country`, is intuitively the country name. The second column, `union`, is the dependent variable of interest. It captures the percentage of the work force that is unionized in this cross-section of data. The next column, `left`, is a control variable of sorts. In other words, Wallerstein and Stephens differ in their competing hypotheses of civilian labor force size and industrial concentration, but agree that left-wing governments have a positive effect on union density. It's measured from [Wilensky's (1981) cumulative index of left-wing governments](https://books.google.com/books?id=H4_ojgEACAAJ), for which the reader will have to go to a university library to find more detail about the measure.
 
 The final two columns are the competing independent variables. `size`, which is Wallerstein's "pet" variable of sorts, is the logged civilian labor force size. `concen`, which is Stephens' pet variable, is the economic concentration of a country in industry. The data are available in its entirety below.
 
-```{r tabuniondensity, echo=T, eval=T, cache=F, fig.width=13, fig.height=8, warning=F}
-data(uniondensity)
-
+```{r tabuniondensity, echo=F, eval=T, cache=F, fig.width=13, fig.height=8, warning=F}
 uniondensity %>%
   mutate(size = round(size, 2)) %>% # round for simple presentation. Change *not* saved for analyses 
   arrange(country) %>%
@@ -112,9 +122,7 @@ uniondensity %>%
 
 A careful eye might be able to spot a collinearity problem in the industrial concentration and logged labor force size variables, but a plot will bring it to life.
 
-```{r collinearity-concensize, echo=T, eval=T, cache=T, warning=F, fig.width=13, fig.height=8}
-
-
+```{r collinearity-concensize, echo=F, eval=T, cache=T, warning=F, fig.width=13, fig.height=8}
 uniondensity %>%
   ggplot(.,aes(concen, size)) +
   theme_steve_web() +
@@ -160,30 +168,41 @@ stephens_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
                      set_prior("normal(0,10^6)", class = "b", coef="size"),
                      set_prior("normal(10,5)", class="b", coef="concen"),
                      set_prior("normal(0,10^6)", class="Intercept"))
-
 ```
 
 ###  Replications with Noninformative Prior Information (Table 2) {#table2}
 
 Before replicating some of the main results, let's look at Table 2 of Western and Jackman and see if we can't replicate that first result. One thing I was astonished to find is the results that Western and Jackman provide in Table 2 aren't necessarily the result of noninformative prior information. It looks more like it was actually a standard OLS model. Certainly, OLS is giving results identical to what Western and Jackman report. The Stan model estimated in `brms` is basically identical, but with some observable differences. These are slight, but they do have some implications for the argument about the effect of logged labor force size given the small number of observations.
 
-```{r table2, cache=T}
-
+```{r firstmods, cache=T, message = FALSE}
 # Standard LM
 M1 <- lm(union ~ left + size + concen, data=uniondensity)
 
 # Uninformative priors
 B0 <- brm(union ~ left + size + concen,
           data=uniondensity,
+          # for reproducibility
+          seed = 8675309,
+          refresh = 0,
           family="gaussian")
+```
 
-
-tidy(B0) %>% mutate_at(vars(-term), list(~round(.,2))) %>%
-  slice(1:4) %>%
-  mutate(term = c("Intercept", "Left Government", "Labor Force Size (logged)",
-                  "Industrial Concentration")) %>%
-  mutate(`Mean|Coef (SD|SE)` = paste0(estimate," (", std.error,")") ) %>%
-  select(term, `Mean|Coef (SD|SE)`, lower, upper) %>%
+```{r table2, cache=T, message = FALSE, echo=FALSE}
+# {brms} doesn't have the same tidiers. Gotta do it this way.
+posterior_samples(B0) %>%
+  as_tibble() %>%
+  select(1:4) %>%
+  gather(term, value) %>%
+  group_by(term) %>%
+  summarize(estimate = mean(value),
+            std.error = sd(value),
+            lwr = quantile(value, .05),
+            upr = quantile(value, .95)) %>%
+  mutate_if(is.numeric, ~round(., 2)) %>%
+  mutate(term = c("Industrial Concentration", "Intercept",
+                  "Left Government", "Industrial Concentration")) %>%
+  mutate(`Mean|Coef (SD|SE)` = paste0(estimate," (", std.error,")") )  %>%
+  select(term, `Mean|Coef (SD|SE)`, lwr, upr) %>%
   mutate(Model = "Bayesian LM") -> tidyB0
 
 tidy(M1) %>%
@@ -191,15 +210,13 @@ tidy(M1) %>%
   mutate(term = c("Intercept", "Left Government", "Labor Force Size (logged)",
                   "Industrial Concentration")) %>%
   mutate(`Mean|Coef (SD|SE)` = paste0(estimate," (", std.error,")") )  %>%
-  mutate(lower = estimate - abs(qnorm(.05))*std.error,
-         upper = estimate + abs(qnorm(.05))*std.error) %>%
-  select(term, `Mean|Coef (SD|SE)`, lower, upper) %>%
+  mutate(lwr = estimate - abs(qnorm(.05))*std.error,
+         upr = estimate + abs(qnorm(.05))*std.error) %>%
+  select(term, `Mean|Coef (SD|SE)`, lwr, upr) %>%
   mutate(Model = "Standard OLS") -> tidyM1
 
-
-
 tribble(
-  ~term, ~`Mean|Coef (SD|SE)`, ~lower, ~upper,
+  ~term, ~`Mean|Coef (SD|SE)`, ~lwr, ~upr,
   "Intercept", "97.59 (57.48)", 3.04, 192.14,
   "Left Government", "0.27 (0.08)", .15, .39,
   "Labor Force Size (logged)", "-6.46 (3.79)", -12.70, -.22,
@@ -213,14 +230,12 @@ tribble(
                                      "Labor Force Size (logged)",
                                      "Industrial Concentration")) %>% tbl_df() %>%
   arrange(term) %>%
-  mutate(lower = round(lower, 2),
-         upper = round(upper, 2)) %>%
+  mutate(lwr = round(lwr, 2),
+         upr = round(upr, 2)) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
         caption = "Comparing OLS, an Uninformative Bayesian Model, and Table 2 of Western and Jackman (1994)",
         align=c("l","c","c", "c", "l"))
-
-
 ```
 
 The basic takeaway from this analysis, as it was in Western and Jackman, is the effects of left-wing governments and logged labor force size are statistically discernible from an argument of zero effect for both predictors. This would make Wallerstein right, prima facie, and make Stephens wrong. Stephens' industrial concentration variable is insignificant. Indeed, its effect is practically zero.
@@ -229,24 +244,25 @@ The basic takeaway from this analysis, as it was in Western and Jackman, is the 
 
 The research question in the Bayesian perspective becomes quite interesting in assessing the analyses conducted and summarized in Table 3. Given the aforementioned "weak" nature of the data, does Wallerstein or Stephens' respective arguments depend on the prior belief that they are right?
 
-```{r table3mods, cache=T}
+```{r table3mods, cache=T, message = FALSE}
 # Wallerstein's priors
 B1 <- brm(union ~ left + size + concen,
           data = uniondensity,
           prior=wall_priors,
+          seed = 8675309,
+          refresh = 0,
           family="gaussian")
 
 # Stephens' priors
 B2 <- brm(union ~ left + size + concen,
           data = uniondensity,
           prior=stephens_priors,
+          seed = 8675309,
+          refresh = 0, 
           family="gaussian")
-
-
 ```
 
-```{r table3mods-summary, cache=T}
-
+```{r table3mods-summary, cache=T, echo=F}
 B1 %>%
   spread_draws(b_Intercept, b_left, b_size, b_concen) %>%
   gather(variable, value, b_Intercept:b_concen) %>%
@@ -284,7 +300,6 @@ bind_rows(B1_draws, B2_draws) %>%
         table.attr='id="stevetable"',
         caption = "A Reproduction of Table 3 from Western and Jackman (1994)",
         align=c("l","c","c", "c", "c", "l"))
-
 ```
 
 The results in Table 3, effectively reproduced above, lead to a potentially intriguing implication for this empirical debate. Acknowledging the data are fundamentally weak from the Bayesian perspective, the prior information we build into the models is going to have a lot of influence on the posterior distributions. 
@@ -297,12 +312,11 @@ The posterior distributions for left governments are unchanged across both prior
 
 Table 4 and Table 5 in Western and Jackman (1994) do some sensitivity analyses, which 1) omit the outlier case of Italy, and 2) multiply the variances by 10 to diffuse the priors more. The results of those analyses, which I was partially able to replicate, do show the results are sensitive to diffusing the priors. You can see the code for a reproduction of the same basic findings from Table 5 below. 
 
-```{r table5mods, cache=T}
+```{r table5mods, cache=T, message = FALSE}
 # The sensitivity analyses are:
 # 1) keep the informative priors, but exclude Italy
 # 2) multiply the variances by 10, and exclude Italy.
 #    Notice: variances. Take sd to power 2, then multiply by 10, then sqrt()
-
 
 wall_priors_diffuse <- c(set_prior("normal(3, sqrt(3*10))", class = "b", coef= "left"),
                          set_prior("normal(-5, sqrt(5*10))", class = "b", coef="size"),
@@ -316,49 +330,62 @@ stephens_priors_diffuse <- c(set_prior("normal(3, sqrt(3*10))", class = "b", coe
 
 B3 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=wall_priors,
           family="gaussian")
 
 B4 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=wall_priors_diffuse,
           family="gaussian")
 
 
 B5 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=stephens_priors,
           family="gaussian")
 
 B6 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=stephens_priors_diffuse,
           family="gaussian")
 ```
 
 The point estimates differ a little but the same basic story emerges that emhasize the effect of diffuse priors on low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.
 
-```{r westernjackman1994-tab5-reproduction, echo=T, eval=T, cache=T, warning=F, fig.width=13, fig.height=8}
-tidy(B3) %>% mutate(model = "Informative, Italy Omitted", category = "Wallerstein's Priors") %>%
-  bind_rows(., tidy(B5) %>% mutate(model = "Informative, Italy Omitted",
-                                   category = "Stephens' Priors")) %>%
-  bind_rows(., tidy(B4) %>% mutate(model = "Diffuse, Italy Omitted",
-                                   category = "Wallerstein's Priors")) %>%
-  bind_rows(., tidy(B6) %>% mutate(model = "Diffuse, Italy Omitted",
-                                   category = "Stephens' Priors")) %>%
-  tbl_df() %>%
-  filter(term %in% c("b_left", "b_size","b_concen", "b_Intercept")) %>%
-  mutate(term = forcats::fct_recode(term,
-                                        "Intercept" = "b_Intercept",
-                                        "Left Government" = "b_left",
-                                        "Labor Force Size (logged)" = "b_size",
-                                        "Industrial Concentration" = "b_concen",
-  ))  %>%
-  mutate(term = forcats::fct_relevel(term,
-                                         "Intercept",
-                                         "Left Government",
-                                         "Labor Force Size (logged)")) %>%
-  ggplot(.,aes(category, estimate, ymin=lower, ymax=upper, color=model, shape=model)) +
+```{r westernjackman1994-tab5-reproduction, echo=F, eval=T,  warning=F, fig.width=13, fig.height=8}
+B3 %>% gather_draws(b_Intercept, b_left, b_size, b_concen) %>%
+  mutate(model = "Informative, Italy Omitted", category = "Wallerstein's Priors") -> drawsB3
+
+B4 %>% gather_draws(b_Intercept, b_left, b_size, b_concen) %>%
+  mutate(model = "Diffuse, Italy Omitted", category = "Wallerstein's Priors") -> drawsB4
+
+B5 %>% gather_draws(b_Intercept, b_left, b_size, b_concen) %>%
+  mutate(model = "Informative, Italy Omitted", category = "Stephens' Priors") -> drawsB5
+
+B6 %>% gather_draws(b_Intercept, b_left, b_size, b_concen) %>%
+  mutate(model = "Diffuse, Italy Omitted", category = "Stephens' Priors") -> drawsB6
+
+bind_rows(drawsB3, drawsB4) %>%
+  bind_rows(., drawsB5) %>%
+  bind_rows(., drawsB6) %>%
+  group_by(model, category, .variable) %>%
+  summarize(mean = mean(.value),
+            lwr = quantile(.value, .025),
+            upr = quantile(.value, .975)) %>%
+  mutate(term = fct_reorg(.variable,
+                          "Intercept" = "b_Intercept",
+                          "Left Government" = "b_left",
+                          "Labor Force Size (logged)" = "b_size",
+                          "Industrial Concentration" = "b_concen")) %>%
+  ggplot(.,aes(category, mean, ymin=lwr, ymax=upr, color=model, shape=model)) +
   theme_steve_web() +
   post_bg() +
   scale_colour_brewer(palette = "Set1") +
@@ -373,10 +400,4 @@ tidy(B3) %>% mutate(model = "Informative, Italy Omitted", category = "Wallerstei
 ```
 
 
-Still, this post is a love letter of sorts to the Western and Jackman (1994) article and to the `brms` package for doing Bayesian statistical modeling with the Stan programming language. The article appears on every quantitative methods syllabus of mine and `brms` is an incredibly useful tool for getting standard R users to do more Bayesian modeling. You can use the latter to replicate the statistical analyses in the former, which might help the learning experience for students trying to unpack Western and Jackman's research design.
-
-```{r knitchunk, echo=F, eval=F}
-setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("2019-08-02-what-explains-union-density-brms-replication.Rmd",
-            output = "../_posts/2019-08-02-what-explains-union-density-brms-replication.md")
-```
+Still, this post is a love letter of sorts to the Western and Jackman (1994) article and to the `{brms}` package for doing Bayesian statistical modeling with the Stan programming language. The article appears on every quantitative methods syllabus of mine and `{brms}` is an incredibly useful tool for getting standard R users to do more Bayesian modeling. You can use the latter to replicate the statistical analyses in the former, which might help the learning experience for students trying to unpack Western and Jackman's research design.

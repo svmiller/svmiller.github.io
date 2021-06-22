@@ -1,12 +1,12 @@
 ---
 title: "What Explains Union Density? A Replication of an Old Article with the {brms} Package"
-output:
-  md_document:
-    variant: gfm
-    preserve_yaml: TRUE
-    pandoc_args: [ 
-      "--ascii"
-    ]
+# output:
+#   md_document:
+#     variant: gfm
+#     preserve_yaml: TRUE
+#     pandoc_args: [ 
+#       "--ascii"
+#     ]
 # knit: (function(inputFile, encoding) {
 #   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
@@ -21,11 +21,10 @@ image: "1946-may-day.jpg"
 
 
 
-
-
 {% include image.html url="/images/1946-may-day.jpg" caption="Diverse workers of various affiliations march together at a 1946 May Day parade in New York City. (Bettmann Archive via Getty Images)" width=400 align="right" %}
 
-<!-- *Last updated: August 20, 2019* -->
+
+*Last updated: 22 June 2021. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 Count this as a post I've always wanted to write for myself because I wish I could go back in time to show this to me in graduate school when I was trying (and struggling) to learn Bayesian methods.
 
@@ -57,12 +56,13 @@ There is a major statistical problem that both authors encounter. Looking at the
 
 ## The Replication {#replication}
 
-This replication will depend on just a few packages. `tidyverse` is at the fore of my workflow, followed by my toy `stevemisc` package. This package, importantly, has the union density data. Finally, the `brms` package will estimate the statistical models. I'm going to use `kableExtra` to help format some tables for this blogpost and use `ggrepel` for a graph. `broom` will do some model processing and `tidybayes` will do some model summaries from `brms` objects. I'll call in a few `forcats` functions for processing information for graphs, but won't load the package.
+This replication will depend on just a few packages. `{tidyverse}` is at the fore of my workflow, followed by my toy `{stevemisc}` and `{stevedata}` packages. `{stevedata}` has the union density data. Finally, the `{brms}` package will estimate the statistical models. I'm going to use `{kableExtra}` to help format some tables for this blog post and use `{ggrepel}` for a graph. `{broom}` will do some model processing and `{tidybayes}` will do some model summaries from `{brms}` objects.
 
 
 ```r
 library(tidyverse)
 library(stevemisc)
+library(stevedata)
 library(brms)
 library(kableExtra)
 library(ggrepel)
@@ -72,22 +72,9 @@ library(tidybayes)
 
 ### The Data {#data}
 
-The data frame is stored in my `stevemisc` package as `uniondensity`. It has 20 rows with four columns. The first column, `country`, is intuitively the country name. The second column, `union`, is the dependent variable of interest. It captures the percentage of the work force that is unionized in this cross-section of data. The next column, `left`, is a control variable of sorts. In otherwords, Wallerstein and Stephens differ in their competing hypotheses of civilian labor force size and industrial concentration, but agree that left-wing governments have a positive effect on union density. It's measured from [Wilensky's (1981) cumulative index of left-wing governments](https://books.google.com/books?id=H4_ojgEACAAJ), for which the reader will have to go to a university library to find more detail about the measure.
+The data frame is stored in my `{stevedata}` package as `uniondensity`. It has 20 rows with four columns. The first column, `country`, is intuitively the country name. The second column, `union`, is the dependent variable of interest. It captures the percentage of the work force that is unionized in this cross-section of data. The next column, `left`, is a control variable of sorts. In other words, Wallerstein and Stephens differ in their competing hypotheses of civilian labor force size and industrial concentration, but agree that left-wing governments have a positive effect on union density. It's measured from [Wilensky's (1981) cumulative index of left-wing governments](https://books.google.com/books?id=H4_ojgEACAAJ), for which the reader will have to go to a university library to find more detail about the measure.
 
 The final two columns are the competing independent variables. `size`, which is Wallerstein's "pet" variable of sorts, is the logged civilian labor force size. `concen`, which is Stephens' pet variable, is the economic concentration of a country in industry. The data are available in its entirety below.
-
-
-```r
-data(uniondensity)
-
-uniondensity %>%
-  mutate(size = round(size, 2)) %>% # round for simple presentation. Change *not* saved for analyses 
-  arrange(country) %>%
-  kable(., format="html",
-        table.attr='id="stevetable"',
-        caption = "The Data from Western and Jackman (1994)",
-        align=c("l","c","c", "c"))
-```
 
 <table id="stevetable">
 <caption>The Data from Western and Jackman (1994)</caption>
@@ -246,25 +233,7 @@ uniondensity %>%
 
 A careful eye might be able to spot a collinearity problem in the industrial concentration and logged labor force size variables, but a plot will bring it to life.
 
-
-```r
-uniondensity %>%
-  ggplot(.,aes(concen, size)) +
-  theme_steve_web() +
-  post_bg() +
-  geom_point(size=1.5) +
-  geom_smooth(method="lm") +
-  geom_text_repel(aes(label=country), family="Open Sans") +
-  annotate("label", x=1.85, y=11, 
-         label=paste("Pearson R = ", round(cor(uniondensity$concen, uniondensity$size),3)), 
-          size=3.5, family="Open Sans") + 
-  labs(x = "Industrial Concentration",
-       y = "Civilian Labor Force Size (Logged)",
-       title = "The Collinearity Between Industrial Concentration and Logged Labor Force Size",
-       subtitle = "The correlation is -.922, which is almost a perfect negative correlation.")
-```
-
-![plot of chunk collinearity-concensize](/images/collinearity-concensize-1.png)
+![plot of chunk collinearity-concensize](/images/what-explains-union-density-brms-replication/collinearity-concensize-1.png)
 
 ### Setting Priors for the Statistical Models (via Table 1) {#table1}
 
@@ -309,50 +278,20 @@ M1 <- lm(union ~ left + size + concen, data=uniondensity)
 # Uninformative priors
 B0 <- brm(union ~ left + size + concen,
           data=uniondensity,
+          # for reproducibility
+          seed = 8675309,
+          refresh = 0,
           family="gaussian")
-
-
-tidy(B0) %>% mutate_at(vars(-term), list(~round(.,2))) %>%
-  slice(1:4) %>%
-  mutate(term = c("Intercept", "Left Government", "Labor Force Size (logged)",
-                  "Industrial Concentration")) %>%
-  mutate(`Mean|Coef (SD|SE)` = paste0(estimate," (", std.error,")") ) %>%
-  select(term, `Mean|Coef (SD|SE)`, lower, upper) %>%
-  mutate(Model = "Bayesian LM") -> tidyB0
-
-tidy(M1) %>%
-  mutate_at(vars(-term), list(~round(.,2))) %>%
-  mutate(term = c("Intercept", "Left Government", "Labor Force Size (logged)",
-                  "Industrial Concentration")) %>%
-  mutate(`Mean|Coef (SD|SE)` = paste0(estimate," (", std.error,")") )  %>%
-  mutate(lower = estimate - abs(qnorm(.05))*std.error,
-         upper = estimate + abs(qnorm(.05))*std.error) %>%
-  select(term, `Mean|Coef (SD|SE)`, lower, upper) %>%
-  mutate(Model = "Standard OLS") -> tidyM1
-
-
-
-tribble(
-  ~term, ~`Mean|Coef (SD|SE)`, ~lower, ~upper,
-  "Intercept", "97.59 (57.48)", 3.04, 192.14,
-  "Left Government", "0.27 (0.08)", .15, .39,
-  "Labor Force Size (logged)", "-6.46 (3.79)", -12.70, -.22,
-  "Industrial Concentration", "0.35 (19.25)", -31.32, 32.02
-) %>%
-  mutate(Model = "Western and Jackman (Table 2)") %>%
-  bind_rows(tidyM1, .) %>%
-  bind_rows(tidyB0, .) %>%
-  mutate(term = forcats::fct_relevel(term,
-                                     "Intercept", "Left Government",
-                                     "Labor Force Size (logged)",
-                                     "Industrial Concentration")) %>% tbl_df() %>%
-  arrange(term) %>%
-  mutate(lower = round(lower, 2),
-         upper = round(upper, 2)) %>%
-  kable(., format="html",
-        table.attr='id="stevetable"',
-        caption = "Comparing OLS, an Uninformative Bayesian Model, and Table 2 of Western and Jackman (1994)",
-        align=c("l","c","c", "c", "l"))
+#> Running MCMC with 4 chains, at most 8 in parallel...
+#> 
+#> Chain 1 finished in 0.2 seconds.
+#> Chain 2 finished in 0.1 seconds.
+#> Chain 3 finished in 0.2 seconds.
+#> Chain 4 finished in 0.1 seconds.
+#> 
+#> All 4 chains finished successfully.
+#> Mean chain execution time: 0.2 seconds.
+#> Total execution time: 0.4 seconds.
 ```
 
 <table id="stevetable">
@@ -361,17 +300,17 @@ tribble(
   <tr>
    <th style="text-align:left;"> term </th>
    <th style="text-align:center;"> Mean|Coef (SD|SE) </th>
-   <th style="text-align:center;"> lower </th>
-   <th style="text-align:center;"> upper </th>
+   <th style="text-align:center;"> lwr </th>
+   <th style="text-align:center;"> upr </th>
    <th style="text-align:left;"> Model </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 99.56 (62.07) </td>
-   <td style="text-align:center;"> -0.01 </td>
-   <td style="text-align:center;"> 199.81 </td>
+   <td style="text-align:center;"> 96.55 (64.17) </td>
+   <td style="text-align:center;"> -5.23 </td>
+   <td style="text-align:center;"> 205.47 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -392,7 +331,7 @@ tribble(
    <td style="text-align:left;"> Left Government </td>
    <td style="text-align:center;"> 0.27 (0.08) </td>
    <td style="text-align:center;"> 0.13 </td>
-   <td style="text-align:center;"> 0.41 </td>
+   <td style="text-align:center;"> 0.40 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -411,13 +350,6 @@ tribble(
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -6.58 (4.12) </td>
-   <td style="text-align:center;"> -13.14 </td>
-   <td style="text-align:center;"> 0.01 </td>
-   <td style="text-align:left;"> Bayesian LM </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Labor Force Size (logged) </td>
    <td style="text-align:center;"> -6.46 (3.79) </td>
    <td style="text-align:center;"> -12.69 </td>
    <td style="text-align:center;"> -0.23 </td>
@@ -432,9 +364,16 @@ tribble(
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> -0.39 (20.73) </td>
-   <td style="text-align:center;"> -34.92 </td>
-   <td style="text-align:center;"> 33.28 </td>
+   <td style="text-align:center;"> 0.76 (21.62) </td>
+   <td style="text-align:center;"> -36.26 </td>
+   <td style="text-align:center;"> 34.62 </td>
+   <td style="text-align:left;"> Bayesian LM </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Industrial Concentration </td>
+   <td style="text-align:center;"> -6.4 (4.22) </td>
+   <td style="text-align:center;"> -13.53 </td>
+   <td style="text-align:center;"> 0.31 </td>
    <td style="text-align:left;"> Bayesian LM </td>
   </tr>
   <tr>
@@ -466,54 +405,37 @@ The research question in the Bayesian perspective becomes quite interesting in a
 B1 <- brm(union ~ left + size + concen,
           data = uniondensity,
           prior=wall_priors,
+          seed = 8675309,
+          refresh = 0,
           family="gaussian")
+#> Running MCMC with 4 chains, at most 8 in parallel...
+#> 
+#> Chain 1 finished in 0.1 seconds.
+#> Chain 2 finished in 0.1 seconds.
+#> Chain 3 finished in 0.1 seconds.
+#> Chain 4 finished in 0.1 seconds.
+#> 
+#> All 4 chains finished successfully.
+#> Mean chain execution time: 0.1 seconds.
+#> Total execution time: 0.2 seconds.
 
 # Stephens' priors
 B2 <- brm(union ~ left + size + concen,
           data = uniondensity,
           prior=stephens_priors,
+          seed = 8675309,
+          refresh = 0, 
           family="gaussian")
-```
-
-
-```r
-B1 %>%
-  spread_draws(b_Intercept, b_left, b_size, b_concen) %>%
-  gather(variable, value, b_Intercept:b_concen) %>%
-  group_by(variable) %>%
-  summarize(mean = mean(value),
-            sd = sd(value),
-            lwr = quantile(value, .05),
-            upr = quantile(value, .95)) %>%
-  mutate(prior = "Wallerstein's Priors") -> B1_draws
-
-B2 %>%
-  spread_draws(b_Intercept, b_left, b_size, b_concen) %>%
-  gather(variable, value, b_Intercept:b_concen) %>%
-  group_by(variable) %>%
-  summarize(mean = mean(value),
-            sd = sd(value),
-            lwr = quantile(value, .05),
-            upr = quantile(value, .95)) %>%
-  mutate(prior = "Stephens' Priors") -> B2_draws
-
-bind_rows(B1_draws, B2_draws) %>%
-  mutate(variable = forcats::fct_recode(variable,
-                                        "Intercept" = "b_Intercept",
-                                        "Left Government" = "b_left",
-                                        "Labor Force Size (logged)" = "b_size",
-                                        "Industrial Concentration" = "b_concen",
-                                        ))  %>%
-  mutate(variable = forcats::fct_relevel(variable,
-                                       "Intercept",
-                                       "Left Government",
-                                       "Labor Force Size (logged)")) %>%
-  arrange(variable, prior) %>%
-  mutate_if(is.numeric, round, 2) %>%
-  kable(., format="html",
-        table.attr='id="stevetable"',
-        caption = "A Reproduction of Table 3 from Western and Jackman (1994)",
-        align=c("l","c","c", "c", "c", "l"))
+#> Running MCMC with 4 chains, at most 8 in parallel...
+#> 
+#> Chain 1 finished in 0.1 seconds.
+#> Chain 2 finished in 0.1 seconds.
+#> Chain 3 finished in 0.1 seconds.
+#> Chain 4 finished in 0.1 seconds.
+#> 
+#> All 4 chains finished successfully.
+#> Mean chain execution time: 0.1 seconds.
+#> Total execution time: 0.2 seconds.
 ```
 
 <table id="stevetable">
@@ -531,18 +453,18 @@ bind_rows(B1_draws, B2_draws) %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 70.87 </td>
-   <td style="text-align:center;"> 20.85 </td>
-   <td style="text-align:center;"> 37.22 </td>
-   <td style="text-align:center;"> 105.31 </td>
+   <td style="text-align:center;"> 70.08 </td>
+   <td style="text-align:center;"> 20.48 </td>
+   <td style="text-align:center;"> 36.47 </td>
+   <td style="text-align:center;"> 102.79 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 82.80 </td>
-   <td style="text-align:center;"> 33.16 </td>
-   <td style="text-align:center;"> 27.05 </td>
-   <td style="text-align:center;"> 138.81 </td>
+   <td style="text-align:center;"> 81.57 </td>
+   <td style="text-align:center;"> 33.14 </td>
+   <td style="text-align:center;"> 27.45 </td>
+   <td style="text-align:center;"> 135.54 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
   <tr>
@@ -550,7 +472,7 @@ bind_rows(B1_draws, B2_draws) %>%
    <td style="text-align:center;"> 0.27 </td>
    <td style="text-align:center;"> 0.08 </td>
    <td style="text-align:center;"> 0.14 </td>
-   <td style="text-align:center;"> 0.40 </td>
+   <td style="text-align:center;"> 0.41 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
@@ -563,34 +485,34 @@ bind_rows(B1_draws, B2_draws) %>%
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -4.80 </td>
-   <td style="text-align:center;"> 1.88 </td>
-   <td style="text-align:center;"> -7.94 </td>
+   <td style="text-align:center;"> -4.72 </td>
+   <td style="text-align:center;"> 1.85 </td>
+   <td style="text-align:center;"> -7.76 </td>
    <td style="text-align:center;"> -1.71 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -5.45 </td>
-   <td style="text-align:center;"> 2.10 </td>
-   <td style="text-align:center;"> -8.95 </td>
-   <td style="text-align:center;"> -1.91 </td>
+   <td style="text-align:center;"> -5.38 </td>
+   <td style="text-align:center;"> 2.08 </td>
+   <td style="text-align:center;"> -8.84 </td>
+   <td style="text-align:center;"> -1.90 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 9.41 </td>
-   <td style="text-align:center;"> 4.86 </td>
-   <td style="text-align:center;"> 1.33 </td>
-   <td style="text-align:center;"> 17.25 </td>
+   <td style="text-align:center;"> 9.45 </td>
+   <td style="text-align:center;"> 4.78 </td>
+   <td style="text-align:center;"> 1.58 </td>
+   <td style="text-align:center;"> 17.38 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 4.63 </td>
-   <td style="text-align:center;"> 12.78 </td>
-   <td style="text-align:center;"> -16.81 </td>
-   <td style="text-align:center;"> 25.56 </td>
+   <td style="text-align:center;"> 5.14 </td>
+   <td style="text-align:center;"> 12.97 </td>
+   <td style="text-align:center;"> -15.72 </td>
+   <td style="text-align:center;"> 26.41 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
 </tbody>
@@ -613,7 +535,6 @@ Table 4 and Table 5 in Western and Jackman (1994) do some sensitivity analyses, 
 # 2) multiply the variances by 10, and exclude Italy.
 #    Notice: variances. Take sd to power 2, then multiply by 10, then sqrt()
 
-
 wall_priors_diffuse <- c(set_prior("normal(3, sqrt(3*10))", class = "b", coef= "left"),
                          set_prior("normal(-5, sqrt(5*10))", class = "b", coef="size"),
                          set_prior("normal(0,10^6)", class="b", coef="concen"),
@@ -626,66 +547,77 @@ stephens_priors_diffuse <- c(set_prior("normal(3, sqrt(3*10))", class = "b", coe
 
 B3 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=wall_priors,
           family="gaussian")
+#> Running MCMC with 4 chains, at most 8 in parallel...
+#> 
+#> Chain 1 finished in 0.1 seconds.
+#> Chain 2 finished in 0.1 seconds.
+#> Chain 3 finished in 0.1 seconds.
+#> Chain 4 finished in 0.1 seconds.
+#> 
+#> All 4 chains finished successfully.
+#> Mean chain execution time: 0.1 seconds.
+#> Total execution time: 0.2 seconds.
 
 B4 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=wall_priors_diffuse,
           family="gaussian")
+#> Running MCMC with 4 chains, at most 8 in parallel...
+#> 
+#> Chain 1 finished in 0.2 seconds.
+#> Chain 2 finished in 0.1 seconds.
+#> Chain 4 finished in 0.1 seconds.
+#> Chain 3 finished in 0.1 seconds.
+#> 
+#> All 4 chains finished successfully.
+#> Mean chain execution time: 0.1 seconds.
+#> Total execution time: 0.4 seconds.
 
 
 B5 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=stephens_priors,
           family="gaussian")
+#> Running MCMC with 4 chains, at most 8 in parallel...
+#> 
+#> Chain 1 finished in 0.1 seconds.
+#> Chain 2 finished in 0.1 seconds.
+#> Chain 3 finished in 0.1 seconds.
+#> Chain 4 finished in 0.1 seconds.
+#> 
+#> All 4 chains finished successfully.
+#> Mean chain execution time: 0.1 seconds.
+#> Total execution time: 0.2 seconds.
 
 B6 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
+          seed = 8675309,
+          refresh = 0,
           prior=stephens_priors_diffuse,
           family="gaussian")
+#> Running MCMC with 4 chains, at most 8 in parallel...
+#> 
+#> Chain 1 finished in 0.1 seconds.
+#> Chain 2 finished in 0.1 seconds.
+#> Chain 3 finished in 0.1 seconds.
+#> Chain 4 finished in 0.1 seconds.
+#> 
+#> All 4 chains finished successfully.
+#> Mean chain execution time: 0.1 seconds.
+#> Total execution time: 0.2 seconds.
 ```
 
 The point estimates differ a little but the same basic story emerges that emhasize the effect of diffuse priors on low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.
 
-
-```r
-tidy(B3) %>% mutate(model = "Informative, Italy Omitted", category = "Wallerstein's Priors") %>%
-  bind_rows(., tidy(B5) %>% mutate(model = "Informative, Italy Omitted",
-                                   category = "Stephens' Priors")) %>%
-  bind_rows(., tidy(B4) %>% mutate(model = "Diffuse, Italy Omitted",
-                                   category = "Wallerstein's Priors")) %>%
-  bind_rows(., tidy(B6) %>% mutate(model = "Diffuse, Italy Omitted",
-                                   category = "Stephens' Priors")) %>%
-  tbl_df() %>%
-  filter(term %in% c("b_left", "b_size","b_concen", "b_Intercept")) %>%
-  mutate(term = forcats::fct_recode(term,
-                                        "Intercept" = "b_Intercept",
-                                        "Left Government" = "b_left",
-                                        "Labor Force Size (logged)" = "b_size",
-                                        "Industrial Concentration" = "b_concen",
-  ))  %>%
-  mutate(term = forcats::fct_relevel(term,
-                                         "Intercept",
-                                         "Left Government",
-                                         "Labor Force Size (logged)")) %>%
-  ggplot(.,aes(category, estimate, ymin=lower, ymax=upper, color=model, shape=model)) +
-  theme_steve_web() +
-  post_bg() +
-  scale_colour_brewer(palette = "Set1") +
-  geom_pointrange(position = position_dodge(width = .5)) + coord_flip() +
-  facet_wrap(~term, scales="free_x", ncol=4) + geom_hline(yintercept = 0, linetype="dashed") +
-  labs(color="Model",
-       shape = "Model",
-       x = "",
-       y = "Mean Estimate (with 90% Intervals)",
-       title = "A Reproduction of the Sensitivity Analyses from Table 5 in Western and Jackman (1994)",
-       subtitle = "The results differ a little bit in the point estimates, but still communicate the same basic findings from Western and Jackman.")
-```
-
-![plot of chunk westernjackman1994-tab5-reproduction](/images/westernjackman1994-tab5-reproduction-1.png)
+![plot of chunk westernjackman1994-tab5-reproduction](/images/what-explains-union-density-brms-replication/westernjackman1994-tab5-reproduction-1.png)
 
 
-Still, this post is a love letter of sorts to the Western and Jackman (1994) article and to the `brms` package for doing Bayesian statistical modeling with the Stan programming language. The article appears on every quantitative methods syllabus of mine and `brms` is an incredibly useful tool for getting standard R users to do more Bayesian modeling. You can use the latter to replicate the statistical analyses in the former, which might help the learning experience for students trying to unpack Western and Jackman's research design.
-
-
+Still, this post is a love letter of sorts to the Western and Jackman (1994) article and to the `{brms}` package for doing Bayesian statistical modeling with the Stan programming language. The article appears on every quantitative methods syllabus of mine and `{brms}` is an incredibly useful tool for getting standard R users to do more Bayesian modeling. You can use the latter to replicate the statistical analyses in the former, which might help the learning experience for students trying to unpack Western and Jackman's research design.
