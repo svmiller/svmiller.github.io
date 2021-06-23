@@ -17,26 +17,41 @@ image: "prior-posterior-likelihood.png"
 
 ```{r setup, include=FALSE, cache=F}
 
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
-                      cache.path = '~/Dropbox/svmiller.github.io/cache/thinking-about-priors-bayes/',
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = FALSE) 
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
 ```
 
 ```{r loaddatadostuff, echo=F, cache=F}
 options(knitr.kable.NA = '')
 
-setwd("~/Dropbox/svmiller.github.io")
+#setwd("~/Dropbox/svmiller.github.io")
 
 library(tidyverse) # for all things workflow
 library(stevemisc) # my toy R package, mostly for helper functions and plotting prettiness
@@ -45,11 +60,8 @@ library(brms) # for Bayes stuff
 library(tidybayes) # for additional Bayes stuff
 library(kableExtra) # for tables
 
-fct_reorg <- function(fac, ...) {
-  fct_recode(fct_relevel(fac, ...), ...)
-}
-
-tidyB01 <- readRDS("R/priors/tidyB01.rds")
+tidyB01 <- readRDS("~/Dropbox/svmiller.github.io/R/priors/tidyB01.rds")
+m_sums <- readRDS("~/Dropbox/svmiller.github.io/R/priors/m_sums.rds")
 
 ```
 
@@ -58,17 +70,6 @@ tidyB01 <- readRDS("R/priors/tidyB01.rds")
 add_jekyll_image('/images/prior-posterior-likelihood.png', "The intuition behind Bayesian inference.", "400", "right")
  
 ```
-
-<style>
-img[src*='#center'] { 
-    display: block;
-    margin: auto;
-}
-</style>
-
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 
 There are any number of sticking points for a beginner to learning Bayes. For me, it was [mostly about implementation](http://svmiller.com/blog/2019/08/what-explains-union-density-brms-replication/). I'll confess to being thrown for a loop about Markov chains before I got [Jeff Gill's math book](https://www.amazon.com/Essential-Mathematics-Political-Research-Analytical/dp/052168403X) in the summer of 2009 and spent some time on his treatment of that topic, but I mostly struggled with the software of the time that did not seem intuitive to me. `{brms}` has been integral toward increasing my pivot toward Bayes.
 
@@ -87,10 +88,6 @@ library(stevedata) # for data
 library(brms) # for Bayes stuff
 library(tidybayes) # for additional Bayes stuff
 library(kableExtra) # for tables
-
-fct_reorg <- function(fac, ...) {
-  fct_recode(fct_relevel(fac, ...), ...)
-}
 ```
 
 And here's a table contents.
@@ -109,7 +106,7 @@ I'll only add that Bayes can be a bit time-consuming, so a lot what I'm doing ha
 
 Most Bayesian texts I've read treat what follows here 1) last, if they address it at all, 2) technically *not* pure Bayesian if you're peeking into your data to get some preliminary information for your prior expectations, and 3) only situationally a good idea. That said, "only situationally a good idea" is my middle name and this is an itch I've been wanting to scratch for a while.
 
-Around this time last year, I wrote [this guide on how to understand a linear regression model](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/). The reviews were well-received. I've even been invited to present this to students in the United Kingdom (if remotely), hence the subject matter. It may not be immediately evident, but scroll down to that regression table. Therein, the unemployed variable, a dummy variable that equals 1 if the respondent is not currently employed but is actively looking for work, has a coefficient that is dwarfed by the standard error. Nothing looking like an issue from that at the onset; some variables just have really diffuse standard errors. However, a descriptive statistics table from the variables in that model points to a potential problem. You can check [the `_source` directory on my website](https://github.com/svmiller/svmiller.github.io/tree/master/_source) for the underlying code here as I typically hide code that results in tables (for web readability).
+Around this time last year, I wrote [this guide on how to understand a linear regression model](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/). The reviews were well-received. I've even been invited to present this to students in the United Kingdom (if remotely), hence the subject matter. It may not be immediately evident, but scroll down to that regression table. Therein, the unemployed variable, a dummy variable that equals 1 if the respondent is not currently employed but is actively looking for work, has a coefficient that is dwarfed by the standard error. Nothing looking like an issue from that at the onset; some variables just have really diffuse standard errors. However, a descriptive statistics table from the variables in that model points to a potential problem. You can check [the `_rmd` directory on my website](https://github.com/svmiller/svmiller.github.io/tree/master/_rmd) for the underlying code here as I typically hide code that results in tables (for web readability).
 
 ```{r, echo=F}
 ESS9GB %>%
@@ -122,7 +119,7 @@ ESS9GB %>%
             median = median(val, na.rm=T),
             min = min(val, na.rm=T),
             max = max(val, na.rm=T),
-            n = n()) %>%
+            n = n())  %>%
   mutate(sd = ifelse(var == "uempla",  sqrt(mean*(1-mean)/n), sd)) %>%
   mutate(var = c("Age", "Education (in Years)", "Female","Household Income (Deciles)",
                  "Pro-Immigration Sentiment", "Ideology (L to R)",
@@ -141,7 +138,6 @@ Something looks amiss here in that unemployed variable. The mean of the dummy va
 While we should note the data should be matched before doing something with inferential implications like this, the *t*-test suggests a potential difference in the means between both groups. On average, the unemployed are about 2.12 points lower in their pro-immigration sentiment than the gainfully employed or those not looking for active employment (e.g. housewives, students).
 
 ```{r}
-
 ttest_uempl <- t.test(immigsent ~ uempla, data=ESS9GB)
 # be mindful of the direction here when you tidy up your t-test.
 broom::tidy(ttest_uempl) %>%
@@ -160,7 +156,6 @@ B0 <- brm(immigsent ~ agea + female + eduyrs + uempla + hinctnta + lrscale,
           data = ESS9GB,
           seed = 8675309,
           family = gaussian())
-
 
 # cocksure prior, just for unemployment
 cocksure_prior <- c(set_prior("normal(-2.12,1.26)", class="b", coef="uempla"))
@@ -232,9 +227,7 @@ There are reasons you should choose to be careful here with this approach. Basic
 In `{brms}`, you'd specify such prior distributions in our union density as follows.
 
 ```{r, echo=T, eval=T}
-
 brmform <- bf(union ~ left + size + concen)
-
 
 lazy_priors_normal <- c(set_prior("normal(0,1)", class = "b", coef= "left"),
                          set_prior("normal(0,1)", class = "b", coef="size"),
@@ -242,13 +235,11 @@ lazy_priors_normal <- c(set_prior("normal(0,1)", class = "b", coef= "left"),
                          set_prior("normal(0,1)", class="Intercept"),
                          set_prior("normal(0,1)", class="sigma"))
 
-
 lazy_priors_vague <- c(set_prior("normal(0,10^6)", class = "b", coef= "left"),
                          set_prior("normal(0,10^6)", class = "b", coef="size"),
                          set_prior("normal(0,10^6)", class="b", coef="concen"),
                          set_prior("normal(0,10^6)", class="Intercept"),
                          set_prior("normal(0, 10^6)", class="sigma"))
-
 ```
 
 ## Have {brms} Think of Priors For You {#brmspriors}
@@ -407,8 +398,7 @@ Compare these reasonable ignorance priors with the more diffuse priors that `{br
 
 Here are the effects of these various priors can have on our inferences about union density, beyond what Western and Jackman (1994) did in their article and [what I reproduced here](http://svmiller.com/blog/2019/08/what-explains-union-density-brms-replication/). Again, this is a fair bit of code so I'll only show the finished result.
 
-```{r effect-various-priors-union-density, echo=F, eval=T, cache=T, warning=F, fig.width=12, fig.height = 8}
-
+```{r effect-various-priors-union-density, echo=F, eval=T, cache=F, warning=F, fig.width=12, fig.height = 8}
 m_sums %>%
   mutate(variable = fct_reorg(variable,
                               "Left-Wing Governments" = "b_left",
@@ -425,8 +415,6 @@ m_sums %>%
        title = "The Effect of Various Prior Distributions on Inferences about Union Density",
        subtitle = "The standard normal prior (0,1) was a really bad choice while more reasonable ignorance priors turn out to be more informative.",
        caption = "Data: ?uniondensity in {stevedata}. See also: Western and Jackman (1994).")
-
-
 ```
 
 The results of these different priors point to a few things worth discussing. First, one thing that immediately stands out to me is the lazy standard normal prior, with a mean of 0 and a standard deviation of 1, was kind of an idiot prior. It was an idiot prior for a lot of reasons. For one, I attached it to the intercept, which was stupid. I had no earthly reason to believe that intercept would functionally be between -3 and 3. I got lucky with the left-wing government coefficient, in that the true effect of left-wing governments was always going to be in those smaller bounds. However, there was good reason to expect that the two other variables would have plausible effects outside the basic bounds of a standard normal distribution. I elected to be an idiot with that prior information by slapping on a standard normal distribution on those effects. There are plenty of applications in which a standard normal distribution is a good, honest ignorance prior for a model. This was not one of them. This was an idiot prior, [an illustration of what being an idiot with prior distributions can do to inferences](https://gist.github.com/svmiller/a592dcfcf63826fb73e33d5555940285).
@@ -456,10 +444,3 @@ For most applications, you may be overthinking the prior by asking things like w
 Importantly, though, if you can avoid those default priors in `{brms}` and `{rstanarm}`, do it. It's not the package authors' fault that those priors are diffuse. They're there because you're probably asking them to think of your data for you when you should be thinking of your data instead. My particular applications are often plenty data-rich, albeit with important random effects that I need to model, so I don't have the weak data problem that I present here. However, those default priors can really bog down computation time. If you're curious, my experience has suggested that Student's *t* (3,0,1) is adequate for the standard deviations of my random effects while a normal distribution with a mean of 0 and a standard deviation of 2.5 works well for the other parameters (in the logistic regression context).
 
 One thing I appreciate about the Bayesian approach is that makes what was old into new again. Decades ago, researchers with little computational power had to think carefully about their model before dropping punch cards off at the mainframe for a weekend. Cheap computing power came with some lazy thinking about the data and the model (and let he who is without sin cast the first stone). The Bayesian approach brings some of that back full circle. The model can take some time, so you should think of ways to do the job right. Think a little about your data. Think a little about your model. It'll go a long way. 
-
-```{r knitchunk, echo=F, eval=F}
-#setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("_source/2021-02-08-thinking-about-your-priors-bayesian-analysis.Rmd",
-            output = "_posts/2021-02-08-thinking-about-your-priors-bayesian-analysis.md")
-
-```

@@ -21,17 +21,6 @@ image: "prior-posterior-likelihood.png"
 
 {% include image.html url="/images/prior-posterior-likelihood.png" caption="The intuition behind Bayesian inference." width=400 align="right" %}
 
-<style>
-img[src*='#center'] { 
-    display: block;
-    margin: auto;
-}
-</style>
-
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
 There are any number of sticking points for a beginner to learning Bayes. For me, it was [mostly about implementation](http://svmiller.com/blog/2019/08/what-explains-union-density-brms-replication/). I'll confess to being thrown for a loop about Markov chains before I got [Jeff Gill's math book](https://www.amazon.com/Essential-Mathematics-Political-Research-Analytical/dp/052168403X) in the summer of 2009 and spent some time on his treatment of that topic, but I mostly struggled with the software of the time that did not seem intuitive to me. `{brms}` has been integral toward increasing my pivot toward Bayes.
 
 For the pure beginners, I think it's the idea of specifying prior distributions. It's certainly what just about every beginner text on Bayes I've seen spends the most time discussing. For beginners, the idea of prior expectations weighting the observed data to produce posterior distributions seems weird. It may even seem like it's borrowing trouble. Bayesian inference is "subjective", which is as much a design feature as it is a pejorative for dismissing the enterprise outright. A discomfort with the idea of prior distributions comes with a question of whether they are necessary. After all, if you elect to begin agnostic, and you have lots of data with which to play, the posterior is going to more closely resemble what the likelihood function communicates. You can have some really strong priors, but a fair bit of data at hand produces an ensuing posterior distribution that is going to map closely with the likelihood function. The extent to which prior distributions are sine qua non features of a Bayesian analysis, they are kind of problematic for newbies after their first semester or two of quantitative methods. Thus, if it may not matter much to inferences if you have plenty of data to use, do you need Bayes in the first place?
@@ -50,10 +39,6 @@ library(stevedata) # for data
 library(brms) # for Bayes stuff
 library(tidybayes) # for additional Bayes stuff
 library(kableExtra) # for tables
-
-fct_reorg <- function(fac, ...) {
-  fct_recode(fct_relevel(fac, ...), ...)
-}
 ```
 
 And here's a table contents.
@@ -72,7 +57,7 @@ I'll only add that Bayes can be a bit time-consuming, so a lot what I'm doing ha
 
 Most Bayesian texts I've read treat what follows here 1) last, if they address it at all, 2) technically *not* pure Bayesian if you're peeking into your data to get some preliminary information for your prior expectations, and 3) only situationally a good idea. That said, "only situationally a good idea" is my middle name and this is an itch I've been wanting to scratch for a while.
 
-Around this time last year, I wrote [this guide on how to understand a linear regression model](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/). The reviews were well-received. I've even been invited to present this to students in the United Kingdom (if remotely), hence the subject matter. It may not be immediately evident, but scroll down to that regression table. Therein, the unemployed variable, a dummy variable that equals 1 if the respondent is not currently employed but is actively looking for work, has a coefficient that is dwarfed by the standard error. Nothing looking like an issue from that at the onset; some variables just have really diffuse standard errors. However, a descriptive statistics table from the variables in that model points to a potential problem. You can check [the `_source` directory on my website](https://github.com/svmiller/svmiller.github.io/tree/master/_source) for the underlying code here as I typically hide code that results in tables (for web readability).
+Around this time last year, I wrote [this guide on how to understand a linear regression model](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/). The reviews were well-received. I've even been invited to present this to students in the United Kingdom (if remotely), hence the subject matter. It may not be immediately evident, but scroll down to that regression table. Therein, the unemployed variable, a dummy variable that equals 1 if the respondent is not currently employed but is actively looking for work, has a coefficient that is dwarfed by the standard error. Nothing looking like an issue from that at the onset; some variables just have really diffuse standard errors. However, a descriptive statistics table from the variables in that model points to a potential problem. You can check [the `_rmd` directory on my website](https://github.com/svmiller/svmiller.github.io/tree/master/_rmd) for the underlying code here as I typically hide code that results in tables (for web readability).
 
 <table id="stevetable">
 <caption>Descriptive Statistics in the ESS9GB Data in {stevedata}</caption>
@@ -164,22 +149,13 @@ ttest_uempl <- t.test(immigsent ~ uempla, data=ESS9GB)
 # be mindful of the direction here when you tidy up your t-test.
 broom::tidy(ttest_uempl) %>%
   select(estimate:p.value)
-```
-
-```
-## # A tibble: 1 x 5
-##   estimate estimate1 estimate2 statistic p.value
-##      <dbl>     <dbl>     <dbl>     <dbl>   <dbl>
-## 1     2.12      16.9      14.8      1.68   0.102
-```
-
-```r
+#> # A tibble: 1 x 5
+#>   estimate estimate1 estimate2 statistic p.value
+#>      <dbl>     <dbl>     <dbl>     <dbl>   <dbl>
+#> 1     2.12      16.9      14.8      1.68   0.102
 # extract the standard error
 round(as.vector(abs(diff(ttest_uempl$estimate)/ttest_uempl$statistic)), 2)
-```
-
-```
-## [1] 1.26
+#> [1] 1.26
 ```
 
 So, what if we were so sure---cocksure, even---that the true effect of being unemployed is to lower estimated pro-immigration sentiment by 2.12 points? Here, we believe this is the true effect and our regression model is not picking this up even though the *t*-test is. If we were so sure about this, we could specify this as a prior distribution on the estimated coefficient for unemployment with a normal distribution plugging in that difference in means as the mean of the distribution and the standard error of the *t*-test as the standard deviation of that distribution. I could obviously elect to be cocksure about more priors, but I really want to focus on just this one because it's a unique data issue that the other variables don't have.
@@ -194,7 +170,6 @@ B0 <- brm(immigsent ~ agea + female + eduyrs + uempla + hinctnta + lrscale,
           seed = 8675309,
           family = gaussian())
 
-
 # cocksure prior, just for unemployment
 cocksure_prior <- c(set_prior("normal(-2.12,1.26)", class="b", coef="uempla"))
 
@@ -207,7 +182,7 @@ B1 <- brm(immigsent ~ agea + female + eduyrs + uempla + hinctnta + lrscale,
 
 In a peculiar situation like this, the choice of a prior matters a great deal. With just 38 people reporting they are unemployed, there is not a lot of information about the effect of that variable on pro-immigration sentiment even if our data are reasonably powered (*n* = 1454). Were I to begin completely agnostic with default/flat priors, the effect leans negative but with diffuse standard errors capturing the poor quality of information for that variable. Were I to begin cocksure about the effect of being unemployed, the poor quality of information about the unemployed I have leads to an estimate that may not be *as* cocksure as the assumed prior effect, but is still more sanguine about the effect of being unemployed than if I were to begin completely agnostic. This has important inferential implications if I were exploring this question from the perspective of garden-variety null hypothesis testing.
 
-![plot of chunk the-effect-of-a-cocksure-prior](/images/the-effect-of-a-cocksure-prior-1.png)
+![plot of chunk the-effect-of-a-cocksure-prior](/images/thinking-about-your-priors-bayesian-analysis/the-effect-of-a-cocksure-prior-1.png)
 
 I should offer a few comments about this approach. First, it's technically cheating in the Bayesian framework. I'm using a *t*-test to get an informative prior and plugging it into the analysis. You should think about the prior distributions of your model *before* peeking at the data. That said, you can conjure a hypothetical situation where 1) past studies had shown that effect of being unemployed as having a mean of -2.12 with a standard deviation of 1.26 but 2) this particular data-generating process did not grab a lot of information on that particular variable. While this is technically cheating in this particular application, you could conjure a situation where it amounts to testing newer observations against a counterargument or conventional wisdom. Second, I'm calling this a "cocksure" prior just to be tongue-in-cheek. Bayesians would call this is a "strong prior", and it is. However, if there is some stake attached to this particular coefficient for one reason or the other---perhaps you're testing the political economy of immigration opinion framework [like I did in this publication](http://svmiller.com/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)---be prepared to futz with that prior further. Explore how sensitive your inferences are to that prior distribution because, spoiler alert, they are in this case. They likely will be in your case if you encounter a situation like this.
 
@@ -219,7 +194,7 @@ Let's think of what this means in the context of the union density analysis, mos
 
 The extent to which we know we want a linear model and that's it and elect to not really think about the data or model further, we're assuming those parameters could look something like this.
 
-![plot of chunk standard-normal-diffuse-normal](/images/standard-normal-diffuse-normal-1.png)
+![plot of chunk standard-normal-diffuse-normal](/images/thinking-about-your-priors-bayesian-analysis/standard-normal-diffuse-normal-1.png)
 
 There are reasons you should choose to be careful here with this approach. Basically, these are lazy priors, one a little diffuse and the other *really* diffuse. You're not really investing time into thinking about your data. No matter, one prevailing assumption in the statistics world is that things are distributed somewhat normally around some central tendency with observations further from it being less common. If you elect to begin agnostic about your parameters, prominently your regression coefficients, you're starting at zero and assume the effect could plausibly be as large (positive or negative) as 2.5 (i.e. about 99% of the distribution in standard normal) or 2,500,000 (in the more comically diffuse distribution). These are ultimately lazy priors, but accessible for beginners who may at least know about the normal distribution.
 
@@ -229,13 +204,11 @@ In `{brms}`, you'd specify such prior distributions in our union density as foll
 ```r
 brmform <- bf(union ~ left + size + concen)
 
-
 lazy_priors_normal <- c(set_prior("normal(0,1)", class = "b", coef= "left"),
                          set_prior("normal(0,1)", class = "b", coef="size"),
                          set_prior("normal(0,1)", class="b", coef="concen"),
                          set_prior("normal(0,1)", class="Intercept"),
                          set_prior("normal(0,1)", class="sigma"))
-
 
 lazy_priors_vague <- c(set_prior("normal(0,10^6)", class = "b", coef= "left"),
                          set_prior("normal(0,10^6)", class = "b", coef="size"),
@@ -260,25 +233,24 @@ uniondensity %>%
   # but the principle is still clear
   data.frame %>%
   mutate_all(~round(.,2))
-```
+#>   median_y mad_y
+#> 1    55.15 25.35
 
-```
-##   median_y mad_y
-## 1    55.15 25.35
-```
-
-```r
 get_prior(brmform, data=uniondensity)
-```
-
-```
-##                     prior     class   coef group resp dpar nlpar bound       source
-##                    (flat)         b                                         default
-##                    (flat)         b concen                             (vectorized)
-##                    (flat)         b   left                             (vectorized)
-##                    (flat)         b   size                             (vectorized)
-##  student_t(3, 55.1, 25.4) Intercept                                         default
-##     student_t(3, 0, 25.4)     sigma                                         default
+#>                     prior     class   coef group resp dpar nlpar bound
+#>                    (flat)         b                                   
+#>                    (flat)         b concen                            
+#>                    (flat)         b   left                            
+#>                    (flat)         b   size                            
+#>  student_t(3, 55.1, 25.4) Intercept                                   
+#>     student_t(3, 0, 25.4)     sigma                                   
+#>        source
+#>       default
+#>  (vectorized)
+#>  (vectorized)
+#>  (vectorized)
+#>       default
+#>       default
 ```
 
 Knowing well that a residual standard deviation of a linear model must always be positive, Bayesians describe such a prior on the sigma here as a "half-*t*" or words to that effect.
@@ -295,7 +267,7 @@ tibble(`student_t(3,0,1)` = rstudent_t(100000, 3, 0, 1),
        `student_t(3,55.1,25.4)` = rstudent_t(100000, 3, 55.1,25.4),) -> t_examples
 ```
 
-![plot of chunk students-t-priors-uniondensity](/images/students-t-priors-uniondensity-1.png)
+![plot of chunk students-t-priors-uniondensity](/images/thinking-about-your-priors-bayesian-analysis/students-t-priors-uniondensity-1.png)
 
 Our first introduction to Student's *t*-distribution came with a focus on the "standard" *t*-distribution that was more interested in the degrees of freedom. This three-parameter (aka: "location-scale") version is a bit more flexible and more diffuse. You should be able to see how long those tails go in this three-parameter version of Student's *t*-distribution above. Consider its corollary: the standard normal distribution. You remember that it's a near impossibility to observe a value more extreme than 3 on either side of the standard normal distribution. However, those extremes are a bit more common with a Student's *t*-distribution.
 
@@ -337,11 +309,11 @@ t_examples %>%
   <tr>
    <td style="text-align:left;"> Normal(0,1) </td>
    <td style="text-align:center;"> 0.00 </td>
-   <td style="text-align:center;"> [-0.68,0.67] </td>
-   <td style="text-align:center;"> -4.25 </td>
-   <td style="text-align:center;"> 4.36 </td>
-   <td style="text-align:center;"> 268 </td>
-   <td style="text-align:center;"> 0.27% </td>
+   <td style="text-align:center;"> [-0.67,0.67] </td>
+   <td style="text-align:center;"> -4.71 </td>
+   <td style="text-align:center;"> 4.68 </td>
+   <td style="text-align:center;"> 303 </td>
+   <td style="text-align:center;"> 0.3% </td>
   </tr>
   <tr>
    <td style="text-align:left;"> student_t(3,0,1) </td>
@@ -391,16 +363,13 @@ uniondensity %>%
             sd_size = 2.5*sd_y/sd(size),
             sd_concen = 2.5*sd_y/sd(concen),
             rate_sigma = 1/sd_y) %>% data.frame
-```
-
-```
-##       sd_y mean_y   sd_y25  sd_left  sd_size sd_concen rate_sigma
-## 1 18.75283 54.065 46.88208 1.387893 28.85946   145.092 0.05332528
+#>       sd_y mean_y   sd_y25  sd_left  sd_size sd_concen rate_sigma
+#> 1 18.75283 54.065 46.88208 1.387893 28.85946   145.092 0.05332528
 ```
 
 The only major divergence is that `{rstanarm}` eschews the half-*t* or half-normal distribution for the residual standard deviation and slaps an exponential distribution with rate equal to 1 over the standard deviation of the dependent variable. Here's what it would look like compared to a "half"-*t* that `{brms}` would employ. Both are weakly informative, but I rather like the `{rstanarm}` approach here in that 1) it's explicitly non-negative and 2) slightly more informative than the more diffuse "half"-*t* that `{brms}` is using. I've yet to see a residual standard deviation of like 2,000. I'm sure it's out there, but I haven't seen it in my travels.
 
-![plot of chunk comparing-exponential-half-t-rstanarm-brms](/images/comparing-exponential-half-t-rstanarm-brms-1.png)
+![plot of chunk comparing-exponential-half-t-rstanarm-brms](/images/thinking-about-your-priors-bayesian-analysis/comparing-exponential-half-t-rstanarm-brms-1.png)
 
 ## Think of Your Own "Reasonable Ignorance" Priors {#reasonableignorancepriors}
 
@@ -431,7 +400,7 @@ Compare these reasonable ignorance priors with the more diffuse priors that `{br
 
 Here are the effects of these various priors can have on our inferences about union density, beyond what Western and Jackman (1994) did in their article and [what I reproduced here](http://svmiller.com/blog/2019/08/what-explains-union-density-brms-replication/). Again, this is a fair bit of code so I'll only show the finished result.
 
-![plot of chunk effect-various-priors-union-density](/images/effect-various-priors-union-density-1.png)
+![plot of chunk effect-various-priors-union-density](/images/thinking-about-your-priors-bayesian-analysis/effect-various-priors-union-density-1.png)
 
 The results of these different priors point to a few things worth discussing. First, one thing that immediately stands out to me is the lazy standard normal prior, with a mean of 0 and a standard deviation of 1, was kind of an idiot prior. It was an idiot prior for a lot of reasons. For one, I attached it to the intercept, which was stupid. I had no earthly reason to believe that intercept would functionally be between -3 and 3. I got lucky with the left-wing government coefficient, in that the true effect of left-wing governments was always going to be in those smaller bounds. However, there was good reason to expect that the two other variables would have plausible effects outside the basic bounds of a standard normal distribution. I elected to be an idiot with that prior information by slapping on a standard normal distribution on those effects. There are plenty of applications in which a standard normal distribution is a good, honest ignorance prior for a model. This was not one of them. This was an idiot prior, [an illustration of what being an idiot with prior distributions can do to inferences](https://gist.github.com/svmiller/a592dcfcf63826fb73e33d5555940285).
 
@@ -460,5 +429,3 @@ For most applications, you may be overthinking the prior by asking things like w
 Importantly, though, if you can avoid those default priors in `{brms}` and `{rstanarm}`, do it. It's not the package authors' fault that those priors are diffuse. They're there because you're probably asking them to think of your data for you when you should be thinking of your data instead. My particular applications are often plenty data-rich, albeit with important random effects that I need to model, so I don't have the weak data problem that I present here. However, those default priors can really bog down computation time. If you're curious, my experience has suggested that Student's *t* (3,0,1) is adequate for the standard deviations of my random effects while a normal distribution with a mean of 0 and a standard deviation of 2.5 works well for the other parameters (in the logistic regression context).
 
 One thing I appreciate about the Bayesian approach is that makes what was old into new again. Decades ago, researchers with little computational power had to think carefully about their model before dropping punch cards off at the mainframe for a weekend. Cheap computing power came with some lazy thinking about the data and the model (and let he who is without sin cast the first stone). The Bayesian approach brings some of that back full circle. The model can take some time, so you should think of ways to do the job right. Think a little about your data. Think a little about your model. It'll go a long way. 
-
-
