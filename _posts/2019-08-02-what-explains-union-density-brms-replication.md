@@ -1,17 +1,8 @@
 ---
 title: "What Explains Union Density? A Replication of an Old Article with the {brms} Package"
-# output:
-#   md_document:
-#     variant: gfm
-#     preserve_yaml: TRUE
-#     pandoc_args: [ 
-#       "--ascii"
-#     ]
-# knit: (function(inputFile, encoding) {
-#   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-02'
-excerpt: "What explains union density? This is an old article, but it's a fun replication in brms/Stan."
+excerpt: "What explains union density? This is an old article, but it's a fun replication in {brms} and Stan."
 layout: post
 categories:
   - R
@@ -19,7 +10,10 @@ categories:
 image: "1946-may-day.jpg"
 ---
 
-*Last updated: 22 June 2021. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
+
+
+
+*Last updated: 23 June 2021. The data are now in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. You can download this from CRAN. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 {% include image.html url="/images/1946-may-day.jpg" caption="Diverse workers of various affiliations march together at a 1946 May Day parade in New York City. (Bettmann Archive via Getty Images)" width=400 align="right" %}
 
@@ -53,7 +47,7 @@ There is a major statistical problem that both authors encounter. Looking at the
 
 ## The Replication {#replication}
 
-This replication will depend on just a few packages. `{tidyverse}` is at the fore of my workflow, followed by my toy `{stevemisc}` and `{stevedata}` packages. `{stevedata}` has the union density data. Finally, the `{brms}` package will estimate the statistical models. I'm going to use `{kableExtra}` to help format some tables for this blog post and use `{ggrepel}` for a graph. `{broom}` will do some model processing and `{tidybayes}` will do some model summaries from `{brms}` objects.
+This replication will depend on just a few packages. `{tidyverse}` is at the fore of my workflow, followed by my toy `{stevemisc}` and `{stevedata}` packages. `{stevedata}` has the union density data. Finally, the `{brms}` package will estimate the statistical models. I'm going to use `{kableExtra}` and `{modelsummary}` to help format some tables for this blog post. `{ggrepel}` will appear in a graph. `{broom}` will do some model processing and `{tidybayes}` will do some model summaries from `{brms}` objects.
 
 
 ```r
@@ -62,6 +56,7 @@ library(stevemisc)
 library(stevedata)
 library(brms)
 library(kableExtra)
+library(modelsummary)
 library(ggrepel)
 library(broom)
 library(tidybayes)
@@ -243,20 +238,16 @@ The first part of the replication process will set the competing priors into two
 # size: -5(2.5) // This is what he's arguing
 # concen: 0(10^6) // diffuse/"ignorance" prior
 # Intercept: 0(10^6) // diffuse/"ignorance" prior
-
 wall_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
                  set_prior("normal(-5,2.5)", class = "b", coef="size"),
                  set_prior("normal(0,10^6)", class="b", coef="concen"),
                  set_prior("normal(0,10^6)", class="Intercept"))
-
-
 
 # Stephens priors
 # left: 3(1.5) // they both agree about left governments
 # size: 0(10^6) // diffuse/"ignorance" prior
 # concen: 10(5) // This is what Stephens thinks it is.
 # Intercept: 0(10^6) // diffuse/"ignorance" prior
-
 stephens_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
                      set_prior("normal(0,10^6)", class = "b", coef="size"),
                      set_prior("normal(10,5)", class="b", coef="concen"),
@@ -265,7 +256,7 @@ stephens_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
 
 ###  Replications with Noninformative Prior Information (Table 2) {#table2}
 
-Before replicating some of the main results, let's look at Table 2 of Western and Jackman and see if we can't replicate that first result. One thing I was astonished to find is the results that Western and Jackman provide in Table 2 aren't necessarily the result of noninformative prior information. It looks more like it was actually a standard OLS model. Certainly, OLS is giving results identical to what Western and Jackman report. The Stan model estimated in `brms` is basically identical, but with some observable differences. These are slight, but they do have some implications for the argument about the effect of logged labor force size given the small number of observations.
+Before replicating some of the main results, let's look at Table 2 of Western and Jackman and see if we can't replicate that first result. One thing I was astonished to find is the results that Western and Jackman provide in Table 2 aren't necessarily the result of noninformative prior information. It looks more like it was actually a standard OLS model. Certainly, OLS is giving results identical to what Western and Jackman report. The Stan model estimated in `brms` is basically identical, but with some slight differences.
 
 
 ```r
@@ -279,116 +270,96 @@ B0 <- brm(union ~ left + size + concen,
           seed = 8675309,
           refresh = 0,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 8 in parallel...
+#> Running MCMC with 4 chains, at most 32 in parallel...
 #> 
-#> Chain 1 finished in 0.2 seconds.
+#> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
-#> Chain 3 finished in 0.2 seconds.
+#> Chain 3 finished in 0.1 seconds.
 #> Chain 4 finished in 0.1 seconds.
 #> 
 #> All 4 chains finished successfully.
-#> Mean chain execution time: 0.2 seconds.
+#> Mean chain execution time: 0.1 seconds.
 #> Total execution time: 0.4 seconds.
 ```
 
-<table id="stevetable">
-<caption>Comparing OLS, an Uninformative Bayesian Model, and Table 2 of Western and Jackman (1994)</caption>
+<div id="modelsummary">
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>Comparing Table 2 of Western and Jackman (1994) with OLS and a Bayesian Linear Model</caption>
  <thead>
   <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:center;"> Mean|Coef (SD|SE) </th>
-   <th style="text-align:center;"> lwr </th>
-   <th style="text-align:center;"> upr </th>
-   <th style="text-align:left;"> Model </th>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:center;"> Western and Jackman Table 2 </th>
+   <th style="text-align:center;"> OLS </th>
+   <th style="text-align:center;"> Bayesian Linear Model </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 96.55 (64.17) </td>
-   <td style="text-align:center;"> -5.23 </td>
-   <td style="text-align:center;"> 205.47 </td>
-   <td style="text-align:left;"> Bayesian LM </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 97.59 (57.48) </td>
-   <td style="text-align:center;"> 3.04 </td>
-   <td style="text-align:center;"> 192.14 </td>
-   <td style="text-align:left;"> Standard OLS </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 97.59 (57.48) </td>
-   <td style="text-align:center;"> 3.04 </td>
-   <td style="text-align:center;"> 192.14 </td>
-   <td style="text-align:left;"> Western and Jackman (Table 2) </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> Left Government </td>
-   <td style="text-align:center;"> 0.27 (0.08) </td>
-   <td style="text-align:center;"> 0.13 </td>
-   <td style="text-align:center;"> 0.40 </td>
-   <td style="text-align:left;"> Bayesian LM </td>
+   <td style="text-align:center;"> 0.27** </td>
+   <td style="text-align:center;"> 0.27** </td>
+   <td style="text-align:center;"> 0.27** </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Left Government </td>
-   <td style="text-align:center;"> 0.27 (0.08) </td>
-   <td style="text-align:center;"> 0.14 </td>
-   <td style="text-align:center;"> 0.40 </td>
-   <td style="text-align:left;"> Standard OLS </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Left Government </td>
-   <td style="text-align:center;"> 0.27 (0.08) </td>
-   <td style="text-align:center;"> 0.15 </td>
-   <td style="text-align:center;"> 0.39 </td>
-   <td style="text-align:left;"> Western and Jackman (Table 2) </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (0.08) </td>
+   <td style="text-align:center;"> (0.08) </td>
+   <td style="text-align:center;"> (0.08) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -6.46 (3.79) </td>
-   <td style="text-align:center;"> -12.69 </td>
-   <td style="text-align:center;"> -0.23 </td>
-   <td style="text-align:left;"> Standard OLS </td>
+   <td style="text-align:center;"> -6.46+ </td>
+   <td style="text-align:center;"> -6.46 </td>
+   <td style="text-align:center;"> -6.40 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -6.46 (3.79) </td>
-   <td style="text-align:center;"> -12.70 </td>
-   <td style="text-align:center;"> -0.22 </td>
-   <td style="text-align:left;"> Western and Jackman (Table 2) </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 0.76 (21.62) </td>
-   <td style="text-align:center;"> -36.26 </td>
-   <td style="text-align:center;"> 34.62 </td>
-   <td style="text-align:left;"> Bayesian LM </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (3.79) </td>
+   <td style="text-align:center;"> (3.79) </td>
+   <td style="text-align:center;"> (4.22) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> -6.4 (4.22) </td>
-   <td style="text-align:center;"> -13.53 </td>
-   <td style="text-align:center;"> 0.31 </td>
-   <td style="text-align:left;"> Bayesian LM </td>
+   <td style="text-align:center;"> 0.35 </td>
+   <td style="text-align:center;"> 0.35 </td>
+   <td style="text-align:center;"> 0.76 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 0.35 (19.25) </td>
-   <td style="text-align:center;"> -31.31 </td>
-   <td style="text-align:center;"> 32.01 </td>
-   <td style="text-align:left;"> Standard OLS </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:center;"> (19.25) </td>
+   <td style="text-align:center;"> (19.25) </td>
+   <td style="text-align:center;"> (21.62) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 0.35 (19.25) </td>
-   <td style="text-align:center;"> -31.32 </td>
-   <td style="text-align:center;"> 32.02 </td>
-   <td style="text-align:left;"> Western and Jackman (Table 2) </td>
+   <td style="text-align:left;"> Intercept </td>
+   <td style="text-align:center;"> 97.59+ </td>
+   <td style="text-align:center;"> 97.59 </td>
+   <td style="text-align:center;"> 96.55 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (57.48) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (57.48) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (64.17) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Num.Obs. </td>
+   <td style="text-align:center;"> 20 </td>
+   <td style="text-align:center;"> 20 </td>
+   <td style="text-align:center;"> 20 </td>
   </tr>
 </tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td>
+</tr>
+</tfoot>
 </table>
+
+</div>
+
 
 The basic takeaway from this analysis, as it was in Western and Jackman, is the effects of left-wing governments and logged labor force size are statistically discernible from an argument of zero effect for both predictors. This would make Wallerstein right, prima facie, and make Stephens wrong. Stephens' industrial concentration variable is insignificant. Indeed, its effect is practically zero.
 
@@ -405,7 +376,7 @@ B1 <- brm(union ~ left + size + concen,
           seed = 8675309,
           refresh = 0,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 8 in parallel...
+#> Running MCMC with 4 chains, at most 32 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -414,7 +385,7 @@ B1 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.2 seconds.
+#> Total execution time: 0.3 seconds.
 
 # Stephens' priors
 B2 <- brm(union ~ left + size + concen,
@@ -423,28 +394,28 @@ B2 <- brm(union ~ left + size + concen,
           seed = 8675309,
           refresh = 0, 
           family="gaussian")
-#> Running MCMC with 4 chains, at most 8 in parallel...
+#> Running MCMC with 4 chains, at most 32 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
-#> Chain 3 finished in 0.1 seconds.
+#> Chain 3 finished in 0.2 seconds.
 #> Chain 4 finished in 0.1 seconds.
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.2 seconds.
+#> Total execution time: 0.3 seconds.
 ```
 
 <table id="stevetable">
 <caption>A Reproduction of Table 3 from Western and Jackman (1994)</caption>
  <thead>
   <tr>
-   <th style="text-align:left;"> variable </th>
-   <th style="text-align:center;"> mean </th>
-   <th style="text-align:center;"> sd </th>
-   <th style="text-align:center;"> lwr </th>
-   <th style="text-align:center;"> upr </th>
-   <th style="text-align:left;"> prior </th>
+   <th style="text-align:left;"> Coefficient/Term </th>
+   <th style="text-align:center;"> Mean </th>
+   <th style="text-align:center;"> Standard Deviation </th>
+   <th style="text-align:center;"> Lower Bound </th>
+   <th style="text-align:center;"> Upper Bound </th>
+   <th style="text-align:left;"> Prior </th>
   </tr>
  </thead>
 <tbody>
@@ -548,7 +519,7 @@ B3 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=wall_priors,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 8 in parallel...
+#> Running MCMC with 4 chains, at most 32 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -557,7 +528,7 @@ B3 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.2 seconds.
+#> Total execution time: 0.3 seconds.
 
 B4 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
@@ -565,16 +536,16 @@ B4 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=wall_priors_diffuse,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 8 in parallel...
+#> Running MCMC with 4 chains, at most 32 in parallel...
 #> 
-#> Chain 1 finished in 0.2 seconds.
-#> Chain 2 finished in 0.1 seconds.
-#> Chain 4 finished in 0.1 seconds.
+#> Chain 1 finished in 0.1 seconds.
+#> Chain 2 finished in 0.2 seconds.
 #> Chain 3 finished in 0.1 seconds.
+#> Chain 4 finished in 0.1 seconds.
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.4 seconds.
+#> Total execution time: 0.3 seconds.
 
 
 B5 <- brm(union ~ left + size + concen,
@@ -583,7 +554,7 @@ B5 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=stephens_priors,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 8 in parallel...
+#> Running MCMC with 4 chains, at most 32 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -592,7 +563,7 @@ B5 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.2 seconds.
+#> Total execution time: 0.3 seconds.
 
 B6 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
@@ -600,7 +571,7 @@ B6 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=stephens_priors_diffuse,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 8 in parallel...
+#> Running MCMC with 4 chains, at most 32 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -609,7 +580,7 @@ B6 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.2 seconds.
+#> Total execution time: 0.3 seconds.
 ```
 
 The point estimates differ a little but the same basic story emerges that emhasize the effect of diffuse priors on low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.

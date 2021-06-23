@@ -1,17 +1,8 @@
 ---
 title: "What Explains Union Density? A Replication of an Old Article with the {brms} Package"
-# output:
-#   md_document:
-#     variant: gfm
-#     preserve_yaml: TRUE
-#     pandoc_args: [ 
-#       "--ascii"
-#     ]
-# knit: (function(inputFile, encoding) {
-#   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-02'
-excerpt: "What explains union density? This is an old article, but it's a fun replication in brms/Stan."
+excerpt: "What explains union density? This is an old article, but it's a fun replication in {brms} and Stan."
 layout: post
 categories:
   - R
@@ -53,7 +44,7 @@ knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
 ```
 
 
-*Last updated: `r format(Sys.time(), '%e %B %Y')`. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
+*Last updated: `r format(Sys.time(), '%e %B %Y')`. The data are now in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. You can download this from CRAN. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
@@ -91,7 +82,7 @@ There is a major statistical problem that both authors encounter. Looking at the
 
 ## The Replication {#replication}
 
-This replication will depend on just a few packages. `{tidyverse}` is at the fore of my workflow, followed by my toy `{stevemisc}` and `{stevedata}` packages. `{stevedata}` has the union density data. Finally, the `{brms}` package will estimate the statistical models. I'm going to use `{kableExtra}` to help format some tables for this blog post and use `{ggrepel}` for a graph. `{broom}` will do some model processing and `{tidybayes}` will do some model summaries from `{brms}` objects.
+This replication will depend on just a few packages. `{tidyverse}` is at the fore of my workflow, followed by my toy `{stevemisc}` and `{stevedata}` packages. `{stevedata}` has the union density data. Finally, the `{brms}` package will estimate the statistical models. I'm going to use `{kableExtra}` and `{modelsummary}` to help format some tables for this blog post. `{ggrepel}` will appear in a graph. `{broom}` will do some model processing and `{tidybayes}` will do some model summaries from `{brms}` objects.
 
 ```{r loadstuff, cache=T}
 library(tidyverse)
@@ -99,6 +90,7 @@ library(stevemisc)
 library(stevedata)
 library(brms)
 library(kableExtra)
+library(modelsummary)
 library(ggrepel)
 library(broom)
 library(tidybayes)
@@ -150,20 +142,16 @@ The first part of the replication process will set the competing priors into two
 # size: -5(2.5) // This is what he's arguing
 # concen: 0(10^6) // diffuse/"ignorance" prior
 # Intercept: 0(10^6) // diffuse/"ignorance" prior
-
 wall_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
                  set_prior("normal(-5,2.5)", class = "b", coef="size"),
                  set_prior("normal(0,10^6)", class="b", coef="concen"),
                  set_prior("normal(0,10^6)", class="Intercept"))
-
-
 
 # Stephens priors
 # left: 3(1.5) // they both agree about left governments
 # size: 0(10^6) // diffuse/"ignorance" prior
 # concen: 10(5) // This is what Stephens thinks it is.
 # Intercept: 0(10^6) // diffuse/"ignorance" prior
-
 stephens_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
                      set_prior("normal(0,10^6)", class = "b", coef="size"),
                      set_prior("normal(10,5)", class="b", coef="concen"),
@@ -172,7 +160,7 @@ stephens_priors <- c(set_prior("normal(3,1.5)", class = "b", coef= "left"),
 
 ###  Replications with Noninformative Prior Information (Table 2) {#table2}
 
-Before replicating some of the main results, let's look at Table 2 of Western and Jackman and see if we can't replicate that first result. One thing I was astonished to find is the results that Western and Jackman provide in Table 2 aren't necessarily the result of noninformative prior information. It looks more like it was actually a standard OLS model. Certainly, OLS is giving results identical to what Western and Jackman report. The Stan model estimated in `brms` is basically identical, but with some observable differences. These are slight, but they do have some implications for the argument about the effect of logged labor force size given the small number of observations.
+Before replicating some of the main results, let's look at Table 2 of Western and Jackman and see if we can't replicate that first result. One thing I was astonished to find is the results that Western and Jackman provide in Table 2 aren't necessarily the result of noninformative prior information. It looks more like it was actually a standard OLS model. Certainly, OLS is giving results identical to what Western and Jackman report. The Stan model estimated in `brms` is basically identical, but with some slight differences.
 
 ```{r firstmods, cache=T, message = FALSE}
 # Standard LM
@@ -187,56 +175,61 @@ B0 <- brm(union ~ left + size + concen,
           family="gaussian")
 ```
 
+<div id="modelsummary">
+
 ```{r table2, cache=T, message = FALSE, echo=FALSE}
 # {brms} doesn't have the same tidiers. Gotta do it this way.
+
+# What was in Table 2 in Western and Jackman?
+WJT2 <- data.frame(
+  term = c("(Intercept)", "left", "size", "concen"),
+  estimate = c(97.59, .27, -6.46, .35),
+  std.error = c(57.48, .08, 3.79, 19.25))
+
+WJT2 %>%
+  mutate(stat = estimate/`std.error`,
+         `p.value` = 2 * pt(abs(stat), 30, lower.tail = FALSE)) -> WJT2
+
+modWJ <- list(
+  tidy = WJT2,
+  glance = data.frame(
+  nobs = 20))
+class(modWJ) <- "modelsummary_list"
+
 posterior_samples(B0) %>%
   as_tibble() %>%
   select(1:4) %>%
   gather(term, value) %>%
   group_by(term) %>%
   summarize(estimate = mean(value),
-            std.error = sd(value),
-            lwr = quantile(value, .05),
-            upr = quantile(value, .95)) %>%
-  mutate_if(is.numeric, ~round(., 2)) %>%
-  mutate(term = c("Industrial Concentration", "Intercept",
-                  "Left Government", "Industrial Concentration")) %>%
-  mutate(`Mean|Coef (SD|SE)` = paste0(estimate," (", std.error,")") )  %>%
-  select(term, `Mean|Coef (SD|SE)`, lwr, upr) %>%
-  mutate(Model = "Bayesian LM") -> tidyB0
+            std.error = sd(value)) %>%
+  mutate(term = c("concen", "(Intercept)", "left", "size")) %>%
+  mutate(stat = estimate/`std.error`,
+         `p.value` = 2 * pt(abs(stat), 30, lower.tail = FALSE)) -> tidyB0
 
-tidy(M1) %>%
-  mutate_at(vars(-term), list(~round(.,2))) %>%
-  mutate(term = c("Intercept", "Left Government", "Labor Force Size (logged)",
-                  "Industrial Concentration")) %>%
-  mutate(`Mean|Coef (SD|SE)` = paste0(estimate," (", std.error,")") )  %>%
-  mutate(lwr = estimate - abs(qnorm(.05))*std.error,
-         upr = estimate + abs(qnorm(.05))*std.error) %>%
-  select(term, `Mean|Coef (SD|SE)`, lwr, upr) %>%
-  mutate(Model = "Standard OLS") -> tidyM1
+modB0 <- list(
+  tidy = tidyB0,
+  glance = data.frame(nobs = 20)
+)
 
-tribble(
-  ~term, ~`Mean|Coef (SD|SE)`, ~lwr, ~upr,
-  "Intercept", "97.59 (57.48)", 3.04, 192.14,
-  "Left Government", "0.27 (0.08)", .15, .39,
-  "Labor Force Size (logged)", "-6.46 (3.79)", -12.70, -.22,
-  "Industrial Concentration", "0.35 (19.25)", -31.32, 32.02
-) %>%
-  mutate(Model = "Western and Jackman (Table 2)") %>%
-  bind_rows(tidyM1, .) %>%
-  bind_rows(tidyB0, .) %>%
-  mutate(term = forcats::fct_relevel(term,
-                                     "Intercept", "Left Government",
-                                     "Labor Force Size (logged)",
-                                     "Industrial Concentration")) %>% tbl_df() %>%
-  arrange(term) %>%
-  mutate(lwr = round(lwr, 2),
-         upr = round(upr, 2)) %>%
-  kable(., format="html",
-        table.attr='id="stevetable"',
-        caption = "Comparing OLS, an Uninformative Bayesian Model, and Table 2 of Western and Jackman (1994)",
-        align=c("l","c","c", "c", "l"))
+class(modB0) <- "modelsummary_list"
+
+library(modelsummary)
+modelsummary(list("Western and Jackman Table 2" = modWJ, 
+                  "OLS" = M1, 
+                  "Bayesian Linear Model" = modB0),
+             title = "Comparing Table 2 of Western and Jackman (1994) with OLS and a Bayesian Linear Model",
+             stars = TRUE, fmt = 2,
+             gof_omit ="IC|F|Log.|R2$|Adj",
+             coef_map =c("left"="Left Government",
+                         "size" = "Labor Force Size (logged)" ,
+                         "concen" = "Industrial Concentration",
+                         "(Intercept)"="Intercept")
+             ) 
 ```
+
+</div>
+
 
 The basic takeaway from this analysis, as it was in Western and Jackman, is the effects of left-wing governments and logged labor force size are statistically discernible from an argument of zero effect for both predictors. This would make Wallerstein right, prima facie, and make Stephens wrong. Stephens' industrial concentration variable is insignificant. Indeed, its effect is practically zero.
 
@@ -298,6 +291,7 @@ bind_rows(B1_draws, B2_draws) %>%
   mutate_if(is.numeric, round, 2) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
+        col.names = c("Coefficient/Term", "Mean", "Standard Deviation", "Lower Bound", "Upper Bound", "Prior"),
         caption = "A Reproduction of Table 3 from Western and Jackman (1994)",
         align=c("l","c","c", "c", "c", "l"))
 ```

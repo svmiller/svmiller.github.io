@@ -37,3 +37,46 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+
+
+
+#modelsummary table {
+
+ margin: 0px auto;
+  padding-bottom: 30px;
+  padding-top: 30px;
+border-spacing: 0px;
+}
+
+#modelsummary table caption {
+	font-weight: bold;
+
+}
+
+
+
+#modelsummary table thead tr th {
+	margin: 0px;
+	padding: 5px;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+#modelsummary tfoot {
+	border-top: 1px solid #000000;
+	font-size: .85em;
+	text-align: right;
+}
+
+#modelsummary tbody tr:last-child td {
+
+border-bottom: 1px solid #000000;
+
+}
+
+#modelsummary td {
+  padding-left: 10px;
+  padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
