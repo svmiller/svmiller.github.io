@@ -15,8 +15,6 @@ categories:
 image: "2015-anti-trump-rally-chicago.jpg"
 ---
 
-
-
 {% include image.html url="/images/2015-anti-trump-rally-chicago.jpg" caption="Demonstrators hold up a piñata of Republican Presidential candidate Donald Trump during a protest on October 12, 2015 in Chicago, Illinois. (GETTY IMAGES)" width=400 align="right" %}
 
 Reading quantitative articles from 20-30 years is a treat because it highlights how little was required of authors conducting and reporting statistical analyses. There are exceptions, of course; [Dixon's (1994) article](https://www.cambridge.org/core/journals/american-political-science-review/article/democracy-and-the-peaceful-settlement-of-international-conflict/414774D3152349AFA09CB284FC993005) linking democratic peace with peaceful conflict resolution is an exemplar on this front and others for someone versed in IR scholarship. However, it used to be enough to run a garden variety linear model (or generalized linear model, if you were feeling fancy), interpret the statistical significance of the results as they pertained to a pet hypothesis of interest, and call it a day.
@@ -385,7 +383,7 @@ SimsM3 %>%
 </table>
 
 
-Basically, the mean of first differences is .086, suggesting that being born again increases the probability of voting for Donald Trump, on average, by .086. 95% of the distribution of first differences is between .036 and .136, which does not overlap 0. Indeed, none of the first differences were negative. Negative first differneces would be inconsistent with a hypothesis that being a born-again Christian raises the probability of voting for Donald Trump. All of this is surely intuitive, but here's a way of presenting that information that acknowledges both estimation uncertainty and fundamental certainty in both a creative and flexible way.
+Basically, the mean of first differences is .086, suggesting that being born again increases the probability of voting for Donald Trump, on average, by .086. 95% of the distribution of first differences is between .036 and .136, which does not overlap 0. Indeed, none of the first differences were negative. Negative first differences would be inconsistent with a hypothesis that being a born-again Christian raises the probability of voting for Donald Trump. All of this is surely intuitive, but here's a way of presenting that information that acknowledges both estimation uncertainty and fundamental certainty in both a creative and flexible way.
 
 You can also summarize the probability of voting for Donald Trump at different values of a given independent variable. Here, let's return to the simple logistic regression (`M2`) and use `data_grid()` in `{modelr}` to create a new data frame where everything is set to the typical value, but 1) the partisanship variable ranges from the minimum to the maximum and, 2) for each value of partisanship, the cognitive racism variable alternates between 0 (i.e. the mean) and 1 (i.e. a two standard deviation increase from the mean).
 
