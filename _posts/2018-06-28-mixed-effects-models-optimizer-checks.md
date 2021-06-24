@@ -16,7 +16,7 @@ image: r-logo.png
 
 {% include image.html url="/images/r-logo.png" caption="The R logo, just 'cause." width=350 align="right" %}
 
-*Last updated: 22 June 2021. Namely, the data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well.* 
+*Last updated: 22 June 2021. The data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well.* 
 
 My goals for writing this are two-fold. First, it'd been a long time since my last blog post. I usually average 7-10 posts a year and this will only be the second one. Second, I've been meaning to offer some tips/tutorials for mixed effects modelers who are still new to the craft. Mixed effects modeling is my method of choice for evaluating and explaining social/political phenomenon. I think I've become pretty good at it over the past 10 years, but everything I know I ultimately taught myself through trial and error. Stackoverflow is nice but I was always reticent to post there to search for answers I feel I should've known already. It does mean that while I everything I know is self-taught, I've learned a lot of tricks along the way and I think it would be good to share them.
 
