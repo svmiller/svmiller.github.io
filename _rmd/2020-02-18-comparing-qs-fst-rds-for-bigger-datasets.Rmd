@@ -1,11 +1,5 @@
 ---
 title: "Comparing the Read/Save Times for RDS, {qs}, and {fst} Formats (or: All Hail {qs})"
-output:
-  md_document:
-    variant: gfm
-    preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-02-18'
 excerpt: "Here is a comparison of read/save times for R serialized data frames, {qs}, and {fst} formats. Alternatively: all hail {qs}."
