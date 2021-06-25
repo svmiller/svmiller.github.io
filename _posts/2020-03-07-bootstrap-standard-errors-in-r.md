@@ -15,9 +15,11 @@ image: "system-of-a-down.jpg"
 
 
 
+
+
 {% include image.html url="/images/system-of-a-down.jpg" caption="The Toxicity of Heteroskedasticity" width=350 align="right" %}
 
-*Last updated: 28 April 2021* 
+*Last updated: 28 April 2021`* 
 
 This will be another post I wish I can go back in time to show myself how to do when I was in graduate school. It's something I recently taught [my grad class](http://post8000.svmiller.com/) how to do as part of [a lab session](http://post8000.svmiller.com/lab-scripts/ols-diagnostics-lab.html).
 
@@ -144,7 +146,7 @@ broom::tidy(bptest(M1)) %>%
 
 A fitted-residual plot will also suggest we don't have neat-looking variances either.
 
-![plot of chunk fitted-resid-plot-crime-data](/images/fitted-resid-plot-crime-data-1.png)
+![plot of chunk fitted-resid-plot-crime-data](/images/bootstrap-standard-errors-in-r/fitted-resid-plot-crime-data-1.png)
 
 The implication of this kind of heteroskedasticity is less about our coefficients and more about the standard errors around them. Under these conditions, it makes sense to bootstrap the standard errors to compare them to what the OLS model produces.
 
@@ -658,6 +660,7 @@ Now, here's where the magic happens that will show how awesome `{purrr}` is for 
 
 
 ```r
+
 bootCrime %>% 
     mutate(lm = map(strap, ~lm(violent ~ poverty + single + metro + white + highschool, 
                      data = .)),
@@ -669,23 +672,20 @@ If you were to call the `bootCrime` object at this stage into the R console, you
 
 ```r
 bootCrime
-```
-
-```
-## # A tibble: 1,000 x 4
-##    strap      .id   lm     tidy            
-##    <list>     <chr> <list> <list>          
-##  1 <resample> 0001  <lm>   <tibble [6 × 5]>
-##  2 <resample> 0002  <lm>   <tibble [6 × 5]>
-##  3 <resample> 0003  <lm>   <tibble [6 × 5]>
-##  4 <resample> 0004  <lm>   <tibble [6 × 5]>
-##  5 <resample> 0005  <lm>   <tibble [6 × 5]>
-##  6 <resample> 0006  <lm>   <tibble [6 × 5]>
-##  7 <resample> 0007  <lm>   <tibble [6 × 5]>
-##  8 <resample> 0008  <lm>   <tibble [6 × 5]>
-##  9 <resample> 0009  <lm>   <tibble [6 × 5]>
-## 10 <resample> 0010  <lm>   <tibble [6 × 5]>
-## # … with 990 more rows
+#> # A tibble: 1,000 x 4
+#>    strap      .id   lm     tidy            
+#>    <list>     <chr> <list> <list>          
+#>  1 <resample> 0001  <lm>   <tibble [6 × 5]>
+#>  2 <resample> 0002  <lm>   <tibble [6 × 5]>
+#>  3 <resample> 0003  <lm>   <tibble [6 × 5]>
+#>  4 <resample> 0004  <lm>   <tibble [6 × 5]>
+#>  5 <resample> 0005  <lm>   <tibble [6 × 5]>
+#>  6 <resample> 0006  <lm>   <tibble [6 × 5]>
+#>  7 <resample> 0007  <lm>   <tibble [6 × 5]>
+#>  8 <resample> 0008  <lm>   <tibble [6 × 5]>
+#>  9 <resample> 0009  <lm>   <tibble [6 × 5]>
+#> 10 <resample> 0010  <lm>   <tibble [6 × 5]>
+#> # … with 990 more rows
 ```
 
 If you were curious, you could look at a particular OLS result with the following code. You're wanting to glance inside a list inside a tibble, so the indexing you do should consider that. I'm electing to not spit out the results in this post, but this code will do it.
@@ -702,6 +702,7 @@ Now, this is where you're going to start summarizing the results from your thous
 
 
 ```r
+
 bootCrime %>%
   pull(tidy) %>%
   map2_df(., # map to return a data frame
@@ -714,29 +715,27 @@ If you're curious, this basically just ganked all the "tidied" output of our 1,0
 
 ```r
 tidybootCrime
-```
-
-```
-## # A tibble: 6,000 x 6
-##    term        estimate std.error statistic      p.value resample
-##    <chr>          <dbl>     <dbl>     <dbl>        <dbl>    <int>
-##  1 (Intercept) -1150.      660.      -1.74  0.0886              1
-##  2 poverty        28.7      10.5      2.75  0.00861             1
-##  3 single         71.1      22.3      3.19  0.00260             1
-##  4 metro           8.61      1.28     6.73  0.0000000258        1
-##  5 white          -1.72      2.15    -0.803 0.426               1
-##  6 highschool      1.46      8.11     0.179 0.858               1
-##  7 (Intercept) -1175.      845.      -1.39  0.171               2
-##  8 poverty        51.0      12.6      4.06  0.000193            2
-##  9 single         11.9      28.5      0.418 0.678               2
-## 10 metro           7.92      1.28     6.21  0.000000154         2
-## # … with 5,990 more rows
+#> # A tibble: 6,000 x 6
+#>    term        estimate std.error statistic      p.value resample
+#>    <chr>          <dbl>     <dbl>     <dbl>        <dbl>    <int>
+#>  1 (Intercept) -1150.      660.      -1.74  0.0886              1
+#>  2 poverty        28.7      10.5      2.75  0.00861             1
+#>  3 single         71.1      22.3      3.19  0.00260             1
+#>  4 metro           8.61      1.28     6.73  0.0000000258        1
+#>  5 white          -1.72      2.15    -0.803 0.426               1
+#>  6 highschool      1.46      8.11     0.179 0.858               1
+#>  7 (Intercept) -1175.      845.      -1.39  0.171               2
+#>  8 poverty        51.0      12.6      4.06  0.000193            2
+#>  9 single         11.9      28.5      0.418 0.678               2
+#> 10 metro           7.92      1.28     6.21  0.000000154         2
+#> # … with 5,990 more rows
 ```
 
 This next code will calculate the standard errors. Importantly, *bootstrap standard errors are the standard deviation of the coefficient estimate for each of the parameters in the model.* That part may not be obvious. It's not the mean of standard errors for the estimate; it's the standard deviation of the coefficient estimate itself.
 
 
 ```r
+
 tidybootCrime %>%
   # group by term, naturally
   group_by(term) %>%
@@ -776,7 +775,7 @@ broom::tidy(M1) %>%
        subtitle = "A plot like this visualizes how different standard errors could be when adjusted for heteroskedasticity.")
 ```
 
-![plot of chunk bootstrapped-ses-crime-data](/images/bootstrapped-ses-crime-data-1.png)
+![plot of chunk bootstrapped-ses-crime-data](/images/bootstrap-standard-errors-in-r/bootstrapped-ses-crime-data-1.png)
 
 ## Conclusion
 
