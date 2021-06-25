@@ -1,9 +1,5 @@
 ---
 title: "A Quick Tutorial on Merging Data with the *_join() Family of Functions in {dplyr}"
-output:
-  md_document:
-    variant: gfm
-    preserve_yaml: TRUE
 author: "steve"
 date: '2021-01-22'
 excerpt: "This is a quick tutorial on mutating and filtering joins in {dplyr}, as well as a discussion on how to think about them."
@@ -15,20 +11,35 @@ image: "sql-joins.jpeg"
 
 ```{r setup, include=FALSE, cache=F}
 
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
-                      cache.path = '~/Dropbox/svmiller.github.io/cache/merge-join-tutorial/',
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = FALSE) 
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
 ```
 
 ```{r loaddatadostuff, echo=F, cache=F}
@@ -40,15 +51,10 @@ library(knitr) # for tables
 library(kableExtra) # for prettier tables
 
 pwt_sample %>% distinct(country) %>% arrange(country) %>% pull(country) -> rich_countries
-
-
-
 ```
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
- 
 add_jekyll_image('/images/sql-joins.jpeg', "It's not technically SQL, but it is in spirit.", "375", "right")
- 
 ```
 
 <style>
@@ -80,7 +86,7 @@ Here's a table of contents for what follows.
 
 The major issue my student is going to encounter is the probability of doing a research project where the data are all-inclusive and self-contained in a single file is almost 0. A reader may object that surveys or survey experiments administered online typically return files that include all the data of importance. That's fine, but 1) few outside a major survey research organization (e.g. ANES, LAPOP) can get away with doing a simple survey analysis and getting it published at a high-ranking journal in political science, 2) survey experiments cost money that we don't have (certainly in this economy and at this university), and 3) my student is working in the context of international political economy for which surveys/experiments are not applicable for the desired task. On the last point, my student will likely be having to collect data from the World Bank, the International Monetary Fund, and the Bank of International Settlements. They'll have to merge all that into one data frame for the sake of an analysis.
 
-I offer this as a guide to the student on the `*_join()` family of functions that come in `dplyr`. The terminology in these functions seems very much [inspired by SQL](https://www.w3schools.com/sql/sql_join.asp); indeed, a lot of `tidyverse` functions have clear corollaries/inspirations in SQL. The functions here are multiple for different purposes, but ultimately merge information from one data set into another based on matching characteristics. The tutorial I offer here will focus on two groups of `*_join()` functions. The first---mutating joins---adds columns from one data frame to another based on matching rows based on keys. The second---filtering joins---filters rows from one data frame based on the presence or absence of a match in another data frame.
+I offer this as a guide to the student on the `*_join()` family of functions that come in `{dplyr}`. The terminology in these functions seems very much [inspired by SQL](https://www.w3schools.com/sql/sql_join.asp); indeed, a lot of `tidyverse` functions have clear corollaries/inspirations in SQL. The functions here are multiple for different purposes, but ultimately merge information from one data set into another based on matching characteristics. The tutorial I offer here will focus on two groups of `*_join()` functions. The first---mutating joins---adds columns from one data frame to another based on matching rows based on keys. The second---filtering joins---filters rows from one data frame based on the presence or absence of a match in another data frame.
 
 Before getting into the various `*_join()` functions, I'm going to start with a description of the R packages/data I'll be using for what follows.
 
@@ -114,7 +120,6 @@ And here's the tibble for `PWT`.
 ```{r}
 PWT
 ```
-
 
 Here's a breakdown of the two data frames. The temporal domains are identical but the number of countries are not. `PWT` will have all the countries and years whereas `pwt_sample` has just 21 select rich countries.  Both `PWT` and `pwt_sample` have common columns for the country (`isocode`) and year of observation (`year`). Both have different economic information (i.e. the columns for real GDP, population, depreciation rate of capital stock, etc.).
 
@@ -206,7 +211,7 @@ I close with the following advice for my student and the reader.
 
 ### Know and Match Your Keys Before Joining/Merging
 
-First, I didn't mention that the `*_join()` functions in `dplyr` can allow the user to manually specify keys for occasions when there are matching keys, even if the keys have different column names. For example, what if the `isocode` column in `PWT` was named `iso3c`? We, as the researcher, would know that is the perfect country code match between both data frames, but R wouldn't know that because the columns don't have the same name. Here's what happens if we tried to left_join `pwt_sample` into `PWT` where the country ISO codes didn't have the same column name.
+First, I didn't mention that the `*_join()` functions in `{dplyr}` can allow the user to manually specify keys for occasions when there are matching keys, even if the keys have different column names. For example, what if the `isocode` column in `PWT` was named `iso3c`? We, as the researcher, would know that is the perfect country code match between both data frames, but R wouldn't know that because the columns don't have the same name. Here's what happens if we tried to left_join `pwt_sample` into `PWT` where the country ISO codes didn't have the same column name.
 
 ```{r}
 PWT %>% 
@@ -216,7 +221,7 @@ PWT %>%
 
 Yuck. The surest way to know you botched a merge in R is if the number of rows in the ensuing data frame increases (usually: explodes) beyond what you as the researcher know it should be.
 
-However, in instances where two columns contain the same information/keys, but are named differently, you can use the `by` option to tell `dplyr` on what it should be matching. Observe:
+However, in instances where two columns contain the same information/keys, but are named differently, you can use the `by` option to tell `{dplyr}` on what it should be matching. Observe:
 
 ```{r}
 PWT %>%
@@ -247,10 +252,3 @@ That said, I want to encourage my student (and the reader still learning about R
 I encourage the student/reader to think the same way. When you know your "master" data frame (i.e. your `x`) and have a good idea what the dimensions should be, `left_join()` and inspecting the output will be the easiest way to think about merging data and the easiest way to inspect the output for potential problems. 
 
 It also squares well with what I discussed with my graduate students as well about pipe-based workflow in R/the "tidyverse". Start with "master" data objects, do functions to it in the pipe, and assign it to an output when done. Likewise, start with the "master" data object, merge more data into it, and assign to an output when done.
-
-```{r knitchunk, echo=F, eval=F}
-#setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("_source/2021-01-22-a-tutorial-on-the-join-family-in-r.Rmd",
-            output = "_posts/2021-01-22-a-tutorial-on-the-join-family-in-r.md")
-
-```

@@ -1,9 +1,5 @@
 ---
 title: "A Quick Tutorial on Merging Data with the *_join() Family of Functions in {dplyr}"
-output:
-  md_document:
-    variant: gfm
-    preserve_yaml: TRUE
 author: "steve"
 date: '2021-01-22'
 excerpt: "This is a quick tutorial on mutating and filtering joins in {dplyr}, as well as a discussion on how to think about them."
@@ -48,7 +44,7 @@ Here's a table of contents for what follows.
 
 The major issue my student is going to encounter is the probability of doing a research project where the data are all-inclusive and self-contained in a single file is almost 0. A reader may object that surveys or survey experiments administered online typically return files that include all the data of importance. That's fine, but 1) few outside a major survey research organization (e.g. ANES, LAPOP) can get away with doing a simple survey analysis and getting it published at a high-ranking journal in political science, 2) survey experiments cost money that we don't have (certainly in this economy and at this university), and 3) my student is working in the context of international political economy for which surveys/experiments are not applicable for the desired task. On the last point, my student will likely be having to collect data from the World Bank, the International Monetary Fund, and the Bank of International Settlements. They'll have to merge all that into one data frame for the sake of an analysis.
 
-I offer this as a guide to the student on the `*_join()` family of functions that come in `dplyr`. The terminology in these functions seems very much [inspired by SQL](https://www.w3schools.com/sql/sql_join.asp); indeed, a lot of `tidyverse` functions have clear corollaries/inspirations in SQL. The functions here are multiple for different purposes, but ultimately merge information from one data set into another based on matching characteristics. The tutorial I offer here will focus on two groups of `*_join()` functions. The first---mutating joins---adds columns from one data frame to another based on matching rows based on keys. The second---filtering joins---filters rows from one data frame based on the presence or absence of a match in another data frame.
+I offer this as a guide to the student on the `*_join()` family of functions that come in `{dplyr}`. The terminology in these functions seems very much [inspired by SQL](https://www.w3schools.com/sql/sql_join.asp); indeed, a lot of `tidyverse` functions have clear corollaries/inspirations in SQL. The functions here are multiple for different purposes, but ultimately merge information from one data set into another based on matching characteristics. The tutorial I offer here will focus on two groups of `*_join()` functions. The first---mutating joins---adds columns from one data frame to another based on matching rows based on keys. The second---filtering joins---filters rows from one data frame based on the presence or absence of a match in another data frame.
 
 Before getting into the various `*_join()` functions, I'm going to start with a description of the R packages/data I'll be using for what follows.
 
@@ -78,23 +74,20 @@ Here's the tibble for `pwt_sample`.
 
 ```r
 pwt_sample
-```
-
-```
-## # A tibble: 1,428 x 7
-##    country   isocode  year   pop    hc  rgdpna labsh
-##    <chr>     <chr>   <dbl> <dbl> <dbl>   <dbl> <dbl>
-##  1 Australia AUS      1950  8.39  2.67 119510. 0.680
-##  2 Australia AUS      1951  8.63  2.67 122550. 0.680
-##  3 Australia AUS      1952  8.82  2.68 117534. 0.680
-##  4 Australia AUS      1953  8.99  2.69 130285. 0.680
-##  5 Australia AUS      1954  9.19  2.70 140700. 0.680
-##  6 Australia AUS      1955  9.41  2.70 146250. 0.680
-##  7 Australia AUS      1956  9.64  2.71 146586. 0.680
-##  8 Australia AUS      1957  9.85  2.72 149796. 0.680
-##  9 Australia AUS      1958 10.1   2.73 159957. 0.680
-## 10 Australia AUS      1959 10.3   2.74 169756. 0.680
-## # … with 1,418 more rows
+#> # A tibble: 1,428 x 7
+#>    country   isocode  year   pop    hc  rgdpna labsh
+#>    <chr>     <chr>   <dbl> <dbl> <dbl>   <dbl> <dbl>
+#>  1 Australia AUS      1950  8.39  2.67 119510. 0.680
+#>  2 Australia AUS      1951  8.63  2.67 122550. 0.680
+#>  3 Australia AUS      1952  8.82  2.68 117534. 0.680
+#>  4 Australia AUS      1953  8.99  2.69 130285. 0.680
+#>  5 Australia AUS      1954  9.19  2.70 140700. 0.680
+#>  6 Australia AUS      1955  9.41  2.70 146250. 0.680
+#>  7 Australia AUS      1956  9.64  2.71 146586. 0.680
+#>  8 Australia AUS      1957  9.85  2.72 149796. 0.680
+#>  9 Australia AUS      1958 10.1   2.73 159957. 0.680
+#> 10 Australia AUS      1959 10.3   2.74 169756. 0.680
+#> # … with 1,418 more rows
 ```
 
 And here's the tibble for `PWT`.
@@ -102,25 +95,21 @@ And here's the tibble for `PWT`.
 
 ```r
 PWT
+#> # A tibble: 12,376 x 4
+#>    isocode  year delta    xr
+#>    <fct>   <dbl> <dbl> <dbl>
+#>  1 ABW      1950    NA    NA
+#>  2 ABW      1951    NA    NA
+#>  3 ABW      1952    NA    NA
+#>  4 ABW      1953    NA    NA
+#>  5 ABW      1954    NA    NA
+#>  6 ABW      1955    NA    NA
+#>  7 ABW      1956    NA    NA
+#>  8 ABW      1957    NA    NA
+#>  9 ABW      1958    NA    NA
+#> 10 ABW      1959    NA    NA
+#> # … with 12,366 more rows
 ```
-
-```
-## # A tibble: 12,376 x 4
-##    isocode  year delta    xr
-##    <fct>   <dbl> <dbl> <dbl>
-##  1 ABW      1950    NA    NA
-##  2 ABW      1951    NA    NA
-##  3 ABW      1952    NA    NA
-##  4 ABW      1953    NA    NA
-##  5 ABW      1954    NA    NA
-##  6 ABW      1955    NA    NA
-##  7 ABW      1956    NA    NA
-##  8 ABW      1957    NA    NA
-##  9 ABW      1958    NA    NA
-## 10 ABW      1959    NA    NA
-## # … with 12,366 more rows
-```
-
 
 Here's a breakdown of the two data frames. The temporal domains are identical but the number of countries are not. `PWT` will have all the countries and years whereas `pwt_sample` has just 21 select rich countries.  Both `PWT` and `pwt_sample` have common columns for the country (`isocode`) and year of observation (`year`). Both have different economic information (i.e. the columns for real GDP, population, depreciation rate of capital stock, etc.).
 
@@ -168,23 +157,20 @@ Mutating joins in `{dplyr}` add columns from one data frames to another based on
 
 ```r
 inner_join(PWT, pwt_sample)
-```
-
-```
-## # A tibble: 1,428 x 9
-##    isocode  year  delta    xr country     pop    hc  rgdpna labsh
-##    <chr>   <dbl>  <dbl> <dbl> <chr>     <dbl> <dbl>   <dbl> <dbl>
-##  1 AUS      1950 0.0287 0.893 Australia  8.39  2.67 119510. 0.680
-##  2 AUS      1951 0.0301 0.893 Australia  8.63  2.67 122550. 0.680
-##  3 AUS      1952 0.0310 0.893 Australia  8.82  2.68 117534. 0.680
-##  4 AUS      1953 0.0312 0.893 Australia  8.99  2.69 130285. 0.680
-##  5 AUS      1954 0.0318 0.893 Australia  9.19  2.70 140700. 0.680
-##  6 AUS      1955 0.0325 0.893 Australia  9.41  2.70 146250. 0.680
-##  7 AUS      1956 0.0329 0.893 Australia  9.64  2.71 146586. 0.680
-##  8 AUS      1957 0.0331 0.893 Australia  9.85  2.72 149796. 0.680
-##  9 AUS      1958 0.0334 0.893 Australia 10.1   2.73 159957. 0.680
-## 10 AUS      1959 0.0338 0.893 Australia 10.3   2.74 169756. 0.680
-## # … with 1,418 more rows
+#> # A tibble: 1,428 x 9
+#>    isocode  year  delta    xr country     pop    hc  rgdpna labsh
+#>    <chr>   <dbl>  <dbl> <dbl> <chr>     <dbl> <dbl>   <dbl> <dbl>
+#>  1 AUS      1950 0.0287 0.893 Australia  8.39  2.67 119510. 0.680
+#>  2 AUS      1951 0.0301 0.893 Australia  8.63  2.67 122550. 0.680
+#>  3 AUS      1952 0.0310 0.893 Australia  8.82  2.68 117534. 0.680
+#>  4 AUS      1953 0.0312 0.893 Australia  8.99  2.69 130285. 0.680
+#>  5 AUS      1954 0.0318 0.893 Australia  9.19  2.70 140700. 0.680
+#>  6 AUS      1955 0.0325 0.893 Australia  9.41  2.70 146250. 0.680
+#>  7 AUS      1956 0.0329 0.893 Australia  9.64  2.71 146586. 0.680
+#>  8 AUS      1957 0.0331 0.893 Australia  9.85  2.72 149796. 0.680
+#>  9 AUS      1958 0.0334 0.893 Australia 10.1   2.73 159957. 0.680
+#> 10 AUS      1959 0.0338 0.893 Australia 10.3   2.74 169756. 0.680
+#> # … with 1,418 more rows
 ```
 
 In this case, `inner_join()` returned a data frame the dimension with the number of rows in `pwt_sample`. It has the effect of adding `delta` and `xr` to `pwt_sample`. `inner_join(PWT, pwt_sample)` is functionally equivalent to `inner_join(pwt_sample, PWT)`. The ordering of `x` and `y` will only affect the order in which the columns appear.
@@ -196,23 +182,20 @@ In this case, `inner_join()` returned a data frame the dimension with the number
 
 ```r
 left_join(PWT, pwt_sample)
-```
-
-```
-## # A tibble: 12,376 x 9
-##    isocode  year delta    xr country   pop    hc rgdpna labsh
-##    <chr>   <dbl> <dbl> <dbl> <chr>   <dbl> <dbl>  <dbl> <dbl>
-##  1 ABW      1950    NA    NA <NA>       NA    NA     NA    NA
-##  2 ABW      1951    NA    NA <NA>       NA    NA     NA    NA
-##  3 ABW      1952    NA    NA <NA>       NA    NA     NA    NA
-##  4 ABW      1953    NA    NA <NA>       NA    NA     NA    NA
-##  5 ABW      1954    NA    NA <NA>       NA    NA     NA    NA
-##  6 ABW      1955    NA    NA <NA>       NA    NA     NA    NA
-##  7 ABW      1956    NA    NA <NA>       NA    NA     NA    NA
-##  8 ABW      1957    NA    NA <NA>       NA    NA     NA    NA
-##  9 ABW      1958    NA    NA <NA>       NA    NA     NA    NA
-## 10 ABW      1959    NA    NA <NA>       NA    NA     NA    NA
-## # … with 12,366 more rows
+#> # A tibble: 12,376 x 9
+#>    isocode  year delta    xr country   pop    hc rgdpna labsh
+#>    <chr>   <dbl> <dbl> <dbl> <chr>   <dbl> <dbl>  <dbl> <dbl>
+#>  1 ABW      1950    NA    NA <NA>       NA    NA     NA    NA
+#>  2 ABW      1951    NA    NA <NA>       NA    NA     NA    NA
+#>  3 ABW      1952    NA    NA <NA>       NA    NA     NA    NA
+#>  4 ABW      1953    NA    NA <NA>       NA    NA     NA    NA
+#>  5 ABW      1954    NA    NA <NA>       NA    NA     NA    NA
+#>  6 ABW      1955    NA    NA <NA>       NA    NA     NA    NA
+#>  7 ABW      1956    NA    NA <NA>       NA    NA     NA    NA
+#>  8 ABW      1957    NA    NA <NA>       NA    NA     NA    NA
+#>  9 ABW      1958    NA    NA <NA>       NA    NA     NA    NA
+#> 10 ABW      1959    NA    NA <NA>       NA    NA     NA    NA
+#> # … with 12,366 more rows
 ```
 
 ### `right_join()`
@@ -222,23 +205,20 @@ left_join(PWT, pwt_sample)
 
 ```r
 right_join(PWT, pwt_sample)
-```
-
-```
-## # A tibble: 1,428 x 9
-##    isocode  year  delta    xr country     pop    hc  rgdpna labsh
-##    <chr>   <dbl>  <dbl> <dbl> <chr>     <dbl> <dbl>   <dbl> <dbl>
-##  1 AUS      1950 0.0287 0.893 Australia  8.39  2.67 119510. 0.680
-##  2 AUS      1951 0.0301 0.893 Australia  8.63  2.67 122550. 0.680
-##  3 AUS      1952 0.0310 0.893 Australia  8.82  2.68 117534. 0.680
-##  4 AUS      1953 0.0312 0.893 Australia  8.99  2.69 130285. 0.680
-##  5 AUS      1954 0.0318 0.893 Australia  9.19  2.70 140700. 0.680
-##  6 AUS      1955 0.0325 0.893 Australia  9.41  2.70 146250. 0.680
-##  7 AUS      1956 0.0329 0.893 Australia  9.64  2.71 146586. 0.680
-##  8 AUS      1957 0.0331 0.893 Australia  9.85  2.72 149796. 0.680
-##  9 AUS      1958 0.0334 0.893 Australia 10.1   2.73 159957. 0.680
-## 10 AUS      1959 0.0338 0.893 Australia 10.3   2.74 169756. 0.680
-## # … with 1,418 more rows
+#> # A tibble: 1,428 x 9
+#>    isocode  year  delta    xr country     pop    hc  rgdpna labsh
+#>    <chr>   <dbl>  <dbl> <dbl> <chr>     <dbl> <dbl>   <dbl> <dbl>
+#>  1 AUS      1950 0.0287 0.893 Australia  8.39  2.67 119510. 0.680
+#>  2 AUS      1951 0.0301 0.893 Australia  8.63  2.67 122550. 0.680
+#>  3 AUS      1952 0.0310 0.893 Australia  8.82  2.68 117534. 0.680
+#>  4 AUS      1953 0.0312 0.893 Australia  8.99  2.69 130285. 0.680
+#>  5 AUS      1954 0.0318 0.893 Australia  9.19  2.70 140700. 0.680
+#>  6 AUS      1955 0.0325 0.893 Australia  9.41  2.70 146250. 0.680
+#>  7 AUS      1956 0.0329 0.893 Australia  9.64  2.71 146586. 0.680
+#>  8 AUS      1957 0.0331 0.893 Australia  9.85  2.72 149796. 0.680
+#>  9 AUS      1958 0.0334 0.893 Australia 10.1   2.73 159957. 0.680
+#> 10 AUS      1959 0.0338 0.893 Australia 10.3   2.74 169756. 0.680
+#> # … with 1,418 more rows
 ```
 
 ### `full_join()`
@@ -248,23 +228,20 @@ right_join(PWT, pwt_sample)
 
 ```r
 full_join(PWT, pwt_sample)
-```
-
-```
-## # A tibble: 12,376 x 9
-##    isocode  year delta    xr country   pop    hc rgdpna labsh
-##    <chr>   <dbl> <dbl> <dbl> <chr>   <dbl> <dbl>  <dbl> <dbl>
-##  1 ABW      1950    NA    NA <NA>       NA    NA     NA    NA
-##  2 ABW      1951    NA    NA <NA>       NA    NA     NA    NA
-##  3 ABW      1952    NA    NA <NA>       NA    NA     NA    NA
-##  4 ABW      1953    NA    NA <NA>       NA    NA     NA    NA
-##  5 ABW      1954    NA    NA <NA>       NA    NA     NA    NA
-##  6 ABW      1955    NA    NA <NA>       NA    NA     NA    NA
-##  7 ABW      1956    NA    NA <NA>       NA    NA     NA    NA
-##  8 ABW      1957    NA    NA <NA>       NA    NA     NA    NA
-##  9 ABW      1958    NA    NA <NA>       NA    NA     NA    NA
-## 10 ABW      1959    NA    NA <NA>       NA    NA     NA    NA
-## # … with 12,366 more rows
+#> # A tibble: 12,376 x 9
+#>    isocode  year delta    xr country   pop    hc rgdpna labsh
+#>    <chr>   <dbl> <dbl> <dbl> <chr>   <dbl> <dbl>  <dbl> <dbl>
+#>  1 ABW      1950    NA    NA <NA>       NA    NA     NA    NA
+#>  2 ABW      1951    NA    NA <NA>       NA    NA     NA    NA
+#>  3 ABW      1952    NA    NA <NA>       NA    NA     NA    NA
+#>  4 ABW      1953    NA    NA <NA>       NA    NA     NA    NA
+#>  5 ABW      1954    NA    NA <NA>       NA    NA     NA    NA
+#>  6 ABW      1955    NA    NA <NA>       NA    NA     NA    NA
+#>  7 ABW      1956    NA    NA <NA>       NA    NA     NA    NA
+#>  8 ABW      1957    NA    NA <NA>       NA    NA     NA    NA
+#>  9 ABW      1958    NA    NA <NA>       NA    NA     NA    NA
+#> 10 ABW      1959    NA    NA <NA>       NA    NA     NA    NA
+#> # … with 12,366 more rows
 ```
 
 In a particular case like this, `full_join()` is identical to `left_join()`. This is because, in terms of the important shared columns, `pwt_sample` is a glorified subset of `PWT`.
@@ -272,10 +249,7 @@ In a particular case like this, `full_join()` is identical to `left_join()`. Thi
 
 ```r
 identical(full_join(PWT, pwt_sample), left_join(PWT, pwt_sample))
-```
-
-```
-## [1] TRUE
+#> [1] TRUE
 ```
 
 ## Filtering Joins {#filteringjoins}
@@ -289,23 +263,20 @@ Whereas mutating joins add information from one data frame to another, filtering
 
 ```r
 semi_join(PWT, pwt_sample)
-```
-
-```
-## # A tibble: 1,428 x 4
-##    isocode  year  delta    xr
-##    <fct>   <dbl>  <dbl> <dbl>
-##  1 AUS      1950 0.0287 0.893
-##  2 AUS      1951 0.0301 0.893
-##  3 AUS      1952 0.0310 0.893
-##  4 AUS      1953 0.0312 0.893
-##  5 AUS      1954 0.0318 0.893
-##  6 AUS      1955 0.0325 0.893
-##  7 AUS      1956 0.0329 0.893
-##  8 AUS      1957 0.0331 0.893
-##  9 AUS      1958 0.0334 0.893
-## 10 AUS      1959 0.0338 0.893
-## # … with 1,418 more rows
+#> # A tibble: 1,428 x 4
+#>    isocode  year  delta    xr
+#>    <fct>   <dbl>  <dbl> <dbl>
+#>  1 AUS      1950 0.0287 0.893
+#>  2 AUS      1951 0.0301 0.893
+#>  3 AUS      1952 0.0310 0.893
+#>  4 AUS      1953 0.0312 0.893
+#>  5 AUS      1954 0.0318 0.893
+#>  6 AUS      1955 0.0325 0.893
+#>  7 AUS      1956 0.0329 0.893
+#>  8 AUS      1957 0.0331 0.893
+#>  9 AUS      1958 0.0334 0.893
+#> 10 AUS      1959 0.0338 0.893
+#> # … with 1,418 more rows
 ```
 
 Notice that `semi_join()` looked for the matching keys (`isocode` and `year`) and subset `PWT` based on that.
@@ -318,23 +289,20 @@ Notice that `semi_join()` looked for the matching keys (`isocode` and `year`) an
 
 ```r
 anti_join(PWT, pwt_sample)
-```
-
-```
-## # A tibble: 10,948 x 4
-##    isocode  year delta    xr
-##    <fct>   <dbl> <dbl> <dbl>
-##  1 ABW      1950    NA    NA
-##  2 ABW      1951    NA    NA
-##  3 ABW      1952    NA    NA
-##  4 ABW      1953    NA    NA
-##  5 ABW      1954    NA    NA
-##  6 ABW      1955    NA    NA
-##  7 ABW      1956    NA    NA
-##  8 ABW      1957    NA    NA
-##  9 ABW      1958    NA    NA
-## 10 ABW      1959    NA    NA
-## # … with 10,938 more rows
+#> # A tibble: 10,948 x 4
+#>    isocode  year delta    xr
+#>    <fct>   <dbl> <dbl> <dbl>
+#>  1 ABW      1950    NA    NA
+#>  2 ABW      1951    NA    NA
+#>  3 ABW      1952    NA    NA
+#>  4 ABW      1953    NA    NA
+#>  5 ABW      1954    NA    NA
+#>  6 ABW      1955    NA    NA
+#>  7 ABW      1956    NA    NA
+#>  8 ABW      1957    NA    NA
+#>  9 ABW      1958    NA    NA
+#> 10 ABW      1959    NA    NA
+#> # … with 10,938 more rows
 ```
 
 The above example of `anti_join()` compared `PWT` and `pwt_sample`. It found all cases where rows matched based on the shared columns and returned all rows in `PWT` with*out* a match in `pwt_sample` based on the shared rows.
@@ -345,35 +313,32 @@ I close with the following advice for my student and the reader.
 
 ### Know and Match Your Keys Before Joining/Merging
 
-First, I didn't mention that the `*_join()` functions in `dplyr` can allow the user to manually specify keys for occasions when there are matching keys, even if the keys have different column names. For example, what if the `isocode` column in `PWT` was named `iso3c`? We, as the researcher, would know that is the perfect country code match between both data frames, but R wouldn't know that because the columns don't have the same name. Here's what happens if we tried to left_join `pwt_sample` into `PWT` where the country ISO codes didn't have the same column name.
+First, I didn't mention that the `*_join()` functions in `{dplyr}` can allow the user to manually specify keys for occasions when there are matching keys, even if the keys have different column names. For example, what if the `isocode` column in `PWT` was named `iso3c`? We, as the researcher, would know that is the perfect country code match between both data frames, but R wouldn't know that because the columns don't have the same name. Here's what happens if we tried to left_join `pwt_sample` into `PWT` where the country ISO codes didn't have the same column name.
 
 
 ```r
 PWT %>% 
   rename(iso3c = isocode) %>%
   left_join(., pwt_sample)
-```
-
-```
-## # A tibble: 259,896 x 10
-##    iso3c  year delta    xr country     isocode   pop    hc  rgdpna  labsh
-##    <fct> <dbl> <dbl> <dbl> <chr>       <chr>   <dbl> <dbl>   <dbl>  <dbl>
-##  1 ABW    1950    NA    NA Australia   AUS      8.39  2.67 119510.  0.680
-##  2 ABW    1950    NA    NA Austria     AUT      6.98  2.55  47147.  0.637
-##  3 ABW    1950    NA    NA Belgium     BEL      8.63  2.20  76035.  0.651
-##  4 ABW    1950    NA    NA Canada      CAN     13.8   2.48 179072.  0.768
-##  5 ABW    1950    NA    NA Switzerland CHE      4.62  2.94  99082.  0.660
-##  6 ABW    1950    NA    NA Chile       CHL     NA    NA        NA  NA    
-##  7 ABW    1950    NA    NA Germany     DEU     68.7   2.43 442402.  0.672
-##  8 ABW    1950    NA    NA Denmark     DNK      4.27  2.84  51441.  0.645
-##  9 ABW    1950    NA    NA Spain       ESP     28.1   1.87 123428.  0.640
-## 10 ABW    1950    NA    NA Finland     FIN      4.01  2.12  27678.  0.669
-## # … with 259,886 more rows
+#> # A tibble: 259,896 x 10
+#>    iso3c  year delta    xr country     isocode   pop    hc  rgdpna  labsh
+#>    <fct> <dbl> <dbl> <dbl> <chr>       <chr>   <dbl> <dbl>   <dbl>  <dbl>
+#>  1 ABW    1950    NA    NA Australia   AUS      8.39  2.67 119510.  0.680
+#>  2 ABW    1950    NA    NA Austria     AUT      6.98  2.55  47147.  0.637
+#>  3 ABW    1950    NA    NA Belgium     BEL      8.63  2.20  76035.  0.651
+#>  4 ABW    1950    NA    NA Canada      CAN     13.8   2.48 179072.  0.768
+#>  5 ABW    1950    NA    NA Switzerland CHE      4.62  2.94  99082.  0.660
+#>  6 ABW    1950    NA    NA Chile       CHL     NA    NA        NA  NA    
+#>  7 ABW    1950    NA    NA Germany     DEU     68.7   2.43 442402.  0.672
+#>  8 ABW    1950    NA    NA Denmark     DNK      4.27  2.84  51441.  0.645
+#>  9 ABW    1950    NA    NA Spain       ESP     28.1   1.87 123428.  0.640
+#> 10 ABW    1950    NA    NA Finland     FIN      4.01  2.12  27678.  0.669
+#> # … with 259,886 more rows
 ```
 
 Yuck. The surest way to know you botched a merge in R is if the number of rows in the ensuing data frame increases (usually: explodes) beyond what you as the researcher know it should be.
 
-However, in instances where two columns contain the same information/keys, but are named differently, you can use the `by` option to tell `dplyr` on what it should be matching. Observe:
+However, in instances where two columns contain the same information/keys, but are named differently, you can use the `by` option to tell `{dplyr}` on what it should be matching. Observe:
 
 
 ```r
@@ -381,23 +346,20 @@ PWT %>%
   rename(iso3c = isocode,
          the_year = year) %>%
   left_join(., pwt_sample, by=c("iso3c"="isocode", "the_year"="year"))
-```
-
-```
-## # A tibble: 12,376 x 9
-##    iso3c the_year delta    xr country   pop    hc rgdpna labsh
-##    <chr>    <dbl> <dbl> <dbl> <chr>   <dbl> <dbl>  <dbl> <dbl>
-##  1 ABW       1950    NA    NA <NA>       NA    NA     NA    NA
-##  2 ABW       1951    NA    NA <NA>       NA    NA     NA    NA
-##  3 ABW       1952    NA    NA <NA>       NA    NA     NA    NA
-##  4 ABW       1953    NA    NA <NA>       NA    NA     NA    NA
-##  5 ABW       1954    NA    NA <NA>       NA    NA     NA    NA
-##  6 ABW       1955    NA    NA <NA>       NA    NA     NA    NA
-##  7 ABW       1956    NA    NA <NA>       NA    NA     NA    NA
-##  8 ABW       1957    NA    NA <NA>       NA    NA     NA    NA
-##  9 ABW       1958    NA    NA <NA>       NA    NA     NA    NA
-## 10 ABW       1959    NA    NA <NA>       NA    NA     NA    NA
-## # … with 12,366 more rows
+#> # A tibble: 12,376 x 9
+#>    iso3c the_year delta    xr country   pop    hc rgdpna labsh
+#>    <chr>    <dbl> <dbl> <dbl> <chr>   <dbl> <dbl>  <dbl> <dbl>
+#>  1 ABW       1950    NA    NA <NA>       NA    NA     NA    NA
+#>  2 ABW       1951    NA    NA <NA>       NA    NA     NA    NA
+#>  3 ABW       1952    NA    NA <NA>       NA    NA     NA    NA
+#>  4 ABW       1953    NA    NA <NA>       NA    NA     NA    NA
+#>  5 ABW       1954    NA    NA <NA>       NA    NA     NA    NA
+#>  6 ABW       1955    NA    NA <NA>       NA    NA     NA    NA
+#>  7 ABW       1956    NA    NA <NA>       NA    NA     NA    NA
+#>  8 ABW       1957    NA    NA <NA>       NA    NA     NA    NA
+#>  9 ABW       1958    NA    NA <NA>       NA    NA     NA    NA
+#> 10 ABW       1959    NA    NA <NA>       NA    NA     NA    NA
+#> # … with 12,366 more rows
 ```
 
 You *could* do this, but I advise against it (except for when it's [a clever parlor trick like I show here](http://svmiller.com/blog/2019/01/create-country-year-dyad-year-from-country-data/)). My rationale is if you have to declare the matching keys because *one* of the identifying columns doesn't have an identical name, you have to declare *all* the matching keys even if those are identically named. For example, here's what would happen if it was just the ISO codes that didn't have the same name and we thought that's all we needed to declare in `left_join()`.
@@ -408,23 +370,20 @@ You *could* do this, but I advise against it (except for when it's [a clever par
 PWT %>%
   rename(iso3c = isocode) %>%
   left_join(., pwt_sample, by=c("iso3c"="isocode"))
-```
-
-```
-## # A tibble: 108,052 x 10
-##    iso3c year.x delta    xr country year.y   pop    hc rgdpna labsh
-##    <chr>  <dbl> <dbl> <dbl> <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl>
-##  1 ABW     1950    NA    NA <NA>        NA    NA    NA     NA    NA
-##  2 ABW     1951    NA    NA <NA>        NA    NA    NA     NA    NA
-##  3 ABW     1952    NA    NA <NA>        NA    NA    NA     NA    NA
-##  4 ABW     1953    NA    NA <NA>        NA    NA    NA     NA    NA
-##  5 ABW     1954    NA    NA <NA>        NA    NA    NA     NA    NA
-##  6 ABW     1955    NA    NA <NA>        NA    NA    NA     NA    NA
-##  7 ABW     1956    NA    NA <NA>        NA    NA    NA     NA    NA
-##  8 ABW     1957    NA    NA <NA>        NA    NA    NA     NA    NA
-##  9 ABW     1958    NA    NA <NA>        NA    NA    NA     NA    NA
-## 10 ABW     1959    NA    NA <NA>        NA    NA    NA     NA    NA
-## # … with 108,042 more rows
+#> # A tibble: 108,052 x 10
+#>    iso3c year.x delta    xr country year.y   pop    hc rgdpna labsh
+#>    <chr>  <dbl> <dbl> <dbl> <chr>    <dbl> <dbl> <dbl>  <dbl> <dbl>
+#>  1 ABW     1950    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  2 ABW     1951    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  3 ABW     1952    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  4 ABW     1953    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  5 ABW     1954    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  6 ABW     1955    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  7 ABW     1956    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  8 ABW     1957    NA    NA <NA>        NA    NA    NA     NA    NA
+#>  9 ABW     1958    NA    NA <NA>        NA    NA    NA     NA    NA
+#> 10 ABW     1959    NA    NA <NA>        NA    NA    NA     NA    NA
+#> # … with 108,042 more rows
 ```
 
 Notice the number of rows exploded. You (well: I) screwed up.
@@ -440,5 +399,3 @@ That said, I want to encourage my student (and the reader still learning about R
 I encourage the student/reader to think the same way. When you know your "master" data frame (i.e. your `x`) and have a good idea what the dimensions should be, `left_join()` and inspecting the output will be the easiest way to think about merging data and the easiest way to inspect the output for potential problems. 
 
 It also squares well with what I discussed with my graduate students as well about pipe-based workflow in R/the "tidyverse". Start with "master" data objects, do functions to it in the pipe, and assign it to an output when done. Likewise, start with the "master" data object, merge more data into it, and assign to an output when done.
-
-
