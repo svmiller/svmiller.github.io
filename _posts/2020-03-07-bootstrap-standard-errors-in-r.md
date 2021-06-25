@@ -19,7 +19,7 @@ image: "system-of-a-down.jpg"
 
 {% include image.html url="/images/system-of-a-down.jpg" caption="The Toxicity of Heteroskedasticity" width=350 align="right" %}
 
-*Last updated: 28 April 2021`* 
+*Last updated: 28 April 2021* 
 
 This will be another post I wish I can go back in time to show myself how to do when I was in graduate school. It's something I recently taught [my grad class](http://post8000.svmiller.com/) how to do as part of [a lab session](http://post8000.svmiller.com/lab-scripts/ols-diagnostics-lab.html).
 
