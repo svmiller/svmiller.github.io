@@ -735,7 +735,6 @@ This next code will calculate the standard errors. Importantly, *bootstrap stand
 
 
 ```r
-
 tidybootCrime %>%
   # group by term, naturally
   group_by(term) %>%
