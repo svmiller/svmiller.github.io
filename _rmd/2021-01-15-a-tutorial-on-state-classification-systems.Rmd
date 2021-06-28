@@ -17,9 +17,16 @@ image: "national-flags.jpg"
 
 ```{r setup, include=FALSE, cache=F}
 
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
@@ -28,9 +35,10 @@ add_jekyll_image <- function(url, caption, width, align) {
 
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
-                      cache.path = '~/Dropbox/svmiller.github.io/cache/state-classification-systems/',
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = FALSE) 
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
 ```
 
 ```{r loaddatadostuff, echo=F, cache=F}
@@ -51,17 +59,6 @@ library(kableExtra) # for prettier tables
 add_jekyll_image('/images/national-flags.jpg', "A stock photo of assorted national flags (Getty Images)", "425", "right")
  
 ```
-
-<style>
-img[src*='#center'] { 
-    display: block;
-    margin: auto;
-}
-</style>
-
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
 
 My graduate studies program director asked me to teach an independent study for a graduate student this semester. The goal is to better train the student for their research agenda beyond what I could plausibly teach them in a given semester.[^theythem] Toward that end, I'm going to offer most (if not all) of the independent study sessions as posts on my blog. This should help the student and possibly help others who stumble onto my website. Going forward, I'm probably just going to copy-paste this introduction for future posts for this independent study.
 
@@ -124,7 +121,7 @@ No matter, take inventory of the temporal domain you want *first*. State codes c
 
 Vincent Arel-Bundock's `{countrycode}` package---which I'll discuss later---is going to be useful for getting different classification systems to integrate with each other. However, my student (and the reader) should be reticent to treat `{countrycode}` as magic or to use it uncritically. Namely, my student and the reader should treat one classification system as a "master" system for the particular project.
 
-The system that the student/reader makes the "master" system is to their discretion. However, the master system should probably be the system that emerges as a center of gravity for the particular project. For example, I do *a lot* of research on inter-state conflict across time and space. The bulk of the data I use is in [the CoW ecosystem](https://correlatesofwar.org/data-sets). Naturally, CoW's state system membership is ultimately my "master" system. It integrates perfectly with other components of the CoW data ecosystem (e.g. trade, material capabilities). One data source I integrate into these projects---the Polity regime type data---has a different classification system. When that arises, I standardize---as well as I can---the Polity system codes to the CoW codes and integrate into my data based on the matching CoW codes. Again, `countrycode` is wonderful for this purpose (more on that later), but it is not magic and there's always going to be some cleanup issues to address in the process. But, it's imperative on me, in my case, to treat the CoW system as a master system because it's the center of gravity for what I'm doing. It makes my job ultimately easier.
+The system that the student/reader makes the "master" system is to their discretion. However, the master system should probably be the system that emerges as a center of gravity for the particular project. For example, I do *a lot* of research on inter-state conflict across time and space. The bulk of the data I use is in [the CoW ecosystem](https://correlatesofwar.org/data-sets). Naturally, CoW's state system membership is ultimately my "master" system. It integrates perfectly with other components of the CoW data ecosystem (e.g. trade, material capabilities). One data source I integrate into these projects---the Polity regime type data---has a different classification system. When that arises, I standardize---as well as I can---the Polity system codes to the CoW codes and integrate into my data based on the matching CoW codes. Again, `{countrycode}` is wonderful for this purpose (more on that later), but it is not magic and there's always going to be some cleanup issues to address in the process. But, it's imperative on me, in my case, to treat the CoW system as a master system because it's the center of gravity for what I'm doing. It makes my job ultimately easier.
 
 A student doing a lot of cross-national financial analyses will probably lean on the ISO system as the master system. Namely, ISO classification is everywhere and prominently used in International Monetary Fund and World Bank data. I believe the Penn World Table also uses the ISO system for its data.
 

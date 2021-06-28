@@ -21,17 +21,6 @@ image: "national-flags.jpg"
 
 {% include image.html url="/images/national-flags.jpg" caption="A stock photo of assorted national flags (Getty Images)" width=425 align="right" %}
 
-<style>
-img[src*='#center'] { 
-    display: block;
-    margin: auto;
-}
-</style>
-
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-
 My graduate studies program director asked me to teach an independent study for a graduate student this semester. The goal is to better train the student for their research agenda beyond what I could plausibly teach them in a given semester.[^theythem] Toward that end, I'm going to offer most (if not all) of the independent study sessions as posts on my blog. This should help the student and possibly help others who stumble onto my website. Going forward, I'm probably just going to copy-paste this introduction for future posts for this independent study.
 
 [^theythem]: I'll be using they/them pronouns here mostly for maximum anonymity.
@@ -308,7 +297,7 @@ No matter, take inventory of the temporal domain you want *first*. State codes c
 
 Vincent Arel-Bundock's `{countrycode}` package---which I'll discuss later---is going to be useful for getting different classification systems to integrate with each other. However, my student (and the reader) should be reticent to treat `{countrycode}` as magic or to use it uncritically. Namely, my student and the reader should treat one classification system as a "master" system for the particular project.
 
-The system that the student/reader makes the "master" system is to their discretion. However, the master system should probably be the system that emerges as a center of gravity for the particular project. For example, I do *a lot* of research on inter-state conflict across time and space. The bulk of the data I use is in [the CoW ecosystem](https://correlatesofwar.org/data-sets). Naturally, CoW's state system membership is ultimately my "master" system. It integrates perfectly with other components of the CoW data ecosystem (e.g. trade, material capabilities). One data source I integrate into these projects---the Polity regime type data---has a different classification system. When that arises, I standardize---as well as I can---the Polity system codes to the CoW codes and integrate into my data based on the matching CoW codes. Again, `countrycode` is wonderful for this purpose (more on that later), but it is not magic and there's always going to be some cleanup issues to address in the process. But, it's imperative on me, in my case, to treat the CoW system as a master system because it's the center of gravity for what I'm doing. It makes my job ultimately easier.
+The system that the student/reader makes the "master" system is to their discretion. However, the master system should probably be the system that emerges as a center of gravity for the particular project. For example, I do *a lot* of research on inter-state conflict across time and space. The bulk of the data I use is in [the CoW ecosystem](https://correlatesofwar.org/data-sets). Naturally, CoW's state system membership is ultimately my "master" system. It integrates perfectly with other components of the CoW data ecosystem (e.g. trade, material capabilities). One data source I integrate into these projects---the Polity regime type data---has a different classification system. When that arises, I standardize---as well as I can---the Polity system codes to the CoW codes and integrate into my data based on the matching CoW codes. Again, `{countrycode}` is wonderful for this purpose (more on that later), but it is not magic and there's always going to be some cleanup issues to address in the process. But, it's imperative on me, in my case, to treat the CoW system as a master system because it's the center of gravity for what I'm doing. It makes my job ultimately easier.
 
 A student doing a lot of cross-national financial analyses will probably lean on the ISO system as the master system. Namely, ISO classification is everywhere and prominently used in International Monetary Fund and World Bank data. I believe the Penn World Table also uses the ISO system for its data.
 
@@ -336,23 +325,20 @@ This comes pre-processed in my `{peacesciencer}` package. `create_stateyears()` 
 
 ```r
 create_stateyears()
-```
-
-```
-## # A tibble: 16,731 x 3
-##    ccode statenme                  year
-##    <dbl> <chr>                    <int>
-##  1     2 United States of America  1816
-##  2     2 United States of America  1817
-##  3     2 United States of America  1818
-##  4     2 United States of America  1819
-##  5     2 United States of America  1820
-##  6     2 United States of America  1821
-##  7     2 United States of America  1822
-##  8     2 United States of America  1823
-##  9     2 United States of America  1824
-## 10     2 United States of America  1825
-## # … with 16,721 more rows
+#> # A tibble: 16,731 x 3
+#>    ccode statenme                  year
+#>    <dbl> <chr>                    <int>
+#>  1     2 United States of America  1816
+#>  2     2 United States of America  1817
+#>  3     2 United States of America  1818
+#>  4     2 United States of America  1819
+#>  5     2 United States of America  1820
+#>  6     2 United States of America  1821
+#>  7     2 United States of America  1822
+#>  8     2 United States of America  1823
+#>  9     2 United States of America  1824
+#> 10     2 United States of America  1825
+#> # … with 16,721 more rows
 ```
 
 ### Create a State-Year Panel of Gleditsch-Ward states {#creategw}
@@ -362,23 +348,20 @@ create_stateyears()
 
 ```r
 create_stateyears(system="gw")
-```
-
-```
-## # A tibble: 18,289 x 3
-##    gwcode statename                 year
-##     <dbl> <chr>                    <int>
-##  1      2 United States of America  1816
-##  2      2 United States of America  1817
-##  3      2 United States of America  1818
-##  4      2 United States of America  1819
-##  5      2 United States of America  1820
-##  6      2 United States of America  1821
-##  7      2 United States of America  1822
-##  8      2 United States of America  1823
-##  9      2 United States of America  1824
-## 10      2 United States of America  1825
-## # … with 18,279 more rows
+#> # A tibble: 18,289 x 3
+#>    gwcode statename                 year
+#>     <dbl> <chr>                    <int>
+#>  1      2 United States of America  1816
+#>  2      2 United States of America  1817
+#>  3      2 United States of America  1818
+#>  4      2 United States of America  1819
+#>  5      2 United States of America  1820
+#>  6      2 United States of America  1821
+#>  7      2 United States of America  1822
+#>  8      2 United States of America  1823
+#>  9      2 United States of America  1824
+#> 10      2 United States of America  1825
+#> # … with 18,279 more rows
 ```
 
 ### Create a Panel of ISO Codes {#createiso}
@@ -393,23 +376,20 @@ ISO_3166_1 %>% as_tibble() %>%
   # Alpha_2 = iso2c, if you wanted it.
   # I want the three-character one.
   select(Alpha_3, Name)
-```
-
-```
-## # A tibble: 249 x 2
-##    Alpha_3 Name                
-##    <chr>   <chr>               
-##  1 ABW     Aruba               
-##  2 AFG     Afghanistan         
-##  3 AGO     Angola              
-##  4 AIA     Anguilla            
-##  5 ALA     Åland Islands       
-##  6 ALB     Albania             
-##  7 AND     Andorra             
-##  8 ARE     United Arab Emirates
-##  9 ARG     Argentina           
-## 10 ARM     Armenia             
-## # … with 239 more rows
+#> # A tibble: 249 x 2
+#>    Alpha_3 Name                
+#>    <chr>   <chr>               
+#>  1 ABW     Aruba               
+#>  2 AFG     Afghanistan         
+#>  3 AGO     Angola              
+#>  4 AIA     Anguilla            
+#>  5 ALA     Åland Islands       
+#>  6 ALB     Albania             
+#>  7 AND     Andorra             
+#>  8 ARE     United Arab Emirates
+#>  9 ARG     Argentina           
+#> 10 ARM     Armenia             
+#> # … with 239 more rows
 ```
 
 `{ISOcodes}` does have another data frame for "retired" codes. This is `ISO_3166_3` in the `{ISOcodes}` package. I encourage my student to take stock of how applicable some of these observations are for their particular analysis. My previous point about ISO codes---they don't neatly communicate a temporal dimension---still holds.
@@ -637,23 +617,20 @@ ISO_3166_1 %>% as_tibble() %>%
   mutate(year = list(seq(styear, endyear))) %>%
   unnest(year) %>%
   select(-styear, -endyear)
-```
-
-```
-## # A tibble: 2,739 x 3
-##    Alpha_3 Name   year
-##    <chr>   <chr> <int>
-##  1 ABW     Aruba  2010
-##  2 ABW     Aruba  2011
-##  3 ABW     Aruba  2012
-##  4 ABW     Aruba  2013
-##  5 ABW     Aruba  2014
-##  6 ABW     Aruba  2015
-##  7 ABW     Aruba  2016
-##  8 ABW     Aruba  2017
-##  9 ABW     Aruba  2018
-## 10 ABW     Aruba  2019
-## # … with 2,729 more rows
+#> # A tibble: 2,739 x 3
+#>    Alpha_3 Name   year
+#>    <chr>   <chr> <int>
+#>  1 ABW     Aruba  2010
+#>  2 ABW     Aruba  2011
+#>  3 ABW     Aruba  2012
+#>  4 ABW     Aruba  2013
+#>  5 ABW     Aruba  2014
+#>  6 ABW     Aruba  2015
+#>  7 ABW     Aruba  2016
+#>  8 ABW     Aruba  2017
+#>  9 ABW     Aruba  2018
+#> 10 ABW     Aruba  2019
+#> # … with 2,729 more rows
 ```
 
 ### Create a Panel of UN M49 Codes {#createunm49}
@@ -665,23 +642,20 @@ ISO_3166_1 %>% as_tibble() %>%
 UN_M.49_Countries %>% as_tibble() %>% 
   select(-ISO_Alpha_3) %>%
   mutate(Name = str_trim(Name, side="left"))
-```
-
-```
-## # A tibble: 249 x 2
-##    Code  Name               
-##    <chr> <chr>              
-##  1 004   Afghanistan        
-##  2 248   Åland Islands      
-##  3 008   Albania            
-##  4 012   Algeria            
-##  5 016   American Samoa     
-##  6 020   Andorra            
-##  7 024   Angola             
-##  8 660   Anguilla           
-##  9 010   Antarctica         
-## 10 028   Antigua and Barbuda
-## # … with 239 more rows
+#> # A tibble: 249 x 2
+#>    Code  Name               
+#>    <chr> <chr>              
+#>  1 004   Afghanistan        
+#>  2 248   Åland Islands      
+#>  3 008   Albania            
+#>  4 012   Algeria            
+#>  5 016   American Samoa     
+#>  6 020   Andorra            
+#>  7 024   Angola             
+#>  8 660   Anguilla           
+#>  9 010   Antarctica         
+#> 10 028   Antigua and Barbuda
+#> # … with 239 more rows
 ```
 
 ### Use `{countrycode}` for Matching/Merging Across Classification Systems {#usecountrycode}
@@ -697,30 +671,21 @@ ISO_3166_1 %>% as_tibble() %>%
   # I want the three-character one.
   select(Alpha_3, Name) %>%
   mutate(ccode = countrycode(Alpha_3, "iso3c", "cown"))
-```
-
-```
-## Warning: Problem with `mutate()` input `ccode`.
-## ℹ Some values were not matched unambiguously: ABW, AIA, ALA, ASM, ATA, ATF, BES, BLM, BMU, BVT, CCK, COK, CUW, CXR, CYM, ESH, FLK, FRO, GGY, GIB, GLP, GRL, GUF, GUM, HKG, HMD, IMN, IOT, JEY, MAC, MAF, MNP, MSR, MTQ, MYT, NCL, NFK, NIU, PCN, PRI, PSE, PYF, REU, SGS, SHN, SJM, SPM, SRB, SXM, TCA, TKL, UMI, VGB, VIR, WLF
-## 
-## ℹ Input `ccode` is `countrycode(Alpha_3, "iso3c", "cown")`.
-```
-
-```
-## # A tibble: 249 x 3
-##    Alpha_3 Name                 ccode
-##    <chr>   <chr>                <dbl>
-##  1 ABW     Aruba                   NA
-##  2 AFG     Afghanistan            700
-##  3 AGO     Angola                 540
-##  4 AIA     Anguilla                NA
-##  5 ALA     Åland Islands           NA
-##  6 ALB     Albania                339
-##  7 AND     Andorra                232
-##  8 ARE     United Arab Emirates   696
-##  9 ARG     Argentina              160
-## 10 ARM     Armenia                371
-## # … with 239 more rows
+#> Warning in countrycode(Alpha_3, "iso3c", "cown"): Some values were not matched unambiguously: ABW, AIA, ALA, ASM, ATA, ATF, BES, BLM, BMU, BVT, CCK, COK, CUW, CXR, CYM, ESH, FLK, FRO, GGY, GIB, GLP, GRL, GUF, GUM, HKG, HMD, IMN, IOT, JEY, MAC, MAF, MNP, MSR, MTQ, MYT, NCL, NFK, NIU, PCN, PRI, PSE, PYF, REU, SGS, SHN, SJM, SPM, SRB, SXM, TCA, TKL, UMI, VGB, VIR, WLF
+#> # A tibble: 249 x 3
+#>    Alpha_3 Name                 ccode
+#>    <chr>   <chr>                <dbl>
+#>  1 ABW     Aruba                   NA
+#>  2 AFG     Afghanistan            700
+#>  3 AGO     Angola                 540
+#>  4 AIA     Anguilla                NA
+#>  5 ALA     Åland Islands           NA
+#>  6 ALB     Albania                339
+#>  7 AND     Andorra                232
+#>  8 ARE     United Arab Emirates   696
+#>  9 ARG     Argentina              160
+#> 10 ARM     Armenia                371
+#> # … with 239 more rows
 ```
 
 I do want the reader to observe something. `countrycode()` cannot perfectly match observations. The extent to which there are important differences among classification systems, perfect one-to-one matching is impossible (and it's why I recommend treating one classification as a master system). When `countrycode()` cannot find a one-to-one match, it returns an NA and will tell you which inputs were not matched for your own diagnostic purposes. In our case, these are the NAs.
@@ -1024,23 +989,20 @@ ISO_3166_1 %>% as_tibble() %>%
   select(Alpha_3, Name) %>%
   mutate(ccode = countrycode(Alpha_3, "iso3c", "cown"),
          ccode = ifelse(Alpha_3 == "SRB", 345, ccode)) 
-```
-
-```
-## # A tibble: 249 x 3
-##    Alpha_3 Name                 ccode
-##    <chr>   <chr>                <dbl>
-##  1 ABW     Aruba                   NA
-##  2 AFG     Afghanistan            700
-##  3 AGO     Angola                 540
-##  4 AIA     Anguilla                NA
-##  5 ALA     Åland Islands           NA
-##  6 ALB     Albania                339
-##  7 AND     Andorra                232
-##  8 ARE     United Arab Emirates   696
-##  9 ARG     Argentina              160
-## 10 ARM     Armenia                371
-## # … with 239 more rows
+#> # A tibble: 249 x 3
+#>    Alpha_3 Name                 ccode
+#>    <chr>   <chr>                <dbl>
+#>  1 ABW     Aruba                   NA
+#>  2 AFG     Afghanistan            700
+#>  3 AGO     Angola                 540
+#>  4 AIA     Anguilla                NA
+#>  5 ALA     Åland Islands           NA
+#>  6 ALB     Albania                339
+#>  7 AND     Andorra                232
+#>  8 ARE     United Arab Emirates   696
+#>  9 ARG     Argentina              160
+#> 10 ARM     Armenia                371
+#> # … with 239 more rows
 ```
 
 I use this to underscore that `{countrycode}` is one of the most useful R packages merging and matching across different state/country classification systems. However, it is not magic and should not be used uncritically. Always inspect the output.
