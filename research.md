@@ -66,7 +66,7 @@ Gibler, Douglas M. and Steven V. Miller. Forthcoming. "An Appraisal of Project M
 
 Miller, Steven V. Forthcoming. "[Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017](/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)." *Social Science Journal.*
 
-Miller, Steven V. and Nicholas T. Davis. Forthcoming. "[The Effect of White Social Prejudice on Support for American Democracy](/research/white-social-prejudice-support-american-democracy/)." *Journal of Race, Ethnicity, and Politics.*
+Miller, Steven V. and Nicholas T. Davis. 2021. "[The Effect of White Social Prejudice on Support for American Democracy](/research/white-social-prejudice-support-american-democracy/)." *Journal of Race, Ethnicity, and Politics.* 6(2): 334--351.
 
 Curtis, K. Amber and Steven V. Miller. 2021. "[A (Supra)Nationalist Personality? The Big Five’s Effects on Political-Territorial Identification](https://journals.sagepub.com/doi/abs/10.1177/1465116520988907)."  *European Union Politics* 22(2): 202--226. 
 

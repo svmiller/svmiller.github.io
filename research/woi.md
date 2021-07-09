@@ -16,7 +16,7 @@ permalink: /research/white-social-prejudice-support-american-democracy/
 
 ## Abstract
 
-*Co-authored with [Nicholas T. Davis](http://www.nicholastdavis.com/). Forthcoming at [Journal of Race, Ethnicity, and Politics](https://www.cambridge.org/core/journals/journal-of-race-ethnicity-and-politics).*
+*Co-authored with [Nicholas T. Davis](http://www.nicholastdavis.com/). Published at [Journal of Race, Ethnicity, and Politics](https://www.cambridge.org/core/journals/journal-of-race-ethnicity-and-politics/article/abs/effect-of-white-social-prejudice-on-support-for-american-democracy/84E06B7CA592CCC53852AE94AAD35B9F).*
 
 Social prejudice constitutes an unwillingness to associate with individuals whose cultural or racial background differs from one's own group. Such prejudice is a particularly thorny problem in the context of democracy, which requires citizens to minimally respect such differences. In this manuscript, we assess the relationships between these attitudes and support for democratic institutions. Using World Values Survey data from 1995 to 2011, we find that prejudice toward cultural, ethnic, or racial 'others' reduces the value that white Americans assign to democracy. We also find white Americans who exhibit these attitudes are more likely to dismiss the value of separation of powers and are more likely to support army rule. These findings imply that exclusionary rhetoric targeted toward nonwhite groups is accompanied by lower baseline support for democracy. We close with a discussion of how our analyses inform the study of Americans' attitudes toward democracy.
 
