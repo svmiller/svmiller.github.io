@@ -1,0 +1,83 @@
+---
+output: 
+  stevetemplates::article2:
+    citation_package: natbib
+    dev: cairo_pdf
+bibliography: '`r paste0(Sys.getenv("HOME"), "/Dropbox/master.bib")`'
+biblio-style: apsr
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+title: "An Article Summary of 'Making Sense of Isolationism: Foreign Policy Mood as a Multilevel Phenomenon'"
+author:
+- name: Steven V. Miller
+  affiliation: Clemson University
+  email: svmille@clemson.edu
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+
+mainfont: cochineal
+# fontfamilyoptions: sc, osf
+fontsize: 11pt
+---
+
+# Article
+
+```{r, echo=F, results="asis", warning=F, message=F}
+
+library(stevemisc)
+library(bib2df)
+library(tidyverse)
+
+bib <- bib2df("~/Dropbox/master.bib")
+
+bib %>%
+  filter(BIBTEXKEY == "kertzer2013msi") %>%
+  df2bib() %>%
+  capture.output() %>%
+  print_refs(., toformat="latex") %>%
+  str_replace(., "\\{``", "``") %>%
+  str_replace(., "''\\}", "''") %>%
+  cat(., sep="\n")
+
+```
+
+# Introduction
+
+Isolationism---the belief that the foreign policy of the United States has historically been, or should be, aloof from world affairs---is the oldest debate in American foreign policy [@pollinsschweller1999ll] and constitutes a major theme of academic and popular discussion. However, our interest in macro-level questions of the popularity of isolationism at the mass-level and the micro-level question of who is more likely to be isolationist among U.S. citizens are typically discrete from each other in our research. This is a mistake given these phenomena interact with each other. @kertzer2013msi offers a multi-level analysis of support for isolationism using multiple waves of American National Election Survey (ANES) data from 1980 to 2008. He finds important cross-level interaction between economic assessments and indicators and support for isolationism. Respondents who feel the national economic situation is getting worse amid periods of high unemployment and inflation are more likely to support isolationist sentiment. He also finds the security environment influences isolationist sentiment contingent upon the political knowledge of the respondent. Low-knowledge individuals are generally unaffected by the international security environment while high-knowledge individuals express more isolationist sentiments when the international security environment becomes more conflictual.
+
+# Foreign Policy as Multilevel Phenomenon
+
+The isolationism phenomenon, long an important inquiry into the popular and academic discussion of U.S. foreign policy, has focused on two different themes that produce arguments that do not communicate well with each other.
+
+The first topic in the isolationism debate concerns a macro-level phenomenon of the popularity of isolationism, its presence, and its desirability as a general principle for U.S. foreign policy. Casual students of U.S. foreign policy mistake that isolationism was a general rule of U.S. foreign policy prior to the U.S.' emergence of a superpower during World War II. The historical record of U.S. foreign policy would not support such an interpretation either. In fact, isolationism prior to World War II is more myth than reality [@braumoeller2010mai]. The perceived high-water moment of isolationism, the rejection of the U.S. entry into Woodrow Wilson's League of Nations, reflects only a constitutional quirk of treaty ratification, not a majoritarian sentiment. Isolationism holds even less currency in the United States after World War II. The perceived nature of the Soviet threat led to a broad consensus about the need for an active U.S. role in foreign affairs [@pagebarabas2000fpg]. Macro-level scholarship tends to converge on a conclusion that isolationism is more fiction than fact in the study of U.S. foreign policy and that interventionism in the present is normatively better than isolationism.
+
+Micro-level scholarship notes there is important heterogeneity in citizen attitudes toward the U.S. role in the international system that the other vein of isolationism scholarship misses. For example, @urbatsch2010idp finds isolationism is more pronounced among older citizens, women, the less educated, the more religious, and ethnic/racial minorities. Isolationist sentiment goes down when the respondent shares the same political party of the president. Additional inquiries into the micro-level foundations of isolationism involve questions of Republican or Democratic partisanship or regional differences. Midwesterners, especially Quakers in Pennsylvania [@byrd1960qwfp], have gravitated more toward isolationism than other regions [@smuckler1953ri; @rieselbach1960bib]. The inquiry here is different. Whereas macro-level scholarship explores questions of when isolationist sentiment increases, the micro-level scholarships asks who is more likely to support isolationism.
+
+@kertzer2013msi notes these inquiries have produced findings that do not directly speak to each other even though they should. Kertzer contends we have ignored what early foreign policy literature called the "man-milieu" interaction [c.f. @sproutsprout1957efs]. The broader foreign policy context shapes the individual's response to it and the sum of individual sentiments toward U.S. foreign policy shapes the macro-level phenomenon we study. We miss these interactions in the study of isolationism with separate research agendas that operate separate from each other.
+
+# Modeling the Multi-level Context of Isolationism
+
+Kertzer argues that individual-level isolationist sentiments are a function of three factors. The first is individual-level economic perceptions. Those who hold more positive evaluations of the economy are more likely to support an internationalist foreign policy while those who hold negative evaluations are more likely to express isolationist sentiments. Objective (i.e. "macro-level") economic indicators also influence individual-level attitudes toward isolationism. Positive economic conditions lead citizens to prefer an extroverted foreign policy while negative economic conditions lead individuals to prefer a less active role for the U.S. in foreign affairs. Kertzer also identifies the effect the security environment has. The more conflictual the U.S.' international security environment is, and the less the U.S. wins the disputes in which it is involved, the less likely citizens will prefer an internationalist foreign policy. Kertzer also adds there should be cross-level interactions between the the micro-level and macro-level economic assessments as well as the international security environment and the respondent's political knowledge. The effect of subjective economic assessments is conditional on the presence of positive economic conditions at the national level. Further, foreign policy's sophisitication and its removal from everyday life of the typical citizen means we should observe the effects of the international security environment only on the most knowledgable respondents.
+
+His sampling frame to test his hypotheses involves biannual ANES data from 1980 to 2008. His dependent variable proxying isolationist sentiments is a statement from the ANES that reads, "This country would be better off if we just stayed home and did not concern ourselves with problems in other parts of the world." Respondents who agreed with that statement get a value of 0 and those that disagreed assume a value of 1. He codes retrospective sociotropic evaluations of the economy with a question that asks respondents whether they believe the economy has gotten worse, stayed the same, or improved over the past year. He uses Correlates of War (CoW) Militarized Interstate Dispute (MID) data to count the number of ongoing MIDs involving the United State as well as MIDs that the U.S. failed to win. Kertzer uses the interviewer's postquestionnaire assessment of the respondent’s general level of information about politics to measure political knowledge. Kertzer adds several control variables for individual-level correlates like age, education, gender, income, personal efficacy, and partisanship, among others.
+
+Kertzer estimates a series of mixed effects models and displays the results in regression tables and graphs quantities of interest. Table 1 shows there is a robust effect of retrospective evaluations of the economy consistent with his hypothesis. Respondents who hold more positive evaluations of the economy are more likely to express preferences for an extroverted foreign policy. Kertzer does report statistically significant interactions with retrospective sociotropic evaluations and objective economic indicators. Worsening economic conditions for the country decrease the effect that subjective economic assessments have on an individual's attitude toward an extroverted foreign policy. Table 2 suggests minimal effects of the security environment on attitudes toward foreign policy. Figure 1 unpacks this relationship further and reports that a more conflictual international security environment generally has no effect on the low-knowledge respondent. However, more MIDs and more failures to win these disputes leads high-knowledge respondents to express greater aversion to an extroverted foreign policy.
+
+# Conclusion and Relevance to the Study of U.S. Foreign Policy
+
+Kertzer argues that the study of isolationism, the oldest debate in the study of U.S. foreign policy, has produced answers that only address half the question at a time. Macro-level questions of the overall popularity of isolationism and its changes as a foreign policy mood over time and micro-level questions of who supports isolationism miss that foreign policy mood is a multi-level phenomenon. The broader foreign policy context shapes individual-level political attitudes about isolationism and the sum of these attitudes toward U.S. foreign policy shapes the macro-level phenomenon we study. Kertzer uses a series of mixed effects models for data spanning 28 years of ANES data and finds economic and security factors shape at the macro-level condition attitudes toward isolationism. However, there are important interactive effects between these macro-level factors and micro-level indicators of retrospective sociotropic evaluations and political knowledge. Worsening economic conditions for the country decrease the effect that subjective economic assessments have on attitudes toward isolationism while a more conflict international security environment leads only the high-knowledge respondents to express greater preferences for isolationism.
+
+Kertzer's cross-level analysis ultimately concerns a micro-level question of who is likely to be an isolationist but it does speak to macro-level questions of isolationism as general principle or rule in the study of U.S. foreign policy. @rosatiscott2014pusf echo the general consensus of political scientists that the U.S. had never been isolationist. The U.S. is a product of European power politics and came into the world immediately encircled by territory owned by hostile neighbors (France, Great Britain, and Spain). Its survival hinged on its ability to adapt to these circumstances in what @rosatiscott2014pusf identify as the "Continental Era". The "Regional Era" only expanded U.S. goals of nation-building, territorial consolidation, and spheres of influence that started with independence. Kertzer's analysis does not directly challenge this consensus but instead models conditions in which an individual-level foreign policy mood for isolationism may change. Consider that Kertzer finds that there are two foreign policy extroverts for every one respondent who expresses support for isolationism. This finding is largely time-invariant as well.
+
+His analysis has more to say about scholarship that links U.S. foreign policy with the study of public opinion and political attitudes. His findings provide a challenge to classic American public opinion scholarship that draws a thick divide between attitudes toward domestic policy and attitudes toward foreign policy. Conventional wisdom, largely accumulated during the early period of the Cold War in which there was a durable consensus about the perceived Soviet threat, holds these are separate issue domains. Kertzer finds attitudes toward foreign policy are shaped by the economic context. This is a non-trivial finding for students wedded to these classic works. However, his findings about the international security environment conform to some of these classic works. Knowledge about ongoing foreign policy events requires a higher level of political sophistication than the typical American voter demonstrates. Therefore, it should not be surprising that international conflict's dampening effect on support for an extroverted foreign policy falls largely on the high-knowledge citizen.
+
+\newpage
+<!--
+# References
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
+
