@@ -1,0 +1,97 @@
+---
+output: 
+  stevetemplates::article2:
+    citation_package: natbib
+    dev: cairo_pdf
+bibliography: '`r paste0(Sys.getenv("HOME"), "/Dropbox/master.bib")`'
+biblio-style: apsr
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+title: "An Article Summary of 'Democratizing for Peace'"
+author:
+- name: Steven V. Miller
+  affiliation: Clemson University
+  email: svmille@clemson.edu
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+
+mainfont: cochineal
+# fontfamilyoptions: sc, osf
+fontsize: 11pt
+---
+
+# Article
+
+```{r, echo=F, results="asis", warning=F, message=F}
+
+library(stevemisc)
+library(bib2df)
+library(tidyverse)
+
+bib <- bib2df("~/Dropbox/master.bib")
+
+bib %>%
+  filter(BIBTEXKEY == "wardgleditsch1998dp") %>%
+  df2bib() %>%
+  capture.output() %>%
+  print_refs(., toformat="latex") %>%
+  str_replace(., "\\{``", "``") %>%
+  str_replace(., "''\\}", "''") %>%
+  cat(., sep="\n")
+
+```
+
+
+# Introduction
+
+Ward and Gleditsch tackle a puzzle unaddressed (to that point) in the democratic peace literature. The empirical core of the so-called "democratic peace" tell us that democracies do not fight each other, and (effectively) never in war, relative to other regime pairings. However, democracies are no more or less war-prone than other state types at the unit-level. The closest thing to an empirical law that we have in political science [@levy1988dpw], there is an important, implicit assumption that states should become more peaceful with each other as they democratize. Empirical evidence has failed to vindicate this. If anything, democratizing states show a greater proclivity to belligerence, which @mansfieldsnyder1995ddw attribute to electoral pressures in nascent democracies that encourage solidifying popular support by making nationalistic appeals. These lead democratizing states to war. Ward and Gleditsch want to unpack this claim further and test whether all forms of democratization are dangerous. They regress Correlates of War inter-state data on multiple measures of democratization, ultimately finding that the dangerous democratizations are the ones that are rocky or turbulent. States that make large and consistent strides toward democratization are more peaceful than those that do not. Democratizing states are less war-prone than we had previously thought.
+
+# Literature Review
+
+Ward and Gleditsch review the democratic peace literature to date. They note normative explanations offered by the likes of @dixon1994dps, who argues that a norm of bounded competition explains the proclivity of jointly democratic disputes to end in a negotiated settlement relative to disputes involving other state pairings. They also note the structural features of democracy that are thought to explain this phenomenon, like those offered by Morgan and his colleagues [@morgancampbell1991dsd; @morganschwebach1992ttd]. These argue the importance of institutional constraints of democracies that are supposed to account for these findings.
+
+The authors address what seems to be an empirical anomaly hidden within these structural accounts of the democratic peace. The issue is not that democracies are still war-prone at the unit-level; this is common knowledge by this time. The issue is that the process of *democratizing* entails substantial risks for those democratizing states to become embroiled in a war. Here, the authors address a well-cited argument from @mansfieldsnyder1995ddw, who find that leaders of democratizing states are susceptible to electoral incentives that could reward them for exploiting nationalistic sentiments. This, however, may lead fledgling democracies to war at greater rates than stable democracies or stable autocracies. The case of Serbia/Yugoslavia in the 1990s illustrates this phenomenon well.
+
+Whereas much of the democratic peace literature had traveled from the academy to policy-making by the mid-1990s, addressing the merits of this argument has real-world implications. Ward and Gleditsch are not convinced that the process of democratizing is inherently dangerous or war-prone. Instead, they contend that only the most turbulent democratization processes should entails risks of inter-state war and proceed with an empirical test of their hypotheses.
+
+# Uncovering the Dangerous Democratizations
+
+Whereas extant research had specified democratization as a yes/no binary phenomenon, the authors break new ground in estimating three forms of democratization (not including the current democracy value for country $i$ at time-point $t$). These include the direction of change between time-point $t$ and time-point $t-10$.[^tenyear] If the value was greater ten years ago than it was in the observation year (i.e. $X_{it} < X_{it - 10}$), this is coded as -1. It is coded as 1 if the opposite is true. Instances where  $X_{it} = X_{it - 10}$ are coded as 0. In another specification, the authors use just the difference between $X_{it}$ and $X_{it - 10}$. Larger values indicate more democratic change in a ten-year period. Finally, the authors specify a variance measure. This is denoted formally as
+
+\begin{equation}
+    \frac{1}{10} \sum\limits_{t=1}^{10}(X_{it} - \frac{1}{10}\sum\limits_{t=1}^{10}X_{it})^2
+\end{equation}
+
+where the average democracy measure in a ten-year period ($\frac{1}{10}\sum\limits_{t=1}^{10}X_{it}$) is subtracted from the democracy value in a given year within that window. This is done for all ten years, squared, and then averaged. Larger values indicate more rapid changes and turbulent ebbs and flows, rather than linear processes of gradual democratization. All data here come from the Polity project and are estimated using the democracy characteristics (11-point scale) and again using the composite democracy/autocracy characteristics (21-point scale).
+
+[^tenyear]: The use of ten-year periods follows convention given by @mansfieldsnyder1995ddw and allows the authors' results to speak well to this study.
+
+Thereafter, the authors gather Correlates of War inter-state war data as a dependent variable on which to regress their various democracy measures. The analyses of interest for the authors are largely in Table 3. The results shown here suggest that there is no relationship between the current value of democracy and the probability of war. The direction of change measure is positive and statistically significant in both models, suggesting changes toward democracy are associated with greater natural logged odds of war. This is consistent with what @mansfieldsnyder1995ddw found. However, magnitude changes in favor of democratization are peaceful. The larger the change in a ten-year window, the lower the logged odds of war. Finally, the variance measure is positive and statistically significant. More turbulent year-to-year changes coincide with the greater logged odds of war, which is consistent with our intuition about what a "dangerous democratization" would resemble. 
+
+The results are almost identical when the authors subset the Polity measure to just the executive constraints subcomponent. The current value of executive contraints, where higher values indicate more executive constraints (i.e. more democracy), has a positive relationship with the natural logged odds of war. This is one minor departure from the results in Table 3. The other results in Table 4 are identical to what the authors report in Table 3. The direction of change measure is positive and statistically significant while the magnitude change measure is negative and statistically significant. The variance measure is positive and statistically significant as well.
+
+All told, the authors' results qualify what we know from @mansfieldsnyder1995ddw. Some forms of democratization are dangerous while others are not. States making larger transitions to democracy are more peaceful than those making gradual changes or changes in democratization with a huge variance from year to year.
+
+# Conclusion
+
+The democratic peace in its then-current form tells us that democratic dyads would be unlikely to fight each other, and effectively never in war, while democracies are no more or less war-prone than other types of states. As it traveled to policy-making circles, practitioners understood the democratic peace entails that democratizing states should be more peaceful. @mansfieldsnyder1995ddw found what they thought to be compelling evidence that practitioners who believed this naive relationship about democratization and peace were mistaken. Ward and Gleditsch challenge those findings and say that democratizing states are much more peaceful than @mansfieldsnyder1995ddw suggested. States making greater changes toward democracy are peaceful, though states that are perhaps slightly more democratic than they were ten years ago are more war-prone. Ultimately, democratizations that are rocky and subject to reversals are the democratizations that are war-prone.
+
+The authors are mostly speaking to @mansfieldsnyder1995ddw, but the findings address other democratic peace scholarship. For one, it addresses a gap in understanding of why democracies are war-prone at the unit-level. All we know from the likes of @maozrussett1993nsc at that point is that democracies are no different than non-democracies in their proclivity for violent conflict behavior. @rousseauetal1996adn try to vindicate the monadic democratic peace but are mostly unsuccessful. Ward and Gleditsch's findings suggest these previous analyses aggregate all forms of democracy (including fledgling democracies) together. Disaggregating state's regime scores further, like Ward and Gleditsch do here, suggests that some democracies may in fact be more peaceful at the unit-level than other state types. States making large moves toward democracy are more peaceful than those who are not. Democracies may not be more peaceful than autocracies, all things considered, but some are. Those that make large strides toward democracy are more peaceful than states that are gradually democratizating or have large year-to-year fluctuations in their level of democracy.
+
+Ward and Gleditsch provide a useful analysis to help us understand that, which has obvious implications for understanding the fledgling (and in some cases, unsuccessful and war-prone) democratization processes observed in Southeastern and Eastern Europe after the Cold War ended. The classic case of this time concerned Serbia after the dissolution of Yugoslavia. The disintegration of Yugoslavia and gradual democratization that followed in Belgrade came with major institutional uncertainty. This created opportunities for Slobodan Milošević to prey on voters' nationalistic sentiments to secure power. This was an electoral success for Milošević, but it embroiled a fledgling, democratizing Serbia in war for much of the 1990s.
+
+Yet, the Serbian example stands at odds with the Spanish example. King Juan Carlos I, Francisco Franco's heir apparent, was a closet democrat at heart to the chagrin of Franco's original expectations. After Franco's death in 1975, Juan Carlos I pushed numerous democratic reforms through the Cortes that installed democracy in a five-year window. Spain's `polity2` score moved from -7 in 1974 (i.e. one of the least democratic countries in the world) to -3 in 1975, then 1 in 1976, a 5 in 1977, and a 9 in 1978. This almost a complete democratic transformation, which even survived a coup attempt in 1982. The Spanish case is exceptional and conforms well to Ward and Gleditsch's analysis. Not only was Spain not involved in a war for 13 years after the transition to democracy,[^gulfwar] it was involved in only three small-scale MIDs in the ten years after the effective consolidation of democracy in 1978. It did not even engage in a militarized incident for two of those three MIDs. This is true even though Spain has some major contested issues that linger in its relations with other countries like Morocco (Ceuta, Melilla) and the United Kingdom (Gibraltar). Spain, which made a large, unidirectional transition to democracy, is one of the peaceful democracies that Ward and Gleditsch's analysis describes.
+
+[^gulfwar]: Spain participated in a show of force against Iraq as part of the Gulf War coalition in 1990. It was an active participant in the Iraq War in 2003.
+
+
+\newpage
+<!--
+# References
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
+
