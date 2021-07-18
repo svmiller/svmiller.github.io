@@ -1,0 +1,96 @@
+---
+output: 
+  stevetemplates::article2:
+    citation_package: natbib
+    dev: cairo_pdf
+bibliography: '`r paste0(Sys.getenv("HOME"), "/Dropbox/master.bib")`'
+biblio-style: apsr
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+title: "An Article Summary of 'Assessing the Dyadic Nature of the Democratic Peace, 1918-88'"
+author:
+- name: Steven V. Miller
+  affiliation: Clemson University
+  email: svmille@clemson.edu
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+
+mainfont: cochineal
+# fontfamilyoptions: sc, osf
+fontsize: 11pt
+---
+
+# Article
+
+```{r, echo=F, results="asis", warning=F, message=F}
+
+library(stevemisc)
+library(bib2df)
+library(tidyverse)
+
+bib <- bib2df("~/Dropbox/master.bib")
+
+bib %>%
+  filter(BIBTEXKEY == "rousseauetal1996adn") %>%
+  df2bib() %>%
+  capture.output() %>%
+  print_refs(., toformat="latex") %>%
+  str_replace(., "\\{``", "``") %>%
+  str_replace(., "''\\}", "''") %>%
+  cat(., sep="\n")
+
+```
+
+
+
+# Introduction
+
+Rousseau et al. attempt to tackle an inconsistency in the democratic peace literature. The core findings in the democratic peace literature tell us that democracies do not fight each other, and never in war, when compared to non-democracies. However, democracies are no more or less war-prone than non-democracies at the unit-level. This tells us that the "peace" of "democratic peace" is a dyadic phenomenon (i.e. observed when democracies are paired with each other) rather than a "monadic" phenomenon (i.e. democracies as more peaceful than other regime types). Rousseau et al. contend this is a problem of research design. Dyad-year models do not do an adequate job testing monadic-level implications of the foundations of democratic peace. The authors address this with a state-level analysis of ICB data and escalation in crisis to better test the monadic implications of the democratic peace. Their findings do not vindicate monadic democratic peace arguments since empirical support is contingent on omitted variable bias. We observe it only when the authors omit an important confounder: whether the state is satisfied with the status quo.
+
+# What We Know About the Democratic Peace
+
+The authors situate their analysis in what is an already thriving democratic peace research program. They address the normative and structural models of democratic peace and note a common (and still relevant) critique of the core of democratic peace. The findings suggest a dyadic peace but the arguments imply a monadic phenomenon for which there has never been robust empirical support. In other words, our arguments about the pacific nature of democracies in their interactions with each other make implicit assumptions about the composition of democracies that amount to statements that democracies should be more peaceful in general despite the evidence saying this is not true.
+
+The authors recount the normative model [e.g. @maozrussett1993nsc; @dixon1994dps] in which scholars assume democracies behave differently than autocracies in their own domestic political contexts. These models assume that political socialization within democracies induces democrats to pursue negotiation and compromise in their interactions with domestic rivals to capture and hold office. This conditions them to pursue negotiation and compromise in their interactions with foreign leaders, resulting in the absence of war with other democrats that share these norms. They compare it with structural models [e.g. @morgancampbell1991dsd; @morganschwebach1992ttd] of the democratic peace. These assume that democratic institutions force democrats to engage in more protracted war mobilization efforts because of the enfranchisement of a broad array of the citizenry as well as the costs that war imposes upon them. The protracted nature of these mobilization efforts allow time for cooler heads to prevail in a dyadic dispute but that nothing restrains the autocrat from immediately jeopardizing the security of the democratic state. This allows emergency mobilization that escalates war in a dispute between a democrat and an autocrat (e.g. World War II from the U.S. perspective). Democratic peace scholars tailor both models to explain the dyadic phenomenon we observe and not the monadic implications for which there is little to no empirical support.
+
+However, the contradiction is unmistakable in democratic peace scholarship at this time. Democratic peace scholars tailor the assumptions in their theoretical models to explain the dyadic phenomenon but imply that we must observe the monadic phenomenon as well. The normative model assumes democrats capture office through negotiation and compromise, conditioning their worldview toward the same in foreign policy. This is almost always the first assumption in any normative theoretic model and it almost explicitly suggests democrats should be more inclined to be peaceful in nature as a result. However, the assumptions that normative scholars add to the theory shoehorn the predictions to be dyadic and not monadic despite the first assumption suggesting democracies are more peaceful in general. Structural models suffer from this same contradiction as well. The extent to which structural models of democratic peace assume democracies are slow-movers with higher mobilization costs makes additional assumptions that limit the democratic peace to a dyadic phenomenon seem ad hoc. This happens because our theoretical models may have put the cart before the horse at this point. We know the data tell us the democratic peace is dyadic and not monadic. We then craft our models to explain the findings.
+
+The authors offer a clever intuition when they note this is a problem of research design. Our standard empirical models of democratic peace are dyadic, whether they are dyad-year models of MID or war onset or dyadic-MID-level analyses of escalation. The authors argue we could better test the monadic implications of democratic peace by shifting the level of analysis to the individual state, which amounts to a foreign policy decision-making analysis of states in crisis. We know democracies are as conflict-prone and war-prone at the unit-level but the monadic implications of democratic peace may still stand if democracies are not the first to initiate or escalate hostilities in foreign policy crises.
+
+# Research Design and Results
+
+The authors use the ICB data, which has a temporal domain from 1918 to 1988, and apply some case-exclusion rules. These include the elimination of colonialism crises, crises involving other non-state actors, crises that ended in capitulation before the use of force, crises that occurred in the context of a full-scale war and crises with no traceable threat to use force.  Some crises were also aggregated as well if they all concerned the same dispute.  With these crises in place, they disaggregate the crises by conflict dyad and further disaggregate that to the state-level.  In short, they use the state in the crisis, versus an opponent, as the unit of analysis.
+
+The dependent (outcome) variable of interest is the initiation of force.  It is ordered in nature, spanning values of 0 to 2.  If a given state was not the first to initiate the use of force, it is coded a 0.  The authors code a 1 if a state was the first to commit 1,000 or fewer troops to a combat zone, which the authors understand as a minor level of force. The authors code a 2 if the state was the first to initiate a minor leve of force *and the first to commit more than 1,000 troops to the combat zone.[^assume]  The dependent variable assumes a value of 0 for both states if neither used military force in the crisis.  Recall that the authors are going to test the argument that there is a monadic element to the democratic peace. They expect that the democracy in a given crisis will be less likely to be the one that first initiates force. A democracy in a crisis that uses a major level of force, but only after another state that opposes it used this major level of force, is still coded as 0. The authors also run a test on highest level of force as a robustness check.  This is coded in an analogous manner to the initiation of force variable, but checks for highest level of force regardless of who escalated the crisis with the first show of force.
+
+[^assume]: Assume the following crisis between State A and State B.  State A commits 500 troops to a combat zone.  State B responds by committing 5,000 troops to a combat zone.  Both State A and State B would have values of 1, since State A was the first to initiate a minor level of force and State B was the first to respond with a major level of force.  Assume a different scenario for State A and State B.  State A first commits 500 troops to a combat zone.  State B responds by committing 501 troops to a combat zone.  State A requites that by sending 5,000 troops to a combat zone.  State A would have a value of 2 for this variable while State B would have a value of 0.
+
+<!-- I don't want to dwell on the variables too much, including the satisfaction with the status quo variable that seems to hinge on making the monadic claim significant (Table 5).  Do recall what the authors want to test: the monadic democratic peace (more peaceful in general) and the dyadic democratic peace (more peaceful only with themselves).-->  If the monadic claim is true, then knowing one state's level of democracy is sufficient to know whether or not the state initiated force against an opponent.\footnote{The authors create a 0-20 scale of democracy from the Polity data.}  If the dyadic claim is true, then there must be some kind of interaction term in the model where the state is the unit of the analysis.  To test this claim, the authors take the actor's democracy score and interact with a democratic dummy variable that assumes the value of a 1 if the opponent meets the conventional cutoff for democracy in the Polity data.
+
+
+The authors present their results first in Table 1, in which the first row tests the monadic claim.  The coefficient is in the expected direction (i.e., it is negative), but is not significant.  The *t*-ratio of 1.470 indicates approximately 80% confidence that the results are not a product of the sampling process, which is well below the conventional *t*-ratio of 1.96 (95% confidence). In short, there is only weak support for the monadic claim.  This is not the case with the second row, where the democracy score interacts with a democracy/no-democracy dummy variable.  This variable is significant and negative.  In other words, a democracy is less likely to initiate force at either a minor or major level if its opponent in an international crisis is also a democracy. This is another route to empirical support for the dyadic nature of the democratic peace. Table 3 produces similar results, albeit for the escalation variable.  There is even less support for the monadic claim as the variable used to test it is not significant.
+
+Only one set of analyses provides any empirical support for monadic hypothesis. This is Table 5 in Rousseau et al.'s analysis. The coefficient for the state's democracy score is negative and significant in both the first model (initiation of force) and the second model (highest level of force). This seems like important empirical vindication for the monadic argument of democratic peace but the results are more precarious than they first seem. The strongest empirical support for the monadic democratic peace follows deliberate model re-specification that removes an important confounder: satisfaction with the status quo. This variable was negative and significant in both Table 1 and Table 3 but the authors removed it in Table 5. In short, the association between a state's level of democracy and its pacific disposition in foreign policy crises is not robust if the support for the hypothesis requires omitted variable bias. It is ultimately not clear if democracies are more pacific in crises or if they are a class of states that are generally more satisfied with the status quo.
+
+# Conclusion
+
+Rousseau et al. attempt to tackle an unmistakable contradiction in democratic peace scholarship. The democratic peace our empirical models observe is dyadic and we have tailored the arguments that explain them to capture this dyadic peace. However, our arguments are implicitly monadic. They make implicit assumptions that democracies are more peaceful in general even if our statistical models fail to provide support for those monadic arguments. Rousseau et al. contend this is a research design problem. Dyad-year models are not inherently flawed but do not do well to test monadic hypotheses of democratic peace.
+
+Rousseau et al. propose a novel analysis to test the monadic democratic peace but the findings ultimately do not provide strong support for the argument that democracies should be more peaceful in general. Rousseau et al.'s state-level analyses of initiation and escalation in foreign policy crises observe the dyadic democratic peace of which we already knew. However, it observes the pacific disposition of democracies in foreign policy crises only in a model of clear omitted variable bias. Table 5 shows support for the monadic democratic peace when the authors remove the satisfaction with the status quo variable. Thus, it is not clear whether democracies are generally more pacific or if they are a class of states that are satisfied with the status quo.
+
+There are clear implications of the findings for previous scholarship on democratic peace as well as our observations of conspicuous crises in international politics. The authors try to distinguish their findings from the well-traveled democratic peace articles of the time [e.g. @morgancampbell1991dsd; @morganschwebach1992ttd; @maozrussett1993nsc; @dixon1994dps] with a new estimation strategy. Ultimately, their findings conform well to the received wisdom of these articles. In essence, the democratic peace is ultimately a dyadic phenomenon and not a monadic phenomenon. This would situate what Rousseau et al. do with what @benoit1996drm attempted in a similar article published the same year. Both attempted novel empirical tests to more fully explicate the monadic democratic peace. Both ultimately found lukewarm support for the proposition.
+
+However, the authors do well to draw our attention to the fundamental limitation of the dyad-year level of analysis for evaluating claims about the monadic democratic peace. The example of 20th century Belgium works well here.  A dyad-year research design will show an enduring democratic peace between Belgium and the Netherlands, but show a conflict-prone (and war-prone) Belgium-Germany dyad.  It would conclude in support of the dyadic element and cast doubt on the monadic element because Belgium was in conflict with Germany while a non-trivial democratic peace---given the origin of that dyad---exists between Belgium and the Netherlands. This illustrates how this is problematic. Belgium did not initiate conflict against Germany; rather, it was the flat-road entrance for Germany into France. However, the dyad-year design will conclude that democratic Belgium is conflict-prone even though Belgium did not initiate or escalate the disputes that became World War I and World War II. A more honest research design results in a better evaluation of the monadic proposition even if the findings ultimately still support just the dyadic democratic peace.
+
+
+
+\newpage
+<!--
+# References
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
+
