@@ -25,7 +25,7 @@ The article summaries here were updated for presentation within R Markdown, but 
       <li class="archiveposturl">
         <span><a href="{{ site.url }}/svm-article-summaries/{{ articlesummaries.dirname }}/{{ articlesummaries.filename }}.pdf">{{ articlesummaries.title }}</a></span><br>
 <span class = "postlower">
-<strong>Author:</strong> {{ articlesummaries.author }} &nbsp; &nbsp; &nbsp; <strong>Journal:</strong> {{ articlesummaries.journal }}  &nbsp; &nbsp; &nbsp; <strong>Year:</strong> {{ articlesummaries.year }}</span>
+<strong>Author:</strong> {{ articlesummaries.author }}<br /><strong>Journal:</strong> {{ articlesummaries.journal }}<br /><strong>Year:</strong> {{ articlesummaries.year }}</span>
       </li>
 {% endfor %}
 </ul>
