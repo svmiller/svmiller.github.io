@@ -62,7 +62,7 @@ tbody td { padding: 5px;
 
 ## Publications
 
-Gibler, Douglas M. and Steven V. Miller. Forthcoming. "An Appraisal of Project Mars and the Divided Armies Argument." Conditionally accepted at *International Studies Quarterly*.
+Gibler, Douglas M. and Steven V. Miller. Forthcoming. "An Appraisal of Project Mars and the Divided Armies Argument." *International Studies Quarterly*.
 
 Miller, Steven V. Forthcoming. "[Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017](/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)." *Social Science Journal.*
 
