@@ -1,0 +1,95 @@
+---
+output: 
+  stevetemplates::article2:
+    citation_package: natbib
+    dev: cairo_pdf
+bibliography: '`r paste0(Sys.getenv("HOME"), "/Dropbox/master.bib")`'
+biblio-style: apsr
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+title: "An Article Summary of 'Democracy and the Peaceful Settlement of International Conflict'"
+author:
+- name: Steven V. Miller
+  affiliation: Clemson University
+  email: svmille@clemson.edu
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+
+mainfont: cochineal
+# fontfamilyoptions: sc, osf
+fontsize: 11pt
+---
+
+# Article
+
+```{r, echo=F, results="asis", warning=F, message=F}
+
+library(stevemisc)
+library(bib2df)
+library(tidyverse)
+
+bib <- bib2df("~/Dropbox/master.bib")
+
+bib %>%
+  filter(BIBTEXKEY %in% c("dixon1994dps")) %>%
+  df2bib() %>%
+  capture.output() %>%
+  print_refs(., toformat="latex")
+
+```
+
+
+
+# Introduction
+
+The democratic peace constitutes one of the major challenges to structural paradigms of international relations. The finding that no two democracies have ever been engaged in war with each other was path-breaking for international relations scholarship at the time and constitutes, per @levy1988dpw, the closest thing we have to an empirical law in all political science. However, "democratic peace theory" is instead a democratic peace *fact*; it needs a theory. In his article, Dixon proposes the first great articulation of the "normative" perspective of the democratic peace and the first extension of democratic peace theory into a democratic peace research program. Using his "norm of bounded competition", Dixon argues that democratic leaders embroiled in the preliminary phases of a dispute with each other trust that the other side is beholden to democratic norms of non-violent competition. Thus, democracies do not fight wars with each other because they peacefully settle what disputes they do have before escalation to war, a finding confirmed in his analysis using the @alkersherman1986ice conflict phases data set. Dixon was the first explore the effect of regime type on conflict management and the negotiation of disputes in the international system.
+
+# Literature Review
+
+The problem Dixon addresses is less about the existence of the democratic peace and more about why it exists. Initial scholarship that sought to address the democratic peace anomaly focused on the unique institutional constraints of democracies [e.g. @morgancampbell1991dsd; @bdmetal1992wfr].  However, these early institutional perspectives have major limitations. These early institutional perspectives struggle with observable rally effects in democracies. They also generally assume a "monadic" perspective of the democratic peace, which does not coincide with the empirical confirmation that democracies are still conflict-prone, just not with each other.<!--Selection mechanisms for office shape incentives to wage war.  With only a slight incumbency advantage, democratic leaders must avoid policy failure.  Therefore, they select themselves into conflicts with overwhelming odds of victory and fully commit, or "try hard", in those conflicts.  Two democratic leaders in the early stage of a dispute are aware of the common constraints and know that neither condition for conflict escalation can be satisfied.  The dispute ends short of war as a result. -->
+
+The competing perspective within the democratic peace theory tradition affords explanatory power to democratic norms, not institutions.  If democratic governing structures are born from democratic norms and resemble those norms, then a focus on institutional constraints may have been misguided.  The idea is that there are fundamental normative differences between democracies and autocracies.  Autocrats have few if any normative bounds on their behavior.  They may capture the state through use of lethal force and violence.  They may also keep their hold on power through the same means, suppressing any dissent.  Autocratic foreign policy behavior thus reflects the autocrat's preferences.  The autocrat does not need nor respect the preferences of his subjects within his state and thus behaves the same way towards others outside the state.  Democracies, by contrast, rest on fundamental norms of equal competition, minority rights and consent to be governed.  Use of force and repression to govern would be deemed "illegitimate" by both the majority and minority, which enacts normative restraints on violent behavior and is eventually codified in law.  Just as the autocrat externalizes this domestic norm in his foreign policy, so does the democratic leader externalize her internal norms in foreign policy.  International politics then essentially becomes an extension of domestic politics. 
+
+Dixon's "norm of bounded competition" is the clearest articulation of this theory that is able to explain both core findings of the democratic peace.  While democracies vary in some social and cultural norms as well as institutional mechanisms, the norm of bounded competition is common to all democracies.  Rivals in democracies openly compete for scarce resources and policy outcomes, but they do so with rules and restraints that normatively restrict political actors not to use coercion or violence.  A "contingent consent" [@schmitterkarl1991wdi] follows from this universal democratic norm.  Aware that unregulated competition creates intolerable risks and uncertainty for all, political elites trust each other not to use force or violence during the electoral contest or any time after it.  Since leaders, democratic leaders especially, view international politics as an extension of democratic politics, this norm of bounded competition surfaces in international disputes.  When two democracies are locked in the early phases of an interstate conflict, the leader of each democracy is secure in their knowledge that the leader of the other state is bounded by the same norm.  When a democratic leader is confronted by an autocrat, the democrat does not believe that the autocrat is bound by any norm, and nothing remains to restrain escalation.  This normative perspective generates a unique answer to the paradoxes of the democratic peace.  Democratic leaders do not trust autocracies but trust each other to the point where they peacefully negotiate settlements to their disputes before war is an option. This hypothesis concerns Dixon in his analysis.
+
+# Analysis
+
+Dixon uses an @alkersherman1986ice update of a Butterworth-Scranton data set, which disaggregates conflicts into phases. The total number of observations includes 264 postwar disputes, disaggregated into 718 phases.  Dixon uses these observations to test for the presence or absence of an agreement to conclude the dispute-phase.
+
+The dependent variable looks at the peaceful settlement of the dispute-phase, a binary indicator if there was an agreement between the combatants in a dispute.  A 1 signals some type of agreement---either complete or partial---whereas a 0 indicates no agreement.  Dixon eliminates imposed settlements.
+
+The independent variable of interest is the minimum level of democracy among the combatants in the dispute-phase. Here, Dixon breaks more ground by introducing the "weak-link" concept to measuring the effects of the democratic peace. The idea here is simple and straightforward. Democratic norms are only as strong as the "weak-link" is. If this "weak-link" is a 0 on an 11-point scale (from 0 to 10), then the other combatants in the dispute-phase can have democracy scores anywhere from 0 to 10. We would not expect to observe mutually held democratic norms in this dispute-phase and thus do not expect this dispute-phase to end in a negotiated settlement. If, however, the "weak-link" has a democracy score of 9, then the other combatants in the dispute-phase must have a democracy score equal to 9 or 10. Here, we would expect to observe the mutual norms of bounded competition that Dixon conceptualizes and thus a negotiated settlement to conclude the dispute-phase. Dixon uses the Polity II data for this variable.
+
+<!-- This article uses an operationalization of democracy prominent in many in democratic peace articles.  Dixon uses the same Polity II data, but codes for the *minimum* level of democracy in a given conflict phase.  The idea is that the higher the number this is, the more democratic the disputants are in a given conflict.  This is an 11 point scale, ranging from 0 to 10. -->
+
+Table 1 provides preliminary support for the hypothesis.  Jointly democratic disputes are the most likely to culminate in a negotiated settlement in Table 1, where the traditional Polity cutoff of 6 is used.  Table 2 presents the first series of regressions.  Recall that the dependent variable is binary, so a positive coefficient represents an increased likelihood of observing a 1 in the dependent variable (i.e., a negotiated settlement) versus a 0 (no negotiated settlement).  The democratic peace argument is tested first in Model 1 of Table 2, showing statistical significance at the .01 level.  In short, Model 1 of Table 2 shows that an increasing minimum level of democracy in a dispute predicts an increased likelihood of a dispute ending in a negotiated settlement with a high degree of confidence.  Models 2 and 3 simply add more variables that could make the relationship between democracy and peaceful dispute settlement spurious (including alliances and mediation).  These control variables are also statistically significant and associated with peaceful dispute settlement.  For example, allies are likely to negotiate ends to their dispute.  However, the relationship between democracy and peaceful dispute settlement remains robust.  It achieves significance in Models 1, 2 and 3.
+
+Table 3 provides weighted coefficients to correct for an autocorrelation problem that could compromise estimation.  Table 4 adds some more controls.  Model 5 of Table 4 even adds a control for capability ratio, a variable of interest for structural theories of international relations that privilege the importance of the balance of power. A model that specifies for democracy in Model 5 fails to show any support for the neorealist proposition that power parity is important.  It is positive, but not significant.  Democracy is positively and significantly associated with peaceful dispute settlement each time.
+
+Table 5 provides predicted probabilities of the effect of democracy on peaceful dispute settlement, by increment of Polity score and with consideration to other factors demonstrated earlier in the article to be associated with negotiated settlements: mediation, hostilities and alliances.  The first column is the 11 point democracy scale (0:10), showing mean values of peaceful settlement associated with each minimum level of democracy.  The next eight columns show the pacifying effect of democracy, incrementally, weighted against consideration of other factors like mediation, hostilities and alliances.  Look at the worst case scenario in column 8.  Column 8 predicts the probability of peaceful dispute settlement in disputes where there is no mediation, where there were hostilities in the dispute, and where there was no alliance to facilitate negotiation.  In short, this is the worst case scenario for peaceful dispute settlement.  Even then, democracy incrementally increases the probability of peaceful dispute settlement under these circumstances.  When the minimum level of democracy is 0, there is only a predicted probability of .07 of peaceful dispute settlement.  When the mimimum level of democracy is 10, there is a predicted probability of .21. That constitutes an increase of about 200% in the predicted probability of a negotiated settlement to conclude a dispute-phase under those worst-case scenarios. 
+
+
+\section{Conclusion and Implications}
+
+The importance of Dixon's analysis lay in the ground he broke on democratic peace scholarship. Democratic peace was not necessarily a new topic when Dixon's article first appeared in press. The term "democratic peace" was already widely in use. However, Dixon remains the first to evaluate a logical implication of the democratic peace. If democracies have, to date, avoided fighting each other in a war, it must be because they are more likely to settle what disputes they do have before the escalation to war. In short, democratic peace has important implications for a related topic of conflict management, which no one before Dixon had thoroughly considered. As such, Dixon's analysis became an important next step in a democratic peace research program and one of the important findings associated with the ability of democracies to avoid war with each other.
+
+Further, Dixon's article may be the clearest articulation of what we call the "normative perspective" of democratic peace. While we had a consensus about the empirical findings of democratic peace, there were competing explanations as to why democracies avoid war with each other but are no more or less war-prone at the unit level. @rummel1983liv had his "libertarian" peace, though this piece generated immediate criticism [e.g. @chan1984mmw; @weede1984dwi]. More scholarship at the time this article was published focused on democratic institutional structures [e.g. @morgancampbell1991dsd], though the institutional perspective suffered from numerous theoretical and empirical limitations that were even known then. No one before Dixon had articulated a "norm of bounded competition" that is exogenous to varying degrees of democratic institutions that are born from this norm. Again, Dixon's analysis breaks new ground.[^epilogue]
+
+[^epilogue]: Selectorate theory may have written the epilogue to this point. @bdmetal2003lps note that Dixon does not explain democratic peace by norms; he simply assumes it and begs the question in the process. The institutional arguments of the time that Dixon (1994) supplanted can be better understood in this framework that prioritizes leader allocation of resources toward public and private goods.
+
+Dixon does not use this language, but his argument also conforms well to broader arguments about information [e.g. @schultz1999ddic, in the democratic peace literature]. For example, Dixon contends that mutual norms of bounded competition between two democracies in a dispute lead to negotiated settlements because both sides know and trust the normative restraints of the other side. In other words, democratic norms lead to complete and perfect information, which, we commonly assume, is necessary and sufficient for crises to avoid escalation to war.
+
+This article may be over 20-years-old, but its insights help us understand recent and current events in the international system. Consider a stylized illustration of recent events involving Greece and its creditors in Europe (through the European Union). Though both Greece and its democratic creditors in Europe dispute, sometimes in quite heated fashion, the terms of previous bailout packages and what austerity policies should follow for Greek citizens, both sides are ultimately negotiating in good faith and even recently agreed to a resolution of a disputed issue before the onset of war and, even, a real militarized interstate dispute involving Greece and its creditors. Democratic norms are ultimately strong in both sides. Contrast this with the absence of democratic norms between the United States and the Hussein regime in Iraq, which led to numerous disputes and two wars.
+
+
+
+\newpage
+<!--
+# References
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
+
