@@ -1,19 +1,14 @@
 - role: Undergraduates
-  status: There are openings for undergraduates to work for credit beginning Fall 2021.
+  status: There are openings for undergraduates to work for credit.
   apply: See the lab manual's <a href="https://srikrishnan-lab/lab-manual/policies/undergrad/">application instructions for undergraduates</a>.
 
 - role: Graduate Students
   status: |+
-    We're looking to admit several Ph.D and M.S. students for fully-funded positions.
-
-    For one position, we are looking to recruit a Ph.D student who is interested in working on power-system management under wildfire risk. This is a Department of Energy-funded project.
+    We're looking to admit several Ph.D and M.S. students for fully-funded positions focusing on uncertainty quantification for complex systems and coastal adaptation to sea-level rise.
 
     There are projects for M.Eng. students if you're interested in a project that aligns with our research and mission.
   apply: Please see the lab manual's <a href="https://srikrishnan-lab/lab-manual/policies/graduate/">application instructions for graduate students</a>.
 
 - role: Postdoctoral Researchers
-  status: We are looking to hire a postdoc to work on a USDA-funded project on energy-system transitions and climate in New York State.  See <a href="/2021/01/postdoc-available-usda/">the announcement</a> for details.
-  apply: |+
-    See <a href="https://academicjobsonline.org/ajo/jobs/17811">the posting</a> at Academic Jobs Online.
-
-    More generally, see the lab manual's <a href="https://srikrishnan-lab.github.io/lab-manual/postdoc/">application instructions for postdocs.</a>
+  status: We do not have any current openings for postdocs.
+  apply: Please see the lab manual's <a href="https://srikrishnan-lab.github.io/lab-manual/postdoc/">application instructions for postdocs.</a>
