@@ -1,0 +1,109 @@
+---
+output: 
+  stevetemplates::article2:
+    citation_package: natbib
+    dev: cairo_pdf
+bibliography: '`r paste0(Sys.getenv("HOME"), "/Dropbox/master.bib")`'
+biblio-style: apsr
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+title: "An Article Summary of 'Libertarianism and International Violence', and its Critiques"
+author:
+- name: Steven V. Miller
+  affiliation: Clemson University
+  email: svmille@clemson.edu
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+
+mainfont: cochineal
+# fontfamilyoptions: sc, osf
+fontsize: 11pt
+pandocparas: TRUE
+---
+
+# Article
+
+<!-- \setlength{\parindent}{0cm} -->
+
+```{r, echo=F, results="asis", warning=F, message=F}
+
+library(stevemisc)
+library(bib2df)
+library(tidyverse)
+
+bib <- bib2df("~/Dropbox/master.bib")
+
+bib %>%
+  filter(BIBTEXKEY %in% c("rummel1983liv")) %>%
+  df2bib() %>%
+  capture.output() %>%
+  print_refs(., toformat="latex")
+
+```
+
+```{r, echo=F, results="asis", warning=F, message=F}
+
+bib %>%
+  filter(BIBTEXKEY %in% c("chan1984mmw", "weede1984dwi")) %>%
+  df2bib() %>%
+  capture.output() %>%
+  print_refs(., toformat="plain")
+
+```
+
+
+
+# Introduction
+
+Why do democracies avoid war? Even asking this question was a direct challenge of common approaches in international relations by the early 1980s. Babst [-@babst1964egf; -@babst1972afp] found, and @smallsinger1976twp later confirmed, that regime types matter for the study of international conflict and that democracies are anomalous in their ability to avoid war (at least with each other. However, Babst [-@babst1964egf; -@babst1972afp] and @smallsinger1976twp are largely atheoretical in this empirical presentation. @rummel1983liv proposes a "libertarian" explanation for what we call now the democratic peace phenomenon.  In this article, a follow-up to prior work Rummel had done, he uses this article to subsume the democratic peace under the bigger rubric of libertarian exceptionalism.  In no short order, Rummel attempts to accomplish the following three things.  First, he seeks to demonstrate that libertarian states are at complete peace with each other.  Second, he hopes to show that the more jointly libertarian two states are, the less their mutual violence.  Finally, and most ambitiously, Rummel seeks to demonstrate that the more libertarian a state is, the more peaceful it is, in general.  These claims invited some significant challenges from @chan1984mmw and @weede1984dwi.
+
+# Why Are Democracies Supposedly Peaceful?
+
+@rummel1983liv is one of the first full-throated theoretical arguments for the democratic peace. Pioneer work on the democratic peace had largely been mute about why there is this supposedly pacific nature about democracies in international politics. The pioneer work by Babst [-@babst1964egf; -@babst1972afp] did well to even discover this peace between what he called "elective governments." Singer and Small, then working on what became the Correlates of War project we know now, were skeptical of Babst's findings but their analysis of the preliminary version of the Correlates of War conflict data confirmed Babst's discovery with only a few quibbles about methodology [@smallsinger1976twp]. Neither Babst nor Singer and Small offered much in the way of theory, approaching democracy as as a "I will know it when I see it" phenomenon and deferring to future researchers on the theoretical mechanics. Rummel accepted this opportunity. This might be Rummel's most famous explication of his argument, but it is also not his first. He had been trying to recast the democratic peace as a "libertarian peace" for a few years to this point [e.g. @rummel1979ucw]. Ultimately, the moment in which this article should be understood in the present is at the foundation of democratic peace research. The empirical evidence was already there; the "theory" in "democratic peace theory" was not.
+
+Rummel's baseline theoretical expectations hinge on the importance of freedom and liberty to the conduct of politics.  If the citizens are free to choose their leaders, and if a press corp is free to report on the conduct of the leader and her administration, then wars should be less common involving these types of free states.  Citizens are sufficiently empowered and dialed into the policies of the leader's administration and will serve as a deterrent to unwanted foreign adventures for which the citizens themselves will be conscripted to fight.
+
+However, this, by itself, is more an argument about democratic mechanics rather than the libertarianism that Rummel seeks to champion.  At another level, Rummel argues that things like free markets are self-regulating devices that deter violence and contain its presence.  In libertarian societies, the answer to conflict between two rational, self-interested actors is market exchange, not violence.  At both the state-level, and the dyadic level, libertarianism creates bonds between elites and citizens, embraces pluralism in the market, and will ultimately make libertarian states more peaceful in general, as well as with each other.
+
+Operationalizing these expectations is the next step.  The data for the independent variable (libertarianism) comes from Freedom House.  In particular, the *Freedom at Issue* publication from 1982 is consulted in coding states on levels of political freedom and economic freedom.  The political freedom aspect is gauged using two separate 7 point measures, where a 7 indicates total lack of freedom and a 1 indicates political freedom.  The two political freedom measures include one for the extent to which the political process is contingent upon free and fair elections.  The second measure is a civil liberties measure, measuring the freedoms that citizens have from censorship and persecution for dissidence.  These two measures are combined such that this scale ranges from 2 to 14.  A value of 2 indicates a country with free and fair elections and whose citizens have broad autonomy to speak freely for or against government measures (e.g. 1+1 = 2, United States).  A value of 14 indicates a country whose executive selection processes are not done through elections, and for which citizens have no liberty to speak against the government (e.g. 7+7 = 14, Vietnam). 
+
+Recall that Rummel's argument is that a democratic-socialist state like Sweden will be *less* peaceful, in general, than a democratic capitalist state like the United States.  The *Freedom at Issue* publication also has a variable to capture this.  The economic freedom that Rummel crafts from this is a 14 point scale (1-14), in which Rummel places states after reading Freedom House's scale.  A value of 1 indicates industrial  and  preindustrial  capitalist,  decentralized states such as the United States.  It scales up to 14, which captures the industrial socialist and communist states like the Soviet Union.  Rummel *adds* this scale to the combined scale, previously mentioned, to get the independent variable in question.[^examples]
+
+[^examples]: Some prominent coding examples: for Belgium, 2 + 1 = 3; for Sweden, 2 + 9 = 11; for Poland 11 + 9 = 20; and for East Germany, 14 + 14 = 28.
+
+There are multiple dependent variables that Rummel codes, almost all of which are 9 point (0-8) scales with 0 representing no violence and 8 measuring the severest form of conflict and violence for the particular category.  These dependent variables arewarning and threats, economic sanctions, alerts, war, and the number killed scale. The number killed scale actually ranges from 0-9, with 0 representing no deaths in the dyad and 9 representing more than 703,125 deaths.
+
+The temporal domain in question is from 1976 to 1980, in which Rummel selects on specific dyads to measure campaigns of violence (of various types) engaged from one dyad member to the other.  Data for conflicts ultimately come from reading newspapers like the *Wall Street Journal* and the *New York Times*, as well as weekly magazines like *Time* and *Newsweek*.
+
+# Rummel's Findings
+
+From there, Rummel proceeds to evaluate his three hypotheses of interest.  He ultimately finds support for all three hypotheses.  First, libertarian states have no violence between them, which he finds is not just a function of distance between libertarian states.  As such, he finds a dyadic libertarian peace.  Second, he finds that libertarian states are indeed less prone to violence in general, a test of the so-called *monadic* claim about the unique properties of states themselves.  He finds support for this argument, though, there is no significant difference between the results for political freedom and freedom.  Third, he finds that the more libertarian two states, the less their mutual foreign violence.  Again, Rummel is vindicated in all three accounts in arguing that the democratic peace we just uncovered from the likes of Babst and Small and Singer is, in fact, a libertarian peace.  Libertarian states are more peaceful with each other and in general.
+
+# Rummel's Critics
+
+Theoretical critiques about Rummel aside, much of what Rummel tried to accomplish in this article did not withstand the test of time.  In fact, critiques of the argument came forward almost immediately.
+
+Steve Chan's [-@chan1984mmw] analysis highlights some important methodological shortcomings in Rummel's analysis.  For one, he purposely selected on a handful of dyads within a five year window between 1976 and 1980.  As such, the most we can say is that democracies (viz, libertarian states) are more peaceful with each other and in general *if* we accept Rummel's coding decisions *and* if we limit the temporal domain to a recent five year stretch.  When we extend the temporal domain to 1816 with the most widely used conflict data sets from the Correlates of War project and adopt a more rigorous method of coding wars and coding violence than Rummel's reading of *Newsweek*, the pacifying effect of democracy and libertarianism disappears.  In short, Chan reduces us back to Babst's and Small and Singer's square one.  Democracies do not fight each other, but democracies are still war prone.  This only gets worse when we consider that Rummel significantly restricted the temporal domain to a five year window, which purposely ignores all the non-libertarian imperialism that countries like Belgium and the United States found to be in their national interest.
+
+Erich Weede [-@weede1984dwi] adds more suspicion to Rummel's claims.  Weede's approach to evaluating Rummel's claims is to extend the temporal domain back just fifteen years to 1960 and evaluate Rummel's arguments using the Correlates of War war data.  Like Chan, Weede finds no significant pacifying effect of democracy or libertarianism on war reduction.  That is to say: democratic or libertarian states are no more or less likely to be involved in wars, regardless of the regime type on the other side.  Weede does find that the period of the late 1970s is exceptional for the ability of democracies to avoid war, in general.  However, a five year window does not make for a generalization of the behavior of democracies across the universe of cases across time and space.
+
+All told, Chan and Weede demonstrate that Rummel's findings are not robust.  Even minor changes to the temporal domain negate much of his findings.  If we are to have confidence in Rummel's arguments that libertarian states are more peaceful in general, and peaceful with each other, it needs to withstand the scrutiny of different tests of the same argument.  Instead, we are left with the observation that Rummel's findings are due to Rummel's coding decisions, both in the temporal domain and in the conflict data.
+
+# Conclusion
+
+This is an old debate in international relations, for which there are not many current citations either in the conflict literature or the democratic peace literature.  Beyond a conversation about the need for robustness in statistical analyses, this debate is a noteworthy turn in the democratic peace research program for a few reasons.  Namely, this seems to have discredited the claim that democracies are unique in the conduct of international politics.  From the debate between Rummel and his critics, and echoing some misgivings that Small and Singer had about Babst's original findings, we conclude that democracies are *not* more peaceful in general.  When we speak of the democratic peace phenomenon, we speak of the *dyadic* case and not the *monadic* case.  That is: democracies are only more peaceful with each other, but are no more or less peaceful than other types of states.  This becomes the heart of democratic peace theory as we know it. Others have tried to vindicate the monadic proposition--- @benoit1996drm and @rousseauetal1996adn come to mind here---but the empirical evidence in support of this proposition has always been weak. This debate between Rummel and his critics seemed to solidify a turn in the democratic peace research program.
+
+There are a number of reasons to be skeptical about Rummel's argument here. A big question a reader will have here is to what "libertarian" state of consequence in the study of international relations would this apply? Freedom House does not appear to take inventory of this concept of "economic freedom" anymore but a Freedom House report from around that time  lists "free" and "industrial capitalist" countries to be a select list of Australia, Bahamas, Barbados, Belgium, Canada, Colombia, Costa Rica, France, Greece, Grenada, Iceland, Ireland, Italy, Japan, Luxembourg, Mauritius, New Zealand, Spain, Suriname, Switzerland, Trinidad and Tobago, the United States, and West Germany [@gastil1978fw].[^nooneuses] This list includes states of little consequence for the study of international relations (e.g. Bahama, Barbados, Grenada, Luxembourg, Mauritius), states effectively occupied by U.S. military personnel as part of the Cold War in order to be peaceful (e.g. Italy, Japan, Spain, West Germany), some states that would look more belligerent if Rummel had a longer temporal domain (e.g. Australia, Canada, France, Greece, and the United States), and some admittedly peaceful (if minor) states (e.g. Costa Rica, New Zealand). What "libertarianism" has to do with this is not clear and the observed behavior of states at this time can be understood by other factors. Rummel's argument that the United States is more peaceful than a more democratic socialist state (broadly understood) state like Sweden would be demonstrably wrong and no one should make this argument with a straight face. Chan's critique here is particularly damning; we can reject Rummel's argument and evidence just by highlighting the narrow temporal domain that Rummel used.
+
+[^nooneuses]: It is worth noting, for a variety of reasons, that Rummel stands out as one of the few to use Freedom House for a purpose like this. The Polity project has a much longer temporal domain on state-year measures of democracy. This critique will omit a discussion of why Freedom House is not well-equipped for a research question like this.
+
+\newpage
+<!--
+# References
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
+
