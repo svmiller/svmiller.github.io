@@ -1,0 +1,46 @@
+---
+title: "How to (Meticulously) Convert Participant-Level Dispute Data to Dyadic Dispute-Year Data in R"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2021-05-25'
+excerpt: "Use some R code (and SQL code) to create dyadic dispute-year data from participant-level summaries."
+layout: post
+categories:
+  - R
+  - Political Science
+image: "putin-visit-denmark-2011.jpg"
+---
+
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/_", rmd_name, "/")
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = '~/Dropbox/svmiller.github.io/cache/cow-mid-dyadic-dispute-data/',
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE,
+  comment = "#>")
+```
+
+`r knitr::current_input() `
+
+```{r}
+plot(mtcars) 
+```

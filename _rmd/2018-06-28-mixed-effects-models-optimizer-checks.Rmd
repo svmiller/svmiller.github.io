@@ -48,6 +48,8 @@ library(tidyverse) # for most things
 library(stevemisc) # helper functions/formatting
 library(stevedata) # the data
 library(lme4) # for mixed models
+
+optimizer_data <- readRDS("~/Dropbox/svmiller.github.io/R/optimizers/optimizer_data.rds")
 ```
 
 ```{r leadimage2, echo=F, eval=T, results="asis", cache=F}
@@ -56,7 +58,7 @@ add_jekyll_image('/images/r-logo.png', "The R logo, just 'cause.", "350", "right
  
 ```
 
-*Last updated: `r format(Sys.time(), '%e %B %Y')`. The data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well.* 
+*Last updated: `r format(Sys.time(), '%e %B %Y')`. The data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well. I've also added a simulation of 100 trials for each optimizer.* 
 
 My goals for writing this are two-fold. First, it'd been a long time since my last blog post. I usually average 7-10 posts a year and this will only be the second one. Second, I've been meaning to offer some tips/tutorials for mixed effects modelers who are still new to the craft. Mixed effects modeling is my method of choice for evaluating and explaining social/political phenomenon. I think I've become pretty good at it over the past 10 years, but everything I know I ultimately taught myself through trial and error. Stackoverflow is nice but I was always reticent to post there to search for answers I feel I should've known already. It does mean that while I everything I know is self-taught, I've learned a lot of tricks along the way and I think it would be good to share them.
 
@@ -212,28 +214,60 @@ bind_rows(AF1_zcai, AF2_zcai) %>%
 
 ```
 
-`allFit()` will helpfully store the estimation times of these models as well. This will be useful as you figure out which optimizer gives you the most "bang for your buck" (i.e. what converges the fastest, especially if you're short on memory and time). The results suggest you can get the most bang for your buck through non-linear optimization of the BOBYQA method or the BOBYQA method itself. The non-linear optimization result is unsurprising because this procedure permits stopping convergence checks earlier if it believes it has already found an approximate optimum. The differences may not matter as much for linear models in the mixed effects framework. These already estimate quickly, all things considered. No matter, BOBYQA might be the way to go if you want a quick and honest look at the results of your logistic mixed effects model.
+`allFit()` will helpfully store the estimation times of these models as well. This will be useful as you figure out which optimizer gives you the most "bang for your buck" (i.e. what converges the fastest, especially if you're short on memory and time). I devised a script that estimated these two models, and re-fitted them with `allFit()` 100 times. The data that emerged is the elapsed run time for each optimizer across 100 iterations.
+
+The results suggest you can get the most bang for your buck through non-linear optimization of the BOBYQA method or the BOBYQA method itself. The non-linear optimization result is unsurprising because this procedure permits stopping convergence checks earlier if it believes it has already found an approximate optimum. The differences may not matter as much for linear models in the mixed effects framework. These already estimate quickly, all things considered. No matter, BOBYQA might be the way to go if you want a quick and honest look at the results of your logistic mixed effects model.
 
 ```{r allfittimes, echo=F, eval=T, fig.width = 12, warning=F, error=F, fig.height=10}
 
-cbind(as.data.frame(summary(AF1)$times), rownames(summary(AF1)$times)) %>%
-  tbl_df() %>%
-  rename(Optimizer = `rownames(summary(AF1)$times)`) %>%
-  mutate(Model = "Linear Mixed Effects Model") -> AF1times
-
-cbind(as.data.frame(summary(AF2)$times), rownames(summary(AF2)$times)) %>%
-  tbl_df() %>%
-  rename(Optimizer = `rownames(summary(AF2)$times)`) %>%
-  mutate(Model = "Logistic Mixed Effects Model") -> AF2times
-
-bind_rows(AF1times, AF2times) %>%
-  ggplot(.,aes(Optimizer, elapsed)) + geom_point() +
-  facet_wrap(~Model) + coord_flip() +
-  theme_steve_web() +
-  post_bg() +
-  ylab("Elapsed Time") +
+optimizer_data$linear_times %>% 
+  mutate(model = "Linear Mixed Effects Model") %>%
+  bind_rows(., optimizer_data$logit_times %>% mutate(model = "Logistic Mixed Effects Model")) %>%
+  group_by(model, optimizer) %>%
+  summarize(mean = mean(elapsed),
+            lwr = quantile(elapsed, .025),
+            upr = quantile(elapsed, .975),
+            min = min(elapsed),
+            max = max(elapsed))  %>%
+  ggplot(.,aes(x = optimizer, y = mean, ymin = lwr, ymax=upr)) +
+  theme_steve_web() + post_bg() +
+  geom_pointrange() +
+  facet_wrap(~model, scales = "free_x") + coord_flip() +
   labs(title = "A Comparison of Estimation Times Across Seven Different Optimizers",
-       x = "")
+       x = "", y = "Elapsed Time (with 95% Intervals)")
+
+#   ggplot(.) +
+#   theme_steve_web() + post_bg() +
+#   geom_hline(yintercept = 0, colour = gray(1/2), lty = 2) +
+#    geom_linerange(aes(x = optimizer, y = mean,
+#                       ymin = lwr,
+#                        ymax = upr),
+#                    lwd = 1, position = position_dodge(width = 1/2)) + 
+#     geom_pointrange(aes(x = optimizer, y = mean, 
+#                         ymin = min,
+#                         ymax = max),
+#                     lwd = 1/2, position = position_dodge(width = 1/2),
+#                      fill = "WHITE") +
+#   facet_wrap(~model, scales = "free_x") + coord_flip()
+# 
+# cbind(as.data.frame(summary(AF1)$times), rownames(summary(AF1)$times)) %>%
+#   tbl_df() %>%
+#   rename(Optimizer = `rownames(summary(AF1)$times)`) %>%
+#   mutate(Model = "Linear Mixed Effects Model") -> AF1times
+# 
+# cbind(as.data.frame(summary(AF2)$times), rownames(summary(AF2)$times)) %>%
+#   tbl_df() %>%
+#   rename(Optimizer = `rownames(summary(AF2)$times)`) %>%
+#   mutate(Model = "Logistic Mixed Effects Model") -> AF2times
+# 
+# bind_rows(AF1times, AF2times) %>%
+#   ggplot(.,aes(Optimizer, elapsed)) + geom_point() +
+#   facet_wrap(~Model) + coord_flip() +
+#   theme_steve_web() +
+#   post_bg() +
+#   ylab("Elapsed Time") +
+#   labs(title = "A Comparison of Estimation Times Across Seven Different Optimizers",
+#        x = "")
 
 
 ```
