@@ -78,7 +78,7 @@ Let's use the Kargil War (MID#4007) as an illustration of what this did. First, 
 
 ```r
 MIDB %>% filter(dispnum == 4007)
-#> # A tibble: 2 x 19
+#> # A tibble: 2 × 19
 #>   dispnum stabb ccode stday stmon styear endday endmon endyear sidea revstate
 #>     <dbl> <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl>  <dbl>   <dbl> <dbl>    <dbl>
 #> 1    4007 PAK     770    17     9   1993     17      7    1999     1        1
@@ -93,7 +93,7 @@ And here is what it looks like when made a little bit longer. Observe the new `y
 ```r
 longPart %>% filter(dispnum == 4007) %>%
   select(dispnum:ccode, date:day, everything())
-#> # A tibble: 4,260 x 26
+#> # A tibble: 4,260 × 26
 #>    dispnum stabb ccode date        year month   day stday stmon styear endday
 #>      <dbl> <chr> <dbl> <date>     <dbl> <dbl> <int> <dbl> <dbl>  <dbl>  <dbl>
 #>  1    4007 IND     750 1993-09-17  1993     9    17    17     9   1993     17
@@ -850,7 +850,7 @@ We need to take inventory of what duplicates may have emerged in these data to s
 dDisp %>%
   group_by(dispnum, ccode1, ccode2, year) %>%
   tally() %>% filter(n > 1)
-#> # A tibble: 0 x 5
+#> # A tibble: 0 × 5
 #> # Groups:   dispnum, ccode1, ccode2 [0]
 #> # … with 5 variables: dispnum <dbl>, ccode1 <dbl>, ccode2 <dbl>, year <dbl>,
 #> #   n <int>
@@ -864,7 +864,7 @@ Fortunately, this came up empty. Because we made the sequence in SQL on dates an
 dDisp %>%
     select(dispnum:sidea2) %>%
     filter(dispnum == 258 & ccode1 %in% c(355, 360, 375) & ccode2 %in% c(355, 360, 375))
-#> # A tibble: 4 x 6
+#> # A tibble: 4 × 6
 #>   dispnum ccode1 ccode2  year sidea1 sidea2
 #>     <dbl>  <dbl>  <dbl> <dbl>  <dbl>  <dbl>
 #> 1     258    355    375  1944      1      0
@@ -880,7 +880,7 @@ We also have just one observation year in 2011 for Denmark-Russia in MID#4676.
 dDisp %>%
     select(dispnum:sidea2) %>%
     filter(dispnum == 4676 & ccode1 %in% c(365, 390) & ccode2 %in% c(365, 390))
-#> # A tibble: 4 x 6
+#> # A tibble: 4 × 6
 #>   dispnum ccode1 ccode2  year sidea1 sidea2
 #>     <dbl>  <dbl>  <dbl> <dbl>  <dbl>  <dbl>
 #> 1    4676    365    390  2011      0      1
@@ -1207,7 +1207,7 @@ So far this isn't bad, but it's not complete. There are several cases of states 
 ```r
 MIDB %>% filter(dispnum == 4182) %>%
   arrange(-sidea, -orig,  ccode, styear)
-#> # A tibble: 7 x 19
+#> # A tibble: 7 × 19
 #>   dispnum stabb ccode stday stmon styear endday endmon endyear sidea revstate
 #>     <dbl> <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl>  <dbl>   <dbl> <dbl>    <dbl>
 #> 1    4182 ISR     666     6     4   1993      8      9    2006     1        1
@@ -1240,7 +1240,7 @@ MIDB %>%
   mutate(ydiff = styear - prevendyr) %>%
   # Give me the cases where the separation was a year or less AND not a side-switcher
   filter(ydiff <= 1 & (sidea - lagsidea == 0))
-#> # A tibble: 16 x 13
+#> # A tibble: 16 × 13
 #> # Groups:   dispnum, ccode [12]
 #>    dispnum stabb ccode stday stmon styear endday endmon endyear sidea prevendyr
 #>      <dbl> <chr> <dbl> <dbl> <dbl>  <dbl>  <dbl>  <dbl>   <dbl> <dbl>     <dbl>
@@ -1291,7 +1291,7 @@ Let's check our work with that case of MID#4182, looking at the `disponset` colu
 
 ```r
 dDisp %>% filter(dispnum == 4182 & ccode1 == 652)
-#> # A tibble: 6 x 18
+#> # A tibble: 6 × 18
 #>   dispnum ccode1 ccode2  year dispongoing disponset sidea1 sidea2 fatality1
 #>     <dbl>  <dbl>  <dbl> <dbl>       <dbl>     <dbl>  <dbl>  <dbl>     <dbl>
 #> 1    4182    652    666  1993           1         1      0      1         1
