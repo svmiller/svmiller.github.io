@@ -10,7 +10,7 @@ excerpt: "Here is a quick-and-dirty primer for understanding the causes of war i
 layout: post
 categories:
   - Political Science
-image: "leopold.jpg"
+image: "leopold-card.jpg"
 ---
 
 ```{r setup, include=FALSE, cache=F}
