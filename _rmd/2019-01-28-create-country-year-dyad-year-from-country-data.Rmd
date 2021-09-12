@@ -39,6 +39,13 @@ add_update <- function(announce, text) {
   
 }
 
+add_announce <- function(announce, text) {
+  
+  update <- paste0('{% include announcebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
                       cache.path = cache_path,
@@ -110,9 +117,9 @@ States %>%
 DDY %>% filter(ccode2 > ccode1) -> NDY
 ```
 
-```{r updatebox, echo=F, eval=T, results="asis", cache=F}
+```{r announcebox, echo=F, eval=T, results="asis", cache=F}
  
-add_update(announce = "This functionality is now in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> ⤵️", 
+add_announce(announce = "This Functionality is Now in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> ⤵️", 
            text = "This post became the basis for <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a>, which you can now install on CRAN. The processes described here ultimately became <a href='http://svmiller.com/peacesciencer/reference/create_dyadyears.html'><code class='highlighter-rouge'>create_dyadyears()</code></a> and <a href='http://svmiller.com/peacesciencer/reference/create_stateyears.html'><code class='highlighter-rouge'>create_stateyears()</code></a> in that package. Please check out the package’s website for its continued development.")
  
 ```
