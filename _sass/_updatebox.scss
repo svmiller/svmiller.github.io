@@ -15,3 +15,26 @@
   background: #f3f3f3;
   
 }
+
+/* Take a look at this, consider incorporating some of it down the road maybe. */
+/* https://kazemnejad.github.io/jekyll-course-website-template/ */
+.announcement-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #fded94; /* fcf8e3 */
+    border-color: #eacc8b; /* faebcc */
+}
+
+.announcement-box code {
+  
+  background-color: #fded94; /* ffed88 */
+  
+}
+
+.announcement-box a {
+  
+  color: #000; 
+  
+}
