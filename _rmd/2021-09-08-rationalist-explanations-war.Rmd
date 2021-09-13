@@ -59,7 +59,7 @@ Consider this a post as a primer for my upper-division students in international
 
 Here's a table of contents.
 
-1. [A Perspective Toward the Study of International Relation](#perspective)
+1. [A Perspective Toward the Study of International Relations](#perspective)
 2. [How Might We Understand Why States Fight Wars From This Perspective?](#whystatesfight)
     - [Solving This Simple Model](#solve)
     - [How Else to Wrap Your Head Around This?](#examples)
