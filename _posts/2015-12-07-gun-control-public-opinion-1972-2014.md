@@ -12,7 +12,17 @@ image: "planned-parenthood-shooter-arrested.jpg"
 <!--We commonly believe the gun control debate to be a polarizing issue, but data from the General Social Survey suggest that is not necessarily true. GOP partisanship does not robustly reduce support for gun control and most Republicans actually support gun control measures. However, the issue is quickly becoming a polarizing issue among the electorate, and it's likely not just the South that is responsible for that.
      -->
 
-<dl id="" class="wp-caption aligncenter" style="max-width:100%; text-align: left; padding-top: 8px">
+<div class="announcement-box">
+<h2>This Blog Post is Now a Peer-Reviewed Paper ⤵️</h2>
+
+<p>This was an end-of-the-semester diversion from grading and I was happy to get a publication out of it at <em>Social Science Quarterly</em>. A lot remains the same empirically, except for the addition of the 2016 wave of GSS data, the addition of another control variable for rural respondents, and a few auxiliary analyses on top of that.</p>
+
+<p><strong>Suggested Citation:</strong></p>
+
+<p>Miller, Steven V. 2019.  "<a href="http://svmiller.com/research/what-americans-really-think-about-gun-control/">What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016</a>." <em>Social Science Quarterly</em> 100(1): 272--288.</p>
+</div>
+
+<!-- <dl id="" class="wp-caption aligncenter" style="max-width:100%; text-align: left; padding-top: 8px">
 
 <dt><span style="font-weight:bold; font-size: 1em; padding-left: 8px">This blog post is now a peer-reviewed paper. ⤵️</span></dt>
 
@@ -22,7 +32,7 @@ image: "planned-parenthood-shooter-arrested.jpg"
 <dd style = "padding-bottom: 8px">
 Miller, Steven V. 2019.  "<a href="http://svmiller.com/research/what-americans-really-think-about-gun-control/">What Americans Think About Gun Control: Evidence from the General Social Survey, 1972-2016</a>." <em>Social Science Quarterly</em> 100(1): 272--288.
 </dd>
-</dl>
+</dl> -->
 
 
 {% include image.html url="/images/planned-parenthood-shooter-arrested.jpg" caption="Police take Robert Lewis Dear into custody after a mass shooting at a Colorado Springs Planned Parenthood." width=450 align="right" %}

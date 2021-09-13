@@ -32,10 +32,14 @@
   
   background-color: #fded94; /* ffed88 */
   font-size: 100%;
+  padding: 2px 2px; 
+  border-bottom: 0px;
+  
 }
 
 .announcement-box a {
   
   color: #000; 
+  text-decoration: none; border-bottom:1px dotted; 
   
 }
