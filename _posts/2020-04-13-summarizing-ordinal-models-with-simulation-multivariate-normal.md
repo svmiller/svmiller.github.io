@@ -27,7 +27,7 @@ This approach is well supported for two types of models: 1) linear models and 2)
 
 I think what I offer here is a reasonable workaround for these limitations while still hewing to how Gelman and Hill (2007) talk about model simulation. I offer this with three caveats. First, I really need to think of a wrapper function for this that can account for the varying levels in the dependent variable. Everything here is hand-coded, but still accessible. Second, I'm going to focus on just simulations of the fixed effects parameters. I think this is reasonable since most quantities of interest a reviewer will want to see in my field (political science) will care just about the fixed effects. Third, and related to the second point, more complicated simulations and predictions including things like random slopes in addition to varying levels of the random effect are probably better done with a fully Bayesian approach. `{tidybayes}` and `{brms}` offer great support for these approaches.
 
-Alas, here are two cool things you can do with model simulation for your ordinal models from the `ordinal` package. First, here are the R packages I'll be using.
+Alas, here are two cool things you can do with model simulation for your ordinal models from the `{ordinal}` package. First, here are the R packages I'll be using.
 
 ```r
 library(stevemisc) # my toy R package with various helper functions
