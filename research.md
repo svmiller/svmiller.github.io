@@ -62,7 +62,7 @@ tbody td { padding: 5px;
 
 ## Publications
 
-Gibler, Douglas M. and Steven V. Miller. Forthcoming. "The Militarized Interstate Confrontation (MIC) Dataset, 1816-2010" *Journal of Conflict Resolution*.
+<!-- Gibler, Douglas M. and Steven V. Miller. Forthcoming. "The Militarized Interstate Confrontation (MIC) Dataset, 1816-2010" *Journal of Conflict Resolution*. -->
 
 Gibler, Douglas M. and Steven V. Miller. Forthcoming. "An Appraisal of Project Mars and the Divided Armies Argument." *International Studies Quarterly*.
 
