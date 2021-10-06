@@ -1,0 +1,95 @@
+---
+output: stevetemplates::word
+title: "My Analysis on Attitudes About Immigration in the United Kingdom"
+author: A. Awesome Student
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE,
+                      dpi = 600,
+                      warning=FALSE,
+                      fig.width = 8.5,
+                      fig.path = "paper-example/figs/",
+                      cache.path = "paper-example/_cache/")
+
+library(tidyverse) # for all things workflow
+library(stevedata) # for the data
+library(stevemisc) # graph formatting, other helper functions
+library(lme4) # everyone's go-to for mixed models
+library(modelsummary) # regression tables
+
+ESS9GB %>%
+  mutate(imuecltd = ifelse(imueclt < 5, 1, 0)) -> ESS9GB
+
+M3 <- lmer(immigsent ~ agea + female + eduyrs + uempla + hinctnta + 
+             lrscale + (1 + lrscale | region), data=ESS9GB)
+M4 <- glmer(imuecltd ~ agea + female + eduyrs + uempla + hinctnta + 
+              lrscale + (1 + lrscale | region), data=ESS9GB,
+            family = binomial(link="logit"))
+
+```
+
+# Section
+
+Vivamus bibendum velit in magna blandit fringilla. Nullam fermentum euismod nisi, eu consectetur odio fermentum at. Suspendisse egestas sed quam ac scelerisque. Nullam venenatis ipsum semper tortor sagittis tempor. Integer nec leo at est placerat fringilla. Integer mollis vitae enim in condimentum. Pellentesque pulvinar volutpat feugiat. Donec enim tortor, facilisis sit amet vulputate eu, auctor efficitur diam.
+
+Aenean eleifend sem at massa placerat molestie. Phasellus eget sapien sapien. Ut bibendum mauris sit amet placerat semper. Curabitur sed dui in libero tempus sollicitudin in sit amet odio. In ullamcorper lorem vitae sollicitudin cursus. Nulla id blandit sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam mi orci, maximus a mattis aliquam, finibus eu dolor. Suspendisse ullamcorper dui a orci bibendum, in mollis dolor ullamcorper.
+
+
+
+
+```{r tab-reg, results="asis"}
+#| echo=FALSE
+modelsummary(list("Pro-Immigration Sentiment" = M3, "Immigrants Undermine Culture" = M4),
+             output = "huxtable",
+             title = "Simple Models of Immigration Attitudes in the United Kingdom",
+             gof_omit = "IC|F|Log.|R2$|R2",
+             coef_map = c("agea" = "Age",
+                          "female" = "Female",
+                          "eduyrs" = "Years of Education",
+                          "uempla" = "Unemployed",
+                          "hinctnta" = "Household Income (Deciles)",
+                          "lrscale" = "Ideology (L to R)",
+                          "(Intercept)" = "Intercept"),
+             align = "lcc")
+```
+
+
+## Subsection
+
+Vivamus bibendum velit in magna blandit fringilla. Nullam fermentum euismod nisi, eu consectetur odio fermentum at. Suspendisse egestas sed quam ac scelerisque. Nullam venenatis ipsum semper tortor sagittis tempor. Integer nec leo at est placerat fringilla. Integer mollis vitae enim in condimentum. Pellentesque pulvinar volutpat feugiat. Donec enim tortor, facilisis sit amet vulputate eu, auctor efficitur diam.
+
+Aenean eleifend sem at massa placerat molestie. Phasellus eget sapien sapien. Ut bibendum mauris sit amet placerat semper. Curabitur sed dui in libero tempus sollicitudin in sit amet odio. In ullamcorper lorem vitae sollicitudin cursus. Nulla id blandit sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam mi orci, maximus a mattis aliquam, finibus eu dolor. Suspendisse ullamcorper dui a orci bibendum, in mollis dolor ullamcorper.
+
+
+```{r, fig.cap = "A Figure"}
+#| eval = T,
+#| echo = F
+library(modelr)
+ESS9GB %>%
+    data_grid(.model = M3, region = unique(region), lrscale = c(0, 10)) -> newdat
+
+library(merTools)
+predictInterval(M3, newdat, level = .9, stat = "mean", type="linear.prediction", include.resid.var = FALSE) %>%
+  bind_cols(newdat, .) %>%
+  mutate(ideocat = ifelse(lrscale == 0, "Most Left", "Most Right")) %>%
+    ggplot(.,aes(reorder(region, fit), y=fit, ymax=upr, ymin=lwr, color=ideocat, shape=ideocat)) +
+    geom_pointrange(position = position_dodge(width = .3), size=1) +
+  scale_color_brewer(palette = "Set1") +
+    coord_flip() + theme_steve_web() +
+  labs(color = "", shape = "",
+       y = "Simulated Mean Immigration Sentiment (with 90% Intervals)", x = "",
+       caption = "Data: ?ESS9GB, in {stevedata}. Method: Simulation by multivariate normal distribution of coefficients and variance-covariance matrix.")
+```
+
+### Third subsection
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo consequat mi in fermentum. Phasellus id nisi at nibh sollicitudin volutpat non et massa. Nam nec sapien porttitor, sollicitudin erat vitae, auctor mauris. Nam nisl enim, sagittis vitae semper vitae, suscipit id turpis. Aliquam vel lacinia libero, sit amet dapibus nunc. Nullam vitae bibendum orci. Vestibulum hendrerit maximus volutpat. Nulla a placerat sapien. Integer ullamcorper dapibus magna, eget scelerisque orci consequat quis. Fusce suscipit mi tortor, ultricies faucibus arcu finibus at. Quisque blandit velit in hendrerit pulvinar.
+
+Integer vitae consequat mi, sit amet pulvinar massa. Quisque at dui lectus. Mauris malesuada mattis arcu nec ultricies. Integer quis condimentum nulla. Nullam lacinia vel diam condimentum hendrerit. Quisque sed rhoncus dolor. Vivamus at sem vitae nisi imperdiet hendrerit a sed felis. Quisque sollicitudin ex nec enim malesuada iaculis. Nam in interdum sapien. Fusce pellentesque volutpat metus faucibus vulputate. In turpis odio, ornare tempus facilisis vel, malesuada sed est.
+
+Vivamus bibendum velit in magna blandit fringilla. Nullam fermentum euismod nisi, eu consectetur odio fermentum at. Suspendisse egestas sed quam ac scelerisque. Nullam venenatis ipsum semper tortor sagittis tempor. Integer nec leo at est placerat fringilla. Integer mollis vitae enim in condimentum. Pellentesque pulvinar volutpat feugiat. Donec enim tortor, facilisis sit amet vulputate eu, auctor efficitur diam.
+
+Aenean eleifend sem at massa placerat molestie. Phasellus eget sapien sapien. Ut bibendum mauris sit amet placerat semper. Curabitur sed dui in libero tempus sollicitudin in sit amet odio. In ullamcorper lorem vitae sollicitudin cursus. Nulla id blandit sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam mi orci, maximus a mattis aliquam, finibus eu dolor. Suspendisse ullamcorper dui a orci bibendum, in mollis dolor ullamcorper.
+
+Aenean in purus sapien. Suspendisse malesuada orci justo, eget sollicitudin neque rhoncus nec. Suspendisse nibh metus, volutpat vel tempor in, vestibulum vitae erat. Ut velit nisl, venenatis vitae condimentum molestie, facilisis eget odio. Nulla ornare vehicula risus, vitae commodo metus aliquet vitae. Nulla nunc metus, rutrum sit amet mauris non, auctor tristique dolor. Phasellus ut nibh at risus scelerisque maximus. Maecenas vitae enim et ligula tempus malesuada. Suspendisse auctor sed ligula vitae semper. Phasellus eu turpis volutpat, luctus leo eget, consectetur lacus. In condimentum erat eu egestas congue. Aenean ut mi ut eros condimentum viverra a quis sapien. Morbi in diam mauris. Sed eu eleifend eros, nec euismod lectus.
