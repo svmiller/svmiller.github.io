@@ -247,13 +247,13 @@ modelsummary(list("Pro-Immigration Sentiment" = M1, "Immigrants Undermine Cultur
 \scriptsize
 ```{r}
 #| eval=F
-linloess_plot(M1) # in {stevemisc}
+linloess_plot(M1, color="black", pch=21) # in {stevemisc}
 ```
 
 \normalsize
 ```{r}
 #| echo=FALSE
-linloess_plot(M1) + theme_steve_web() +
+linloess_plot(M1, color="black", pch=21) + theme_steve_web() +
   labs(caption = "Data: ?ESS9GB, in {stevedata}.",
        title = "Assessing the Linearity Assumption of the OLS Model",
        subtitle = "Comparing the linear smoother with the LOESS smoother is a useful visual diagnostic of the linearity assumption of OLS. It can also point to outliers/influential observations.")
