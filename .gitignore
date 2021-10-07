@@ -26,3 +26,6 @@ docs/**/*.log
 # don't ignore the .gitignore file
 !.gitignore
 
+# Finally adding this
+# https://stackoverflow.com/questions/32335459/git-ignore-filenames-which-contain-pattern-to-ignore
+**testy-mctesterson**
