@@ -247,7 +247,7 @@ modelsummary(list("Pro-Immigration Sentiment" = M1, "Immigrants Undermine Cultur
 \scriptsize
 ```{r}
 #| eval=F
-linloess_plot(M1, color="black", pch=21) # in {stevemisc}
+linloess_plot(M1) # in {stevemisc}
 ```
 
 \normalsize
@@ -307,7 +307,7 @@ merTools::predictInterval(M3, newdat, level = .9, stat = "mean", type="linear.pr
     geom_pointrange(position = position_dodge(width = .3), size=1) +
   scale_color_brewer(palette = "Set1") +
     coord_flip() + theme_steve_web() +
-  labs(color = "", shape = "",
+  labs(color = "Ideology", shape = "Ideology",
        y = "Simulated Mean Immigration Sentiment (with 90% Intervals)", x = "",
        title = "Post-Estimation Simulation of Mixed Models Will Tell You More About What Your Effects 'Look Like'",
        subtitle = "They suggest that the most left North East respondents aren't that different from the most right in their sentiment toward immigration. In Scotland: they're very different.",
