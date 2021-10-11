@@ -138,12 +138,12 @@ Higher values = more pro-immigration sentiment.
 
 The **independent variables** (*IVs*):
 
-- *Age* (in years)
-- *Education* (in years of education)
-- *Gender* (1 if respondent is a woman)
-- *Employment status* (1 if respondent is unemployed, but looking for work)
-- *Household income* (in deciles)
-- *Ideology* (on 11-point L-R scale)
+- *Age* (in years) [`agea`]
+- *Education* (in years of education) [`eduyrs`]
+- *Gender* (1 if respondent is a woman) [`female`]
+- *Employment status* (1 if respondent is unemployed, but looking for work) [`uempla`]
+- *Household income* (in deciles) [`hinctnta`]
+- *Ideology* (on 11-point L-R scale) [`lrscale`]
 
 ## An Applied Analysis in `R`
 ### Some Startup `R` Libraries We'll Need
@@ -171,11 +171,12 @@ We can get summary statistics, by region...
 ESS9GB %>%
   group_by(region) %>%
   summarize(prop_undermine = mean(imuecltd, na.rm=T),
-            mean_immigsent = mean(immigsent, na.rm=T))
+            mean_immigsent = mean(immigsent, na.rm=T)) %>%
+  arrange(-mean_immigsent)
 ```
 \normalsize
 
-### We Can Even Visualize These Findings With a Map
+### 
 
 ```{r}
 #| echo = F
@@ -190,7 +191,8 @@ ESS9GB %>%
   theme_steve_web() +
   coord_sf(expand = TRUE) +
   scale_fill_continuous(low="#F3E5F5",high="#4A14BC") +
-  theme(plot.margin=grid::unit(c(0,0,0,0), "mm")) +
+  theme(plot.margin=grid::unit(c(0,0,0,0), "mm"),
+        legend.position = "right") +
   labs(fill = "",
        title = "Percentage of Respondents Thinking Immigrants Undermine Culture, by Region",
        subtitle = "The sentiment is highest in North East (40%) and lowest in London (24%) and Scotland (20%).",
@@ -231,8 +233,8 @@ modelsummary(list("Pro-Immigration Sentiment" = M1, "Immigrants Undermine Cultur
            escape = FALSE) %>%
   row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
   row_spec(0, bold=TRUE)  %>%
-  row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
-  row_spec(c(5,6,9,10), color="#00cc00") %>%
+  # row_spec(c(1,2,3,4,7,8,11,12), color="#cc0000") %>%
+  # row_spec(c(5,6,9,10), color="#00cc00") %>%
   row_spec(c(3,4,7,8,11,12), background='#dedede') %>%
   row_spec(c(5,6,9,10,11,12), bold=TRUE) %>%
   row_spec(0, bold=TRUE) %>%
@@ -288,7 +290,7 @@ show_ranef(M3, "region", reorder=FALSE) # in {stevemisc}
 show_ranef(M3, "region", reorder=FALSE) + theme_steve_web() +
   labs(caption = "Data: ?ESS9GB, in {stevedata}.",
        title = "A Caterpillar Plot of Random Effects from a Mixed Effects Model",
-       subtitle = "These will show which levels of the random effect start higher/lower than the global average and which effects are stronger/weaker than the global average.")
+       subtitle = "These will show which levels of the random effect start higher/lower than the global average and which effects are higher/lower than the global average.")
 ```
 
 ###
