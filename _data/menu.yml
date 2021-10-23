@@ -45,6 +45,8 @@
       subhref: "/for-students/pi-sigma-alpha/"
     - subtitle: "Presentations"
       subhref: "/presentations/"
+    - subtitle: "We Should Really Be Citing These Things More"
+      subhref: "/things-we-really-should-be-citing/"
     #- subtitle: "Clean USAID Greenbook Data (2014)"
     #   subhref: "/miscellany/clean-usaid-greenbook-data/"
     # - subtitle: "Journal of Peace Research *.bst File (2014)"

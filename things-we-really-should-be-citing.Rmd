@@ -1,0 +1,89 @@
+---
+title: "We Should Really Be Citing These Things More"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+    pandoc_args: 
+      - "--wrap=preserve"
+author: "steve"
+excerpt: "Use some R code (and SQL code) to create dyadic dispute-year data from participant-level summaries."
+layout: page
+categories:
+  - R
+  - Political Science
+# image: "putin-visit-denmark-2011.jpg"
+---
+
+```{r setup, include=FALSE, cache=F}
+
+
+rmd_name <- knitr::current_input()
+#rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+#rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+```
+
+
+This page will serve as a bibliography/running tally of things that we (certainly I) use a lot in our applied research, but we almost never cite these things as integral to the output submitted for peer review. Here's the problem as I see it.
+
+1. The need to do more runs head-first into the stringent space restrictions of our journals. This creates a tension where the tools we use collide with our publication outlets that simultaneously expect us to do more without any increase in the journal's capacity to allow us to communicate more.
+2. The tools themselves are both integral to our workflow, but only indirectly related---at most---to the material. For example, there were no doubt dozens---maybe over 100---peace science articles published in the mid-2000s that used EUGene for constructing the data. The analysis may have been one of several at the time seeking to explain variation in inter-state conflict by reference to democracy. [Jones et al. (1996)](https://journals.sagepub.com/doi/10.1177/073889429601500203) or [Ghosn et al. (2004)](https://journals.sagepub.com/doi/10.1080/07388940490463861?icid=int.sj-abstract.similar-articles.2) may have been appropriately cited for the conflict data. The user may have also cited a given [Polity](https://www.systemicpeace.org/inscrdata.html) user manual for the democracy data. In all likelihood, they omitted that software introduced by [Bennett and Stam (2000)](https://www.tandfonline.com/doi/abs/10.1080/03050620008434965) created the data for them.`[^1]`{=markdown} Something has to be omitted for space, and it's likely going to be the ancillary stuff.`[^2]`{=markdown}  
+3. Relative to the period when I started my path in academia, I think we have a glut of researchers producing more public goods than ever before. There's a wealth of information out there regarding various computational methods, various parlor tricks for reproducible research, or various other tools that expedite our research processes. We're all better off for it, and we should all appreciate it.
+4. However, there aren't too many incentives for people in academia who provide these goods. Their contributions are rarely cited and journals in the discipline don't typically advertise space or interest in these public goods. To be clear, there are publication outlets available---prominently [*Journal of Open Source Software*](https://joss.theoj.org)---but I highly doubt I'm the first person who has been told by more senior people or administrators that these outlets are considered "less than" other more "prestigious", discipline-specific outlets.
+
+What I pledge and offer here can't address all these issues. That said, my experience  has shown that administrators increasingly prioritize scholarly indicators of "impact" in doing end-of-year evaluations for performance and the sporadic "merit" reviews for raises. Increasingly, that's [Google Scholar](https://scholar.google.com). If journals don't permit space for us to cite all the important ancillary stuff, we can at least 1) stick those citations in an appendix, 2) put the appendix online at our website, 3) wait for Google to crawl our site to find those citations, and 4) let those register on people's Google Scholar profiles to count toward their [*h*-index](https://guides.lib.umich.edu/c.php?g=282982&p=1887449) and [*i*10-index](https://ucsd.libguides.com/c.php?g=704382&p=5000890#:~:text=i10-Index%20=%20the%20number%20of,Advantages%20of%20i10-Index). It'll at least be what I pledge to do going forward.
+
+## Stuff I Use a Lot in My Research
+
+What follows is an incomplete and expanding list of tools I use in all/most of my research projects. I may not use all of them in a given project (i.e. if I'm doing something Bayesian, I'm not going to be doing something with clustered standard errors). No matter, I use these a lot---you probably do too---and we should all cite them more.
+
+```{r, results="asis"}
+library(tidyverse)
+library(bib2df)
+library(stevemisc)
+
+things_to_cite <- bib2df("~/Dropbox/svmiller.github.io/miscelanea/things-you-should-cite.bib")
+
+print_refs(capture.output(df2bib(things_to_cite)), toformat='plain')
+```
+
+
+### .bib Entries
+
+
+Here are the .bib entries if you'd like to add them to your own file.
+
+```{r}
+df2bib(things_to_cite)
+```
+
+
+`[^1]:`{=markdown} The researcher borrows trouble when they do this because software like EUGene implements its own design choices on the construction of the data that are almost never communicated to the reader. They may even be unaware to the researcher.
+
+`[^2]:`{=markdown} Let he who is without sin cast the first stone; my [first](https://journals.sagepub.com/doi/abs/10.1177/0738894211404797) [two](https://journals.sagepub.com/doi/full/10.1177/0022002712446126) publications are guilty of this.
