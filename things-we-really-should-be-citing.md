@@ -7,7 +7,7 @@ output:
     pandoc_args: 
       - "--wrap=preserve"
 author: "steve"
-excerpt: "Use some R code (and SQL code) to create dyadic dispute-year data from participant-level summaries."
+excerpt: "These are ancillary materials that help us in our research that we (I) should be citing more."
 layout: page
 categories:
   - R
