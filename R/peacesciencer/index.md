@@ -29,7 +29,10 @@ download_extdata()
 
 These are directed dyad-year-level data for national trade from the Correlates of War project.
 
-### Directed Leader Dyad-Year Data, 1870-2015 ([`dir_leader_dyad_years.rds`](http://svmiller.com/R/peacesciencer/dir_leader_dyad_years.rds))
+### Directed Leader Dyad-Year Data, 1870-2015 (CoW States) ([`cow_dir_leader_dyad_years.rds`](http://svmiller.com/R/peacesciencer/cow_dir_leader_dyad_years.rds))
 
-These are all directed leader dyad-year data from 1870-2015. Data come from the Archigos data (version 4.1).
+These are all directed leader dyad-year data from 1870-2015. Data come from the Archigos data (version 4.1) and are standardized to CoW state system membership.
 
+### Directed Leader Dyad-Year Data, 1870-2015 (Gleditsch-Ward States) ([`gw_dir_leader_dyad_years.rds`](http://svmiller.com/R/peacesciencer/gw_dir_leader_dyad_years.rds))
+
+These are all directed leader dyad-year data from 1870-2015. Data come from the Archigos data (version 4.1) and represent all available leader dyadic pairings in the Archigos data (which are nominally represented in the Gleditsch-Ward state system).
