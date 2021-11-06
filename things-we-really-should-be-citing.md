@@ -69,7 +69,18 @@ Chung, Yeojin et al. 2013. “A Nondegenerate Penalized Likelihood
 Estimator for Variance Parameters in Multilevel Models.” Psychometrika
 78(4): 685–709.
 
+Wickham, Hadley et al. 2019. “Welcome to the tidyverse.” Journal of Open
+Source Software 4(43): 1686.
+
 Xie, Yihui. 2015. Dynamic Documents with R and Knitr. Chapman; Hall/CRC.
+
+———. 2016. Bookdown: Authoring Books and Technical Documents with R
+Markdown. Boca Raton, Florida: Chapman; Hall/CRC.
+<https://bookdown.org/yihui/bookdown>.
+
+Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. R Markdown
+Cookbook. Boca Raton, Florida: Chapman; Hall/CRC.
+<https://bookdown.org/yihui/rmarkdown-cookbook>.
 
 ### .bib Entries
 
@@ -172,6 +183,40 @@ df2bib(things_to_cite)
 #>   Year = {2017},
 #>   Doi = {10.18637/jss.v080.i01},
 #>   Encoding = {UTF-8}
+#> }
+#> 
+#> 
+#> @Book{xie2016b,
+#>   Address = {Boca Raton, Florida},
+#>   Author = {Yihui Xie},
+#>   Note = {ISBN 978-1138700109},
+#>   Publisher = {Chapman and Hall/CRC},
+#>   Title = {bookdown: Authoring Books and Technical Documents with {R} Markdown},
+#>   Year = {2016},
+#>   Url = {https://bookdown.org/yihui/bookdown}
+#> }
+#> 
+#> 
+#> @Article{wickhametal2019wt,
+#>   Author = {Hadley Wickham and Mara Averick and Jennifer Bryan and Winston Chang and Lucy D'Agostino McGowan and Romain François and Garrett Grolemund and Alex Hayes and Lionel Henry and Jim Hester and Max Kuhn and Thomas Lin Pedersen and Evan Miller and Stephan Milton Bache and Kirill Müller and Jeroen Ooms and David Robinson and Dana Paige Seidel and Vitalie Spinu and Kohske Takahashi and Davis Vaughan and Claus Wilke and Kara Woo and Hiroaki Yutani},
+#>   Journal = {Journal of Open Source Software},
+#>   Number = {43},
+#>   Pages = {1686},
+#>   Title = {Welcome to the {tidyverse}},
+#>   Volume = {4},
+#>   Year = {2019},
+#>   Doi = {10.21105/joss.01686}
+#> }
+#> 
+#> 
+#> @Book{xieetal2020rmc,
+#>   Address = {Boca Raton, Florida},
+#>   Author = {Yihui Xie and Christophe Dervieux and Emily Riederer},
+#>   Note = {ISBN 9780367563837},
+#>   Publisher = {Chapman and Hall/CRC},
+#>   Title = {R Markdown Cookbook},
+#>   Year = {2020},
+#>   Url = {https://bookdown.org/yihui/rmarkdown-cookbook}
 #> }
 ```
 
