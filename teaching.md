@@ -37,6 +37,7 @@ This page includes my teaching philosophy and an empirical assessment of my teac
 - [Comparative Political Behavior](/teaching/posc-4430-political-behavior/)
 - [Quantitative Public Policy Analysis](/teaching/quantitative-public-policy-analysis/)
 - [Democracies, International Conflict, and Peace](/teaching/proposed-syllabi/svm-democracy-conflict-peace-syllabus.pdf)
+- [What Do We Know About War?](/teaching/proposed-syllabi/svm-wdwkaw-syllabus.pdf)
 
 ### University of Illinois at Urbana-Champaign
 
