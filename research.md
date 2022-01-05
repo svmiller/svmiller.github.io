@@ -64,6 +64,8 @@ tbody td { padding: 5px;
 
 <!-- Gibler, Douglas M. and Steven V. Miller. Forthcoming. "The Militarized Interstate Confrontation (MIC) Dataset, 1816-2010" *Journal of Conflict Resolution*. -->
 
+Miller, Steven V. Forthcoming. "A Random Item Response Model of External Territorial Threat, 1816-2010." *Journal of Global Security Studies.*
+
 Gibler, Douglas M. and Steven V. Miller. Forthcoming. "An Appraisal of Project Mars and the Divided Armies Argument." *International Studies Quarterly*.
 
 Miller, Steven V. Forthcoming. "[Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017](/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)." *Social Science Journal.*
