@@ -64,6 +64,8 @@ tbody td { padding: 5px;
 
 <!-- Gibler, Douglas M. and Steven V. Miller. Forthcoming. "The Militarized Interstate Confrontation (MIC) Dataset, 1816-2010" *Journal of Conflict Resolution*. -->
 
+Miller, Steven V. Forthcoming. "[`{peacesciencer}`](http://svmiller.com/peacesciencer/): An R Package for Quantitative Peace Science Research." *Conflict Management and Peace Science*.
+
 Miller, Steven V. Forthcoming. "A Random Item Response Model of External Territorial Threat, 1816-2010." *Journal of Global Security Studies.*
 
 Gibler, Douglas M. and Steven V. Miller. Forthcoming. "An Appraisal of Project Mars and the Divided Armies Argument." *International Studies Quarterly*.
