@@ -1,0 +1,140 @@
+---
+title: "Print References/Reading List/Bibliography in Your Syllabus (With Some Style) in R Markdown and {stevemisc}"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2022-01-13'
+excerpt: "Here's a more elegant way to format a bibliography/reading list for a syllabus than RefManageR in R Markdown."
+layout: post
+categories:
+  - R
+image: "stack-of-journals.png"
+---
+
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+
+library(tidyverse)     # for most things
+library(stevemisc)     # for graph formatting
+library(kableExtra)
+```
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+ 
+add_jekyll_image('/images/stack-of-journals.png', "A stack of things to read.", "350", "right")
+ 
+```
+
+It's the start of the semester for a lot of us, which means it's time to create our syllabi and tell students to read things in hopes that they might actually read them. No matter, the point here isn't to repeat a common refrain of university professors that it's difficult to get students to do the readings on the syllabus, [let alone convert them to communism](https://twitter.com/profmusgrave/status/1279252119074242560). The point here is to scratch an itch on how to format a reading list for a syllabus in an elegant way. I think I have a reasonable solution here based on some functionality built into [`{stevemisc}`](http://svmiller.com/stevemisc/) (pending version 1.4).
+
+Here's the basic problem from the perspective of someone who uses R Markdown as an interface to pandoc, and ultimately a wrapper for a LaTeX document designed with my syllabus template in [`{stevetemplates}`](http://svmiller.com/stevetemplates/). Rather, here's the question as a restatement of the problem how does one create a "reading list" in the syllabus in a seamless way that elegantly communicates the pertinent information (i.e. the stuff a student should read for a given week during the semester)? This answer has dogged me for awhile, since there are two basic approaches here of which I'm familiar. None are perfect.
+
+One approach is to make some in-text citations that can then be formatted as a bibliography at the end of the document. One of my professors in grad school recently discovered LaTeX while I was a student there and formatted their syllabus this way. It would look something like this in the LaTeX document.
+
+```latex
+\section{Week 1}
+
+\citep{horvath1944, janowicz1950, cassady1955, griffin1974, griffin1975, george1995, smith2006}
+```
+
+This would come out looking something like this.
+
+```
+Week 1
+
+(Horvath, 1944; Janowicz, 1950; Cassady, 1955; Griffin, 1974, 1975; George, 1995; Smith, 2006)
+```
+
+A student would then have to read the syllabus and jump to the bibliography at the very end of the syllabus to figure out what exactly the reading was. That works, but it's unenjoyable.
+
+Another approach would be what I've done for the past few years. This leverages [`{RefManageR}`](https://cran.r-project.org/web/packages/RefManageR/index.html), a master `.bib` file, and R Markdown. Here's a simple illustration based on [my ongoing international conflict class](http://posc3610.svmiller.com/), in which I assign the 3rd edition of [*What Do We Know About War?*](https://www.amazon.com/What-Do-Know-about-War-dp-1538140098/dp/1538140098) as well as John Vasquez' [*The War Puzzle Revisited*](https://www.amazon.com/Revisited-Cambridge-Studies-International-Relations/dp/0521708230). These are given in my convoluted `master.bib` file as "vasquez2009twp" and "mitchellvasquez2021wdwk". If I wanted to display these entries as a bibliography or reading list in my syllabus, I would do something like this. Do note that your chunk option should *always* be set to `"results='asis'"` for any of this to work.
+
+```{r, results="asis"}
+library(RefManageR)
+
+bib <- ReadBib("~/Dropbox/master.bib")
+myopts <- BibOptions(bib.style = "authoryear", style="latex", first.inits=FALSE, max.names = 20)
+
+bib[c("vasquez2009twp", "mitchellvasquez2021wdwk")]
+```
+
+A few things are happening here that make this approach functional, but dissatisfying. Namely, `{RefManageR}` is limited stylistically. It can do some basic formatting, but things are just going to come out looking awkward no matter what. For one, it has no discipline-specific (for me) formatting style. I would like APSA's citation style, but I would settle for Harvard or Chicago. The best I can do is "authoryear", and importantly tell `{RefManageR}` to knock it off (to the best of my abilities) with condensing multiple authors to "et al." or initializing (sic) their names.
+
+So, here's what I think to be a better way, and one that uses some functionality built into the pending version 1.4 of [`{stevemisc}`](http://svmiller.com/stevemisc/). I'll be using a toy data set that comes in this package too. This is `stevepubs`. `stevepubs` is a data frame of my publications (in print and forthcoming), mostly my journal articles. This leverages the awesomeness of the [`{bib2df}`](https://cran.r-project.org/web/packages/bib2df/index.html) package (itself a dependency of [`{stevemisc}`](http://svmiller.com/stevemisc/). For quick context, here is how I created this data frame.
+
+```r
+library(tidyverse)
+library(bib2df)
+library(stevemisc)
+
+bib <- bib2df("~/Dropbox/master.bib")
+
+bib %>%
+  filter(COMMENT == "citemyshit") %>%
+  arrange(YEAR) %>%
+  select(where(~!all(is.na(.x)))) %>%
+  select(-COMMENT, -TIMESTAMP, -OWNER) -> stevepubs
+```
+
+And here is what this data frame looks like.
+
+```{r}
+stevepubs
+```
+
+The workhorse function for doing what I want here is [`print_refs()`](http://svmiller.com/stevemisc/reference/print_refs.html). Here's a brief summary of the arguments in this function.
+
+- `bib`: a valid `.bib` entry, *or* a data frame that (one assumes) was created by the [`{bib2df}`](https://cran.r-project.org/web/packages/bib2df/index.html) package. Either works here.
+- `csl`: a CSL file, matching one available in the repository supplied to `cslrepo`, that the user wants to format the references. The default here is "american-political-science-association.csl". Do note that if ".csl" is not supplied here, the functions you assumes you forgot to do this and will attach it on for you.
+- `toformat`: the output format wanted by the user. Default is "markdown_strict". "latex" works here as well. I caution against doing too much here. [Check Pandoc's user guide](https://pandoc.org/MANUAL.html) for more information here.
+- `cslrepo`: 	a directory of CSL files. Defaults to the one on Github ("https://raw.githubusercontent.com/citation-style-language/styles/master").
+- `spit_out`: logical, defaults to TRUE. If TRUE, wraps ("spits out") formatted citations in a `writeLines()` output for the console. If FALSE, returns a character vector.
+- `delete_after`: logical, defaults to TRUE. If TRUE, deletes CSL file when it's done. If FALSE, retains CSL for (potential) future use.
+
+## Print Your References
+
+From there, this is a simple matter of just executing `print_refs()`. This would format all the references in `stevepubs` into a full reading list/bibliography.
+
+
+```{r, results="asis"}
+stevepubs %>% print_refs()
+```
+
+If you're working with a "master" `.bib` file, like I typically do, you probably don't want to format *all* those entries in there. However, if you've converted your `.bib` file to a data frame by way of [`{bib2df}`](https://cran.r-project.org/web/packages/bib2df/index.html), you can do some basic filtering on it to get what you want. For example, let's assume I have a week where I'm just going to assign everything of mine that was published in 2017. Here's how you'd do that.
+
+```{r, results="asis"}
+stevepubs %>% filter(YEAR == 2017) %>%  print_refs()
+```
+
+There's not a lot else on top of that. I have some sister functions I wrote around this as I was experimenting with this---prominently [`filter_refs()`](http://svmiller.com/stevemisc/reference/filter_refs.html) but this should be enough to get started. Consider it the latest tool in my syllabi package, complementing [my template](http://svmiller.com/blog/2016/07/r-markdown-syllabus/) and [calendar](http://svmiller.com/blog/2020/08/a-ggplot-calendar-for-your-semester/).
