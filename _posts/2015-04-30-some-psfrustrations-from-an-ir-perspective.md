@@ -94,7 +94,7 @@ So, yes, democracies do not fight each other, and never in war. We're not sure (
  [21]: http://www.theguardian.com/commentisfree/2013/jul/16/egyptian-coup-warning-will-erdogan-listen
  [22]: http://mitpress.mit.edu/books/logic-political-survival
  [23]: http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=9371272&fileId=S1752971914000347
- [24]: http://onlinelibrary.wiley.com/doi/10.1111/j.1468-2478.2009.00552.x/full
+ [24]: https://doi.org/10.1111/j.1468-2478.2009.00552.x
  [25]: http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=2300088&fileId=S0003055408080131
  [26]: http://onlinelibrary.wiley.com/doi/10.1111/j.1540-5907.2007.00244.x/abstract?deniedAccessCustomisedMessage=&userIsAuthenticated=false
  [27]: http://politicalscience.cos.ucf.edu/wp-content/uploads/2013/08/Mous_ISQ-2013.pdf
