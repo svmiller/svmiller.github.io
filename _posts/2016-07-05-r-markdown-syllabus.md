@@ -9,6 +9,9 @@ excerpt: "I have a series of templates for R Markdown. Here's one for an syllabu
 image: "itsinsyllabus.gif"
 ---
 
+{% include announcebox.html announce="An Updated Version of This Template is in <a href='http://svmiller.com/stevetemplates'><code class='highlighter-rouge'>{stevetemplates}</code></a> ⤵️" text="This template is available in <a href='http://svmiller.com/stevetemplates'><code class='highlighter-rouge'>{stevetemplates}</code></a>, an R package that includes all my R Markdown templates. The version of <a href='http://svmiller.com/stevetemplates/reference/syllabus.html'>the template available in the package</a> is slightly modified/improved from what I present here. Issues with this template can be best addressed on <a href='https://github.com/svmiller/stevetemplates'>the project's Github</a>." %}
+
+
 {% include image.html url="/images/itsinsyllabus.gif" caption="Via PhD Comics, naturally." width=450 align="right" %}
 
 This will be the latest in [my series](http://svmiller.com/categories/#R%20Markdown) of tutorials for making the most of [R Markdown](http://rmarkdown.rstudio.com/). [My repository](https://github.com/svmiller/svm-r-markdown-templates) already has R Markdown LaTeX templates for [academic manuscripts](http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/), [CVs](http://svmiller.com/blog/2016/03/svm-r-markdown-cv/), and [personal statements](https://github.com/svmiller/svm-r-markdown-templates/blob/master/svm-latex-statement.tex) (e.g. teaching statement, research statement). The syllabus is the next step.
