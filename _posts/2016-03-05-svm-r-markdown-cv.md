@@ -9,6 +9,8 @@ excerpt: "I have a series of templates for R Markdown. Here's one for an academi
 image: "rmarkdown-cv.png"
 ---
 
+{% include announcebox.html announce="An Updated Version of This Template is in <a href='http://svmiller.com/stevetemplates'><code class='highlighter-rouge'>{stevetemplates}</code></a> ⤵️" text="This template is available in <a href='http://svmiller.com/stevetemplates'><code class='highlighter-rouge'>{stevetemplates}</code></a>, an R package that includes all my R Markdown templates. The version of <a href='http://svmiller.com/stevetemplates/reference/cv.html'>the template available in the package</a> is slightly modified/improved from what I present here. Issues with this template can be best addressed on <a href='https://github.com/svmiller/stevetemplates'>the project's Github</a>." %}
+
 {% include image.html url="/images/rmarkdown-cv.png" caption="What my CV looks like with this template." width=450 align="right" %}
 
 Why aren't you using [R Markdown](http://rmarkdown.rstudio.com/) already? I've offered an argument why you should consider doing everything in R Markdown with posts about [my academic manuscript template](http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/) and [my integration of R Markdown with Beamer](http://svmiller.com/blog/2015/02/moving-from-beamer-to-r-markdown/) (see [updated Beamer-R Markdown template here](https://github.com/svmiller/svm-r-markdown-templates)).

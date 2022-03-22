@@ -9,6 +9,9 @@ excerpt: "I have a series of templates for R Markdown. Here's one for academic m
 image: "rmarkdown-academic.png"
 ---
 
+{% include announcebox.html announce="An Updated Version of This Template is in <a href='http://svmiller.com/stevetemplates'><code class='highlighter-rouge'>{stevetemplates}</code></a> ⤵️" text="This template is available in <a href='http://svmiller.com/stevetemplates'><code class='highlighter-rouge'>{stevetemplates}</code></a>, an R package that includes all my R Markdown templates. The version of <a href='http://svmiller.com/stevetemplates/reference/article.html'>the template available in the package</a> is slightly modified/improved from what I present here. I also want to note that I do not intend to offer too much support for this template, in light of <a href='http://svmiller.com/blog/2020/09/another-rmarkdown-article-template/'>my newer article template</a> that is <a href='http://svmiller.com/stevetemplates/reference/article2.html'>also available</a> in <a href='http://svmiller.com/stevetemplates'><code class='highlighter-rouge'>{stevetemplates}</code></a>. Issues with this template can be best addressed on <a href='https://github.com/svmiller/stevetemplates'>the project's Github</a>." %}
+
+
 {% include image.html url="/images/rmarkdown-academic.png" caption="The frontmatter to an R Markdown document." width=450 align="right" %}
 
 You should consider no longer using LaTeX as a front-end for your manuscripts. Use a wrapper for LaTeX instead, like [R Markdown](http://rmarkdown.rstudio.com/). 
