@@ -90,7 +90,7 @@ composition of the international system (or shape of a state) changed, as
 recorded in [`{cshapes}`](https://icr.ethz.ch/data/cshapes/). Sometimes these changes concern the dyadic
 minimum distance; sometimes they don't. For example, the dissolution of
 the Soviet Union is responsible for a lot shape changes (i.e. system entry) in
-1991. That obviously won't change the dyadic minimum
+the year it happened. That obviously won't change the dyadic minimum
 distance between the U.S. and Canada, which will always be zero. Sometimes the
 start of the year (Jan. 1), the midpoint of the year (June 30), or the end of
 the year (Dec. 31) coincides with a system change. Often it doesn't. Note that
