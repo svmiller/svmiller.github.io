@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-01-28'
 excerpt: "Here are some sample data sets to show some classic limitations/fallacies of correlations, emphasizing the importance of exploratory data visualization/analysis."
@@ -19,17 +17,19 @@ image: "simpsons-paradox.jpg"
 
 {% include image.html url="/images/simpsons-paradox.jpg" caption="The Simpsons Paradox, not to be confused with Simpson's paradox (HT: @fMRI_guy)." width=400 align="right" %}
 
+*Last updated: 3 May 2022. [`{stevedata}`](http://svmiller.com/stevedata/) now has these data sets (and more) that I use for pedagogical instruction. I changed some things in this post to account for that.* 
+
 I'm teaching [a grad-level methods class](http://post8000.svmiller.com) this semester that is heavier on applied data analysis for a public policy audience than [my undergraduate class](http://svmiller.com/teaching/posc-3410-quantitative-methods-in-political-science/), which is more focused on boilerplate research design stuff for political science. It is in part a chore in as much as it's a new prep. The emphasis on causal inference is more narrow/focused now than it was when I was learning related material in graduate school (and certainly for a different purpose). 
 
-It's also a blessing because it's giving me some opportunity to rethink/retool how I teach this stuff for a wide audience. Along the way, I'm compiling some instructional tools into [an R package, `post8000r`](https://github.com/svmiller/post8000r), that is right now on [my Github](https://github.com/svmiller/). My goals here are multiple. First: disseminate sample data sets for in-class instruction of these topics of interest to both my students and researchers/teachers who would like a handy package for methods instruction. Second, I'm also trying to teach my students, by example, how to code some things within a [tidyverse](https://www.tidyverse.org/) workflow. Every class I teach this semester has a Tuesday lecture/discussion with a Thursday lab, where students learn to implement the week's topics in R.
+It's also a blessing because it's giving me some opportunity to rethink/retool how I teach this stuff for a wide audience. Along the way, I'm compiling some instructional tools into [an R package, `{stevedata}`](http://svmiller.com/stevedata/), that is now available on CRAN. My goals here are multiple. First: disseminate sample data sets for in-class instruction of these topics of interest to both my students and researchers/teachers who would like a handy package for methods instruction. Second, I'm also trying to teach my students, by example, how to code some things within a [{tidyverse}](https://www.tidyverse.org/) workflow. Every class I teach this semester has a Tuesday lecture/discussion with a Thursday lab, where students learn to implement the week's topics in R.
 
 This week is all about association and causality, even though the lab session will focus more on some associational techniques like correlation along with a discussion of where correlation analysis can go awry. Here are some of the applications, starting with first a list of packages I'll be using in this workflow.
 
 
 ```r
 library(tidyverse) # you should know what this is
-library(stevemisc) # devtools::install_github("svmiller/stevemisc")
-library(post8000r) # devtools::install_github("svmiller/post8000r")
+library(stevemisc)
+library(stevedata) 
 library(ggpmisc)
 library(ggrepel)
 library(knitr)
@@ -40,75 +40,62 @@ library(kableExtra)
 
 [Francis J. Anscombe's (1973) famous quartet](http://doi.org/10.2307/2682899) is a go-to illustration for how simple associational analyses, even linear regression, can mislead the researcher if s/he is not taking care to actually look at the underlying data. Here, Anscombe created four data sets, each with 11 observations and two variables (`x` and `y`). All four quartets have the same mean for `x` and `y`, the same variance for `x` and `y`, the same regression line (`y`-intercept and slope for `x`), the same residual sum of squares, and the same correlation. However, they look quite differently.
 
-The `anscombe` data come default in R, so there's no need to add it to my R package. But some R code will underscore the peculiar nature of Anscombe's quartet.
+The `anscombe` data come default in R, but `{stevedata}` has a modified (for ease of calculation) version of the same data as the [`quartets`](http://svmiller.com/stevedata/reference/quartets.html) data.
 
 
 ```r
 data("anscombe") # from datasets
 
-anscombe %>%
+
+quartets %>%
+  group_by(group) %>%
   summarize_all(list(mean = mean, sd = sd)) %>%
-  gather() %>%
-  separate(key, c("var", "stat"), "_") %>%
-  group_split(stat) %>% bind_cols() %>%
-  rename(mean = value,
-         sd = value1) %>%
-  select(var, mean, sd) %>%
   kable(., format="html",
         table.attr='id="stevetable"',
         caption = "The Means and Standard Deviations from Anscombe's Quartet",
-        col.names = c("Variable", "Mean", "Standard Deviation"),
-        align=c("l","c","c"))
+        col.names = c("Group", "Mean (X)", "Mean (Y)", 
+                      "Standard Deviation (X)",  "Standard Deviation (Y)" ),
+        align=c("lcccc"))
 ```
 
 <table id="stevetable">
 <caption>The Means and Standard Deviations from Anscombe's Quartet</caption>
  <thead>
   <tr>
-   <th style="text-align:left;"> Variable </th>
-   <th style="text-align:center;"> Mean </th>
-   <th style="text-align:center;"> Standard Deviation </th>
+   <th style="text-align:left;"> Group </th>
+   <th style="text-align:center;"> Mean (X) </th>
+   <th style="text-align:center;"> Mean (Y) </th>
+   <th style="text-align:center;"> Standard Deviation (X) </th>
+   <th style="text-align:center;"> Standard Deviation (Y) </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;"> x1 </td>
-   <td style="text-align:center;"> 9.000000 </td>
-   <td style="text-align:center;"> 3.316625 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> x2 </td>
-   <td style="text-align:center;"> 9.000000 </td>
-   <td style="text-align:center;"> 3.316625 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> x3 </td>
-   <td style="text-align:center;"> 9.000000 </td>
-   <td style="text-align:center;"> 3.316625 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> x4 </td>
-   <td style="text-align:center;"> 9.000000 </td>
-   <td style="text-align:center;"> 3.316625 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> y1 </td>
+   <td style="text-align:left;"> Quartet 1 </td>
+   <td style="text-align:center;"> 9 </td>
    <td style="text-align:center;"> 7.500909 </td>
+   <td style="text-align:center;"> 3.316625 </td>
    <td style="text-align:center;"> 2.031568 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> y2 </td>
+   <td style="text-align:left;"> Quartet 2 </td>
+   <td style="text-align:center;"> 9 </td>
    <td style="text-align:center;"> 7.500909 </td>
+   <td style="text-align:center;"> 3.316625 </td>
    <td style="text-align:center;"> 2.031657 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> y3 </td>
+   <td style="text-align:left;"> Quartet 3 </td>
+   <td style="text-align:center;"> 9 </td>
    <td style="text-align:center;"> 7.500000 </td>
+   <td style="text-align:center;"> 3.316625 </td>
    <td style="text-align:center;"> 2.030424 </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> y4 </td>
+   <td style="text-align:left;"> Quartet 4 </td>
+   <td style="text-align:center;"> 9 </td>
    <td style="text-align:center;"> 7.500909 </td>
+   <td style="text-align:center;"> 3.316625 </td>
    <td style="text-align:center;"> 2.030578 </td>
   </tr>
 </tbody>
@@ -118,19 +105,11 @@ However, a scatterplot (with overlaying regression line) will show that each qua
 
 
 ```r
-anscombe %>%
-  gather() %>%
-  mutate(group = paste0("Quartet ", stringr::str_sub(key, -1, -1)),
-         key = stringr::str_sub(key, 1, 1)) %>%
-  group_split(key) %>%
-  bind_cols() %>%
-  rename(x = value,
-         y = value1) %>%
-  select(x, y, group) %>%
+quartets %>%
   ggplot(.,aes(x, y)) +
   theme_steve_web() + post_bg() +
   facet_wrap(~group) + geom_point() +
-  geom_smooth(method = "lm", se=TRUE, formula = y ~ x) +
+   geom_smooth(method = "lm", se=TRUE, formula = y ~ x) +
   stat_poly_eq(formula = y ~ x,
                eq.with.lhs = "italic(hat(y))~`=`~",
                aes(label = paste(..eq.label.., "~~~~~(",..rr.label..,")", sep = "")),
@@ -144,22 +123,22 @@ anscombe %>%
        caption = "Source: Anscombe (1973).")
 ```
 
-![plot of chunk anscombes-quartet-ggplot](/images/anscombes-quartet-ggplot-1.png)
+![plot of chunk anscombes-quartet-ggplot](/images/illustrate-correlation-fallacies-limitations-in-r/anscombes-quartet-ggplot-1.png)
 
 Basically: look at your data. Look at your model too.
-
 
 
 ## Simpson's Paradox
 
 [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a well-known problem of correlation in which a correlation analysis, almost always done in a bivariate context, may reveal a relationship that is reversed upon the introduction of some third variable. Every stylized case I've seen of Simpson's paradox conceptualizes  the third factor as some kind of grouping/category effect (certainly of interest to me as a mixed effects modeler), even if this may not be necessary to show a Simpson reversal.
 
-One of the classic pedagogical cases of a Simpson's paradox is from [Deborah Lynne Guber's (1999)](https://pdfs.semanticscholar.org/29c3/0e9dc77b56340faa5e6ad35e0741a5a83d49.pdf) study of public school expenditures and SAT performance in 1994-95 across all 50 states. There are other cases I've seen of a Simpson reversal, incidentally most involving education, but these data were readily available and are part of my `post8000r` package as the `Guber99` data frame.
+One of the classic pedagogical cases of a Simpson's paradox is from [Deborah Lynne Guber's (1999)](https://pdfs.semanticscholar.org/29c3/0e9dc77b56340faa5e6ad35e0741a5a83d49.pdf) study of public school expenditures and SAT performance in 1994-95 across all 50 states. There are other cases I've seen of a Simpson reversal, incidentally most involving education, but these data were readily available and are part of my `{stevedata}` package as the [`Guber99`](http://svmiller.com/stevedata/reference/Guber99.html) data frame.
 
 Guber tackles a troubling correlation at the state-level in these data from 1994-95. Namely, states that spend more (per pupil) on students appear to have lower total SAT scores to show for it. The correlation between the two variables in the data is -0.381.
 
 
 ```r
+
 Guber99 %>%
   ggplot(.,aes(expendpp, total)) +
   theme_steve_web() + post_bg() +
@@ -175,7 +154,7 @@ Guber99 %>%
        y = "Average Total SAT Score")
 ```
 
-![plot of chunk guber99-simple-correlation-expenditure-sat](/images/guber99-simple-correlation-expenditure-sat-1.png)
+![plot of chunk guber99-simple-correlation-expenditure-sat](/images/illustrate-correlation-fallacies-limitations-in-r/guber99-simple-correlation-expenditure-sat-1.png)
 
 However, this naive negative correlation masks that a confounding variable changes the relationship between student expenditures and SAT scores. In Guber's case, this is the percentage of the state with students taking the SAT. Per Guber, one likely culprit here is that SAT test-taking is more ubiquitous in wealthier, more populous, and spendier (sic) states like New York and Connecticut. In states where SAT test-taking is not as common, some combination of the ACT as test-taking alternative and self-selection (i.e. the best, most motivated students in some of these states take the SAT to go to college out of their states) is enough to reverse the relationship between student expenditures and total SAT score.
 
@@ -217,11 +196,11 @@ Guber99 %>%
   </tr>
   <tr>
    <td style="text-align:left;"> Second Quartile </td>
-   <td style="text-align:center;"> 0.301 </td>
+   <td style="text-align:center;"> 0.305 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Third Quartile </td>
-   <td style="text-align:center;"> 0.376 </td>
+   <td style="text-align:center;"> 0.570 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Highest Quartile </td>
@@ -256,7 +235,7 @@ Guber99 %>%
        y = "Average Total SAT Score")
 ```
 
-![plot of chunk guber99-correlation-expenditure-sat-test-takers-group-plot](/images/guber99-correlation-expenditure-sat-test-takers-group-plot-1.png)
+![plot of chunk guber99-correlation-expenditure-sat-test-takers-group-plot](/images/illustrate-correlation-fallacies-limitations-in-r/guber99-correlation-expenditure-sat-test-takers-group-plot-1.png)
 
 Basically: think long and hard about grouping effects in your data since they can confound inferences you may want to make from bivariate correlations.
 
@@ -264,13 +243,13 @@ Basically: think long and hard about grouping effects in your data since they ca
 
 The ecological fallacy is one of the classic limitations about correlation about which we have long known. Namely: inferences and correlations at the individual-level need not be equivalent at the group-level.
 
-We have [W.S. Robinson (1950)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents) to thank for this classic cautionary tale. His case concerns illiteracy rates from the 1930 Census, later cleaned and amended by [Grotenhuis et al. (2011)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents), and included in my `post8000r` package as the `Illiteracy30` data frame.
+We have [W.S. Robinson (1950)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents) to thank for this classic cautionary tale. His case concerns illiteracy rates from the 1930 Census, later cleaned and amended by [Grotenhuis et al. (2011)](https://www.jstor.org/stable/2087176?seq=1#metadata_info_tab_contents), and included in my `{stevedata}` package as the [`illiteracy30`](http://svmiller.com/stevedata/reference/illiteracy30.html) data frame.
 
 It's not too problematic to note that literacy rates in the U.S. cluster on race and immigrant status, certainly by the early 20th century when Robinson conducted this analysis. The explanations here are multiple, for which a summary of which Europeans migrated to the U.S. and why will illustrate the issue. The unequal allocation of public goods (like education) on race---certainly during the Jim Crow era---will add further background. It should be unsurprising that there were higher illiteracy rates for those 10 years old or above among non-white, non-native-born people in the U.S. relative to the white, native-born population in the U.S.
 
 
 ```r
-Illiteracy30 %>%
+illiteracy30 %>%
   summarize_if(is.numeric, sum) %>%
   gather(var) %>%
   mutate(category = c("Total Population", "Total Population",
@@ -326,7 +305,8 @@ However, there is interesting variation in the data by level of analysis. Consid
 
 
 ```r
-Illiteracy30 %>%
+
+illiteracy30 %>%
   mutate(foreignp = fbwhite/pop,
          illiterate = pop_il/pop,
          fbilliterate = fbwhite_il/fbwhite) %>%
@@ -359,8 +339,6 @@ Summaries %>%
        y = "")
 ```
 
-![plot of chunk robinson-1950-ecological-fallacy-foreign-born-illiteracy](/images/robinson-1950-ecological-fallacy-foreign-born-illiteracy-1.png)
+![plot of chunk robinson-1950-ecological-fallacy-foreign-born-illiteracy](/images/illustrate-correlation-fallacies-limitations-in-r/robinson-1950-ecological-fallacy-foreign-born-illiteracy-1.png)
 
 Basically: be mindful of your unit of analysis. Ecological correlations are not substitutes for individual correlations.
-
-
