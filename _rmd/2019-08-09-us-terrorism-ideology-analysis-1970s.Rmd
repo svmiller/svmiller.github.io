@@ -52,7 +52,7 @@ library(kableExtra)
 ```
 
 
-```{r loadcleandata, cache=T, echo=F}
+```{r loadcleandata, echo=F}
 
 Ideo <- readxl::read_xlsx("~/Dropbox/data/gtd/globalterrorismdb_USideology_1970-2016.xlsx")
 GTD_US <- readxl::read_xlsx("~/Dropbox/data/gtd/20180730-download/globalterrorismdb_0718dist.xlsx") %>%
@@ -180,7 +180,7 @@ Ideo %>%
   group_by(cat) %>%
   mutate(t = sum(n)) %>%
   mutate(prop = n/t,
-         lab = paste0(mround2(prop),"%")) %>%
+         lab = paste0(mround(prop),"%")) %>%
   ungroup() %>% 
   mutate(cat = forcats::fct_recode(cat,
                                     "Left-Wing" = "lw",
