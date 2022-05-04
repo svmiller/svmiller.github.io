@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-02-08'
 excerpt: "Here is how I think about teaching random measurement error to students, all in R."
@@ -37,7 +35,7 @@ Anywho, here's some R code to think about teaching this stuff, with a focus at l
 
 ## R Code {#rcode}
 
-Here are some R packages you'll need for this post. Check [the `_source` directory for my website](https://github.com/svmiller/svmiller.github.io/tree/master/_source) on Github for the full thing since I may likely condense some of the code because graphs, for example, are code-heavy. 
+Here are some R packages you'll need for this post. Check [the `_rmd` directory for my website](https://github.com/svmiller/svmiller.github.io/tree/master/_rmd) on Github for the full thing since I may likely condense some of the code because graphs, for example, are code-heavy. 
 
 
 ```r
@@ -46,7 +44,7 @@ library(stevemisc)
 library(stargazer)
 ```
 
-I recently added a [`cor2data`](https://twitter.com/stevenvmiller/status/1226564517586505728) function to [my `stevemisc` package](https://github.com/svmiller/stevemisc). It will take any correlation matrix and simulate data from it that is just `rnorm(n, 0, 1)` for all variables named in the matrix. The underlying code is effectively identical to [what I did here](http://svmiller.com/blog/2019/09/instrumental-variables-2sls/) to introduce potential readers/students to instrumental variable analysis.
+I recently added a [`cor2data()`](https://twitter.com/stevenvmiller/status/1226564517586505728) function to [my `{stevemisc}` package](https://github.com/svmiller/stevemisc). It will take any correlation matrix and simulate data from it that is just `rnorm(n, 0, 1)` for all variables named in the matrix. The underlying code is effectively identical to [what I did here](http://svmiller.com/blog/2019/09/instrumental-variables-2sls/) to introduce potential readers/students to instrumental variable analysis.
 
 In this case, we'll create a data set of 1,000 observations with the following correlation matrix. There are just an `x1`, an `x2`, and an error term `e`. Nothing is correlated in any meaningful way. From this correlation matrix, we'll create 1,000 observations with my go-to reproducible seed. Thereafter, we're going to create an outcome `y` that is a simple linear function of all three things. In other words, `x1` and `x2` objectively change `y` by 1 with each unit increase in `x1` or `x2` (plus or minus some random error `e`) and the estimated value of `y` when `x1` and `x2` are zero is 1.
 
@@ -58,7 +56,7 @@ Cor <- matrix(cbind(1, 0.001, 0.001,
                     0.001, 0.001, 1),nrow=3)
 rownames(Cor) <- colnames(Cor) <- vars
 
-# from stevemisc
+# from {stevemisc}
 Data <- cor2data(Cor, 1000, 8675309) # Jenny I got your number...
 
 Data$y <- with(Data, 1 + 1*x1 + 1*x2 + e)
@@ -94,7 +92,7 @@ Here is a simple OLS model regressing `y` on `x1` and `x2` (along with some othe
 
 We can show what random measurement error does to our inferences with these parameters in mind and through this setup. When I talk to undergraduates about random measurement error in the coding sense, I talk about having, say, a lazy undergraduate working for me coding fatalities in a conflict. However, this hypothetical coder is lazy and sloppy. In some cases, the coder entered an 11 instead of 1, or a 1000 instead of 100 (or vice-versa). The nature of the coding error is not systematic. It's just sloppy or lazy. Alternatively: "random."
 
-Here's a way of showing this in our setup. For every 10th value in `x2` in our data set of 1,000 observations, we will substitute that particular value for some other value that will range from the implausible to the plausible and back again. Since all variables in the data frame are generated randomly from a normal distribution with a mean of zero and a standard deviation of one, this type of coding error is not targeting any subset of the distribution. It does not hinge on whether the 10th value is large or small, positive or negative. The 10th value generated from `rnorm` does not depend on the previous value. This is ultimately a way of mimicking random measurement error.
+Here's a way of showing this in our setup. For every 10th value in `x2` in our data set of 1,000 observations, we will substitute that particular value for some other value that will range from the implausible to the plausible and back again. Since all variables in the data frame are generated randomly from a normal distribution with a mean of zero and a standard deviation of one, this type of coding error is not targeting any subset of the distribution. It does not hinge on whether the 10th value is large or small, positive or negative. The 10th value generated from `rnorm()` does not depend on the previous value. This is ultimately a way of mimicking random measurement error.
 
 The values we'll substitute will range from -500 to 500 at various increments. Since `x2` is simulated to have a mean of zero and a standard deviation of one, the values we'll substitute will range from the statistically impossible, given the distribution of the data (e.g. -500), to the plausible (e.g. 0, the mean).
 
@@ -136,14 +134,14 @@ M3df <- broom::tidy(M3) %>%
 Here is way of visualizing what random measurement error in `x2` does to inferences we want to make about the relationship between `x2` and `y`. Recall that `y` is objectively, in part, a function of `x2` wherein each unit increase in `x2` coincides with an increase of 1 in `y` even as there is an estimated (and independent) effect of `x1` and an error term as well. This amounts to a Type 2 error. The true population effect is 1. Our OLS estimates for `x2` without random measurement error includes 1. However, random measurement error pushes the estimated effect to zero and precludes us from detecting that signal. You can call this a "bias" of a sort; random measurement error in an independent variable biases a regression coefficient to zero. I don't know if we necessarily think of this in the same way we think of "bias" in the systematic context, but that's because a lot of us were molded in the context of null hypothesis testing.
 
 
-![plot of chunk random-measurement-error-x2](/images/random-measurement-error-x2-1.png)
+![plot of chunk random-measurement-error-x2](/images/random-measurement-error/random-measurement-error-x2-1.png)
 
 There is an interesting effect on the intercept too. The more, for lack of better term, "plausible" the random measurement error is in the scale of `x2` (e.g. recoding every 10th value to be 0, i.e. the mean), the more the intercept is stressed from its true value as well. The less plausible the random measurement error is, the more the intercept is unchanged.
 
 Another way of looking at the fundamental takeaway here is to compare the R-squared values from these models. The effect of increasing measurement error in `x2`, at least in how I've done that in this exercise, is to collapse the R-squared from the model with no measurement bias to the model that excludes `x2` outright. Random measurement as severe at both tails reduces the measure of `x2` to noise.
 
 
-![plot of chunk random-measurement-error-x2-rsq](/images/random-measurement-error-x2-rsq-1.png)
+![plot of chunk random-measurement-error-x2-rsq](/images/random-measurement-error/random-measurement-error-x2-rsq-1.png)
 
 ### Random Measurement Error in Y
 
@@ -166,12 +164,10 @@ Data %>%
 
 Random measurement error in the dependent variable will not really bias the regression coefficients. The intercept will want to travel in the direction of the random measurement error in `y`, which isn't too surprising when you internalize that the intercept is the estimate of *y* when all covariates are set to zero. However, the regression coefficients for `x1` and `x2` don't materially move much. They just get noisier. Random measurement error in an independent variable will push its coefficient to zero. Random measurement error in the dependent variable will extend out the standard errors for the independent variables.
 
-![plot of chunk random-measurement-error-y](/images/random-measurement-error-y-1.png)
+![plot of chunk random-measurement-error-y](/images/random-measurement-error/random-measurement-error-y-1.png)
 
 Comparing the R-squared values will illustrate what's happening here. Random measurement error, whether in an independent variable or a dependent variable, decreases R-squared. The model does not fit the data well because the data are noise.
 
-![plot of chunk random-measurement-error-y-rsq](/images/random-measurement-error-y-rsq-1.png)
+![plot of chunk random-measurement-error-y-rsq](/images/random-measurement-error/random-measurement-error-y-rsq-1.png)
 
 I should think soon about extending this framework to explore systematic measurement error and bias in this setup. Already, [my post on instrumental variables](http://svmiller.com/blog/2019/09/instrumental-variables-2sls/) does this. However, I wanted something on my website that at least unpacks random measurement error as well.
-
-

@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-02-08'
 excerpt: "Here is how I think about teaching random measurement error to students, all in R."
@@ -15,32 +13,42 @@ categories:
 image: "bullseyes.png"
 ---
 
-```{r setup-correlated-errors, include=FALSE, cache=F}
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
 
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
-                      cache.path = '~/Dropbox/svmiller.github.io/cache/random-error/',
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = TRUE) 
-
-
-
-
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
 ```
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
 add_jekyll_image('/images/bullseyes.png', "I think we all get the bullseyes as metaphors of measurement error when we get taught this stuff in graduate school.", "300", "right")
- 
 ```
 
 1. [Introduction](#introduction)
@@ -61,7 +69,7 @@ Anywho, here's some R code to think about teaching this stuff, with a focus at l
 
 ## R Code {#rcode}
 
-Here are some R packages you'll need for this post. Check [the `_source` directory for my website](https://github.com/svmiller/svmiller.github.io/tree/master/_source) on Github for the full thing since I may likely condense some of the code because graphs, for example, are code-heavy. 
+Here are some R packages you'll need for this post. Check [the `_rmd` directory for my website](https://github.com/svmiller/svmiller.github.io/tree/master/_rmd) on Github for the full thing since I may likely condense some of the code because graphs, for example, are code-heavy. 
 
 ```{r, eval=T, message=F, warning=F}
 library(tidyverse)
@@ -69,7 +77,7 @@ library(stevemisc)
 library(stargazer)
 ```
 
-I recently added a [`cor2data`](https://twitter.com/stevenvmiller/status/1226564517586505728) function to [my `stevemisc` package](https://github.com/svmiller/stevemisc). It will take any correlation matrix and simulate data from it that is just `rnorm(n, 0, 1)` for all variables named in the matrix. The underlying code is effectively identical to [what I did here](http://svmiller.com/blog/2019/09/instrumental-variables-2sls/) to introduce potential readers/students to instrumental variable analysis.
+I recently added a [`cor2data()`](https://twitter.com/stevenvmiller/status/1226564517586505728) function to [my `{stevemisc}` package](https://github.com/svmiller/stevemisc). It will take any correlation matrix and simulate data from it that is just `rnorm(n, 0, 1)` for all variables named in the matrix. The underlying code is effectively identical to [what I did here](http://svmiller.com/blog/2019/09/instrumental-variables-2sls/) to introduce potential readers/students to instrumental variable analysis.
 
 In this case, we'll create a data set of 1,000 observations with the following correlation matrix. There are just an `x1`, an `x2`, and an error term `e`. Nothing is correlated in any meaningful way. From this correlation matrix, we'll create 1,000 observations with my go-to reproducible seed. Thereafter, we're going to create an outcome `y` that is a simple linear function of all three things. In other words, `x1` and `x2` objectively change `y` by 1 with each unit increase in `x1` or `x2` (plus or minus some random error `e`) and the estimated value of `y` when `x1` and `x2` are zero is 1.
 
@@ -80,11 +88,10 @@ Cor <- matrix(cbind(1, 0.001, 0.001,
                     0.001, 0.001, 1),nrow=3)
 rownames(Cor) <- colnames(Cor) <- vars
 
-# from stevemisc
+# from {stevemisc}
 Data <- cor2data(Cor, 1000, 8675309) # Jenny I got your number...
 
 Data$y <- with(Data, 1 + 1*x1 + 1*x2 + e)
-
 ```
 
 Here is a simple OLS model regressing `y` on `x1` and `x2` (along with some other regressions looking at just `x1` and `x2`). The coefficients that emerge from the OLS model are in orbit what the true population effects are. However, it is worth noting the effect of `x1` is more than two standard errors from the true population effect. The difference is not huge or necessarily immediately noticeable, but it's worth mentioning.
@@ -108,7 +115,7 @@ stargazer(M1, M2, M3, type="html",
 
 We can show what random measurement error does to our inferences with these parameters in mind and through this setup. When I talk to undergraduates about random measurement error in the coding sense, I talk about having, say, a lazy undergraduate working for me coding fatalities in a conflict. However, this hypothetical coder is lazy and sloppy. In some cases, the coder entered an 11 instead of 1, or a 1000 instead of 100 (or vice-versa). The nature of the coding error is not systematic. It's just sloppy or lazy. Alternatively: "random."
 
-Here's a way of showing this in our setup. For every 10th value in `x2` in our data set of 1,000 observations, we will substitute that particular value for some other value that will range from the implausible to the plausible and back again. Since all variables in the data frame are generated randomly from a normal distribution with a mean of zero and a standard deviation of one, this type of coding error is not targeting any subset of the distribution. It does not hinge on whether the 10th value is large or small, positive or negative. The 10th value generated from `rnorm` does not depend on the previous value. This is ultimately a way of mimicking random measurement error.
+Here's a way of showing this in our setup. For every 10th value in `x2` in our data set of 1,000 observations, we will substitute that particular value for some other value that will range from the implausible to the plausible and back again. Since all variables in the data frame are generated randomly from a normal distribution with a mean of zero and a standard deviation of one, this type of coding error is not targeting any subset of the distribution. It does not hinge on whether the 10th value is large or small, positive or negative. The 10th value generated from `rnorm()` does not depend on the previous value. This is ultimately a way of mimicking random measurement error.
 
 The values we'll substitute will range from -500 to 500 at various increments. Since `x2` is simulated to have a mean of zero and a standard deviation of one, the values we'll substitute will range from the statistically impossible, given the distribution of the data (e.g. -500), to the plausible (e.g. 0, the mean).
 
@@ -144,8 +151,6 @@ M3df <- broom::tidy(M3) %>%
   mutate(lwr = estimate - abs(qnorm(.025))*std.error,
          upr = estimate + abs(qnorm(.025))*std.error)  %>%
   mutate(r2 = broom::glance(M3) %>% pull(1))
-
-
 ```
 
 Here is way of visualizing what random measurement error in `x2` does to inferences we want to make about the relationship between `x2` and `y`. Recall that `y` is objectively, in part, a function of `x2` wherein each unit increase in `x2` coincides with an increase of 1 in `y` even as there is an estimated (and independent) effect of `x1` and an error term as well. This amounts to a Type 2 error. The true population effect is 1. Our OLS estimates for `x2` without random measurement error includes 1. However, random measurement error pushes the estimated effect to zero and precludes us from detecting that signal. You can call this a "bias" of a sort; random measurement error in an independent variable biases a regression coefficient to zero. I don't know if we necessarily think of this in the same way we think of "bias" in the systematic context, but that's because a lot of us were molded in the context of null hypothesis testing.
@@ -172,8 +177,6 @@ Xmods %>%
        title = "The Effect of Random Measurement Error in x2",
        subtitle = "Random measurement error in x2 plummets the estimated relationship of x2 on y to zero, making it hard to discern a signal that objectively exists.",
        caption = "Shaded area communicates 95% Intervals from OLS with no measurement error.")
-
-
 ```
 
 There is an interesting effect on the intercept too. The more, for lack of better term, "plausible" the random measurement error is in the scale of `x2` (e.g. recoding every 10th value to be 0, i.e. the mean), the more the intercept is stressed from its true value as well. The less plausible the random measurement error is, the more the intercept is unchanged.
@@ -203,7 +206,6 @@ Xmods %>%
 Random measurement error in the dependent variable does not have quite the same effect, even if the fundamental takeaway in terms of what random measurement error does will be the same. We'll do what we did previously for `x2`, but for `y` instead.
 
 ```{r, eval=T, message=F, warning=F}
-
 Ymods <- tibble()
 
 for (i in new_vals) {
@@ -215,13 +217,11 @@ Data %>%
   Ymods = bind_rows(Ymods, broomed)
   
 }
-
 ```
 
 Random measurement error in the dependent variable will not really bias the regression coefficients. The intercept will want to travel in the direction of the random measurement error in `y`, which isn't too surprising when you internalize that the intercept is the estimate of *y* when all covariates are set to zero. However, the regression coefficients for `x1` and `x2` don't materially move much. They just get noisier. Random measurement error in an independent variable will push its coefficient to zero. Random measurement error in the dependent variable will extend out the standard errors for the independent variables.
 
 ```{r random-measurement-error-y, echo=F, eval=T, cache=T, warning=F, fig.width=13, fig.height = 8}
-
 Ymods %>%
   mutate(term = ifelse(grepl("ynv", term), "y", term)) %>%
   mutate(lwr = estimate - abs(qnorm(.025))*std.error,
@@ -264,9 +264,3 @@ Ymods %>%
 ```
 
 I should think soon about extending this framework to explore systematic measurement error and bias in this setup. Already, [my post on instrumental variables](http://svmiller.com/blog/2019/09/instrumental-variables-2sls/) does this. However, I wanted something on my website that at least unpacks random measurement error as well.
-
-```{r knitchunk, echo=F, eval=F}
-#setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("_source/2020-02-08-random-measurement-error.Rmd",
-            output = "_posts/2020-02-08-random-measurement-error.md")
-```
