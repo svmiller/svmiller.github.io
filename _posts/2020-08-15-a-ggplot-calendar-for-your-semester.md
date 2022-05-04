@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-08-15'
 excerpt: "Here is how you can make a ggplot calendar to add to your R Markdown syllabi."
@@ -18,7 +16,7 @@ image: "ggplot-hex.png"
   
 
 
-{% include image.html url="/images/ggplot-hex.png" caption="The ggplot hex logo" width=240 align="right" %}
+{% include image.html url="/images/ggplot-hex.png" caption="The {ggplot2} hex logo" width=240 align="right" %}
 
 It's the start of the school year, which means it's time for university professors to finish their syllabi for the upcoming semester. For most of us, it starts next week.
 
@@ -40,7 +38,7 @@ First, look at your particular academic calendar and identify some important uni
 
 ```r
 not_here_dates <- c(ymd(20201103),
-              ymd(20201123):ymd(20201127))
+              seq(ymd(20201123),ymd(20201127), by = "1 day"))
 ```
 
 Then, identify some "due dates" for various assignments in the class. Here, let's assume this class has exams on Oct. 1, Nov. 5, and a final exam on Dec. 11.
@@ -64,15 +62,10 @@ Now, let's get to work on creating a data frame of dates. Here's how I like to d
 Cal <- tibble(date = seq(ymd(20200801), ymd(20201231), by=1)) 
 ```
 
-Thereafter, we're going to create some identifying information for our dates and, importantly, take care to distinguish what is the start of the week versus what is the first day of the month. For example, it's customary (in the United States) to treat a week as starting on Sunday though the first day of the month may be Saturday (as it was this month). Toward that end, I devised a week of the month function (`wom`) that will treat the first day of the month as the first week of the month up until the first Sunday (unless Sunday was the start of the month). This will matter a great deal because the ggplot calendar ultimately treats the week number as the *y*-axis in a `ggplot()` call.
+Thereafter, we're going to create some identifying information for our dates and, importantly, take care to distinguish what is the start of the week versus what is the first day of the month. For example, it's customary (in the United States) to treat a week as starting on Sunday though the first day of the month may be Saturday (as it was this month). Toward that end, I devised a week of the month function (`wom()`), [available in `{stevemisc}`](http://svmiller.com/stevemisc/reference/wom.html), that will treat the first day of the month as the first week of the month up until the first Sunday (unless Sunday was the start of the month). This will matter a great deal because the ggplot calendar ultimately treats the week number as the *y*-axis in a `ggplot()` call.
 
 
 ```r
-wom <- function(date) {
-    first <- wday(as.Date(paste(year(date),month(date),1,sep="-")))
-    return((mday(date)+(first-2)) %/% 7+1)
-  }
-
 Cal %>%
   mutate(mon = lubridate::month(date, label=T, abbr=F), # get month label
          wkdy = weekdays(date, abbreviate=T), # get weekday label
@@ -81,7 +74,7 @@ Cal %>%
          exams = ifelse(date %in% exam_dates, 1, 0), # is it an exam?
          not_here = ifelse(date %in% not_here_dates, 1, 0), # is it a day off?
          day = lubridate::mday(date), # get day of month to add later as a label
-         # Below: our custom wom() function
+         # Below: wom() is in {stevemisc}
          week = wom(date)) -> Cal
 ```
 
@@ -97,7 +90,7 @@ Cal %>%
          category = ifelse(is.na(category) | (semester == 1 & not_here == 1), "NA", category)) -> Cal 
 ```
 
-The final thing to do here is to make the damn calendar. At its core, a ggplot calendar is a faceted tile plot. The first few commands are fairly straightforward, but pay careful attention to how I adjust the scales manually to suppress some redundant information (i.e. it's not important that there are other days in the semester for the sake of the class, nor is it important to highlight dates outside the semester in the calendar.
+The final thing to do here is to make the damn calendar. At its core, a `ggplot` calendar is a faceted tile plot. The first few commands are fairly straightforward, but pay careful attention to how I adjust the scales manually to suppress some redundant information (i.e. it's not important that there are other days in the semester for the sake of the class, nor is it important to highlight dates outside the semester in the calendar.
 
 
 
@@ -105,7 +98,8 @@ The final thing to do here is to make the damn calendar. At its core, a ggplot c
 Cal %>% 
   ggplot(.,aes(wkdy, week)) +
   # custom theme stuff below
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
+  post_bg() +
   # geom_tile and facet_wrap will do all the heavy lifting
   geom_tile(alpha=0.8, aes(fill=category), color="black") +
   facet_wrap(~mon, scales="free_x", ncol=3) +
@@ -126,9 +120,6 @@ Cal %>%
        caption = "Notable dates: Fall Break (Nov. 3... please vote), Thanksgiving Break (Nov. 23-27)")
 ```
 
-![plot of chunk a-ggplot-calendar-example](/images/a-ggplot-calendar-example-1.png)
+![plot of chunk a-ggplot-calendar-example](/images/a-ggplot-calendar-for-your-semester/a-ggplot-calendar-example-1.png)
 
 Make this code yours as you see fit, but I think your students may benefit from the including a semester calendar to help them internalize important dates. It's deceptively not a lot of code.
-
-
-

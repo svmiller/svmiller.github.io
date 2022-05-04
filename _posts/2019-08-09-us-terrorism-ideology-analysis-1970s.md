@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-09'
 excerpt: "This is the first of what may be a series of exploratory analyses of the political ideology of terrorism in the U.S. Here, I start with the 1970s."
@@ -151,7 +149,7 @@ For what it's worth, environmentalists were reportedly responsible for just two 
 
 There wasn't a whole lot of variation of attack types by ideological motivations. Namely, bombing/explosions were the method du jour for most of these groups. Certainly, bombings are the first things that come to my mind thinking of left-wing terror attacks in the 1970s (e.g. [Sterling Hall bombing (1970)](https://en.wikipedia.org/wiki/Sterling_Hall_bombing), [Pentagon bombing (1972)](https://en.wikipedia.org/wiki/Weather_Underground#Pentagon_bombing)). There is some variation by motivation, but it looks minor. It should perhaps be unsurprising that the distribution of nationalist-separatist attack types looks similar to the distribution of left-wing attack types because the overlap in those groups is quite large (more on that later). Right-wing extremists favored armed assaults and facility attacks more than their left-wing counterparts. Single-issue extremists were disproportionately inclined toward bombings/explosions. Recall that single-issue extremism can assume any form for any issue and any issue position. Thus, while anti-abortion extremists of the decade were more drawn to facility/infrastructure attacks, [Omega-7](https://en.wikipedia.org/wiki/Omega_7), a single-issue group dedicated to overthrowing Castro in Cuba, was almost exclusively a bombing/explosion outfit (26 of 29 attacks, with three other assassination incidents). In addition, religious extremists in the 1970s showed a greater affinity toward armed assaults than did other kinds of extremists, a finding partially influenced by Muslim terrorism of that decade (more on that later).
 
-![plot of chunk attack-type-terrorism-1970s](/images/attack-type-terrorism-1970s-1.png)
+![plot of chunk attack-type-terrorism-1970s](/images/us-terrorism-ideology-analysis-1970s/attack-type-terrorism-1970s-1.png)
 
 A look at the perpetrators for these incidents will offer some insight to who these actors were and what were the political causes motivating terrorism in the 1970s. The following table lists the top 10 perpetrators of terrorist incidents by one of the five motivations (omitting the two environmentalist incidents, which are already subsumed in the left-wing category). Do note that the motivations are not necessarily mutually exclusive and so some groups appear in multiple columns.
 
@@ -354,7 +352,7 @@ Some digging through the characteristics of religious motivation, by faith, will
 
 The 1970s were the most notorious decade for terrorism after the 1970s, but it's important to note the worst stretches of terrorism were early in the decade. The 468 incidents in 1970s is easily the most in any given year. The combined 715 incidents in 1970 and 1971 are over 25% of the entire data set from 1970 to 2017. Drops in terrorism were discernible after those first two years. In 1979, the U.S. had just 69 total terror incidents, an 85% drop from the first year of the decade.
 
-![plot of chunk terrorism-incidents-by-year-motivation-1970s](/images/terrorism-incidents-by-year-motivation-1970s-1.png)
+![plot of chunk terrorism-incidents-by-year-motivation-1970s](/images/us-terrorism-ideology-analysis-1970s/terrorism-incidents-by-year-motivation-1970s-1.png)
 
 The middle part of the decade sees some increase in terrorism from 1972 and 1973. There were 58 total incidents in 1973 (the nadir for the decade), but 94 incidents in 1974 (a 62% increase from 1973) and 149 incidents in 1975 (a 156% increase from 1973 and 58% increase from 1974). These do coincide with small surges in left-wing terrorism in the middle of the decade. 
 
@@ -477,5 +475,3 @@ Charges against these groups were quietly dropped because of the warantless sear
 Amid successful counterterrorism/policing (again, of varying legality), as well the absence of some of the original motivations for these groups/militants (e.g. the end of the Vietnam war), left-wing terrorism was about 57% of all terrorism and only just over 24% of all terrorism by 1979. Nationalist-separatist terrorism surpassed left-wing terrorism as the modal form of terrorism by the end of the decade even as all forms of terrorism combined was just over 14% of what it was in 1970. Indeed, the 69 incidents in 1979 would be just four more than what the U.S. experienced in 2017 and five more than what it experienced in 2016.
 
 In other words, domestic terrorism regressed to the typical mean by the end of the decade even as the first two years are over a quarter of the entire data set.
-
-

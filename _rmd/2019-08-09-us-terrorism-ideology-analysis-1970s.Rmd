@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2019-08-09'
 excerpt: "This is the first of what may be a series of exploratory analyses of the political ideology of terrorism in the U.S. Here, I start with the 1970s."
@@ -15,22 +13,37 @@ categories:
 image: "weather-underground-day-of-rage.jpg"
 ---
 
-```{r setup-us-terrorism-ideology, include=FALSE, cache=F}
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
 
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
-knitr::opts_chunk$set(fig.path = fig_path, dpi=300,
-                      cache.path = '../cache/us-terrorism-ideology/',
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = TRUE) 
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
 
 library(tidyverse)
 library(stevemisc)
@@ -177,8 +190,7 @@ Ideo %>%
                                    "Single Issue" = "single")) %>%
   ggplot(.,aes(attacktype1_txt, prop)) +
   theme_steve_web() + 
-  theme(plot.background = element_rect(fill = "#fdfdfd"),
-        panel.background = element_rect(fill = "#fdfdfd")) +
+  post_bg() +
   geom_bar(stat="identity", alpha=0.8, fill="#619cff", color="black") +
   facet_wrap(~cat) +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -318,8 +330,7 @@ Ideo %>%
   geom_text(aes(label=n), vjust=-.5, colour="black",
             position=position_dodge(.9), size=3.5, family="Open Sans") +
   theme_steve_web() +
-  theme(plot.background = element_rect(fill = "#fdfdfd"),
-        panel.background = element_rect(fill = "#fdfdfd")) +
+  post_bg() +
   scale_x_continuous(breaks = seq(1970, 1980, by = 2)) +
   facet_wrap(~cat) +
   labs(x = "Year",
@@ -388,9 +399,3 @@ Charges against these groups were quietly dropped because of the warantless sear
 Amid successful counterterrorism/policing (again, of varying legality), as well the absence of some of the original motivations for these groups/militants (e.g. the end of the Vietnam war), left-wing terrorism was about 57% of all terrorism and only just over 24% of all terrorism by 1979. Nationalist-separatist terrorism surpassed left-wing terrorism as the modal form of terrorism by the end of the decade even as all forms of terrorism combined was just over 14% of what it was in 1970. Indeed, the 69 incidents in 1979 would be just four more than what the U.S. experienced in 2017 and five more than what it experienced in 2016.
 
 In other words, domestic terrorism regressed to the typical mean by the end of the decade even as the first two years are over a quarter of the entire data set.
-
-```{r knitchunk, echo=F, eval=F}
-setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("2019-08-09-us-terrorism-ideology-analysis.Rmd",
-            output = "../_posts/2019-08-09-us-terrorism-ideology-analysis-1970s.md")
-```
