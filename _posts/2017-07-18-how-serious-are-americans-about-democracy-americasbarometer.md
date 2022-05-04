@@ -30,7 +30,7 @@ I chose the AmericasBarometer data, part of the Latin American Public Opinion Pr
 
 We'll start with one of the items that does appear in all four AmericasBarometer waves under consideration here: satisfaction with the way democracy works in the United States. This question, which prompts the respondent to state their level of satisfaction with democracy on a four-part scale from "very satisfied" to "very dissatisfied", is ubiquitous in all cross-national survey research on democracy, making it a good place to start. The figure, reproduced below, makes evident a partisan shift in democratic satisfaction after Obama's election in 2008. Interestingly, we see this shift among Republicans and not Democrats.
 
-![plot of chunk satisdem](/images/satisdem-1.png)
+![plot of chunk satisdem](/images/how-serious-are-americans-about-democracy-americasbarometer/satisdem-1.png)
 
 The Democrats experienced no change in their level of satisfaction with democracy after Obama's general election win gave Democrats united government. They also experienced no real shift after the Republicans took control of the House of Representatives. Republicans, on the other hand, experienced a discernible drop in their level of democratic satisfaction after Democrats took control of the White House. The percentage of cases among Republicans in the "very satisfied" group dropped from 18% to 6% in 2010. The "satisfied" group dropped from 65% to 44%. Those overall "satisfied" dropped from 83% to 50%. Democratic satisfaction after an honest election gave Democrats united government dropped to a 50/50 proposition among Republicans that did not materially improve after the Republicans retook the House.
 
@@ -42,7 +42,7 @@ We could reassure ourselves with a statement of, "well, of course partisans are 
 
 There are more patterns consistent with the latter statement than the former. AmericasBarometer asked its respondents in the 2008, 2010, and 2012 waves to state how democratic they think the United States is, in general. It regrettably dropped this question for the 2014 wave but the hope is it returns in future waves. Here, we see effectively the same pattern. Republicans are more dissatisfied with how democracy works in the U.S. after the Democrats took control of the White House *and* they are also more inclined to think the U.S. is *less democratic* after elections produce outcomes they do not like, even if this trend "corrected" a little in the 2012 wave.
 
-![plot of chunk usdemocratic](/images/usdemocratic-1.png)
+![plot of chunk usdemocratic](/images/how-serious-are-americans-about-democracy-americasbarometer/usdemocratic-1.png)
 
 We observe no such change among Democrats in these three waves. Obama's presence in the White House and the ephemeral control of the executive and legislative branches by Democrats did not make Democrats think the U.S. was more democratic in these three waves. We should note that Democrat movement on this item, should it (hopefully) appear again in AmericasBarometer wave, would no doubt resemble what we saw of the Republican respondents in 2010.
 
@@ -52,14 +52,14 @@ Democrats are not blameless in the AmericasBarometer data. The AmericasBarometer
 
 
 
-![plot of chunk potus_limitopp](/images/potus_limitopp-1.png)
+![plot of chunk potus_limitopp](/images/how-serious-are-americans-about-democracy-americasbarometer/potus_limitopp-1.png)
 
 Here, you see an important partisan sort of responses after Obama's election. 53% of Republicans at least somewhat disagreed (per my inference) with the President silencing political opposition when George W. Bush was in office. The remainder were either on the fence (21%) or at least somewhat agreed that Bush should silence political opposition (26%). These responses, understandably, changed considerably among Republicans when Obama became president. They also changed among Democrats, who became more open to the President silencing political opposition when Obama had the position.
 
 You could alternatively condense this to a dichotomous measure of "Strongly Disagree" vs. "Does Not Strongly Disagree" and you'll get the same basic story. It might arguably be even "starker" because the "mostly disagree" responses would be in the same category as the "strongly agree" responses.
 
 
-![plot of chunk potus_limitopp2](/images/potus_limitopp2-1.png)
+![plot of chunk potus_limitopp2](/images/how-serious-are-americans-about-democracy-americasbarometer/potus_limitopp2-1.png)
 
 AmericasBarometer stopped asking this question in the United States after the 2012 wave. I wish it would return.
 
@@ -69,7 +69,7 @@ AmericasBarometer data are again partial, but illustrative, for the purpose of t
 
 The good news is that most partisans are against this situational suspension of Congress even as [Congress has lower approval ratings than lice and Nickelback](https://www.washingtonpost.com/news/wonk/wp/2013/01/10/graph-of-the-day-congress-is-less-popular-than-lice-colonoscopies-and-nickelback/?utm_term=.6b98cf082c39). The bad news is there's a clear, if small, movement among Democrats later into the Obama administration when Democrats 1) lost the House and 2) looked like they were going to lose the Senate.
 
-![plot of chunk closecong](/images/closecong-1.png)
+![plot of chunk closecong](/images/how-serious-are-americans-about-democracy-americasbarometer/closecong-1.png)
 
 We should note with morbid interest what this resembled among Democrats in 2016, or would look like among Republicans if the 2018 midterm elections result in the worst-case scenario for the GOP.
 
@@ -78,5 +78,3 @@ We should note with morbid interest what this resembled among Democrats in 2016,
 I worry the politics we see in the United States right now at the mass-level suggests that American partisans might not be serious about democracy. You saw it in the "Tea Party" reaction to Obama's White House win. You're going to see it soon among Democrats and those further to the political left with Trump in the White House, even as concerns about Trump are far more legitimate than the concerns about Obama's united government in January 2009. Those who value democracy for democracy's sake should not be conditioning their attitudes toward American democracy and democratic norms based on whether their co-partisans control government. Increasingly, we see this is the case. We definitely see it among Republicans. We even see it a little among Democrats in the available data, for which more recent waves will likely continue this trend.
 
 I should note that I'm an American, and a political behavior researcher. I'm not an "American political behavior" researcher. However, my analysis suggests that those two classes of surveys in the U.S. I mentioned in the preamble---those exclusive to the U.S. and those that include the U.S. with observations from other countries---should better speak to each other. Clearly those that include the U.S. among cases like Pakistan or Venezuela could benefit from more granular and focused questions about American politics. Those exclusive to the U.S., however, may have to start questioning how committed Americans are to democracy if their responses to these general questions about democratic commitment are conditioned by co-partisan control of government. We need to start asking Americans the same questions about democracy we would ask Pakistanis and Venezuelans.
-
-
