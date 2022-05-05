@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-03-23'
 excerpt: "What explains British attitudes toward immigration? Here is a pedagogical example from the European Social Survey in 2018-19 that's more useful in teaching students about inference from a sample and how to read a regression table."
@@ -29,12 +27,11 @@ This is a companion blog post to a presentation I was invited to give to some po
 
 What follows should not be interpreted as exhaustive of all the covariates of anti-immigration sentiment in the United Kingdom, or more generally. It clearly is not. Instead, the purpose of this presentation is to introduce these students to a quantitative approach to a social scientific problem in only 15 minutes and assuming no background knowledge on quantitative methods for the intended audience. As such, consider it an update to one of the most widely read pieces on my blog on [how students should think about evaluating a regression table](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/). It will ideally improve upon that, but I'll leave that determination if it does to the reader.
 
-The post will also include some R code necessary to generate these results. There is only so much I can do within the allocated time to introduce students to a quantitative approach to social science. I don't get the opportunity to show them R code, though I would love if space and time permitted it. Toward that end, I will reference how I'm doing this in R with some code chunks in the post. The [`_source`](https://github.com/svmiller/svmiller.github.io/tree/master/_source) directory on [the Github directory for my site](https://github.com/svmiller/svmiller.github.io) will have the full code for this post. The particular [source file is here](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd). 
+The post will also include some R code necessary to generate these results. There is only so much I can do within the allocated time to introduce students to a quantitative approach to social science. I don't get the opportunity to show them R code, though I would love if space and time permitted it. Toward that end, I will reference how I'm doing this in R with some code chunks in the post. The [`_rmd`](https://github.com/svmiller/svmiller.github.io/tree/master/_rmd) directory on [the Github directory for my site](https://github.com/svmiller/svmiller.github.io) will have the full code for this post. The particular [source file is here](https://github.com/svmiller/svmiller.github.io/blob/master/_rmd/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd). 
 
 Here are all the R packages that I'll use for the important stuff in this post.[^stevedata]
 
 [^stevedata]: I've since published [`{stevedata}` on CRAN](https://cran.r-project.org/web/packages/stevedata/index.html), which has the `ESS9GB` data I'm creating here.
-
 
 ```r
 # use install.packages() in case you don't have any of these
@@ -99,7 +96,7 @@ ESS9GB %>%
 
 [^mirt]: A factor analysis I quietly ran returns factor loadings for each of .862 (the economy prompt), .919 (the culture prompt), and .953 (the better or worse place to live prompt) with a proportional variance of .832.
 
-*First things first*: look at your data. Here, I recommend getting the mean (i.e. the statistical "average"), median (i.e. the middlemost value), standard deviation (i.e. a measure of the dispersion around the mean), the minimum and maximum values, the total number of observations for which we have data, and the proportion of missing observations. My shorthand is you should want your median and mean to be close to each other---too far apart and you have [a bimodal distribution](https://socratic.org/questions/what-is-a-bimodal-distribution) where there are two natural clumps in the data that are distant from each other. In which case, the measure of "average" might not look so average. You should want your standard deviation to ideally be small relative to the mean on a scale like this. You should also want the proportion of missing responses to be fewer than 5%. The minimum and maximum are there for additional context as well as the number of observations. Note the code below is sufficient to spit this info into the R console, but I'm suppressing the `kable()` command that stylizes the HTML table on this blog post. [Check the source file](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd) for more information. 
+*First things first*: look at your data. Here, I recommend getting the mean (i.e. the statistical "average"), median (i.e. the middlemost value), standard deviation (i.e. a measure of the dispersion around the mean), the minimum and maximum values, the total number of observations for which we have data, and the proportion of missing observations. My shorthand is you should want your median and mean to be close to each other---too far apart and you have [a bimodal distribution](https://socratic.org/questions/what-is-a-bimodal-distribution) where there are two natural clumps in the data that are distant from each other. In which case, the measure of "average" might not look so average. You should want your standard deviation to ideally be small relative to the mean on a scale like this. You should also want the proportion of missing responses to be fewer than 5%. The minimum and maximum are there for additional context as well as the number of observations. Note the code below is sufficient to spit this info into the R console, but I'm suppressing the `kable()` command that stylizes the HTML table on this blog post. [Check the source file](https://github.com/svmiller/svmiller.github.io/blob/master/_rmd/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd) for more information. 
 
 ```r
 ESS9GB %>%
@@ -153,7 +150,7 @@ ESS9GB %>%
   ggplot(.,aes(as.factor(immigsent), n)) +  # create foundation ggplot
   # bar chart, with some prettiness
   geom_bar(stat="identity", alpha=0.8, color="black", fill="#619cff") +
-  theme_steve_web() + post_bg() + # my custom ggplot theme + post bg for my website
+  theme_steve_web() + post_bg() + # custom theme stuff
   labs(y = "Number of Responses",
        x = "Value of the Pro-Immigration Sentiment Variable",
        caption = "Data: European Social Survey, Round 9 in the United Kingdom",
@@ -161,7 +158,7 @@ ESS9GB %>%
        subtitle = "There's a natural heaping of 0s and 30s but I've seen worse variables treated as interval for an OLS model.")
 ```
 
-![plot of chunk distribution-of-immigsent-variable-for-ess9gb](/images/distribution-of-immigsent-variable-for-ess9gb-1.png)
+![plot of chunk distribution-of-immigsent-variable-for-ess9gb](/images/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/distribution-of-immigsent-variable-for-ess9gb-1.png)
 
 ## What Can We Say About Pro-Immigration Sentiment in the UK from This Measure? {#whatcanwesay}
 
@@ -329,17 +326,14 @@ ESS9GB %>%
 The *z*-score that emerges from this calculation is 13.748, meaning our sample statistic is more than 13 standard errors away from the proposed mean of 14.650. You can show how unlikely this is with a normal distribution. Consider the standard normal distribution below. This distribution has a mean of zero, for simplicity's sake, and we observe that 68% of all values are with one standard unit from the mean of zero, 90% of all values are within about 1.645 standard units from the mean of zero, and 95% of all values are within about 1.96 standard units from zero. Further, 99% of the distribution is within about 2.58 standard units on either side of the distribution. The *z*-score we calculated of 13.748 won't even appear on the plot.
 
 
-![plot of chunk a-normal-distribution-with-areas-under-curve](/images/a-normal-distribution-with-areas-under-curve-1.png)
+![plot of chunk a-normal-distribution-with-areas-under-curve](/images/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/a-normal-distribution-with-areas-under-curve-1.png)
 
 This graph will help us understand just how rare our *z*-score is. Consider that if 95% of the normal distribution is within about 1.96 standard units of the mean of the distribution, than 5% rests outside it. It is highly unlikely that we would find something outside 1.96 standard units on either side of the mean; indeed, we would only find something that extreme about 5% of the time, on average. Likewise, we can use a basic R calculation---`2*pnorm(-abs(13.748))`---to see what is the **p-value** associated with the *z*-score in a normal distribution.
 
 
 ```r
 2*pnorm(-abs(13.748)) # two-sided in this context
-```
-
-```
-## [1] 5.235696e-43
+#> [1] 5.235696e-43
 ```
 
 For context, that is going to be 42 zeroes after the decimal and before any other number. Formally, the probability of us observing our sample mean (16.891) with that *z*-score (13.748), given the true population mean is 14.650 is 5.2356956 &times; 10<sup>-43</sup>. Informally, that probability is effectively zero and converging on a near impossibility. 
@@ -377,7 +371,7 @@ $$\begin{eqnarray}
 
 I want to briefly note two things about this equation, stylized as it is. First, each of those predictors can clearly have different effects on `immigsent`, the dependent variable of immigration sentiment. That's in part what we're trying to tease out in a regression model and it'll be something I highlight in the summary below. Second, the $$i$$ notation you see is to denote the individual observation (i.e. individual survey respondent in our data). The values of a given variable for a particular respondent will vary but the estimated effects of a given variable on immigration sentiment (i.e. $$\beta$$) will be the same for all observations. Third, pay careful attention to that $$\epsilon$$ term. We call that an "error term" or the "residuals" from the regression. Basically, $$\epsilon$$ isn't a predictor of interest. It represents everything that's not included in our model that explains the variation in immigration sentiment that our linear function won't capture. Without sidetracking too much into a discussion of minimizing the sum of squares (i.e. "ordinary least squares") in regression, we expect the linear regression to draw a line of best fit through the data, but it won't 100% capture every point in the data. The difference between what our regression predicts for a particular observation and the value of the particular observation is that "residual" or "error."
 
-Running a linear regression in R is simple. The commands below will do it while some code I hide will format the tables I present. Again, check [the `_source` file](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd).
+Running a linear regression in R is simple. The commands below will do it while some code I hide will format the tables I present. Again, check [the `_rmd` file](https://github.com/svmiller/svmiller.github.io/blob/master/_rmd/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd).
 
 ```r
 M1 <- lm(immigsent ~ agea + female + eduyrs + uempla + hinctnta  + lrscale, data=ESS9GB)
@@ -538,9 +532,9 @@ I'll close this section by noting, as I did in [my guide from 2014](http://svmil
 
 I want to offer the following concluding thoughts, some of which will echo my thoughts on [my guide from 2014](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/). 
 
-First, be mindful of the distribution of the dependent variable. In this application, we're treating this 31-point composite index as interval and I think it's reasonable to do so. The distribution of the measure didn't look too wonky, all things considered. However, variables with a huge skew problem or just a handful of responses (e.g. five-item Likerts, binary responses) will either break some of the underlying assumptions of a linear regression or will produce nonsensical quantities of interest. Basically, look at your data and look at your model. In this case, maybe there's a [heteroskedasticity](https://en.wikipedia.org/wiki/Heteroscedasticity) concern, but a heteroskedasticity correction I run (quietly) and report here suggest no major concern for our coefficients. [I have a lab script for my grad-level methods class](https://github.com/svmiller/post8000/blob/master/lab-scripts/ols-diagnostics-lab.R) that shows how flexible you can get with heteroskedasticity corrections. You could also bootstrap your standard errors, which [I show how to do here in detail](http://svmiller.com/blog/2020/03/bootstrap-standard-errors-in-r/). I'm electing for a simpler heteroskedasticity correction. You can see in [the source file](https://github.com/svmiller/svmiller.github.io/blob/master/_source/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd) what exactly I did here (via the `sandwich` package).
+First, be mindful of the distribution of the dependent variable. In this application, we're treating this 31-point composite index as interval and I think it's reasonable to do so. The distribution of the measure didn't look too wonky, all things considered. However, variables with a huge skew problem or just a handful of responses (e.g. five-item Likerts, binary responses) will either break some of the underlying assumptions of a linear regression or will produce nonsensical quantities of interest. Basically, look at your data and look at your model. In this case, maybe there's a [heteroskedasticity](https://en.wikipedia.org/wiki/Heteroscedasticity) concern, but a heteroskedasticity correction I run (quietly) and report here suggest no major concern for our coefficients. [I have a lab script for my grad-level methods class](https://github.com/svmiller/post8000/blob/master/lab-scripts/ols-diagnostics-lab.R) that shows how flexible you can get with heteroskedasticity corrections. You could also bootstrap your standard errors, which [I show how to do here in detail](http://svmiller.com/blog/2020/03/bootstrap-standard-errors-in-r/). I'm electing for a simpler heteroskedasticity correction. You can see in [the source file](https://github.com/svmiller/svmiller.github.io/blob/master/_rmd/2020-03-23-what-explains-british-attitudes-toward-immigration-a-pedagogical-example.Rmd) what exactly I did here (via the `{sandwich}` package).
 
-![plot of chunk heteroskedasticity-correction-ess-round9-united-kingdom-immigration-sentiment](/images/heteroskedasticity-correction-ess-round9-united-kingdom-immigration-sentiment-1.png)
+![plot of chunk heteroskedasticity-correction-ess-round9-united-kingdom-immigration-sentiment](/images/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/heteroskedasticity-correction-ess-round9-united-kingdom-immigration-sentiment-1.png)
 
 Second, be mindful of the independent variables. Put another way: [statistically significant is not itself “significant”](http://www.amazon.com/The-Cult-Statistical-Significance-Economics/dp/0472050079). It's easy to conflate "significant" with "large" or "very important." However, the test of statistical significance is misleading because it's really a test of prescision and discernibility from zero. I'll always bring up that "statistically signficant" made [a prestigious list of terms that scientists wish the general public would stop misusing](http://io9.com/10-scientific-ideas-that-scientists-wish-you-would-stop-1591309822).
 
@@ -550,7 +544,7 @@ Thus, *be very careful* in assuming that coefficient size is necessarily an indi
 
 Everything is centered on zero as well so the "constant" (or *y*-intercept) now communicates the expected value of *y* for a typical case approximating the mean. The first model, which is not standardized, gives us an estimate of *y* to be about 11.655 for a person who is a 1) zero-years-old(!) 2) male who 3) was never educated(!) and self-identifies as 4) furthest to the ideological left, but is 5) currently employed even if 6) their household income is zero(!) on a 1:10 scale. That estimate for a *y*-intercept is useless, as the exclamation points I add suggest. When standardized, the *y*-intercept of 17.269 gives us the estimated value for an employed man of average age, education, income, and ideology. That *y*-intercept is much more useful the extent to which it conveys a quantity of interest for an observation that is much more likely to actually exist.
 
-More to the point, binary and non-binary inputs are now roughly on the same scale, allowing for a preliminary comparison of coefficients. The `r2sd()` function in my `stevemisc` package will do this standardization.
+More to the point, binary and non-binary inputs are now roughly on the same scale, allowing for a preliminary comparison of coefficients. The `r2sd()` function in my `{stevemisc}` package will do this standardization.
 
 ```r
 ESS9GB %>%
@@ -602,6 +596,3 @@ The results from the regression does offer some preliminary evidence that the ye
 Further, as another word of caution, more asterisks do not mean more "significance." Greater levels of statistical significance (i.e. more "stars") suggest only more precise estimates, not bigger or "more important" effects. Significance is an assessment only of precision and discernibility from some other counterclaim (of zero in the regression context).
 
 Finally, I offer this humbly, only as a companion to a presentation to some politics students in the United Kingdom. I do not intend it to be exhaustive of all the covariates of immigration attitudes; it clearly is not. I offer it only as a complement to students on how to approach social/political science topics quantitatively and how to evaluate quantitative evidence presented to them. There's so much more a researcher could do with these data, whether it's exhausting all sources of omitted variable bias potentially present or more fully explicating some of the regional variation in a mixed effects modeling approach. Explore the data with that in mind. Interested students from that presentation I was slated to give are free to reach out to me as well with additional inquiries on these data.
-
-
-

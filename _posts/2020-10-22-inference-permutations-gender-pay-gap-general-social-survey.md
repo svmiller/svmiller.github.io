@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-10-24'
 excerpt: "This is an illustrative exercise of permutations as a computational means to inference, using the gender gap in base income from the General Social Survey."
@@ -61,9 +59,9 @@ And here's a table of contents.
 
 ## The Data and the Application {#thedata}
 
-The data I'll be using come from the General Social Survey (GSS) and are available in [my `stevedata` package](https://github.com/svmiller/stevedata) as the `gss_wages` data. These are individual-level wage data for Americans from 1974 to 2018. I've long been interested in finding good individual-level data that can be used to teach about [the gender pay gap](https://www.payscale.com/data/gender-pay-gap) and provide some quantifiable information about it. The gender pay gap is a big part of how I start a quantitative methods class by cautioning students to avoid hasty generalizations. However, individual-level income measures are not exactly easy to obtain in your canned American public opinion data sets. The GSS, though, appears to have that and I take a subset of the data and include it in my `stevedata` package.
+The data I'll be using come from the General Social Survey (GSS) and are available in [my `{stevedata}` package](https://github.com/svmiller/stevedata) as the `gss_wages` data. These are individual-level wage data for Americans from 1974 to 2018. I've long been interested in finding good individual-level data that can be used to teach about [the gender pay gap](https://www.payscale.com/data/gender-pay-gap) and provide some quantifiable information about it. The gender pay gap is a big part of how I start a quantitative methods class by cautioning students to avoid hasty generalizations. However, individual-level income measures are not exactly easy to obtain in your canned American public opinion data sets. The GSS, though, appears to have that and I take a subset of the data and include it in my `{stevedata}` package.
 
-Briefly, the data I provide in `stevedata` have the respondent's self-reported base income in constant 1986 USD (`realrinc`). I'm kind of astonished [the GSS has this](https://gssdataexplorer.norc.org/variables/5199/vshow). For example, I could not tell you how much my income is to the dollar, though I can land in the hundreds (or so). Asking usually leads to larger amounts of missingness as people either don't know their base income or withhold saying it. Surveys that have a temporal scope may not want the hassle of having to standardize dollars across time, which leads to more accessible measures of income by reference to a self-reported "scale" or "ladder" of incomes (usually a 1:10 metric). No matter, the GSS has these data along with [some](http://gss.norc.org/Documents/reports/methodological-reports/MR064.pdf) [documentation](http://www.gss.norc.org/Documents/reports/methodological-reports/MR101%20Getting%20the%20Most%20Out%20of%20the%20GSS%20Income%20Measures.pdf) about it. I'll only add the caveat that I'll be using these data "as is", offering takeaways for illustration about permutation more so than the underlying problem itself (i.e. the gender pay gap).
+Briefly, the data I provide in `{stevedata}` have the respondent's self-reported base income in constant 1986 USD (`realrinc`). I'm kind of astonished [the GSS has this](https://gssdataexplorer.norc.org/variables/5199/vshow). For example, I could not tell you how much my income is to the dollar, though I can land in the hundreds (or so). Asking usually leads to larger amounts of missingness as people either don't know their base income or withhold saying it. Surveys that have a temporal scope may not want the hassle of having to standardize dollars across time, which leads to more accessible measures of income by reference to a self-reported "scale" or "ladder" of incomes (usually a 1:10 metric). No matter, the GSS has these data along with [some](http://gss.norc.org/Documents/reports/methodological-reports/MR064.pdf) [documentation](http://www.gss.norc.org/Documents/reports/methodological-reports/MR101%20Getting%20the%20Most%20Out%20of%20the%20GSS%20Income%20Measures.pdf) about it. I'll only add the caveat that I'll be using these data "as is", offering takeaways for illustration about permutation more so than the underlying problem itself (i.e. the gender pay gap).
 
 I'll also make some use of some factors that could be influencing the differences between men and women on self-reported income in the GSS data, though I again caution these will not be all exhaustive. In addition to the respondent's self-reported gender in the data (`gender`), I have the respondent's age (`age`), marital status (`maritalcat`), highest degree obtained (`educcat`), and the prestige of the respondent's occupation (`prestg10`). You can read more about [how the GSS assesses prestige and socioeconomic scores](http://gss.norc.org/Documents/reports/methodological-reports/MR124.pdf) if you'd like, but, for now, higher values indicate more prestigious occupations that should result in higher pay. 
 
@@ -97,34 +95,25 @@ Let's assume the data look like this.
 
 ```r
 jenny() # set.seed(8675309) for reproducibility in stevemisc, with message
-```
-
-```
-## 🎶 Jenny, I got your number...
-```
-
-```r
+#> Jenny, I got your number...
 tibble(group = c(rep("Treatment", 5), rep("Control", 5)),
        e = rnorm(10, 0, 1),
        y = ifelse(group == "Treatment", 50 + e, 45 + e)) -> Example
 
 Example
-```
-
-```
-## # A tibble: 10 x 3
-##    group           e     y
-##    <chr>       <dbl> <dbl>
-##  1 Treatment -0.0547  49.9
-##  2 Treatment  0.738   50.7
-##  3 Treatment  0.448   50.4
-##  4 Treatment  1.02    51.0
-##  5 Treatment -0.138   49.9
-##  6 Control    0.210   45.2
-##  7 Control   -0.643   44.4
-##  8 Control    1.39    46.4
-##  9 Control   -0.820   44.2
-## 10 Control    0.571   45.6
+#> # A tibble: 10 × 3
+#>    group           e     y
+#>    <chr>       <dbl> <dbl>
+#>  1 Treatment -0.997   49.0
+#>  2 Treatment  0.722   50.7
+#>  3 Treatment -0.617   49.4
+#>  4 Treatment  2.03    52.0
+#>  5 Treatment  1.07    51.1
+#>  6 Control    0.987   46.0
+#>  7 Control    0.0275  45.0
+#>  8 Control    0.673   45.7
+#>  9 Control    0.572   45.6
+#> 10 Control    0.904   45.9
 ```
 
 The difference in means between both groups is going to come out to about 5 and it should be no surprise that a *t*-test is going to suggest a discernible difference between both treatment and control. Further, it is going to suggest that the difference between treatment and control is highly unlikely to have arisen by chance if the true difference between treatment and control is zero. This strongly implies a systematic difference between treatment and control that we of course built into the generation of the data.
@@ -151,14 +140,14 @@ broom::tidy(t.test(y ~ group, data=Example))
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:center;"> -5.26 </td>
-   <td style="text-align:center;"> 45.14 </td>
-   <td style="text-align:center;"> 50.4 </td>
-   <td style="text-align:center;"> -11.36 </td>
+   <td style="text-align:center;"> -4.81 </td>
+   <td style="text-align:center;"> 45.63 </td>
+   <td style="text-align:center;"> 50.44 </td>
+   <td style="text-align:center;"> -8.28 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 6.22 </td>
-   <td style="text-align:center;"> -6.38 </td>
-   <td style="text-align:center;"> -4.14 </td>
+   <td style="text-align:center;"> 4.73 </td>
+   <td style="text-align:center;"> -6.33 </td>
+   <td style="text-align:center;"> -3.29 </td>
    <td style="text-align:center;"> Welch Two Sample t-test </td>
    <td style="text-align:center;"> two.sided </td>
   </tr>
@@ -175,25 +164,22 @@ Example %>%
   mutate(y1 = sample(y), y2 = sample(y),
          y3 = sample(y), y4 = sample(y),
          y5 = sample(y), y6 = sample(y))
+#> # A tibble: 10 × 9
+#>    group           e     y    y1    y2    y3    y4    y5    y6
+#>    <chr>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1 Treatment -0.997   49.0  46.0  46.0  45.7  50.7  45.7  50.7
+#>  2 Treatment  0.722   50.7  45.9  52.0  45.6  45.0  52.0  51.1
+#>  3 Treatment -0.617   49.4  45.6  45.7  45.9  49.4  45.0  49.4
+#>  4 Treatment  2.03    52.0  45.7  45.9  52.0  46.0  50.7  52.0
+#>  5 Treatment  1.07    51.1  49.4  45.0  50.7  51.1  49.4  45.0
+#>  6 Control    0.987   46.0  51.1  49.0  51.1  45.7  49.0  45.6
+#>  7 Control    0.0275  45.0  52.0  50.7  46.0  49.0  45.9  46.0
+#>  8 Control    0.673   45.7  45.0  49.4  49.4  45.9  46.0  49.0
+#>  9 Control    0.572   45.6  49.0  51.1  45.0  52.0  51.1  45.9
+#> 10 Control    0.904   45.9  50.7  45.6  49.0  45.6  45.6  45.7
 ```
 
-```
-## # A tibble: 10 x 9
-##    group           e     y    y1    y2    y3    y4    y5    y6
-##    <chr>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-##  1 Treatment -0.0547  49.9  45.2  45.2  46.4  50.7  46.4  50.7
-##  2 Treatment  0.738   50.7  45.6  51.0  44.2  44.4  51.0  49.9
-##  3 Treatment  0.448   50.4  44.2  46.4  45.6  50.4  44.4  50.4
-##  4 Treatment  1.02    51.0  50.4  45.6  51.0  45.2  50.7  51.0
-##  5 Treatment -0.138   49.9  49.9  44.4  50.7  49.9  50.4  44.4
-##  6 Control    0.210   45.2  51.0  49.9  49.9  46.4  49.9  44.2
-##  7 Control   -0.643   44.4  44.4  50.7  45.2  49.9  45.6  45.2
-##  8 Control    1.39    46.4  49.9  50.4  50.4  45.6  45.2  49.9
-##  9 Control   -0.820   44.2  46.4  49.9  44.4  51.0  49.9  45.6
-## 10 Control    0.571   45.6  50.7  44.2  49.9  44.2  44.2  46.4
-```
-
-This process of permutation is repeatable for, in most applications, more permutations than the researcher would plausibly need or want. The more observations, the more plausible permutations in order to generate a null distribution to approximate hypothetical repeated sampling of the population. This process seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `tidyverse` partisan, I'm drawn to `modelr`'s `permute()` function and will use it in the analyses below.
+This process of permutation is repeatable for, in most applications, more permutations than the researcher would plausibly need or want. The more observations, the more plausible permutations in order to generate a null distribution to approximate hypothetical repeated sampling of the population. This process seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `{tidyverse}` partisan, I'm drawn to `{modelr}`'s `permute()` function and will use it in the analyses below.
 
 ## Permutation and Linear Regression {#permutationols}
 
@@ -258,7 +244,7 @@ It suggests that, controlling for other sources of potential confounding, there 
 
 Observe that the *t*-statistic is about -6. This suggests, given what we know about central limit theorem and a normal distribution, it is almost a statistical impossibility that there are no differences between unmarried men and unmarried women in the four most recent GSS waves given the coefficient and standard error we observed. However, the statement is more theoretical than empirical. Permutation allows an empirical means to basically the same end. 
 
-Using the `permute()` function in `modelr`, I create 10,000 random permutations of the `wages12` data, shuffling the order only of the dependent variable. Thereafter, using `purrr` (as called in `tidyverse`), I run 10,000 regressions on these permuted data, tidy the output, and pull the results.
+Using the `permute()` function in `{modelr}`, I create 10,000 random permutations of the `wages12` data, shuffling the order only of the dependent variable. Thereafter, using `{purrr}` (as called in `{tidyverse}`), I run 10,000 regressions on these permuted data, tidy the output, and pull the results.
 
 ```r
 jenny() # I got your number
@@ -305,7 +291,7 @@ Here are the summary statistics for the 10,000 coefficients for the `gender` dum
 </table>
 
 
-![plot of chunk possible-effects-female-permutation](/images/possible-effects-female-permutation-1.png)
+![plot of chunk possible-effects-female-permutation](/images/inference-permutations-gender-pay-gap-general-social-survey/possible-effects-female-permutation-1.png)
 
 The benefit of approaching inference this way is the student does not have to engage in the academic task of dividing a regression coefficient over a standard error to obtain a *t*-value or *z*-score, finding the corresponding *p*-value to make a statement of the long-run relative probability of obtaining the statistic against some counterclaim (i.e. typically zero in the null hypothesis testing framework). Instead, the student can reasonably approximate a null distribution through permutation and see it for themselves.
 
@@ -339,117 +325,13 @@ And here's what they would look like. You can see a clear positive relationship 
 
 [^ifyouusedmedian]: Sub out the mean for the median and the differences between men and women get even smaller for the more prestigious occupations. The use of means is necessary for doing *t*-tests and comparing permutation to them even if people who study income caution about the importance of using the median as an estimate of central tendency.
 
-<table id="stevetable">
-<caption>Mean Income, by Occupational Prestige and Gender, in the General Social Survey (2012-2018)</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> Prestige Grouping </th>
-   <th style="text-align:center;"> Gender </th>
-   <th style="text-align:center;"> Number of Observations </th>
-   <th style="text-align:center;"> Mean Income (1986 USD) </th>
-   <th style="text-align:center;"> Difference </th>
-   <th style="text-align:center;"> % (Women/Men) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> 20-29 </td>
-   <td style="text-align:center;"> Male </td>
-   <td style="text-align:center;"> 404 </td>
-   <td style="text-align:center;"> $11,482.04 </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 20-29 </td>
-   <td style="text-align:center;"> Female </td>
-   <td style="text-align:center;"> 434 </td>
-   <td style="text-align:center;"> $7,468.73 </td>
-   <td style="text-align:center;"> -$4,013.31 </td>
-   <td style="text-align:center;"> 65.05% </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 30-39 </td>
-   <td style="text-align:center;"> Male </td>
-   <td style="text-align:center;"> 768 </td>
-   <td style="text-align:center;"> $16,545.37 </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 30-39 </td>
-   <td style="text-align:center;"> Female </td>
-   <td style="text-align:center;"> 922 </td>
-   <td style="text-align:center;"> $12,807.02 </td>
-   <td style="text-align:center;"> -$3,738.35 </td>
-   <td style="text-align:center;"> 77.41% </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 40-49 </td>
-   <td style="text-align:center;"> Male </td>
-   <td style="text-align:center;"> 524 </td>
-   <td style="text-align:center;"> $23,952.84 </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 40-49 </td>
-   <td style="text-align:center;"> Female </td>
-   <td style="text-align:center;"> 732 </td>
-   <td style="text-align:center;"> $15,526.74 </td>
-   <td style="text-align:center;"> -$8,426.10 </td>
-   <td style="text-align:center;"> 64.82% </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 50-59 </td>
-   <td style="text-align:center;"> Male </td>
-   <td style="text-align:center;"> 227 </td>
-   <td style="text-align:center;"> $30,698.47 </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 50-59 </td>
-   <td style="text-align:center;"> Female </td>
-   <td style="text-align:center;"> 362 </td>
-   <td style="text-align:center;"> $23,010.93 </td>
-   <td style="text-align:center;"> -$7,687.54 </td>
-   <td style="text-align:center;"> 74.96% </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 60-69 </td>
-   <td style="text-align:center;"> Male </td>
-   <td style="text-align:center;"> 208 </td>
-   <td style="text-align:center;"> $35,809.26 </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 60-69 </td>
-   <td style="text-align:center;"> Female </td>
-   <td style="text-align:center;"> 367 </td>
-   <td style="text-align:center;"> $25,851.12 </td>
-   <td style="text-align:center;"> -$9,958.13 </td>
-   <td style="text-align:center;"> 72.19% </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 70-79 </td>
-   <td style="text-align:center;"> Male </td>
-   <td style="text-align:center;"> 83 </td>
-   <td style="text-align:center;"> $36,970.38 </td>
-   <td style="text-align:center;">  </td>
-   <td style="text-align:center;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 70-79 </td>
-   <td style="text-align:center;"> Female </td>
-   <td style="text-align:center;"> 52 </td>
-   <td style="text-align:center;"> $33,925.07 </td>
-   <td style="text-align:center;"> -$3,045.31 </td>
-   <td style="text-align:center;"> 91.76% </td>
-  </tr>
-</tbody>
-</table>
+
+```
+#> Error: Problem with `mutate()` column `perc`.
+#> ℹ `perc = ifelse(!is.na(perc), paste0(mround2(perc), "%"), NA)`.
+#> ✖ could not find function "mround2"
+#> ℹ The error occurred in group 1: prestgf = "20-29".
+```
 
 
 We can get *t*-tests to assess whether the differences between men and women by occupational prestige grouping are likely to have occurred by chance. Rounding the *p*-values from these results to zero (for convenience on the formatting end) suggests the probability of observing these differences if there were truly no differences between incomes for unmarried men and unmarried women is small. It's effectively zero for the 20-29 group and the 40-49 group. It's less than .05 for the 30-39 and 60-69 group. It's less than .1 for the 50-59 group. The highest occupational prestige groups may well be at income parity for unmarried men and unmarried women in that group.
@@ -558,7 +440,7 @@ wages12 %>%
   setNames(unique(sort(wages12$prestgf))) -> splits
 ```
 
-Some `purrr` magic will then create 2,000 permutations of each of these six data frames (corresponding to the six occupational prestige groupings we have). After shuffling each of the six data frames, I'll get grouped summaries for all of them, with [some assistance from Vincent Arel-Bundock](https://stackoverflow.com/questions/64471217/grouped-summarizing-in-a-nested-tibble-with-permutations). The end results is a single data frame that contains the mean income in 1986 USD, by gender and occupational prestige, for all these permutations.
+Some `{purrr}` magic will then create 2,000 permutations of each of these six data frames (corresponding to the six occupational prestige groupings we have). After shuffling each of the six data frames, I'll get grouped summaries for all of them, with [some assistance from Vincent Arel-Bundock](https://stackoverflow.com/questions/64471217/grouped-summarizing-in-a-nested-tibble-with-permutations). The end results is a single data frame that contains the mean income in 1986 USD, by gender and occupational prestige, for all these permutations.
 
 ```r
 # https://stackoverflow.com/questions/64471217/grouped-summarizing-in-a-nested-tibble-with-permutations
@@ -590,7 +472,7 @@ The benefit of this group-split approach to permutation is it can allow us a com
 
 <!-- The mean income observed for women by occupational prestige group, however, could have come by chance for many of the groups. Observe the dashed line containing the observed group mean is well within the distribution of the permutations for all except the unmarried women in the 20-29 occupational prestige group and the unmarried women in the 40-49 occupational prestige group. That suggests the mean incomes for unmarried women could be a chance result, or at least that we should look more carefully at the underlying data producing the faceted density plot. -->
 
-![plot of chunk geom-density-of-permuted-group-means](/images/geom-density-of-permuted-group-means-1.png)
+![plot of chunk geom-density-of-permuted-group-means](/images/inference-permutations-gender-pay-gap-general-social-survey/geom-density-of-permuted-group-means-1.png)
 
 The plot above leads to a question that is empirically answerable by the permutations. What percentage of the permutations contained a mean income for the unmarried women in that occupational prestige group that was at or below the actual mean? The code below will answer that. Briefly, across 10,000 permutations spanning all but the highest occupational prestige group, only 43 permutations resulted in a permutation at or below the observed mean. That suggests it's highly unlikely to have arisen by chance. However, the income we observed for unmarried women in the highest occupational prestige group seems like a plausible result. An extreme result like it appeared in about 32% of the 2,000 permutations for that group.
 
@@ -772,7 +654,4 @@ The biggest benefit I see is that it encourages students to think about a data-g
 
 For drawbacks, I'm not 100% convinced this approach is worth doing over teaching inference by reference to more theoretical topics like central limit theorem, *p*-values, and so on. My misgivings here are multiple. I'm not sure it scales well. It may work well dealing with smaller data sets in which students aren't tempted to permute forever to see if there is some other combination of data, other than the actual combination, that can reproduce a test result. For super simple data sets, especially experimental designs with just the focus on treatment and control means, I can see this being a useful teaching experience. For larger data sets with other complexities (e.g. random effects), this is just too computationally demanding to write and implement with ultimately not that much of a payoff. I get the argument that it is very much a 20th century thing to have students flip to the end of the textbook to find [a *z*-score table](http://www.z-table.com/). It's as "20th century" as still [demanding our high school students learn calculus with the same damn TI-83/84 calculator](https://money.cnn.com/2017/05/12/technology/ti-84-graphing-calculator/index.html) I had in high school over 20 years ago. But the 21st century path forward might be understanding how to use `pnorm()` and `pt()` in R. Permutation is fine as a means to teaching about statistical inference, but I think we should be teaching around implementation anyway. You don't need permutation for that.
 
-That said, you could do it, and it'd be kind of cool for students to see it to understand what it's trying to mimic. This guide offers how to think about doing it with `modelr` and an application to the gender pay gap as approximated in 2012-2018 waves of the GSS.
-
-
-
+That said, you could do it, and it'd be kind of cool for students to see it to understand what it's trying to mimic. This guide offers how to think about doing it with `{modelr}` and an application to the gender pay gap as approximated in 2012-2018 waves of the GSS.

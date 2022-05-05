@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-10-24'
 excerpt: "This is an illustrative exercise of permutations as a computational means to inference, using the gender gap in base income from the General Social Survey."
@@ -18,23 +16,40 @@ image: "gender-pay-gap.jpg"
 
 ```{r setup, include=FALSE, cache=F}
 
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
-                      cache.path = '~/Dropbox/svmiller.github.io/cache/gender-pay-gap/',
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = FALSE) 
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+
 ```
 
-```{r loaddatadostuff, echo=F, cache=T}
+```{r loaddatadostuff, echo=F, cache=F}
 library(tidyverse) # for all things workflow
 library(stevemisc) # my toy R package, via devtools::install_github("svmiller/stevemisc")
 library(stevedata) # my toy data package, via devtools::install_github("svmiller/stevedata")
@@ -59,8 +74,8 @@ gss_wages %>%
   filter(year >= 2012) -> wages12
 
 
-lmPerms <- readRDS("~/Dropbox/svmiller.github.io/rda/gender-pay-gap/lmPerms.rds")
-prestgfmeans <- readRDS("~/Dropbox/svmiller.github.io/rda/gender-pay-gap/prestgfmeans.rds")
+lmPerms <- readRDS("~/Dropbox/svmiller.github.io/R/gender-pay-gap/lmPerms.rds")
+prestgfmeans <- readRDS("~/Dropbox/svmiller.github.io/R/gender-pay-gap/prestgfmeans.rds")
 
 ```
 
@@ -109,9 +124,9 @@ And here's a table of contents.
 
 ## The Data and the Application {#thedata}
 
-The data I'll be using come from the General Social Survey (GSS) and are available in [my `stevedata` package](https://github.com/svmiller/stevedata) as the `gss_wages` data. These are individual-level wage data for Americans from 1974 to 2018. I've long been interested in finding good individual-level data that can be used to teach about [the gender pay gap](https://www.payscale.com/data/gender-pay-gap) and provide some quantifiable information about it. The gender pay gap is a big part of how I start a quantitative methods class by cautioning students to avoid hasty generalizations. However, individual-level income measures are not exactly easy to obtain in your canned American public opinion data sets. The GSS, though, appears to have that and I take a subset of the data and include it in my `stevedata` package.
+The data I'll be using come from the General Social Survey (GSS) and are available in [my `{stevedata}` package](https://github.com/svmiller/stevedata) as the `gss_wages` data. These are individual-level wage data for Americans from 1974 to 2018. I've long been interested in finding good individual-level data that can be used to teach about [the gender pay gap](https://www.payscale.com/data/gender-pay-gap) and provide some quantifiable information about it. The gender pay gap is a big part of how I start a quantitative methods class by cautioning students to avoid hasty generalizations. However, individual-level income measures are not exactly easy to obtain in your canned American public opinion data sets. The GSS, though, appears to have that and I take a subset of the data and include it in my `{stevedata}` package.
 
-Briefly, the data I provide in `stevedata` have the respondent's self-reported base income in constant 1986 USD (`realrinc`). I'm kind of astonished [the GSS has this](https://gssdataexplorer.norc.org/variables/5199/vshow). For example, I could not tell you how much my income is to the dollar, though I can land in the hundreds (or so). Asking usually leads to larger amounts of missingness as people either don't know their base income or withhold saying it. Surveys that have a temporal scope may not want the hassle of having to standardize dollars across time, which leads to more accessible measures of income by reference to a self-reported "scale" or "ladder" of incomes (usually a 1:10 metric). No matter, the GSS has these data along with [some](http://gss.norc.org/Documents/reports/methodological-reports/MR064.pdf) [documentation](http://www.gss.norc.org/Documents/reports/methodological-reports/MR101%20Getting%20the%20Most%20Out%20of%20the%20GSS%20Income%20Measures.pdf) about it. I'll only add the caveat that I'll be using these data "as is", offering takeaways for illustration about permutation more so than the underlying problem itself (i.e. the gender pay gap).
+Briefly, the data I provide in `{stevedata}` have the respondent's self-reported base income in constant 1986 USD (`realrinc`). I'm kind of astonished [the GSS has this](https://gssdataexplorer.norc.org/variables/5199/vshow). For example, I could not tell you how much my income is to the dollar, though I can land in the hundreds (or so). Asking usually leads to larger amounts of missingness as people either don't know their base income or withhold saying it. Surveys that have a temporal scope may not want the hassle of having to standardize dollars across time, which leads to more accessible measures of income by reference to a self-reported "scale" or "ladder" of incomes (usually a 1:10 metric). No matter, the GSS has these data along with [some](http://gss.norc.org/Documents/reports/methodological-reports/MR064.pdf) [documentation](http://www.gss.norc.org/Documents/reports/methodological-reports/MR101%20Getting%20the%20Most%20Out%20of%20the%20GSS%20Income%20Measures.pdf) about it. I'll only add the caveat that I'll be using these data "as is", offering takeaways for illustration about permutation more so than the underlying problem itself (i.e. the gender pay gap).
 
 I'll also make some use of some factors that could be influencing the differences between men and women on self-reported income in the GSS data, though I again caution these will not be all exhaustive. In addition to the respondent's self-reported gender in the data (`gender`), I have the respondent's age (`age`), marital status (`maritalcat`), highest degree obtained (`educcat`), and the prestige of the respondent's occupation (`prestg10`). You can read more about [how the GSS assesses prestige and socioeconomic scores](http://gss.norc.org/Documents/reports/methodological-reports/MR124.pdf) if you'd like, but, for now, higher values indicate more prestigious occupations that should result in higher pay. 
 
@@ -178,7 +193,7 @@ Example %>%
          y5 = sample(y), y6 = sample(y))
 ```
 
-This process of permutation is repeatable for, in most applications, more permutations than the researcher would plausibly need or want. The more observations, the more plausible permutations in order to generate a null distribution to approximate hypothetical repeated sampling of the population. This process seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `tidyverse` partisan, I'm drawn to `modelr`'s `permute()` function and will use it in the analyses below.
+This process of permutation is repeatable for, in most applications, more permutations than the researcher would plausibly need or want. The more observations, the more plausible permutations in order to generate a null distribution to approximate hypothetical repeated sampling of the population. This process seems like it's akin to random measurement error, but the underlying distribution of results from permutation amounts to a distribution of plausible results against which to compare the actual results. There are a variety of permutation packages, but, as a `{tidyverse}` partisan, I'm drawn to `{modelr}`'s `permute()` function and will use it in the analyses below.
 
 ## Permutation and Linear Regression {#permutationols}
 
@@ -203,7 +218,7 @@ It suggests that, controlling for other sources of potential confounding, there 
 
 Observe that the *t*-statistic is about -6. This suggests, given what we know about central limit theorem and a normal distribution, it is almost a statistical impossibility that there are no differences between unmarried men and unmarried women in the four most recent GSS waves given the coefficient and standard error we observed. However, the statement is more theoretical than empirical. Permutation allows an empirical means to basically the same end. 
 
-Using the `permute()` function in `modelr`, I create 10,000 random permutations of the `wages12` data, shuffling the order only of the dependent variable. Thereafter, using `purrr` (as called in `tidyverse`), I run 10,000 regressions on these permuted data, tidy the output, and pull the results.
+Using the `permute()` function in `{modelr}`, I create 10,000 random permutations of the `wages12` data, shuffling the order only of the dependent variable. Thereafter, using `{purrr}` (as called in `{tidyverse}`), I run 10,000 regressions on these permuted data, tidy the output, and pull the results.
 
 ```r
 jenny() # I got your number
@@ -368,7 +383,7 @@ wages12 %>%
   setNames(unique(sort(wages12$prestgf))) -> splits
 ```
 
-Some `purrr` magic will then create 2,000 permutations of each of these six data frames (corresponding to the six occupational prestige groupings we have). After shuffling each of the six data frames, I'll get grouped summaries for all of them, with [some assistance from Vincent Arel-Bundock](https://stackoverflow.com/questions/64471217/grouped-summarizing-in-a-nested-tibble-with-permutations). The end results is a single data frame that contains the mean income in 1986 USD, by gender and occupational prestige, for all these permutations.
+Some `{purrr}` magic will then create 2,000 permutations of each of these six data frames (corresponding to the six occupational prestige groupings we have). After shuffling each of the six data frames, I'll get grouped summaries for all of them, with [some assistance from Vincent Arel-Bundock](https://stackoverflow.com/questions/64471217/grouped-summarizing-in-a-nested-tibble-with-permutations). The end results is a single data frame that contains the mean income in 1986 USD, by gender and occupational prestige, for all these permutations.
 
 ```r
 # https://stackoverflow.com/questions/64471217/grouped-summarizing-in-a-nested-tibble-with-permutations
@@ -550,12 +565,4 @@ The biggest benefit I see is that it encourages students to think about a data-g
 
 For drawbacks, I'm not 100% convinced this approach is worth doing over teaching inference by reference to more theoretical topics like central limit theorem, *p*-values, and so on. My misgivings here are multiple. I'm not sure it scales well. It may work well dealing with smaller data sets in which students aren't tempted to permute forever to see if there is some other combination of data, other than the actual combination, that can reproduce a test result. For super simple data sets, especially experimental designs with just the focus on treatment and control means, I can see this being a useful teaching experience. For larger data sets with other complexities (e.g. random effects), this is just too computationally demanding to write and implement with ultimately not that much of a payoff. I get the argument that it is very much a 20th century thing to have students flip to the end of the textbook to find [a *z*-score table](http://www.z-table.com/). It's as "20th century" as still [demanding our high school students learn calculus with the same damn TI-83/84 calculator](https://money.cnn.com/2017/05/12/technology/ti-84-graphing-calculator/index.html) I had in high school over 20 years ago. But the 21st century path forward might be understanding how to use `pnorm()` and `pt()` in R. Permutation is fine as a means to teaching about statistical inference, but I think we should be teaching around implementation anyway. You don't need permutation for that.
 
-That said, you could do it, and it'd be kind of cool for students to see it to understand what it's trying to mimic. This guide offers how to think about doing it with `modelr` and an application to the gender pay gap as approximated in 2012-2018 waves of the GSS.
-
-
-```{r knitchunk, echo=F, eval=F}
-#setwd("~/Dropbox/svmiller.github.io/_source")
-knitr::knit("_source/2020-10-22-inference-permutations-gender-pay-gap-general-social-survey.Rmd",
-            output = "_posts/2020-10-22-inference-permutations-gender-pay-gap-general-social-survey.md")
-
-```
+That said, you could do it, and it'd be kind of cool for students to see it to understand what it's trying to mimic. This guide offers how to think about doing it with `{modelr}` and an application to the gender pay gap as approximated in 2012-2018 waves of the GSS.
