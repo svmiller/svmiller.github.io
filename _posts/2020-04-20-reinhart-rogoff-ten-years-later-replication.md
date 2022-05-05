@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-04-20'
 excerpt: "Reinhart and Rogoff's paper may have had more immediate influence on economics than any other paper in history, but it's a showcase on how not to do research."
@@ -15,6 +13,7 @@ categories:
   - Political Science
 image: "paul-ryan-workout-photos-oh-god-who-thought-this-was-a-good-look.jpg"
 ---
+
 
 
 
@@ -28,7 +27,7 @@ My grad class this week is getting a discussion of ethics and replication in the
 
 My go-to though is from economics. Carmen Reinhart and Kenneth Rogoff (both at Harvard) assembled an exhaustive list of macroeconomic statistics for countries around the world, even dating to the 18th century in some cases, to explore the financial consequences of accrued government expenditures over time. The important findings they communicated came concurrent with the Great Recession happening at the same time. Therein, they put forward what they euphemistically call a set of ["stylized facts"](https://www.nber.org/papers/w15639) that advanced economies (i.e. Western Europe + Australia, Canada, Japan, and New Zealand) for which central government debt is at least 90% of GDP, on average, experience economic contractions. This finding took off. Reinhart and Rogoff were afforded numerous op-eds at the most prestigious newspapers to promote their findings. Their findings even became the basis for much of the austerity measures in Western Europe and the United States that still loom large after 10 years. It was explicitly [cited in Paul Ryan's proposed budget](https://en.wikipedia.org/wiki/The_Path_to_Prosperity) in 2012 and it was cited by European Union Economic and Monetary Affairs Commissioner Olli Rehn in defense of efforts to drive down budget deficits in the Eurozone. Paul Krugman, more an economist than I am, could well be right when [he said](https://www.nybooks.com/articles/2013/06/06/how-case-austerity-has-crumbled/) Reinhart and Rogoff "may have had more immediate influence on public debate than any previous paper in the history of economics."
 
-It was [a graduate student at the University of Massachusetts-Amherst](https://bellarmine.lmu.edu/economics/faculty/?expert=thomas.herndon) who found how exactly Reinhart and Rogoff produced their findings. Namely, the underlying data were well-documented and collected by Reinhart and Rogoff, but the academic workflow in Microsoft Excel led to a slew of errors that produced the findings that Reinhart and Rogoff [published in the *American Economic Review*](https://pubs.aeaweb.org/doi/pdf/10.1257/aer.100.2.573), had discussed by Congress and in numerous op-eds and TV interview opportunities, and which became the foundation for austerity in Western Europe and the United States during and after the Great Recession. Calling it the Microsft Excel error that ["tanked the global economy"](https://www.thestranger.com/slog/archives/2013/04/17/how-microsoft-excel-tanked-the-global-economy) and ["destroy(ed) the economies of the Western world"](http://www.iqtrainwrecks.info/2013/04/19/did-an-excel-coding-error-destroy-the-economies-of-the-western-world/) might be bold, but it's in orbit of the magnitude of the error and how we're all still living in its afterglow.
+It was [a graduate student at the University of Massachusetts-Amherst](https://bellarmine.lmu.edu/economics/faculty/?expert=thomas.herndon) who found how exactly Reinhart and Rogoff produced their findings. Namely, the underlying data were well-documented and collected by Reinhart and Rogoff, but the academic workflow in Microsoft Excel led to a slew of errors that produced the findings that Reinhart and Rogoff [published in the *American Economic Review*](https://pubs.aeaweb.org/doi/pdf/10.1257/aer.100.2.573), had discussed by Congress and in numerous op-eds and TV interview opportunities, and which became the foundation for austerity in Western Europe and the United States during and after the Great Recession. Calling it the Microsoft Excel error that ["tanked the global economy"](https://www.thestranger.com/slog/archives/2013/04/17/how-microsoft-excel-tanked-the-global-economy) and ["destroy(ed) the economies of the Western world"](http://www.iqtrainwrecks.info/2013/04/19/did-an-excel-coding-error-destroy-the-economies-of-the-western-world/) might be bold, but it's in orbit of the magnitude of the error and how we're all still living in its afterglow.
 
 With that in mind, I wanted to revisit the data and the analysis in this post. My primary audience here is [my grad-level methods class](http://post8000.svmiller.com/) since we'll be talking about replication and academic workflow this week. Here are the R packages we'll be using.
 
@@ -314,12 +313,12 @@ RR %>%
    <td style="text-align:left;"> Austria </td>
    <td style="text-align:center;"> 5.21 (34) </td>
    <td style="text-align:center;"> 3.39 (25) </td>
-   <td style="text-align:center;"> NA </td>
-   <td style="text-align:left;"> NA </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Belgium </td>
-   <td style="text-align:center;"> NA </td>
+   <td style="text-align:center;">  </td>
    <td style="text-align:center;"> 4.19 (17) </td>
    <td style="text-align:center;"> 3.08 (21) </td>
    <td style="text-align:left;"> 2.57 (25) </td>
@@ -336,7 +335,7 @@ RR %>%
    <td style="text-align:center;"> 3.52 (23) </td>
    <td style="text-align:center;"> 1.7 (16) </td>
    <td style="text-align:center;"> 2.39 (17) </td>
-   <td style="text-align:left;"> NA </td>
+   <td style="text-align:left;">  </td>
   </tr>
 </tbody>
 </table>
@@ -437,7 +436,7 @@ RR %>%
        subtitle = "The relationship looks to be almost zero from the 30% and above and the estimate gets much noisier at much higher levels of debt.")
 ```
 
-![plot of chunk relationship-between-debt-real-gdp-growth-1946-2009](/images/relationship-between-debt-real-gdp-growth-1946-2009-1.png)
+![plot of chunk relationship-between-debt-real-gdp-growth-1946-2009](/images/reinhart-rogoff-ten-years-later-replication/relationship-between-debt-real-gdp-growth-1946-2009-1.png)
 
 Herndon et al.'s (2014, pp. 275-77) comment about the historical wrinkles in the data---especially how the largest booms and bust are post-World War II peculiarities and how the relationship between debt and real GDP growth seems to have softened over time---provides an opportunity to think of a mixed effects solution. It's any wonder you don't see mixed effects models more in time-series cross-sectional data like this because they're novel ways of modeling the data. My approach here will be minimal since we're dealing with "stylized facts." I'll eschew random effects for years and countries and instead offer a simple random effect for decade that pools countries and years within them.
 
@@ -469,10 +468,11 @@ RR %>%
             debtgdp2 = c(0, 30, 60, 90, 120)) -> newdat
 ```
 
-Now, let's use the `tidybayes` package to add some predicted draws and plot the intervals. I'm going to use 80% intervals because everything is going to be diffuse anyway.
+Now, let's use the `{tidybayes}` package to add some predicted draws and plot the intervals. I'm going to use 80% intervals because everything is going to be diffuse anyway.
 
 
 ```r
+
 newdat %>%
   add_predicted_draws(M1, seed=8675309) %>% # Jenny, I got your number...
   ungroup() %>%
@@ -494,7 +494,7 @@ newdat %>%
        caption = "Data: Reinhart and Rogoff (2009, 2010). Model details: svmiller.com/blog/2020/04/reinhart-rogoff-ten-years-later-replication/")
 ```
 
-![plot of chunk relationship-between-debt-real-gdp-growth-by-decade](/images/relationship-between-debt-real-gdp-growth-by-decade-1.png)
+![plot of chunk relationship-between-debt-real-gdp-growth-by-decade](/images/reinhart-rogoff-ten-years-later-replication/relationship-between-debt-real-gdp-growth-by-decade-1.png)
 
 I think this squares nicely with the main takeaways that Herndon et al. (2014) communicate in their replication of Reinhart and Rogoff (2010). Namely, the main relationship that Reinhart and Rogoff argue seems derivative of two things. First, the greatest difference in growth levels as a function of debt is observed shortly after World War II. However, these 1940s observations are sui generis and atypical. They include those countries with massive recoveries after World War II (e.g. Austria). They include robust peacetime growth as an externality for countries that did not participate in World War II (e.g. Ireland, Sweden). They also include the unique case of the United States, for whom economic contractions following war were commonplace. Indeed, the end of World War II meant a drastically reduced global demand for one of the biggest parts of the American economy by that point: American weapons. The United States, which had used sovereign debt to finance itself through the Great Depression and World War II, unsurprisingly had an economic contraction at this point. The relationship between debt and GDP growth for the U.S. at this point is entirely incidental.
 
@@ -507,5 +507,3 @@ The Reinhart and Rogoff replication crisis is both a sad case and a teachable mo
 [^humbly]: I offer this humbly because I don't want to dig into the weeds of collating corollary citations in calculating impact.
 
 Beyond that, it's a teachable moment for graduate students on the issue of ethics and replication in social science. Per [Andrew Heiss](https://www.andrewheiss.com/)' great [lecture slides on this topic](https://evalf19.classes.andrewheiss.com/class/14-class/), accidental evil is still evil. A quiet errata won't undo what's already been done in Southern Europe and the United States. This is not a comment on Reinhart and Rogoff's motives. It's just a comment on what followed. Students can minimize the risk this happens to them, and importantly to others, by making their research reproducible. Certainly, never do anything important in Microsoft Excel.
-
-
