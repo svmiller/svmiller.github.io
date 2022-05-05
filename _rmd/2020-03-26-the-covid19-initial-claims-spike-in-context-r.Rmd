@@ -4,8 +4,6 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
-knit: (function(inputFile, encoding) {
-   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../_posts") })
 author: "steve"
 date: '2020-03-26'
 excerpt: "The first data on COVID-19's effect on unemployment rates are out and... holy cow."
@@ -17,23 +15,39 @@ image: "woman-mask-la-covid19.jpg"
 
 ```{r setup, include=FALSE, cache=F}
 
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
 base_dir <- "~/Dropbox/svmiller.github.io/"
 base_url <- "/"
-fig_path <- "images/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
  cat(img)
 }
 
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
-                      cache.path = '../cache/covid19-initial-claims/',
+                      cache.path = cache_path,
                       message=FALSE, warning=FALSE,
-                      cache = TRUE) 
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
 
 library(tidyverse) # for most things. This is the best workflow package out there.
 library(stevemisc)
+library(stevedata)
 library(fredr)
 library(lubridate)
 library(knitr)
@@ -103,20 +117,21 @@ add_jekyll_image('/images/woman-mask-la-covid19.jpg', "A woman walks wearing a m
 ```
 
 
-*Last updated: `r format(Sys.time(), '%B %d, %Y')`* 
+*Last updated: 2 April 2020* 
 
 The U.S. Employment and Training Administration released its weekly update on initial unemployment claims, giving us the first glimpse of the economic implications of the COVID-19 pandemic beyond [the fluctuation we're observing in the stock market](http://svmiller.com/blog/2020/03/dow-jones-no-good-very-bad-day/). And... [yikes](https://www.cnn.com/2020/03/26/economy/unemployment-benefits-coronavirus/index.html).
 
-The data are grisly and some R code will illustrate that. First, here are the packages necessary to put this unemployment claims spike in context. `tidyverse` comes at the fore of my workflow. `stevemisc` is my toy R package, which incidentally has a data set on U.S. recessions (`recessions`) for added context. It should be no surprise that unemployment climbs during these periods. Finally, `fredr` interacts with the Federal Reserve Economic Data maintained by the research division of the Federal Reserve Bank of St. Louis. The API is the easiest and most flexible of any I've used and I wish the IMF's API were as simple. `lubridate` will help us play with dates.
+The data are grisly and some R code will illustrate that. First, here are the packages necessary to put this unemployment claims spike in context. `{tidyverse}` comes at the fore of my workflow. `{stevemisc}` is my toy R package and `{stevedata}` has a data set on U.S. recessions (`recessions`) for added context. It should be no surprise that unemployment climbs during these periods. Finally, `{fredr}` interacts with the Federal Reserve Economic Data maintained by the research division of the Federal Reserve Bank of St. Louis. The API is the easiest and most flexible of any I've used and I wish the IMF's API were as simple. `{lubridate}` will help us play with dates.
 
 ```r
 library(tidyverse)
 library(stevemisc)
+library(stevedata)
 library(fredr)
 library(lubridate)
 ```
 
-The `fredr` call is simple. The initial unemployment claims data has [a series id of "ICSA"](https://fred.stlouisfed.org/series/ICSA) and the data extend to January 1967. Let's grab everything we can.
+The `{fredr}` call is simple. The initial unemployment claims data has [a series id of "ICSA"](https://fred.stlouisfed.org/series/ICSA) and the data extend to January 1967. Let's grab everything we can.
 
 ```r
 fredr(series_id = "ICSA",
@@ -153,7 +168,7 @@ Now, here's what the data look like as of today.
 
 ICSA %>%
   # change just one line
-  filter(date <= ymd("2020-03-21"))  %>% # Commenting out just one line.
+  filter(date <= ymd("2020-03-21"))  %>%
   ggplot(.,aes(date, value/1000)) +
   theme_steve_web() + post_bg() +
   scale_x_date(date_breaks = "2 years",
@@ -243,12 +258,15 @@ sclaims %>%
   group_by(state) %>%
   mutate(l1_value = lag(value, 1),
          diff = (value - l1_value)/l1_value,
-         diff = diff*100) %>%
+         diff = diff*100) %>% 
+  filter(date == "2020-03-21") %>%
   slice(n()) %>%
   arrange(-diff) %>% select(-series_id) %>%
   mutate(diff = paste0(round(diff, 2), "%")) %>% 
   ungroup() %>%
   mutate(rank = seq(1,n())) %>%
+  select(-realtime_start, -realtime_end) %>%
+  mutate_at(vars(value, l1_value), ~trimws(format(., big.mark=","))) %>%
   select(rank, state, everything(), -date)  %>%
      kable(., format="html", table.attr='id="stevetable"',
         col.names=c("Rank", "State", "Initial Claims (March 21, 2020)", "Initial Claims (March 14, 2020)", "% Change"),
