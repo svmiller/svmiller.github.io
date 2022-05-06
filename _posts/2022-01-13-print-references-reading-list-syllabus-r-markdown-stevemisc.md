@@ -215,4 +215,4 @@ stevepubs %>% filter(YEAR == 2017) %>%  print_refs()
 #> Research Quarterly* 70(4): 790–802.
 ```
 
-There's not a lot else on top of that. I have some sister functions I wrote around this as I was experimenting with this---prominently [`filter_refs()`](http://svmiller.com/stevemisc/reference/filter_refs.html) but this should be enough to get started. Consider it the latest tool in my syllabi package, complementing [my template](http://svmiller.com/blog/2016/07/r-markdown-syllabus/) and [calendar](http://svmiller.com/blog/2020/08/a-ggplot-calendar-for-your-semester/).
+There's not a lot else on top of that. I have some sister functions I wrote around this as I was experimenting with this---prominently [`filter_refs()`](http://svmiller.com/stevemisc/reference/filter_refs.html)---but this should be enough to get started. Consider it the latest tool in my syllabi package, complementing [my template](http://svmiller.com/blog/2016/07/r-markdown-syllabus/) and [calendar](http://svmiller.com/blog/2020/08/a-ggplot-calendar-for-your-semester/).
