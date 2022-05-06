@@ -80,7 +80,7 @@ A student would then have to read the syllabus and jump to the bibliography at t
 
 Another approach would be what I've done for the past few years. This leverages [`{RefManageR}`](https://cran.r-project.org/web/packages/RefManageR/index.html), a master `.bib` file, and R Markdown. Here's a simple illustration based on [my ongoing international conflict class](http://posc3610.svmiller.com/), in which I assign the 3rd edition of [*What Do We Know About War?*](https://www.amazon.com/What-Do-Know-about-War-dp-1538140098/dp/1538140098) as well as John Vasquez' [*The War Puzzle Revisited*](https://www.amazon.com/Revisited-Cambridge-Studies-International-Relations/dp/0521708230). These are given in my convoluted `master.bib` file as "vasquez2009twp" and "mitchellvasquez2021wdwk". If I wanted to display these entries as a bibliography or reading list in my syllabus, I would do something like this. Do note that your chunk option should *always* be set to `"results='asis'"` for any of this to work.
 
-```{r, results="asis"}
+```{r}
 library(RefManageR)
 
 bib <- ReadBib("~/Dropbox/master.bib")
@@ -127,13 +127,13 @@ The workhorse function for doing what I want here is [`print_refs()`](http://svm
 From there, this is a simple matter of just executing `print_refs()`. This would format all the references in `stevepubs` into a full reading list/bibliography.
 
 
-```{r, results="asis"}
+```{r}
 stevepubs %>% print_refs()
 ```
 
 If you're working with a "master" `.bib` file, like I typically do, you probably don't want to format *all* those entries in there. However, if you've converted your `.bib` file to a data frame by way of [`{bib2df}`](https://cran.r-project.org/web/packages/bib2df/index.html), you can do some basic filtering on it to get what you want. For example, let's assume I have a week where I'm just going to assign everything of mine that was published in 2017. Here's how you'd do that.
 
-```{r, results="asis"}
+```{r}
 stevepubs %>% filter(YEAR == 2017) %>%  print_refs()
 ```
 

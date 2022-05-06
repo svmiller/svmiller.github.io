@@ -49,18 +49,17 @@ bib <- ReadBib("~/Dropbox/master.bib")
 myopts <- BibOptions(bib.style = "authoryear", style="latex", first.inits=FALSE, max.names = 20)
 
 bib[c("vasquez2009twp", "mitchellvasquez2021wdwk")]
+#> Mitchell, Sarah McLaughlin and John A. Vasquez, ed.
+#> (2021).
+#> \emph{What Do We Know about War?}
+#> 3rd ed.
+#> Lanham, MD: Rowman \& Littlefield.
+#> 
+#> Vasquez, John A
+#> (2009).
+#> \emph{The War Puzzle Revisited}.
+#> New York, NY: Cambridge University Press.
 ```
-
-Mitchell, Sarah McLaughlin and John A. Vasquez, ed.
-(2021).
-\emph{What Do We Know about War?}
-3rd ed.
-Lanham, MD: Rowman \& Littlefield.
-
-Vasquez, John A
-(2009).
-\emph{The War Puzzle Revisited}.
-New York, NY: Cambridge University Press.
 
 A few things are happening here that make this approach functional, but dissatisfying. Namely, `{RefManageR}` is limited stylistically. It can do some basic formatting, but things are just going to come out looking awkward no matter what. For one, it has no discipline-specific (for me) formatting style. I would like APSA's citation style, but I would settle for Harvard or Chicago. The best I can do is "authoryear", and importantly tell `{RefManageR}` to knock it off (to the best of my abilities) with condensing multiple authors to "et al." or initializing (sic) their names.
 
@@ -86,27 +85,27 @@ And here is what this data frame looks like.
 ```r
 stevepubs
 #> # A tibble: 19 × 12
-#>    CATEGORY     BIBTEXKEY  AUTHOR BOOKTITLE JOURNAL NUMBER PAGES PUBLISHER TITLE
-#>    <chr>        <chr>      <list> <chr>     <chr>   <chr>  <chr> <chr>     <chr>
-#>  1 ARTICLE      millergib… <chr … <NA>      Confli… 3      261-… <NA>      "Dem…
-#>  2 ARTICLE      giblereta… <chr … <NA>      Compar… 12     1655… <NA>      "Ind…
-#>  3 ARTICLE      giblermil… <chr … <NA>      Social… 5      1202… <NA>      "Com…
-#>  4 ARTICLE      giblermil… <chr … <NA>      Journa… 2      258-… <NA>      "Qui…
-#>  5 ARTICLE      miller201… <chr … <NA>      Journa… 6      677-… <NA>      "Ter…
-#>  6 ARTICLE      giblermil… <chr … <NA>      Journa… 5      634-… <NA>      "Ext…
-#>  7 ARTICLE      giblereta… <chr … <NA>      Intern… 4      719-… <NA>      "An …
-#>  8 ARTICLE      miller201… <chr … <NA>      Politi… 2      457-… <NA>      "Eco…
-#>  9 ARTICLE      miller201… <chr … <NA>      Confli… 5      526-… <NA>      "Ind…
-#> 10 ARTICLE      miller201… <chr … <NA>      Politi… 4      790-… <NA>      "The…
-#> 11 ARTICLE      miller201… <chr … <NA>      Peace … 1      <NA>  <NA>      "Ext…
-#> 12 ARTICLE      miller201… <chr … <NA>      Social… 1      272-… <NA>      "Wha…
-#> 13 ARTICLE      giblereta… <chr … <NA>      Intern… 2      476-… <NA>      "The…
-#> 14 INCOLLECTION millereta… <chr … Oxford R… <NA>    <NA>   <NA>  Oxford U… "Geo…
-#> 15 ARTICLE      millerdav… <chr … <NA>      Journa… 2      334-… <NA>      "The…
-#> 16 ARTICLE      curtismil… <chr … <NA>      Europe… 2      202-… <NA>      "A (…
-#> 17 ARTICLE      miller202… <chr … <NA>      The So… <NA>   <NA>  <NA>      "Eco…
-#> 18 ARTICLE      peacescie… <chr … <NA>      Confli… <NA>   <NA>  <NA>      "~{ …
-#> 19 ARTICLE      miller202… <chr … <NA>      Journa… <NA>   <NA>  <NA>      "A R…
+#>    CATEGORY  BIBTEXKEY  AUTHOR BOOKTITLE  JOURNAL  NUMBER PAGES PUBLISHER TITLE 
+#>    <chr>     <chr>      <list> <chr>      <chr>    <chr>  <chr> <chr>     <chr> 
+#>  1 ARTICLE   millergib… <chr … <NA>       Conflic… 3      261-… <NA>      "Demo…
+#>  2 ARTICLE   giblereta… <chr … <NA>       Compara… 12     1655… <NA>      "Indi…
+#>  3 ARTICLE   giblermil… <chr … <NA>       Social … 5      1202… <NA>      "Comp…
+#>  4 ARTICLE   giblermil… <chr … <NA>       Journal… 2      258-… <NA>      "Quic…
+#>  5 ARTICLE   miller201… <chr … <NA>       Journal… 6      677-… <NA>      "Terr…
+#>  6 ARTICLE   giblermil… <chr … <NA>       Journal… 5      634-… <NA>      "Exte…
+#>  7 ARTICLE   giblereta… <chr … <NA>       Interna… 4      719-… <NA>      "An A…
+#>  8 ARTICLE   miller201… <chr … <NA>       Politic… 2      457-… <NA>      "Econ…
+#>  9 ARTICLE   miller201… <chr … <NA>       Conflic… 5      526-… <NA>      "Indi…
+#> 10 ARTICLE   miller201… <chr … <NA>       Politic… 4      790-… <NA>      "The …
+#> 11 ARTICLE   miller201… <chr … <NA>       Peace E… 1      <NA>  <NA>      "Exte…
+#> 12 ARTICLE   miller201… <chr … <NA>       Social … 1      272-… <NA>      "What…
+#> 13 ARTICLE   giblereta… <chr … <NA>       Interna… 2      476-… <NA>      "The …
+#> 14 INCOLLEC… millereta… <chr … Oxford Re… <NA>     <NA>   <NA>  Oxford U… "Geog…
+#> 15 ARTICLE   millerdav… <chr … <NA>       Journal… 2      334-… <NA>      "The …
+#> 16 ARTICLE   curtismil… <chr … <NA>       Europea… 2      202-… <NA>      "A (S…
+#> 17 ARTICLE   miller202… <chr … <NA>       The Soc… <NA>   <NA>  <NA>      "Econ…
+#> 18 ARTICLE   peacescie… <chr … <NA>       Conflic… <NA>   <NA>  <NA>      "~{ \…
+#> 19 ARTICLE   miller202… <chr … <NA>       Journal… <NA>   <NA>  <NA>      "A Ra…
 #> # … with 3 more variables: VOLUME <chr>, YEAR <chr>, DOI <chr>
 ```
 
@@ -127,95 +126,93 @@ From there, this is a simple matter of just executing `print_refs()`. This would
 
 ```r
 stevepubs %>% print_refs()
+#> Curtis, K. Amber, and Steven V. Miller. 2021. “A (Supra)nationalist
+#> Personality? The Big Five’s Effects on Political-Territorial
+#> Identification.” *European Union Politics* 22(2): 202–26.
+#> 
+#> Gibler, Douglas M., Marc L. Hutchison, and Steven V. Miller. 2012.
+#> “Individual Identity Attachments and International Conflict: The
+#> Importance of Territorial Threat.” *Comparative Political Studies*
+#> 45(12): 1655–83.
+#> 
+#> Gibler, Douglas M., and Steven V. Miller. 2012. “Comparing the Foreign
+#> Aid Policies of Presidents Bush and Obama.” *Social Science Quarterly*
+#> 93(5): 1202–17.
+#> 
+#> ———. 2013. “Quick Victories? Territory, Democracies, and Their
+#> Disputes.” *Journal of Conflict Resolution* 57(2): 258–84.
+#> 
+#> ———. 2014. “External Territorial Threat, State Capacity, and Civil War.”
+#> *Journal of Peace Research* 51(5): 634–46.
+#> 
+#> Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. “An
+#> Analysis of the Militarized Interstate Dispute (MID) Dataset,
+#> 1816-2001.” *International Studies Quarterly* 60(4): 719–30.
+#> 
+#> ———. 2020. “The Importance of Correct Measurement.” *International
+#> Studies Quarterly* 64(2): 476–79.
+#> 
+#> Miller, Steven V. 2013. “Territorial Disputes and the Politics of
+#> Individual Well-Being.” *Journal of Peace Research* 50(6): 677–90.
+#> 
+#> ———. 2017a. “Economic Threats or Societal Turmoil? Understanding
+#> Preferences for Authoritarian Political Systems.” *Political Behavior*
+#> 39(2): 457–78.
+#> 
+#> ———. 2017b. “Individual-Level Expectations of Executive Authority Under
+#> Territorial Threat.” *Conflict Management and Peace Science* 34(5):
+#> 526–45.
+#> 
+#> ———. 2017c. “The Effect of Terrorism on Judicial Confidence.” *Political
+#> Research Quarterly* 70(4): 790–802.
+#> 
+#> ———. 2018. “External Territorial Threats and Tolerance of Corruption: A
+#> Private/Government Distinction.” *Peace Economics, Peace Science and
+#> Public Policy* 24(1).
+#> 
+#> ———. 2019. “What Americans Think about Gun Control: Evidence from the
+#> General Social Survey, 1972-2016.” *Social Science Quarterly* 100(1):
+#> 272–88.
+#> 
+#> ———. “A Random Item Response Model of External Territorial Threat,
+#> 1816-2010.” *Journal of Global Security Studies*.
+#> 
+#> ———. “Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes
+#> Toward Immigration in the U.S. From 1992 to 2017.” *The Social Science
+#> Journal*.
+#> 
+#> ———. “ <span class="nocase"> {}peacesciencer{}</span>: An R Package for
+#> Quantitative Peace Science Research.” *Conflict Management and Peace
+#> Science*.
+#> 
+#> Miller, Steven V., and Nicholas T. Davis. 2021. “The Effect of White
+#> Social Prejudice on Support for American Democracy.” *Journal of Race,
+#> Ethnicity, and Politics* 6(2): 334–51.
+#> 
+#> Miller, Steven V., and Doublas M. Gibler. 2011. “Democracies, Territory,
+#> and Negotiated Compromises.” *Conflict Management and Peace Science*
+#> 28(3): 261–79.
+#> 
+#> Miller, Steven V., Jaroslav Tir, and John A. Vasquez. 2020. “Geography,
+#> Territory, and Conflict.” In *Oxford Research Encyclopedia of
+#> International Studies*, Oxford University Press.
 ```
-
-Curtis, K. Amber, and Steven V. Miller. 2021. “A (Supra)nationalist
-Personality? The Big Five’s Effects on Political-Territorial
-Identification.” *European Union Politics* 22(2): 202–26.
-
-Gibler, Douglas M., Marc L. Hutchison, and Steven V. Miller. 2012.
-“Individual Identity Attachments and International Conflict: The
-Importance of Territorial Threat.” *Comparative Political Studies*
-45(12): 1655–83.
-
-Gibler, Douglas M., and Steven V. Miller. 2012. “Comparing the Foreign
-Aid Policies of Presidents Bush and Obama.” *Social Science Quarterly*
-93(5): 1202–17.
-
-———. 2013. “Quick Victories? Territory, Democracies, and Their
-Disputes.” *Journal of Conflict Resolution* 57(2): 258–84.
-
-———. 2014. “External Territorial Threat, State Capacity, and Civil War.”
-*Journal of Peace Research* 51(5): 634–46.
-
-Gibler, Douglas M., Steven V. Miller, and Erin K. Little. 2016. “An
-Analysis of the Militarized Interstate Dispute (MID) Dataset,
-1816-2001.” *International Studies Quarterly* 60(4): 719–30.
-
-———. 2020. “The Importance of Correct Measurement.” *International
-Studies Quarterly* 64(2): 476–79.
-
-Miller, Steven V. 2013. “Territorial Disputes and the Politics of
-Individual Well-Being.” *Journal of Peace Research* 50(6): 677–90.
-
-———. 2017a. “Economic Threats or Societal Turmoil? Understanding
-Preferences for Authoritarian Political Systems.” *Political Behavior*
-39(2): 457–78.
-
-———. 2017b. “Individual-Level Expectations of Executive Authority Under
-Territorial Threat.” *Conflict Management and Peace Science* 34(5):
-526–45.
-
-———. 2017c. “The Effect of Terrorism on Judicial Confidence.” *Political
-Research Quarterly* 70(4): 790–802.
-
-———. 2018. “External Territorial Threats and Tolerance of Corruption: A
-Private/Government Distinction.” *Peace Economics, Peace Science and
-Public Policy* 24(1).
-
-———. 2019. “What Americans Think about Gun Control: Evidence from the
-General Social Survey, 1972-2016.” *Social Science Quarterly* 100(1):
-272–88.
-
-———. “A Random Item Response Model of External Territorial Threat,
-1816-2010.” *Journal of Global Security Studies*.
-
-———. “Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes
-Toward Immigration in the U.S. From 1992 to 2017.” *The Social Science
-Journal*.
-
-———. “ <span class="nocase"> {peacesciencer}</span>: An R Package for
-Quantitative Peace Science Research.” *Conflict Management and Peace
-Science*.
-
-Miller, Steven V., and Nicholas T. Davis. 2021. “The Effect of White
-Social Prejudice on Support for American Democracy.” *Journal of Race,
-Ethnicity, and Politics* 6(2): 334–51.
-
-Miller, Steven V., and Doublas M. Gibler. 2011. “Democracies, Territory,
-and Negotiated Compromises.” *Conflict Management and Peace Science*
-28(3): 261–79.
-
-Miller, Steven V., Jaroslav Tir, and John A. Vasquez. 2020. “Geography,
-Territory, and Conflict.” In *Oxford Research Encyclopedia of
-International Studies*, Oxford University Press.
 
 If you're working with a "master" `.bib` file, like I typically do, you probably don't want to format *all* those entries in there. However, if you've converted your `.bib` file to a data frame by way of [`{bib2df}`](https://cran.r-project.org/web/packages/bib2df/index.html), you can do some basic filtering on it to get what you want. For example, let's assume I have a week where I'm just going to assign everything of mine that was published in 2017. Here's how you'd do that.
 
 
 ```r
 stevepubs %>% filter(YEAR == 2017) %>%  print_refs()
+#> Miller, Steven V. 2017a. “Economic Threats or Societal Turmoil?
+#> Understanding Preferences for Authoritarian Political Systems.”
+#> *Political Behavior* 39(2): 457–78.
+#> 
+#> ———. 2017b. “Individual-Level Expectations of Executive Authority Under
+#> Territorial Threat.” *Conflict Management and Peace Science* 34(5):
+#> 526–45.
+#> 
+#> ———. 2017c. “The Effect of Terrorism on Judicial Confidence.” *Political
+#> Research Quarterly* 70(4): 790–802.
 ```
-
-Miller, Steven V. 2017a. “Economic Threats or Societal Turmoil?
-Understanding Preferences for Authoritarian Political Systems.”
-*Political Behavior* 39(2): 457–78.
-
-———. 2017b. “Individual-Level Expectations of Executive Authority Under
-Territorial Threat.” *Conflict Management and Peace Science* 34(5):
-526–45.
-
-———. 2017c. “The Effect of Terrorism on Judicial Confidence.” *Political
-Research Quarterly* 70(4): 790–802.
 
 There's not a lot else on top of that. I have some sister functions I wrote around this as I was experimenting with this---prominently [`filter_refs()`](http://svmiller.com/stevemisc/reference/filter_refs.html) but this should be enough to get started. Consider it the latest tool in my syllabi package, complementing [my template](http://svmiller.com/blog/2016/07/r-markdown-syllabus/) and [calendar](http://svmiller.com/blog/2020/08/a-ggplot-calendar-for-your-semester/).
