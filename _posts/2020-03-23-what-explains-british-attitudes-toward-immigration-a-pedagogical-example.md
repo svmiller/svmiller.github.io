@@ -452,10 +452,10 @@ What emerges in the linear regression context is a **t-statistic**, which is a c
 
 More importantly, the process of inference is exactly the same. Divide the regression coefficient over the standard error. If the absolute value of that is about 1.96, you can reject the proposed claim of zero effect and substitute that your negative or positive relationship is closer to what the true effect in the population is.
 
-`tidy()` from the `broom` package will do this for us, fortunately. Some extra code I hide will make it prettier to view. I'll also omit the constant (or *y*-intercept) from this because the constant or *y*-intercept is just the estimate of *y* when all predictors are set to zero.
+`tidy()` from the `{broom}` package will do this for us, fortunately. Some extra code I hide will make it prettier to view. I'll also omit the constant (or *y*-intercept) from this because the constant or *y*-intercept is just the estimate of *y* when all predictors are set to zero.
 
 ```r
-tidyM1 <- tidy(M1) # from the broom package
+tidyM1 <- tidy(M1) # from the {broom} package
 tidyM1
 ```
 
@@ -554,7 +554,6 @@ ESS9GB %>%
          z_lrscale = r2sd(lrscale)) -> ESS9GB
 
 M2 <- lm(immigsent ~ z_agea + female + z_eduyrs + uempla + z_hinctnta  + z_lrscale, data=ESS9GB)
-
 ```
 
 The results from the regression does offer some preliminary evidence that the years of education variable has the strongest magnitude effect. It is also the most precise. On a common scale, the absolute value of the effects of ideology and household income look comparable as well whereas that may not have been obvious in the unstandardized model.
