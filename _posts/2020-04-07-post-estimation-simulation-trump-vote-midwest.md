@@ -15,6 +15,8 @@ categories:
 image: "2015-anti-trump-rally-chicago.jpg"
 ---
 
+
+
 {% include image.html url="/images/2015-anti-trump-rally-chicago.jpg" caption="Demonstrators hold up a piñata of Republican Presidential candidate Donald Trump during a protest on October 12, 2015 in Chicago, Illinois. (GETTY IMAGES)" width=400 align="right" %}
 
 Reading quantitative articles from 20-30 years is a treat because it highlights how little was required of authors conducting and reporting statistical analyses. There are exceptions, of course; [Dixon's (1994) article](https://www.cambridge.org/core/journals/american-political-science-review/article/democracy-and-the-peaceful-settlement-of-international-conflict/414774D3152349AFA09CB284FC993005) linking democratic peace with peaceful conflict resolution is an exemplar on this front and others for someone versed in IR scholarship. However, it used to be enough to run a garden variety linear model (or generalized linear model, if you were feeling fancy), interpret the statistical significance of the results as they pertained to a pet hypothesis of interest, and call it a day.
@@ -116,7 +118,7 @@ Nothing here is terribly surprising or novel in this model, yet the summary of t
 
 This person clearly cannot exist. No one is zero-years-old in a survey of adults. The partisanship and ideology estimates are outside the bounds of the scale. However, the model is still trying to find an estimate for this hypothetical person because the constant/$$y$$-intercept is part of the model. You can choose to suppress this parameter, either in the model or in the presentation of it. More often than not, though, it's there and the lay reader will want to interpret it. Think of this as the regression modeler's equivalent of [Chekhov's gun](https://en.wikipedia.org/wiki/Chekhov%27s_gun). Regression modeling is also storytelling. If you're going to include it, you damn well better prepare yourself to explain it.
 
-A related limitation emerges in trying to compare coefficients. The largest coefficient in the model is the cognitive racism variable, but is that truly the largest "effect?" On absolute terms, is the negative effect of college education equivalent to partisanship? The answer here should be clearly "no, of course not." Partisanship is invariably going to be the largest effect in any model of partisan vote choice in the U.S. [Racism may have played an outsized role](https://www.vox.com/policy-and-politics/2018/10/16/17980820/trump-obama-2016-race-racism-class-economy-2018-midterm) in the 2016 presidential election, but partisanship is still going to be the biggest mover here. However, almost all variables share different scales. Age ranges from 18 to 92. The college education variable can only be 0 and 1. You can't compare coefficients under these circumstances even as you may really want to do this.
+A related limitation emerges in trying to compare coefficients. The largest coefficient in the model is the cognitive racism variable, but is that truly the largest "effect?" On absolute terms, is the negative effect of college education equivalent to partisanship? The answer here should be clearly "no, of course not." Partisanship is invariably going to be the largest effect in any model of partisan vote choice in the U.S. [Racism may have played an outsized role](https://www.vox.com/policy-and-politics/2018/10/16/17980820/trump-obama-2016-race-racism-class-economy-2018-midterm) in the 2016 presidential election, but partisanship is still going to be the biggest mover here. However, almost all variables have different scales. Age ranges from 18 to 92. The college education variable can only be 0 and 1. You can't compare coefficients under these circumstances even as you may really want to do this.
 
 <!-- After all, the coefficient communicates the effect of a one-unit increase in $$x$$ on the estimated (natural logged odds) of $$y$$. Does that make cognitive racism the largest effect? -->
 
@@ -124,7 +126,7 @@ A related limitation emerges in trying to compare coefficients. The largest coef
 
 Gelman and Hill (2007) (see also: [Gelman (2008)](http://www.stat.columbia.edu/~gelman/research/published/standardizing7.pdf)) propose a novel modeling hack here. Take any non-binary input and scale it by two standard deviations instead of just one. Scaling by one standard deviation creates [the familiar *z*-score](http://svmiller.com/blog/2020/03/normal-distribution-central-limit-theorem-inference/) where an individual observation is subtracted from the mean and divided by a standard unit (here: the standard deviation). This rescales the variable to have a mean of 0 and a standard deviation of 1. Dividing by *two* standard deviations creates a scaled variable where the mean is 0 and the standard deviation is .5. The benefits of this approach are multiple.
 
-First, coefficients no longer communciate the effect of a raw, one-unit change in $$x$$ on $$y$$. Instead, the coefficients are magnitude effects. They communicate the effect of a change across approximately 47.7% of the distribution of the independent variable. Sometimes this is what you want. In other words, do you care about the change in the natural logged odds of voting for Donald Trump for going from a 20-year-old to a 21-year-old? Or the effect of going from a 33-year-old Millennial (roughly a standard deviation below the mean) to a 66-year-old Boomer (roughly a standard deviation above the mean)? For me, it'd be the latter and scaling by two standard deviations can help you get a glimpse of that from the model summary.
+First, coefficients no longer communicate the effect of a raw, one-unit change in $$x$$ on $$y$$. Instead, the coefficients are magnitude effects. They communicate the effect of a change across approximately 47.7% of the distribution of the independent variable. Sometimes this is what you want. In other words, do you care about the change in the natural logged odds of voting for Donald Trump for going from a 20-year-old to a 21-year-old? Or the effect of going from a 33-year-old Millennial (roughly a standard deviation below the mean) to a 66-year-old Boomer (roughly a standard deviation above the mean)? For me, it'd be the latter and scaling by two standard deviations can help you get a glimpse of that from the model summary.
 
 Second, the constant/$$y$$-intercept is now meaningful. It becomes, in this case, the natural logged odds of voting for Donald Trump for what amounts to a plausible "typical" case. In our model, this is the white respondent without a college diploma of average age, income, social/political values, and who is not a born-again Christian. This person will actually exist.
 
@@ -285,7 +287,7 @@ From there, my `get_sims()` function will ask for, in order, the statistical mod
 SimsM3 <- get_sims(M3, newdatM3, 1000, 8675309)
 
 SimsM3
-#> # A tibble: 2,000 x 2
+#> # A tibble: 2,000 × 2
 #>           y   sim
 #>       <dbl> <dbl>
 #>  1 -0.156       1
@@ -316,7 +318,7 @@ newdatM3 %>%
 
 SimsM3 %>%
   dplyr::select(y, sim, bornagain)
-#> # A tibble: 2,000 x 3
+#> # A tibble: 2,000 × 3
 #>        y   sim bornagain
 #>    <dbl> <dbl>     <dbl>
 #>  1 0.461     1         0
@@ -397,7 +399,7 @@ Data %>% # Note: I could recode the scaled stuff to be 0 but modelr will just re
 
 SimM2 <- get_sims(M2, newdatM2, 1000, 8675309)
 SimM2
-#> # A tibble: 14,000 x 2
+#> # A tibble: 14,000 × 2
 #>          y   sim
 #>      <dbl> <dbl>
 #>  1 -2.53       1
@@ -426,7 +428,7 @@ newdatM2 %>%
   dplyr::select(y, sim, z_pid7na, z_lcograc) -> SimM2
 
 SimM2
-#> # A tibble: 14,000 x 4
+#> # A tibble: 14,000 × 4
 #>         y   sim z_pid7na z_lcograc
 #>     <dbl> <dbl>    <dbl>     <dbl>
 #>  1 0.0736     1  -0.679          0
@@ -459,7 +461,7 @@ SimM2 %>%
          pidcat = fct_inorder(pidcat)) -> SimM2
 
 SimM2
-#> # A tibble: 14,000 x 6
+#> # A tibble: 14,000 × 6
 #>         y   sim z_pid7na z_lcograc pid7na pidcat                 
 #>     <dbl> <dbl>    <dbl>     <dbl>  <int> <fct>                  
 #>  1 0.0736     1  -0.679          0      1 Strong Democrat        
