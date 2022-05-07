@@ -1,7 +1,7 @@
 .wp-caption {
-background-color: #f3f3f3;
+background-color: $su-sky20;
 text-align: center;
-border: 1px dotted $clemson-purple;
+border: 1px dotted $su-blue;
 	font-size: 0.90em;
 	overflow: hidden;
 	position: relative;
@@ -10,7 +10,7 @@ border: 1px dotted $clemson-purple;
 
 .wp-caption dd {
         color: #000000;
-	background-color: #f3f3f3;
+	background-color: $su-sky20;
 	font-size: .9em;
 	padding: 2px 8px 3px 8px;
 	margin: 1px 0 0 0;

@@ -14,7 +14,7 @@
 	font-weight: bold;
 	color: #fff;
 	border-bottom: 1px #ddd solid;
-	background: $clemson-purple;
+	background: $su-blue;
 	padding: 7px 3px 7px 10px
 }
 
@@ -25,7 +25,7 @@
 }
 
 #stevetable tr:nth-child(even) {background: #f9f9f9}
-#stevetable tr:nth-child(odd) {background: #fdfdfd}
+#stevetable tr:nth-child(odd) {background: $background-color}
 
 
 #stargazer table {

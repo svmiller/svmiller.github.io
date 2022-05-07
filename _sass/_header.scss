@@ -3,9 +3,9 @@
  */
 .site-header {
     border-top: 0px solid $grey-color-dark;
-	border-bottom: 4px solid $clemson-purple;
+	border-bottom: 4px solid $su-water;
     min-height: 56px;
-    background: $clemson-orange;
+    background: $su-blue;
     // Positioning context for the mobile navigation icon
     position: relative;
 
@@ -82,16 +82,16 @@
 	letter-spacing: 0;
 	line-height: 1.2em;
 	padding: 4px 10px;
-color: $clemson-purple;
+color: $su-blue;
 
 }
 
 .site-nav .sub-menu a:hover {
-	color: $clemson-orange;
+	/* color: $clemson-orange; */
 }
 .site-nav  .sub-menu {
 	background: #ffffff;
-	border-color: $clemson-purple;
+	border-color: $su-blue;
 	min-width: 265px;
 
 	z-index:2147483647;
@@ -157,7 +157,7 @@ z-index:999;
 
     .page-link {
         color: #ffffff;
-    background: $clemson-orange;
+    /* background: $clemson-orange; */
         line-height: $base-line-height;
 
         // Gaps between nav items, but not on the first one

@@ -184,7 +184,7 @@ h1 /* .post-title */ {
     letter-spacing: -1px;
     line-height: 1;
 		font-family: 'Titillium Web', sans-serif;
-		color: $clemson-purple;
+		color: $su-blue;
 
     @include media-query($on-laptop) {
 /*        font-size: 36px; */
@@ -250,7 +250,7 @@ ul.listing li.listing-item time {
 }
 
 ul.listing li.listing-item a {
-	color: $clemson-purple;
+	color: $su-blue;
 	font-weight: 400;
 	font-family: 'Titillium Web', sans-serif;
 }
@@ -271,7 +271,7 @@ ul#archive li {
 }
 
 ul#archive li:nth-child(even) { background: #f9f9f9; }
-ul#archive li:nth-child(odd) { background: #fdfdfd; }
+ul#archive li:nth-child(odd) { background: $background-color; }
 
 ul#archive  h2 {
 	padding-top: .5em }
@@ -291,7 +291,7 @@ ul#archive li.alt {
 }
 
 ul#archive li span a {
-       color: $clemson-purple;
+       color: $su-blue;
 	font-weight: bold;
 font-family: 'Titillium Web', sans-serif;
 }
