@@ -329,7 +329,7 @@ And here's what they would look like. You can see a clear positive relationship 
 ```
 #> Error: Problem with `mutate()` column `perc`.
 #> ℹ `perc = ifelse(!is.na(perc), paste0(mround2(perc), "%"), NA)`.
-#> ✖ could not find function "mround2"
+#> x could not find function "mround2"
 #> ℹ The error occurred in group 1: prestgf = "20-29".
 ```
 

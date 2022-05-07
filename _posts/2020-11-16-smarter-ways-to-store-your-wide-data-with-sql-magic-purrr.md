@@ -16,10 +16,18 @@ image: "postgres.jpg"
 
 
 
+```
+#> Error: could not connect to server: No such file or directory
+#> 	Is the server running locally and accepting
+#> 	connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+#> Error: could not connect to server: No such file or directory
+#> 	Is the server running locally and accepting
+#> 	connections on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+```
 
 {% include image.html url="/images/postgres.jpg" caption="Postgres is a pretty powerful relational database system." width=350 align="right" %}
 
-*Last updated: 19 June 2021. The function described here is now [`db_lselect()`](http://svmiller.com/stevemisc/reference/db_lselect.html) in [`{stevemisc}`](http://svmiller.com/stevemisc/). You can download this package on CRAN.*
+*Last updated:  7 May 2022. The function described here is now [`db_lselect()`](http://svmiller.com/stevemisc/reference/db_lselect.html) in [`{stevemisc}`](http://svmiller.com/stevemisc/). You can download this package on CRAN.*
 
 
 For some time, I've wrestled with how to elegantly store two data sets I use a great deal in my own research or navel-gazing. The first is the General Social Survey (GSS) and the second is the World Values Survey (WVS). The GSS contains 32 survey waves, done roughly every two years, spanning 1972 and 2018 in the United States. The temporal reach of the data are broadly useful for tracking trends in public opinion over time, but different questions come and go at different points in time. The data as I have it are not particularly long (64,814 rows), but they are *very* wide (6,108 columns). The data are well-annotated with variable labels too, which compounds how tedious it is to load and explore. The WVS (v. 1-6) is similarly gnarly to load. The data contains surveys of roughly 100 countries in 28 different years spanning 1981 to 2009. The data are mercifully more standardized across countries and waves than the GSS, but, at 348,532 rows and 1,445 columns, they too are tedious to load and explore. To this point, my experiences have suggested to say nuts to the native formats of these data and save them [as R serialized data frames](http://svmiller.com/blog/2019/01/how-should-you-store-load-bigger-data-sets-wvs/) or [serialize them with the `{qs}` package](http://svmiller.com/blog/2020/02/comparing-qs-fst-rds-for-bigger-datasets/).
@@ -178,38 +186,7 @@ From there, the real benefits of relational databases and `{dplyr}`'s interface 
 
 ```r
 tbl(wvspgcon, "6")
-#> # Source:   table<6> [?? x 399]
-#> # Database: postgres [steve@/var/run/postgresql:5432/wvs]
-#>     s001  s002    uid  s003 s003a  s006    s007  s007_01 s009  s009a  s012  s013
-#>    <dbl> <dbl>  <int> <dbl> <dbl> <dbl>   <dbl>    <dbl> <chr> <chr> <dbl> <dbl>
-#>  1     2     6 258968    12    12     1  1.21e8   1.21e8 "   … -4       NA     2
-#>  2     2     6 258969    12    12     2  1.21e8   1.21e8 "   … -4       NA     1
-#>  3     2     6 258970    12    12     3  1.21e8   1.21e8 "   … -4       NA     1
-#>  4     2     6 258971    12    12     4  1.21e8   1.21e8 "   … -4       NA     2
-#>  5     2     6 258972    12    12     5  1.21e8   1.21e8 "   … -4       NA     1
-#>  6     2     6 258973    12    12     6  1.21e8   1.21e8 "   … -4       NA     3
-#>  7     2     6 258974    12    12     7  1.21e8   1.21e8 "   … -4       NA     2
-#>  8     2     6 258975    12    12     8  1.21e8   1.21e8 "   … -4       NA     2
-#>  9     2     6 258976    12    12     9  1.21e8   1.21e8 "   … -4       NA     2
-#> 10     2     6 258977    12    12    10  1.21e8   1.21e8 "   … -4       NA     1
-#> # … with more rows, and 387 more variables: s013b <dbl>, s016 <dbl>,
-#> #   s017 <dbl>, s017a <dbl>, s018 <dbl>, s018a <dbl>, s019 <dbl>, s019a <dbl>,
-#> #   s020 <dbl>, s021 <dbl>, s021a <dbl>, s024 <dbl>, s024a <dbl>, s025 <dbl>,
-#> #   s025a <dbl>, a001 <dbl>, a002 <dbl>, a003 <dbl>, a004 <dbl>, a005 <dbl>,
-#> #   a006 <dbl>, a008 <dbl>, a009 <dbl>, a029 <dbl>, a030 <dbl>, a032 <dbl>,
-#> #   a034 <dbl>, a035 <dbl>, a038 <dbl>, a039 <dbl>, a040 <dbl>, a041 <dbl>,
-#> #   a042 <dbl>, a043_f <dbl>, a043b <dbl>, a098 <dbl>, a099 <dbl>, a100 <dbl>,
-#> #   a101 <dbl>, a102 <dbl>, a103 <dbl>, a104 <dbl>, a105 <dbl>, a106 <dbl>,
-#> #   a106b <dbl>, a106c <dbl>, a124_02 <dbl>, a124_03 <dbl>, a124_06 <dbl>,
-#> #   a124_07 <dbl>, a124_08 <dbl>, a124_09 <dbl>, a124_12 <dbl>, a124_17 <dbl>,
-#> #   a124_42 <dbl>, a124_43 <dbl>, a165 <dbl>, a168 <dbl>, a168a <dbl>,
-#> #   a170 <dbl>, a173 <dbl>, a189 <dbl>, a190 <dbl>, a191 <dbl>, a192 <dbl>,
-#> #   a193 <dbl>, a194 <dbl>, a195 <dbl>, a196 <dbl>, a197 <dbl>, a198 <dbl>,
-#> #   a199 <dbl>, a200 <dbl>, a201 <dbl>, a202 <dbl>, a203 <dbl>, a204 <dbl>,
-#> #   a205 <dbl>, a206 <dbl>, a207 <dbl>, a208 <dbl>, a209 <dbl>, a210 <dbl>,
-#> #   a211 <dbl>, a212 <dbl>, a222 <dbl>, a213 <dbl>, a214 <dbl>, a215 <dbl>,
-#> #   a216 <dbl>, a217 <dbl>, a218 <dbl>, a219 <dbl>, a220 <dbl>, a221 <dbl>,
-#> #   b008 <dbl>, b030 <dbl>, b031 <dbl>, c001 <dbl>, c002 <dbl>, …
+#> Error in tbl(wvspgcon, "6"): object 'wvspgcon' not found
 ```
 
 `{dplyr}`'s interface with relational databases like PostgreSQL is not exhaustive, but it is pretty comprehensive. For example, I could see how many countries are in the first and sixth survey wave.
@@ -220,12 +197,12 @@ tbl(wvspgcon, "1") %>%
   # s003 = country code
   select(s003) %>%
   distinct(s003) %>% pull() %>% length()
-#> [1] 10
+#> Error in tbl(wvspgcon, "1"): object 'wvspgcon' not found
 
 tbl(wvspgcon, "6") %>%
   select(s003) %>%
   distinct(s003) %>% pull() %>% length()
-#> [1] 60
+#> Error in tbl(wvspgcon, "6"): object 'wvspgcon' not found
 ```
 
 Now, it's time to do the same with the GSS data. Here, though, the tables in the database are named by the survey year.
@@ -271,23 +248,10 @@ waves %>%
       select(uid, s002, s003, s020, f120)
   }) %>%
   reduce(function(x, y) union(x, y)) -> f120_query
+#> Error in tbl(wvspgcon, .x): object 'wvspgcon' not found
 
 f120_query
-#> # Source:   lazy query [?? x 5]
-#> # Database: postgres [steve@/var/run/postgresql:5432/wvs]
-#>       uid  s002  s003  s020  f120
-#>     <int> <dbl> <dbl> <dbl> <dbl>
-#>  1 339053     6   840  2011     1
-#>  2 337342     6   840  2011     6
-#>  3 112198     3   840  1995     3
-#>  4 112244     3   840  1995     9
-#>  5 171210     4   840  1999     3
-#>  6 113216     3   840  1995     3
-#>  7 337527     6   840  2011     7
-#>  8  13513     1   840  1981     8
-#>  9 253940     5   840  2006     1
-#> 10 337960     6   840  2011     8
-#> # … with more rows
+#> Error in eval(expr, envir, enclos): object 'f120_query' not found
 ```
 
 If you'd like, you can see underlying SQL query here.
@@ -295,30 +259,7 @@ If you'd like, you can see underlying SQL query here.
 
 ```r
 show_query(f120_query)
-#> <SQL>
-#> (((((SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "1"
-#> WHERE ("s003" = 840.0))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "2"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "3"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "4"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "5"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "6"
-#> WHERE ("s003" = 840.0))
+#> Error in show_query(f120_query): object 'f120_query' not found
 ```
 
 You could do a few more SQL operations within `{dplyr}`/`{dbplyr}` syntax.
@@ -328,45 +269,13 @@ You could do a few more SQL operations within `{dplyr}`/`{dbplyr}` syntax.
 f120_query %>%
   group_by(s020) %>%
   summarize(mean_aj = mean(f120)) -> query_aj_mean
+#> Error in group_by(., s020): object 'f120_query' not found
 
 query_aj_mean
-#> # Source:   lazy query [?? x 2]
-#> # Database: postgres [steve@/var/run/postgresql:5432/wvs]
-#>    s020 mean_aj
-#>   <dbl>   <dbl>
-#> 1  1981    3.52
-#> 2  1995    3.90
-#> 3  1999    4.36
-#> 4  2006    4.46
-#> 5  2011    4.81
+#> Error in eval(expr, envir, enclos): object 'query_aj_mean' not found
 
 show_query(query_aj_mean)
-#> <SQL>
-#> SELECT "s020", AVG("f120") AS "mean_aj"
-#> FROM ((((((SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "1"
-#> WHERE ("s003" = 840.0))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "2"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "3"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "4"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "5"
-#> WHERE ("s003" = 840.0)))
-#> UNION
-#> (SELECT "uid", "s002", "s003", "s020", "f120"
-#> FROM "6"
-#> WHERE ("s003" = 840.0))) "q01"
-#> GROUP BY "s020"
+#> Error in show_query(query_aj_mean): object 'query_aj_mean' not found
 ```
 
 More important, when you're done with the SQL side of things and you want to get more into the stuff for which you need full R functionality, you can use the `collect()` function on these data and proceed from there. Here, let's show you can get basic percentages of responses in a particular category for a given survey year. The following code will do the important stuff, though code I hide after the fact will format the data into a graph.
@@ -380,33 +289,23 @@ f120_query %>%
   group_by(s020) %>%
   mutate(tot = sum(n),
          perc = n/tot,
-         # mround is in stevemisc
+         # mround is in {stevemisc}
          lab = paste0(mround(perc),"%"))
-#> # A tibble: 50 x 6
-#> # Groups:   s020 [5]
-#>     s020  f120     n   tot   perc lab   
-#>    <dbl> <dbl> <int> <int>  <dbl> <chr> 
-#>  1  1981     1   975  2277 0.428  42.82%
-#>  2  1981     2   132  2277 0.0580 5.8%  
-#>  3  1981     3   154  2277 0.0676 6.76% 
-#>  4  1981     4   119  2277 0.0523 5.23% 
-#>  5  1981     5   426  2277 0.187  18.71%
-#>  6  1981     6   108  2277 0.0474 4.74% 
-#>  7  1981     7    99  2277 0.0435 4.35% 
-#>  8  1981     8   110  2277 0.0483 4.83% 
-#>  9  1981     9    55  2277 0.0242 2.42% 
-#> 10  1981    10    99  2277 0.0435 4.35% 
-#> # … with 40 more rows
+#> Error in collect(.): object 'f120_query' not found
 ```
 
 
-![plot of chunk abortion-attitudes-united-states-wvs-1981-2011](/images/smarter-ways-to-store-your-wide-data-with-sql-magic-purrr/abortion-attitudes-united-states-wvs-1981-2011-1.png)
+
+```
+#> Error in collect(.): object 'f120_query' not found
+```
 
 Helpfully, you can also use `{dplyr}` syntax to do even lazier queries. Here's one example in the GSS data. The GSS has periodically asked its respondents [this interesting question](https://gssdataexplorer.norc.org/variables/590/vshow) (`fepres`): "If your party nominated a woman for President, would you vote for her if she were qualified for the job?". There is a lot to unpack here. It's an interesting question to ask and, helpfully, the GSS made sure to qualify the question with "your party." The GSS asked it in most survey waves between 1972 and 2010, but not since 2010. Let's grab it. Let's also grab the data for whether the respondent believes the United States is spending too little, about the right amount, or too much on highways and bridges (`natroad`). This was asked every survey year from 1984 to 2018. I'm not going to do anything with this data, but I'm going to use it to emphasize how lazy of a query you can do here thanks to `{dplyr}`.
 
 
 ```r
 all_years <- DBI::dbListTables(gsspgcon)
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbListTables': object 'gsspgcon' not found
 
 all_years %>%
   map(~{
@@ -414,6 +313,7 @@ all_years %>%
     select(one_of("year", "uid", "fepres", "natroad"))
   }) %>%
   reduce(function(x, y) union(x, y)) -> gss_query
+#> Error in map(., ~{: object 'all_years' not found
 ```
 
 This will produce warnings, but the use of `one_of()` in the `select()` function means the warnings will just advise you about data unavailability. We knew that would happen and did it by design. Here's the ensuing output. Observe that the use of `one_of()` in `select()`, alongside other `{dplyr}` mechanics, just created NAs for cases where one of the two variables was not asked in one of the survey waves.
@@ -421,22 +321,7 @@ This will produce warnings, but the use of `one_of()` in the `select()` function
 
 ```r
 gss_query %>% arrange(year, uid)
-#> # Source:     lazy query [?? x 4]
-#> # Database:   postgres [steve@/var/run/postgresql:5432/gss]
-#> # Ordered by: year, uid
-#>     year   uid fepres natroad
-#>    <dbl> <int>  <dbl>   <dbl>
-#>  1  1972     1      1      NA
-#>  2  1972     2      2      NA
-#>  3  1972     3      1      NA
-#>  4  1972     4      1      NA
-#>  5  1972     5      1      NA
-#>  6  1972     6      2      NA
-#>  7  1972     7      1      NA
-#>  8  1972     8      1      NA
-#>  9  1972     9      1      NA
-#> 10  1972    10      1      NA
-#> # … with more rows
+#> Error in arrange(., year, uid): object 'gss_query' not found
 ```
 
 Likewise, when you've finished your query, use `collect()` to more fully use R's functionality to do data analysis.
@@ -459,7 +344,10 @@ gss_query %>%
          perc = n/tot)
 ```
 
-![plot of chunk gss-would-vote-for-a-women-for-president](/images/smarter-ways-to-store-your-wide-data-with-sql-magic-purrr/gss-would-vote-for-a-women-for-president-1.png)
+
+```
+#> Error in collect(.): object 'gss_query' not found
+```
 
 The goal of this post is more about the method than the substance. Here's how I'd recommend storing your wide/tedious-to-load data as tables in a relational database. `{dplyr}` and `{purrr}` can get a lot out of these databases with just a little bit of code and knowledge about the underlying data. There's more I can/should do here (e.g. stripping out the "Inapplicables" as missing data in the GSS), but you may find this useful. It's a smart way to store your bigger data sets in the social/political sciences so you can explore them as quickly and conveniently as possible. You can also learn a bit more about SQL syntax along the way.
 
@@ -468,5 +356,7 @@ When you're done, remember to "disconnect" from the database.
 
 ```r
 DBI::dbDisconnect(wvspgcon)
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbDisconnect': object 'wvspgcon' not found
 DBI::dbDisconnect(gsspgcon)
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'conn' in selecting a method for function 'dbDisconnect': object 'gsspgcon' not found
 ```

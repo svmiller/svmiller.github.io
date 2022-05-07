@@ -99,7 +99,6 @@ Cal %>%
   ggplot(.,aes(wkdy, week)) +
   # custom theme stuff below
   theme_steve_web() + 
-  post_bg() +
   # geom_tile and facet_wrap will do all the heavy lifting
   geom_tile(alpha=0.8, aes(fill=category), color="black") +
   facet_wrap(~mon, scales="free_x", ncol=3) +

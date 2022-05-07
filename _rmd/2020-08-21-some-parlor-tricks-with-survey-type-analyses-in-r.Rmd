@@ -393,7 +393,7 @@ popmeansBoot %>%
   bind_rows(., popmeansSurv) %>%
   mutate(cat = forcats::fct_relevel(cat, "Naive Summary", "Survey Design", "Bootstrapped")) %>%
   ggplot(.,aes(method, mean, ymin=lb, ymax=ub)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   facet_wrap(~cat) +
   geom_pointrange() +
   coord_flip() +
@@ -544,7 +544,7 @@ submeansBoot %>%
          schooltype = forcats::fct_relevel(schooltype, "Elementary School", "Middle School", "High School"))  %>%
     left_join(., schoolmeans) %>%
   ggplot(.,aes(method, mean, ymin=lb, ymax=ub, color=schooltype, shape = schooltype)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_hline(data = schoolmeans, aes(yintercept = actualmean), linetype="dashed") +
   facet_wrap(~cat+schooltype) +
   scale_colour_brewer(palette = "Set1") +
@@ -662,7 +662,7 @@ regBootsums %>%
 regSums %>%
   rename(se = `std.error`) %>%
   ggplot(.,aes(method, estimate, ymin=estimate - p_z(.1)*se, ymax=estimate + p_z(.1)*se, color=method, shape = method)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_hline(data = regSums, aes(yintercept = trueeffect), linetype="dashed") +
   geom_pointrange(position = position_dodge(width = .3), size=.6) +
   coord_flip() +
@@ -794,7 +794,7 @@ regBootsums %>%
 regSums %>%
   rename(se = `std.error`) %>%
   ggplot(.,aes(method, estimate, ymin=estimate - p_z(.1)*se, ymax=estimate + p_z(.1)*se, color=method, shape = method)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_hline(data = regSums, aes(yintercept = trueeffect), linetype="dashed") +
   geom_pointrange(position = position_dodge(width = .3), size=.6) +
   coord_flip() +

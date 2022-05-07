@@ -270,7 +270,7 @@ f120_query %>%
   group_by(s020) %>%
   mutate(tot = sum(n),
          perc = n/tot,
-         # mround is in stevemisc
+         # mround is in {stevemisc}
          lab = paste0(mround(perc),"%"))
 ```
 
@@ -283,11 +283,11 @@ f120_query %>%
   group_by(s020) %>%
   mutate(tot = sum(n),
          perc = n/tot,
-         # mround is in stevemisc
+         # mround is in {stevemisc}
          lab = paste0(mround(perc),"%")) %>%
   ggplot(.,aes(as.factor(f120), perc)) + 
   geom_bar(stat="identity", color="black", fill="#619cff") +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   scale_y_continuous(labels = scales::percent) +
   scale_x_discrete(labels = c("Never\nJustifiable", "2", "3", "4", "5",
                               "6", "7", "8", "9", "Always\nJustifiable")) +
