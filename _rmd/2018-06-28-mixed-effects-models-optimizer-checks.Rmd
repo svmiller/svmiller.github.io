@@ -48,6 +48,7 @@ library(tidyverse) # for most things
 library(stevemisc) # helper functions/formatting
 library(stevedata) # the data
 library(lme4) # for mixed models
+library(broom.mixed) # for mixed model tidiers
 
 optimizer_data <- readRDS("~/Dropbox/svmiller.github.io/R/optimizers/optimizer_data.rds")
 ```
@@ -71,6 +72,7 @@ library(tidyverse) # for most things
 library(stevemisc) # helper functions/formatting
 library(stevedata) # the data
 library(lme4) # for mixed models
+library(broom.mixed) # for mixed model tidiers
 ```
 
 ## A Brief Description of the Data
@@ -105,9 +107,9 @@ I provide the results below with my optimizer of choice. I am partial to bound o
 The results below are substantively intuitive. Age might have a negative effect on attitudes toward abortion, but we see that in the logistic model and not the linear model. It should be unsurprising that increasing ideology to the right and increasing religiosity (i.e. the importance of God in the respondent's life) decrease attitudes toward abortion's justifiability. The child autonomy index has a positive effect on the justifiability of abortion, which is consistent with received wisdom from "modernization" and "values" scholarship.
 
 ```{r ajdwplots, echo=F, eval=T, fig.width=13, fig.height=8}
-broom::tidy(M1) %>%
+tidy(M1) %>%
   mutate(model = "Linear Mixed Effects Model") %>%
-  bind_rows(., broom::tidy(M2) %>% mutate(model = "Logistic Mixed Effects Model")) %>%
+  bind_rows(., tidy(M2) %>% mutate(model = "Logistic Mixed Effects Model")) %>%
   filter(effect == "fixed")  %>%
   mutate(term = fct_reorg(term,
                            "Intercept" = "(Intercept)",
@@ -176,7 +178,7 @@ You could also do something similar with the *z*-statistics and *t*-statistics o
 
 ```{r optimizerzts, echo=T, eval=T,  fig.width=11, fig.height=8, message=F, warning=F, error=F}
 
-lapply(AF1, broom::tidy) %>%
+lapply(AF1, tidy) %>%
   map2_df(.,
           names(AF1),
           ~mutate(.x, optimizer = .y)) %>%
@@ -188,7 +190,7 @@ lapply(AF1, broom::tidy) %>%
                        "nlopt: BOBYQA")) %>%
   mutate(Model = "Linear Mixed Effects Model") -> AF1_zcai
 
-lapply(AF2, broom::tidy) %>%
+lapply(AF2, tidy) %>%
   map2_df(.,
           names(AF2),
           ~mutate(.x, optimizer = .y)) %>%

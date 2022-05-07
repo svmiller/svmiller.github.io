@@ -29,6 +29,7 @@ library(tidyverse) # for most things
 library(stevemisc) # helper functions/formatting
 library(stevedata) # the data
 library(lme4) # for mixed models
+library(broom.mixed) # for mixed model tidiers
 ```
 
 ## A Brief Description of the Data
@@ -99,7 +100,6 @@ bind_rows(AF1_lliks, AF2_lliks) %>%
   ggplot(.,aes(Optimizer, llik)) + geom_point() +
   facet_wrap(~model) + coord_flip() +
   theme_steve_web() +
-  post_bg() +
   ylab("Log-Likelihood") +
   labs(title = "The Log-Likelihoods of Seven Different Optimizers in Our Two Models")
 ```
@@ -113,7 +113,7 @@ You could also do something similar with the *z*-statistics and *t*-statistics o
 
 ```r
 
-lapply(AF1, broom::tidy) %>%
+lapply(AF1, tidy) %>%
   map2_df(.,
           names(AF1),
           ~mutate(.x, optimizer = .y)) %>%
@@ -125,7 +125,7 @@ lapply(AF1, broom::tidy) %>%
                        "nlopt: BOBYQA")) %>%
   mutate(Model = "Linear Mixed Effects Model") -> AF1_zcai
 
-lapply(AF2, broom::tidy) %>%
+lapply(AF2, tidy) %>%
   map2_df(.,
           names(AF2),
           ~mutate(.x, optimizer = .y)) %>%
@@ -140,7 +140,6 @@ lapply(AF2, broom::tidy) %>%
 bind_rows(AF1_zcai, AF2_zcai) %>%
   ggplot(.,aes(optimizer, statistic)) + geom_point() +
   theme_steve_web() +
-  post_bg() +
   coord_flip() + facet_wrap(~Model) +
   geom_hline(yintercept = 1.96, linetype="dashed") +
   labs(caption = "Vertical line represents a z-value (or t-value, in the linear model) of 1.96, the conventional cutoff for statistical significance.",
