@@ -150,7 +150,7 @@ ESS9GB %>%
   ggplot(.,aes(as.factor(immigsent), n)) +  # create foundation ggplot
   # bar chart, with some prettiness
   geom_bar(stat="identity", alpha=0.8, color="black", fill="#619cff") +
-  theme_steve_web() + post_bg() + # custom theme stuff
+  theme_steve_web() + # custom theme stuff
   labs(y = "Number of Responses",
        x = "Value of the Pro-Immigration Sentiment Variable",
        caption = "Data: European Social Survey, Round 9 in the United Kingdom",

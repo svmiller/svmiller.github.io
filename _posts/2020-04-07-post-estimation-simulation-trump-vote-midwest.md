@@ -490,7 +490,7 @@ SimM2 %>%
             upr = quantile(y, .975)) %>%
   ggplot(.,aes(pidcat, meany, ymin=lwr, ymax=upr, color=z_lcograc, shape=z_lcograc)) +
   geom_hline(yintercept = .5, linetype ="dashed") +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   scale_color_manual(values = c("#377EB8", "#E41A1C")) +
   geom_pointrange(size=.8) +
   scale_y_continuous(limits = c(0, 1)) +
