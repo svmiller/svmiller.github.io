@@ -80,20 +80,20 @@ Run the `WDI()` function and you'll get output that looks like this.
 
 ```r
 WDI() %>% as_tibble()
-#> # A tibble: 16,104 x 4
-#>    iso2c country    NY.GDP.PCAP.KD  year
-#>    <chr> <chr>               <dbl> <int>
-#>  1 1A    Arab World            NA   2020
-#>  2 1A    Arab World          6429.  2019
-#>  3 1A    Arab World          6456.  2018
-#>  4 1A    Arab World          6446.  2017
-#>  5 1A    Arab World          6518.  2016
-#>  6 1A    Arab World          6424.  2015
-#>  7 1A    Arab World          6353.  2014
-#>  8 1A    Arab World          6331.  2013
-#>  9 1A    Arab World          6266.  2012
-#> 10 1A    Arab World          6009.  2011
-#> # … with 16,094 more rows
+#> # A tibble: 16,226 × 4
+#>    iso2c country                     NY.GDP.PCAP.KD  year
+#>    <chr> <chr>                                <dbl> <int>
+#>  1 ZH    Africa Eastern and Southern          1443.  2020
+#>  2 ZH    Africa Eastern and Southern          1525.  2019
+#>  3 ZH    Africa Eastern and Southern          1534.  2018
+#>  4 ZH    Africa Eastern and Southern          1536.  2017
+#>  5 ZH    Africa Eastern and Southern          1539.  2016
+#>  6 ZH    Africa Eastern and Southern          1549.  2015
+#>  7 ZH    Africa Eastern and Southern          1546.  2014
+#>  8 ZH    Africa Eastern and Southern          1528.  2013
+#>  9 ZH    Africa Eastern and Southern          1505.  2012
+#> 10 ZH    Africa Eastern and Southern          1517.  2011
+#> # … with 16,216 more rows
 ```
 
 This returns the country/spatial unit (with the two-character ISO code, recalling [a previous post on this matter](http://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/)), a name for the unit (`country`), the indicator(s) you wanted, and the year. Of note, you can specify `extra = TRUE` to get more identifying information about the country/spatial unit beyond the two-character ISO code and name. I recommend against this since it's just more output than you probably want. Further, the indicator you want is returned "as is." In other words, the column name is the exact code of the World Bank indicator. You'll probably want to rename this for convenience. 
@@ -107,7 +107,7 @@ Consider that`{WDI}` has a search function. What if you're just curious what dat
 
 ```r
 WDIsearch("GDP") %>% as_tibble()
-#> # A tibble: 539 x 2
+#> # A tibble: 539 × 2
 #>    indicator            name                                                  
 #>    <chr>                <chr>                                                 
 #>  1 5.51.01.10.gdp       "Per capita GDP growth"                               
@@ -130,21 +130,21 @@ Admittedly, this is a *broad* search knowing how common GDP is in economic indic
 
 ```r
 WDIsearch("ease of") %>% as_tibble()
-#> # A tibble: 12 x 2
-#>    indicator                     name                                           
-#>    <chr>                         <chr>                                          
-#>  1 IC.BUS.DFRN.XQ                Ease of doing business score (0 = lowest perfo…
-#>  2 IC.BUS.EASE.DFRN.DB1014       Global: Ease of doing business score (DB10-14 …
-#>  3 IC.BUS.EASE.DFRN.DB15         Ease of doing business score (DB15 methodology)
-#>  4 IC.BUS.EASE.DFRN.DB16         Global: Ease of doing business score (DB15 met…
-#>  5 IC.BUS.EASE.DFRN.XQ.DB1719    Global: Ease of doing business score (DB17-20 …
-#>  6 IC.BUS.EASE.XQ                Ease of doing business index (1=most business-…
-#>  7 LP.LPI.ITRN.RK                Ease of arranging competitively priced interna…
-#>  8 LP.LPI.ITRN.XQ                Logistics performance index: Ease of arranging…
-#>  9 PROT.MINOR.INV.EASE.SHARE.LG… Protecting minority investors: Ease of shareho…
-#> 10 PROT.MINOR.INV.EASE.SHARE.LG… Protecting minority investors: Ease of shareho…
-#> 11 PROT.MINOR.INV.EASE.SSI.XD.0… Protecting minority investors: Ease of shareho…
-#> 12 PROT.MINOR.INV.EASE.SSI.XD.0… Protecting minority investors: Ease of shareho…
+#> # A tibble: 12 × 2
+#>    indicator                                   name                             
+#>    <chr>                                       <chr>                            
+#>  1 IC.BUS.DFRN.XQ                              Ease of doing business score (0 …
+#>  2 IC.BUS.EASE.DFRN.DB1014                     Global: Ease of doing business s…
+#>  3 IC.BUS.EASE.DFRN.DB15                       Ease of doing business score (DB…
+#>  4 IC.BUS.EASE.DFRN.DB16                       Global: Ease of doing business s…
+#>  5 IC.BUS.EASE.DFRN.XQ.DB1719                  Global: Ease of doing business s…
+#>  6 IC.BUS.EASE.XQ                              Ease of doing business index (1=…
+#>  7 LP.LPI.ITRN.RK                              Ease of arranging competitively …
+#>  8 LP.LPI.ITRN.XQ                              Logistics performance index: Eas…
+#>  9 PROT.MINOR.INV.EASE.SHARE.LGL.XD.010.DB0614 Protecting minority investors: E…
+#> 10 PROT.MINOR.INV.EASE.SHARE.LGL.XD.010.DB1519 Protecting minority investors: E…
+#> 11 PROT.MINOR.INV.EASE.SSI.XD.0010.DB0614.DFRN Protecting minority investors: E…
+#> 12 PROT.MINOR.INV.EASE.SSI.XD.0010.DB1519.DFRN Protecting minority investors: E…
 ```
 
 Knowing what you (should) know about the data of interest, that tells you the indicator for the ease of doing business score is `IC.BUS.DFRN.XQ`. Make a note of it.
@@ -199,20 +199,20 @@ WDI(indicator = c("EG.ELC.ACCS.ZS", # access to electricity
     start = 1960, end = 2020) %>% as_tibble() -> Data
 
 Data
-#> # A tibble: 16,104 x 8
-#>    iso2c country  year EG.ELC.ACCS.ZS BN.CAB.XOKA.GD.… IC.BUS.DFRN.XQ
-#>    <chr> <chr>   <int>          <dbl>            <dbl>          <dbl>
-#>  1 1A    Arab W…  1960             NA               NA             NA
-#>  2 1A    Arab W…  1961             NA               NA             NA
-#>  3 1A    Arab W…  1962             NA               NA             NA
-#>  4 1A    Arab W…  1963             NA               NA             NA
-#>  5 1A    Arab W…  1964             NA               NA             NA
-#>  6 1A    Arab W…  1965             NA               NA             NA
-#>  7 1A    Arab W…  1966             NA               NA             NA
-#>  8 1A    Arab W…  1967             NA               NA             NA
-#>  9 1A    Arab W…  1968             NA               NA             NA
-#> 10 1A    Arab W…  1969             NA               NA             NA
-#> # … with 16,094 more rows, and 2 more variables: FP.CPI.TOTL.ZG <dbl>,
+#> # A tibble: 16,226 × 8
+#>    iso2c country     year EG.ELC.ACCS.ZS BN.CAB.XOKA.GD.ZS IC.BUS.DFRN.XQ
+#>    <chr> <chr>      <int>          <dbl>             <dbl>          <dbl>
+#>  1 1A    Arab World  1960             NA                NA             NA
+#>  2 1A    Arab World  1961             NA                NA             NA
+#>  3 1A    Arab World  1962             NA                NA             NA
+#>  4 1A    Arab World  1963             NA                NA             NA
+#>  5 1A    Arab World  1964             NA                NA             NA
+#>  6 1A    Arab World  1965             NA                NA             NA
+#>  7 1A    Arab World  1966             NA                NA             NA
+#>  8 1A    Arab World  1967             NA                NA             NA
+#>  9 1A    Arab World  1968             NA                NA             NA
+#> 10 1A    Arab World  1969             NA                NA             NA
+#> # … with 16,216 more rows, and 2 more variables: FP.CPI.TOTL.ZG <dbl>,
 #> #   FR.INR.LNDP <dbl>
 ```
 
@@ -228,7 +228,7 @@ Data %>%
          ratespread = 8) -> Data
 
 Data
-#> # A tibble: 16,104 x 8
+#> # A tibble: 16,226 × 8
 #>    iso2c country     year elecperpop   cab   edb   cpi ratespread
 #>    <chr> <chr>      <int>      <dbl> <dbl> <dbl> <dbl>      <dbl>
 #>  1 1A    Arab World  1960         NA    NA    NA    NA         NA
@@ -241,7 +241,7 @@ Data
 #>  8 1A    Arab World  1967         NA    NA    NA    NA         NA
 #>  9 1A    Arab World  1968         NA    NA    NA    NA         NA
 #> 10 1A    Arab World  1969         NA    NA    NA    NA         NA
-#> # … with 16,094 more rows
+#> # … with 16,216 more rows
 ```
 
 Alternatively, upon publication of this post, the package author reached out via Twitter and recommended this approach prior to the `WDI()` call.
@@ -256,7 +256,7 @@ Data %>%
   filter(country == "Mexico") %>%
   mutate(cpiprop = cpi/100) %>% # going somewhere with this...
   ggplot(.,aes(year, cpiprop)) + 
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_bar(stat="identity", alpha=.8, fill="#619cff", color="black") +
   scale_x_continuous(breaks = seq(1960, 2020, by = 10)) +
   # Below is why I like proportions

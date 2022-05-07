@@ -149,7 +149,7 @@ ttest_uempl <- t.test(immigsent ~ uempla, data=ESS9GB)
 # be mindful of the direction here when you tidy up your t-test.
 broom::tidy(ttest_uempl) %>%
   select(estimate:p.value)
-#> # A tibble: 1 x 5
+#> # A tibble: 1 × 5
 #>   estimate estimate1 estimate2 statistic p.value
 #>      <dbl>     <dbl>     <dbl>     <dbl>   <dbl>
 #> 1     2.12      16.9      14.8      1.68   0.102
@@ -237,13 +237,13 @@ uniondensity %>%
 #> 1    55.15 25.35
 
 get_prior(brmform, data=uniondensity)
-#>                     prior     class   coef group resp dpar nlpar bound
+#>                     prior     class   coef group resp dpar nlpar lb ub
 #>                    (flat)         b                                   
 #>                    (flat)         b concen                            
 #>                    (flat)         b   left                            
 #>                    (flat)         b   size                            
 #>  student_t(3, 55.1, 25.4) Intercept                                   
-#>     student_t(3, 0, 25.4)     sigma                                   
+#>     student_t(3, 0, 25.4)     sigma                               0   
 #>        source
 #>       default
 #>  (vectorized)

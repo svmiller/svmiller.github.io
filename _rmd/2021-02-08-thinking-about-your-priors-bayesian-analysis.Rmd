@@ -187,7 +187,7 @@ tidyB01 %>%
          var = fct_rev(var),
          cat = fct_rev(cat)) %>%
   ggplot(.,aes(var, mean, ymin=lwr, ymax=upr)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() +
   facet_wrap(~cat) +
   coord_flip() +
   geom_pointrange() +
@@ -215,7 +215,7 @@ tibble(`Normal(0,1)` = rnorm(100000, 0, 1),
   gather(var, val) %>%
   ggplot(.,aes(val)) + geom_density() +
   facet_wrap(~var, scales="free") +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   labs(y = "", x ="",
        caption = "Data are simulated to avoid having to think about stat_function() within facet_wrap().",
        title = "A Standard Normal Distribution and a Diffuse Normal Distribution",
@@ -279,7 +279,7 @@ t_examples %>%
   gather(var, val) %>%
   ggplot(.,aes(val)) + geom_density() +
   facet_wrap(~var, scales="free") +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   labs(title = "Density Plots of Various Student's t-Distributions",
        x = "", y = "",
        subtitle = "The location-scale version of Student's t-distribution has some fairly long, if not necessarily ''fat'', tails.",
@@ -363,7 +363,7 @@ tibble(`exp(.05)` = rexp(100000, rate = 1/sd(uniondensity$union)),
   filter(val >= 0) %>%
   ggplot(.,aes(val)) + geom_density() +
   facet_wrap(~var, scales="free") +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   labs(title = "Comparing Default Priors for Sigma in a Linear Model in {brms} and {rstanarm}",
        x = "", y ="",
        subtitle = "Both distributions are weakly informative, but the exponential might be a just bit more informative (in a good way).",
@@ -407,7 +407,7 @@ m_sums %>%
                               "Intercept" = "b_Intercept")) %>%
   ggplot(.,aes(prior, mean, ymin=lwr, ymax=upr)) + 
   geom_pointrange() +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_hline(yintercept = 0, linetype="dashed") +
   facet_wrap(~variable, scales="free") +
   coord_flip() +

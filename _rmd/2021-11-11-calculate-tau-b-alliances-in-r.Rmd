@@ -285,7 +285,7 @@ Here, for example, would be the United States and United Kingdom across time.
 Data %>%
   filter(ccode1 == 2 & ccode2 == 200) %>%
   ggplot(.,aes(year, taub)) + geom_line() +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   scale_x_continuous(breaks = seq(1820, 2010, by = 10)) +
   labs(y = "Tau-b Correlation Coefficient",
        x = "",
@@ -299,7 +299,7 @@ And here would be the United Kingdom and Germany from 1816 to 1945, an effective
 Data %>%
     filter(ccode1 == 200 & ccode2 == 255 & year <= 1945) %>%
     ggplot(.,aes(year, taub)) + geom_line() +
-    theme_steve_web() + post_bg() +
+    theme_steve_web() +
     scale_x_continuous(breaks = seq(1820, 2010, by = 10)) +
     labs(y = "Tau-b Correlation Coefficient",
          x = "",
