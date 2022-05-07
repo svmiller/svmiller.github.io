@@ -270,7 +270,7 @@ B0 <- brm(union ~ left + size + concen,
           seed = 8675309,
           refresh = 0,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 32 in parallel...
+#> Running MCMC with 4 chains, at most 8 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -279,12 +279,12 @@ B0 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.4 seconds.
+#> Total execution time: 0.5 seconds.
 ```
 
 <div id="modelsummary">
 
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table style="NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;" class="table">
 <caption>Comparing Table 2 of Western and Jackman (1994) with OLS and a Bayesian Linear Model</caption>
  <thead>
   <tr>
@@ -309,39 +309,39 @@ B0 <- brm(union ~ left + size + concen,
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -6.46+ </td>
-   <td style="text-align:center;"> -6.46 </td>
-   <td style="text-align:center;"> -6.40 </td>
+   <td style="text-align:center;"> −6.46+ </td>
+   <td style="text-align:center;"> −6.46 </td>
+   <td style="text-align:center;"> −6.34 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (3.79) </td>
    <td style="text-align:center;"> (3.79) </td>
-   <td style="text-align:center;"> (4.22) </td>
+   <td style="text-align:center;"> (4.18) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
    <td style="text-align:center;"> 0.35 </td>
    <td style="text-align:center;"> 0.35 </td>
-   <td style="text-align:center;"> 0.76 </td>
+   <td style="text-align:center;"> 0.69 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (19.25) </td>
    <td style="text-align:center;"> (19.25) </td>
-   <td style="text-align:center;"> (21.62) </td>
+   <td style="text-align:center;"> (21.23) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Intercept </td>
    <td style="text-align:center;"> 97.59+ </td>
    <td style="text-align:center;"> 97.59 </td>
-   <td style="text-align:center;"> 96.55 </td>
+   <td style="text-align:center;"> 96.01 </td>
   </tr>
   <tr>
    <td style="text-align:left;box-shadow: 0px 1px">  </td>
    <td style="text-align:center;box-shadow: 0px 1px"> (57.48) </td>
    <td style="text-align:center;box-shadow: 0px 1px"> (57.48) </td>
-   <td style="text-align:center;box-shadow: 0px 1px"> (64.17) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (63.22) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -350,12 +350,8 @@ B0 <- brm(union ~ left + size + concen,
    <td style="text-align:center;"> 20 </td>
   </tr>
 </tbody>
-<tfoot>
-<tr>
-<td style="padding: 0; border:0;" colspan="100%">
-<sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td>
-</tr>
-</tfoot>
+<tfoot><tr><td style="padding: 0; " colspan="100%">
+<sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
 </table>
 
 </div>
@@ -376,7 +372,7 @@ B1 <- brm(union ~ left + size + concen,
           seed = 8675309,
           refresh = 0,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 32 in parallel...
+#> Running MCMC with 4 chains, at most 8 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -385,7 +381,7 @@ B1 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.3 seconds.
+#> Total execution time: 0.2 seconds.
 
 # Stephens' priors
 B2 <- brm(union ~ left + size + concen,
@@ -394,16 +390,16 @@ B2 <- brm(union ~ left + size + concen,
           seed = 8675309,
           refresh = 0, 
           family="gaussian")
-#> Running MCMC with 4 chains, at most 32 in parallel...
+#> Running MCMC with 4 chains, at most 8 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
-#> Chain 3 finished in 0.2 seconds.
+#> Chain 3 finished in 0.1 seconds.
 #> Chain 4 finished in 0.1 seconds.
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.3 seconds.
+#> Total execution time: 0.2 seconds.
 ```
 
 <table id="stevetable">
@@ -421,26 +417,26 @@ B2 <- brm(union ~ left + size + concen,
 <tbody>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 70.08 </td>
-   <td style="text-align:center;"> 20.48 </td>
-   <td style="text-align:center;"> 36.47 </td>
-   <td style="text-align:center;"> 102.79 </td>
+   <td style="text-align:center;"> 71.49 </td>
+   <td style="text-align:center;"> 20.66 </td>
+   <td style="text-align:center;"> 37.27 </td>
+   <td style="text-align:center;"> 105.53 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Intercept </td>
-   <td style="text-align:center;"> 81.57 </td>
-   <td style="text-align:center;"> 33.14 </td>
-   <td style="text-align:center;"> 27.45 </td>
-   <td style="text-align:center;"> 135.54 </td>
+   <td style="text-align:center;"> 82.06 </td>
+   <td style="text-align:center;"> 33.83 </td>
+   <td style="text-align:center;"> 27.14 </td>
+   <td style="text-align:center;"> 136.40 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Left Government </td>
    <td style="text-align:center;"> 0.27 </td>
    <td style="text-align:center;"> 0.08 </td>
-   <td style="text-align:center;"> 0.14 </td>
-   <td style="text-align:center;"> 0.41 </td>
+   <td style="text-align:center;"> 0.15 </td>
+   <td style="text-align:center;"> 0.40 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
@@ -453,34 +449,34 @@ B2 <- brm(union ~ left + size + concen,
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -4.72 </td>
-   <td style="text-align:center;"> 1.85 </td>
-   <td style="text-align:center;"> -7.76 </td>
-   <td style="text-align:center;"> -1.71 </td>
+   <td style="text-align:center;"> -4.84 </td>
+   <td style="text-align:center;"> 1.86 </td>
+   <td style="text-align:center;"> -7.86 </td>
+   <td style="text-align:center;"> -1.74 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Labor Force Size (logged) </td>
-   <td style="text-align:center;"> -5.38 </td>
-   <td style="text-align:center;"> 2.08 </td>
-   <td style="text-align:center;"> -8.84 </td>
-   <td style="text-align:center;"> -1.90 </td>
+   <td style="text-align:center;"> -5.41 </td>
+   <td style="text-align:center;"> 2.13 </td>
+   <td style="text-align:center;"> -8.86 </td>
+   <td style="text-align:center;"> -1.91 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 9.45 </td>
-   <td style="text-align:center;"> 4.78 </td>
-   <td style="text-align:center;"> 1.58 </td>
-   <td style="text-align:center;"> 17.38 </td>
+   <td style="text-align:center;"> 9.28 </td>
+   <td style="text-align:center;"> 4.79 </td>
+   <td style="text-align:center;"> 1.34 </td>
+   <td style="text-align:center;"> 17.37 </td>
    <td style="text-align:left;"> Stephens' Priors </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Industrial Concentration </td>
-   <td style="text-align:center;"> 5.14 </td>
-   <td style="text-align:center;"> 12.97 </td>
-   <td style="text-align:center;"> -15.72 </td>
-   <td style="text-align:center;"> 26.41 </td>
+   <td style="text-align:center;"> 4.86 </td>
+   <td style="text-align:center;"> 13.13 </td>
+   <td style="text-align:center;"> -16.61 </td>
+   <td style="text-align:center;"> 26.26 </td>
    <td style="text-align:left;"> Wallerstein's Priors </td>
   </tr>
 </tbody>
@@ -519,7 +515,7 @@ B3 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=wall_priors,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 32 in parallel...
+#> Running MCMC with 4 chains, at most 8 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -528,7 +524,7 @@ B3 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.3 seconds.
+#> Total execution time: 0.2 seconds.
 
 B4 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
@@ -536,16 +532,16 @@ B4 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=wall_priors_diffuse,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 32 in parallel...
+#> Running MCMC with 4 chains, at most 8 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
-#> Chain 2 finished in 0.2 seconds.
+#> Chain 2 finished in 0.1 seconds.
 #> Chain 3 finished in 0.1 seconds.
 #> Chain 4 finished in 0.1 seconds.
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.3 seconds.
+#> Total execution time: 0.2 seconds.
 
 
 B5 <- brm(union ~ left + size + concen,
@@ -554,7 +550,7 @@ B5 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=stephens_priors,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 32 in parallel...
+#> Running MCMC with 4 chains, at most 8 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -563,7 +559,7 @@ B5 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.3 seconds.
+#> Total execution time: 0.2 seconds.
 
 B6 <- brm(union ~ left + size + concen,
           data = subset(uniondensity, country != "Italy"),
@@ -571,7 +567,7 @@ B6 <- brm(union ~ left + size + concen,
           refresh = 0,
           prior=stephens_priors_diffuse,
           family="gaussian")
-#> Running MCMC with 4 chains, at most 32 in parallel...
+#> Running MCMC with 4 chains, at most 8 in parallel...
 #> 
 #> Chain 1 finished in 0.1 seconds.
 #> Chain 2 finished in 0.1 seconds.
@@ -580,7 +576,7 @@ B6 <- brm(union ~ left + size + concen,
 #> 
 #> All 4 chains finished successfully.
 #> Mean chain execution time: 0.1 seconds.
-#> Total execution time: 0.3 seconds.
+#> Total execution time: 0.2 seconds.
 ```
 
 The point estimates differ a little but the same basic story emerges that emhasize the effect of diffuse priors on low-*n* statistical analysis even if the implications appear greater for Stephens' hypothesis. Indeed, omitting Italy and using Stephens' priors produces stronger evidence for the effect of *civilian labor force size* than Wallerstein's prior when Italy is omitted. Generally, sensitivity analyses highlight the importance of priors when data are weak.
