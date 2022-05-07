@@ -58,7 +58,7 @@ add_jekyll_image('/images/r-logo.png', "The R logo, just 'cause.", "350", "right
  
 ```
 
-*Last updated: `r format(Sys.time(), '%e %B %Y')`. The data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well. I've also added a simulation of 100 trials for each optimizer.* 
+*Last updated: 26 August 2021. The data can be more easily loaded in [`{stevedata}`](http://svmiller.com/stevedata) as the [`wvs_usa_abortion`](http://svmiller.com/stevedata/reference/wvs_usa_abortion.html) data frame. The results will be slightly different as well. I've also added a simulation of 100 trials for each optimizer.* 
 
 My goals for writing this are two-fold. First, it'd been a long time since my last blog post. I usually average 7-10 posts a year and this will only be the second one. Second, I've been meaning to offer some tips/tutorials for mixed effects modelers who are still new to the craft. Mixed effects modeling is my method of choice for evaluating and explaining social/political phenomenon. I think I've become pretty good at it over the past 10 years, but everything I know I ultimately taught myself through trial and error. Stackoverflow is nice but I was always reticent to post there to search for answers I feel I should've known already. It does mean that while I everything I know is self-taught, I've learned a lot of tricks along the way and I think it would be good to share them.
 
@@ -123,7 +123,6 @@ broom::tidy(M1) %>%
          upr = estimate + p_z(.05)*std.error) %>%
   ggplot(., aes(term, estimate, ymin=lwr, ymax=upr, color = model, shape = model)) +
   theme_steve_web() +
-  post_bg() +
   scale_colour_brewer(palette = "Set1") +
   geom_pointrange(position = position_dodge(width = .5)) + coord_flip() +
   geom_hline(yintercept = 0, linetype="dashed") +
@@ -166,7 +165,6 @@ bind_rows(AF1_lliks, AF2_lliks) %>%
   ggplot(.,aes(Optimizer, llik)) + geom_point() +
   facet_wrap(~model) + coord_flip() +
   theme_steve_web() +
-  post_bg() +
   ylab("Log-Likelihood") +
   labs(title = "The Log-Likelihoods of Seven Different Optimizers in Our Two Models")
 
@@ -205,7 +203,6 @@ lapply(AF2, broom::tidy) %>%
 bind_rows(AF1_zcai, AF2_zcai) %>%
   ggplot(.,aes(optimizer, statistic)) + geom_point() +
   theme_steve_web() +
-  post_bg() +
   coord_flip() + facet_wrap(~Model) +
   geom_hline(yintercept = 1.96, linetype="dashed") +
   labs(caption = "Vertical line represents a z-value (or t-value, in the linear model) of 1.96, the conventional cutoff for statistical significance.",
@@ -230,7 +227,7 @@ optimizer_data$linear_times %>%
             min = min(elapsed),
             max = max(elapsed))  %>%
   ggplot(.,aes(x = optimizer, y = mean, ymin = lwr, ymax=upr)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_pointrange() +
   facet_wrap(~model, scales = "free_x") + coord_flip() +
   labs(title = "A Comparison of Estimation Times Across Seven Different Optimizers",

@@ -367,7 +367,6 @@ Data %>%
          percper = paste0(perc*100,"%")) %>%
   ggplot(aes(x=factor(satisdem), y =perc, fill=`Party ID`)) +
   theme_steve_web() +
-  post_bg() +
   geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
   scale_fill_brewer(palette="Set1") +
@@ -407,7 +406,6 @@ Data %>%
          percper = paste0(perc*100,"%")) %>%
   ggplot(aes(x=factor(usdemocratic), y =perc, fill=`Party ID`)) +
   theme_steve_web() +
-  post_bg() +
   geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
   scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
   facet_wrap(~ year, ncol=2, scales="free") +
@@ -446,7 +444,6 @@ Data %>%
            percper = paste0(perc*100,"%")) %>%
     ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + 
   theme_steve_web() +
-  post_bg() +
     geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
   scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
@@ -484,7 +481,6 @@ Data %>%
            percper = paste0(perc*100,"%")) %>%
     ggplot(aes(x=factor(potus_limitopp), y =perc, fill=`Party ID`)) + 
   theme_steve_web() +
-  post_bg() +
     geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
   scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +
@@ -525,7 +521,6 @@ Data %>%
            percper = paste0(perc*100,"%")) %>%
     ggplot(aes(x=factor(closecong), y =perc, fill=`Party ID`)) +
   theme_steve_web() +
-  post_bg() +
     geom_bar(stat="identity", position="dodge", color="black", alpha=0.8) +
   scale_fill_brewer(palette="Set1") + # aes(fill=`Party ID`), position=position_dodge(),
     facet_wrap(~ year, ncol=2, scales="free") +

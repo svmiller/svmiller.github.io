@@ -109,7 +109,6 @@ Here is a box-and-whisker plot of the load times across the 10 trials for each f
 combined_times %>%
   ggplot(.,aes(Method, elapsed)) +
   theme_steve_web() +
-  post_bg() +
   geom_boxplot(fill="#619cff", alpha=.5) +
   ylab("Elapsed Time in Seconds") +
   labs(title = "Load Times for World Values Survey Longitudinal Data in Various Formats",
