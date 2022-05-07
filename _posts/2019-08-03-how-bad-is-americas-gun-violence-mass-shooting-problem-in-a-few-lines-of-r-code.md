@@ -20,7 +20,7 @@ image: "gilroy-strong.jpg"
 
 {% include image.html url="/images/gilroy-strong.jpg" caption="Artist Ignacio 'Nacho' Moya carries a sign he made during a vigil for the victims of the Gilroy Garlic Festival Shooting (Nhat V. Meyer/Bay Area News Group)" width=400 align="right" %}
 
-*Last updated: 17 June 2021*
+*Last updated:  7 May 2022*
 
 [Another day, another mass shooting](https://www.cnn.com/2019/08/03/us/el-paso-shooting/index.html) for literally the only country of its size and development where this happens on a routine basis. This one in El Paso may (reportedly) have some domestic terrorist overtones to it, but ~~barring confirmation of the shooter and the shooter's motives for the moment~~([nevermind](https://www.nytimes.com/2019/08/03/us/patrick-crusius-el-paso-shooter-manifesto.html)), this post will focus on just the gun violence and the mass shooting angle here.
 
@@ -58,7 +58,6 @@ ghp100k %>%
          cy = fct_lump(cy, value)) %>%
   ggplot(.,aes(cy, value)) +
   theme_steve_web() +
-  post_bg() +
   geom_bar(stat="identity", alpha=0.6, color="black") +
   geom_text(aes(label=round(value, 2)), vjust=-.5, colour="black",
             position=position_dodge(.9), size=4, family="Open Sans") +
@@ -336,6 +335,7 @@ By comparison, they're improving in every other country, prominently Italy.
 
 
 ```r
+
 ghp100k %>%
   arrange(country, year) %>%
   ggplot(.,aes(year, value)) + geom_line(size=1.1) +
@@ -397,7 +397,7 @@ mass_shootings_yearly %>%
   filter(year >= 2017) %>%
   summarize(n = sum(n)) %>% pull(n) -> nobssince2017
 
-today <- format(Sys.time(), '%B %d, %Y')
+today <- format(Sys.time(), '%B %e, %Y')
 
 mjms_title = paste0("The Number of Mass Shootings by Year: ", first_event, " Through ", last_update)
 mjms_subtitle = paste0("There were ", nobs80s90s, " mass shootings from 1982 to 1999. There have already been ", nobssince2017, " from 2017 through ", last_update,".")
@@ -406,7 +406,6 @@ mjms_caption = paste0("Data: Mother Jones. Methodology: mass shootings include a
 mass_shootings_yearly %>%
   ggplot(.,aes(year, n)) +
   theme_steve_web() +
-  post_bg() +
   geom_bar(stat="identity", alpha=0.4, fill="#619cff",color="black") +
   scale_x_continuous(breaks = seq(1980, 2020, by = 4)) +
   scale_y_continuous(breaks = seq(0, 14, by =2)) +
@@ -420,5 +419,3 @@ mass_shootings_yearly %>%
 ```
 
 ![plot of chunk us-mass-shootings-by-year-1982-present](/images/how-bad-is-americas-gun-violence-mass-shooting-problem-in-a-few-lines-of-r-code/us-mass-shootings-by-year-1982-present-1.png)
-
-

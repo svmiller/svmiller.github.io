@@ -164,7 +164,6 @@ Xmods %>%
          upr = estimate + abs(qnorm(.025))*std.error) %>%
   ggplot(., aes(as.factor(mod), estimate, ymin=lwr, ymax=upr)) +
   theme_steve_web() +
-  post_bg() +
   facet_wrap(~term) +
   scale_y_continuous(breaks = seq(0, 1, by = .2)) +
   geom_pointrange() +
@@ -189,7 +188,6 @@ Xmods %>%
   distinct(mod, r2) %>% 
   ggplot(.,aes(as.factor(mod), r2)) + 
   theme_steve_web() +
-  post_bg() +
   geom_point() + 
   geom_hline(yintercept = broom::glance(M3) %>% pull(1)) +
   annotate("text", x= 1, y=.635, label = "R2 for Model Without Random Measurement Error (solid)", hjust=0, family="Open Sans") +
@@ -228,7 +226,6 @@ Ymods %>%
          upr = estimate + abs(qnorm(.025))*std.error) %>%
   ggplot(., aes(as.factor(mod), estimate, ymin=lwr, ymax=upr)) +
   theme_steve_web() +
-  post_bg() +
   facet_wrap(~term) +
   geom_pointrange() +
   geom_rect(data=M3df, aes(x = NULL,y = NULL,xmin=-Inf, xmax=Inf, 
@@ -249,7 +246,6 @@ Ymods %>%
   distinct(mod, r2) %>% 
   ggplot(.,aes(as.factor(mod), r2)) + 
   theme_steve_web() +
-  post_bg() +
   geom_point() + 
   geom_hline(yintercept = broom::glance(M3) %>% pull(1)) +
   annotate("text", x= 1, y=.635, label = "R2 for Model Without Random Measurement Error (solid)", hjust=0, family="Open Sans") +

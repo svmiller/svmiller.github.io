@@ -190,7 +190,6 @@ Ideo %>%
                                    "Single Issue" = "single")) %>%
   ggplot(.,aes(attacktype1_txt, prop)) +
   theme_steve_web() + 
-  post_bg() +
   geom_bar(stat="identity", alpha=0.8, fill="#619cff", color="black") +
   facet_wrap(~cat) +
   scale_y_continuous(labels = scales::percent, limits=c(0,1)) +
@@ -330,7 +329,6 @@ Ideo %>%
   geom_text(aes(label=n), vjust=-.5, colour="black",
             position=position_dodge(.9), size=3.5, family="Open Sans") +
   theme_steve_web() +
-  post_bg() +
   scale_x_continuous(breaks = seq(1970, 1980, by = 2)) +
   facet_wrap(~cat) +
   labs(x = "Year",

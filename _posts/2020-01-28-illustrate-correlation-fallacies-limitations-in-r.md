@@ -107,7 +107,7 @@ However, a scatterplot (with overlaying regression line) will show that each qua
 ```r
 quartets %>%
   ggplot(.,aes(x, y)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   facet_wrap(~group) + geom_point() +
    geom_smooth(method = "lm", se=TRUE, formula = y ~ x) +
   stat_poly_eq(formula = y ~ x,
@@ -141,7 +141,7 @@ Guber tackles a troubling correlation at the state-level in these data from 1994
 
 Guber99 %>%
   ggplot(.,aes(expendpp, total)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_point() + geom_smooth(method = "lm") +
   geom_text_repel(aes(label=state), family="Open Sans") + 
   annotate("label", y=1085, x=9, 
@@ -222,7 +222,7 @@ Guber99 %>%
 
 Guber99 %>%
   ggplot(.,aes(expendpp, total)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_point() + geom_smooth(method = "lm")  +
   facet_wrap(~group) +
   geom_label(size    = 3.5, data  = Correlations,
@@ -324,7 +324,7 @@ Summaries %>%
 
 Summaries %>%
   ggplot(.,aes(foreignp, value)) + 
-  theme_steve_web() + post_bg() + 
+  theme_steve_web() +  
   facet_wrap(~group) + 
   geom_label(size    = 3.5, data  = Correlations,
     mapping = aes(x = .28, y = .18, label = label),
