@@ -44,7 +44,7 @@ knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
 ```
 
 
-*Last updated: `r format(Sys.time(), '%e %B %Y')`. The data are now in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. You can download this from CRAN. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
+*Last updated: 23 June 2021. The data are now in [`{stevedata}`](http://svmiller.com/stevedata) as the [`uniondensity`](http://svmiller.com/stevedata/reference/uniondensity.html) data frame. You can download this from CRAN. `tidy()` in `{broom}` no longer handles `{brms}` models in the absence of random effects. This post has been updated to reflect those changes. Seeds have been added to the models for reproducibility as well. Some code has been suppressed for presentation.* 
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
  
@@ -118,7 +118,6 @@ A careful eye might be able to spot a collinearity problem in the industrial con
 uniondensity %>%
   ggplot(.,aes(concen, size)) +
   theme_steve_web() +
-  post_bg() +
   geom_point(size=1.5) +
   geom_smooth(method="lm") +
   geom_text_repel(aes(label=country), family="Open Sans") +
@@ -381,7 +380,6 @@ bind_rows(drawsB3, drawsB4) %>%
                           "Industrial Concentration" = "b_concen")) %>%
   ggplot(.,aes(category, mean, ymin=lwr, ymax=upr, color=model, shape=model)) +
   theme_steve_web() +
-  post_bg() +
   scale_colour_brewer(palette = "Set1") +
   geom_pointrange(position = position_dodge(width = .5)) + coord_flip() +
   facet_wrap(~term, scales="free_x", ncol=4) + geom_hline(yintercept = 0, linetype="dashed") +
