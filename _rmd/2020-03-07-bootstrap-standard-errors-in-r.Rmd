@@ -100,7 +100,6 @@ M1 <- lm(violent ~ poverty + single + metro + white + highschool, af_crime93)
 ```
 
 ```{r broom-m1, eval=T, echo=F}
-
 broom::tidy(M1) %>%
   mutate_if(is.numeric, ~round(.,3)) %>%
   mutate(term = c("Intercept", "% Poverty", "% Single Family Home",
@@ -110,7 +109,6 @@ broom::tidy(M1) %>%
         col.names = c("Term", "Coefficient", "Standard Error", "t-statistic", "p-value"),
         caption = "What Explains the Violent Crime Rate in These Data?",
         align=c("l","c","c","c","c"))
-
 ```
 
 However, people who report OLS models should also provide some diagnostic tests to explore whether the assumptions of the model hold. One of those assumptions is homoskedasticity, which can be tested with a Breusch-Pagan test from the `{lmtest}` package. Here, the test output is testing a null hypothesis of homoskedastic variances. If the p-value is low enough to your particular threshold---we'll go with *p* < .05---you should reject the null hypothesis of homoskedastic variance and assert you instead have heteroskedastic variances in your model. The output of the Breusch-Pagan test suggests we've violated the assumption of homoskedasticity with these data.
@@ -172,7 +170,6 @@ bootCrime %>%
 Now, here's where the magic happens that will show how awesome `{purrr}` is for these things if you take some time to learn it. For each of these 1,000 resamples, we're going to run the same regression from above and store the results in our special tibble as a column named `lm`. Next, we're going to create another column (`tidy`) that tidies up those linear models. Yes, that's actually a thousand linear regressions we're running and saving a tibble. Tibbles are awesome.
 
 ```{r boot-lm, eval=T, echo=T}
-
 bootCrime %>% 
     mutate(lm = map(strap, ~lm(violent ~ poverty + single + metro + white + highschool, 
                      data = .)),
@@ -198,13 +195,11 @@ bootCrime$tidy[[1000]]
 Now, this is where you're going to start summarizing the results from your thousand regressions. Next, we should pull the tidy lists from the `bootCrime` tibble and "map" over them into a new tibble. This is where the investment into learning `{purrr}` starts to pay off. It would be quite time-consuming to do this in some other way.
 
 ```{r map2dfbootcrime, eval=T, echo=T}
-
 bootCrime %>%
   pull(tidy) %>%
   map2_df(., # map to return a data frame
           seq(1, 1000), # make sure to get this seq right. We did this 1000 times.
           ~mutate(.x, resample = .y)) -> tidybootCrime
-
 ```
 
 If you're curious, this basically just ganked all the "tidied" output of our 1,000 regressions and binded them as rows to each other, with helpful indices in the `resample` column. Observe:
@@ -216,13 +211,11 @@ tidybootCrime
 This next code will calculate the standard errors. Importantly, *bootstrap standard errors are the standard deviation of the coefficient estimate for each of the parameters in the model.* That part may not be obvious. It's not the mean of standard errors for the estimate; it's the standard deviation of the coefficient estimate itself.
 
 ```{r get-bootstrapses, eval=T, echo=T}
-
 tidybootCrime %>%
   # group by term, naturally
   group_by(term) %>%
   # This is the actual bootstrapped standard error you want
   summarize(bse = sd(estimate)) -> bseM1
-
 ```
 
 When you bootstrap your standard errors under these conditions, you should compare the results of these bootstrapped standard errors with the standard OLS standard errors for the parameters in your model. Here, we'll do it visually. The ensuing plot suggests the standard errors most influenced by the heteroskedasticity in our model are those for the single family home variable and especially the percentage of the state that is white variable. In the former case, the bootstrapping still produced standard errors that could rule out a counterclaim of zero relationship, but the percentage of the state that is white variable becomes much more diffuse when its standard errors are bootstrapped. Sure, the 90% confidence intervals that we're using here (given the small number of observations) would still slightly overlap zero with the OLS estimates, but it was close. It's not close when the standard errors are bootstrapped. We should be cautious about wanting to make an argument for a precise effect there in our model.
@@ -254,8 +247,6 @@ broom::tidy(M1) %>%
   labs(x = "", y="",
        title = "A Comparison of Normal OLS Standard Errors with Bootstrapped Standard Errors",
        subtitle = "A plot like this visualizes how different standard errors could be when adjusted for heteroskedasticity.")
-  
-
 ```
 
 ## Conclusion

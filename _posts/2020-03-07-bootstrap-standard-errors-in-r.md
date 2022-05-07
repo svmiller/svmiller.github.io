@@ -19,7 +19,7 @@ image: "system-of-a-down.jpg"
 
 {% include image.html url="/images/system-of-a-down.jpg" caption="The Toxicity of Heteroskedasticity" width=350 align="right" %}
 
-*Last updated: 28 April 2021`* 
+*Last updated: 28 April 2021* 
 
 This will be another post I wish I can go back in time to show myself how to do when I was in graduate school. It's something I recently taught [my grad class](http://post8000.svmiller.com/) how to do as part of [a lab session](http://post8000.svmiller.com/lab-scripts/ols-diagnostics-lab.html).
 
@@ -660,7 +660,6 @@ Now, here's where the magic happens that will show how awesome `{purrr}` is for 
 
 
 ```r
-
 bootCrime %>% 
     mutate(lm = map(strap, ~lm(violent ~ poverty + single + metro + white + highschool, 
                      data = .)),
@@ -702,7 +701,6 @@ Now, this is where you're going to start summarizing the results from your thous
 
 
 ```r
-
 bootCrime %>%
   pull(tidy) %>%
   map2_df(., # map to return a data frame
@@ -735,7 +733,6 @@ This next code will calculate the standard errors. Importantly, *bootstrap stand
 
 
 ```r
-
 tidybootCrime %>%
   # group by term, naturally
   group_by(term) %>%
