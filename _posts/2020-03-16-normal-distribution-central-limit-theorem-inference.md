@@ -164,7 +164,7 @@ Therms18 %>%
   group_by(fttrump) %>%
   tally() %>%
   ggplot(.,aes(fttrump, n)) + geom_bar(stat="identity", fill="#619cff",color="black") +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() +
   scale_x_continuous(breaks = seq(0, 100, by=10)) +
   labs(x = "Thermometer Rating for Donald Trump",
        y = "Number of Observations with This Particular Rating",

@@ -424,7 +424,7 @@ Herndon et al. (2014, Figure 4) note a simple generalized additive model would h
 ```r
 RR %>%
   ggplot(.,aes(debtgdp, drgdp)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_point() +
   geom_smooth(method=gam, formula= y ~ s(x, bs = "cs")) +
   geom_vline(xintercept = 90, linetype = "dashed") +
@@ -483,7 +483,7 @@ newdat %>%
             lwr = quantile(.prediction, .1),
             upr = quantile(.prediction, .9)) %>%
   ggplot(.,aes(debtgdp2, mean, ymin=lwr, ymax=upr)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() +
   geom_hline(yintercept = 0, linetype="dashed") +
   geom_pointrange() +
   facet_wrap(~decade) + coord_flip() +

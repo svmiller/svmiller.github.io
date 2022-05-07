@@ -215,7 +215,7 @@ simM1 %>% # we're going to name things to match up nicely with the above output
   mutate(term = fct_rev(fct_inorder(term))) %>%
   # plot..
   ggplot(.,aes(term, estimate, ymin=lwr, ymax=upr,color=category, shape=category)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() +
   scale_colour_brewer(palette = "Set1") +
   geom_hline(yintercept =  0, linetype="dashed") +
   geom_pointrange(position = position_dodge(width = .5)) + coord_flip()+
@@ -250,7 +250,7 @@ Data %>%
   dplyr::slice(rep(row_number(), 1000)) ->  newdatM1
 
 newdatM1
-#> # A tibble: 2,000 x 7
+#> # A tibble: 2,000 × 7
 #>    z_ideo  z_age female collegeed z_famincr z_pid7na state       
 #>     <dbl>  <dbl>  <dbl>     <dbl>     <dbl>    <dbl> <chr>       
 #>  1 -0.958 0.0518      1         0   0.00220   0.0254 Pennsylvania
@@ -277,7 +277,7 @@ simM1 %>%
   arrange(sim) -> simM1
 
 simM1
-#> # A tibble: 2,000 x 11
+#> # A tibble: 2,000 × 11
 #>      sim `1|2`  `2|3` `3|4` `4|5`    z_age  female collegeed z_famincr z_ideo
 #>    <int> <dbl>  <dbl> <dbl> <dbl>    <dbl>   <dbl>     <dbl>     <dbl>  <dbl>
 #>  1     1 -1.94 -0.315 0.698  1.67  0.0661  -0.0209    -0.567   -0.213    1.61
@@ -304,7 +304,7 @@ simM1 %>%
   bind_cols(., newdatM1) -> simM1
 
 simM1
-#> # A tibble: 2,000 x 18
+#> # A tibble: 2,000 × 18
 #>      sim `1|2`  `2|3` `3|4` `4|5` coefz_age coeffemale coefcollegeed
 #>    <int> <dbl>  <dbl> <dbl> <dbl>     <dbl>      <dbl>         <dbl>
 #>  1     1 -1.94 -0.315 0.698  1.67   0.0661     -0.0209        -0.567
@@ -332,7 +332,7 @@ simM1 %>%
   select(sim, xb, everything()) -> simM1
 
 simM1
-#> # A tibble: 2,000 x 19
+#> # A tibble: 2,000 × 19
 #>      sim    xb `1|2`  `2|3` `3|4` `4|5` coefz_age coeffemale coefcollegeed
 #>    <int> <dbl> <dbl>  <dbl> <dbl> <dbl>     <dbl>      <dbl>         <dbl>
 #>  1     1 -1.54 -1.94 -0.315 0.698  1.67   0.0661     -0.0209        -0.567
@@ -379,7 +379,7 @@ simM1 %>%
 
 simM1 %>%
   select(sim, z_ideo, p1:p5, sump)
-#> # A tibble: 2,000 x 8
+#> # A tibble: 2,000 × 8
 #>      sim z_ideo     p1    p2    p3     p4     p5  sump
 #>    <int>  <dbl>  <dbl> <dbl> <dbl>  <dbl>  <dbl> <dbl>
 #>  1     1 -0.958 0.401  0.372 0.131 0.0577 0.0387     1
