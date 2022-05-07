@@ -21,7 +21,7 @@ image: "kameron-michaels.jpg"
 
 <!-- {% include image.html url="/images/kameron-michaels.jpg" caption="Kameron Michaels isn't quite sure what's happening below, but she's certainly a little revolted at the sight." width=410 align="right" %} -->
 
-*Last updated: June 17, 2021*
+*Last updated: May 07, 2022*
 
 My wife got me hooked into watching RuPaul's Drag Race with her. The long and short of it is I didn't need to have my arm twisted to watch or enjoy the show. Indeed, drag nights at Icon in Tuscaloosa---incidentally home to [the performer who gave Trinity her "Tuck" moniker](https://twitter.com/leland2genesis?lang=en)---are some of my fondest memories of graduate school. A performer who routinely served as opening act for her---[and sadly passed away](http://obits.al.com/obituaries/birmingham/obituary.aspx?n=kevin-thomas&pid=188344432&fhid=6039) last year---was among the sweetest/kindest people I knew in town.[^herdoc] I had a receptiveness to drag as concept and creative outlet, but oddly did not know about the show until my wife told me about it.
 
@@ -752,7 +752,7 @@ Finally, I decided to run a simple graded response model on the data for all con
 
 The top 25 participants on this metric are listed below, with accompanying standard errors around the latent estimate.
 
-![plot of chunk top-rupauls-drag-race-performers](/images/top-rupauls-drag-race-performers-1.png)
+![plot of chunk top-rupauls-drag-race-performers](/images/dragracer-rupauls-drag-race-analysis/top-rupauls-drag-race-performers-1.png)
 
 Fans of the show are free to read into this what they want. Several Season 13 scores are going to be functions of those first three episodes, which will artificially prop up some scores even if (I think) they were uncompetitive. I'm not too invested in what this demonstrates, but a few things are worth mentioning as quick hitters.
 
