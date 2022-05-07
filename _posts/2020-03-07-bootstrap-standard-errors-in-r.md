@@ -19,7 +19,7 @@ image: "system-of-a-down.jpg"
 
 {% include image.html url="/images/system-of-a-down.jpg" caption="The Toxicity of Heteroskedasticity" width=350 align="right" %}
 
-*Last updated: 28 April 2021* 
+*Last updated: 28 April 2021`* 
 
 This will be another post I wish I can go back in time to show myself how to do when I was in graduate school. It's something I recently taught [my grad class](http://post8000.svmiller.com/) how to do as part of [a lab session](http://post8000.svmiller.com/lab-scripts/ols-diagnostics-lab.html).
 
@@ -672,19 +672,19 @@ If you were to call the `bootCrime` object at this stage into the R console, you
 
 ```r
 bootCrime
-#> # A tibble: 1,000 x 4
-#>    strap      .id   lm     tidy            
-#>    <list>     <chr> <list> <list>          
-#>  1 <resample> 0001  <lm>   <tibble [6 × 5]>
-#>  2 <resample> 0002  <lm>   <tibble [6 × 5]>
-#>  3 <resample> 0003  <lm>   <tibble [6 × 5]>
-#>  4 <resample> 0004  <lm>   <tibble [6 × 5]>
-#>  5 <resample> 0005  <lm>   <tibble [6 × 5]>
-#>  6 <resample> 0006  <lm>   <tibble [6 × 5]>
-#>  7 <resample> 0007  <lm>   <tibble [6 × 5]>
-#>  8 <resample> 0008  <lm>   <tibble [6 × 5]>
-#>  9 <resample> 0009  <lm>   <tibble [6 × 5]>
-#> 10 <resample> 0010  <lm>   <tibble [6 × 5]>
+#> # A tibble: 1,000 × 4
+#>    strap               .id   lm     tidy            
+#>    <list>              <chr> <list> <list>          
+#>  1 <resample [51 x 8]> 0001  <lm>   <tibble [6 × 5]>
+#>  2 <resample [51 x 8]> 0002  <lm>   <tibble [6 × 5]>
+#>  3 <resample [51 x 8]> 0003  <lm>   <tibble [6 × 5]>
+#>  4 <resample [51 x 8]> 0004  <lm>   <tibble [6 × 5]>
+#>  5 <resample [51 x 8]> 0005  <lm>   <tibble [6 × 5]>
+#>  6 <resample [51 x 8]> 0006  <lm>   <tibble [6 × 5]>
+#>  7 <resample [51 x 8]> 0007  <lm>   <tibble [6 × 5]>
+#>  8 <resample [51 x 8]> 0008  <lm>   <tibble [6 × 5]>
+#>  9 <resample [51 x 8]> 0009  <lm>   <tibble [6 × 5]>
+#> 10 <resample [51 x 8]> 0010  <lm>   <tibble [6 × 5]>
 #> # … with 990 more rows
 ```
 
@@ -715,7 +715,7 @@ If you're curious, this basically just ganked all the "tidied" output of our 1,0
 
 ```r
 tidybootCrime
-#> # A tibble: 6,000 x 6
+#> # A tibble: 6,000 × 6
 #>    term        estimate std.error statistic      p.value resample
 #>    <chr>          <dbl>     <dbl>     <dbl>        <dbl>    <int>
 #>  1 (Intercept) -1150.      660.      -1.74  0.0886              1
@@ -735,6 +735,7 @@ This next code will calculate the standard errors. Importantly, *bootstrap stand
 
 
 ```r
+
 tidybootCrime %>%
   # group by term, naturally
   group_by(term) %>%
@@ -764,7 +765,7 @@ broom::tidy(M1) %>%
                                     "% White" = "white",
                                     "% High School Graduate" = "highschool")) %>%
    ggplot(.,aes(category, estimate, ymin=lwr, ymax=upr)) + 
-  theme_steve_web() + post_bg() +
+  theme_steve_web() +
   geom_pointrange(position = position_dodge(width = 1)) +
   facet_wrap(~term, scales="free_x") +
   geom_hline(yintercept = 0, linetype="dashed") +
