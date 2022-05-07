@@ -130,7 +130,7 @@ af_crime93 %>%
   mutate(fitted = fitted(M1),
          resid = resid(M1)) %>%
   ggplot(.,aes(fitted, resid)) + geom_point() +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   xlab("Fitted Values") + ylab("Residuals") +
   geom_text_repel(aes(label=state), family="Open Sans") +
   labs(title = "A Fitted-Residual Plot from Our Crime Model",
@@ -246,7 +246,7 @@ broom::tidy(M1) %>%
                                     "% White" = "white",
                                     "% High School Graduate" = "highschool")) %>%
    ggplot(.,aes(category, estimate, ymin=lwr, ymax=upr)) + 
-  theme_steve_web() + post_bg() +
+  theme_steve_web() +
   geom_pointrange(position = position_dodge(width = 1)) +
   facet_wrap(~term, scales="free_x") +
   geom_hline(yintercept = 0, linetype="dashed") +

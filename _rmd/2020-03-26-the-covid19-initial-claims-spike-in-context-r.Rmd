@@ -145,7 +145,7 @@ Here's what the data looked like before today.
 ICSA %>%
   filter(date <= ymd("2020-03-14")) %>%
   ggplot(.,aes(date, value/1000)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   scale_x_date(date_breaks = "2 years",
                date_labels = "%Y",
                limits = as.Date(c('1965-01-01','2020-04-01'))) +
@@ -170,7 +170,7 @@ ICSA %>%
   # change just one line
   filter(date <= ymd("2020-03-21"))  %>%
   ggplot(.,aes(date, value/1000)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   scale_x_date(date_breaks = "2 years",
                date_labels = "%Y",
                limits = as.Date(c('1965-01-01','2020-04-01'))) +
@@ -206,7 +206,7 @@ ICSA %>%
   # Omit the filter
   #filter(date <= ymd("2020-03-21"))  %>% # Commenting out just one line.
   ggplot(.,aes(date, value/1000)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   scale_x_date(date_breaks = "2 years",
                date_labels = "%Y",
                limits = as.Date(c('1965-01-01','2020-04-01'))) +

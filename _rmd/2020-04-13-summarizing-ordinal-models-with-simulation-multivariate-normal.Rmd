@@ -176,7 +176,7 @@ simM1 %>% # we're going to name things to match up nicely with the above output
   mutate(term = fct_rev(fct_inorder(term))) %>%
   # plot..
   ggplot(.,aes(term, estimate, ymin=lwr, ymax=upr,color=category, shape=category)) +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() +
   scale_colour_brewer(palette = "Set1") +
   geom_hline(yintercept =  0, linetype="dashed") +
   geom_pointrange(position = position_dodge(width = .5)) + coord_flip()+

@@ -274,14 +274,12 @@ for (i in 1:100) {
 ```
 
 ```{r illustration-of-variable-importance-trump-vote-2016, echo=F, eval=T, warning=F, fig.width=12, fig.height = 8}
-
 importance_tab %>%
   group_by(var) %>%
   summarize(meanimp = mean(MeanDecreaseGini),
             sd = sd(MeanDecreaseGini)) %>%
   mutate(var = reorder(var, meanimp)) %>%
   ggplot(.,aes(var, y=meanimp)) + theme_steve_web() +
-  post_bg() +
   coord_flip() +
   geom_linerange(aes(x = var, ymin = meanimp - sd,
                        ymax = meanimp + sd),
@@ -447,7 +445,7 @@ accuracyStates %>%
   ggplot(.,aes(state, accuracy, color=model, shape=model)) +
   # scale_x_discrete(expand=c(.2,.2)) +
   facet_wrap(~division, scale = "free") +
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_point(size=3, position=position_dodge(width=.3)) + 
   coord_flip() +
   labs(y = "Accuracy",

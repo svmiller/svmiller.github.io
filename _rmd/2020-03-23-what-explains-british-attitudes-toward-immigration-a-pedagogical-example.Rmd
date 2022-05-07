@@ -192,7 +192,7 @@ ESS9GB %>%
   ggplot(.,aes(as.factor(immigsent), n)) +  # create foundation ggplot
   # bar chart, with some prettiness
   geom_bar(stat="identity", alpha=0.8, color="black", fill="#619cff") +
-  theme_steve_web() + post_bg() + # custom theme stuff
+  theme_steve_web() + # custom theme stuff
   labs(y = "Number of Responses",
        x = "Value of the Pro-Immigration Sentiment Variable",
        caption = "Data: European Social Survey, Round 9 in the United Kingdom",
@@ -317,7 +317,7 @@ The *z*-score that emerges from this calculation is 13.748, meaning our sample s
 
 ```{r a-normal-distribution-with-areas-under-curve, echo=F, eval=T, cache=T, warning=F, fig.width=13, fig.height = 8}
 normal_dist("#002F5F", "#002F5F") + 
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   labs(title = "The Area Underneath a Normal Distribution",
        subtitle = "The tails extend to infinity and are asymptote to zero, but the full domain sums to 1. 95% of all possible values are within about 1.96 standard units from the mean.",
        y = "Density",
@@ -492,7 +492,7 @@ M1hcses %>%
                                     "Household Income (Deciles)" = "hinctnta",
                                     "Ideology (L to R)" = "lrscale")) %>%
   ggplot(.,aes(Category, estimate, ymin=lwr, ymax=upr)) + 
-  theme_steve_web() + post_bg() +
+  theme_steve_web() + 
   geom_pointrange(position = position_dodge(width = 1)) +
   facet_wrap(~term, scales="free_x") +
   geom_hline(yintercept = 0, linetype="dashed") +
