@@ -164,7 +164,7 @@ TV16 %>%
                                   .ordered = TRUE))-> Midwest
 ```
 
-Next, let's partition the data. Machine learning people have several means to validate their predictive models, but a fairly boilerplate approach here is to split the data into a "training" set and a "testing" set. Therein, the model predicts/"learns" on the training set and insights from the training model can then be applied to the testing set to assess model performance. I've yet to see any hard rules for how to approach training and testing partitions, but I routinely see data split 80%/20% training/testing. It's not hard to do with `modelr`.
+Next, let's partition the data. Machine learning people have several means to validate their predictive models, but a fairly boilerplate approach here is to split the data into a "training" set and a "testing" set. Therein, the model predicts/"learns" on the training set and insights from the training model can then be applied to the testing set to assess model performance. I've yet to see any hard rules for how to approach training and testing partitions, but I routinely see data split 80%/20% training/testing. It's not hard to do with `{modelr}`.
 
 ```{r partitiondata}
 set.seed(8675309) # Jenny, I got your number...
