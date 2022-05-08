@@ -46,7 +46,7 @@ knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
                       collapse = TRUE, comment = "#>") 
 ```
 
-```{r loaddatadostuff, include=FALSE, cache=T}
+```{r loaddatadostuff, include=FALSE}
 library(survey)
 library(srvyr)
 library(tidyverse)
@@ -382,7 +382,7 @@ for (i in 1:1000) {
 }
 ```
 
-```{r population-means-various-sample-types, echo=F, eval=T, cache=T, warning=F, fig.width=12, fig.height = 8}
+```{r population-means-various-sample-types, echo=F, eval=T,  warning=F, fig.width=12, fig.height = 8}
 popmeansBoot %>%
   group_by(method) %>%
   summarize(mean = mean(meanapi),
@@ -517,7 +517,7 @@ for (i in 1:1000) {
 ```
 
 
-```{r school-type-means-various-sample-types, echo=F, eval=T, cache=T, warning=F, fig.width=13, fig.height = 11}
+```{r school-type-means-various-sample-types, echo=F, eval=T,  warning=F, fig.width=13, fig.height = 11}
 fakeAPI %>%
   group_by(schooltype) %>%
   summarize(actualmean = mean(api)) %>%
@@ -646,7 +646,7 @@ M4 <- broom.mixed::tidy(lmer(api ~ meals + colgrad + fullqual + (1 | county) + (
 regMixed <- rbind(M1, M2, M3, M4) %>% tbl_df() %>% mutate(method = "Mixed Effects Model") %>% filter(effect == "fixed")
 ```
 
-```{r fakeapi-comparing-different-regression-models, echo=F, eval=T, cache=T, warning=F, fig.width=11.5, fig.height = 12}
+```{r fakeapi-comparing-different-regression-models, echo=F, eval=T,  warning=F, fig.width=11.5, fig.height = 12}
 regBootsums %>%
   rename(estimate = mean,
          `std.error` = sd) %>%
@@ -775,7 +775,7 @@ M4 <- broom.mixed::tidy(lmer(api00 ~ meals + col.grad + full + (1 | cname) + (1 
 regMixed <- rbind(M1, M3, M4) %>% tbl_df() %>% mutate(method = "Mixed Effects Model") %>% filter(effect == "fixed")
 ```
 
-```{r api-comparing-different-regression-models, echo=F, eval=T, cache=T, warning=F, fig.width=12, fig.height = 12}
+```{r api-comparing-different-regression-models, echo=F, eval=T,  warning=F, fig.width=12, fig.height = 12}
 actualeffects <- broom::tidy(M1 <- lm(api00 ~ meals + col.grad + full, data=apipop))
 
 regBootsums %>%
