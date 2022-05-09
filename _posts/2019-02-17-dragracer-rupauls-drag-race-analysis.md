@@ -21,7 +21,7 @@ image: "kameron-michaels.jpg"
 
 <!-- {% include image.html url="/images/kameron-michaels.jpg" caption="Kameron Michaels isn't quite sure what's happening below, but she's certainly a little revolted at the sight." width=410 align="right" %} -->
 
-*Last updated:  7 May 2022*
+*Last updated:  9 May 2022. Coverage includes Season 14.*
 
 My wife got me hooked into watching RuPaul's Drag Race with her. The long and short of it is I didn't need to have my arm twisted to watch or enjoy the show. Indeed, drag nights at Icon in Tuscaloosa---incidentally home to [the performer who gave Trinity her "Tuck" moniker](https://twitter.com/leland2genesis?lang=en)---are some of my fondest memories of graduate school. A performer who routinely served as opening act for her---[and sadly passed away](http://obits.al.com/obituaries/birmingham/obituary.aspx?n=kevin-thomas&pid=188344432&fhid=6039) last year---was among the sweetest/kindest people I knew in town.[^herdoc] I had a receptiveness to drag as concept and creative outlet, but oddly did not know about the show until my wife told me about it.
 
@@ -201,6 +201,15 @@ This will facilitate some kind of comparison, say, among the season-winners by r
    <td style="text-align:center;"> 14.29% </td>
    <td style="text-align:center;"> 8 </td>
   </tr>
+  <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:left;"> Willow Pill </td>
+   <td style="text-align:center;"> 7.14% </td>
+   <td style="text-align:center;"> 7.14% </td>
+   <td style="text-align:center;"> 14.29% </td>
+   <td style="text-align:center;"> 14.29% </td>
+   <td style="text-align:center;"> -2 </td>
+  </tr>
 </tbody>
 </table>
 
@@ -365,6 +374,16 @@ I added an indicator to the contestant-episode data after season 12 noting which
    <td style="text-align:center;"> 50% </td>
    <td style="text-align:center;"> -3 </td>
   </tr>
+  <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:left;"> Kornbread (The Snack) Jete </td>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 16.67% </td>
+   <td style="text-align:center;"> 16.67% </td>
+   <td style="text-align:center;"> 0% </td>
+   <td style="text-align:center;"> 0% </td>
+   <td style="text-align:center;"> 2 </td>
+  </tr>
 </tbody>
 </table>
 
@@ -436,6 +455,16 @@ The data can also be used to identify the lowest-scoring performers to get a top
    <td style="text-align:center;"> -4 </td>
   </tr>
   <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:left;"> Daya Betty </td>
+   <td style="text-align:center;"> 7.14% </td>
+   <td style="text-align:center;"> 7.14% </td>
+   <td style="text-align:center;"> 21.43% </td>
+   <td style="text-align:center;"> 21.43% </td>
+   <td style="text-align:center;"> -4 </td>
+  </tr>
+  <tr>
    <td style="text-align:center;"> S10 </td>
    <td style="text-align:center;"> 2 </td>
    <td style="text-align:left;"> Kameron Michaels </td>
@@ -476,24 +505,14 @@ The data can also be used to identify the lowest-scoring performers to get a top
    <td style="text-align:center;"> -2 </td>
   </tr>
   <tr>
-   <td style="text-align:center;"> S04 </td>
-   <td style="text-align:center;"> 4 </td>
-   <td style="text-align:left;"> Latrice Royale </td>
-   <td style="text-align:center;"> 18.18% </td>
-   <td style="text-align:center;"> 36.36% </td>
-   <td style="text-align:center;"> 27.27% </td>
-   <td style="text-align:center;"> 36.36% </td>
-   <td style="text-align:center;"> -1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> S12 </td>
-   <td style="text-align:center;"> 4 </td>
-   <td style="text-align:left;"> Jackie Cox </td>
-   <td style="text-align:center;"> 0% </td>
-   <td style="text-align:center;"> 54.55% </td>
-   <td style="text-align:center;"> 27.27% </td>
-   <td style="text-align:center;"> 36.36% </td>
-   <td style="text-align:center;"> -1 </td>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:left;"> Willow Pill </td>
+   <td style="text-align:center;"> 7.14% </td>
+   <td style="text-align:center;"> 7.14% </td>
+   <td style="text-align:center;"> 14.29% </td>
+   <td style="text-align:center;"> 14.29% </td>
+   <td style="text-align:center;"> -2 </td>
   </tr>
 </tbody>
 </table>
@@ -593,6 +612,42 @@ There are a few cases I show below where an individual performer had a higher "D
    <td style="text-align:center;"> 9 </td>
    <td style="text-align:center;"> 8 </td>
   </tr>
+  <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:left;"> Lady Camden </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:left;"> Angeria Paris VanMicheals </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 0 </td>
+   <td style="text-align:center;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:left;"> Bosco </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> -2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:left;"> Kornbread (The Snack) Jete </td>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> -2 </td>
+  </tr>
 </tbody>
 </table>
 
@@ -639,6 +694,15 @@ One other metric for classifying "robbed" queens is to locate those queens who 1
    <td style="text-align:center;"> -5 </td>
    <td style="text-align:left;"> Jujubee </td>
    <td style="text-align:center;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> S14 </td>
+   <td style="text-align:left;"> Kornbread (The Snack) Jete </td>
+   <td style="text-align:center;"> 12 </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> -4 </td>
+   <td style="text-align:left;"> Daya Betty </td>
+   <td style="text-align:center;"> 6 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> S04 </td>

@@ -111,7 +111,6 @@ cbind(D, rrscores) %>%
   rename(lperform = F1,
          lperform_se = SE_F1) %>%
   tbl_df() -> D
-
 ```
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
@@ -123,7 +122,7 @@ add_jekyll_image('/images/kameron-michaels.jpg', "Kameron Michaels, the people's
 
 <!-- {% include image.html url="/images/kameron-michaels.jpg" caption="Kameron Michaels isn't quite sure what's happening below, but she's certainly a little revolted at the sight." width=410 align="right" %} -->
 
-*Last updated: `r format(Sys.time(), '%e %B %Y')`*
+*Last updated: `r format(Sys.time(), '%e %B %Y')`. Coverage includes Season 14.*
 
 My wife got me hooked into watching RuPaul's Drag Race with her. The long and short of it is I didn't need to have my arm twisted to watch or enjoy the show. Indeed, drag nights at Icon in Tuscaloosa---incidentally home to [the performer who gave Trinity her "Tuck" moniker](https://twitter.com/leland2genesis?lang=en)---are some of my fondest memories of graduate school. A performer who routinely served as opening act for her---[and sadly passed away](http://obits.al.com/obituaries/birmingham/obituary.aspx?n=kevin-thomas&pid=188344432&fhid=6039) last year---was among the sweetest/kindest people I knew in town.[^herdoc] I had a receptiveness to drag as concept and creative outlet, but oddly did not know about the show until my wife told me about it.
 
@@ -172,9 +171,7 @@ The data are far from perfect or complete, but they're workable for an empirical
 
 This will facilitate some kind of comparison, say, among the season-winners by reference to thier performance in main challenges/runways through the course of a season. I choose to focus on the percentage of wins, bottoms, etc. because the number of competitive episodes varies considerably through the 12 seasons. For example, Bebe Zahara Benet had just six episodes before the finale in which she could've been eliminated. Raja, Season's 3 winner, had 12. Seasons since then have had 10 or 11 competitive episodes, excluding the eight competitive episodes in Season 8. Season 13 was particularly long.
 
-```{r tabseasonwinners, echo=F, eval=T, cache=T, fig.width=13, fig.height=8, warning=F, message =F}
-
-
+```{r tabseasonwinners, echo=F, eval=T, fig.width=13, fig.height=8, warning=F, message =F}
 D %>%
   filter(rank == 1) %>%
   select(season, contestant, perc_win, perc_winhigh, perc_btm, perc_lowbtm, db_score) %>%
@@ -191,8 +188,6 @@ D %>%
         table.attr='id="stevetable"',
         caption = "Ranking the RuPaul's Drag Race Winners Across All Seasons",
         align=c("c","l","c","c","c","c","c"))
-
-
 ```
 
 The table won't reveal too much that stands at odds with what long-running fans of the show already know. Sharon Needles had the most main challenge wins of any season-winner and, in my interpretation of the data, is tied with Shea Couleé (a Season 9 semifinalist) for most main challenge wins of any performer. Fans will qualify that Sharon won her challenges outright while Shea shared two of her wins with Sasha Velour. This may matter to the allocation of prize money but won't matter in the data as I have it.
@@ -212,7 +207,6 @@ The conclusion of Season 11 and addition of Yvie Oddly to this list of winners m
 I added an indicator to the contestant-episode data after season 12 noting which contestant was Miss Congeniality for the season. From there, we can compare the Miss Congenialities (sic?) across seasons.
 
 ```{r comparemisscons, echo=F, eval=T, warning=F, message =F}
-
 D %>%
   left_join(., rpdr_contep %>% distinct(season, contestant, missc)) %>%
   # select(season, missc, contestant) %>%
@@ -283,7 +277,6 @@ This would not be the first time a queen was "robbed" from winning her particula
 There are a few cases I show below where an individual performer had a higher "Dusted or Busted" score than the eventual winner that season, with more of them coming in more recent seasons. All have unique situations. Nina finished second despite having the overall better record than Bebe Zahara Benet, but Ongina was woefully underplaced in her season. She too had a better "Dusted or Busted" score than the eventual champion, but finished in fifth place. Shea Couleé had arguably the best season run in the show's herstory but was eliminated in the semifinals. More recently, Brooke Lynn Hytes can now boast the biggest point differential in show herstory over an eventual champion. Her three-point cushion over the eventual season champion may not be topped.
 
 ```{r robbedqueens1, echo=F, eval=T, fig.width=13, fig.height=8, warning=F, message =F}
-
 D %>%
   group_by(season) %>%
   mutate(winnerdb = ifelse(rank == 1, db_score, NA),
@@ -303,8 +296,6 @@ D %>%
         table.attr='id="stevetable"',
         caption = "Queens Whose D/B Scores Were Greater Than the Season Champion, All Seasons",
         align=c("c","l","c","c","c","c","c"))
-
-
 ```
 
 One other metric for classifying "robbed" queens is to locate those queens who 1) finished outside the top four in a season but 2) had a higher "Dusted or Busted" score than the lowest-ranked performer to land in the top four. There are 44 such instances in the data, but much of that is in Season 6 because Darienne Lake had such a low score by the end of the season that even contestants like Gia Gunn and Laganja Estranja had comfortably outperformed her. The table below subsets that list to just the cases of performers who had the highest such difference in a given season and arranges them by largest difference.
