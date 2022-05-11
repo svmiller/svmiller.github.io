@@ -2,6 +2,7 @@
 layout: page
 title: "Letters of Recommendation"
 permalink: /for-students/letters-of-recommendation/
+active: miscelanea
 ---
 
 Writing letters of recommendation is an important professional service that professors provide for eligible students. I take these letters seriously when asked to write them and I become interested in how well the letter helps a student seeking some type of professional advancement (e.g. an internship, a job, graduate school, or law school). To that end, the letter I write requires a commitment from me to make sure that I’m helping you as best I can.
