@@ -2,6 +2,7 @@
 layout: page
 title: Presentations
 permalink: /presentations/
+active: miscelanea
 ---
 
 I occasionally get asked to give presentations on topics that are not directly connected to a manuscript/working paper. I put a link to those here for posterity. An astute reader will note that the underlying code for these presentations exists in [a subdirectory on the Github repository for my website](https://github.com/svmiller/svmiller.github.io/tree/master/presentations).

@@ -3,6 +3,7 @@ layout: page
 title: Assorted Article Summaries in Political Science/International Relations
 permalink: /article-summaries/
 image: "edward-james-olmos-stand-deliver.jpg"
+active: miscelanea
 ---
 
 I'm a big proponent of students writing an article summary for every article they read. I so strongly believe this maximizes the learning experience that I build these assignments into the syllabi for my undergraduate courses. My rationale here is largely built from my time in graduate school and stumbling into [the "IR Notes Pool" at Harvard University](http://www.olivialau.org/ir/) from around this time. I started doing this religiously for [my adviser](https://dmgibler.people.ua.edu)'s seminar on international conflict and the experience greatly helped me understand the material I was reading and situate it with other things I was reading.
