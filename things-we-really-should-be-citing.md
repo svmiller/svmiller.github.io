@@ -12,7 +12,7 @@ layout: page
 categories:
   - R
   - Political Science
-# image: "putin-visit-denmark-2011.jpg"
+active: miscelanea
 ---
 
 This page will serve as a bibliography/running tally of things that we (certainly I) use a lot in our applied research, but we almost never cite these things as integral to the output submitted for peer review. Here’s the problem as I see it.

@@ -2,6 +2,7 @@
 layout: page
 title: CV
 permalink: /cv/
+active: cv
 ---
 
 I embed a current version of my CV below. You can also [download the PDF here](/docs/svm-cv.pdf).

@@ -1,4 +1,4 @@
-<ul class="menu">
+<!-- <ul class="menu">
 
     {% for steve in site.data.menu %}
     {% if steve.subcategories != null %}
@@ -12,5 +12,30 @@
      <li><a href="{{ steve.href }}" class="page-link">{{ steve.title }}</a>
     {% endif %}
     </li>
+    {% endfor %}
+    </ul>
+-->
+
+<ul class="menu">
+    {% for i in site.data.menu %}
+    {% if i.subcategories != null %}
+    {% if {{page.active}} == {{i.active}} %}
+    <li id="n-active"><a href="{{ i.href }}" class="active">{{ i.title }}</a>
+    {% else %}
+     <li><a href="{{ i.href }}" class="">{{ i.title }}</a>
+    {% endif %}
+    <ul class="sub-menu">
+    {% for subcategory in i.subcategories %}
+    <li><a href="{{ subcategory.subhref }}">{{ subcategory.subtitle }}</a></li>
+    {% endfor %}
+    </ul> </li>
+    {% else %}
+    {% if {{page.active}} == {{i.active}} %}
+    <li id="n-active"><a href="{{ i.href }}" class="active">{{ i.title }}</a>
+    {% else %}
+    <li><a href="{{ i.href }}" class="">{{ i.title }}</a>
+    {% endif %}   </li>
+    {% endif %}
+ 
     {% endfor %}
     </ul>

@@ -12,7 +12,7 @@ layout: page
 categories:
   - R
   - Political Science
-# image: "putin-visit-denmark-2011.jpg"
+active: miscelanea
 ---
 
 ```{r setup, include=FALSE, cache=F}

@@ -40,6 +40,11 @@
 	color: #fff;
 }
 
+.site-nav ul li a:hover {
+  text-decoration: none;
+	color: $su-water;
+}
+
 .site-nav ul {
 
 	text-align: right;
@@ -71,6 +76,10 @@
 .site-nav a {
 	display: block;
         color: #ffffff;
+}
+
+.site-nav ul li#n-active {
+  border-color: $su-water;
 }
 
 /* Sub Menu */

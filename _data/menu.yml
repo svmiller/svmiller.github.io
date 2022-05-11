@@ -1,11 +1,14 @@
 - title: "About"
   href: "/about/"
+  active: about
 
 - title: "Blog"
   href: "/blog/"
+  active: blog
 
 - title: "CV"
   href: "/cv/"
+  active: cv
 
 # - title: "For Students"
 #   href: "/for-students/"
@@ -17,9 +20,11 @@
 
 - title: "Research"
   href: "/research/"
+  active: research
 
 - title: "Teaching"
   href: "/teaching/"
+  active: teaching
   subcategories:
     - subtitle: "POSC 1020 – Introduction to International Relations"
       subhref: "http://posc1020.svmiller.com"
@@ -34,6 +39,7 @@
 
 - title: "Miscelánea"
   href: ""
+  active: miscelanea
   subcategories:
     - subtitle: "Article Summaries"
       subhref: "/article-summaries/"
