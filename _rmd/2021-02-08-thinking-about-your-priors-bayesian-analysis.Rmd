@@ -13,6 +13,7 @@ layout: post
 categories:
   - R
 image: "prior-posterior-likelihood.png"
+active: blog
 ---
 
 ```{r setup, include=FALSE, cache=F}

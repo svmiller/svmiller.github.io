@@ -8,6 +8,7 @@ categories:
   - Political Science
 excerpt: "How serious are Americans about democracy? I look at four waves of AmericasBarometer data to answer that question. I have my doubts about American (certainly partisan) commitment to democracy."
 image: trump-ny-rally.jpg
+active: blog
 ---
 
 ```{r setup-how-serious-americans, include=FALSE, cache=F}

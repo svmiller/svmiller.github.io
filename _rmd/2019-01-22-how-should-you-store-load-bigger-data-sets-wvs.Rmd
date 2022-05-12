@@ -10,6 +10,7 @@ layout: post
 permalink: null
 categories: R
 image: "world-values-survey.jpg"
+active: blog
 ---
 
 

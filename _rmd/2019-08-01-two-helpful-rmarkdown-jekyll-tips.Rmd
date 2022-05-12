@@ -12,6 +12,7 @@ categories:
   - R Markdown
   - Jekyll
 image: brent-rambo.jpg
+active: blog
 ---
 
 ```{r setup, include=FALSE, cache=F}

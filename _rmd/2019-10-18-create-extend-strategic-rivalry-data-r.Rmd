@@ -12,6 +12,7 @@ categories:
   - R
   - Political Science
 image: "bettanier-black-spot-1887.jpg"
+active: blog
 ---
 
 ```{r setup, include=FALSE, cache=F}

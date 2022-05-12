@@ -12,6 +12,7 @@ categories:
   - R
   - Political Science
 image: "paul-ryan-workout-photos-oh-god-who-thought-this-was-a-good-look.jpg"
+active: blog
 ---
 
 ```{r setup, include=FALSE, cache=F}

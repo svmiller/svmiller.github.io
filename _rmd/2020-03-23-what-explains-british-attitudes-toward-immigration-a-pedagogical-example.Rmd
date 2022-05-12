@@ -13,6 +13,7 @@ categories:
   - Political Science
   - Teaching
 image: "british-immigration.jpg"
+active: blog
 ---
 
 ```{r setup-correlated-errors, include=FALSE, cache=F}

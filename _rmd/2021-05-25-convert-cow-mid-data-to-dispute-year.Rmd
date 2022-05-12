@@ -12,6 +12,7 @@ categories:
   - R
   - Political Science
 image: "putin-visit-denmark-2011.jpg"
+active: blog
 ---
 
 ```{r setup, include=FALSE, cache=F}

@@ -1,5 +1,5 @@
 ---
-title: "How to (Meticulously) Convert Participant-Level Dispute Data to Dyadic Dispute-Year Data in R"
+title: "Testy McTesterson"
 output:
   md_document:
     variant: gfm
@@ -30,6 +30,13 @@ add_jekyll_image <- function(url, caption, width, align) {
  cat(img)
 }
 
+add_announce <- function(announce, text) {
+  
+  update <- paste0('{% include announcebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
 knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
 knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
                       cache.path = '~/Dropbox/svmiller.github.io/cache/cow-mid-dyadic-dispute-data/',
@@ -39,7 +46,12 @@ knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
   comment = "#>")
 ```
 
-`r knitr::current_input() `
+```{r announcebox, echo=F, eval=T, results="asis", cache=F}
+ 
+add_announce(announce = "Check this Shit out ⤵️", 
+           text = "This post became the basis for <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a>, which you can now install on CRAN. The processes described here ultimately became <a href='http://svmiller.com/peacesciencer/reference/create_dyadyears.html'><code class='highlighter-rouge'>create_dyadyears()</code></a> and <a href='http://svmiller.com/peacesciencer/reference/create_stateyears.html'><code class='highlighter-rouge'>create_stateyears()</code></a> in that package. Please check out the package’s website for its continued development.")
+ 
+```
 
 ```{r}
 plot(mtcars) 

@@ -12,6 +12,7 @@ permalink: null
 categories:
   - R
   - Political Science
+active: blog
 ---
 
 ```{r setup, include=FALSE, cache=F}

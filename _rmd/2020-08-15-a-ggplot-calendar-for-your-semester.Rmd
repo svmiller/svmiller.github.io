@@ -12,6 +12,7 @@ categories:
   - R Markdown
   - R
 image: "ggplot-hex.png"
+active: blog
 ---
   
 ```{r setup, include=FALSE, cache=F}
@@ -62,7 +63,7 @@ It's the start of the school year, which means it's time for university professo
 
 University syllabi are curious monsters. For one, they're prone to bloat. Universities---understandably, by the way---mandate some important information be included in them. These range from the obvious information for students (i.e. when the class meets) to important university policy to communicate with students so that the university and its representatives (i.e. people like me) conform to relevant state and federal law. Over time, universities---again, understandably---have begun to see syllabi like contracts. Continuation in the course constitutes student acceptance with the terms of the "contract", as oulined in the syllabus. This both informs the student and protects the faculty.
 
-It does mean syllabi are getting progressively bigger and longer and the practical information students may want regarding the class schedule may get harder to find. It's why, for the past two years or so, I've taken to modeling a calendar to be included in my R Markdown syllabi. It took me a few years to perfect this. Mostly: dates in R are clunky no matter `lubridate`'s efforts to make them more tractable. However, I think I finally got it in a way that's both intuitive and not at all daunting. Here's some code you can copy-paste-tweak for your own particular case.
+It does mean syllabi are getting progressively bigger and longer and the practical information students may want regarding the class schedule may get harder to find. It's why, for the past two years or so, I've taken to modeling a calendar to be included in my R Markdown syllabi. It took me a few years to perfect this. Mostly: dates in R are clunky no matter `{lubridate}`'s efforts to make them more tractable. However, I think I finally got it in a way that's both intuitive and not at all daunting. Here's some code you can copy-paste-tweak for your own particular case.
 
 First, here are the R packages you'll want or at least that I'll be using in this post.
 

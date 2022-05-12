@@ -12,6 +12,7 @@ categories:
   - R
   - Political Science
 image: "gilroy-strong.jpg"
+active: blog
 ---
 
 ```{r setup, echo=F, warning=F, message=F}

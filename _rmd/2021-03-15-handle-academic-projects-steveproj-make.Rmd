@@ -12,6 +12,7 @@ categories:
   - R
   - R Markdown
 image: "steveproj-hexlogo.png"
+active: blog
 ---
 
 ```{r setup, include=FALSE, cache=F}
