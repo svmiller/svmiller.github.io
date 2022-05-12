@@ -11,6 +11,7 @@ layout: post
 categories:
   - R
 image: "stack-of-journals.png"
+active: blog
 ---
 
 

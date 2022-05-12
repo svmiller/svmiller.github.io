@@ -12,6 +12,7 @@ categories:
   - Political Science
   - R
 image: "maurice-kendall.png"
+active: blog
 ---
 
 
