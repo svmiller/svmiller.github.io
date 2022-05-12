@@ -2,6 +2,7 @@
 layout: page
 title: "{peacesciencer} Remote Data"
 permalink: /R/peacesciencer/
+active: miscelanea
 ---
 
 This serves as a simple index page for some information about remote data available for download in [`{peacesciencer}`](http://svmiller.com/peacesciencer/). CRAN has a size requirement---5 MB for the whole package---that can be restrictive for a package that aims to do as many things as `{peacesciencer}`. This will concern some data sets of interest for users. These are always the largest files in an R package.
