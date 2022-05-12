@@ -7,6 +7,7 @@ layout: post
 categories:
   - R
 image: "sql-joins.jpeg"
+active: blog
 ---
 
 

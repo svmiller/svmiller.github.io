@@ -7,6 +7,7 @@ categories:
   - Political Science
 excerpt: "I downloaded the 2016 CCES data to model the relationships among age, family income, partisanship, and racial attitudes on the Trump vote."
 image: "trump-supporter-myrtle-beach.jpg"
+active: blog
 ---
 
 {% include image.html url="/images/trump-supporter-myrtle-beach.jpg" caption="A Trump supporter at a rally in Myrtle Beach, S.C., signals his feelings about Mexican immigration. (ARON P. BERNSTEIN/ GETTY IMAGES)" width=450 align="right" %}

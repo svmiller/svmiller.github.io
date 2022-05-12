@@ -7,6 +7,7 @@ categories:
   - R
 excerpt: "I wish the stargazer package in R would automatically generate random effect statistics from the lme4 package. Here's a backward way to get those and include them in stargazer output.   "
 image: "stars-cake.jpg"
+active: blog
 ---
 
 <dl id="" class="wp-caption aligncenter" style="max-width:100%; text-align: left; padding-top: 8px">

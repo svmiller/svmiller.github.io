@@ -7,6 +7,7 @@ categories:
   - Political Science
 excerpt: "Donald Trump's Twitter diversions on controversial topics usually match well with public opinion."
 image: "sad-trump-1.jpg"
+active: blog
 ---
 
 {% include image.html url="/images/sad-trump-1.jpg" caption="The President-elect reportedly finds this picture of himself flattering and thinks of it as a personal favorite photo, so I intend to use it." width=450 align="right" %}

@@ -12,6 +12,7 @@ tags:
   - R
 excerpt: "Markdown is awesome. It's much better for preparing slides than the Beamer package in LaTeX. I offer a guide to get started."
 image: "rmd-beamer-example.png"
+active: blog
 ---
 
 *Last updated: August 17, 2019. Feel free to read this, but it's a legacy blog post right now and not very informative for those interested in learning to use R Markdown. You can [read an update here](http://svmiller.com/blog/2019/08/r-markdown-template-beamer-presentations/).*

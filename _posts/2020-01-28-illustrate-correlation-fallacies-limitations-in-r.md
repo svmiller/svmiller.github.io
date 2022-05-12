@@ -11,6 +11,7 @@ layout: post
 categories:
   - R
 image: "simpsons-paradox.jpg"
+active: blog
 ---
 
 

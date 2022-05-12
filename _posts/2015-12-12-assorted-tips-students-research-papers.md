@@ -7,6 +7,7 @@ categories:
   - Teaching 
 excerpt: "My last batch of research papers were, to put it gently, underwhelming. I offer some advice for future students on how to not repeat some errors that I encountered."
 image: "squidward-paper.jpg"
+active: blog
 ---
 
 

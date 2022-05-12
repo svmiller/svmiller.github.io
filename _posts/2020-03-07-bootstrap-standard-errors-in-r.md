@@ -11,6 +11,7 @@ layout: post
 categories:
   - R
 image: "system-of-a-down.jpg"
+active: blog
 ---
 
 

@@ -11,6 +11,7 @@ layout: post
 categories:
   - R
 image: "woman-mask-la-covid19.jpg"
+active: blog
 ---
 
 

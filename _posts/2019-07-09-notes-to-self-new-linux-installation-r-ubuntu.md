@@ -9,6 +9,7 @@ categories:
   - R
   - Linux
 image: "monsoon-screenfetch.png"
+active: blog
 ---
 
 

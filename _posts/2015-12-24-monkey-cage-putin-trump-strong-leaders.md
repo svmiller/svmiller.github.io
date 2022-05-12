@@ -7,6 +7,7 @@ categories:
   - Political Science
 excerpt: "I guested on *The Monkey Cage* to offer insight to what Putin and Trump supporters have in common and what they expect of their heads of state."
 image: "trump-pleased-putin.jpg"
+active: blog
 ---
 
 From [a guest post at *The Monkey Cage*](https://www.washingtonpost.com/news/monkey-cage/wp/2015/12/24/heres-what-trump-and-putin-have-in-common-and-why-so-many-people-approve/):

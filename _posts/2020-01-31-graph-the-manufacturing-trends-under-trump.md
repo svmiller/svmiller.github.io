@@ -13,6 +13,7 @@ layout: post
 categories:
   - R
 image: "trump-hire-buy-american.jpg"
+active: blog
 ---
 
 

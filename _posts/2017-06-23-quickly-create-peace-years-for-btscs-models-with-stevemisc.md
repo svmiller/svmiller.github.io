@@ -7,6 +7,7 @@ permalink:
 categories:
   - R
 excerpt: "I have my first attempt at an R package, {stevemisc}, available on my github. It can help you quickly generate peace years for BTSCS models."
+active: blog
 ---
 
 {% include announcebox.html announce="This Functionality is Now in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> ⤵️" text="The processes described here have been included in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a>, an R package for the creation of all kinds of peace science data. You can add peace years to state-year or dyad-year data in <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> with the <a href='http://svmiller.com/peacesciencer/reference/add_peace_years.html'><code class='highlighter-rouge'>add_peace_years()</code></a> function, which also offers some speed improvements from what I offer here. Please check out the website for <a href='http://svmiller.com/peacesciencer'><code class='highlighter-rouge'>{peacesciencer}</code></a> for updates on its continued development." %}

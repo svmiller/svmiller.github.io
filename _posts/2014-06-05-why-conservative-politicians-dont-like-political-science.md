@@ -11,6 +11,7 @@ tags:
 format: quote
 excerpt: "Conservatives don't like funding political science for not-so-subtle reasons."
 image: "screengrab-from-slate.png"
+active: blog
 ---
 
 [At *Slate*](http://www.slate.com/blogs/weigel/2014/06/04/house_appropriations_for_2015_include_specific_cuts_for_political_science.html):

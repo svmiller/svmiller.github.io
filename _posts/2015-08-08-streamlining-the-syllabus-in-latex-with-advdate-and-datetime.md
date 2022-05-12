@@ -7,6 +7,7 @@ categories:
   - LaTeX
 excerpt: "I got tired of manually getting dates right for each week of the semester in the reading list section of the syllabus, so I found a way to make LaTeX do that."
 image: "time-clocks.jpg"
+active: blog
 ---
 
 

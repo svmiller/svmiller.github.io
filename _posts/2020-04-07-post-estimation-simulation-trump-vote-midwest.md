@@ -13,6 +13,7 @@ categories:
   - Political Science
   - Teaching
 image: "2015-anti-trump-rally-chicago.jpg"
+active: blog
 ---
 
 

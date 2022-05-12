@@ -7,6 +7,7 @@ categories:
   - Political Science
 excerpt: "Political scientists are discovering an open secret from the World Values Survey data. A lot of Americans may have a fickle attachment to democracy."
 image: "donald-trump.jpg"
+active: blog
 ---
 
 {% include image.html url="/images/donald-trump.jpg" caption="The Trump phenomenon has exposed an undercurrent in American values that World Values Survey researchers have known well." width=450 align="right" %}

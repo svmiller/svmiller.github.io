@@ -7,6 +7,7 @@ categories:
   - Teaching
 excerpt: "It's important for students to take good notes in class, though it's not obvious what this means. I offer a guide here for a political science audience. "
 image: "open-notebook.png"
+active: blog
 ---
 
 

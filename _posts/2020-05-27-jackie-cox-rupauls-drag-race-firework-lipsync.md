@@ -13,6 +13,7 @@ layout: post
 categories:
   - RuPaul's Drag Race
 image: "jackie-cox-firework.jpg"
+active: blog
 ---
 
 

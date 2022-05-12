@@ -13,6 +13,7 @@ layout: post
 categories:
   - R
 image: "sans-bad-time.jpg"
+active: blog
 ---
 
 

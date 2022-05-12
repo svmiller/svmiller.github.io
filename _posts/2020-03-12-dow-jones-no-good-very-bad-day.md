@@ -13,6 +13,7 @@ layout: post
 categories:
   - R
 image: "dow-jones-dude.jpg"
+active: blog
 ---
 
 

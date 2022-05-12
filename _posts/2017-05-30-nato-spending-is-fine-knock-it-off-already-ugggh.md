@@ -7,6 +7,7 @@ categories:
   - Political Science
 excerpt: "People complain about NATO spending. NATO spending is fine and you should appreciate it for what it is."
 image: "nato-hq.jpg"
+active: blog
 ---
 
 <!-- {% include image.html url="/images/nato-hq.jpg" caption="NATO headquarters in Brussels." width=450 align="right" %} -->

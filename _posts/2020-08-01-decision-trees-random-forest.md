@@ -14,6 +14,7 @@ categories:
   - R
   - Political Science
 image: "not-so-random-trees.jpg"
+active: blog
 ---
   
 

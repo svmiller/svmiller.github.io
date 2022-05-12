@@ -9,6 +9,7 @@ tags:
   - Regression
 excerpt: "I believe that the ability to read a regression table is an important task for undergraduate students in political science. I offer an explanation of the regression table in this post. "
 image: "badly-done-open-book.jpg"
+active: blog
 ---
 
 

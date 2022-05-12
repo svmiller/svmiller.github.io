@@ -12,6 +12,7 @@ categories:
   - R
   - RuPaul's Drag Race
 image: "kameron-michaels.jpg"
+active: blog
 ---
 
 

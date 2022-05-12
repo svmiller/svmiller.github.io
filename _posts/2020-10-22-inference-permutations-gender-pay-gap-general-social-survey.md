@@ -12,6 +12,7 @@ categories:
   - R
   - Political Science
 image: "gender-pay-gap.jpg"
+active: blog
 ---
 
 

@@ -14,6 +14,7 @@ categories:
   - Political Science
   - Teaching
 image: "gauss-german-mark.jpg"
+active: blog
 ---
 
 

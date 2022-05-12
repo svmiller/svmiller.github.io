@@ -7,6 +7,7 @@ categories:
   - Teaching
 excerpt: "Discomfort should be a learning experience as Irina Popescu notes at The Chronicle for Higher Education."
 image: "educational-power-discomfort.jpg"
+active: blog
 ---
 
 

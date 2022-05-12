@@ -15,6 +15,7 @@ categories:
   - Political Science
   - Teaching
 image: "white-privilege-is-racism-crop.jpg"
+active: blog
 ---
 
 

@@ -11,6 +11,7 @@ layout: post
 categories:
   - R
 image: "bullseyes.png"
+active: blog
 ---
 
 

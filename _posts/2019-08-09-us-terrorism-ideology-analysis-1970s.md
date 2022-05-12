@@ -11,6 +11,7 @@ layout: post
 categories:
   - Political Science
 image: "weather-underground-day-of-rage.jpg"
+active: blog
 ---
 
 

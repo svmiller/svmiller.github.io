@@ -7,6 +7,7 @@ categories:
   - Teaching 
 excerpt: "A list of dos and dont's for writing for students in political science."
 image: "stephen-king-road-to-hell.jpg"
+active: blog
 ---
 
 *Updated: March 7, 2016*

@@ -13,6 +13,7 @@ layout: post
 categories:
   - R
 image: "alma-observatory.jpg"
+active: blog
 ---
 
 

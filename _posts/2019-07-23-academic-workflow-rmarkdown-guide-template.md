@@ -8,6 +8,7 @@ permalink: null
 categories:
   - R Markdown
 image: "worklow_a.png"
+active: blog
 ---
 
 

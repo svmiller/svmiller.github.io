@@ -8,6 +8,7 @@ categories:
   - R
   - Political Science
 image: "1946-may-day.jpg"
+active: blog
 ---
 
 

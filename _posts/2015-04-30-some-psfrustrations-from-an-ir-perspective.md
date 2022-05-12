@@ -7,6 +7,7 @@ categories:
   - Political Science
 excerpt: "Here are some #PSFrustrations from the perspective of an IR scholar."
 image: "hollande-merkel-hug.jpg"
+active: blog
 ---
 
 

@@ -11,6 +11,7 @@ layout: post
 categories:
   - Political Science
 image: "leopold-card.jpg"
+active: blog
 ---
 
 

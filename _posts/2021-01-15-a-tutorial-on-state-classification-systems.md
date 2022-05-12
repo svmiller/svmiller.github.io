@@ -13,6 +13,7 @@ layout: post
 categories:
   - R
 image: "national-flags.jpg"
+active: blog
 ---
 
 
