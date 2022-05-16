@@ -24,9 +24,9 @@ active: blog
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-I think we've all had things that we've written that we kind of cringe seeing now. That's me and [this guide I wrote over five years ago](http://svmiller.com/blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-stargazer-package/) on how to include information about the random effects from a mixed effects (multilevel) model in a table made by the `stargazer` package. I mean, ew, Steve from five years ago. For a guide that purports to "quasi-automate" something, it involves a lot of manual steps and is convoluted as hell. Even the illustrative data set is unintuitive. Yet, it's one of the most frequently visited pages on my website despite not being very helpful. Good work, Steve from five years ago.
+I think we've all had things that we've written that we kind of cringe seeing now. That's me and [this guide I wrote over five years ago](http://svmiller.com/blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-stargazer-package/) on how to include information about the random effects from a mixed effects (multilevel) model in a table made by the `{stargazer}` package. I mean, ew, Steve from five years ago. For a guide that purports to "quasi-automate" something, it involves a lot of manual steps and is convoluted as hell. Even the illustrative data set is unintuitive. Yet, it's one of the most frequently visited pages on my website despite not being very helpful. Good work, Steve from five years ago.
 
-There is a better way, though. There are multiple benefits to the approach that follows. It involves fewer steps. It's generalizable to cases where `stargazer` can't process the kind of statistical model. It also has a more intuitive example data set.
+There is a better way, though. There are multiple benefits to the approach that follows. It involves fewer steps. It's generalizable to cases where `{stargazer}` can't process the kind of statistical model. It also has a more intuitive example data set.
 
 Here are the R packages we'll be using in this guide.
 
@@ -40,11 +40,11 @@ library(stargazer) # the star of the show
 
 ## The Data and the Models
 
-I discussed these data in a post from late March this year. [In that post](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/), which I was supposed to give to some students in the United Kingdom before the COVID-19 outbreak, I proposed a rudimentary statistical model of immigration sentiment in the United Kingdom to better teach students in the UK about quantitative methods. I make that data available in my `stevemisc` package as the `ESS9GB` data. 
+I discussed these data in a post from late March this year. [In that post](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/), which I was supposed to give to some students in the United Kingdom before the COVID-19 outbreak, I proposed a rudimentary statistical model of immigration sentiment in the United Kingdom to better teach students in the UK about quantitative methods. I make that data available in my `{stevedata}` package as the `ESS9GB` data. 
 
 Briefly, the `immigsent` is a 31-point scale of attitudes about immigration created as an additive index of three 10-point prompts about whether a respondent believes immigration is good for the UK's economy, whether cultural life is enriched by immigrants, and whether the UK is made a better place to live because of immigrants. Higher values mean more pro-immigration sentiment. We're going to propose an explanation of variation in the `immigsent` variable as a function of the respondent's age (`agea`), whether the respondent is a woman (`female`) or unemployed (`uempla`), the respondent's household income in deciles (`hinctnta`), and hte respondent's ideology on an 11-point left-right scale (`lrscale`). Data come from the 9th round of ESS data for the United Kingdom and were already subset to just those respondents who were born in the United Kingdom.
 
-We'll propose three models. The first is a simple linear model, much like I did in the post in March. The second is a mixed effects model with a random effect for one of 12 UK regions in the data. These regions are East Midlands, East of England, London, North East, North West, Northern Ireland, Scotland, South East, South West, Wales, West Midlands, and Yorkshire and the Humber. The third model will include a random slope for ideology on the random effect of region. This model will also be estimated with the `blme` package. Of note: `stargazer` doesn't support the `blme` package.
+We'll propose three models. The first is a simple linear model, much like I did in the post in March. The second is a mixed effects model with a random effect for one of 12 UK regions in the data. These regions are East Midlands, East of England, London, North East, North West, Northern Ireland, Scotland, South East, South West, Wales, West Midlands, and Yorkshire and the Humber. The third model will include a random slope for ideology on the random effect of region. This model will also be estimated with the `{blme}` package. Of note: `{stargazer}` doesn't support the `{blme}` package.
 
 Before estimating the models, let's scale everything that's not binary by two standard deviations. Centering, at the least, is just good modeling practice. Mixed effects models, in particular, get very whiny in the absence of naturally occurring zeroes.[^didntdothisbefore]
 
@@ -75,7 +75,7 @@ M3 <- blmer(immigsent ~ z_agea + female + z_eduyrs + uempla + z_hinctnta  +
 
 ## Creating a Stargazer Table
 
-The approach I recommend starts with creating "tidied" data frames of the regression model. These will contain the fixed effects and their standard errors. Importantly, that's all we want from these objects even as the `broom` package will also store information about the random effects. It's useful information in a lot of applications, just not this particular one.
+The approach I recommend starts with creating "tidied" data frames of the regression model. These will contain the fixed effects and their standard errors. Importantly, that's all we want from these objects even as the `{broom}` package will also store information about the random effects. It's useful information in a lot of applications, just not this particular one.
 
 ```r
 tidyM1 <- broom::tidy(M1)
@@ -102,17 +102,15 @@ sd_regionM3lrscale <- round(as.numeric(attributes(VarCorr(M3)$"region")$stddev)[
 Now, let's manually create a tibble that has all this information presented in the order we want. We're also going to add the number of observations from the model as well. Do note you can choose to eschew the vectors and have the tibble do the calculations for you, but that would clutter up the workflow (I think). I'm sure there's a way of getting escaping LaTeX characters in this if you're thinking ahead to a LaTeX table, but this will do for now.
 
 ```r
-
 tribble(~stat, ~M1, ~M2, ~M3,
         "Number of Regions", NA, num_region, num_region,
         "sd(Region)", NA, sd_regionM2, sd_regionM3,
         "sd(Region, Ideology)", NA, NA, sd_regionM3lrscale,
         "", NA, NA, NA,
         "N", nobs(M1), nobs(M2), nobs(M3)) -> mod_stats
-          
 ```
 
-Now, let's create a regression table using the `stargazer` package. This will format to HTML (for this blog post), but changing the type to "latex" (for example) won't materially change anything. I'll walk through the important pieces after the table.
+Now, let's create a regression table using the `{stargazer}` package. This will format to HTML (for this blog post), but changing the type to "latex" (for example) won't materially change anything. I'll walk through the important pieces after the table.
 
 ```r
 stargazer(M1, M2, M2, type="html", 
@@ -130,7 +128,6 @@ stargazer(M1, M2, M2, type="html",
           model.names = FALSE,
           column.labels = c("OLS", "Linear Mixed Effects", "Linear Mixed Effects (Bayesian)")
           )
-
 ```
 
 <div id="stargazer">
@@ -171,15 +168,15 @@ stargazer(M1, M2, M2, type="html",
 </table>
 <br /></div>
 
-This approach is flexible to your own needs and particular set of models, but I want to highlight these important components. First, notice that Model 3 in the presentation was actually called as Model 2. Minimally, the function is `stargazer(M1, M2, M2)` because Model 3 (`M3`) is of class `blmerMod`. The overlap between `blmerMod` for Model 3 and `lmerMod` for Model 2 is obviously substantial, but `stargazer` will only process the latter and not the former. Thus, technically, Model 3 in the table was actually called as Model 2 again.
+This approach is flexible to your own needs and particular set of models, but I want to highlight these important components. First, notice that Model 3 in the presentation was actually called as Model 2. Minimally, the function is `stargazer(M1, M2, M2)` because Model 3 (`M3`) is of class `blmerMod`. The overlap between `blmerMod` for Model 3 and `lmerMod` for Model 2 is obviously substantial, but `{stargazer}` will only process the latter and not the former. Thus, technically, Model 3 in the table was actually called as Model 2 again.
 
-Second, and importantly, I manually supplied the coefficients and the standard errors as a list drawn from the tidied objects I created with the `broom` package. This allowed me to overwrite Model 2 (as Model 3) with the actual coefficients and standard errors from Model 3. Thus, you can see in Model 3 that the results of the Bayesian mixed effects model suggest that allowing a random of slope for ideology for the 12 regions in the UK implies there's no overall effect of ideology in the United Kingdom after considering the region-by-region variation in the data. I note this humbly because, as I mentioned in [the blog post from March](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/), this is just a simple exercise aimed for instruction about quantitative methods.
+Second, and importantly, I manually supplied the coefficients and the standard errors as a list drawn from the tidied objects I created with the `{broom}` package. This allowed me to overwrite Model 2 (as Model 3) with the actual coefficients and standard errors from Model 3. Thus, you can see in Model 3 that the results of the Bayesian mixed effects model suggest that allowing a random of slope for ideology for the 12 regions in the UK implies there's no overall effect of ideology in the United Kingdom after considering the region-by-region variation in the data. I note this humbly because, as I mentioned in [the blog post from March](http://svmiller.com/blog/2020/03/what-explains-british-attitudes-toward-immigration-a-pedagogical-example/), this is just a simple exercise aimed for instruction about quantitative methods.
 
-More importantly than the inferential takeaway (for the sake of this guide), I think this offers a workaround for those of you working with statistical models that `stargazer` can't process. If `stargazer` can't process/summarize the particular statistical model, but the `tidy()` function in the `broom` package can, 1) estimate a simple linear model or generalized linear model that contains all the same variables (with the exact variable names), 2) have `stargazer` process that model and 3) overwrite the coefficients and standard errors with the information summarized by the `tidy()` function in `broom`.
+More importantly than the inferential takeaway (for the sake of this guide), I think this offers a workaround for those of you working with statistical models that `{stargazer}` can't process. If `{stargazer}` can't process/summarize the particular statistical model, but the `tidy()` function in the `{broom}` package can, 1) estimate a simple linear model or generalized linear model that contains all the same variables (with the exact variable names), 2) have `{stargazer}` process that model and 3) overwrite the coefficients and standard errors with the information summarized by the `tidy()` function in `{broom}`.
 
-Third, omit the default model statistics that `stargazer` wants to supply and add your own with the `add.lines` option. This will be the information that includes the number of groups/"clusters" in the random effect, the standard deviation of the random parameters, and the total number of observations in the data. The rest of the `stargazer` call is just for formatting.
+Third, omit the default model statistics that `{stargazer}` wants to supply and add your own with the `add.lines` option. This will be the information that includes the number of groups/"clusters" in the random effect, the standard deviation of the random parameters, and the total number of observations in the data. The rest of the `{stargazer}` call is just for formatting.
 
-My [previous stab at this](http://svmiller.com/blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-stargazer-package/) purported a means to "automate" the inclusion of information about random effects in a `stargazer` table summarizing mixed effects regressions. This is a better way of doing it. 
+My [previous stab at this](http://svmiller.com/blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-stargazer-package/) purported a means to "automate" the inclusion of information about random effects in a `{stargazer}` table summarizing mixed effects regressions. This is a better way of doing it. 
 
 
 
