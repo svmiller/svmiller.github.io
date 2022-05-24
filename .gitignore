@@ -9,6 +9,10 @@ HIDEME
 /docs/non-academic-jobs
 /figure
 
+# I think these are unique to a new setup.
+Gemfile
+Gemfile.lock
+
 # I don't need anyone to see these files
 # They're intermediate output or private info
 docs/**/*.Rmd
