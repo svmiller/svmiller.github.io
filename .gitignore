@@ -8,6 +8,7 @@ HIDEME
 /docs/job-materials
 /docs/non-academic-jobs
 /figure
+*.bak
 
 # I think these are unique to a new setup.
 Gemfile
