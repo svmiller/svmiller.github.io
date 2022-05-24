@@ -25,17 +25,17 @@
 - title: "Teaching"
   href: "/teaching/"
   active: teaching
-  subcategories:
-    - subtitle: "POSC 1020 – Introduction to International Relations"
-      subhref: "http://posc1020.svmiller.com"
-    - subtitle: "POSC 3410 – Quantitative Methods in Political Science"
-      subhref: "http://posc3410.svmiller.com"
-    - subtitle: "POSC 3610 – International Conflict"
-      subhref: "http://posc3610.svmiller.com"
-    - subtitle: "POSC 3630 – United States Foreign Policy"
-      subhref: "/teaching/posc-3630-united-states-foreign-policy/"
-    - subtitle: "POST 8000 - Foundations of Social Science Research for Public Policy"
-      subhref: "http://post8000.svmiller.com/"
+# subcategories:
+#    - subtitle: "POSC 1020 – Introduction to International Relations"
+#      subhref: "http://posc1020.svmiller.com"
+#    - subtitle: "POSC 3410 – Quantitative Methods in Political Science"
+#      subhref: "http://posc3410.svmiller.com"
+    # - subtitle: "POSC 3610 – International Conflict"
+    #   subhref: "http://posc3610.svmiller.com"
+    # - subtitle: "POSC 3630 – United States Foreign Policy"
+    #   subhref: "/teaching/posc-3630-united-states-foreign-policy/"
+    # - subtitle: "POST 8000 - Foundations of Social Science Research for Public Policy"
+    #   subhref: "http://post8000.svmiller.com/"
 
 - title: "Miscelánea"
   href: ""
