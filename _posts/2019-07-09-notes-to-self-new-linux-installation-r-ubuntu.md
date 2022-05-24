@@ -27,13 +27,19 @@ Consider this mostly a note to myself on tailoring a Linux installation (preferr
 
 ## Install These Packages Before Installing R {#requiredpackages}
 
-My preferred R is [Microsoft R Open](https://mran.microsoft.com/open), an enhanced distribution of R that is an easy installation on Ubuntu and its variants. Linux users, unlike Mac or Windows users, will need to install some other packages from the package repository in (Ubuntu) Linux before several R packages will work. Basically, make sure to install these packages in the command line before trying to do anything in R.
+Linux users, unlike Mac or Windows users, will need to install some other packages from the package repository in (Ubuntu) Linux before several R packages will work. Basically, make sure to install these packages in the command line before trying to do anything in R.
+
+# ADD libssl for Rstudio
+# ADD cmake for nloptr
+# ADD libfontconfig1-dev for systemfonts for kableExtra
+# ADD libharfbuzz-dev libfribidi-dev for textshaping for pkgdown
+# ADD libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev  for ragg for pkgdown
 
 ```shell
-sudo apt install curl libcurl4 libssl-dev libxml2-dev libcurl4-openssl-dev libgit2-dev
+sudo apt install curl libcurl4 libssl-dev libxml2-dev libcurl4-openssl-dev libgit2-dev libssl cmake libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 ```
 
-You'll need `curl` for R Open. `libssl-dev` and `libxml2-dev` are required for the `openssl` and `xml2` packages in R, which are required packages for `tidyverse`. `libcurl4-openssl-dev` is required for `RCurl`, which `brms` requires for statistical modeling in [Stan](https://mc-stan.org/). Finally, you'll need need `libgit2-dev` for the `git2r` package in R, the extent to which `git2r` is required for the `devtools` package.
+You'll need `curl` for R Open, which I used to use before version 4.0 of R. `libssl-dev` and `libxml2-dev` are required for the `{openssl}` and `{xml2}` packages in R, which are required packages for `{tidyverse}`. `libcurl4-openssl-dev` is required for `{RCurl}`, which `{brms}` requires for statistical modeling in [Stan](https://mc-stan.org/). You'll need need `libgit2-dev` for the `{git2r}` package in R, the extent to which `{git2r}` is required for the `devtools` package. `{nloptr}` depends on `cmake`. `{kableExtra}` requires `{systemfonts}`, which in turn requires `libfontconfig1-dev` on Ubuntu. `{pkgdown}` has a similar intermediate requirement. It requires `{textshaping}`, which in turn requires `libharfbuzz-dev` and `libfribidi-dev`. It also requires `{ragg}`, which needs `libfreetype6-dev`, `libpng-dev`, `libtiff5-dev`, and `libjpeg-dev`. Thinking ahead, you'll need `libssl` for installing Rstudio as well.
 
 Install these packages before installing R or trying to install your favorite packages in R and you'll ensure there are no package installation problems. I will probably revisit this and update it when I find another Linux package required for another R package.
 
