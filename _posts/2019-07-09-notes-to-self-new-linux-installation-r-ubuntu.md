@@ -28,12 +28,6 @@ Consider this mostly a note to myself on tailoring a Linux installation (preferr
 ## Install These Packages Before Installing R {#requiredpackages}
 
 Linux users, unlike Mac or Windows users, will need to install some other packages from the package repository in (Ubuntu) Linux before several R packages will work. Basically, make sure to install these packages in the command line before trying to do anything in R.
-<!--
-# ADD libssl for Rstudio
-# ADD cmake for nloptr
-# ADD libfontconfig1-dev for systemfonts for kableExtra
-# ADD libharfbuzz-dev libfribidi-dev for textshaping for pkgdown
-# ADD libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev  for ragg for pkgdown -->
 
 ```shell
 sudo apt install curl libcurl4 libssl-dev libxml2-dev libcurl4-openssl-dev libgit2-dev libssl cmake libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
