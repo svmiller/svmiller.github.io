@@ -246,7 +246,7 @@ Knowing well that these data are ugly, they nevertheless constitute the populati
 set.seed(8675309)
 a_sample_mean <- mean(sample(Population, 10, replace=F))
 ## a_sample_mean
-#> NULL
+#> 65.8
 ```
 
 Indeed, the ensuing sample mean is nowhere close to the actual population mean. However, what if we were to get a million samples, each sample consisting of just 10 observations, and save the means of those samples? Here's the code that will do that.
