@@ -761,8 +761,8 @@ Beyond the simple OLS case, I think this so-called "log-log" model is the most s
 
 ### Summarizing Our log(DV)~log(IV) Model
 
-1. The estimated change in per capita expenditures when the under-18 population variable is multiplied by Leonhard Euler's constant is about $$exp(1.495) \approx 4.459$$.
-2. The estimated percentage change in per capita education expenditures for a 1% change in the under-18 population is $$1.01^{1.495} \approx 1.014$$. We expect about a 1.4% increase in per capita education expenditures for this 1% change in the under-18 population.
+1. The estimated change in per capita expenditures when the under-18 population variable is multiplied by Leonhard Euler's constant is about $$exp(1.495) \approx 4.459$$. This would be about a 4.459-fold increase when the under-18 population variable is multiplied by Leonhard Euler's constant (i.e. increases by 1 on its logarithmic scale).
+2. The estimated percentage change in per capita education expenditures for a 1% change in the under-18 population is $$1.01^{1.495} \approx 1.0149$$. The relative change in per capita education expenditures is about .0149 for a 1% increase in the under-18 population variable and the percentage change in per capita education expenditures is about 1.49% for a 1% increase in the under-18 population variable.
 </div>
 
 We can use an amalgam of the same code above (having already generated our 1% changes in the under-18 population variable) to illustrate what this looks like.
@@ -784,9 +784,11 @@ newdat %>%
 #> 1 0.01498897  1.498897
 
 # Let's compare to our coefficient from M4
-1.01^coef(M4)[4]
+(1.01^coef(M4)[4]-1);(1.01^coef(M4)[4]-1)*100 
+#>     ln_pop 
+#> 0.01498897
 #>   ln_pop 
-#> 1.014989
+#> 1.498897
 ```
 
 ## Conclusion {#conclusion}
