@@ -697,6 +697,13 @@ newdat %>%
   data.frame
 #>     relchange perchange
 #> 1 0.004598327 0.4598327
+
+# Let's compare to our coefficient from M2 now
+(exp(coef(M2)[4])-1); (exp(coef(M2)[4])-1)*100 
+#>         pop 
+#> 0.004598327
+#>       pop 
+#> 0.4598327
 ```
 
 
@@ -739,6 +746,11 @@ newdat %>%
   summarize(mean = mean(diff, na.rm=T)) %>% data.frame
 #>       mean
 #> 1 5.007064
+
+# Let's compare to our coefficient from M3
+log(1.01)*coef(M3)[4]
+#>   ln_pop 
+#> 5.007064
 ```
 
 ### Both the DV and the IV are Log-Transformed {#loglog}
@@ -770,6 +782,11 @@ newdat %>%
   data.frame
 #>    relchange perchange
 #> 1 0.01498897  1.498897
+
+# Let's compare to our coefficient from M4
+1.01^coef(M4)[4]
+#>   ln_pop 
+#> 1.014989
 ```
 
 ## Conclusion {#conclusion}

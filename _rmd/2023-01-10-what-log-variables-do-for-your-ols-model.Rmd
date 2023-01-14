@@ -271,6 +271,9 @@ newdat %>%
          perchange = relchange*100) %>%
   summarize_at(c("relchange", "perchange"), ~mean(.,na.rm=T)) %>%
   data.frame
+
+# Let's compare to our coefficient from M2 now
+(exp(coef(M2)[4])-1); (exp(coef(M2)[4])-1)*100 
 ```
 
 
@@ -310,6 +313,9 @@ newdat %>%
   mutate(pred = predict(M3, newdata =.),
          diff = pred - lag(pred, 1)) %>%
   summarize(mean = mean(diff, na.rm=T)) %>% data.frame
+
+# Let's compare to our coefficient from M3
+log(1.01)*coef(M3)[4]
 ```
 
 ### Both the DV and the IV are Log-Transformed {#loglog}
@@ -338,6 +344,9 @@ newdat %>%
          perchange = relchange*100) %>%
   summarize_at(c("relchange", "perchange"), ~mean(.,na.rm=T)) %>%
   data.frame
+
+# Let's compare to our coefficient from M4
+1.01^coef(M4)[4]
 ```
 
 ## Conclusion {#conclusion}
