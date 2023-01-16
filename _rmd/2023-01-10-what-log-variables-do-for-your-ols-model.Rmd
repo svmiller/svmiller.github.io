@@ -207,7 +207,7 @@ predM1 %>%
 coef(M1)[4]
 ```
 
-So yeah, this wasn't too hard. When nothing in the OLS model is log-transformed, a one-unit change in the value of the independent variable coincides with an estimated change of the regression coefficient in the value of the dependent variable. That's easy.
+So yeah, this wasn't too hard. When nothing in the OLS model is log-transformed, a one-unit change in the value of the independent variable coincides with an estimated change of the regression coefficient in the value of the dependent variable. That's easy, but it's also worth repeating.
 
 ### The DV is Log-Transformed, but the IV Isn't {#loglin}
 
@@ -252,9 +252,9 @@ A few interesting things are happening here. For one, recall that the dependent 
 
 ### Summarizing Our log(DV)~IV Model
 
-1. $$exp(.004587787) = 1.004598$$, or: "a one-unit change in the residents (per thousand) under the age of 18 multiplies the expected per capita public school expenditures by about 1.004598.
-2. $$exp(.004587787*20) = 1.096097$$, or: a 20-unit change in the residents (per thousand)  under the age of 18---which is incidentally about a standard deviation change across the range of this variable---multiplies the expected per capita public school expenditures by about 1.096.
-3. The percentage change rule of logarithmic difference says a one-unit change in the residents (per thousand) under the age of 18 coincides with an estimated $$100*(.004587787) \approx .45$$ *percent* increase in expected per capita public school estimates. This one is typically everyone's go-to for cases where the DV is logged but the IV is not. Just understand the percentage change rule is always approximate, though it's fair to use it because your treatment of the regression coefficients is always approximate too.
+1. $$exp(.004587787) = 1.004598$$, or: "a one-unit change in the residents (per thousand) under the age of 18 multiplies the expected per capita public school expenditures by about 1.004598. You can plug in any value here as well. For example, $$exp(.004587787*20) = 1.096097$$, or: a 20-unit change in the residents (per thousand)  under the age of 18---which is incidentally about a standard deviation change across the range of this variable---multiplies the expected per capita public school expenditures by about 1.096.
+2. The first quantity also contains the relative change and percentage change, though you'd have to subtract 1. For example: $$(exp(.004587787) - 1)*100 = .4598$$. Or: a one-unit change in the residents (per thousand) under the age of 18 coincides with an estimated .4598 *percent* increase in expected per capita public school expenditures. The relative increase can be obtained by dividing the percentage increase by 100, or by not multiply the exponentiated coefficient (-1) by 100.
+3. The percentage change rule (of thumb) of logarithmic difference says a one-unit change in the residents (per thousand) under the age of 18 coincides with an approximated $$100*(.004587787) \approx .45$$ *percent* increase in expected per capita public school expenditures. This one is typically everyone's go-to for cases where the DV is logged but the IV is not. Just understand the percentage change rule is always approximate, though it's fair to use it because your treatment of the regression coefficients is always approximate too.
 </div>
 
 We can use a prediction grid to illustrate this. Here, let's create a prediction grid with a sequence from the minimum to the maximum of the under-18 population variable, fixing the other regressors at a typical value. Then, we'll create model predictions, based on the model with the logged dependent variable. We can exponentiate those model predictions and create a relative change variable communicating the relative change from its previous value (i.e. $$\frac{y'-y}{y}$$), and then multiplying that by 100 to get its percentage change. What emerges is consistent with what we did above, though we are relating the discussion back to our raw (untransformed) variable that we log-transformed for the regression.
@@ -274,6 +274,9 @@ newdat %>%
 
 # Let's compare to our coefficient from M2 now
 (exp(coef(M2)[4])-1); (exp(coef(M2)[4])-1)*100 
+
+# Technically not it, but close
+coef(M2)[4]*100
 ```
 
 
@@ -292,7 +295,7 @@ There's another way of looking at this, much like we did above with the percenta
 
 1. The estimated change in per capita expenditures when the under-18 population variable is multiplied by Leonhard Euler's constant is 503.206.
 2. The estimated change in per capita expenditures is 503.206 when the under-18 population variable changes by $$100*(e - 1) \approx 171.82\%$$
-3. A 1% change in the under-18 population variable changes the estimated per capita education expenditures by $$503.206*log(1.01) = 5.007$$. A 10% change in the under-18 population variable changes the estimated per capita expenditures by $$503.206*log(1.10) \approx 47.96$$. A 20% change in the under-18 population variable changes the estimated per capita expenditures by $$503.206*log(1.20) = 91.74$$.
+3. A 1% change in the under-18 population variable changes the estimated per capita education expenditures by $$503.206*log(1.01) = 5.007$$. A 10% change in the under-18 population variable changes the estimated per capita expenditures by $$503.206*log(1.10) = 47.96$$. A 20% change in the under-18 population variable changes the estimated per capita expenditures by $$503.206*log(1.20) = 91.74$$.
 4. Alternatively, and this is the one I see most often used given the percentage change approximation rule of thumb: a 1% change in the under-18 population variable changes the estimated per capita expenditures by $$503.206/100 \approx 5.03206$$
 </div>
 
@@ -316,6 +319,9 @@ newdat %>%
 
 # Let's compare to our coefficient from M3
 log(1.01)*coef(M3)[4]
+
+# Technically not it, but close
+coef(M3)[4]/100
 ```
 
 ### Both the DV and the IV are Log-Transformed {#loglog}
@@ -327,7 +333,7 @@ Beyond the simple OLS case, I think this so-called "log-log" model is the most s
 ### Summarizing Our log(DV)~log(IV) Model
 
 1. The estimated change in per capita expenditures when the under-18 population variable is multiplied by Leonhard Euler's constant is about $$exp(1.495) \approx 4.459$$. This would be about a 4.459-fold increase when the under-18 population variable is multiplied by Leonhard Euler's constant (i.e. increases by 1 on its logarithmic scale).
-2. The estimated percentage change in per capita education expenditures for a 1% change in the under-18 population is $$1.01^{1.495} \approx 1.0149$$. The relative change in per capita education expenditures is about .0149 for a 1% increase in the under-18 population variable and the percentage change in per capita education expenditures is about 1.49% for a 1% increase in the under-18 population variable.
+2. The estimated percentage change in per capita education expenditures for a 1% change in the under-18 population is $$1.01^{1.495} = 1.0149$$. The relative change in per capita education expenditures is about .0149 for a 1% increase in the under-18 population variable and the percentage change in per capita education expenditures is about 1.49% for a 1% increase in the under-18 population variable.
 </div>
 
 We can use an amalgam of the same code above (having already generated our 1% changes in the under-18 population variable) to illustrate what this looks like.
@@ -347,6 +353,9 @@ newdat %>%
 
 # Let's compare to our coefficient from M4
 (1.01^coef(M4)[4]-1);(1.01^coef(M4)[4]-1)*100 
+
+# Technically not it, but close
+coef(M4)[4]
 ```
 
 ## Conclusion {#conclusion}
