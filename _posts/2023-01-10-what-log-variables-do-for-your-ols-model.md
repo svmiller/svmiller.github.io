@@ -775,6 +775,7 @@ Beyond the simple OLS case, I think this so-called "log-log" model is the most s
 
 1. The estimated change in per capita expenditures when the under-18 population variable is multiplied by Leonhard Euler's constant is about $$exp(1.495) \approx 4.459$$. This would be about a 4.459-fold increase when the under-18 population variable is multiplied by Leonhard Euler's constant (i.e. increases by 1 on its logarithmic scale).
 2. The estimated percentage change in per capita education expenditures for a 1% change in the under-18 population is $$1.01^{1.495} = 1.0149$$. The relative change in per capita education expenditures is about .0149 for a 1% increase in the under-18 population variable and the percentage change in per capita education expenditures is about 1.49% for a 1% increase in the under-18 population variable.
+3. This estimated percentage change in per capita education expenditures for a 1% change in the under-18 population can be approximated with the regression coefficient: $$\beta = 1.495$$.
 </div>
 
 We can use an amalgam of the same code above (having already generated our 1% changes in the under-18 population variable) to illustrate what this looks like.
