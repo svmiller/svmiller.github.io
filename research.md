@@ -50,6 +50,7 @@ tbody td { padding: 5px;
 | [`{stevemisc}`](http://svmiller.com/stevemisc) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/stevemisc?color=green)](https://cran.r-project.org/package=stevemisc) |  various helper functions for research and presentation (esp. for mixed models and BTSCS models) |
 | [`{steveproj}`](http://svmiller.com/steveproj) |  | a Make and R Markdown approach to academic project management |
 | [`{stevetemplates}`](http://svmiller.com/stevetemplates) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/stevetemplates?color=green)](https://cran.r-project.org/package=stevetemplates) |  write R Markdown documents with [my suite of R Markdown templates](https://github.com/svmiller/svm-r-markdown-templates) |
+| [`{stevethemes}`](http://svmiller.com/stevethemes/) |  [![](http://cranlogs.r-pkg.org/badges/grand-total/stevethemes?color=green)](https://cran.r-project.org/package=stevethemes) |  a collection of `{ggplot2}` themes and theme elements |
 
 
 <!--
