@@ -19,6 +19,10 @@ This page includes my teaching philosophy and an empirical assessment of my teac
 
 ## Course Directory
 
+### Stockholm University
+
+- [EH 6105](http://eh6105.svmiller.com) (Quantitative Methods)
+
 ### Clemson University
 
 #### Undergraduate Classes
