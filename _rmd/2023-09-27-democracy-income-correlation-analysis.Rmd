@@ -143,8 +143,9 @@ Data %>%
   theme_steve() +
   stat_halfeye(.width = c(.68, .9), fill=g_c("su_water")) +
   stat_dots(fill='black', alpha=.6, dotsize=.5) +
+  scale_y_continuous(labels = scales::dollar_format()) +
   coord_flip() +
-    labs(y = "Life Expectancy (with 68% and 90% Intervals)",
+    labs(y = "Est. GDP per Capita (2011 USD)",
          x = "",
          caption = "Data: Lipset (1959) [for states/categories] and Anders et al. (2020) [for per capita income]",
          title = "The Distribution of Per Capita Income in 1950, by Lipset's (1959) Four Categories",
