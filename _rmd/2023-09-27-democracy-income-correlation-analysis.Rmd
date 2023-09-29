@@ -1,0 +1,274 @@
+---
+title: "Correlating Democracy and Per Capita Income: A Simple Introduction to an Old Finding"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2023-09-27'
+excerpt: "This is a basic tutorial to what correlation can (and will not) tell you using a classic example first provided by Lipset (1959) on democracy and economic development."
+layout: post
+categories:
+  - R
+  - Political Science
+image: "seymour-martin-lipset.jpg"
+active: blog
+---
+
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+
+library(tidyverse)     # for most things
+library(stevemisc)     # for graph formatting
+library(kableExtra)    # for tables
+library(stevedata)
+library(modelsummary)
+library(stevethemes)
+library(ggdist)
+library(ggrepel)
+options(knitr.kable.NA = '')
+```
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+add_jekyll_image('/images/seymour-martin-lipset.jpg', "We typically credit Seymour Martin Lipset for first noting this correlation.", "400", "right")
+```
+
+I'm having to teach an undergraduate class on quantitative methods where I've been cautioned---repeatedly---the students are not super eager to go as hard and fast as I'd like on this material. It's already going to be an interesting experience breaking the traditional link to Stata on the curriculum in favor of R.[^linux] Toward that end, students will get basic univariate statistics, bivariate statistics, and get to play with a simple linear model. Hopefully, everyone has a good time.
+
+[^linux]: I never got a straight answer but was indirectly told that students have a license for Stata but faculty do not. It was already going to be an issue installing it on my Linux operating system (and that's been an issue that has apparently affected students in the past). So, R it is.
+
+Students will have to learn about Pearson's *r* as the most ubiquitous measure of correlation between two variables, but the challenge (for me, at least) is giving students something substantive around which to learn Pearson's *r*. We practitioners already know Pearson's *r* outright does not care what is *x* and what is *y*, even though we often care a great deal about what is *x* and what is *y* when we argue for causal relationships. The extent to which a practitioner uses Pearson's *r*, they're probably interested in collinearity issues in their model. However, that's not something we get to cover in the course.
+
+The hope is to introduce students to correlation by acknowledging one of the most well-known relationships without a clear causal direction in our field: democracy and development. There are poor democracies and rich autocracies, but the relationship between the two as some kind of equilibrium is fairly robust. The problem is we disagree a great deal about what causes what. Does democracy precede economic development? Does economic development precede democracy? There have been a lot of trees felled for paper to argue these points, and both have prima facie convincing explanations. Here, we get to sidestep those questions altogether and focus on just the thing for which we agree: the two things correlate. I'll be teaching that in R around Lipset's (1959) well-known article that first made a comment of this empirical relationship.
+
+Here are the R packages I'll be using in this post.
+
+```r
+library(tidyverse)     # for most things
+library(stevemisc)     # for toy functions
+library(kableExtra)    # for tables
+library(stevethemes)   # for theme elements
+library(ggdist)        # for fancy distribution plots
+library(ggrepel)       # for labeling observations on a plot
+```
+
+
+
+
+## The Background
+
+I focus on the relationship between democracy and per capita income (alternatively: "economic development") because it's a tractable example of a correlation that does well to emphasize correlation's most basic limitation: it's symmetrical. Correlating democracy with per capita income is equivalent to correlating per income and democracy. We cannot use it to say that one causes the other (even if that's precisely what Lipset (1959) did in his article). It would be fitting in this particular application because there is a lot of disagreement about what exactly causes what.
+
+We have [Seymour Martin Lipset (1959)](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/some-social-requisites-of-democracy-economic-development-and-political-legitimacy1/26559429359F42D3E9B8BC82CA65546A) to thank for first noting this empirical relationship. His cross-section of 48 countries from around 1949/1950 suggested a particularly strong relationship between democracy and economic development, and that even the poorest stable democracies in Europe were almost always richer than the European dictatorships. His argument is one of "modernization" and his particular flavor of it contends modernization (viz, economic development/per capita income) decreases a major source of political conflict: income inequality. The poor get richer and a middle class emerges that is a moderating force in domestic politics. Democracy is more likely to emerge as a system of governance in the absence of violent conflict to settle questions of redistribution.
+
+There are any number of reasons to be skeptical about what Lipset (1959) argued, certainly with the benefit of hindsight and over 60 years of social science research. Even someone like [Guillermo O'Donnell (1973)](https://www.amazon.com/Modernization-Bureaucratic-Authoritarianism-American-Politics-modernization/dp/0877252092) was too happy to point to developments in his native Argentina (and also Brazil) from around the time of Lipset's publication to argue this modernization argument was simple to the point of simplistic. Within the narrow confines of the modernization argument, Lipset (1959) may have been the first to make this kind of argument of correlation-masked-as-causation but modernization arguments to follow have not been wedded to the mechanism he offered. [Cutright (1963)](https://www.journals.uchicago.edu/doi/abs/10.1086/223930) seems to be the first (of which I know) to take a different track and, with it, a different interpretation of the mechanism by which this relationship exists. Without discounting the kind of correlation Lipset (1959) observed, Cutright's telling of this relationship places greater weight on the democratic institutions that precede economic development. Others have made this argument with greater conviction. My particular background in international relations gives considerable weight to Douglass North on a lot of interesting questions. [Douglass North (1990, for example)](https://www.cambridge.org/core/books/institutions-institutional-change-and-economic-performance/AAE1E27DF8996E24C5DD07EB79BBA7EE) builds on this point of departure by arguing democratic protections in the form of property rights are almost sine qua non conditions for economic development. The actors responsible for economic development are unlikely to invest if autocrats can cheaply appropriate property.
+
+We have a kind of chicken-or-egg problem here, which is a fitting metaphor because of [how much ambiguity there also is](https://www.motherjones.com/environment/2023/06/which-came-first-the-chicken-or-the-egg-scientists-might-finally-have-the-answer/) in answering that particular question after you start getting into the weeds of evolution and amniotic ancestors. Modernization scholarship of any kind would not discount that democracy and economic development are a long-term, basically stable equilibrium. However, the path to that outcome---and what exactly "causes" what---is imprecise and unconvincing in most of these classics. Lipset (1959) has a pretty clear take that economic development precedes democracy when he contends that economic development makes society too complex for any set of light-weight autocratic institutions to handle. Yet, economic development in the absence of institutional protections for private actors (i.e. "democracy") is somewhat far-fetched, which tilts the causal arrow to democracy. No one would doubt---[a la Przeworski and Limongi (1997)](https://www.cambridge.org/core/journals/world-politics/article/abs/modernization-theories-and-facts/24CC3E289332FF2D39B5FACEAD75C408)---that the two things correlate so strongly. They do. But even Przeworski and Limongi's (1997) caveats about the basic introduction of democratic measures preceding economic development (which then consolidates democracy) challenges the boilerplate modernization thesis. What [Burkhart and Lewis-Beck (1994)](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/comparative-democracy-the-economic-development-thesis/4F6A7CECE8B8796ECE3CE98ACDE38AA5) try to do is admirable, but even a basic resort to Granger causality just keeps spinning the wheel. [Come 2020](https://preprints.apsanet.org/engage/apsa/article-details/5f6d02e6a70f3600190e487e), they're still spinning the wheel.
+
+This is far from the most complete literature review on all the scholarship on this topic. In fact, it's barely a literature review at all. For students, though, let it serve as a simple (but important) case where almost no one would question a relationship (by way of a simple correlation) exists. However, there are plenty of reasons to be unsure about what causes what, whether any of these conditions are filtered through intermediaries, whether autocrats "learn" from past mistakes toward consolidating their regime, and so on. Let us focus on the kind of correlation that Lipset (1959) first observed and worry about the issue of causality for another day.
+
+## The Data
+
+I created a simple data set that serves as way of exploring the correlation that Lipset (1959) first described, certainly using the countries from around the same time that Lipset (1959) said he used. There are 48 countries observed in 1949/1950 that Lipset groups, somewhat clumsily, into four categories. These are *E*urope and *E*nglish-speaking countries (`EE`) that are either stable democracies or are unstable democracies/dictatorships. There are also *L*atin *A*merican *N*ations (`LAN`) that are democracies/unstable dictatorships or stable dictatorships. Lipset has per capita income data from the United Nations Statistical Division, for which I was not able to retrieve a copy here in Sweden.[^fingers] To make due, I used GDP and population simulations generated by [Anders et al. (2020)](https://academic.oup.com/isq/article/64/2/392/5824855) and available in [`{peacesciencer}`](http://svmiller.com/peacesciencer/), for which a GDP per capita variable (in 2011 USD) is an easy creation. For simplicity's sake, I also use democracy data available in [`{peacesciencer}`](http://svmiller.com/peacesciencer/) and focus here on [Xavier Marquez](https://people.wgtn.ac.nz/xavier.marquez)' [extension of the Unified Democracy Scores (UDS) data](https://xmarquez.github.io/QuickUDS/). I love this variable for coding democracy because it is [a continuous estimate generated by a graded response model](https://www.cambridge.org/core/journals/political-analysis/article/democratic-compromise-a-latent-variable-analysis-of-ten-measures-of-regime-type/2A6B2BBA6F80367644F2C5007E1CFC29) that has the added side effect of communicating the underlying probability of how convinced we are at the observation is a democracy based on the inputs to the graded response model. Students who don't want to think about these hard details should just internalize that higher values = more democracy and/or greater belief that the thing in question is a democracy. The estimates are for 1950 and the simple data set we'll be working with looks like this.
+
+[^fingers]: Fingers crossed that I can get that from an inter-library loan here because it'd be a nifty resource.
+
+```{r}
+read_csv("http://svmiller.com/extdata/democracy-income-1950.csv") %>%
+  mutate(wbgdppc = wbgdp2011est/wbpopest) %>%
+  select(country:cat, wbgdppc, xm_qudsest) -> Data
+```
+
+```{r, echo=F}
+Data %>%
+  select(-iso3c) %>%
+  mutate(xm_qudsest = round(xm_qudsest, 2),
+         wbgdppc = prettyNum(round(wbgdppc, 0),
+                             big.mark =",")) %>%
+  kbl(., caption = "Democracy and Per Capita Income in 1950",
+      format = "html",
+      col.names = c("Country", "Lipset (1959) Category", 
+                    "Est. GDP per Capita (2011 USD)", "Marquez Democracy Estimate"),
+      table.attr='id="stevetable"',
+      align = c("llcc"))
+```
+
+We could use these data to offer a basic replication (in spirit) of some of what you see in Table 2 in Lipset (1959). That second part of Table 2 shows, as you see here, that the ranges of per capita income overlap considerably for the Latin American states but there appears to be a substantial difference in Europe. In Europe at this time, the poorest democracy would be among the wealthiest unstable democracies or dictatorships.
+
+```{r}
+Data %>%
+  summarize(min = min(wbgdppc),
+            median = median(wbgdppc),
+            mean = mean(wbgdppc),
+            max = max(wbgdppc), .by=cat)
+```
+
+A graph might better show this. This graphs leverages `{ggdist}` for making distribution plots, and `{stevethemes}` for aesthetics, though I'll suppress the code here for presentation. 
+
+```{r lipset-1959-categories-gdppc, echo=F, fig.width=11, fig.height = 7.5}
+Data %>%
+  arrange(desc(cat)) %>%
+  mutate(cat = str_replace(cat, "and", "\nand")) %>%
+  mutate(cat = fct_inorder(cat)) %>%
+  ggplot(.,aes(cat, wbgdppc)) +
+  theme_steve() +
+  stat_halfeye(.width = c(.68, .9), fill=g_c("su_water")) +
+  stat_dots(fill='black', alpha=.6, dotsize=.5) +
+  coord_flip() +
+    labs(y = "Life Expectancy (with 68% and 90% Intervals)",
+         x = "",
+         caption = "Data: Lipset (1959) [for states/categories] and Anders et al. (2020) [for per capita income]",
+         title = "The Distribution of Per Capita Income in 1950, by Lipset's (1959) Four Categories",
+         subtitle = "Without using his same data, we see the same basic insights reported in Table 2 of Lipset (1959).")
+```
+
+Here, we can see only one country that Lipset (1959) considers a stable democracy in Europe and the English-speaking world is poorer than the richest unstable democracy/dictatorship in the same region. Perhaps unsurprisingly, that country is Ireland. Among the Latin American states, we can see that the center of the distribution of democracies/unstable dictatorships has higher levels of per capita income than the center of the distribution for the stable dictatorships. There is only one obviously anomalous observation (Venezuela) here among those stable dictatorships.
+
+## Correlating Democracy and Per Capita Income
+
+Now that we can see a basic replication of what Lipset (1959) observed, let's insert our measure of democracy to see how highly democracy and per capita income correlate in this sample.
+
+```{r}
+Data %>%
+  summarize(cor = cor(xm_qudsest, wbgdppc))
+```
+
+I'm always quick to note that there is no formal classification of a correlation, beyond direction, perfection, and zero and that you are left to your own devices to describe what you see.[^sign] Here, we can see it's not 0 and it's not 1 or -1. A correlation coefficient of .701, however, is what I would call a strong, positive correlation. It has anomalous observations (e.g. Ireland and Venezuela), but even removing those two observations would not materially change the correlation coefficient observed here.
+
+[^sign]: You could also test for "significance" from 0, but I've never found a substantive use for that (beyond humoring ourselves about exclusion restrictions), so I don't belabor it to students.
+
+Here, it's worth noting for students that putting democracy as the *x* variable in the `cor()` function and putting per capita income as the *y* variable in the `cor()` function is just a judgment call on my end (even if it might give away how close I am to the North (1990) interpretation). I could reverse the two and get the exact same correlation coefficient because correlation is symmetrical.
+
+```{r}
+# With x and y reversed
+Data %>%
+  summarize(cor = cor(wbgdppc, xm_qudsest))
+```
+
+No matter, let's use `{ggplot2}` to create a scatterplot that is roughly communicating the correlation coefficient we observe.
+
+```{r scatterplot-democracy-gdppc-1950, echoT, fig.width=11, fig.height = 7.5}
+Data %>%
+  ggplot(.,aes(xm_qudsest, wbgdppc)) +
+  theme_steve() +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  labs(x = "Latent Democracy Estimate",
+       y = "Est. GDP per Capita in 2011 USD",
+       title = "A Scatterplot of Democracy and Per Capita Income, 1950",
+       subtitle = "The scatterplot is not earth-shattering, but illustrative of the kind of positive correlation Lipset (1959) observed in these countries.",
+       caption = "Data: Marquez (2016) [democracy], Anders et al. (2020) [for GDP per capita]")
+```
+
+A scatterplot here is useful the extent to which it's critical to show what a correlation coefficient "looks like."[^datasaurus] Here, a correlation coefficient of .701 is suggesting a pretty strong, positive relationship. As the estimate of democracy increases, so should the estimated per capita income even if we must be absolutely agnostic about what is causing what. A clear "rise over run" should emerge, which is basically what we see here.
+
+[^datasaurus]: [Beware the Datasaurus!](https://www.research.autodesk.com/publications/same-stats-different-graphs/)
+
+### Unpacking the Standardization of the Correlation Coefficient
+
+I impart three things about the correlation coefficient (Pearson's *r*) on students who are absolutely new to this. The first is the aforementioned caveat that the correlation coefficient is symmetrical and is ultimately agnostic about any causal relationship generating the data it gets. Correlating *x* with *y* is equal to correlation *y* with *x* so even using the language of "association" can be tenuous if your use of "association" implies a direction (as one might do in a Lambda test). I alluded briefly to the second thing about the correlation coefficient that's important to internalize. It's hard-bound between -1 (perfect negative correlation) and +1 (perfect positive correlation), so any correlation coefficient the student may calculate out of those bounds is an error on their part.
+
+The third thing is kind of interesting because it usually follows a sequence in which I've introduced students to [the standard normal distribution](http://svmiller.com/blog/2020/03/normal-distribution-central-limit-theorem-inference/). The correlation coefficient involves standardization of both *x* and *y*, creating *z*-scores from their product for all observations (summed and divided over the number of observations [minus 1]). *z*-scores communicate distance from the mean, also indicating that a *z*-score of exactly 0 *is* the mean (with absolute precision).
+
+
+Let's use `r1sd_at()` in `{stevemisc}` to scale our democracy and per capita income variables (by 1 standard deviation) to create these *z*-scores and take a peek at the data to see what they imply.
+
+```{r}
+Data %>%
+  r1sd_at(c("wbgdppc", "xm_qudsest"))
+```
+
+In the above console output, the `s_` prefix precedes the name of the variable that was standardized into a new column. We know our correlation coefficient is .701, suggesting a pretty strong, positive relationship. We are expecting to see that most of the standardized variables share the same sign. If it's above the mean in democracy, we expect it to be above the mean in per capita income. If it's below the mean in democracy, we expect it to be below the mean in per capita income. Looking at just the first 10 observations, incidentally all in Europe, we see exactly that. Nine of these 10 states are consistent with this positive correlation, with just the one obvious exception of Ireland.
+
+It's helpful to unpack what this mean visually by way of our scatterplot. We know that correlation creates *z*-scores of *x* and *y* underneath the hood, so let's draw a vertical line at the mean of democracy and a horizontal line at the mean of per capita income to gather more information about our data.
+
+```{r scatterplot-democracy-gdppc-1950-with-mean-lines, echo=F, fig.width=11, fig.height = 7.5}
+Data %>%
+  ggplot(.,aes(xm_qudsest, wbgdppc)) +
+  theme_steve() +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  geom_vline(xintercept = mean(Data$xm_qudsest),
+             linetype = 'dashed') +
+  geom_hline(yintercept = mean(Data$wbgdppc),
+             linetype = 'dashed') +
+  labs(x = "Latent Democracy Estimate",
+       y = "Est. GDP per Capita in 2011 USD",
+       title = "A Scatterplot of Democracy and Per Capita Income, 1950",
+       subtitle = "The introduction of lines at the mean creates quadrants that highlight the positive correlation coefficient.",
+       caption = "Data: Marquez (2016) [democracy], Anders et al. (2020) [for GDP per capita]")
+```
+
+This is effectively breaking our bivariate data into quadrants. The bottom-left and top-right quadrants are so-called positive correlation quadrants. They are above (below) the mean in *x* and above (below) the mean in *y*, so their placement in this quadrant is consistent with a positive correlation. The top-left and bottom-right quadrants are so-called negative correlation quadrants. They are above (below) the mean in *x* and below (above) the mean *y*, so observations here are inconsistent with a positive correlation and consistent with a negative correlation.[^ifjust] The correlation coefficient we get implies that we should expect to see the bulk of observations in the top-right and bottom-left quadrants, which we incidentally do.
+
+[^ifjust]: If just those observations in the top-left and bottom-right quadrants were included for a correlaton, the ensuing Pearson's *r* would be -.211.
+
+You would need to care about the subject matter and understand the standardization component to identify who are the off-correlation observations from 1950 that are poorer than we'd expect, given their democracy (or are richer than we'd expect, given their non-democratic regime). You can identify them in R like this.
+
+```{r}
+Data %>%
+  r1sd_at(c("wbgdppc", "xm_qudsest")) %>%
+  filter((s_wbgdppc > 0 & s_xm_qudsest < 0) |
+          (s_wbgdppc < 0 & s_xm_qudsest > 0))
+```
+
+A niftier tactic to communicate the same basic information is to create a label for them after identifying them and using `geom_label_repel()` in `{ggrepel}` to communicate those observations on the scatterplot. The code that does this is suppressed for presentation, but you can see the end result below. 
+
+```{r scatterplot-democracy-gdppc-1950-with-mean-lines-interesting-observations, echo=F, fig.width=11, fig.height = 7.5}
+Data %>%
+  r1sd_at(c("wbgdppc", "xm_qudsest")) %>%
+  mutate(lbl = ifelse((s_wbgdppc > 0 & s_xm_qudsest < 0) |
+          (s_wbgdppc < 0 & s_xm_qudsest > 0), country, NA)) %>%
+  ggplot(.,aes(xm_qudsest, wbgdppc)) +
+  theme_steve() +
+  geom_point() +
+  geom_smooth(method = 'lm') +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  geom_vline(xintercept = mean(Data$xm_qudsest),
+             linetype = 'dashed') +
+  geom_hline(yintercept = mean(Data$wbgdppc),
+             linetype = 'dashed') +
+  geom_label_repel(aes(label=lbl), family="Open Sans") +
+  labs(x = "Latent Democracy Estimate",
+       y = "Est. GDP per Capita in 2011 USD",
+       title = "A Scatterplot of Democracy and Per Capita Income, 1950",
+       subtitle = "The introduction of lines at the mean creates quadrants that highlight the positive correlation coefficient",
+       caption = "Data: Marquez (2016) [democracy], Anders et al. (2020) [for GDP per capita]")
+```
+
+Again, you would need to care about the subject matter to contextualize some of what you see here. Ireland's historical deprivation is familiar to those with even a passing familiarity with the Ireland, and that poverty [persisted well after the national revolution](https://www.amazon.se/-/en/Statutory-Lecturer-Tom-Garvin/dp/0717139700) and through the mid-to-late 20th century. Venezuela's economic fortunes were buoyed in the 1950s by oil exploration, notwithstanding its [military despotism](https://en.wikipedia.org/wiki/Carlos_Delgado_Chalbaud) and corruption. It was even [the largest exporter of petroleum around this time](https://www.jstor.org/stable/45314162) and the relatively recent discovery of oil fields fueled considerable outside investment in the country. I don't think it takes too much effort to internalize Italian and Austrian democracy as artifacts of a devastating war, which also had economic consequences as well. These are far from exhaustive answers, but may they contextualize the observations the scatterplot and correlation point out. Students may not be too eager to explore the quantitative side of things, but there is always a qualitative component to the story as well.
+
+## Conclusion
+
+The bulk of this is going to be a lab session in which I go over the correlation coefficient, how to implement it in R, and how to make sense of what is being communicated here. Seasoned practitioners will find nothing new here, and will also caution that there is lots and lots of scholarship available that explores the relationship between democracy and economic development in greater detail than what I offer here. You should read those---especially [Boix (2003)](https://www.cambridge.org/core/books/democracy-and-redistribution/ACB818ADD9174249D028E64634627626) and [Acemoglu and Robinson (2006)](https://www.cambridge.org/core/books/economic-origins-of-dictatorship-and-democracy/3F29DF90519971B183CAA16ED0203507). However, we all have to start somewhere, even my undergraduates who are getting their first real exposure to quantitative methods. May replicating an old finding from around this time be at least tractable and informative, certainly of correlation's properties and limitations.
