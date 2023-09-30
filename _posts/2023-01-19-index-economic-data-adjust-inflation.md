@@ -40,8 +40,9 @@ commodity_prices
 #>  8 1960-08-01      1.63      1.63          0.929           0.699       0.930
 #>  9 1960-09-01      1.63      1.63          0.923           0.703       0.930
 #> 10 1960-10-01      1.63      1.63          0.924           0.707       0.930
-#> # … with 746 more rows, and 5 more variables: tea_kolkata <dbl>,
-#> #   tea_mombasa <dbl>, sugar_eu <dbl>, sugar_us <dbl>, sugar_world <dbl>
+#> # ℹ 746 more rows
+#> # ℹ 5 more variables: tea_kolkata <dbl>, tea_mombasa <dbl>, sugar_eu <dbl>,
+#> #   sugar_us <dbl>, sugar_world <dbl>
 ```
 
 ## First Things First: Getting Inflation Adjustment Data
@@ -56,23 +57,24 @@ You can also use the wonderful `{fredr}` package to get these data through the F
 ```r
 CPI <- fredr(series_id = "CPIAUCSL", 
                observation_start = as.Date("1960-01-01")) %>%
-  rename(cpiu = value)
+  rename(cpiu = value) %>%
+  filter(year(date) <= 2022)
 
 CPI
 #> # A tibble: 756 × 5
 #>    date       series_id  cpiu realtime_start realtime_end
 #>    <date>     <chr>     <dbl> <date>         <date>      
-#>  1 1960-01-01 CPIAUCSL   29.4 2023-01-24     2023-01-24  
-#>  2 1960-02-01 CPIAUCSL   29.4 2023-01-24     2023-01-24  
-#>  3 1960-03-01 CPIAUCSL   29.4 2023-01-24     2023-01-24  
-#>  4 1960-04-01 CPIAUCSL   29.5 2023-01-24     2023-01-24  
-#>  5 1960-05-01 CPIAUCSL   29.6 2023-01-24     2023-01-24  
-#>  6 1960-06-01 CPIAUCSL   29.6 2023-01-24     2023-01-24  
-#>  7 1960-07-01 CPIAUCSL   29.6 2023-01-24     2023-01-24  
-#>  8 1960-08-01 CPIAUCSL   29.6 2023-01-24     2023-01-24  
-#>  9 1960-09-01 CPIAUCSL   29.6 2023-01-24     2023-01-24  
-#> 10 1960-10-01 CPIAUCSL   29.8 2023-01-24     2023-01-24  
-#> # … with 746 more rows
+#>  1 1960-01-01 CPIAUCSL   29.4 2023-09-30     2023-09-30  
+#>  2 1960-02-01 CPIAUCSL   29.4 2023-09-30     2023-09-30  
+#>  3 1960-03-01 CPIAUCSL   29.4 2023-09-30     2023-09-30  
+#>  4 1960-04-01 CPIAUCSL   29.5 2023-09-30     2023-09-30  
+#>  5 1960-05-01 CPIAUCSL   29.6 2023-09-30     2023-09-30  
+#>  6 1960-06-01 CPIAUCSL   29.6 2023-09-30     2023-09-30  
+#>  7 1960-07-01 CPIAUCSL   29.6 2023-09-30     2023-09-30  
+#>  8 1960-08-01 CPIAUCSL   29.6 2023-09-30     2023-09-30  
+#>  9 1960-09-01 CPIAUCSL   29.6 2023-09-30     2023-09-30  
+#> 10 1960-10-01 CPIAUCSL   29.8 2023-09-30     2023-09-30  
+#> # ℹ 746 more rows
 ```
 
 ![plot of chunk consumer-price-index-1960-2022](/images/index-economic-data-adjust-inflation/consumer-price-index-1960-2022-1.png)
@@ -102,17 +104,17 @@ CPI
 #> # A tibble: 756 × 8
 #>    date        cpiu  last first mean1990 bench_first bench_last bench_1990
 #>    <date>     <dbl> <dbl> <dbl>    <dbl>       <dbl>      <dbl>      <dbl>
-#>  1 1960-01-01  29.4  298.  29.4     131.        100        9.85       22.5
-#>  2 1960-02-01  29.4  298.  29.4     131.        100.       9.87       22.5
-#>  3 1960-03-01  29.4  298.  29.4     131.        100.       9.87       22.5
-#>  4 1960-04-01  29.5  298.  29.4     131.        101.       9.91       22.6
-#>  5 1960-05-01  29.6  298.  29.4     131.        101.       9.92       22.6
-#>  6 1960-06-01  29.6  298.  29.4     131.        101.       9.93       22.7
-#>  7 1960-07-01  29.6  298.  29.4     131.        101.       9.91       22.6
-#>  8 1960-08-01  29.6  298.  29.4     131.        101.       9.93       22.7
-#>  9 1960-09-01  29.6  298.  29.4     131.        101.       9.93       22.7
-#> 10 1960-10-01  29.8  298.  29.4     131.        101.       9.98       22.8
-#> # … with 746 more rows
+#>  1 1960-01-01  29.4  299.  29.4     131.        100        9.82       22.5
+#>  2 1960-02-01  29.4  299.  29.4     131.        100.       9.84       22.5
+#>  3 1960-03-01  29.4  299.  29.4     131.        100.       9.84       22.5
+#>  4 1960-04-01  29.5  299.  29.4     131.        101.       9.88       22.6
+#>  5 1960-05-01  29.6  299.  29.4     131.        101.       9.89       22.6
+#>  6 1960-06-01  29.6  299.  29.4     131.        101.       9.90       22.7
+#>  7 1960-07-01  29.6  299.  29.4     131.        101.       9.88       22.6
+#>  8 1960-08-01  29.6  299.  29.4     131.        101.       9.90       22.7
+#>  9 1960-09-01  29.6  299.  29.4     131.        101.       9.90       22.7
+#> 10 1960-10-01  29.8  299.  29.4     131.        101.       9.95       22.8
+#> # ℹ 746 more rows
 ```
 
 Cool. That was it; we got our benchmarks. Let's join them into our commodity prices data frame so that we can start adjusting things for inflation. Notice that the `left_join()` here is joining by exact date (which is practically a year-month). Make sure your consumer price index data and benchmarks correspond with the temporal unit in the data frame of interest.
@@ -136,9 +138,10 @@ commodity_prices
 #>  8 1960-08-01      1.63      1.63          0.929           0.699       0.930
 #>  9 1960-09-01      1.63      1.63          0.923           0.703       0.930
 #> 10 1960-10-01      1.63      1.63          0.924           0.707       0.930
-#> # … with 746 more rows, and 8 more variables: tea_kolkata <dbl>,
-#> #   tea_mombasa <dbl>, sugar_eu <dbl>, sugar_us <dbl>, sugar_world <dbl>,
-#> #   bench_first <dbl>, bench_last <dbl>, bench_1990 <dbl>
+#> # ℹ 746 more rows
+#> # ℹ 8 more variables: tea_kolkata <dbl>, tea_mombasa <dbl>, sugar_eu <dbl>,
+#> #   sugar_us <dbl>, sugar_world <dbl>, bench_first <dbl>, bench_last <dbl>,
+#> #   bench_1990 <dbl>
 ```
 
 Now let's start adjusting for inflation.
@@ -167,7 +170,7 @@ commodity_prices %>%
 #>  8 1960-08-01 coffee_arabica 0.929
 #>  9 1960-09-01 coffee_arabica 0.923
 #> 10 1960-10-01 coffee_arabica 0.924
-#> # … with 1,502 more rows
+#> # ℹ 1,502 more rows
 ```
 ![plot of chunk nominal-price-arabica-robustas-1960-2022](/images/index-economic-data-adjust-inflation/nominal-price-arabica-robustas-1960-2022-1.png)
 
@@ -182,17 +185,18 @@ commodity_prices %>%
 #> # A tibble: 756 × 6
 #>    date       coffee_arabica coffee_robustas bench_last real_arabica
 #>    <date>              <dbl>           <dbl>      <dbl>        <dbl>
-#>  1 1960-01-01          0.941           0.697       9.85         9.55
-#>  2 1960-02-01          0.947           0.689       9.87         9.60
-#>  3 1960-03-01          0.928           0.689       9.87         9.41
-#>  4 1960-04-01          0.930           0.685       9.91         9.39
-#>  5 1960-05-01          0.92            0.691       9.92         9.28
-#>  6 1960-06-01          0.912           0.697       9.93         9.18
-#>  7 1960-07-01          0.916           0.691       9.91         9.24
-#>  8 1960-08-01          0.929           0.699       9.93         9.36
-#>  9 1960-09-01          0.923           0.703       9.93         9.29
-#> 10 1960-10-01          0.924           0.707       9.98         9.26
-#> # … with 746 more rows, and 1 more variable: real_robustas <dbl>
+#>  1 1960-01-01          0.941           0.697       9.82         9.58
+#>  2 1960-02-01          0.947           0.689       9.84         9.63
+#>  3 1960-03-01          0.928           0.689       9.84         9.44
+#>  4 1960-04-01          0.930           0.685       9.88         9.42
+#>  5 1960-05-01          0.92            0.691       9.89         9.30
+#>  6 1960-06-01          0.912           0.697       9.90         9.21
+#>  7 1960-07-01          0.916           0.691       9.88         9.27
+#>  8 1960-08-01          0.929           0.699       9.90         9.38
+#>  9 1960-09-01          0.923           0.703       9.90         9.32
+#> 10 1960-10-01          0.924           0.707       9.95         9.28
+#> # ℹ 746 more rows
+#> # ℹ 1 more variable: real_robustas <dbl>
 ```
 
 Let's update our graph now.
@@ -217,18 +221,18 @@ commodity_prices %>%
 #> # A tibble: 756 × 8
 #>    date       sugar_eu sugar_us sugar_world bench_last real_sugar_eu
 #>    <date>        <dbl>    <dbl>       <dbl>      <dbl>         <dbl>
-#>  1 1960-01-01    0.122    0.117      0.0666       9.85          1.24
-#>  2 1960-02-01    0.122    0.119      0.0679       9.87          1.24
-#>  3 1960-03-01    0.122    0.121      0.0683       9.87          1.24
-#>  4 1960-04-01    0.122    0.123      0.0681       9.91          1.23
-#>  5 1960-05-01    0.122    0.121      0.0683       9.92          1.23
-#>  6 1960-06-01    0.122    0.126      0.0666       9.93          1.23
-#>  7 1960-07-01    0.122    0.132      0.0728       9.91          1.23
-#>  8 1960-08-01    0.122    0.128      0.0741       9.93          1.23
-#>  9 1960-09-01    0.122    0.132      0.0725       9.93          1.23
-#> 10 1960-10-01    0.122    0.130      0.0538       9.98          1.23
-#> # … with 746 more rows, and 2 more variables: real_sugar_us <dbl>,
-#> #   real_sugar_world <dbl>
+#>  1 1960-01-01    0.122    0.117      0.0666       9.82          1.25
+#>  2 1960-02-01    0.122    0.119      0.0679       9.84          1.24
+#>  3 1960-03-01    0.122    0.121      0.0683       9.84          1.24
+#>  4 1960-04-01    0.122    0.123      0.0681       9.88          1.24
+#>  5 1960-05-01    0.122    0.121      0.0683       9.89          1.24
+#>  6 1960-06-01    0.122    0.126      0.0666       9.90          1.24
+#>  7 1960-07-01    0.122    0.132      0.0728       9.88          1.24
+#>  8 1960-08-01    0.122    0.128      0.0741       9.90          1.24
+#>  9 1960-09-01    0.122    0.132      0.0725       9.90          1.24
+#> 10 1960-10-01    0.122    0.130      0.0538       9.95          1.23
+#> # ℹ 746 more rows
+#> # ℹ 2 more variables: real_sugar_us <dbl>, real_sugar_world <dbl>
 ```
 ![plot of chunk price-of-sugar-1960-2022](/images/index-economic-data-adjust-inflation/price-of-sugar-1960-2022-1.png)
 -->
@@ -260,9 +264,10 @@ commodity_prices %>%
 #>  8 1960-08-01      1.63      1.63          0.929           0.699       0.930
 #>  9 1960-09-01      1.63      1.63          0.923           0.703       0.930
 #> 10 1960-10-01      1.63      1.63          0.924           0.707       0.930
-#> # … with 746 more rows, and 9 more variables: tea_kolkata <dbl>,
-#> #   tea_mombasa <dbl>, sugar_eu <dbl>, sugar_us <dbl>, sugar_world <dbl>,
-#> #   bench_first <dbl>, bench_last <dbl>, bench_1990 <dbl>, real_brent <dbl>
+#> # ℹ 746 more rows
+#> # ℹ 9 more variables: tea_kolkata <dbl>, tea_mombasa <dbl>, sugar_eu <dbl>,
+#> #   sugar_us <dbl>, sugar_world <dbl>, bench_first <dbl>, bench_last <dbl>,
+#> #   bench_1990 <dbl>, real_brent <dbl>
 ```
 ![plot of chunk multiple-brent-price-1960-2022](/images/index-economic-data-adjust-inflation/multiple-brent-price-1960-2022-1.png)
 
@@ -288,10 +293,10 @@ commodity_prices %>%
 #>  8 1960-08-01      1.63      1.63          0.929           0.699       0.930
 #>  9 1960-09-01      1.63      1.63          0.923           0.703       0.930
 #> 10 1960-10-01      1.63      1.63          0.924           0.707       0.930
-#> # … with 746 more rows, and 10 more variables: tea_kolkata <dbl>,
-#> #   tea_mombasa <dbl>, sugar_eu <dbl>, sugar_us <dbl>, sugar_world <dbl>,
-#> #   bench_first <dbl>, bench_last <dbl>, bench_1990 <dbl>, real_brent <dbl>,
-#> #   index_brent <dbl>
+#> # ℹ 746 more rows
+#> # ℹ 10 more variables: tea_kolkata <dbl>, tea_mombasa <dbl>, sugar_eu <dbl>,
+#> #   sugar_us <dbl>, sugar_world <dbl>, bench_first <dbl>, bench_last <dbl>,
+#> #   bench_1990 <dbl>, real_brent <dbl>, index_brent <dbl>
 ```
 ![plot of chunk index-brent-price-1960-2022](/images/index-economic-data-adjust-inflation/index-brent-price-1960-2022-1.png)
 

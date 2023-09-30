@@ -81,7 +81,8 @@ You can also use the wonderful `{fredr}` package to get these data through the F
 ```{r}
 CPI <- fredr(series_id = "CPIAUCSL", 
                observation_start = as.Date("1960-01-01")) %>%
-  rename(cpiu = value)
+  rename(cpiu = value) %>%
+  filter(year(date) <= 2022)
 
 CPI
 ```
@@ -105,7 +106,7 @@ CPI %>%
   ggplot(.,aes(date, cpiu)) + 
   geom_rect(data=Recessions, inherit.aes=F,
            aes(xmin=Peak, xmax=Trough, ymin=0, ymax=+Inf),  alpha=0.6) +
-  geom_line(size=1.1) +
+  geom_line(linewidth=1.1) +
   theme_steve_web() +
      scale_x_date(breaks = function(x) seq.Date(from = as.Date("1960-01-01"), 
                                                  to = as.Date("2025-01-01"), 
