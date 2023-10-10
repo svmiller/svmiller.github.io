@@ -1,0 +1,127 @@
+---
+output: 
+  stevetemplates::article2:
+    citation_package: natbib
+    dev: cairo_pdf
+bibliography: '`r paste0(Sys.getenv("HOME"), "/Dropbox/master.bib")`'
+biblio-style: apsr
+geometry: margin=1in
+header-includes:
+   - \linespread{1.05}
+title: "An Article Summary of 'Comparative Public Health: The Political Economy of Human Misery and Well-Being'"
+author:
+- name: Steven V. Miller
+  affiliation: Stockholm University
+  email: svmille@clemson.edu
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+
+mainfont: cochineal
+# fontfamilyoptions: sc, osf
+fontsize: 11pt
+pandocparas: TRUE
+---
+
+# Article
+
+```{r, echo=F, results="asis", warning=F, message=F}
+
+library(stevemisc)
+library(bib2df)
+library(tidyverse)
+library(modelsummary)
+library(stevedata)
+
+bib <- bib2df("~/Dropbox/master.bib")
+
+bib %>%
+  filter(BIBTEXKEY == "ghobarahetal2004cph") %>%
+  df2bib() %>%
+  capture.output() %>%
+  print_refs(., toformat="latex") %>%
+  str_replace(., "\\{``", "``") %>%
+  str_replace(., "''\\}", "''") %>%
+  cat(., sep="\n")
+
+```
+
+
+# Introduction
+
+Why do some countries rank higher in public health indicators than others? This is a very broad question in the public health literature, but Ghobarah et al. (2004) contend it is also a political question. Governments make decisions to allocate resources to public health, and these expenditures may (or may not) achieve public health gains. However, both the decision to allocate resources and their public health outcomes are subject to domestic and international political pressures that have gone largely unaddressed in the political science literature. In this cross-sectional analysis using World Health Organization data (for public health outcomes), the authors find important political influences of public health. Generally, there is more public health spending (and improved public health outcomes) where governments are more democratic and wealthier, where societies are better educated, less unequal, and more homogeneous, and where society and government exist in environments without civil conflict or external threat. Consistent with their more famous article in *American Political Science Review* [@ghobarahetal2003cwk], there are important political correlates of public health outcomes that should be of interest to scholars in international relations.
+
+# Literature Review and the Politics of Comparative Public Health
+
+This paper is built on the premise that the important questions of comparative public health are ultimately political questions that have been largely understudied in political science. Economists have never been bashful about viewing their perspectives and methods as hammers in search of nails across academic disciplines. @filmerpritchett1999ipsh, as one case the authors cite, take an economic approach to modeling variation in critical public health indicators of infant and under-5 child mortality, finding only modest associations with these measures and public spending on health. There is an entire academic discipline of public health that is no doubt interested in cross-national variation in public health indicators. It is also the mission of the World Health Organization and its public health researchers to be interested in exactly this. Ghobarah et al. (2004) cite one report at the World Health Organization that models health system efficiency as, in part, a function of pre-existing resources for public health as well as a history of civil conflict [@evansetal2001cenh]. Ghobarah et al. (2004) use this case as a pivot to emphasize that government decisions about public health are ultimately political decisions suitable for inquiry in the field of political science. With a few noteworthy exceptions [e.g. @przeworskietal2000dd], this has been a neglected field of study. Even what passing interest comparative public health has received in international relations often reduces comparative public health to "development", conflating public health questions with questions about economics. The overlap may be evident, but the language we use and the questions we ask should do justice to the field.
+
+Ghobarah et al. (2004) propose political hypotheses about comparative public health, though it is fair to note these hypotheses come from conjecture rather than some deductively crafted theoretical argument. Their conceptual framework privileges both the domestic and international sources of comparative public health outcomes. Domestically, they expect more educated, more democratic, more developed, and more equal societies to be individually associated with (broadly defined) "good" public health outcomes (typically spending, but also health-adjusted life expectancy in years). Internationally, they expect---much of which they emphasize in their more famous *APSR* paper [@ghobarahetal2003cwk]---that conflict and threat lead to "bad" public health outcomes. 
+
+# Results
+
+The sources of their data are multiple (e.g. CIA for GDP per capita, Correlates of War for conflict), but data from the World Health Organization feature prominently for the dependent variables. The regression models they estimate are all simple linear models regressing some public health measure of interest (public health expenditures as a percentage of GDP, total expenditures on health, and health adjusted life expectancy) on political/economic variables all of which have referent years around 1997.
+
+The main results of interest are three regression models across Table I, Table II, and Table III. Across all three models, they find robust effects of GDP per capita and education levels for public health outcomes. Wealthier countries and countries with higher levels of education are positively associated with "good" public health outcomes of public health expenditures (as a percent of GDP), total health expenditures, and health-adjusted life expectancy. Higher levels of democracy are associated with more public health expenditures in Table I. Higher levels of income inequality and higher levels of racial-linguistic-religious heterogeneity are associated with decreased health expenditures and lower life expectancy across all relevant models. Finally, Table III builds on their 2003 article in *APSR* and finds lower life expectancy in states with higher levels of civil war deaths or for which there are civil wars in contiguous states. The models they estimate are arguably "minimal" but the goodness of fit statistics still suggest a lot of cross-national variation is attributable to political variables alone. Indeed, a staggering 80% of the variation in cross-national health-adjusted life expectancy collected by the World Health Organization can be explained by variables that would fall well outside the mission of the World Health Organization to collect. There are correlates of comparative public health that are fundamentally the domain of the political and scholars in international relations and public health would be wise to consider them.
+
+# Conclusion
+
+We should be honest that the results are largely illustrative and the simple cross-sectional design the authors employ cannot answer causal questions. Even the temporal issues the authors consider in coding their predictor variables prior to the referent year for public health indicators still brush with the endogeneity concerns they want to avoid. However, it is fair to say Ghobarah et al. (2004) are correct to emphasize that comparative public health is a political topic suitable for inquiry by scholars in political science and international relations. Indeed, the shadow of Rwanda looms large in this paper, given the time frame of the data and the publication of the article.[^rwanda] Rwanda's civil war and ongoing civil conflicts in its vicinity coincide with a massive difference in public health vis-a-vis a country like Sweden. In their data, Sweden spends about three times as much on public health as a percentage of GDP, twice as much on total health expenditures, and life expectancy in Sweden is about 40(!) years longer than health-adjusted life expectancy in Rwanda. Political considerations, like democracy and conflict, are important insights to this kind of variation.
+
+[^rwanda]: If you want a treat, try replicating their analyses from around this time both with and without Rwanda and see what changes.
+
+
+\newpage
+
+# Appendix: Replicating Ghobarah et al. (2004)
+
+A data set (`GHR04`) forthcoming in version 1.1 of `{stevedata}` contains an easy means to effectively replicate the regressions reported in Ghobarah et al. (2004). There is an important caveat that the results are not identical to what the authors report and there is no easy way to know why this is the case. The authors provide only a Stata .dta file with this publication, which contains over 200 variables and multiple columns that would seem (prima facie) to correspond with the variables of interest. Some forensic work was required in order to discern what were the variables they appear to have used. Briefly, Ghobarah et al. (2004) offer no Stata .log file or .do file, but do liberally cite minimums, maximums, and medians for the variables of interest. They are also clear when they use logarithmic transformations of these variables and Stata does not allow---or at least does not make easy---the kind of on-the-fly logarithmic transformations in a regression model that one could do in R. With some effort, a researcher can discern a column for a given country that matches the information Ghobarah et al. (2004) report (e.g. the private health expenditures as a percentage of GDP for Oman) and determine this is assuredly what they used among the multiple columns available in the same data that look like it. The differences reported here are routinely in the hundredths, or even the thousandths. The biggest source of confusion concerns why there appears to be an additional observation in the regression models. Some country is dropped for some reason, and it's not evident which one or why.
+
+*Students*: you don't need to do what I'm doing here in your article summary. Consider this simply illustrative of running regression models and formatting regression tables in `{modelsummary}`.
+
+\newpage
+
+\small
+```{r}
+# library(stevedata) # need update
+# library(modelsummary)
+M1 <- lm(pubhlthexppgdp ~  log_gdppc + gini + log_educ + log_vanhanen + 
+           rivalry + polity, data=GHR04) 
+
+M2 <- lm(totexphlth ~  log_gdppc + log_educ + pubhlthexppgdp + 
+           prvhlthexpgdp, data=GHR04) 
+
+M3 <- lm(hale ~  totexphlth + urban_growth + gini + log_vanhanen +
+           log_educ + cwdeaths + contig_cw, data=GHR04) 
+
+modelsummary(list("Pub. Health Exp. (% GDP)" = M1,
+                  "Total Exp. Health" = M2,
+                  "HALE" = M3),
+             stars = TRUE,
+             coef_map = c(
+               "log_gdppc" = "GDP per Capita",
+               "gini" = "Income Inequality",
+               "log_educ" = "Education",
+               "log_vanhanen" = "Ethnic Heterogeneity",
+               "rivalry" = "Enduring Intnl. Rivalry",
+               "polity" = "Democracy",
+               "pubhlthexppgdp" = "Pub. Health Exp. (% GDP)",
+               "prvhlthexpgdp" = "Priv. Health Exp. (% GDP)",
+               "urban_growth" = "Rapid Urban Growth",
+               "cwdeaths" = "Civil War Deaths",
+               "contig_cw" = "Contiguous Civil War",
+               "(Intercept)" = "Intercept"
+             ),
+             caption = "A Replication of Tables I, II, and III in Ghobarah et al. (2004)",
+             gof_map = c("nobs", "adj.r.squared"))
+```
+
+\normalsize
+
+\newpage
+<!--
+# References
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
+
