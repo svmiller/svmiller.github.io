@@ -17,7 +17,7 @@ active: blog
 
 
 
-{% include image.html url="/images/1967-05-08-new-mexico-bayoneting-incident.jpg" caption="The Kent State shooting was the proximate cause, but the counter-demonstration at the University of New Mexico was comparably violent. 11 people were stabbed with  New Mexico Army National Guard bayonets during the melee." width=400 align="right" %}
+{% include image.html url="/images/1967-05-08-new-mexico-bayoneting-incident.jpg" caption="The Kent State shooting was the proximate cause, but the Vietnam War protest and counter-demonstration at the University of New Mexico was comparably violent. 11 people were stabbed with  New Mexico Army National Guard bayonets during the melee." width=400 align="right" %}
 
 Consider this a tutorial for second-year MA class on the Poisson model. It's a busy time of the year for me, juggling two MA classes solo, supervising BA theses, and preparing for the next semester's classes (which starts immediately after the fall term ends).[^godthisishard] Part of the challenge this year has been overhauling the advanced MA class on quantitative methods to make it less about time series and as much about models students in international relations or economic history might encounter in their travels. On deck: regression models for the analysis of variables that "count". These are a unique case of discrete dependent variables that are left-bound at 0, can only be integers, and have only an informal bound on the right by probability. However, they present a unique opportunity because, if you were patient and diligent, you can extract some cool information from these models.
 
@@ -202,7 +202,7 @@ DCE12 %>%
 
 They look like the kind of count data you'd teach around, minus some polite concerns about overdispersion I'll deal with later.
 
-Let's evaluate an argument I came across preparing for this class. What explains the incidence of anti-government demonstrations and riots? Let's treat, for now, anti-government demonstrations as strictly peaceful and riots as strictly focused toward the government in this application. [Sawyeret al. (2022)](https://journals.sagepub.com/doi/abs/10.1177/10693971211059762) propose a theoretical model that emphasizes the importance of the "youth bulge" and urbanization as important correlates of both peaceful demonstrations against the government (anti-government demonstrations) and violent demonstrations against the government (riots). Their model of choice is a two-way fixed effects---[which, groan](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0231349)---negative binomial panel model. I'm going to explore this in a simple cross-sectional case because the goal is just about unpacking the Poisson model and not about questioning whether their findings are robust or not.
+Let's evaluate an argument I came across preparing for this class. What explains the incidence of anti-government demonstrations and riots? Let's treat, for now, anti-government demonstrations as strictly peaceful and riots as strictly focused toward the government in this application. [Sawyer et al. (2022)](https://journals.sagepub.com/doi/abs/10.1177/10693971211059762) propose a theoretical model that emphasizes the importance of the "youth bulge" and urbanization as important correlates of both peaceful demonstrations against the government (anti-government demonstrations) and violent demonstrations against the government (riots). Their model of choice is a two-way fixed effects---[which, groan](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0231349)---negative binomial panel model. I'm going to explore this in a simple cross-sectional case because the goal is just about unpacking the Poisson model and not about questioning whether their findings are robust or not.
 
 Let's prepare `DCE12` for analysis in light of the information that Sawyer et al. (2022) also included in their model. I'm going to focus on just the `riots` variable here to minimize an issue I know I'll have to deal with anyway (i.e. overdispersion). I'm going to model the youth bulge as they do, which is the proportion of the population aged 15-29 over the total adult population. I'm going to multiply that by 100 to convert a proportion to a percentage. I'm going to include a variable that is the percentage of the population of the territorial unit living in urban areas. Another variable of interest here is the percentage of tertiary school-aged population enrolled in tertiary school, which comes by way of [Barro and Lee (2015)](https://barrolee.github.io/BarroLeeDataSet/Enroll.html). I might intermittently call this a "university enrollment rate" because that's what it's basically measuring, in as many words, and to the best of its ability. One assumes: more university-aged people in university, the more riots (a la the classic stories we tell about the United States during the Vietnam War). Other variables: Varieties of Democracy's electoral democracy index ("polyarchy"), and the natural logarithmic transformations of total population size and GDP per capita. I'm going to subset the data to just complete cases to make this easier for me.
 
@@ -483,7 +483,7 @@ coeftest(M2, vcov=robust)
    <td style="text-align:center;"> (0.017) </td>
    <td style="text-align:center;"> (0.017) </td>
    <td style="text-align:center;"> (0.029) </td>
-   <td style="text-align:center;"> (0.027) </td>
+   <td style="text-align:center;"> (0.024) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> % Urban </td>
@@ -497,21 +497,21 @@ coeftest(M2, vcov=robust)
    <td style="text-align:center;"> (0.008) </td>
    <td style="text-align:center;"> (0.008) </td>
    <td style="text-align:center;"> (0.012) </td>
-   <td style="text-align:center;"> (0.012) </td>
+   <td style="text-align:center;"> (0.011) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Rate of Students in Tertiary School </td>
    <td style="text-align:center;"> 0.018** </td>
    <td style="text-align:center;"> 1.018** </td>
    <td style="text-align:center;"> 0.019+ </td>
-   <td style="text-align:center;"> 0.018 </td>
+   <td style="text-align:center;"> 0.018+ </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
    <td style="text-align:center;"> (0.006) </td>
    <td style="text-align:center;"> (0.006) </td>
    <td style="text-align:center;"> (0.011) </td>
-   <td style="text-align:center;"> (0.012) </td>
+   <td style="text-align:center;"> (0.010) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Electoral Democracy Index (Polyarchy) </td>
@@ -525,7 +525,7 @@ coeftest(M2, vcov=robust)
    <td style="text-align:center;"> (0.340) </td>
    <td style="text-align:center;"> (0.157) </td>
    <td style="text-align:center;"> (0.690) </td>
-   <td style="text-align:center;"> (0.697) </td>
+   <td style="text-align:center;"> (0.549) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Total Population (Logged) </td>
@@ -539,7 +539,7 @@ coeftest(M2, vcov=robust)
    <td style="text-align:center;"> (0.054) </td>
    <td style="text-align:center;"> (0.098) </td>
    <td style="text-align:center;"> (0.100) </td>
-   <td style="text-align:center;"> (0.095) </td>
+   <td style="text-align:center;"> (0.069) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> GDP per Capita (Logged) </td>
@@ -553,7 +553,7 @@ coeftest(M2, vcov=robust)
    <td style="text-align:center;"> (0.167) </td>
    <td style="text-align:center;"> (0.158) </td>
    <td style="text-align:center;"> (0.271) </td>
-   <td style="text-align:center;"> (0.301) </td>
+   <td style="text-align:center;"> (0.257) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Intercept </td>
@@ -567,7 +567,7 @@ coeftest(M2, vcov=robust)
    <td style="text-align:center;box-shadow: 0px 1.5px"> (1.776) </td>
    <td style="text-align:center;box-shadow: 0px 1.5px"> (0.007) </td>
    <td style="text-align:center;box-shadow: 0px 1.5px"> (2.951) </td>
-   <td style="text-align:center;box-shadow: 0px 1.5px"> (3.140) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> (2.799) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -585,7 +585,7 @@ coeftest(M2, vcov=robust)
 
 </div>
 
-What you do with the differences in sign and significance is your call. In the case of the democracy variable, I already know it's because that should be a square term (c.f. ["more violence in the middle"](https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12373))
+What you do with the differences in significance is your call. In the case of the democracy variable, I already know it's because that should be a square term (c.f. ["more violence in the middle"](https://onlinelibrary.wiley.com/doi/abs/10.1111/ajps.12373)).
 
 ## Conclusion {#conclusion}
 
