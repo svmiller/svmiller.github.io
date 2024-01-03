@@ -68,18 +68,18 @@ We should be honest that the results are largely illustrative and the simple cro
 [^rwanda]: If you want a treat, try replicating their analyses from around this time both with and without Rwanda and see what changes.
 
 
-\newpage
+<!-- \newpage -->
 
-# Appendix: Replicating Ghobarah et al. (2004)
+<!-- # Appendix: Replicating Ghobarah et al. (2004) -->
 
-A data set (`GHR04`) forthcoming in version 1.1 of `{stevedata}` contains an easy means to effectively replicate the regressions reported in Ghobarah et al. (2004). There is an important caveat that the results are not identical to what the authors report and there is no easy way to know why this is the case. The authors provide only a Stata .dta file with this publication, which contains over 200 variables and multiple columns that would seem (prima facie) to correspond with the variables of interest. Some forensic work was required in order to discern what were the variables they appear to have used. Briefly, Ghobarah et al. (2004) offer no Stata .log file or .do file, but do liberally cite minimums, maximums, and medians for the variables of interest. They are also clear when they use logarithmic transformations of these variables and Stata does not allow---or at least does not make easy---the kind of on-the-fly logarithmic transformations in a regression model that one could do in R. With some effort, a researcher can discern a column for a given country that matches the information Ghobarah et al. (2004) report (e.g. the private health expenditures as a percentage of GDP for Oman) and determine this is assuredly what they used among the multiple columns available in the same data that look like it. The differences reported here are routinely in the hundredths, or even the thousandths. The biggest source of confusion concerns why there appears to be an additional observation in the regression models. Some country is dropped for some reason, and it's not evident which one or why.
+<!-- A data set (`GHR04`) forthcoming in version 1.1 of `{stevedata}` contains an easy means to effectively replicate the regressions reported in Ghobarah et al. (2004). There is an important caveat that the results are not identical to what the authors report and there is no easy way to know why this is the case. The authors provide only a Stata .dta file with this publication, which contains over 200 variables and multiple columns that would seem (prima facie) to correspond with the variables of interest. Some forensic work was required in order to discern what were the variables they appear to have used. Briefly, Ghobarah et al. (2004) offer no Stata .log file or .do file, but do liberally cite minimums, maximums, and medians for the variables of interest. They are also clear when they use logarithmic transformations of these variables and Stata does not allow---or at least does not make easy---the kind of on-the-fly logarithmic transformations in a regression model that one could do in R. With some effort, a researcher can discern a column for a given country that matches the information Ghobarah et al. (2004) report (e.g. the private health expenditures as a percentage of GDP for Oman) and determine this is assuredly what they used among the multiple columns available in the same data that look like it. The differences reported here are routinely in the hundredths, or even the thousandths. The biggest source of confusion concerns why there appears to be an additional observation in the regression models. Some country is dropped for some reason, and it's not evident which one or why. -->
 
-*Students*: you don't need to do what I'm doing here in your article summary. Consider this simply illustrative of running regression models and formatting regression tables in `{modelsummary}`.
+<!-- *Students*: you don't need to do what I'm doing here in your article summary. Consider this simply illustrative of running regression models and formatting regression tables in `{modelsummary}`. -->
 
-\newpage
+<!-- \newpage -->
 
-\small
-```{r}
+<!-- \small -->
+```{r,eval=F, echo=F}
 # library(stevedata) # need update
 # library(modelsummary)
 M1 <- lm(pubhlthexppgdp ~  log_gdppc + gini + log_educ + log_vanhanen + 
@@ -113,9 +113,9 @@ modelsummary(list("Pub. Health Exp. (% GDP)" = M1,
              gof_map = c("nobs", "adj.r.squared"))
 ```
 
-\normalsize
+<!-- \normalsize -->
 
-\newpage
+<!-- \newpage -->
 <!--
 # References
 \setlength{\parindent}{-0.2in}
