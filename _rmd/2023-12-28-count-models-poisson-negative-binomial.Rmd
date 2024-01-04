@@ -160,7 +160,7 @@ Example
 Example %>% count(y)
 ```
 
-You could capture faithfully capture this data-generating process with the `glm()` function in R. You might be accustomed to this function for the case of simpler binary logistic regressions, but it's a simple matter of changing one argument in the function (the `family` argument).
+You could faithfully capture this data-generating process with the `glm()` function in R. You might be accustomed to this function for the case of simpler binary logistic regressions, but it's a simple matter of changing one argument in the function (the `family` argument).
 
 ```{r}
 M1 <- glm(y ~ x, Example,
@@ -284,7 +284,7 @@ Okay, let's walk through what this model is telling you, with respect to the inp
 
 "Significance" is done as usual. In this simple model, we don't see any "youth bulge" effect, nor do we see a discernible effect of the percentage of the population living in urban areas. The GDP per capita variable also has no noticeable effect on the expected count of riots in 2012. We do, however, see significant effects of the tertiary school rate variable, the democracy variable, and the population size variable.
 
-But, let's talk how you should interpret the outputs for the stuff that is significant. The rate of students in tertiary school (i.e. university) is positive and significant. All else equal, a unit increase in this variable (e.g. going from 50% of the tertiary school-aged population enrolled in tertiary school to 51%) increases the expected log counts of riots by .018. This effect is "statistically significant" and thus unlikely to be 0. Should you exponentiate that regression coefficient, you get back the incidence rate ratio. Multiply that by the incidence rate ratio and you get a mean of counts following the unit increase in this variable. For example, the mean of *y* in the data is 1.462. Multiply that number by the incidence rate ratio and you get 1.488. That would follow across the data, all else equal. Just be mindful that because it "looks small" belies the large scale here. You shouldn't be making that mistake anyway.
+But, let's talk how you should interpret the outputs for the stuff that is significant. The rate of students in tertiary school (i.e. university) is positive and significant. All else equal, a unit increase in this variable (e.g. going from 50% of the tertiary school-aged population enrolled in tertiary school to 51%) increases the expected log counts of riots by .018. This effect is "statistically significant" and thus unlikely to be 0. Should you exponentiate that regression coefficient, you get back the incidence rate ratio. Multiply the incidence rate of ratio by some mean of expected counts and you get an adjusted mean of counts following a unit increase in the tertiary school (university) enrollment rate variable here. For example, the mean of *y* in the data is 1.462. Multiply that number by the incidence rate ratio and you get 1.488, which is the new expected mean count of events following a unit-increase in this tertiary school (university) enrollment rate variable. That multiplicative effect following a unit increase would follow across the data, all else equal. Just be mindful that because it "looks small" belies the large scale here. You shouldn't be making that mistake anyway.
 
 The democracy variable is negative and statistically significant, suggesting that more democratic states are less likely to have violent riots. What's unique about this variable is that the unit change of 0 to 1 is also a min/max effect. It's the hypothetical effect of going from, say, a hyper North Korea to a Sweden on steroids (or something hyperbolic to that effect). That effect is to decrease the logged counts of riots by -.774. The incidence rate ratio is .461. If, for example, the rate of riots is 1.462, then the adjusted rate in light of this min/max effect is now about .674 (i.e. $$1.462*exp(-.774) = .674$$). Because this effect is negative, you can approximate this by taking 1 - the incidence rate ratio, and multiply that by 100, to get the percentage change. In other words, $$(1.462 - .674)/1.462 = .538$$. That, multiplied by 100, approximates 1 - the incidence rate ratio, also multiplied by 100.
 
@@ -298,7 +298,6 @@ First, let's create a hypothetical prediction grid, holding everything else at t
 
 
 ```{r}
-
 Data %>%
   data_grid(.model = M2,
             perctser = c(
@@ -371,7 +370,6 @@ There is an overdispersion test (in the `{AER}` package) that you can do, but ho
 
 
 ```{r}
-
 M3 <- MASS::glm.nb(riots  ~ youth_bulge + urbanshare + perctser + polyarchy + 
             ln_tpop + 
             ln_gdppc, Data)
@@ -390,7 +388,6 @@ coeftest(M2, vcov=sandwich)
 
 <div id="modelsummary">
 ```{r, echo=F}
-
 modelsummary(list("Poisson" = M2,
                   "Poisson (IRR)" = M2,
                   "Neg. Bin." = M3,

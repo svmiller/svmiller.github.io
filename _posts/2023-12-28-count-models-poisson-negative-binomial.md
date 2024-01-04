@@ -121,7 +121,7 @@ Example %>% count(y)
 #> 12    11     1
 ```
 
-You could capture faithfully capture this data-generating process with the `glm()` function in R. You might be accustomed to this function for the case of simpler binary logistic regressions, but it's a simple matter of changing one argument in the function (the `family` argument).
+You could faithfully capture this data-generating process with the `glm()` function in R. You might be accustomed to this function for the case of simpler binary logistic regressions, but it's a simple matter of changing one argument in the function (the `family` argument).
 
 
 ```r
@@ -318,9 +318,9 @@ summary(M2 <- glm(riots  ~ youth_bulge + urbanshare +
    <td style="text-align:center;"> 0.004** </td>
   </tr>
   <tr>
-   <td style="text-align:left;box-shadow: 0px 1.5px">  </td>
-   <td style="text-align:center;box-shadow: 0px 1.5px"> (1.776) </td>
-   <td style="text-align:center;box-shadow: 0px 1.5px"> (0.007) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (1.776) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.007) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -332,15 +332,13 @@ summary(M2 <- glm(riots  ~ youth_bulge + urbanshare +
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
 </table>
 
-
-
 </div>
 
 Okay, let's walk through what this model is telling you, with respect to the inputs. First, I try to caution students to [be kind to your intercept](http://svmiller.com/blog/2020/04/post-estimation-simulation-trump-vote-midwest/), but I was not here. Thus, my formal interpretation of the *y*-intercept is that the expected, log-transformed mean of counts for a given observation where there is no youth population whatsoever, no one lives in an urban area, no one of university age is enrolled in university, the country is a maximum non-democracy, the logged population size is 0 (i.e. the territorial unit has just 1,000 people because the variable is in the 1000s), and the average GDP per capita is 0, comes out to -5.482. Exponentiating that suggests the mean of events for that hypothetical hellscape is .004 or so. Hey, you asked for it, and [we can always fix it in post](https://tvtropes.org/pmwiki/pmwiki.php/Main/FixItInPost). Had you centered your variables, you could've returned something usable here.
 
 "Significance" is done as usual. In this simple model, we don't see any "youth bulge" effect, nor do we see a discernible effect of the percentage of the population living in urban areas. The GDP per capita variable also has no noticeable effect on the expected count of riots in 2012. We do, however, see significant effects of the tertiary school rate variable, the democracy variable, and the population size variable.
 
-But, let's talk how you should interpret the outputs for the stuff that is significant. The rate of students in tertiary school (i.e. university) is positive and significant. All else equal, a unit increase in this variable (e.g. going from 50% of the tertiary school-aged population enrolled in tertiary school to 51%) increases the expected log counts of riots by .018. This effect is "statistically significant" and thus unlikely to be 0. Should you exponentiate that regression coefficient, you get back the incidence rate ratio. Multiply that by the incidence rate ratio and you get a mean of counts following the unit increase in this variable. For example, the mean of *y* in the data is 1.462. Multiply that number by the incidence rate ratio and you get 1.488. That would follow across the data, all else equal. Just be mindful that because it "looks small" belies the large scale here. You shouldn't be making that mistake anyway.
+But, let's talk how you should interpret the outputs for the stuff that is significant. The rate of students in tertiary school (i.e. university) is positive and significant. All else equal, a unit increase in this variable (e.g. going from 50% of the tertiary school-aged population enrolled in tertiary school to 51%) increases the expected log counts of riots by .018. This effect is "statistically significant" and thus unlikely to be 0. Should you exponentiate that regression coefficient, you get back the incidence rate ratio. Multiply the incidence rate of ratio by some mean of expected counts and you get an adjusted mean of counts following a unit increase in the tertiary school (university) enrollment rate variable here. For example, the mean of *y* in the data is 1.462. Multiply that number by the incidence rate ratio and you get 1.488, which is the new expected mean count of events following a unit-increase in this tertiary school (university) enrollment rate variable. That multiplicative effect following a unit increase would follow across the data, all else equal. Just be mindful that because it "looks small" belies the large scale here. You shouldn't be making that mistake anyway.
 
 The democracy variable is negative and statistically significant, suggesting that more democratic states are less likely to have violent riots. What's unique about this variable is that the unit change of 0 to 1 is also a min/max effect. It's the hypothetical effect of going from, say, a hyper North Korea to a Sweden on steroids (or something hyperbolic to that effect). That effect is to decrease the logged counts of riots by -.774. The incidence rate ratio is .461. If, for example, the rate of riots is 1.462, then the adjusted rate in light of this min/max effect is now about .674 (i.e. $$1.462*exp(-.774) = .674$$). Because this effect is negative, you can approximate this by taking 1 - the incidence rate ratio, and multiply that by 100, to get the percentage change. In other words, $$(1.462 - .674)/1.462 = .538$$. That, multiplied by 100, approximates 1 - the incidence rate ratio, also multiplied by 100.
 
@@ -355,7 +353,6 @@ First, let's create a hypothetical prediction grid, holding everything else at t
 
 
 ```r
-
 Data %>%
   data_grid(.model = M2,
             perctser = c(
@@ -434,7 +431,6 @@ There is an overdispersion test (in the `{AER}` package) that you can do, but ho
 
 
 ```r
-
 M3 <- MASS::glm.nb(riots  ~ youth_bulge + urbanshare + perctser + polyarchy + 
             ln_tpop + 
             ln_gdppc, Data)
@@ -567,11 +563,11 @@ coeftest(M2, vcov=sandwich)
    <td style="text-align:center;"> −5.482+ </td>
   </tr>
   <tr>
-   <td style="text-align:left;box-shadow: 0px 1.5px">  </td>
-   <td style="text-align:center;box-shadow: 0px 1.5px"> (1.776) </td>
-   <td style="text-align:center;box-shadow: 0px 1.5px"> (0.007) </td>
-   <td style="text-align:center;box-shadow: 0px 1.5px"> (2.951) </td>
-   <td style="text-align:center;box-shadow: 0px 1.5px"> (2.799) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (1.776) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.007) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (2.951) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (2.799) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -584,8 +580,6 @@ coeftest(M2, vcov=sandwich)
 <tfoot><tr><td style="padding: 0; " colspan="100%">
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
 </table>
-
-
 
 </div>
 
