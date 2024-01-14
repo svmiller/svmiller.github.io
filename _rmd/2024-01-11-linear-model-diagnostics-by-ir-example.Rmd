@@ -121,7 +121,7 @@ modelsummary(list("Replication" = M1),
 
 I will leave the reader to compare the results of Model 1 here to Model 1 of Table I in their paper. The basic takeaways are the same; the results are the exact same. Controlling for the economic determinants of net FDI inflows, there is a statistically significant relationship between post-conflict justice and net FDI inflows among these post-conflict states. Post-conflict states with post-conflict justice institutions have higher levels of net FDI inflows than post-conflict states without them. The estimated difference between them is ~$1532.61. If the true relationship were 0, the probability we observed what we observed would've happened 16 times in a thousand trials, on average.
 
-## Checking the Linearity Assumption
+## What to Do (and Anticipate) About Non-Linearity 
 
 We teach students that one major assumption about the linear model is that the model is both *linear* and *additive*. In other words, the estimate of *y* (here: net FDI inflows) is an additive combination of the regressors (and an error term). The regression lines are assumed to be straight. A first cut to see if this assumption is satisfied is the fitted-residual plot. Plot the model's fitted values on the the *x*-axis and the residuals on the *y*-axis as a scatterplot. By definition, the line of best fit through the data is flat at 0. Ideally, a LOESS smoother agrees with it.
 
@@ -226,7 +226,7 @@ modelsummary(list("Replication" = M1,
 
 The results here suggest that there was non-linearity evident in the original data, and that it's just not a curvilinear relationship between economic size and net FDI inflows. There's proportionality as well, some of which could've been anticipated. The GDP ("size") and GDP per capita ("development") variables are the largest nominal value possible (raw dollars to the dollar). In most applications, those would be log-transformed. The exchange rate variable could also be reasonably +1 and logged as well. Perhaps assorted other transformations in light of other peculiarities (e.g. the growth variable and the dependent variable itself) may have different implications, but even doing these transformations are sufficient to find a strong curvilinear effect of economic size and to find no discernible (proportional) effect of the exchange rate variable.
 
-### What to Do About Non-Constant Error Variance (Heteroskedasticity)
+## What to Do About Non-Constant Error Variance (Heteroskedasticity)
 
 The fitted-residual plot will often give you a pretty good indication about non-constant error variance (heteroskedasticity) if you have enough observations. It's a little harder to parse with the number of observations we have. No matter, we have a formal test diagnostic---the Breusch-Pagan test---for heteroskedasticity in the regression model. The test itself analyzes patterns/associations in the residuals as a function of the regressors, returning a test statistic (with a *p*-value) based on the extent of associations it sees. High enough test statistic with some *p*-value low enough (for whatever evidentiary threshold floats your boat) suggests heteroskedastic errors. I'm fairly sure we're going to see that here in both our models.
 
