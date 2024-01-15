@@ -21,7 +21,7 @@ active: blog
 
 I'm teaching [a first-year MA-level quantitative methods course](http://eh6105.svmiller.com/) at the moment for which the current topic is [linear model diagnostics](http://eh6105.svmiller.com/lab-scripts/ols-diagnostics.html). The particular example that I had time and space to give them resulted in a situation where there were heteroskedastic errors, albeit with no major inferential implications whatsoever. This understandably led a student to ask if there was a case where heteroskedasticity and assorted heteroskedasticity robustness tests resulted in major inferential implications. The best answer you could give is "of course, but you wouldn't know until you checked". I could definitely give [a U.S.-focused example](http://post8000.svmiller.com/lab-scripts/ols-diagnostics-lab.html#Potential_Fixes_for_Heteroskedasticity) that wouldn't resonate with a European audience. However, the time and space I had before starting the class didn't give me time to find an example that students in IR might actually understand. Even then, there aren't many (simple) linear models you encounter in international relations. Most of the things we care about happen or don't (and are thus better modeled through a logistic/probit regression) or have lots of moving pieces (i.e. are panel models) that are outside the bounds of the class.
 
-There is, however, one example to offer. We should all thank [Joshua Alley](https://joshuaalley.github.io/) for beginning to curate [a repository on cross-sectional OLS models](https://github.com/joshuaalley/cross-sectional-ols) around which you can teach in political science and international relations. One of those data sets from a 2012 publication by Benjamin J. Appel and Cyanne E. Loyle [in *Journal of Peace Research*](https://journals.sagepub.com/doi/10.1177/0022343312450044) on the economic benefits of post-conflict justice. This is an interesting paper to read with an intuitive argument and application. They argue that post-conflict states that engage in some kind of post-conflict justice initiative---like truth and reconciliation commissions or reparations---are getting a downstream benefit from it relative to states that do not do this. These states are signaling to outside investors that they are serious about peace, notwithstanding the conflict that would otherwise make them risky investments. As a result, we should expect, and the authors indeed find, that post-conflict states that engage in post-conflict justice institutions have higher levels of net foreign direct investment (FDI) inflows 10 years after a conflict ended compared to post-conflict states that do not have these institutions. Their data is rather bite-sized too: 95 observations of conflict and 10-year windows afterward for a temporal domain around 1970 to 2001.
+There is, however, one example to offer. We should all thank [Joshua Alley](https://joshuaalley.github.io/) for beginning to curate [a repository on cross-sectional OLS models](https://github.com/joshuaalley/cross-sectional-ols) around which you can teach in political science and international relations. One of those data sets is from a 2012 publication by Benjamin J. Appel and Cyanne E. Loyle [in *Journal of Peace Research*](https://journals.sagepub.com/doi/10.1177/0022343312450044) on the economic benefits of post-conflict justice. This is an interesting paper to read with an intuitive argument and application. They argue that post-conflict states that engage in some kind of post-conflict justice initiative---like truth and reconciliation commissions or reparations---are getting a downstream benefit from it relative to states that do not do this. These states are signaling to outside investors that they are serious about peace, notwithstanding the conflict that would otherwise make them risky investments. As a result, we should expect, and the authors indeed report, that post-conflict states that engage in post-conflict justice institutions have higher levels of net foreign direct investment (FDI) inflows 10 years after a conflict ended compared to post-conflict states that do not have these institutions. Their data is rather bite-sized too: 95 observations of conflict and 10-year windows afterward for a temporal domain around 1970 to 2001.
 
 There's a lot to like about the argument, and certainly the data for pedagogical purposes. It's a rare case of a simple OLS with a straightforward IR application. There's also all sorts of interesting things happening in it that are worth exploring.
 
@@ -148,8 +148,6 @@ M1 <- lm(fdi ~ pcj + econ_devel + econ_size + econ_growth + kaopen + xr + lf + l
 <tfoot><tr><td style="padding: 0; " colspan="100%">
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
-
-
 
 </div>
 
@@ -338,8 +336,6 @@ M2 <- lm(fdi ~ pcj + ln_econ_devel + ln_econ_size +
 <tfoot><tr><td style="padding: 0; " colspan="100%">
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
-
-
 
 </div>
 
@@ -657,8 +653,6 @@ A better approach is to have `{modelsummary}` do all this for you, which is happ
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
 
-
-
 </div>
 
 There's a lot happening here, and we should be initially skeptical of the model with such an evident problem of skew in the economic size and development variables. No matter, this approach suggests what approach you employ for acknowledging and dealing with the heteroskedasticity in your model has important implications for the statistical (in)significance you may like to report. The post-conflict justice variable is significant only in the replication model and the residual bootstrapping approach. The economic size variable is insignificant in the WLS, HC3, and DF. Adj. approach. The exchange rate variable is significant only in the original model, the model with Huber-White standard errors (HC0), and two of the three bootstrapping approaches. We could note, though, it is a judgment call at the .10 level and we should [be humble about making binary classifications of "significant" versus "not significant"](https://press.umich.edu/Books/T/The-Cult-of-Statistical-Significance2) based on this tradition. But, make of that what you will.
@@ -953,12 +947,14 @@ We can do the same thing to the second model, which offers logarithmic transform
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
 
-
-
 </div>
 
 A similar story will still emerge. What statistical significance you'd like to report is sensitive to the heteroskedasticity in the original model and how you elected to acknowledge it and deal with it. Post-conflict justice and the economic size variables are significant in only one of the adjustments (incidentally: the residual bootstrap). It's at least a little amusing that a model that better incorporates the proportionality of key right-hand side predictors, and makes a reasoned post-estimation design choice to re-estimate with a square term, results in new models for which "robustness" often suggests no discernible effects at all. But again, make of that what you will.
 
 ## Conclusion
 
-The point here isn't to chastise past scholarship or deride the work done by others. It's also not to litigate whether there's value to post-conflict justice institutions. Sometimes there's value---normative value---in making amends for past wrongs and broadcasting what exactly those wrongs were irregarding whether there's a downstream benefit in which investors part with their money and send it to you. The point is instead that heteroskedasticity, and how you elect to deal with it, can matter a great deal to your test statistics. You should always look at your data. You should also make reasoned design choices about the inputs into the regression model and what they might mean for the outputs you'd like to report from the regression model. If they're that sensitive to a model that violates an important assumption, and to a particular approach that deals with it, it may be worth noting the results are potentially a function of these choices.
+The point here isn't to chastise past scholarship or deride the work done by others. It's also not to litigate whether there's value to post-conflict justice institutions. Sometimes there's value---normative value---in making amends for past wrongs and broadcasting what exactly those wrongs were irregarding whether there's a downstream benefit in which investors part with their money and send it to you. The point is instead that some anticipatory diagnostics and rudimentary model diagnostics can materially change the inferences you'd like to report.
+
+Make reasoned design choices about what you can anticipate about the distribution of the inputs into your model. That might indicate in advance the kind of non-linearity the fitted-residual plot will suggest from your basic linear model. It may suggest proportional/magnitude changes that are not linear on its raw scale. Making reasoned choices about what to do with these before running the model may change the inferences you'd like to report. Choosing post-modeling re-estimation techniques based on model diagnostics may lead to re-estimations that further change the inferences you'd like to report.
+
+It is also the case that heteroskedasticity, and how you elect to deal with it, can matter a great deal to your test statistics. The presence of heteroskedasticity means the important test statistics you care about are suspect. If those test statistics are that sensitive to a model that violates an important assumption, and to a particular approach that deals with that particular violation, it may be worth noting the results you'd like to emphasize are potentially a function of these choices.
