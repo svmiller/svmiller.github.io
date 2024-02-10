@@ -18,7 +18,7 @@ markdown: kramdown
 # Other options
 permalink: blog/:year/:month/:title/
 jobtitle: "Universitetlektor"
-excerpt_separator: "<!--more-->"
+#excerpt_separator: "<!--more-->"
 
 # SEO stuff
 google_author: "https://plus.google.com/u/0/110288225974212014913"
