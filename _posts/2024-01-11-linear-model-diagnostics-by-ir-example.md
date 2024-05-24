@@ -149,6 +149,8 @@ M1 <- lm(fdi ~ pcj + econ_devel + econ_size + econ_growth + kaopen + xr + lf + l
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
 
+
+
 </div>
 
 I will leave the reader to compare the results of Model 1 here to Model 1 of Table I in their paper. The basic takeaways are the same; the results are the exact same. Controlling for the economic determinants of net FDI inflows, there is a statistically significant relationship between post-conflict justice and net FDI inflows among these post-conflict states. Post-conflict states with post-conflict justice institutions have higher levels of net FDI inflows than post-conflict states without them. The estimated difference between them is ~$1532.61. If the true relationship were 0, the probability we observed what we observed would've happened 16 times in a thousand trials, on average.
@@ -336,6 +338,8 @@ M2 <- lm(fdi ~ pcj + ln_econ_devel + ln_econ_size +
 <tfoot><tr><td style="padding: 0; " colspan="100%">
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
+
+
 
 </div>
 
@@ -653,6 +657,8 @@ A better approach is to have `{modelsummary}` do all this for you, which is happ
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
 
+
+
 </div>
 
 There's a lot happening here, and we should be initially skeptical of the model with such an evident problem of skew in the economic size and development variables. No matter, this approach suggests what approach you employ for acknowledging and dealing with the heteroskedasticity in your model has important implications for the statistical (in)significance you may like to report. The post-conflict justice variable is significant only in the replication model and the residual bootstrapping approach. The economic size variable is insignificant in the WLS, HC3, and DF. Adj. approach. The exchange rate variable is significant only in the original model, the model with Huber-White standard errors (HC0), and two of the three bootstrapping approaches. We could note, though, it is a judgment call at the .10 level and we should [be humble about making binary classifications of "significant" versus "not significant"](https://press.umich.edu/Books/T/The-Cult-of-Statistical-Significance2) based on this tradition. But, make of that what you will.
@@ -946,6 +952,8 @@ We can do the same thing to the second model, which offers logarithmic transform
 <tfoot><tr><td style="padding: 0; " colspan="100%">
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05</td></tr></tfoot>
 </table>
+
+
 
 </div>
 
