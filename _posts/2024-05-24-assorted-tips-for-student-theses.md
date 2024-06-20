@@ -24,7 +24,9 @@ This will be a periodically updated blog post of things I want to tell students 
 
 [^landlords]: American friends, imagine if the same (I'll be polite) people gobbling up off-campus real estate (e.g. Campus Partners at The Ohio State University) also owned the buildings the campus needed to function and you'd get the gist of my reaction about this particular practice when I moved here.
 
-What follows is a table of contents for navigation. These are all things I wish I could say if I had more time or resources to teach students, but I have to point them here instead.
+These are all things I wish I could say if I had more time or resources to teach students, but I have to point them here instead. It won't be the first such post I've written. For example, I have [a 2014 post on how to do a literature review](http://svmiller.com/blog/2014/11/how-to-do-a-literature-review/), [a 2015 "dos and dont's" post](http://svmiller.com/blog/2015/06/dos-and-donts-of-writing-for-students/) on writing for students. The latter was followed by a post later that year on [some tips for students in writing papers](http://svmiller.com/blog/2015/12/assorted-tips-students-research-papers/). The audience in that case were Clemson University students over whom I had more agency in crafting a curriculum. The last such post of its type came in May 2016 on [a web content approach for academic writing](http://svmiller.com/blog/2016/05/everybody-writes-academic/). Themes from all those posts will recur here.
+
+Here’s a table of contents for navigation.
 
 1. [Make Your First Page Count](#firstpage)
 2. [What's the Question?](#question)
