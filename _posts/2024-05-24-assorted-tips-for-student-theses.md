@@ -16,7 +16,7 @@ active: blog
 
 
 
-{% include image.html url="/images/stockholm-university-sodra-hus.jpg" caption="I'm on the top floor of that building you see in the front (albeit on the other side). I can see Mark and Gonzalo's offices, though. (Photo: Clément Morin)" width=400 align="right" %}
+{% include image.html url="/images/stockholm-university-sodra-hus.jpg" caption="I'm on the top floor of that building you see in the front (albeit on the other side). I can see some of my colleagues' offices, though. (Photo: Clément Morin)" width=400 align="right" %}
 
 *Last updated: 20 June 2024.* 
 

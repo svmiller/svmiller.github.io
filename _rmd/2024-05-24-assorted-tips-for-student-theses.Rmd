@@ -67,7 +67,7 @@ options(knitr.kable.NA = '')
 ```
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
-add_jekyll_image('/images/stockholm-university-sodra-hus.jpg', "I'm on the top floor of that building you see in the front (albeit on the other side). I can see Mark and Gonzalo's offices, though. (Photo: Clément Morin)", "400", "right")
+add_jekyll_image('/images/stockholm-university-sodra-hus.jpg', "I'm on the top floor of that building you see in the front (albeit on the other side). I can see some of my colleagues' offices, though. (Photo: Clément Morin)", "400", "right")
 ```
 
 *Last updated: `r format(Sys.Date(), "%d %B %Y")`.* 
