@@ -34,7 +34,7 @@ Powell's [1991 article](https://doi.org/10.2307/1963947) and [1994 article](http
 
 
 
-Ignore for the moment that Powell (1991, 1310) contends that any use of the prisoner's dilemma in which an actor can be eliminated is no longer a prisoner's dilemma. That misapplication of a simple model and misinterpretation of its parameters are important details, but we're always going to talk past one another. Why are we having this debate, then? It's no longer a debate about empirics, which can be resolved. It's a debate about what we assume states do, and we're not going to resolve that anymore than we'd resolve a debate about the perspectives we have toward the world.^[seealso] 
+Ignore for the moment that Powell (1991, 1310) contends that any use of the prisoner's dilemma in which an actor can be eliminated is no longer a prisoner's dilemma. That misapplication of a simple model and misinterpretation of its parameters are important details, but we're always going to talk past one another. Why are we having this debate, then? It's no longer a debate about empirics, which can be resolved. It's a debate about what we assume states do, and we're not going to resolve that anymore than we'd resolve a debate about the perspectives we have toward the world.[^seealso] 
 
 [^seealso]: I have a previous blog posts that talks to students about [perspectives as a kind of proto-theory](http://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#pickatheory). The language would dove-tail with Wagner's (2007, 42) dismissal of this debate that an empirical test of an "approach" is not possible.
 
