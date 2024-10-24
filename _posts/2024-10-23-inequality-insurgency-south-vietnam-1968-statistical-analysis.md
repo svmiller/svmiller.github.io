@@ -1,5 +1,5 @@
 ---
-title: "Inequality, Rebellion, and a Reconsideration of an Old Analysis from 1968 (i.e. Students: You Can Do This, and Do This Better)"
+title: "Inequality, Rebellion, and a Reconsideration of an Old Analysis (i.e. Students: You Can Do This, and Do This Better)"
 output:
   md_document:
     variant: gfm
