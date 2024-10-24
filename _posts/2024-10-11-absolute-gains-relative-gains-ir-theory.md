@@ -19,7 +19,7 @@ active: blog
 
 {% include image.html url="/images/absolute-gains-relative-gains-youtube.jpg" caption="Sorry, why are we doing this? (Image: UNSW eLearning)" width=450 align="right" %}
 
-<!-- *Last updated: 11 October 2024.*  -->
+<!-- *Last updated: 23 October 2024.*  -->
 
 
 Students in my department spend a lot of time comparing/contrasting the two biggest "-isms" (so-called realism and liberalism) and the debate about whether states pursue "absolute gains" or "relative gains". The "liberal" camp argues that states pursue "absolute gains"  that benefit them overall, or words to that effect. The "realist" camp counter-argues that states do and should pursue only "relative gains" that privilege them more so than other potential rivals. There is often a discussion here about a prisoner's dilemma, or a repeated prisoner's dilemma that comes in tow. No matter, I remember this debate from when I was an undergraduate. I was reading the same stuff they are, and that was over 20 years ago.
