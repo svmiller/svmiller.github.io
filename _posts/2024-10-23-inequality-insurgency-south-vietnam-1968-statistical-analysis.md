@@ -19,7 +19,7 @@ active: blog
 
 {% include image.html url="/images/saigon-photo-1960s.jpg" caption="Ho Chi Minh City, by another name, in another life. (New Naratif)" width=450 align="right" %}
 
-<!-- *Last updated: 24 October 2024.*  -->
+<!-- *Last updated: 25 October 2024.*  -->
 
 
 I am teaching a quantitative methods class for students in international relations, which presents its own assorted challenges. Beyond the general apprehension that social science students have to statistics, a class like the one I teach is 1) the last students take before writing their BA theses and 2) by far the most unusual class students will have taken to this point, all things considered. Students don't get a lot of quantitative things thrown at them by the point they have to deal with me. Add in the fact that each given class at the BA level is about a month long and about four hours a week, and there is a multifaceted tension of communicating why the material is important and how you can do it while condensing 2/3rds of what I'd like to discuss into about a third of the time I'd have in a normal American semester. It's a challenge.
@@ -63,6 +63,10 @@ Mitchell's analysis takes the 26 provinces of South Vietnam (his unit of analysi
 4. **Vietnamese land, subject to transfer**: another percentage by way of the same ordinance (see above), the Vietnamese equivalent refers to land both expropriated by the South Vietnamese government *and* redistributed. The logic is the Vietnamese version suggests higher values = lower inequality since the measure (partly) includes redistributed land.[^dubious] 
 5. **Mobility**: a measure of the average degree of accessibility within a province (by reference to the percentage of the province that is plains and hills without dense forests). I'm disinclined to think of this measure as one of "inequality", but Mitchell (1968, 436) wants to read it as one.
 6. **Population density**: a simple measure of provincial population, per square kilometer.
+
+Because we're talking about just 26 observations with only a select few variables, this becomes Table 1 in the article itself.
+
+{% include image.html url="/images/mitchell1968-table1.png" caption="Mitchell's (1968) data set, as Table 1 in his article." width=946 align="center" %}
 
 I have these data scraped from his Table 1 as [`Mitchell68` in `{stevedata}`](http://svmiller.com/stevedata/reference/Mitchell68.html).
 
@@ -397,6 +401,8 @@ A fancier version that displays the full contents follows, by way of `{kableExtr
 
 [^dubious]: This logic is interesting but questionable, and we'll just have to roll with the premise for the nature of the intended use of these data. If an undergrad did this, I'd make a note of it but wouldn't deduct points. It's at least novel and reasonably argued, which is why I would laud an undergraduate taking such initiative.
 
+With the data at hand, it takes next to no effort to do Mitchell's (1968) analysis as he says he did.
+
 ## Mitchell's Linear Model, and What's Wrong {#linearmodel}
 
 Mitchell (1968, 432) reports the results of his statistical model in a way I would not encourage, in addition to advertising the stepwise procedure that informed the design.
@@ -434,9 +440,28 @@ summary(M1)
 #> F-statistic: 6.059 on 6 and 19 DF,  p-value: 0.001114
 ```
 
-That can't go unnoticed. In fact, it did not go unnoticed by [Paranzino (1972, 567)](https://doi.org/10.2307/2010457) in his critique of this paper. If Mitchell did what he said he did, the above R code console output would've been the results he'd report. If the stepwise selection procedure is what Mitchell (1968) said he used for variable selection, the insignificant results for the mobility and owner-operated land variables would betray that. In fact, we're at a loss as to how this happened. It's one thing to note that the intercept is slightly off, or that the population density variable should have a *t*-value of 3.01 (and not 3.38). Discrepancies like that would stand out, but might be charitably attributed to a transcription error or some kind of generous rounding. However, what Mitchell (1968) says he did to inform his design strategy, what he says he used as his data, and what estimation procedure he says he used are betrayed by what he ultimately presents. 
+That can't go unnoticed. In fact, it did not go unnoticed by [Paranzino (1972, 567)](https://doi.org/10.2307/2010457) in his critique of this paper. If Mitchell did what he said he did, the above R code console output would've been the results he'd report. If the stepwise selection procedure is what Mitchell (1968) said he used for variable selection, the insignificant results for the mobility and owner-operated land variables would betray that. In fact, we're at a loss as to how this happened. It's one thing to note that the intercept is slightly off, or that the population density variable should have a *t*-value of 3.01 (and not 3.38). Discrepancies like that would stand out, but might be charitably attributed to a transcription error or some kind of generous rounding happening at multiple levels. However, what Mitchell (1968) says he did to inform his design strategy, what he says he used as his data, and what estimation procedure he says he used are betrayed by what he ultimately presents. The proof is right there in Table 1 if you were to do this yourself.
 
 I can't speak for the technology of the time, nor what might have got lost or jumbled in transcription. No matter, students can do this, but do it better. Let [`{modelsummary}`](https://modelsummary.com/articles/modelsummary.html) help you.
+
+
+``` r
+modelsummary(list("Model 1" = M1),
+             title = "The Correlates of Govt. Control of South Vietnamese Provinces, 1965",
+             stars = c("***" = .01,
+                       "**" = .05,
+                       "*" = .1),
+             output = 'kableExtra',
+             gof_map = c("nobs", "r.squared", "adj.r.squared"),
+             coef_map = c("ool" = "Owner-Operated Land  (%)",
+                          "cvlhs" = "Coefficient of Variation in Land-Holding Size",
+                          "vl" = "Vietnamese Land, Subject to Transfer (%)",
+                          "fl" = "French Land, Subject to Transfer (%)",
+                          "m" = "Area of Mobility (%)",
+                          "pd" = "Population Density",
+                          "(Intercept)" = "Intercept"),
+             )
+```
 
 <div id="modelsummary">
 
@@ -528,7 +553,7 @@ I can't speak for the technology of the time, nor what might have got lost or ju
 
 You don't have to get something wrong in transcription when you have the technology to do it for you. Since I can't impute motives for Mitchell (1968), I can only really say what he presents is wrong. It's not clear what went wrong, but something went wrong.[^punchcards] I think my students can do better with the resources they have.
 
-[^punchcards]: Having only a passing familiarity with [technology of the time](https://doi.org/10.2307/2985546), it's possible some chicanery was involved with a punched card. It wouldn't be the first time I've heard tell of such issues involved a punched card tabulator, though I don't think I have the liberty to name names (even if the name involved has since passed on).
+[^punchcards]: Having only a passing familiarity with [technology of the time](https://doi.org/10.2307/2985546), it's possible some chicanery came with a punched card. It wouldn't be the first time I've heard tell of such issues involving a punched card tabulator. Stories about those get around from those old enough to tell them.
 
 ## Mitchell's Scatterplots, and What's Wrong {#scatterplots}
 
@@ -646,9 +671,9 @@ Contrast this plot with either Figure 1 in Mitchell (1968) or the initial approx
 
 This article is 56 years old and concerns the analysis of a state that has not existed since 1975. Why are we doing this?
 
-I don't offer this as a means of chastising a failure to replicate, though I'm grateful the data are provided that allow such an opportunity. Instead, I offer this article (and this accompanying post) to my BA students with the belief that they could do something like this. Say what you will about what Mitchell is doing, and certainly [Paige (1970)](https://doi.org/10.2307/2009629) and [Paranzino (1972, 567)](https://doi.org/10.2307/2010457) have plenty to say on that. For an undergraduate learning quantitative methods for the first time, I think you can do this. Mitchell (1968) may have done this at a particular time where data we take for granted were still in their infancy and computation on even simple models took time.[^gdp] Students have a plethora of data around them now and computation takes fractions of a second. This does not discount the work that Mitchell (1968) invested in harvesting maps from the *Los Angeles Times* or archival data on land-holdings in South Vietnam. In fact there's an appreciation of it (all things considered). Perhaps students do not have the time for that, but they do have the time to think about a topic like this and grab data that are more plentiful and readily accessible than what Mitchell had at his immediate disposal. 
+I don't offer this as a means of chastising a failure to replicate, though I'm grateful the data are provided that allow such an opportunity. Instead, I offer this article (and this accompanying post) to my BA students with the belief that they could do something like this. Say what you will about what Mitchell is doing, and certainly [Paige (1970)](https://doi.org/10.2307/2009629) and [Paranzino (1972, 567)](https://doi.org/10.2307/2010457) have plenty to say on that. For an undergraduate learning quantitative methods for the first time, I think you can do this. Mitchell (1968) may have done this at a particular time where data we take for granted were still in their infancy and computation on even simple models took time.[^gdp] Students have a plethora of data around them now and computation takes fractions of a second. This does not discount the work that Mitchell (1968) invested in harvesting maps from the *Los Angeles Times* or archival data on land-holdings in South Vietnam. In fact there's an appreciation of it. Perhaps students do not have the time for that, but they do have the time to think about a topic like this and grab data that are more plentiful and readily accessible than what Mitchell had at his immediate disposal. 
 
-Again, say what you will about what Mitchell is doing, but the question is set up rather nicely (all things considered) and he's clear about what he's doing and why he's doing it. I might want undergraduates to better review scholarship than Mitchell does, and to better set up the theoretical mechanisms that underpin his competitive hypothesis test. That translates to students I teach today. Mitchell is also getting a lot of things wrong and engaging in statistical practices that would get you laughed out the room these days.[^r2] However, I'd be quite happy if an undergraduate set up a simple model like this. Perhaps it's weird to say a publication in one of the most prestigious IR journals (*World Politics*) over 50 years ago would be about what I should expect of an undergraduate today, but that's the nature of the business.
+Again, say what you will about what Mitchell is doing, but the question is set up rather nicely. He's clear about what he's doing and why he's doing it. I might want undergraduates to better review scholarship than Mitchell does, and to better set up the theoretical mechanisms that underpin a competitive hypothesis test like his. That transfers to students I teach today. Mitchell is also getting a lot of things wrong and engaging in statistical practices that would get you laughed out the room these days.[^r2] However, I'd be quite happy if an undergraduate set up a simple model like this. Perhaps it's weird to say a publication in one of the most prestigious IR journals (*World Politics*) over 50 years ago would be about what I should expect of an undergraduate today, but that's the nature of the business.
 
 [^gdp]: We take the concept of "gross domestic product" for granted, but its modern formulation would've been just over 30 years old by this time. The ability to marshal data on global scale for it would've been about 20 years old by time Mitchell was working on his analysis.
 
