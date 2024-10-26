@@ -32,6 +32,9 @@ img[src*='#center'] {
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
+*Last updated: 26 October 2024. Some things got lost in transition behind the scenes. These include a move from R version 3.5 to 4, a transition from working directories, and some function changes in `{stevemisc}`.*
+
+
 I'm teaching [my quantitative methods class](http://posc3410.svmiller.com/) this semester for the first time in three and a half years, an exigency brought on by both a hiring/spending freeze and a faculty departure. The impromptu nature of teaching this class along with the COVID-19 fog that has consumed us all mean I'm basically teaching the same class, with just a few updates, that I last taught three and a half years ago. My quantitative skills have improved greatly since then, as have my computational skills. It's led me to think of ways I can improve what I teach should I have to teach it again soon.
 
 I stumbled across [this tweet](https://twitter.com/grant_mcdermott/status/1175576565863702528) from [Grant McDermott](https://t.co/IYuIHtwlXG?amp=1). It's from last year and I missed it entirely when he first posted it, but it appeared in my timeline again amid some other ongoing conversation. The link is to [a keynote speech](https://www.youtube.com/watch?v=5Dnw46eC-0o&feature=youtu.be) from [John Rauser](https://twitter.com/jrauser?lang=en).  Rauser's main point in the keynote, echoed by McDermott, is that computational means to inference are more accessible and better illustrate the underlying point we try to teach students than doing something like calculating standard errors of sample means, calculating *t*-values or *z*-values, and finding the approximate area underneath a Student's *t*-distribution or normal distribution that corresponds with that score. McDermott's comment is that it's only for outdated pedagogy that we don't teach what computational power has made more practical and accessible. I'll stop short of saying that here. After all, bootstrapping was ultimately [Bradley Efron's (1979) answer](https://projecteuclid.org/euclid.aos/1176344552) to [his own question](https://www.youtube.com/watch?v=1aB8tW6LV8U) of what the jackknife was trying to approximate (i.e. a random sampling distribution better done via bootstrap). There is---at least I'm thinking right now---more value in understanding what things like bootstrapping and permutations are trying to approximate before showing how the computational implementations can provide nifty answers to the questions we may have. That said, there might be a missed opportunity that I'm not seeing yet, especially for instructors who teach quantitative methods by reference to smaller-*n* experiments or something like that.
@@ -94,7 +97,7 @@ Assume a simple data set of 10 people, randomly assigned into treatment and cont
 Let's assume the data look like this.
 
 
-```r
+``` r
 jenny() # set.seed(8675309) for reproducibility in stevemisc, with message
 #> Jenny, I got your number...
 tibble(group = c(rep("Treatment", 5), rep("Control", 5)),
@@ -155,12 +158,14 @@ broom::tidy(t.test(y ~ group, data=Example))
 </tbody>
 </table>
 
+
+
 Notice the peculiar language of "by chance." The "by chance" language refers to what we know about sampling distributions from central limit theorem and what we know about a normal distribution, all things I riffed on [elsewhere on my blog](http://svmiller.com/blog/2020/03/normal-distribution-central-limit-theorem-inference/) (and have already mentioned by this point in a semester for the quantitative methods students). The inference here is fundamentally theoretical by reference to these foundation assumptions. One way of mimicking this is through permutation.
 
 Simply, permutation leans on the idea that it's possible that we could randomly shuffle the data in a myriad of ways and observe the sample statistic of interest (i.e. a *t*-test, a regression coefficient, a mean) as a plausible outcome. In the simple `Example` data I introduced above, the shuffling or "permuting" process would look something like this for just a few permutations. Notice the treatment/control variable is the same, but the outcomes are shuffled.
 
 
-```r
+``` r
 Example %>%
   mutate(y1 = sample(y), y2 = sample(y),
          y3 = sample(y), y4 = sample(y),
@@ -187,7 +192,7 @@ This process of permutation is repeatable for, in most applications, more permut
 Let's assume I wanted to explain real income by reference to gender and some other factors that may confound that relationship for all observations since 2012 in the GSS. A simple linear model would produce the following results for unmarried women. Notice I'm giving no comment on my typical rallying cries (e.g. checking for heteroskedasticity or standardizing non-binary inputs), though a researcher should definitely do this with an analysis they might want to submit for peer review.
 
 
-```r
+``` r
 M1 <- lm(realrinc ~ female + age + prestg10 + collegeed, data=subset(wages12, married == 0))
 ```
 
@@ -241,6 +246,8 @@ M1 <- lm(realrinc ~ female + age + prestg10 + collegeed, data=subset(wages12, ma
 </tbody>
 </table>
 
+
+
 It suggests that, controlling for other sources of potential confounding, there is a difference between unmarried men and unmarried women on their real income that amounts to about 6,001 dollars in 1986 USD. Unmarried men---considering age, occupational prestige, and education levels---make about 6,001 1986 USD more than women, on average. There is something important to be said about causal inference and careful causal identification, but this isn't the venue for it.
 
 Observe that the *t*-statistic is about -6. This suggests, given what we know about central limit theorem and a normal distribution, it is almost a statistical impossibility that there are no differences between unmarried men and unmarried women in the four most recent GSS waves given the coefficient and standard error we observed. However, the statement is more theoretical than empirical. Permutation allows an empirical means to basically the same end. 
@@ -292,13 +299,15 @@ Here are the summary statistics for the 10,000 coefficients for the `gender` dum
 </table>
 
 
+
+
 ![plot of chunk possible-effects-female-permutation](/images/inference-permutations-gender-pay-gap-general-social-survey/possible-effects-female-permutation-1.png)
 
 The benefit of approaching inference this way is the student does not have to engage in the academic task of dividing a regression coefficient over a standard error to obtain a *t*-value or *z*-score, finding the corresponding *p*-value to make a statement of the long-run relative probability of obtaining the statistic against some counterclaim (i.e. typically zero in the null hypothesis testing framework). Instead, the student can reasonably approximate a null distribution through permutation and see it for themselves.
 
 ## Permutation and Group Comparisons {#permutationcomparisons}
 
-Permutations may also be useful in making some comparisons among groups outside the regression context. I'm going to note there's only so much that I can do with the (basically) limited data available in the GSS, but let's make a (perhaps) reasonable assumption about occupational prestige. We know there any number of mitigating factors in the United States that can explain systematic differences between men and women in their wages. The rubbish 🗑 parental leave policies in the United States serve as real barriers in a woman's career path. Married women historically--and even in the present---assume more house duties than men in a marriage, which can reasonably influence career trajectories [even for figurative "breadwinners."](https://www.theatlantic.com/family/archive/2019/05/breadwinning-wives-gender-inequality/589237/) It's only in the past few years have [women surpassed men in their level of educational attainment](https://www.statista.com/statistics/184272/educational-attainment-of-college-diploma-or-higher-by-gender/). All are going to influence the relationships above in their own way, which is why I select on unmarried men and women for the regression above and run a simple regression that tries to "control" for that. Ideally, I'd have an exhaustive set of covariates (and plenty of statistical power) to "match" men and women on all of them (except for the systematic difference of gender). Alas, the data aren't well tailored toward that end.
+Permutations may also be useful in making some comparisons among groups outside the regression context. I'm going to note there's only so much that I can do with the (basically) limited data available in the GSS, but let's make a (perhaps) reasonable assumption about occupational prestige. We know there any number of mitigating factors in the United States that can explain systematic differences between men and women in their wages. The rubbish parental leave policies in the United States serve as real barriers in a woman's career path. Married women historically--and even in the present---assume more house duties than men in a marriage, which can reasonably influence career trajectories [even for figurative "breadwinners."](https://www.theatlantic.com/family/archive/2019/05/breadwinning-wives-gender-inequality/589237/) It's only in the past few years have [women surpassed men in their level of educational attainment](https://www.statista.com/statistics/184272/educational-attainment-of-college-diploma-or-higher-by-gender/). All are going to influence the relationships above in their own way, which is why I select on unmarried men and women for the regression above and run a simple regression that tries to "control" for that. Ideally, I'd have an exhaustive set of covariates (and plenty of statistical power) to "match" men and women on all of them (except for the systematic difference of gender). Alas, the data aren't well tailored toward that end.
 
 What if the prestige groupings serve as a decent stand-in for that, absent the ability for a more exhaustive matching analysis with better data? Let's assume, for the task at hand, that occupational prestige effectively accounts for the imbalance in educational attainment and how child-rearing responsibilities can set back women in their careers, and how women have only just surpassed men in their rate of college diplomas.[^iknowiknow] Basically, what do the mean incomes look like by those occupational prestige groups? And what are the differences in the mean incomes, by gender?
 
@@ -326,13 +335,119 @@ And here's what they would look like. You can see a clear positive relationship 
 
 [^ifyouusedmedian]: Sub out the mean for the median and the differences between men and women get even smaller for the more prestigious occupations. The use of means is necessary for doing *t*-tests and comparing permutation to them even if people who study income caution about the importance of using the median as an estimate of central tendency.
 
+<table id="stevetable">
+<caption>Mean Income, by Occupational Prestige and Gender, in the General Social Survey (2012-2018)</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> Prestige Grouping </th>
+   <th style="text-align:center;"> Gender </th>
+   <th style="text-align:center;"> Number of Observations </th>
+   <th style="text-align:center;"> Mean Income (1986 USD) </th>
+   <th style="text-align:center;"> Difference </th>
+   <th style="text-align:center;"> % (Women/Men) </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 20-29 </td>
+   <td style="text-align:center;"> Male </td>
+   <td style="text-align:center;"> 404 </td>
+   <td style="text-align:center;"> $11,482.04 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 20-29 </td>
+   <td style="text-align:center;"> Female </td>
+   <td style="text-align:center;"> 434 </td>
+   <td style="text-align:center;"> $7,468.73 </td>
+   <td style="text-align:center;"> -$4,013.31 </td>
+   <td style="text-align:center;"> 65.05% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 30-39 </td>
+   <td style="text-align:center;"> Male </td>
+   <td style="text-align:center;"> 768 </td>
+   <td style="text-align:center;"> $16,545.37 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 30-39 </td>
+   <td style="text-align:center;"> Female </td>
+   <td style="text-align:center;"> 922 </td>
+   <td style="text-align:center;"> $12,807.02 </td>
+   <td style="text-align:center;"> -$3,738.35 </td>
+   <td style="text-align:center;"> 77.41% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 40-49 </td>
+   <td style="text-align:center;"> Male </td>
+   <td style="text-align:center;"> 524 </td>
+   <td style="text-align:center;"> $23,952.84 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 40-49 </td>
+   <td style="text-align:center;"> Female </td>
+   <td style="text-align:center;"> 732 </td>
+   <td style="text-align:center;"> $15,526.74 </td>
+   <td style="text-align:center;"> -$8,426.10 </td>
+   <td style="text-align:center;"> 64.82% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 50-59 </td>
+   <td style="text-align:center;"> Male </td>
+   <td style="text-align:center;"> 227 </td>
+   <td style="text-align:center;"> $30,698.47 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 50-59 </td>
+   <td style="text-align:center;"> Female </td>
+   <td style="text-align:center;"> 362 </td>
+   <td style="text-align:center;"> $23,010.93 </td>
+   <td style="text-align:center;"> -$7,687.54 </td>
+   <td style="text-align:center;"> 74.96% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 60-69 </td>
+   <td style="text-align:center;"> Male </td>
+   <td style="text-align:center;"> 208 </td>
+   <td style="text-align:center;"> $35,809.26 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 60-69 </td>
+   <td style="text-align:center;"> Female </td>
+   <td style="text-align:center;"> 367 </td>
+   <td style="text-align:center;"> $25,851.12 </td>
+   <td style="text-align:center;"> -$9,958.13 </td>
+   <td style="text-align:center;"> 72.19% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 70-79 </td>
+   <td style="text-align:center;"> Male </td>
+   <td style="text-align:center;"> 83 </td>
+   <td style="text-align:center;"> $36,970.38 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 70-79 </td>
+   <td style="text-align:center;"> Female </td>
+   <td style="text-align:center;"> 52 </td>
+   <td style="text-align:center;"> $33,925.07 </td>
+   <td style="text-align:center;"> -$3,045.31 </td>
+   <td style="text-align:center;"> 91.76% </td>
+  </tr>
+</tbody>
+</table>
 
-```
-#> Error: Problem with `mutate()` column `perc`.
-#> ℹ `perc = ifelse(!is.na(perc), paste0(mround2(perc), "%"), NA)`.
-#> x could not find function "mround2"
-#> ℹ The error occurred in group 1: prestgf = "20-29".
-```
+
 
 
 We can get *t*-tests to assess whether the differences between men and women by occupational prestige grouping are likely to have occurred by chance. Rounding the *p*-values from these results to zero (for convenience on the formatting end) suggests the probability of observing these differences if there were truly no differences between incomes for unmarried men and unmarried women is small. It's effectively zero for the 20-29 group and the 40-49 group. It's less than .05 for the 30-39 and 60-69 group. It's less than .1 for the 50-59 group. The highest occupational prestige groups may well be at income parity for unmarried men and unmarried women in that group.
@@ -423,6 +538,8 @@ wages12 %>%
   </tr>
 </tbody>
 </table>
+
+
 
 We can use permutations to assess what are the range of plausible differences between men and women that would arise by chance. Here, we'll do some grouped permutations, first splitting the data by prestige grouping before permuting the data by income. The end result is a list object (`splits`) that contains six data frames corresponding to the six unique occupational prestige groups in the truncated data.
 
@@ -544,6 +661,8 @@ wages12 %>%
 </table>
 
 
+
+
 I'm on the fence about whether permutation is an acceptable substitute for other means of simulation for assessing the plausibility of the group means, but it's doable. What about the differences between men and women in their mean incomes by these prestige groups? One option here is to treat each permutation as a simulation and get the first difference of those. The results of these first differences of the permutations can then be compared to the observed first differences between men and women by prestige group to assess the likelihood the observed first difference is a chance result.
 
 ```r
@@ -644,6 +763,8 @@ prestgfmeans %>%
   </tr>
 </tbody>
 </table>
+
+
 
 The results are substantively similar to the group means. Across 2,000 permutations each, we failed to observe a difference as extreme as the actual difference between unmarried men and unmarried women in the 20-29 and 40-49 occupational prestige group. We observe only four such permutations in the 30-39 group, 36 permutations in the 50-59 group, and 14 permutations in the 60-69 group, each across 2,000 permutations. Only for the most prestigious occupations do we observe gender differences that may have come by chance. Substantively, my admittedly naive/crude analysis suggests there is possible income parity only for women and men who are unmarried and with the most prestigious jobs. That's still a selection effect of a kind: the most prestigious occupations (and, one assumes, the ones that pay the most). Unmarried women earn less than unmarried men across all other occupational prestige groups.
 
