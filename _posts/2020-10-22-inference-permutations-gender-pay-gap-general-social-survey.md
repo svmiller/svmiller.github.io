@@ -327,7 +327,7 @@ wages12 %>%
          perc = mean/lag(mean)) %>%
   mutate_at(vars("mean", "diff"), ~round(., 2)) %>%
   mutate_at(vars("mean", "diff"), ~scales::dollar(.)) %>%
-  # mround2 is in stevemisc
+  # mround is in stevemisc
   mutate(perc = ifelse(!is.na(perc), paste0(mround2(perc),"%"), NA))
 ```
 
