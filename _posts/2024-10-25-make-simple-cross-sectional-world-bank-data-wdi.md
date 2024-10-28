@@ -37,7 +37,7 @@ Students in my quantitative methods class are (ideally) having to think about th
 
 What's less nice is how a student would think to obtain the data that interests them. The student might end up at a portal like [this one](https://databank.worldbank.org/source/world-development-indicators). They'd have to fumble through what exact database they want, select what countries they want and over what time period, and then download the data to an Excel file. The Excel file would be less than appetizing to look at, having years as columns with unhelpful columns like `X2010` for an observation in the year 2010. This particular format might overwhelm the student if they wanted to add anything to it, especially if they had the whole international system along with assorted regional or economic groups.
 
-There's a better way, I promise. Use the `{WDI}` package in R, and consult [this previous guide of mine](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/). All you need are the `{WDI}` package and an idea of how the World Bank communicates indicators to you.
+There's a better way, I promise. Use the `{WDI}` package in R, and consult [this previous guide of mine](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/). All you need are the `{WDI}` package, an idea of what you want, and the knowledge of how the World Bank communicates indicators to you. The `{WDI}` package will get what you want and some assorted "tidy" verbs will convert what `{WDI}` returns to a simple cross-sectional data set for you to explore.
 
 First, here are the R packages I'll be using. My students should have all these installed by virtue of the course description, except for the `{WDI}` package.
 
@@ -62,7 +62,7 @@ Here's a table of contents.
 
 ## An Applied Example: Some Economic Indicators and the "Doing Business" Project {#example}
 
-[My previous guide](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/) mentioned that I had a PhD student from my time at Clemson University that was interested in the following indicators available on the World Bank. These are [access to electricity (as a percent of the population)](https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS) [`EG.ELC.ACCS.ZS`], the [current account balance](https://data.worldbank.org/indicator/BN.CAB.XOKA.GD.ZS) [`BN.CAB.XOKA.GD.ZS`], the ["ease of doing business" score](https://data.worldbank.org/indicator/IC.BUS.DFRN.XQ) [`IC.BUS.DFRN.XQ`], the [consumer price index](https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG) [`FP.CPI.TOTL.ZG`], and the [interest rate spread](https://data.worldbank.org/indicator/FR.INR.LNDP) [`FR.INR.LNDP`]. Here's where I'll note, especially as I don't want students want simply mimicking me: *I forget why my student wanted these indicators, only that he wanted them (and that he was interested in Sub-Saharan Africa).* Thus, I can tell you what these assorted variables are, and even point you to [the Doing Business project](https://archive.doingbusiness.org/en/doingbusiness) for more information on what that particular estimate is communicating. However, I don't know what relationship he was interested in exploring, but you should definitely know [what you're doing and why you're doing it](http://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#whatareyoudoing). Just because what follows is theoretically thoughtless doesn't mean it's permission for you to do the same.[^edb] However, what follows is fine for the intended purpose: teaching students how to make simple cross-sectional data sets from data made available by the World Bank.
+[My previous guide](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/) mentioned that I had a PhD student from my time at Clemson University that was interested in the following indicators available on the World Bank. These are [access to electricity (as a percent of the population)](https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS) [`EG.ELC.ACCS.ZS`], the [current account balance](https://data.worldbank.org/indicator/BN.CAB.XOKA.GD.ZS) [`BN.CAB.XOKA.GD.ZS`], the ["ease of doing business" score](https://data.worldbank.org/indicator/IC.BUS.DFRN.XQ) [`IC.BUS.DFRN.XQ`], the [consumer price index](https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG) [`FP.CPI.TOTL.ZG`], and the [interest rate spread](https://data.worldbank.org/indicator/FR.INR.LNDP) [`FR.INR.LNDP`]. Here's where I'll note, especially as I don't want students want simply mimicking me: *I forget why my student wanted these indicators. I only remember that he wanted them (and that he was interested in Sub-Saharan Africa).* Thus, I can tell you what these assorted variables are, and even point you to [the Doing Business project](https://archive.doingbusiness.org/en/doingbusiness) for more information on what that particular estimate is communicating.[^edb] However, I don't know what relationship he was interested in exploring, but you should definitely know [what you're doing and why you're doing it](http://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#whatareyoudoing). Just because what follows is theoretically thoughtless doesn't mean it's permission for you to do the same. However, what follows is fine for the intended purpose: teaching students how to make simple cross-sectional data sets from data made available by the World Bank.
 
 [^edb]: The statement announcing [the discontinuation of the Doing Business project](https://www.worldbank.org/en/news/statement/2021/09/16/world-bank-group-to-discontinue-doing-business-report) casts considerable doubt on whether these data should be used whatsoever.
 
@@ -109,9 +109,11 @@ country_isocodes
 #> # ℹ 239 more rows
 ```
 
-The `country` argument in `WDI()` takes either two-character or three-character ISO codes and returns all observations included in what you asked. Here, that's anything in the `iso2c` column in the `country_isocodes` data. Be forewarned, that `WDI()` is verbose, and will alert you to anything it can't find in the World Bank data (e.g. the World Bank has no data for Åland Islands), though the warning message that is returned (and suppressed here) is just a warning and not an error, per se.
+The `country` argument in `WDI()` takes either two-character or three-character ISO codes and returns all observations included in what you asked. If you wanted just the United States, Canada, and Mexico, it would be something like `country = c("US", "MX", "CA")` or the three-character equivalent of `country = c("USA", "MEX", "CAN")`. In our simple example, however, it's anything in the `iso2c` column in the `country_isocodes` data. Be forewarned, that `WDI()` is verbose, and will alert you to anything it can't find in the World Bank data (e.g. the World Bank has no data for Åland Islands), though the warning message that is returned (and suppressed here) is just a warning and not an error, per se.
 
-Run the above `WDI()` function and this is what will come back.
+Run the above `WDI()` function and this is what will come back.[^slow]
+
+[^slow]: If you snooped on the source code for this post, you'd see that I saved the output of this function to a data set and work with that for this post. It's great that this API exists, but accessing it can be a bit slow. With that in mind, it might be wise to consider this the kind of "raw data" you'd have for a project and keep it stored somewhere to process to "clean" data. See some posts of mine ([here](http://svmiller.com/blog/2022/09/steveproj-stevetemplates-targets-workflow-example/) and [here](http://svmiller.com/blog/2021/03/handle-academic-projects-steveproj-make/)) for what I call this "data-laundering" approach to project management.
 
 
 ``` r
@@ -136,7 +138,7 @@ Some basic exploration of the output will show that there often observations for
 
 ## Convert a Panel to a Cross-Section (From "Easiest" to "Still Easy (but with Five More Lines of Code)") {#convert}
 
-The data created above and assigned to an object called `rawData` is what we'd call a "panel" in the social sciences. "Panels" are individual observations observed over (effectively) the same period of time. There are a few options for converting such a panel to what we'd call a "cross-section" (i.e. observations all gathered at (around) the same time, with no temporal component). These range from "easiest" to "easy (but with five more lines of code)".
+The data created above and assigned to an object called `rawData` is what we'd call a "panel" in the social sciences. "Panels" are individual observations observed over (effectively) the same period of time. There are a few options for converting such a panel to what we'd call a "cross-section" (i.e. observations all gathered at (around) the same time, with no temporal component). These range from "easiest" to "still easy (but with five more lines of code)".
 
 
 ### Easiest: Subset to a Single Year (e.g. Most Recent Year) {#easiest}
@@ -398,12 +400,12 @@ modelsummary(list("Subset: 2019" = M1,
 <!-- preamble start -->
 
     <script>
-      function styleCell_6qhruidxbykgj4s3vzkw(i, j, css_id) {
-        var table = document.getElementById("tinytable_6qhruidxbykgj4s3vzkw");
+      function styleCell_44uxoemfnlwxxh0ybgzi(i, j, css_id) {
+        var table = document.getElementById("tinytable_44uxoemfnlwxxh0ybgzi");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_6qhruidxbykgj4s3vzkw');
+        var table = document.getElementById('tinytable_44uxoemfnlwxxh0ybgzi');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -411,8 +413,8 @@ modelsummary(list("Subset: 2019" = M1,
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_6qhruidxbykgj4s3vzkw(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_6qhruidxbykgj4s3vzkw");
+      function spanCell_44uxoemfnlwxxh0ybgzi(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_44uxoemfnlwxxh0ybgzi");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -438,70 +440,70 @@ modelsummary(list("Subset: 2019" = M1,
         targetCell.rowSpan = rowspan;
         targetCell.colSpan = colspan;
       }
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(0, 0, 'tinytable_css_ideec4rfsxwc1x8sm5sa2o') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(0, 1, 'tinytable_css_idzl64145n91229dxli46h') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(0, 2, 'tinytable_css_idzl64145n91229dxli46h') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(0, 3, 'tinytable_css_idzl64145n91229dxli46h') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(1, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(1, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(1, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(1, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(2, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(2, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(2, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(2, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(3, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(3, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(3, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(3, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(4, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(4, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(4, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(4, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(5, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(5, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(5, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(5, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(6, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(6, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(6, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(6, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(7, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(7, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(7, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(7, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(8, 0, 'tinytable_css_idrckhbexxnxne34fikc0p') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(8, 1, 'tinytable_css_id4hk8hmv21d11v128221d') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(8, 2, 'tinytable_css_id4hk8hmv21d11v128221d') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(8, 3, 'tinytable_css_id4hk8hmv21d11v128221d') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(9, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(9, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(9, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(9, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(10, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(10, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(10, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(10, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(11, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(11, 1, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(11, 2, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(11, 3, 'tinytable_css_idev7nptfwgikio4lzcpkp') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(12, 0, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(12, 1, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(12, 2, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
-window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(12, 3, 'tinytable_css_idx99nhl1lt7blrqpe88if') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(0, 0, 'tinytable_css_idcy4cdcsl9hkpvgptuc6z') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(0, 1, 'tinytable_css_id1m8psvlxffk62lsxrebd') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(0, 2, 'tinytable_css_id1m8psvlxffk62lsxrebd') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(0, 3, 'tinytable_css_id1m8psvlxffk62lsxrebd') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(1, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(1, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(1, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(1, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(2, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(2, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(2, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(2, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(3, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(3, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(3, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(3, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(4, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(4, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(4, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(4, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(5, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(5, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(5, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(5, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(6, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(6, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(6, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(6, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(7, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(7, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(7, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(7, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(8, 0, 'tinytable_css_idqh2qg3euchhthzdd7itg') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(8, 1, 'tinytable_css_idxy0p17gyh1hil5w3zbeo') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(8, 2, 'tinytable_css_idxy0p17gyh1hil5w3zbeo') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(8, 3, 'tinytable_css_idxy0p17gyh1hil5w3zbeo') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(9, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(9, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(9, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(9, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(10, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(10, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(10, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(10, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(11, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(11, 1, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(11, 2, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(11, 3, 'tinytable_css_ide6wauwoupl37iyqzwzjn') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(12, 0, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(12, 1, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(12, 2, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
+window.addEventListener('load', function () { styleCell_44uxoemfnlwxxh0ybgzi(12, 3, 'tinytable_css_idlnnpr4bpkj1zi9xt2gtm') })
     </script>
 
     <style>
-    .table td.tinytable_css_ideec4rfsxwc1x8sm5sa2o, .table th.tinytable_css_ideec4rfsxwc1x8sm5sa2o {  text-align: left;  border-bottom: solid 0.1em #d3d8dc; }
-    .table td.tinytable_css_idzl64145n91229dxli46h, .table th.tinytable_css_idzl64145n91229dxli46h {  text-align: center;  border-bottom: solid 0.1em #d3d8dc; }
-    .table td.tinytable_css_idx99nhl1lt7blrqpe88if, .table th.tinytable_css_idx99nhl1lt7blrqpe88if {  text-align: left; }
-    .table td.tinytable_css_idev7nptfwgikio4lzcpkp, .table th.tinytable_css_idev7nptfwgikio4lzcpkp {  text-align: center; }
-    .table td.tinytable_css_idrckhbexxnxne34fikc0p, .table th.tinytable_css_idrckhbexxnxne34fikc0p {  border-bottom: solid 0.05em black;  text-align: left; }
-    .table td.tinytable_css_id4hk8hmv21d11v128221d, .table th.tinytable_css_id4hk8hmv21d11v128221d {  border-bottom: solid 0.05em black;  text-align: center; }
+    .table td.tinytable_css_idcy4cdcsl9hkpvgptuc6z, .table th.tinytable_css_idcy4cdcsl9hkpvgptuc6z {  text-align: left;  border-bottom: solid 0.1em #d3d8dc; }
+    .table td.tinytable_css_id1m8psvlxffk62lsxrebd, .table th.tinytable_css_id1m8psvlxffk62lsxrebd {  text-align: center;  border-bottom: solid 0.1em #d3d8dc; }
+    .table td.tinytable_css_idlnnpr4bpkj1zi9xt2gtm, .table th.tinytable_css_idlnnpr4bpkj1zi9xt2gtm {  text-align: left; }
+    .table td.tinytable_css_ide6wauwoupl37iyqzwzjn, .table th.tinytable_css_ide6wauwoupl37iyqzwzjn {  text-align: center; }
+    .table td.tinytable_css_idqh2qg3euchhthzdd7itg, .table th.tinytable_css_idqh2qg3euchhthzdd7itg {  border-bottom: solid 0.05em black;  text-align: left; }
+    .table td.tinytable_css_idxy0p17gyh1hil5w3zbeo, .table th.tinytable_css_idxy0p17gyh1hil5w3zbeo {  border-bottom: solid 0.05em black;  text-align: center; }
     </style>
     <div class="container">
-      <table class="table table-striped" id="tinytable_6qhruidxbykgj4s3vzkw" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="table table-borderless" id="tinytable_44uxoemfnlwxxh0ybgzi" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         <thead>
         <caption>The Covariates of the Ease of Doing Business in 2019</caption>
               <tr>
@@ -586,7 +588,7 @@ window.addEventListener('load', function () { styleCell_6qhruidxbykgj4s3vzkw(12,
 
 </div>
 
-As the composition of the sample changes, so too do the test statistics. It's also the difference of thresholds of significance for the current account balance and consumer price index variables. I'll withhold comment about the advisability of this exact regression given the above caveat that this applied examples is purposely thoughtless.[^ddd]
+As the composition of the sample changes, so too do the test statistics. It's also the difference of thresholds of significance for the current account balance and consumer price index variables. I'll withhold comment about the advisability of this exact regression given the above caveat that this applied example is purposely thoughtless.[^ddd]
 
 [^ddd]: For example, it would make sense to transform some of these variables. The consumer price index will always have a grotesque scale in a cross-national context, the interest rate spread and current account balance have similar quirks, and the access to electricity tops at 100% (which concerns over 30% of observations). Think carefully about what you're doing and why you're doing it.
 
