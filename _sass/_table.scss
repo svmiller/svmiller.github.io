@@ -39,6 +39,7 @@
 }
 
 
+/* modelsummary, old in light of new changes */
 
 #modelsummary table {
 
@@ -77,6 +78,50 @@ border-bottom: 1px solid #000000;
 }
 
 #modelsummary td {
+  padding-left: 10px;
+  padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+/* tinytable */
+
+.tinytable table {
+
+ margin: 0px auto;
+  padding-bottom: 30px;
+  padding-top: 30px;
+border-spacing: 0px;
+}
+
+
+.tinytable table caption {
+  font-weight: bold;
+}
+
+.tinytable table tr th {
+  	margin: 0px;
+	padding: 5px;
+	font-weight: normal;
+	font-style: italic;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.tinytable tfoot {
+	border-top: 1px solid #000000;
+	font-size: .85em;
+	text-align: right;
+}
+
+.tinytable tbody tr:last-child td {
+
+border-bottom: 1px solid #000000;
+
+}
+
+.tinytable td {
   padding-left: 10px;
   padding-right: 10px;
 	padding-top: 5px;
