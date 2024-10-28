@@ -1,0 +1,369 @@
+---
+title: "Make Simple Cross-Sectional Data with World Bank Data (from {WDI})"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2024-10-25'
+excerpt: "It really doesn't take much effort to do some simple things in {WDI}, like creating a cross-sectional data set for an undergraduate paper."
+layout: post
+categories:
+  - Teaching
+  - R
+image: "mr-jim-business.jpg"
+active: blog
+---
+
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+add_announce <- function(announce, text) {
+  
+  update <- paste0('{% include announcebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
+                      fig.width = 11,
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+
+# library(tidyverse)     # for most things
+# library(stevemisc)     # for graph formatting
+# library(kableExtra)    # for tables
+# library(stevedata)
+# library(modelsummary)
+# library(stevethemes)
+# library(modelr)
+# library(lmtest)
+# library(sandwich)
+# library(ggdist)
+# library(ggrepel)
+library(tidyverse)
+library(stevedata)
+library(WDI)
+library(stevemisc)
+library(modelsummary)
+library(tinytable)
+
+rawData <- readRDS("~/Dropbox/svmiller.github.io/extdata/world-bank-example-cs.rds")
+
+#library(kableExtra)
+# library(modelsummary)
+# library(stevethemes)
+# library(ggrepel)
+# library(modelr)
+options(knitr.kable.NA = '')
+
+# theme_set(theme_steve())
+```
+
+<div class="announcement-box" markdown = "1">
+<!-- <div id="focusbox" markdown = "1"> -->
+
+
+## This Post Assumes Some Familiarity with `{WDI}` ⤵️
+
+My undergraduate students reading this post, thinking about potential topics for their quantitative methods course or their C-papers, should read my earlier tutorial on [how to use the `{WDI}` package in R](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/).
+
+</div>
+
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+add_jekyll_image('/images/mr-jim-business.jpg', "There's no business like Mr. Jim Business", "450", "right")
+```
+
+<!-- *Last updated: `r format(Sys.Date(), "%d %B %Y")`.*  -->
+
+
+Students in my quantitative methods class are (ideally) having to think about their end-of-the-course short papers and their BA theses that will (ideally!) make use of some of the methods and techniques I teach them. Part of that entails thinking of a question that can be answered with these methods and finding data to explore. That naturally draws the student to the World Bank, which [contains a nice repository of data](https://data.worldbank.org/) on a whole host of topics. If you're interested in topics of economic development, population growth, corruption, education levels---or almost anything else in the cross-national context---the World Bank's DataBank has you covered. 
+
+What's less nice is how a student would think to obtain the data that interests them. The student might end up at a portal like [this one](https://databank.worldbank.org/source/world-development-indicators). They'd have to fumble through what exact database they want, select what countries they want and over what time period, and then download the data to an Excel file. The Excel file would be less than appetizing to look at, having years as columns with unhelpful columns like `X2010` for an observation in the year 2010. This particular format might overwhelm the student if they wanted to add anything to it, especially if they had the whole international system along with assorted regional or economic groups.
+
+There's a better way, I promise. Use the `{WDI}` package in R, and consult [this previous guide of mine](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/). All you need are the `{WDI}` package and an idea of how the World Bank communicates indicators to you.
+
+First, here are the R packages I'll be using. My students should have all these installed by virtue of the course description, except for the `{WDI}` package.
+
+```r
+library(tidyverse)    # for most things
+library(stevedata)    # v. 1.4, for country_isocodes
+library(stevemisc)    # for lag_at()
+library(WDI)          # the star of the show for this post
+library(modelsummary) # for the regression table at the end.
+library(tinytable)    # OPTIONAL, for you: for customizing the regression table at the end.
+```
+
+Here's a table of contents.
+
+1. [An Applied Example: Some Economic Indicators and the "Doing Business" Project](#example)
+2. [Convert a Panel to a Cross-Section (From "Easiest" to "Still Easy (but with Five More Lines of Code)")](#convert)
+    - [Easiest: Subset to a Single Year (e.g. Most Recent Year)](#easiest)
+    - [Also Easy: Lag the IVs a Year, then Subset](#alsoeasy)
+    - [Still Easy (but with Five More Lines of Code): Fill Based on Most Recent Available Year](#stilleasy)
+3. [A Simple Regression, and a Conclusion](#regression)
+
+
+## An Applied Example: Some Economic Indicators and the "Doing Business" Project {#example}
+
+[My previous guide](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/) mentioned that I had a PhD student from my time at Clemson University that was interested in the following indicators available on the World Bank. These are [access to electricity (as a percent of the population)](https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS) [`EG.ELC.ACCS.ZS`], the [current account balance](https://data.worldbank.org/indicator/BN.CAB.XOKA.GD.ZS) [`BN.CAB.XOKA.GD.ZS`], the ["ease of doing business" score](https://data.worldbank.org/indicator/IC.BUS.DFRN.XQ) [`IC.BUS.DFRN.XQ`], the [consumer price index](https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG) [`FP.CPI.TOTL.ZG`], and the [interest rate spread](https://data.worldbank.org/indicator/FR.INR.LNDP) [`FR.INR.LNDP`]. Here's where I'll note, especially as I don't want students want simply mimicking me: *I forget why my student wanted these indicators, only that he wanted them (and that he was interested in Sub-Saharan Africa).* Thus, I can tell you what these assorted variables are, and even point you to [the Doing Business project](https://archive.doingbusiness.org/en/doingbusiness) for more information on what that particular estimate is communicating. However, I don't know what relationship he was interested in exploring, but you should definitely know [what you're doing and why you're doing it](http://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#whatareyoudoing). Just because what follows is theoretically thoughtless doesn't mean it's permission for you to do the same.[^edb] However, what follows is fine for the intended purpose: teaching students how to make simple cross-sectional data sets from data made available by the World Bank.
+
+[^edb]: The statement announcing [the discontinuation of the Doing Business project](https://www.worldbank.org/en/news/statement/2021/09/16/world-bank-group-to-discontinue-doing-business-report) casts considerable doubt on whether these data should be used whatsoever.
+
+Now, let's fire up the `WDI()` function knowing what information we want from the World Bank. Here's the function we're going to call, and let me explain more after the code block. 
+
+```{r, echo=T, eval=F}
+WDI(indicator = c("aepp" = "EG.ELC.ACCS.ZS", # access to electricity
+                  "cab" = "BN.CAB.XOKA.GD.ZS", # current account balance
+                  "edb" = "IC.BUS.DFRN.XQ", # ease of doing business
+                  "cpi" = "FP.CPI.TOTL.ZG", # CPI
+                  "irs" = "FR.INR.LNDP"), # interest rate spread
+    start = 2014, end = 2019,
+    country = country_isocodes$iso3c) %>% 
+  as_tibble() -> rawData
+```
+
+```{r, echo=F, eval=F}
+rawData %>%
+  group_by(iso2c) %>%
+  fill(elecperpop, cab, edb, cpi, irs, .direction="down") %>%
+  ungroup() %>%
+  filter(year == 2019) -> Data
+
+Data %>% 
+  mutate(defl = ifelse(cpi < 0, 1, 0),
+         hinfl = ifelse(cpi >= 10, 1, 0)) -> Data
+
+M1 <- lm(edb ~ elecperpop + cab + defl + hinfl + irs, Data)
+```
+
+First, the `indicator` argument in the `WDI()` function takes the indicators of interest, as stored by the World Bank. [The guide I wrote in 2021](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/) should communicate how you could minimally use the `indicator` argument in this function, though I'm doing what the package author recommends doing if you know you're going to be renaming your columns anyway. In the above function, we're grabbing the access to electricity indicator (`EG.ELC.ACCS.ZS`) and, once we do, we're going to assign it to a column called `aepp`. Likewise, we're going to grab the current account balance indicator (`BN.CAB.XOKA.GD.ZS`) and assign it to a column called `cab`. From there, you should be able to see how to do this for the three remaining columns.
+
+Next, let's think a little bit about what we're doing here. For this case, let's treat the ease of doing business score as our dependent variable (i.e. the thing we want to explain). I can see from [exploring the World Bank's data repository](https://data.worldbank.org/indicator/IC.BUS.DFRN.XQ) that the Doing Business project was [discontinuned as of Sept. 16, 2021](https://www.worldbank.org/en/news/statement/2021/09/16/world-bank-group-to-discontinue-doing-business-report). The most recent year for which it has data is 2019. Knowing these are somewhat recent projects, and I'm interested in a simple cross-sectional analysis, it would be a waste of time to ask for information from too far before the most recent year. Thus, I want to focus on just a few years: let's say 2014 to 2019. That will explain the arguments of `start = 2014` and `end = 2019` you see in the code above.
+
+Finally, let's not overwhelm ourselves with what `WDI()` will return without any additional guidance. `WDI()` works primarily with ISO codes, but, by default, it will return *everything* for which it could plausibly have data. This includes countries (e.g. Sweden, the United States, Mexico) but also assorted regional groupings (e.g. North America, Latin America & the Caribbean), organizational groupings (e.g. European Union, OECD states), economic groupings (e.g. [HIPCs](https://en.wikipedia.org/wiki/Heavily_indebted_poor_countries), [LDCs](https://en.wikipedia.org/wiki/Least_developed_countries)), and even the world (among some others). This would be a good opportunity to both [know your state classification systems](http://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/) and [know the population of cases you ultimately want to describe](http://svmiller.com/peacesciencer/articles/state-systems.html). You probably care just about sovereign states ("countries"), so why ask for the other stuff? By default, `WDI()` will get that for you unless you supply something different in the `country` argument.
+
+That's one such reason why I have [the `country_isocodes` data set in `{stevedata}`](http://svmiller.com/stevedata/reference/country_isocodes.html) to allow for some convenient subsetting. Here's a simple summary of that data set.
+
+```{r}
+country_isocodes
+```
+
+The `country` argument in `WDI()` takes either two-character or three-character ISO codes and returns all observations included in what you asked. Here, that's anything in the `iso2c` column in the `country_isocodes` data. Be forewarned, that `WDI()` is verbose, and will alert you to anything it can't find in the World Bank data (e.g. the World Bank has no data for Åland Islands), though the warning message that is returned (and suppressed here) is just a warning and not an error, per se.
+
+Run the above `WDI()` function and this is what will come back.
+
+```{r}
+rawData
+```
+
+Some basic exploration of the output will show that there often observations for which we have no data whatsoever on a key indicator, like interest rate spreads for Afghanistan or Austria, the consumer price index for Argentina and Eritrea, or the current account balance for Chad. Some have situational missingness (e.g. four years of missing data of interest rate spreads for Bahrain, three years of the consumer price index for Tajikistan). One observation, American Samoa, has no information whatsoever and should not be included.
+
+## Convert a Panel to a Cross-Section (From "Easiest" to "Still Easy (but with Five More Lines of Code)") {#convert}
+
+The data created above and assigned to an object called `rawData` is what we'd call a "panel" in the social sciences. "Panels" are individual observations observed over (effectively) the same period of time. There are a few options for converting such a panel to what we'd call a "cross-section" (i.e. observations all gathered at (around) the same time, with no temporal component). These range from "easiest" to "easy (but with five more lines of code)".
+
+
+### Easiest: Subset to a Single Year (e.g. Most Recent Year) {#easiest}
+
+The easiest would be a simple subset of the panel to a single year of observation. In the data created above, this would be a simple matter of selecting the data to, say, 2019 (which would incidentally be the most recent year).
+
+```{r}
+rawData %>% 
+  filter(year == 2019) -> Option1
+
+Option1
+
+Option1 %>%
+  na.omit
+```
+
+The above code shows that we have 215 cross-sectional units, but any regression model we employ on these data would have just 99 observations because of missing data either in what's going to be our dependent variable (the ease of doing business score for Andorra), or independent variables (e.g. the consumer price index for Argentina), or both (e.g. American Samoa).
+
+No matter, this is the path of the absolute least resistance for converting a panel to a cross-section. You can't fail with this route, but the effort required to do this matches the effort that went into thinking about the desirability of this option.
+
+### Also Easy: Lag the IVs a Year, then Subset {#alsoeasy}
+
+There are two things that present themselves in our data that are teachable moments. First, this isn't the kind of class where I can spam the word "endogeneity" at students, but some basic logic suggests it's perilous to treat the ease of doing business score in 2019 as a function of the interest rate spread in 2019. Both are observed (effectively) at the same time. Discerning causal relationships is hard enough as it is, and it's why practitioners like to lag independent variables by a time period (year, in this case). We can at least say with confidence that 2018 observations can only affect 2019 observations (in the dependent variable), and that 2019 cannot affect 2018.[^yeahiknow] [My recent discussion of Mitchell's (1968) analysis](http://svmiller.com/blog/2024/10/inequality-insurgency-south-vietnam-1968-statistical-analysis/) of inequality and government control in South Vietnam comes with an appreciation that even he was aware of this. His analysis is careful to make sure everything that could possibly explain South Vietnamese control of its provinces in 1965 is observed *before* 1965.
+
+[^yeahiknow]: Yeah, concerns for causal identification are not so easily dismissed by simple year lags, but that's a topic for another class.
+
+First, let's take a look at New Zealand as a proof of concept for some of the information gain we're going to get by a year lag.
+
+```{r}
+rawData %>% filter(iso2c == "NZ")
+```
+
+New Zealand has missing data for the interest rate spread in 2019, but the panel is otherwise complete for the other observations. Taking a year lag allows us to keep New Zealand in our data.
+
+I have a suite of functions---[my so-called `_at()` functions](http://svmiller.com/stevemisc/reference/at.html)---for doing single functions to multiple columns all in one fell swoop. `lag_at()`, in this case, creates lagged variables with a prefix of `l[o]_` where `o` corresponds with the order of the lag. The default here is 1, as we want just a single year lag. We can (and must make sure) to specify these are grouped data, so we're not lagging Albania's observation of a current account balance in 2014 based on Afghanistan's observation in 2019.
+
+Let's observe what this does.
+
+```{r}
+rawData %>% 
+  lag_at(c("aepp", "cab", "cpi", "irs"),
+        .by = iso2c)
+```
+
+Notice `lag_at()` takes a character vector corresponding with the columns for which the user wants lags and creates new columns with that lagged information. Because we wanted just a lag of order 1 (i.e. the default), we get four new columns of `l1_aepp`, `l1_cab`, `l1_cpi`, and `l1_irs` corresponding with the first-order lags of access to electricity, current account balance, consumer price index, and interest rate spread (respectively).
+
+Now that we see what it does, let's do our second option. Notice how easy this is, but it's just two more lines of code. The second extra line is optional (because it's using the `select()` column to do column management).
+
+
+```{r}
+rawData %>% 
+  lag_at(c("aepp", "cab", "cpi", "irs"),
+        .by = iso2c) %>%
+  select(country:year, edb, l1_aepp:l1_irs) %>%
+  filter(year == 2019) -> Option2
+
+Option2 %>%
+  na.omit
+```
+
+This approach gains us three more observations because of missingness in 2019. `anti_join()` will tell us what these observations are.
+
+```{r}
+anti_join(Option2 %>% na.omit, Option1 %>% na.omit)
+```
+
+While it's not always the case you "gain" more observations with this route, it happens to be the case that we do *and* we demonstrate that we've thought through a rudimentary concern in the social sciences. In our data, 2018 can only explain ("cause") variation in 2019, and not the other way around.
+
+### Still Easy (but with Five More Lines of Code): Fill Based on Most Recent Available Year {#stilleasy}
+
+We could alternatively take a page out of what I see [the Quality of Government project](https://www.gu.se/en/quality-government) doing with [its cross-sectional data](https://www.gu.se/en/quality-government/qog-data/data-downloads/standard-dataset). In their data, as of Jan. 2024, observations are included from 2020. If 2020 is not available, it will take 2021. If no data exist for 2021, it'll take 2019. No matter, the cross-sectional data frame is effectively one that "fills" to a referent year based on what's available on the referent year, or surrounding it.
+
+That seems like a mouthful, but let's take a look at Japan to get an idea what we want to do.
+
+```{r}
+rawData %>% filter(iso2c == "JP")
+
+rawData %>% 
+  lag_at(c("aepp", "cab", "cpi", "irs"),
+        .by = iso2c) %>%
+  select(country:year, edb, l1_aepp:l1_irs) %>%
+  filter(iso2c == "JP")
+```
+
+Japan is missing an interest rate spread variable for 2019 and 2018. Because the first-order lag of the interest rate spread variable (`l1_irs`) for 2019 wants an observation from 2018 (that it does not have), this becomes an NA and Japan would drop from our cross-sectional analysis. However, we could just simply fill the most recent observation for Japan (2017) as a plug-in for the interest rate spread variable from 2018. There will be occasions where this might be less than desirable, but it's perfectly fine for a case like this.[^ven]
+
+[^ven]: In our data, Venezuela loses a consumer price index observation for 2018 and 2019 after observing 255% in 2017. Using 2017 to fill in 2018 may borrow trouble (i.e. this is Venezuela we're talking about and the inflation for that year was likely [*much* worse than it was in 2017](https://www.statista.com/statistics/1392580/annual-average-consumer-price-index-venezuela/)). However, consumer price indices already behave poorly in the linear model context. Perhaps imputing 2017 for 2018 is a bad idea, but it wouldn't be the worst idea to just infer that there is a hyperinflation crisis in Venezuela that you could discern from imputing an observation for 2018 from 2017. Use your head with the data limitations in mind.
+
+Thus, the third option here is to complement the first-order lags with a group-by fill using the `fill()` function in `{tidyr}`. To the best of my knowledge, `fill()` doesn't recognize the `.by` argument like other so-called "tidy" verbs, but it does work with the deprecated `group_by()` method. Observe the gains in available data for analysis we'll get from this method.
+
+```{r}
+# Reminder of how many observations we have in the first method
+nrow(rawData %>% filter(year == 2019) %>% na.omit)
+
+rawData %>%
+  # Step 1: lag_at(), .by our group
+  lag_at(c("aepp", "cab", "cpi", "irs"),
+         .by = iso2c) %>%
+  # Step 2: group_by() our group
+  group_by(iso2c) %>%
+  # Step 3: fill down the first-order lags.
+  fill(l1_aepp:l1_irs,
+       .direction = "down") %>%
+  #  Step 4: practice safe group_by()
+  ungroup() %>%
+  # Step 5: select what we want, though this is basically optional
+  select(country:year, edb, l1_aepp:l1_irs) %>%
+  # Step 6: filter to most recent year (2019)
+  filter(year == 2019) -> Option3
+
+Option3 %>% na.omit
+```
+
+This method nets us a more inclusive list than the other two methods, using recent data to "fill", where necessary, from recent years to account for more immediately missing data. Notice there are other options in the `.direction` argument, though I'm deliberate in selecting "down" to make sure only past observations can stand in for more current observations (i.e. I won't grab an observation from 2017 to fill in for 2016).
+
+## A Simple Regression, and a Conclusion {#regression}
+
+For the sake an end-of-the-course paper in [my BA-level quantitative methods course](http://ir3-2.svmiller.com/), I'd be happy with any one of these options that makes use of data from the World Bank's data bank (by way `{WDI}`), though the last of them would impress me the most. I'll only offer the caveat that there is no guarantee that all three of these would produce identical results.
+
+Again assuming we want to explain variation in the ease of doing business score as a function of the other indicators we got, three simple linear models will result in results that aren't identical. Observe.
+
+```r
+M1 <- lm(edb ~ aepp + cab + cpi + irs, Option1)
+M2 <- lm(edb ~ l1_aepp + l1_cab + l1_cpi + l1_irs, Option2)
+M3 <- lm(edb ~ l1_aepp + l1_cab + l1_cpi + l1_irs, Option3)
+
+modelsummary(list("Subset: 2019" = M1,
+                  "Subset: 2019 (w/ IV Lags)" = M2,
+                  "Subset: 2019 (w/ IV Lags and Fills)" = M3),
+             stars = TRUE,
+             title = "The Covariates of the Ease of Doing Business in 2019",
+             coef_map = c(
+               "aepp" = "Access to Electricity",
+               "l1_aepp" = "Access to Electricity",
+               "cab" = "Current Account Balance",
+               "l1_cab" = "Current Account Balance",
+               "cpi" = "Consumer Price Index",
+               "l1_cpi" = "Consumer Price Index",
+               "irs" = "Interest Rate Spread",
+               "l1_irs" = "Interest Rate Spread"
+             ),
+             gof_map = c("nobs", "r.squared", "adj.r.squared"))
+```
+
+<div class="tinytable">
+
+```{r, echo=F, eval=T, results='asis'}
+M1 <- lm(edb ~ aepp + cab + cpi + irs, Option1)
+M2 <- lm(edb ~ l1_aepp + l1_cab + l1_cpi + l1_irs, Option2)
+M3 <- lm(edb ~ l1_aepp + l1_cab + l1_cpi + l1_irs, Option3)
+
+modelsummary(list("Subset: 2019" = M1,
+                  "Subset: 2019 (w/ IV Lags)" = M2,
+                  "Subset: 2019 (w/ IV Lags and Fills)" = M3),
+             title = "The Covariates of the Ease of Doing Business in 2019",
+             stars = TRUE,
+            output = 'tinytable',
+             coef_map = c(
+               "aepp" = "Access to Electricity",
+               "l1_aepp" = "Access to Electricity",
+               "cab" = "Current Account Balance",
+               "l1_cab" = "Current Account Balance",
+               "cpi" = "Consumer Price Index",
+               "l1_cpi" = "Consumer Price Index",
+               "irs" = "Interest Rate Spread",
+               "l1_irs" = "Interest Rate Spread"
+             ),
+             gof_map = c("nobs", "r.squared", "adj.r.squared")) %>%
+  theme_tt(theme = "striped") %>% 
+  print(output = 'html')
+```
+
+</div>
+
+As the composition of the sample changes, so too do the test statistics. It's also the difference of thresholds of significance for the current account balance and consumer price index variables. I'll withhold comment about the advisability of this exact regression given the above caveat that this applied examples is purposely thoughtless.[^ddd]
+
+[^ddd]: For example, it would make sense to transform some of these variables. The consumer price index will always have a grotesque scale in a cross-national context, the interest rate spread and current account balance have similar quirks, and the access to electricity tops at 100% (which concerns over 30% of observations). Think carefully about what you're doing and why you're doing it.
+
+I'll clarify here that this isn't supposed to be a serious analysis. Rather, it's supposed to be a tutorial that guides students on how to use `{WDI}` to do some introductory analyses that are suitable for their current level. Come armed with questions that you can answer with data, and think critically about what you want to do and why you want to do it. Using `{WDI}` and doing some basic lags/fills are quite simple by comparison. It's just a few lines of code.
