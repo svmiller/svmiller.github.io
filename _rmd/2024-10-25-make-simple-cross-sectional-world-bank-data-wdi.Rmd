@@ -129,6 +129,8 @@ Here's a table of contents.
     - [Still Easy (but with Five More Lines of Code): Fill Based on Most Recent Available Year](#stilleasy)
 3. [A Simple Regression, and a Conclusion](#regression)
 
+Alrightie, let's get started.
+
 
 ## An Applied Example: Some Economic Indicators and the "Doing Business" Project {#example}
 
