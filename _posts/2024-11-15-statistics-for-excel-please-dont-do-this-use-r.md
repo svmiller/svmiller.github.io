@@ -192,6 +192,39 @@ prop.test(c(391, 37), c(391 + 82, 37 + 49),
 #> sample estimates:
 #>    prop 1    prop 2 
 #> 0.8266385 0.4302326
+
+# A probit model would be fine here too if you'd like to read about it.
+# https://svmiller.com/blog/2024/02/interpreting-probit-models/
+summary(M1 <- glm(vote ~ neighbor, Data, family=binomial(link='probit')))
+#> 
+#> Call:
+#> glm(formula = vote ~ neighbor, family = binomial(link = "probit"), 
+#>     data = Data)
+#> 
+#> Deviance Residuals: 
+#>     Min       1Q   Median       3Q      Max  
+#> -1.8721   0.6171   0.6171   0.6171   1.2988  
+#> 
+#> Coefficients:
+#>             Estimate Std. Error z value Pr(>|z|)    
+#> (Intercept)  0.94096    0.06793   13.85  < 2e-16 ***
+#> neighbor    -1.11675    0.15194   -7.35 1.98e-13 ***
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> (Dispersion parameter for binomial family taken to be 1)
+#> 
+#>     Null deviance: 608.72  on 558  degrees of freedom
+#> Residual deviance: 553.81  on 557  degrees of freedom
+#> AIC: 557.81
+#> 
+#> Number of Fisher Scoring iterations: 3
+# The proportion of "for" votes in non-neighbor states. Should look familiar.
+pnorm(pull(broom::tidy(M1)[1,2]))
+#> [1] 0.8266385
+# The proportion of "for" votes in neighbor states. Should look familiar.
+pnorm(pull(broom::tidy(M1)[1,2]) + pull(broom::tidy(M1)[2,2]))
+#> [1] 0.4302326
 ```
 
 Please just learn R.

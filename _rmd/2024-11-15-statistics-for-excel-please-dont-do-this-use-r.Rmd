@@ -237,6 +237,14 @@ chisq.test(matrix(c(391, 82, 37, 49), nrow=2),
 # You can also do it this way. Same basic thing.
 prop.test(c(391, 37), c(391 + 82, 37 + 49),
           correct = FALSE)
+
+# A probit model would be fine here too if you'd like to read about it.
+# https://svmiller.com/blog/2024/02/interpreting-probit-models/
+summary(M1 <- glm(vote ~ neighbor, Data, family=binomial(link='probit')))
+# The proportion of "for" votes in non-neighbor states. Should look familiar.
+pnorm(pull(broom::tidy(M1)[1,2]))
+# The proportion of "for" votes in neighbor states. Should look familiar.
+pnorm(pull(broom::tidy(M1)[1,2]) + pull(broom::tidy(M1)[2,2]))
 ```
 
 Please just learn R.
