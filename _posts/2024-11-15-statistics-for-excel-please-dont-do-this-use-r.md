@@ -20,7 +20,7 @@ active: blog
 
 {% include image.html url="/images/2022-ukraine-grain-exports-crop.png" caption="The EU signed an emergency free trade agreement with Ukraine in 2022 that it extended in 2024. (Hassan Ammar/AP)" width=400 align="right" %}
 
-<!-- *Last updated: 16 November 2024.*  -->
+<!-- *Last updated: 17 November 2024.*  -->
 
 
 Yeah, I know. Hear me out.
@@ -53,7 +53,7 @@ My student looked at this and immediately noticed something interesting.
 
 {% include image.html url="/images/2024-ukraine-free-trade-vote-snapshot.png" caption="A snapshot of the vote breakdown, by country." width=781 align="center" %}
 
-His initial impression of this information is that opposition to continued trade liberalization with Ukraine (i.e. the red you see) seems concentrated on the EU member states that border Ukraine. Sure, Romania's MEPs had no reservation about extending the agreement. Only one MEP opposed it among 20 casting a vote. Generally, support for continued trade liberalization with Ukraine was broad (around 76%). However,  only 4 of 16 Hungarian votes were in favor, 10 of 43 Polish votes were in favor, and just four of seven Slovakian votes were in favor. He reasoned there is probably something you can derive from [Stolper-Samuelson](https://en.wikipedia.org/wiki/Stolper%E2%80%93Samuelson_theorem) to make sense of this. Countries that border Ukraine probably have similar  endowments to Ukraine, and their agricultural sectors would be put at more of a disadvantage to Ukrainian exports than, say, the agricultural sectors in Spain or Italy. We may know the context here and caution "there's more to it than that", but it's not a bad hypothesis to want to evaluate in these data.
+His initial impression of this information is that opposition to continued trade liberalization with Ukraine (i.e. the red you see) seems concentrated on the EU member states that border Ukraine. Sure, Romania's MEPs had no reservation about extending the agreement. Only one MEP opposed it among 20 casting a vote. Generally, support for continued trade liberalization with Ukraine was broad (around 76%). However, only 4 of 16 Hungarian votes were in favor, 10 of 43 Polish votes were in favor, and just four of seven Slovakian votes were in favor. He reasoned there is probably something you can derive from [Stolper-Samuelson](https://en.wikipedia.org/wiki/Stolper%E2%80%93Samuelson_theorem) to make sense of this. Countries that border Ukraine probably have similar  endowments to Ukraine, and their agricultural sectors would be put at more of a disadvantage to Ukrainian exports than, say, the agricultural sectors in Spain or Italy. We may know the context here and caution "there's more to it than that", but it's not a bad hypothesis to want to evaluate in these data.
 
 I recently downloaded these data from `HowTheyVote.eu` and put them into [`{stevedata}`](http://svmiller.com/stevedata/) as [`eu_ua_fta24`](http://svmiller.com/stevedata/reference/eu_ua_fta24.html). You can see them here, in R.
 
@@ -77,7 +77,7 @@ eu_ua_fta24
 #> # ℹ 1 more variable: group_short_label <chr>
 ```
 
-I also have a spreadsheet version here, which I'll be using for the bulk of this tutorial. Note that I've already pre-processed these data slightly.
+You can download the spreadsheet at the link above. Note that I've already pre-processed these data slightly.
 
 {% include image.html url="/images/eu-ua-fta24-snapshot-2.png" caption="The spreadsheet I'm using" width=722 align="center" %}
 
@@ -87,7 +87,7 @@ If presented data like this, it'll be in your interest to create some basic "gro
 
 {% include image.html url="/images/neighb-if.png" caption="A convoluted extended 'IF' in Excel (or LibreOffice Calc)" width=619 align="center" %}
 
-You could just as well go by manually and search for every instance of, say, "Hungary", and manually enter new 1s for them (and then repeat for the three other neighbors). Then, after filling in the 1s, you can fill in the 0s. You could also nest in a bunch of [`IF()`](https://support.microsoft.com/en-us/office/if-function-69aed7c9-4e8a-4755-a9bc-aa8bbff73be2) statements to achieve this. I want to complain that this is *really* gaudy, and nested "if-else" statements borrow trouble. However, this will get the job done.
+You could just as well go by manually and search for every instance of, say, "Hungary", and manually enter new 1s for them (and then repeat for the three other neighbors). Then, after filling in the 1s, you can fill in the 0s. You could also do what I'm doing here and nest in a bunch of [`IF()`](https://support.microsoft.com/en-us/office/if-function-69aed7c9-4e8a-4755-a9bc-aa8bbff73be2) statements to achieve this. I want to complain that this is *really* gaudy, and nested "if-else" statements borrow trouble. However, this will get the job done.
 
 In the above image, you can see that the `IF()` [rat king](https://en.wikipedia.org/wiki/Rat_king) starts by checking if cell `E2` (i.e. the two-character ISO code for the first MEP observed in the data) is "PL". If so, it's a 1. If not, there's another `=IF()` that will look for if that cell is "HU" (i.e. the MEP is Hungarian). If so, it's a 1. If not, there's another `IF()` that will check if the cell is "SK" (i.e. the MEP is Slovakian). If it is, it's a 1. If not, we get the final `IF()` that will check if the cell is "RO" (for Romanian MEPs). If so, it's a 1. If it is that anything else that doesn't match these conditions, it is a 0.
 
@@ -131,7 +131,7 @@ Do that, and you have a full 2x2 matrix for what you'll do next.
 
 It bothers me to no end to do this in a spreadsheet. No matter, you can do it. Spreadsheet software doesn't have a lot of statistical functionality, but it can do this.
 
-Simply, there are several tests for looking for associations in a setting like this, but one common one is the Pearson's chi-squared test for count data.  This test compares observed frequencies in data to the frequencies that would be expected if there were no association between the variables. You might occasionally see this called "independence", which is where the language you'll see in Excel comes from. There is behind-the-scenes calculation of observed counts vs. expected counts that produces a chi-square statistic. In as many words, this statistic measures the discrepancy between what you observe and what you would expect to observe is there was no difference between the two groups. Higher values = more difference and more of a relation between the variables being compared. Higher values benchmarked to a particular critical value come with lower *p*-values. If a *p*-value is sufficiently small for your liking, you'd reject the null hypothesis of the independence of the two categorical variables.
+Simply, there are several tests for looking for associations in a setting like this, but one common one is the [Pearson's chi-squared test for count data](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test).  This test compares observed frequencies in data to the frequencies that would be expected if there were no association between the variables. You might occasionally see this called "independence", which is where the language you'll see in Excel comes from. There is behind-the-scenes calculation of observed counts vs. expected counts that produces a chi-square statistic. In as many words, this statistic measures the discrepancy between what you observe and what you would expect to observe is there was no difference between the two groups. Higher values = more difference and more of a relation between the variables being compared. Higher values benchmarked to a particular critical value come with lower *p*-values. If a *p*-value is sufficiently small for your liking, you'd reject the null hypothesis of the independence of the two categorical variables.
 
 In your spreadsheet software, go to `Data > Statistics > Chi-square Test`. Fire it up, and you'll see something like this. I've already filled in some of the options.
 
@@ -231,6 +231,6 @@ Please just learn R.
 
 ## Conclusion
 
-Students I teach in their second semester in my program will almost assuredly have no programming experience or exposure to quantitative methods by time I start teaching them about these methods. It's not something they'll get in the first semester, except for the data-driven weirdness I give them about the distribution of conflict or regional/temporal patterns of global governance (i.e. IGOs). Further, I can't make them install R for the sake of a class like this. No matter, I have to get them thinking about doing something. What else is there to do other than to do it a spreadsheet application like Microsoft Excel (or its open-source alternative, LibreOffice Calc).
+Students I teach in their second semester in my program will almost assuredly have no programming experience or exposure to quantitative methods by time I start teaching them about these methods. It's not something they'll get in the first semester, except for the data-driven weirdness I give them about the distribution of conflict or regional/temporal patterns of global governance (i.e. IGOs). Further, I can't make them install R for the sake of a class like this. No matter, I have to get them thinking about doing something. At this stage, there's nothing else I can plausibly expect them to do in four hours than to do something simple in a spreadsheet application like Microsoft Excel (or its open-source alternative, LibreOffice Calc).
 
 It goes without saying that the use of spreadsheet software for statistics is a *misuse* of spreadsheet software. You should not ever do this for serious analyses, [unless ruining Greece and rewarding bad-faith talking points is your goal](https://svmiller.com/blog/2020/04/reinhart-rogoff-ten-years-later-replication/). The benign way of putting this is that Excel is just not designed for statistical analyses, even if it can do some basic stuff much like how [SQL can do some statistical analyses](https://www.red-gate.com/simple-talk/blogs/statistics-sql-simple-linear-regressions/). It can do it, but only some of it (and not particularly well). Use the right tool for the right job, even if learning the "right tool" will come a bit later in our curriculum.
