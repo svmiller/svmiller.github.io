@@ -40,14 +40,14 @@ You can download the spreadsheet I created here to follow along.
 
 <div id="focusbox" markdown = "1">
 
-# [Download the spreadsheet here](http://svmiller.com/extdata/eu-ua-fta24.xlsx)
+## [Download the spreadsheet here](http://svmiller.com/extdata/eu-ua-fta24.xlsx)
 
 </div>
 
 
 ## An Example: a 2024 EU Free Trade Vote on Ukraine
 
-A student of mine in the B-paper course in the spring alerted me to [an interesting European Parliament vote that happened](https://www.europarl.europa.eu/doceo/document/A-9-2024-0077_EN.html) in March 2024 on trade liberalization with Ukraine. I was aware about the 2022 emergency agreement, but was not aware of its extension. The student also alerted me to this nifty website---[`HowTheyVote.eu`](https://howtheyvote.eu/votes/168586)---that summarizes the vote breakdown of MEPs by their political group and country of origin. There's also the ability to download the raw data as a .csv file for exploration.
+A student of mine in the B-paper course in the spring alerted me to [an interesting European Parliament vote that happened](https://www.europarl.europa.eu/doceo/document/A-9-2024-0077_EN.html) in March 2024 on trade liberalization with Ukraine. I was aware os the 2022 emergency agreement, but did not know of this extension. The student also alerted me to this nifty website---[`HowTheyVote.eu`](https://howtheyvote.eu/votes/168586)---that summarizes the vote breakdown of MEPs by their political group and country of origin. There's also the ability to download the raw data as a .csv file for exploration.
 
 My student looked at this and immediately noticed something interesting.
 
@@ -89,7 +89,7 @@ If presented data like this, it'll be in your interest to create some basic "gro
 
 You could just as well go by manually and search for every instance of, say, "Hungary", and manually enter new 1s for them (and then repeat for the three other neighbors). Then, after filling in the 1s, you can fill in the 0s. You could also do what I'm doing here and nest in a bunch of [`IF()`](https://support.microsoft.com/en-us/office/if-function-69aed7c9-4e8a-4755-a9bc-aa8bbff73be2) statements to achieve this. I want to complain that this is *really* gaudy, and nested "if-else" statements borrow trouble. However, this will get the job done.
 
-In the above image, you can see that the `IF()` [rat king](https://en.wikipedia.org/wiki/Rat_king) starts by checking if cell `E2` (i.e. the two-character ISO code for the first MEP observed in the data) is "PL". If so, it's a 1. If not, there's another `=IF()` that will look for if that cell is "HU" (i.e. the MEP is Hungarian). If so, it's a 1. If not, there's another `IF()` that will check if the cell is "SK" (i.e. the MEP is Slovakian). If it is, it's a 1. If not, we get the final `IF()` that will check if the cell is "RO" (for Romanian MEPs). If so, it's a 1. If it is that anything else that doesn't match these conditions, it is a 0.
+In the above image, you can see that the `IF()` [rat king](https://en.wikipedia.org/wiki/Rat_king) starts by checking if cell `E2` (i.e. the two-character ISO code for the first MEP observed in the data) is "PL". If so, it's a 1. If not, there's another `IF()` that will look for if that cell is "HU" (i.e. the MEP is Hungarian). If so, it's a 1. If not, there's another `IF()` that will check if the cell is "SK" (i.e. the MEP is Slovakian). If it is, it's a 1. If not, we get the final `IF()` that will check if the cell is "RO" (for Romanian MEPs). If so, it's a 1. If it is that anything else that doesn't match these conditions, it is a 0.
 
 Once you get that right for the first cell, you can copy-paste it for the remaining cells as I do to isolate which MEPs match the conditions of having ISO codes for Hungary ("HU"), Poland ("PL"), Romania ("RO"), or Slovakia ("SK").
 
