@@ -20,12 +20,12 @@ active: blog
 
 {% include image.html url="/images/2022-ukraine-grain-exports-crop.png" caption="The EU signed an emergency free trade agreement with Ukraine in 2022 that it extended in 2024. (Hassan Ammar/AP)" width=400 align="right" %}
 
-<!-- *Last updated: 17 November 2024.*  -->
+<!-- *Last updated: 18 November 2024.*  -->
 
 
 Yeah, I know. Hear me out.
 
-I'm co-teaching a second-level methods sequence at the bachelor's level right now whose aim is to introduce students to some basic research methods (both qualitative and quantitative). The course itself occurs entirely within a month or so and has just 10 meetings, two of which pertain to quantitative methods. This will be the first remotely quantitative thing that students do in the department, barring the data-driven weirdness I bring to the intro-level courses on governance and security. However, they won't have been [introduced to the R programming language (yet)](https://ir3-2.svmiller.com/). They will not have been asked to download it, but they will be potentially tasked with doing some kind of original analysis themselves for the sake of this course *and* the B-paper (i.e. pre-thesis) course that immediately succeeds it. So, students have to learn how to do something, and I have to teach them how to do something. But, what exactly that "something" is and how one should do it becomes quite the challenge in the four total hours I have to get the message across. What to do, what to do.
+I'm co-teaching a second-level methods sequence at the bachelor's level right now whose aim is to introduce students to some basic research methods (both qualitative and quantitative). The course itself occurs entirely within a month or so and has just 10 meetings, two of which pertain to quantitative methods. This will be the first remotely quantitative thing that students do in the department, barring the data-driven weirdness I bring to the intro-level courses on governance and security. However, they won't have been [introduced to the R programming language (yet)](https://ir3-2.svmiller.com/) and we won't ask them to download it for the sake of four hours of this course. However, we will ask them to do some kind of original analysis themselves for the sake of this course *and* the B-paper (i.e. pre-thesis) course that immediately succeeds it. So, students have to learn how to do something, and I have to teach them how to do something. But, what exactly that "something" is and how one should do it becomes quite the challenge in the four total hours I have to get the message across. What to do, what to do.
 
 So, here goes. If I can't assume a student has been introduced to this stuff before, or even knows what the R programming language is, I can assume they're at least observing the world around them *and* have some kind of spreadsheet application like Microsoft Excel (or [LibreOffice Calc](https://www.libreoffice.org/discover/calc/), for us handsome Linux users and open-source enthusiasts). Spreadsheet software has some limited capacity for statistical inference that you can leverage for the sake of the assignment they have. I can show you how to do it, with the plea that Excel is misspent energy for serious statistics and runs the risk of [ruining the lives of our friends in Greece](https://svmiller.com/blog/2020/04/reinhart-rogoff-ten-years-later-replication/). 
 
@@ -40,7 +40,7 @@ You can download the spreadsheet I created here to follow along.
 
 <div id="focusbox" markdown = "1">
 
-## [Download the spreadsheet here](http://svmiller.com/extdata/eu-ua-fta24.xlsx)
+# [Download the spreadsheet here](http://svmiller.com/extdata/eu-ua-fta24.xlsx)
 
 </div>
 
