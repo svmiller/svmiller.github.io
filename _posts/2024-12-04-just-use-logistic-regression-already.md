@@ -51,6 +51,28 @@ Here's a table of contents.
     
 Cool, let's get going.
 
+## Briefly, the Intuition {#intuition}
+
+The intuition behind the logistic regression comes from the same issue described in [my post about the probit model](https://svmiller.com/blog/2024/02/interpreting-probit-models/) and reading [Cramer (2004)](https://doi.org/10.1016/j.shpsc.2004.09.003) will likewise be informative. Namely, there is a linear probability we want to describe about a phenomenon that is functionally non-linear. Assume the following deterministic, linear relationship.
+
+$$
+y = \beta_0 + \beta_1x
+$$
+
+What makes this relationship linear when the outcome ($$y$$) is discrete? What unbounded relationship on the right-hand side of the equation describes a fundamentally bounded phenomenon on the left-hand side of the equation? A binary $$y$$ we want to model is maximally discrete. It's observed or it isn't. Under these circumstances, what interests us modeling the underlying probability by which $$y$$ is 1. Probability by way of the [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) gets us out 0-1 land, but it too has some discrete properties. It can be more granular than 0 or 1, but it can't be less than 0 or more than 1. Thus, something needs to constrain this linear predictor on the right-hand side of the equation to respect this. It's why you'll often see GLMs stylized as formula with an eta wrapper, like this.
+
+$$
+\eta(x) =\beta_0 + \beta_1x
+$$
+
+What function does this, especially when we're interested in probability? Here's where some knowledge of probability and odds goes a long way. Probability is the chance of some event happening and is bound between 0 and 1. Odds are relative probabilities, defined as the probability of some event happening divided over the probability the event doesn't happen. The odds give us one out because they are unbounded on the right. If the probability of an event happening is an [absolute metaphysical certitude](https://snltranscripts.jt.org/90/90gmclaughlin.phtml) that it will happen, then the odds are infinity (i.e. 1/(1-1) = $$\infty$$). However, they retain a left bound at 0. When the probability of an event happening is an absolute metaphysical certitude that it won't happen, the odds are 0 (i.e. 0/(1-0) = 0). [Enter the natural logarithm to save the day](http://svmiller.com/blog/2023/01/what-log-variables-do-for-your-ols-model/). Log-transformed odds---"logits", for shorthand---are completely unbounded. The log of 0 is negative infinity and the log of infinity is still infinity. Thus, the link function for this generalized linear model is stylized as follows.
+
+$$
+\eta(x) = log(\frac{p}{1-p}) = \beta_0 + \beta_1x
+$$
+
+There's more to add here, certainly about maximum likelihood estimation, but that's the long and short of it to get started. We have a discrete dependent variable that is observed as 1 or 0. We have an underlying phenomenon (probability) that governs whether the outcome is observed or isn't. That phenomenon has fundamental bounds we must respect, but we want the linear relationship to be monotonic and unbounded. That's basically what's happening here.
+
 ## The Data, and the Context {#data}
 
 The data I'll be using should be familiar to those who learned applied statistics by way of [John Fox](https://www.john-fox.ca/). This is a survey data set from Chile about an upcoming [plebiscite concerning the future of Augusto Pinochet's regime](https://en.wikipedia.org/wiki/1988_Chilean_presidential_referendum) in 1988. I ported these to [`{stevedata}`](http://svmiller.com/stevedata) as [`chile88`](https://svmiller.com/stevedata/reference/chile88.html) and did some cosmetic edits to make it a little distinguishable from what is available in the [`{cardata}`](https://cran.r-project.org/web/packages/carData/index.html) that supports [his textbook](https://www.john-fox.ca/AppliedRegression/index.html).
@@ -203,7 +225,7 @@ While I encourage students to not stop here in terms of unpacking logistic regre
 
 ### The Odds Ratio {#oddsratio}
 
-When I was in graduate school learning about statistical models, practitioners in my field that I followed never seemed comfortable with the logistic regression coefficient but did seem comfortable with the odds ratio. I've always been in the opposite camp. I've always felt odds ratios were weird ways of summarizing the logistic regression but the logit on its original scale always made sense to me. This is largely because odds ratios  are left bound at 0 and serve as a kind of intermediate step from converting a probability to a logit. If you're arguing for a negative relationship, you're looking for an odds ratio that's less than 1 and has a confidence interval that does not include 1. I'm more inclined to look for a negative or positive coefficient for the same information. Different strokes, I 'spose.
+When I was in graduate school learning about statistical models, practitioners in my field that I followed never seemed comfortable with the logistic regression coefficient but did seem comfortable with the odds ratio. Then and now, I'm in the opposite camp. I've always felt odds ratios were weird ways of summarizing the logistic regression but the logit on its original scale always made sense to me. This is largely because odds ratios  are left bound at 0 and serve as a kind of intermediate step from converting a probability to a logit. If you're arguing for a negative relationship, you're looking for an odds ratio that's less than 1 and has a confidence interval that does not include 1. I'm more inclined to look for a negative or positive coefficient for the same information. Different strokes, I 'spose.
 
 The logic here is similar to [the "rate" ratio from the Poisson model](https://svmiller.com/blog/2023/12/count-models-poisson-negative-binomial/). If you understand what that's doing in the Poisson context, you'll understand what it means in this context. Both have logarithmic transformations. Exponentiating them "undoes" the logarithm and returns a ratio of interest to communicate the expected change. However, calculating them is multiplicative and not additive.
 
