@@ -105,16 +105,17 @@ library(performance) # for some pseudo-R-squareds.
 
 Here's a table of contents.
 
-1. [The Data, and the Context](#data)
-2. [Specifying the Model and Intepreting its Immediate Output](#model)
-3. [Getting Specific with the Model's Immediate Output](#interpreting)
+1. [Briefly, the Intuition](#intuition)
+2. [The Data, and the Context](#data)
+3. [Specifying the Model and Intepreting its Immediate Output](#model)
+4. [Getting Specific with the Model's Immediate Output](#interpreting)
     - [Interpreting the Logit on its Own Terms](#logit)
     - [The "Divide by 4" Rule](#db4)
     - [The Odds Ratio](#oddsratio)
-4. [Logistic Regression Diagnostics/Fit Assessments](#fitdiagnostics)
+5. [Logistic Regression Diagnostics/Fit Assessments](#fitdiagnostics)
     - ["R-Squared"](#rsquared)
     - [The Binned Residual Plot](#binredplot)
-5. [Conclusion](#conclusion)
+6. [Conclusion](#conclusion)
     
 Cool, let's get going.
 
