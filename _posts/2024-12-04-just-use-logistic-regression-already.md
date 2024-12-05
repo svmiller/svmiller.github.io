@@ -20,11 +20,11 @@ active: blog
 
 {% include image.html url="/images/1988-chile-plebiscite-no-demonstration.jpg" caption="Scenes from a 'No' demonstration in Chile, 1988 (Luis Navarro Vega/Biblioteca Nacional de Chile)" width=400 align="right" %}
 
-<!-- *Last updated: 04 December 2024.*  -->
+<!-- *Last updated: 05 December 2024.*  -->
 
 I want to have something on my blog for students in my advanced quantitative methods class to read to better acclimate themselves to the logistic regression model. This is a curious thing, given everything else on my blog. I use the logistic regression a lot in assorted R tutorials I publish, including [how to read a regression table](http://svmiller.com/blog/2014/08/reading-a-regression-table-a-guide-for-students/) and [how to do model simulation](http://svmiller.com/blog/2020/04/post-estimation-simulation-trump-vote-midwest/). However, I've never really belabored the model itself in any detail. The closest I've done is [a tutorial I wrote for a methods class I taught in 2020](http://post8000.svmiller.com/lab-scripts/logistic-regression-lab.html). There's more I've learned along the way about how to convey information about the logistic regression, and want to do that here.
 
-I will eschew a lot of the hand-wringing about the "linear probability model" in this post, and I may revisit this post at sometime later to discuss the logistic distribution. You should be able to follow along if you read [my previous post on the probit model](https://svmiller.com/blog/2024/02/interpreting-probit-models/), which does cover a lot of these bases as to the curve-fitting inherent to this model (and the probit equivalent). You may also benefit from [reading about the Poisson model](https://svmiller.com/blog/2023/12/count-models-poisson-negative-binomial/), which likewise has a log tranformation (and risk/rate ratio) baked into the quantity it returns. Logarithmic transformations have interesting properties that are [useful to review](https://svmiller.com/blog/2023/01/what-log-variables-do-for-your-ols-model/). While it's not my post, I do rather like [this tutorial from Robert Kubinec](https://www.robertkubinec.com/post/flat_earth/) that also explains the theoretical intuition behind the logistic regression. Calling the "linear probability model" advocates as "flat Earthers" is a nice cherry on top. For this tutorial, I'll assume you've read this and know you have a model you want to unpack in greater detail for a dependent variable that is binary.
+I will eschew a lot of the hand-wringing about the "linear probability model" in this post, and I may revisit this post at sometime later to discuss the logistic distribution. You should be able to follow along if you read [my previous post on the probit model](https://svmiller.com/blog/2024/02/interpreting-probit-models/), which does cover a lot of these bases as to the curve-fitting inherent to this model (and the probit equivalent). You may also benefit from [reading about the Poisson model](https://svmiller.com/blog/2023/12/count-models-poisson-negative-binomial/), which likewise has a log transformation (and risk/rate ratio) baked into the quantity it returns. Logarithmic transformations have interesting properties that are [useful to review](https://svmiller.com/blog/2023/01/what-log-variables-do-for-your-ols-model/). While it's not my post, I do rather like [this tutorial from Robert Kubinec](https://www.robertkubinec.com/post/flat_earth/) that also explains the theoretical intuition behind the logistic regression. Calling the "linear probability model" advocates as "flat Earthers" is a nice cherry on top. For this tutorial, I'll assume you've read this and know you have a model you want to unpack in greater detail for a dependent variable that is binary.
 
 Here are the R packages that will be making an appearance.
 
@@ -90,7 +90,7 @@ Data
 
 ## Specifying the Model and Intepreting its Immediate Output {#model}
 
-The simple generalized linear model with the logit link is a simple function in R, especially if you're accustomed to the `lm()` function. Instead of `lm()`, it's `glm()`. There's an optional `family = binomial(link = 'logit')` argument you'll need to specify in the function to return what you want. If you're confused 
+The simple generalized linear model with the logit link is a simple function in R, especially if you're accustomed to the `lm()` function. Instead of `lm()`, it's `glm()`. There's an optional `family = binomial(link = 'logit')` argument you'll need to specify in the function to return what you want.
 
 
 ``` r
@@ -304,7 +304,7 @@ My inspiration for teaching this diagnostic comes from [Gelman and Hill (2006, 9
 binred_plot(M1) + theme_steve()
 ```
 
-![plot of chunk unnamed-chunk-9](/images/just-use-logistic-regression-already/unnamed-chunk-9-1.png)
+![plot of chunk binredplot-chile-1988](/images/just-use-logistic-regression-already/binredplot-chile-1988-1.png)
 
 The dots coincide with the coordinates of the mean fitted values for a particular bin of observations, along with their mean residuals. The band you see coincides with 95% intervals. A LOESS smoother will look for illustrative evidence of non-linearity as well, but the real important information comes in identifying what percentage of observations come out of bounds. If you use this function of mine in R, you get the following console output alongside the plot. I'll reproduce it below.
 
