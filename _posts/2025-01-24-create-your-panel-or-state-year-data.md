@@ -40,7 +40,7 @@ This is something of a quick hitter, because I'm repeating myself a fair bit. He
 2. [What's My Population?](#mine)
 3. [How Do I Create My Data?](#createdata)
     - [Creating a Panel of State-Years](#stateyears)
-    - [Creating a Panel of State-Quarter or State-Months](#statequarters)
+    - [Creating a Panel of State-Quarters or State-Months](#statequarters)
     - [Creating a Panel of State-Days](#statedays)
 4. [Conclusion: Why Does This Matter?](#conclusion)
 
@@ -59,7 +59,7 @@ Alrightie, let's get going.
 
 Students for whom this is applicable will probably remember their professor (me) teaching them about how inference is made from a sample to a population. The population parameter might be unknowable in the real world, but our statistical tools make inferential claims by way of ruling out things as incompatible with the data. In the classic case, the population is the thing we want to know about based on samples of it.
 
-The "population" in this context isn't referring to something wholly different, per se, but it's different. Instead, the "population" in this context is the universe of relevant cases we want to describe. If, say, the goal is to make inferences about the five Nordic countries, then the "population" is Sweden, Norway, Finland, Iceland, and Denmark. That population is five units. If, say, the goal is to make inferences about South Asia, then the "population" (per World Bank classifications) is Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, and Sri Lanka. That population is eight units. Perhaps missing data creates a subset of that population (i.e. maybe we don't have data on something for Maldives), or we might be interested in just the Scandinavian part of the Nordic countries (which would exclude Finland). 
+The "population" in this context isn't referring to something wholly different, per se, but it is different. Instead, the "population" in this context is the universe of relevant cases we want to describe. If, say, the goal is to make inferences about the five Nordic countries, then the "population" is Sweden, Norway, Finland, Iceland, and Denmark. That population is five units. If, say, the goal is to make inferences about South Asia, then the "population" (per World Bank classifications) is Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, and Sri Lanka. That population is eight units. Perhaps missing data creates a subset of that population (i.e. maybe we don't have data on something for Maldives), or we might be interested in just the Scandinavian part of the Nordic countries (which would exclude Finland). 
 
 However, that means the size of the population decreases for these reasons, and never increases. **Your "population" should never increase in your data**.[^bang] Please keep that in mind.
 
@@ -67,7 +67,7 @@ However, that means the size of the population decreases for these reasons, and 
 
 This part is simple, certainly for bite-sized "populations" like this. There is an added wrinkle when there is a temporal component to the population. The "population" is observed over some repeated interval of time. For a lot of international relations applications, this is yearly. There is a Sweden in 2020 and a Sweden in 2021. There is an India-Pakistan dyad in 1970 and an India-Pakistan dyad in 1971. Perhaps the most abstract sense, the "population" is unchanged but the underlying data aren't unchanged. Our unit of analysis from this population has changed from "thing" (i.e. states) to "thing-time" (e.g. state-year, state-quarter). 
 
-We need to be super mindful about what that means for the data we're ultimately going to have. It seems daunting, but it really isn't. You just have to know what you're doing and take control over your data-generating process that comes from this.
+We need to be super mindful about what that means for the data we're ultimately going to have. It seems daunting, but it really isn't. You just have to know what you're doing and take control of your data-generating process.
 
 ## What's My Population? {#mine}
 
@@ -115,11 +115,32 @@ cow_states %>% slice(1, .by=ccode)
 #> # ℹ 207 more rows
 ```
 
-Thus, we have 217 unique states that have ever existed in the population/universe of Correlates of War states.[^gw] If you use `create_stateyears()` in that package, you'll get that information processed for you in creating state-year data.
+Thus, we have 217 unique states that have ever existed in the population/universe of Correlates of War states.[^gw] If you use `create_stateyears()` in that package, you'll get that information processed for you in creating state-year data. We'll talk more about the temporal component in the next section, but here it is in action creating a panel of five years for all countries in the Correlates of War state system data from 1816 to 1820.
+
+
+``` r
+create_stateyears(subset_year = c(1816:1820))
+#> # A tibble: 115 × 3
+#>    ccode statenme                  year
+#>    <dbl> <chr>                    <int>
+#>  1     2 United States of America  1816
+#>  2     2 United States of America  1817
+#>  3     2 United States of America  1818
+#>  4     2 United States of America  1819
+#>  5     2 United States of America  1820
+#>  6   200 United Kingdom            1816
+#>  7   200 United Kingdom            1817
+#>  8   200 United Kingdom            1818
+#>  9   200 United Kingdom            1819
+#> 10   200 United Kingdom            1820
+#> # ℹ 105 more rows
+```
+
+You wouldn't be interested in this sliver of the overall panel, but there it is anyway.
 
 [^gw]: You are welcome to read about [some of the peculiarities of this state classification system](https://svmiller.com/peacesciencer/articles/state-systems.html), though it is ubiquitous in the study of inter-state conflict. By far the biggest open questions would concern cases like Germany, Yugoslavia/Serbia, and Yemen. I riff on those a little bit on `{peacesciencer}` and what are the implications of those cases.
 
-Almost none of my students (unfortunately 😢) are interested in the kinds of conflict analyses I've done or typically read, but are generally interested in panel models or time series data that might lean on data made available by the World Bank. However, the World Bank is generous to the point of too generous with the data it makes available. Sometimes a student is really interested in low-income countries, or some geographical region. If you're not explicit with `{WDI}` in grabbing data from the World Bank, [it will grab *everything* for you](https://svmiller.com/blog/2024/10/make-simple-cross-sectional-world-bank-data-wdi/). It's understandable that it does that, because you didn't give it guidance about what to include or exclude.
+Almost none of my students (unfortunately 😢) are interested in the kinds of conflict analyses I've done or typically read, but they are generally interested in panel models or time series data that might lean on data made available by the World Bank. However, the World Bank is generous to the point of too generous with the data it makes available. Sometimes a student is really interested in low-income countries, or some geographical region. If you're not explicit with `{WDI}` when you get data from the World Bank, [it will grab *everything* for you](https://svmiller.com/blog/2024/10/make-simple-cross-sectional-world-bank-data-wdi/). It's understandable that it does that, because you didn't give it guidance about what to include or exclude with respect to a population that interests you.
 
 This would be a good time to [read about the assorted classification systems the World Bank employs](https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups). I have a version of these data in `{stevedata}` (forthcoming v. 1.5.0) as `wb_groups`. Here, you can see what are the assorted classification systems and what states are in them.
 
@@ -193,7 +214,7 @@ wb_groups %>% count(wbgn) %>% data.frame
 #> 48                                              World 218
 ```
 
-Here we again refer to how this section started, but let's assume the population to which we want to infer is "low income countries". We can identify the units in that population with no problem whatsoever.
+Here we again refer to how this section started, but let's assume the population to which we want to infer is "low-income countries". We can identify the units in that population with no problem whatsoever.
 
 
 ``` r
@@ -253,7 +274,7 @@ southAsia
 #> 8 SAS   South Asia LKA   Sri Lanka
 ```
 
-As beginners, our eyes gravitate toward the country names. As researchers, they should go to the three-character ISO codes. That's ultimately what the World Bank is (mostly) using for benchmarking their data. That doesn't mean there aren't [some occasional headaches, though](https://svmiller.com/stevedata/reference/wbd_example.html). For example:
+As beginners, our eyes gravitate toward the country names. As researchers, they should go to the three-character ISO codes. That's ultimately what the World Bank is (mostly) using for benchmarking their data and a failure to be diligent about benchmarking to ISO codes creates [some occasional headaches](https://svmiller.com/stevedata/reference/wbd_example.html). See for yourself.
 
 
 ``` r
@@ -271,18 +292,18 @@ wbd_example %>%
 #> 6 Turkiye        TR    TUR    2020 12072.    75.8 NA
 ```
 
-You can see what happened here, and this came as is from the World Bank.
+You can see what happened here, and this came as is from the World Bank. Don't lean on an English country name to help with you anything important.
 
 No matter, let's return to South Asia and take control of our data-generating process. We have our population of interest, but what is our unit of analysis once we add a temporal component? In almost every instance, the temporal unit would be years. Most data of interest to us in the cross-national context is typically aggregated to years. So, let's go from there.
 
 ### Creating a Panel of State-Years {#stateyears}
 
-Let's assume we wanted to proceed with a panel of these eight South Asian states from 2000 to 2020. If that's what we wanted, then basic math say we should have 168 (i.e. 21*8) observations for our population of eight cases. We could hope we get that right in Microsoft Excel, or could we do it ourselves based on my 2019 post. I'll be honest that I return to this procedure all the time in creating data sets to analyze.
+Let's assume we wanted to proceed with a panel of these eight South Asian states from 2000 to 2020. If that's what we wanted, then basic math say we should have 168 observations for our population of eight cases (i.e. 21*8). We could hope we get that right in Microsoft Excel, or could we do it ourselves based on my 2019 post. I'll be honest that I return to this procedure all the time in creating data sets to analyze.
 
 
 ``` r
 southAsia %>%
-  rowwise() %>% # thing rowwise
+  rowwise() %>% # think rowwise
   # below: create an embedded list, as a column, of a sequence from 2000 to 2020
   # This will increment by 1.
   mutate(year = list(seq(2000, 2020, by = 1))) %>% 
@@ -306,15 +327,15 @@ southAsia %>%
 
 If we're thinking ahead to merging data into this panel, it's good to know that we should not ever have more than 168 observations in the data. If that happened, it might be because we did something inadvisable (like merging "Czechia" to "Czech Republic" for both a country name and three-character ISO code).
 
-### Creating a Panel of State-Quarter or State-Months {#statequarters}
+### Creating a Panel of State-Quarters or State-Months {#statequarters}
 
-There are conceivably more granular periods over which the population to comprise our panel can be observed. While I've yet to get comfortable with the International Monetary Fund's (IMF's) application programming interface (API), at least through R, I know the IMF has data for countries that are more granular than yearly. Generally, some data (like trade, of which I'm aware) are available monthly or quarterly. If we wanted a panel of state-months or state-quarters from 2000 to 2020, we could create it like this. This will lean on `{lubridate}`, which is in `{tidyverse}`.
+There are conceivably more granular periods over which the population to comprise our panel can be observed. While I've yet to get comfortable with the International Monetary Fund's (IMF's) application programming interface (API), at least through R, I know the IMF has data for countries that are more granular than yearly. Generally, some data (like trade) are available monthly or quarterly. If we wanted a panel of state-months or state-quarters from 2000 to 2020, we could create it like this. This will lean on `{lubridate}`, which is in `{tidyverse}`.
 
 
 ``` r
 # Create state-quarters, one way...
 southAsia %>%
-  rowwise() %>% # thing rowwise
+  rowwise() %>% # think rowwise
   mutate(date = list(seq(ymd(20000101),
                          ymd(20201201), 
                          by = "1 quarter"))) %>%
@@ -339,7 +360,7 @@ southAsia %>%
 # Create state-months.
 # You'll notice this is just copy-pasting the above and changing a few things.
 southAsia %>%
-  rowwise() %>% # thing rowwise
+  rowwise() %>% # think rowwise
   mutate(date = list(seq(ymd(20000101),
                          ymd(20201201), 
                          by = "1 month"))) %>%
@@ -363,7 +384,7 @@ southAsia %>%
 
 # Create state-quarters, another way...
 southAsia %>%
-  rowwise() %>% # thing rowwise
+  rowwise() %>% # think rowwise
   mutate(date = list(seq(ymd(20000101),
                          ymd(20201201), 
                          by = "1 month"))) %>%
@@ -394,7 +415,7 @@ It's conceivable, however implausible, that a student might be interested in a p
 
 ``` r
 southAsia %>%
-  rowwise() %>% # thing rowwise
+  rowwise() %>% # think rowwise
   mutate(date = list(seq(ymd(20000101),
                          ymd(20201201), 
                          by = "1 day"))) %>%
@@ -420,7 +441,7 @@ There is the obvious caveat that these are just every day of all years for eight
 
 ## Conclusion: Why Does This Matter? {#conclusion}
 
-The banner above this post notes that I've mused on this exact thing six times, and this would be the seventh. I'm repeating myself because I want students to note it takes very little effort to be deliberate in defining the population of interest (in IR applications) *and* takes almost no effort to create the template of the data itself. You should not have to lean on data you download to take care of that for you, because there is no guarantee it will. Data you download doesn't necessarily know the population of interest to you, only the population of interest to the data. Define your population, and you know what you're doing. Define your population, as observed over time, and you have the exact dimensions of your unit of analysis. If something is posing an issue toward creating the full data set of interest, it'll be easier to spot.
+The banner above this post notes that I've mused on this exact thing six times, and this would be the seventh. Coming up next is another instructional bit about the use of `{WDI}`, which I've also done [here](http://svmiller.com/blog/2021/02/gank-world-bank-data-with-wdi-in-r/) and [here](https://svmiller.com/blog/2024/10/make-simple-cross-sectional-world-bank-data-wdi/). I'm repeating myself because I want students to note it takes very little effort to be deliberate in defining the population of interest (in IR applications) *and* takes almost no effort to create the bare bones of the data themselves. You should not have to lean on data you download to take care of that for you, because there is no guarantee it will. Data you download doesn't necessarily know the population of interest to you, only the population of interest to the data. Define your population, and you know what you're doing. Define your population, as observed over time, and you have the exact dimensions of your unit of analysis. If something is posing an issue toward creating the full data set of interest, it'll be easier to spot.
 
 I say this because code in `{peacesciencer}` and just about everything I do leans on `left_join()` in `{dplyr}`. I'm a `left_join()` absolutist. Being abundantly clear about the population of interest and creating the data from scratch allows you full control over the data-generating process. It'll also allow you to more efficiently use functions like `WDI()` in `{WDI}`. Observe:
 
@@ -479,4 +500,6 @@ southAsia # nailed it
 #> # ℹ 158 more rows
 ```
 
-Notice I trusted the three-character ISO codes to communicate the population of interest to me, and the years to match one-to-one (as they do) with what's in my panel. I just needed the information I want (GDP per capita) and the information that would help me merge into the data frame I'm creating (the three-character ISO code, and importantly the year). Be deliberate, but trust the process. As you learn to trust the process, you'll also get a better idea of what went wrong if/when something does go wrong.
+Notice I trusted the three-character ISO codes to communicate the population of interest to me, and the years to match one-to-one (as they do) with what's in my panel. I just needed the information I want (GDP per capita) and the information that would help me merge into the data frame I'm creating (the three-character ISO code, and importantly the year). 
+
+Be deliberate, but trust the process. As you learn to trust the process, you'll also get a better idea of what went wrong if/when something does go wrong.
