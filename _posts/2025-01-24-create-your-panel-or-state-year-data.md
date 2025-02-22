@@ -28,7 +28,7 @@ Spiritually, this post is identical to [one more focused on creating dyad- or st
 </div>
 
 
-{% include image.html url="/images/pedro-pascal-make-your-own-kind-of-music-meme-crop.jpeg" caption="Note quite, but same energy for a lead image. Hot #take: the Bobby Sherman bubblegum pop cover is better." width=425 align="right" %}
+{% include image.html url="/images/pedro-pascal-make-your-own-kind-of-music-meme-crop.jpeg" caption="Not quite, but same energy for a lead image. Hot #take: the Bobby Sherman bubblegum pop cover is better." width=425 align="right" %}
 
 <!-- *Last updated: 25 January 2025.*  -->
 

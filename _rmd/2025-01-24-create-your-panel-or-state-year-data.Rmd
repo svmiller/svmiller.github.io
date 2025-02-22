@@ -95,7 +95,7 @@ Spiritually, this post is identical to [one more focused on creating dyad- or st
 
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
-add_jekyll_image('/images/pedro-pascal-make-your-own-kind-of-music-meme-crop.jpeg', "Note quite, but same energy for a lead image. Hot #take: the Bobby Sherman bubblegum pop cover is better.", "425", "right")
+add_jekyll_image('/images/pedro-pascal-make-your-own-kind-of-music-meme-crop.jpeg', "Not quite, but same energy for a lead image. Hot #take: the Bobby Sherman bubblegum pop cover is better.", "425", "right")
 ```
 
 <!-- *Last updated: `r format(Sys.Date(), "%d %B %Y")`.*  -->
