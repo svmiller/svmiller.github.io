@@ -1,0 +1,313 @@
+---
+title: "Make Sense of Your Interactions with Simulated Quantities of Interest, by Way of {simqi}"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2025-03-19'
+excerpt: "Hello from Seoul, where I just gave a presentation on interactions for a student audience. I expand on that talk here with a note about simulating quantities of interest from the regression model."
+layout: post
+categories:
+  - Teaching
+  - R
+image: "2024-05-29-joonkook-hwang-unsc.jpg"
+active: blog
+---
+
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
+base_dir <- "~/Dropbox/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+add_announce <- function(announce, text) {
+  
+  update <- paste0('{% include announcebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
+                      fig.width = 11,
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+
+# library(tidyverse)     # for most things
+# library(stevemisc)     # for graph formatting
+# library(kableExtra)    # for tables
+# library(stevedata)
+# library(modelsummary)
+# library(stevethemes)
+# library(modelr)
+# library(lmtest)
+# library(sandwich)
+# library(ggdist)
+# library(ggrepel)
+library(tidyverse)
+library(stevedata)
+library(stevethemes)
+library(modelsummary)
+library(modelr)
+library(simqi)
+library(kableExtra)
+
+theme_set(theme_steve())
+
+# rawData <- readRDS("~/Dropbox/svmiller.github.io/extdata/world-bank-example-cs.rds")
+
+#library(kableExtra)
+# library(modelsummary)
+# library(stevethemes)
+# library(ggrepel)
+# library(modelr)
+options(knitr.kable.NA = '')
+
+# theme_set(theme_steve())
+```
+
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+add_jekyll_image('/images/2024-05-29-joonkook-hwang-unsc.jpg', "Joonkook Hwang addresses the UN Security Council, re: North Korea (29 May 2024).", "400", "right")
+```
+
+<!-- *Last updated: `r format(Sys.Date(), "%d %B %Y")`.*  -->
+
+I am writing this in Seoul, where I'm currently 1) having the time of my life and 2) on a research excursion where I was invited to give a quick methods lecture to some students at Ewha Woman's University. I think the students dug the talk? It was super simple, mostly focusing on how to think about dummy variables and interactions. The example that I gave focused on voting alignment with South Korea in the UN General Assembly. I promised the students a write-up of the presentation on my blog, which is what will come here. The presentation I gave didn't include anything about simulating quantities of interest, but it's a new wrinkle I'll add here for advertising my [`{simqi}`](http://svmiller.com/simqi/) package. The core of the talk was about how to make sense of dummy variables and interactions. Post-estimation simulation certainly does that.
+
+Here are the R packages I'll be using in this post.
+
+```r
+library(tidyverse)    # for most things
+library(stevedata)    # forthcoming 1.6.0, for data
+library(stevethemes)  # for default theme
+library(modelsummary) # for the regression table
+library(modelr)       # for prediction grids
+library(simqi)        # forthcoming 0.2.0, for simulation
+library(kableExtra)   # for other tables
+
+theme_set(theme_steve()) # default theme...
+```
+
+Let's get going.
+
+## A Discussion of the Data
+
+The data are [`rok_unga`](http://svmiller.com/stevedata/reference/rok_unga.html), which is forthcoming in [`{stevedata}`](http://svmiller.com/stevedata/). This is a simple data set for exploring the correlates of dyadic foreign policy similarity with South Korea from 1991 to 2020. There's an obvious panel component to this data set, though the analysis in question will focus on just a single year of 2015.
+
+You can preview the data here:
+
+```{r}
+rok_unga
+```
+
+I'm going to do some light recoding based on the information in the data set. For one, the measure of dyadic foreign policy similarity I'll use in this analysis is the percent voting alignment/agreement based on all votes for South Korea and other states in the data. However, these are calculated as proportions; multiplying them by 100 returns the more familiar percentages.[^aware] I'm going to use the GDP per capita and Xavier Marquez' extended "UDS" scores to create so-called "weak links" of GDP per capita and democracy. If the other state's GDP per capita and measure of democracy is greater than South Korea, then the "weak link" is South Korea. If the opposite is true, the "weak link" is the other state. Whereas South Korea is a democratic and relatively prosperous state since it has been in the United Nations as a voting member, both measures are higher for "more democracy" and "more wealth" in the dyad.[^alsoaware] Finally, I'm going to use the `wb_groups` data, another recent addition in `{stevedata}`, to identify states that are in East Asia & the Pacific. If the other state is in that group, as is South Korea, it's a 1. Otherwise, it's a 0.
+
+[^aware]: I am fully aware that any serious analysis of foreign policy similarity would not use such a measure. Ideal point distances (a la [Bailey et al., 2017](https://www.jstor.org/stable/26363889)) and Cohen's $$\kappa$$ (a la [Häge, 2011](https://www.frankhaege.eu/publication/hage-2011-choice/)) are available for your consideration. However, this is fine for teaching students about methods around something a bit more accessible than weighted correlation measures and item response theory.
+
+[^alsoaware]: Such a weak-link measure is common in democratic peace scholarship, though one wonders about its suitability when the dyad-year data set is not universal. Here, `ccode1` is always South Korea. It's fine for the intended purpose, though.
+
+```{r}
+wb_groups %>% filter(wbgn == "East Asia & Pacific") %>% pull(iso3c) -> eap_codes
+
+wb_groups %>% filter(wbgn == "East Asia & Pacific") %>% pull(name)
+# ^ for context, though it's clear not at all of these states are in the UN.
+
+rok_unga %>%
+  mutate(agree100 = agree*100,
+         mindem = ifelse(xm_euds2 > xm_euds1, xm_euds1, xm_euds2),
+         mingdppc = log(ifelse(gdppc2 > gdppc1, gdppc1, gdppc2)),
+         eap = ifelse(iso3c %in% eap_codes, 1, 0)) -> Data
+```
+
+The analysis will subset to 2015, based on my cherry-picking something with a significant interaction that least gives me something to talk about. We can get an idea of what our data "look like" for such a simple cross-sectional analysis, ignoring the East Asia & the Pacific dummy. The bimodality in the dependent variable and the left skew in the democracy variable are worth noting and would be problematic for serious use, though this exercise is more about understanding interactions.
+
+```{r}
+Data %>%
+  filter(year == 2015) %>%
+  select(agree100, mindem, mingdppc, capdist) %>%
+  setNames(c("% Agreement", "Min. Democracy", "Min. GDP per Capita",
+             "Capital Distance from Seoul")) %>%
+  gather(var, val) %>%
+  ggplot(.,aes(val)) + 
+  facet_wrap(~var, scales='free') +
+  geom_density() +
+  labs(title = "A Density Plot of Variables for a Cross-Sectional Analysis in 2015",
+       subtitle = "The percent agreement has a clear bimodality whereas the minimum level of democracy has a clear left tail. Both are worth noting.",
+       x = "", y = "Density",
+       caption = "Data: ?rok_unga in {stevedata}.")
+```
+
+## Two Simple Linear Models
+
+Here are two simple linear models regressing the percentage agreement variable on the minimum level of democracy in the dyad, the minimum GDP per capita in the dyad, the capital distance (from Seoul), and this simple dummy variable identifying whether the other state is in East Asia & the Pacific (EA/P).[^capdist] The first model is one without interactions. The second model interacts the minimum level of democracy the EA/P dummy variable.
+
+[^capdist]: I did not belabor the capital distance variable in the previous section because no recoding was necessary. It is a bit awkward that placement in the EA/P category certainly implies something about this capital distance variable. Then again, EA/P is a big region.
+
+```{r}
+M1 <- lm(agree100 ~ mindem + mingdppc + capdist + eap, 
+         subset(Data, year == 2015))
+
+M2 <- lm(agree100 ~ mindem*eap + mingdppc + capdist, 
+         subset(Data, year == 2015))
+```
+
+A regression table, by way of `{modelsummary}`, follows.
+
+<div id ="modelsummary">
+
+```{r, echo=F, eval=T, results='asis'}
+
+modelsummary(list("Model 1" = M1, 
+                  "Model 2" = M2),
+             stars = TRUE,
+             output = 'kableExtra',
+             title = "The Correlates of Voting Agreement with ROK in the UNGA, 2015",
+             coef_map = c("mindem" = "Min. Democracy",
+                          "mingdppc" = "Min. GDP per Capita",
+                          "capdist" = "Capital Distance",
+                          "eap" = "Other State in East Asia/Pacific (EA/P)",
+                          "mindem:eap" = "Min. Democracy*EA/P",
+                          "(Intercept)" = "Intercept"),
+             gof_map = c("adj.r.squared", "nobs"))
+
+```
+
+</div>
+
+The model output suggests that South Korea is generally in greater alignment in the UN General Assembly with more democratic states and with wealthier states. The further the state's capital is from Seoul, the less agreement there is. This has an intuitive interpretation. States that are closer together might have shared issues or shared preferences that could manifest in greater alignment in the UN General Assembly. An argument toward that end might be underspecified, but it at least makes sense. It would also need to be squared with the dummy variable communicating whether a state is an EA/P state like China or Australia. If it is, the result from Model 1 suggests being an EA/P state coincides with an estimated decrease of 18.362 percentage points in agreement from the baseline of states not in this region (e.g. Canada, Brazil, Sweden, South Africa). Those "baseline" states are observed when the EA/P variable is 0, meaning they're in the *y*-intercept as a reference group.
+
+What about Model 2, though? Model 2 interacts the EA/P dummy variable with the minimum level of democracy variable. Now everything that has been interacted requires some care in interpretation. Get used to thinking of 0 here, because you're going to need it.
+
+We'll start with the minimum level of democracy variable. Because of the interaction, this no longer communicates a neat effect that partials out everything else in the model. Instead, it's been interacted with the EA/P variable. When the EA/P variable is 0 (i.e. the other state is a state like Botswana and not Papua New Guinea), a one-unit increase in the minimum-level of democracy variable coincides with a change in 15.085 percentage points in agreement. The democracy variable in question approximates a normal distribution, so a one-unit increase implies a change of about 34% across the range of plausible democracy scores. However, that effect is for states that aren't EA/P.
+
+Now, let's turn our attention to the EA/P dummy variable. That is no longer the simple comparison of EA/P states versus non-EA/P states. Instead, it's the comparison of EA/P states and non-EA/P states when the minimum level of democracy variable is 0. Here, we get kind of lucky given the distribution of this variable. When the minimum level of democracy variable is 0, this is the estimate's way of communicating that it is 50/50 whether the observation in question is a democracy. This one such reason why I love the Unified Democracy Scores approach to modeling democracy. It returns a latent estimate where 0 is a 50/50 judgement call on classifying a state as a democracy. However, observe that caveat, same as it was above. That coefficient of -11.333 is the difference between EA/P states and non-EA/P states when the minimum level of democracy is 0.
+
+Finally, there is the interaction. Some care is required in interpreting the interaction term because what exactly it tells you will depend on the inputs for anything you're doing. It will also depend critically on the question you're asking. In this simple case, the EA/P variable is a dummy whereas the minimum level of democracy variable is continuous. As a technical matter, the interaction term says that when the democracy variable is 1 and the other state is an EA/P state, knock off -7.735 percentage points from the estimated agreement. As a substantive matter, eyeballing this interactive effect with the coefficient for the minimum level of democracy suggests the democracy effect is much weaker for EA/P states and voting alignment with South Korea than it is for states outside EA/P.
+
+## Making Sense of the Interaction (Two Ways)
+
+If you, the researcher, believe that two things interact in some way to influence the outcome, it's imperative on you, the researcher, to understand what exactly the interaction is communicating. There are two ways of doing. If you're a true beginner, you'll want to do some basic model predictions based on the data inputs and model outputs. As you prepare something for presentation, you'll want something that provides estimates of uncertainty around the prediction. There are several ways of doing the latter, but we will be simulating that with `{simqi}`.
+
+### Predicting Estimates, Based on Model Output
+
+If you're a beginner, do yourself a favor and get acclimated with the interaction by way of the `predict()` function on a hypothetical prediction grid. Toward that end, you should also get comfortable with the `data_grid()` function in `{modelr}`. This function is awesome.
+
+Here's what the code below will do, to be followed with a fancier table afterward. First, `data_grid()` takes the data (`Data`) and an optional argument of the model (`.model = M2`) and will return a hypothetical prediction grid that, by default, gives you the median value (for numeric inputs) or mode (for categorical inputs) for anything that appears in the model. However, it will allow you to add or change other stuff. Here, we'll allow `eap` to take on values of 0 or 1 and allow the `mindem` variable to also take on values of 0 and 1. Minimum GDP per capita and capital distance will be held fixed at their median. Thereafter, we're going to get fitted values of the agreement variable with the `predict()` function, supplying the argument to predict the values of *y* based on the `newdat` grid we created. Thereafter, `diff1` will the first difference of minimum democracy (i.e. among the EA/P states). `diff2` will be the differences between EA/P and non-EA/P states among the two democracy values supplied. The interaction can be seen as the difference of those two differences, if you will.
+
+
+```{r}
+Data %>% 
+  data_grid(.model = M2,
+            eap = c(0,1),
+            mindem = c(0, 1)) -> newdat
+
+newdat
+
+newdat %>%
+  mutate(pred = predict(M2, newdata = newdat)) %>%
+  mutate(diff1 = pred - lag(pred), .by=eap) %>%
+  mutate(diff2 = pred - lag(pred), .by=mindem) %>%
+  mutate(int1 = diff1 - lag(diff1, 2),
+         int2 = diff2 - lag(diff2)) %>% 
+  data.frame
+```
+
+```{r, echo=F}
+Data %>% 
+  modelr::data_grid(.model = M2,
+                    eap = c(0,1),
+                    mindem = c(0, 1)) -> newdat
+
+newdat %>%
+  mutate(pred = predict(M2, newdata = newdat)) %>%
+  mutate(diff1 = pred - lag(pred), .by=eap) %>%
+  mutate(diff2 = pred - lag(pred), .by=mindem) %>%
+  mutate(diff3 = diff2 - lag(diff2)) %>%
+  mutate(mingdppc = format(round(mingdppc, 3), nsmall = 3),
+         capdist = format(round(capdist, 3), nsmall = 3),
+         pred = format(round(pred, 3), nsmall = 3),
+         diff1 = ifelse(!is.na(diff1), format(round(diff1, 3), nsmall = 3), NA),
+         diff2 = ifelse(!is.na(diff2), format(round(diff2, 3), nsmall = 3), NA),
+         diff3 = ifelse(!is.na(diff3), format(round(diff3, 3), nsmall = 3), NA),)  %>%
+  kbl(., longtable = TRUE, booktabs = TRUE,
+      align = c("c"),
+       table.attr='id="stevetable"',
+      caption = "Predicted Agreement from Model 2, by Min. Democracy and EA/P Status",
+      col.names = c("EA/P", "Min. Dem.", "Min. GDPPC",
+                    "Min. Dist", "Est. % Agree", "First Diff. of Min. Dem.",
+                    "First Diff of EA/P", "Interaction")) %>%
+  row_spec(0, bold = TRUE) 
+
+```
+
+This approach is certainly tedious, but may it introduce the beginners to the underlying math.
+
+### Simulate Quantities of Interest to Make Sense of Your Interaction
+
+If it can be simulated, it should be simulated. You could just as well ask for standard errors/confidence intervals by way of `predict()`, but where is the fun in that...
+
+For presentation, you'll want to give yourself flexibility to communicate what the interaction says about the full relationship. To do that, we return to `data_grid()`, but this time ask for a sequence of 100 numbers for the `mindem` variable that corresponds with the range of its minimum to maximum. We will further toggle the `eap` variable to be 0 or 1. Thereafter, we'll use a new R package of mine---[`{simqi}`](http://svmiller.com/simqi/)---to simulate predicted values of the outcome variable across some number of simulations. `sim_qi()` in this package takes the model (`M2`) and an optional but heavily suggested "newdata" data frame (`newdat`). It then runs 1,000 simulations (the default, but can be changed by the `nsim` argument) about what the predicted values would be. You could optionally ask for the `newdata` frame back for easier post-processing (`return_newdata = TRUE`).
+
+
+```{r}
+Data %>% 
+  data_grid(.model = M2,
+            eap = c(0,1),
+            mindem = seq_range(mindem, 100))  -> newdat
+
+newdat
+
+set.seed(8675309)
+
+Sims <- sim_qi(M2, nsim = 100, newdata = newdat, return_newdata = TRUE)
+Sims
+```
+
+What you do with this is entirely up to you, and there are any number of ways of extracting interesting information from this model. This is typically the first way I'd do it for a situation like this. For these 100 simulations, I'll summarize them and return the mean, 5th percentile, and 95th percentile to create a 90 percent interval around the simulated estimate. Importantly, I will do this by unique values of democracy and the EA/P dummy variable. Next, I'll use `{ggplot2}` to plot the ribbon corresponding with the 90% interval and the line corresponding with the simulated mean. What emerges from that will help better clarify what the interaction is ultimately saying.
+
+```{r sim-agreement-rok-2015-mindem-eap, fig.width=10.5}
+Sims %>%
+  summarize(mean_y = mean(y),
+            lwr = quantile(y, .05),
+            upr = quantile(y, .95),
+            .by = c(eap, mindem)) %>%
+  mutate(eap = ifelse(eap == 1, "East Asia & the Pacific", "Other State")) %>%
+  ggplot(., aes(mindem, mean_y, ymin=lwr, ymax=upr, linetype = eap,
+                color=eap, fill=eap)) +
+  geom_ribbon(alpha=.1) +
+  geom_line() +
+  labs(title = "Simulated Agreement with South Korea in 2015, by Democracy and East Asia & the Pacific",
+       subtitle = "Higher values of democracy coincide with greater alignment, but the effect is stronger outside East Asia & the Pacific.",
+       x = "Minimum Level of Democracy",
+       y = "% Agreement with South Korea",
+       linetype = "", color = "", fill = "")
+```
+
+Earlier in this post, I suggested that eyeballing the coefficients tells me the democracy effect is weaker for EA/P states than it is for non-EA/P states, but I couldn't quite see what the effect "looks like." Here's what it looks like. Generally, there is modest increase in voting alignment with South Korea for more democratic states in EA/P. However, that increase pales in comparison to what it is for non-EA/P states. Simulating it and getting the estimates of uncertainty to boot bring that into greater relief.
+
+## Conclusion
+
+There's a lot to be said about model criticism that I haven't said here. The goal was to introduce students to thinking about dummy variables and interactions. Dummy variables are straightforward. They create comparisons between (or among) groups where something is a baseline observation absorbed into the *y*-intercept. In Model 1, Indonesia and Fiji would be in the EA/P group whereas states like Algeria and Portugal would be in the *y*-intercept. Interactions require some care, and it's definitely implied that both variables being interacted have plausible 0s. If they do, the coefficients in the regression model make sense. They would make even more sense if you simulated quantities of interest to better clarify what the interactive effect "looks like". Perhaps simulation is not strictly necessary, but it's certainly flexible.
