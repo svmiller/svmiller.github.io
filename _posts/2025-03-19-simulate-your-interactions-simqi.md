@@ -152,7 +152,7 @@ A regression table, by way of `{modelsummary}`, follows.
   <tr>
    <th style="text-align:left;">   </th>
    <th style="text-align:center;"> Model 1 </th>
-   <th style="text-align:center;"> &amp;nbsp;Model 2 </th>
+   <th style="text-align:center;"> Model 2 </th>
   </tr>
  </thead>
 <tbody>
