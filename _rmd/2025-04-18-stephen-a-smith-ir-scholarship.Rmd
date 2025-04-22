@@ -11,7 +11,7 @@ layout: post
 categories:
   - Teaching
   - Political Science
-image: "stephen-a-smith-machiavelli.png"
+image: "stephen-a-smith-machiavelli-card.png"
 active: blog
 ---
 
