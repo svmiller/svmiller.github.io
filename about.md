@@ -5,7 +5,7 @@ permalink: /about/
 active: about
 ---
 
-{% include image.html url="/images/2022-03-14-ukraine-panel.jpg" caption="Me with Clemson colleagues discussing the 2022 invasion of Ukraine by Russia. Yes, those are cat socks." width=400 align="right" %}
+{% include image.html url="/images/svm-2025-04-23.jpg" caption="Steve." width=350 align="right" %}
 
 I do have interests outside of the academy, but not many.
 
