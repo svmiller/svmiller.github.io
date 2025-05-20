@@ -1,0 +1,97 @@
+---
+title: "Cloud Storage, European Style"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2025-05-19'
+excerpt: "I'm talking myself into the 'Buy European' movement, and part of that means leaving Dropbox."
+layout: post
+categories:
+  - Linux
+  - Computing
+image: "divorce-american-style.jpg"
+active: blog
+---
+
+
+
+
+{% include image.html url="/images/divorce-american-style.jpg" caption="Who's to say the separation doesn't play out like the end of this movie, but..." width=420 align="right" %}
+
+<!-- *Last updated: 20 May 2025.*  -->
+
+The current moment has led to a spate of enthusiasm in the Western world, outside the United States, to wean itself off American products in favor of European (or Canadian) alternatives. The underlying rationale for why this movement emerged is tragic. The weight of the moment and the movement it's generated is heavier than any individual-level consumption decision, and it's more than silly, simple jingoism that motivates its American equivalent. However, the weight of the moment does underscore the weight of the undertaking for anyone who wants to take part. Like moving a grand piano from one home to another, it's an undertaking easier said than done.[^microsoft]
+
+[^microsoft]: I've been a Linux enthusiast since 2004 and would cheerlead efforts for more robust and widespread proliferation among desktop users, replete with public backing for it. But I am a nerd, and best of luck to those wanting to quit Microsoft or Apple cold turkey. Google is entrenched, but solvable. Decent to arguably equivalent alternatives exist. I don't think Microsoft is a solvable problem and the company has helped itself by being [more reliable than the American government](https://www.fool.com/investing/2023/08/14/only-2-stocks-higher-credit-rating-us-government/). I'd rather lend Microsoft money than the U.S. government. You could say something similar about Apple even as its user base is a little more, [shall we say, "dedicated."](https://medium.com/@abubakarrajput342/the-cult-of-apple-understanding-the-fandom-surrounding-the-iphone-a5a903403531). This is an opinionated take, but widespread public support for Apple exceeds the quality of the products they offer. The phone is better than the alternatives and its operating system is fine as a UNIX derivative. I'll withhold further comment on what I think about its hardware and other services, though. 
+
+I've been a Dropbox user since 2008 and just about my entire life's work has revolved around it for as long as I've had it. However, it's time for a change for any number of reasons. Dropbox is a great product, but privacy concerns for an American company accountable to the [CLOUD Act](https://en.wikipedia.org/wiki/CLOUD_Act) are real. It's also just a tad bit expensive for what I need. I need a family plan with at least a terabyte, which is available only for Americans. [As of writing, that's over $200 every year](https://www.dropbox.com/plan-configuration/dropbox-single-seat?option=family). That's a good deal, all things considered, but it's not the best deal if you intend to have just one cloud storage account (more on that later). It's also charging me dollars I don't have in abundance and would have to wire into an American bank account from Sweden. Given the aforementioned moment, it's time for a switch.
+
+Here's what I did, and will commit to doing for the time being. Perhaps this will help a few of you.
+
+## Switching from Dropbox to Koofr
+
+I experimented with a few alternatives and settled on [Koofr](https://koofr.eu/) as my main cloud storage/productivity tool to replace Dropbox. Koofr is a Slovenian company and has data centers across the European Union. It's also [been around since 2013](https://koofr.eu/blog/posts/celebrating-7-years-of-koofr). If you're looking to make the switch from Dropbox, it's good to commit to a service that's not a startup because the older companies more credibly signal staying power. That's something you don't appreciate until you see it in print. [Dropbox (at least since it went public) wasn't profitable until 2020](https://www.engadget.com/dropbox-records-first-profit-ever-135846388.html).
+
+If you're using Dropbox as I did (i.e. for file-sharing, shared directories, and general academic productivity across multiple devices), you'll find that Koofr does literally all of that. It has a built-in Microsoft Office app in the browser if, God help you, you're into that sort of thing. It has file-versioning as well. There are some other perks I want to emphasize as well.
+
+1. It can connect to a host of external cloud services to facilitate the transfer of your files. I'll note you *could* do this and it would be the path of the absolute least resistance, but you would lose your timestamps as Koofr makes copies of the data. That would drive me up the wall, but perhaps a few of you may not mind it as much.
+2. Koofr boasts that the only tracking tool they employ is a simple cookie to keep you logged in. It doesn't advertise ["zero knowledge"](https://en.wikipedia.org/wiki/Zero-knowledge_service) or [end-to-end encryption](https://en.wikipedia.org/wiki/End-to-end_encryption) (E2EE) like some other alternatives, but [the respect for privacy](https://koofr.eu/privacy/) is discernible (beyond the obvious GPDR commitment).
+3. Koofr compensates for the lack of zero-knowledge/E2EE by giving you a few so-called "safe boxes" (i.e. [its "vault" feature](https://koofr.eu/help/koofr-vault/)). If you understand how it works, it's [helping you do something you could do yourself](https://koofr.eu/blog/posts/using-rclone-with-koofr-vault). It's actually quite refreshing for a company to be up front about that. It's offering a service while pleading with you to do it yourself, and showing you how to do it.
+4. [Koofr also has WebDAV capabilities](https://app.koofr.net/help/webdav). There is an incredibly narrow intersection of people I know that 1) use Linux and 2) still rely on mp3s to be the basis of their music collection. That intersection might just have me in it, but it does mean I'm precluded from using iTunes and the default music app on my iPhone. Any alternative music player will have this functionality if you are going to populate with mp3s from a cloud storage company, and I kind of need my cloud storage service to provide it.
+
+The biggest drawback for Koofr is that it is incidentally one of the more expensive options, if not arguably the most expensive option among the European alternatives. I don't think the price is so bad, or at least I have a price threshold for which that suffices (even if it's arguably not optimal). I can't speak for its business model and if the price is a creative way to acquiring capital to finance its development. It would be one thing if Koofr were as feature-poor as some alternatives, but it's quite feature-rich. Other options will definitely beat Koofr to the floor in terms of price, but Koofr offers more than those that are doing this. Perhaps Koofr is aware of this with [its loyalty discount](https://koofr.eu/loyalty-discount/), upwards of half the given rate in a given year. I can't speak to you all, but I *hate* moving literally anything. I can commit to this in the long run and in the long run it should be worth it.
+
+Koofr also doesn't have a family plan of which I'm aware and I'm unaware of any developments toward that end. I would love to keep my wife and I under one plan, but I have a backup plan for that.
+
+This might also be a "me" thing, but Koofr has some default behavior I find a tiny bit cumbersome. Dropbox takes a lot of the guesswork from you on how to manage your files. You eventually get used to what it does and appreciate some of its features. You have a basic directory (i.e. "home", if you're on the browser) where everything is. Once something is in the cloud, you can choose to keep it there and off your computer. Koofr doesn't quite work that way. On Linux, its default desktop sync will be at `/home/[insertusername]/Koofr` (which is good and fine), but appears as "My desktop sync" in the Koofr app and on the web (i.e. ewww).[^ewww] You can adjust this but it's palpable that Koofr doesn't want you to do it this way. I'm also [showing my age here](https://news.ycombinator.com/item?id=29186222), but spaces in file names/folders just irk me. As far as I understand it, Koofr also discourages you from thinking about doing a selective sync as Dropbox would do it. You would have to move files you want to archive outside of your desktop sync folder and to somewhere else on your account. It's not the worst thing in the world (far from it), but it does mean my process had to belabor a bit more what I wanted to archive from day-to-day use. Perhaps that's a good thing?
+
+You would be under *no* obligation to click this link, but this would be [a unique invite link to join Koofr and give it a shot](https://k00.fr/jy2zqc98).
+
+[^ewww]: Some other options will install a default folder to your home directory and sync from that. Ewwwww. At least Koofr doesn't do that.
+
+## Supplement Koofr with pCloud as the Backup's Backup
+
+One piece of advice I picked up scanning subreddits on cloud storage suggested you should have a backup to your backup, the extent to which a service like Dropbox was my backup. Perhaps that's an external hard drive. Perhaps that's some secure storage facility/service somewhere as another service. Perhaps it's another cloud storage company. No matter, back up your backup. 
+
+For me, that was jumping on [a "lifetime" family plan from pCloud for two terabytes](https://www.pcloud.com/family.html?period=lifetime). There was a particular fire sale happening on pCloud around Easter time where this 2 TB family plan was 400 Euros, and it's conceivable that another fire sale might be forthcoming again. I splurged on it because I could, and you may find that in your interest as well.
+
+To be up front, you should be skeptical of services that offer so-called "lifetime" plans as they are for the "lifetime" of the company. A start-up company has every incentive to sell these for a quick influx of capital. A start-up company that sells them then won't be around that long to honor it. Keep that in mind, and perhaps that will scare you off, But, pCloud is a Swiss company with the European part of its operations in Luxembourg and has also been around since 2013. Other companies that offer those "lifetime" deals (e.g. [Icedrive](https://icedrive.net/), [Internxt](https://internxt.com/)) have been around half that time.
+
+pCloud has a few superlatives for how I intend to use it. For one, its Linux app mounts as an external hard drive. That makes it less optimal for real-time collaboration/syncing and suitable for seeing what's in what is going to be my archive whenever I want to see it. The syncing itself is quite fast, at least for uploading things. I rather like it's functionality for playing music or sorting/displaying photos. For a one-off purchase, and the backup of a backup, I'm quite happy with it. If I were using it as my main cloud storage option, I would find some of its performance a bit questionable and would be left wanting about some of its functionality for collaboration. However, it's a good place to stick stuff.
+
+There are a few downsides worth calling out in particular. For one, pCloud's customer support isn't as responsive as Koofr or some of the other options. I didn't find that terribly off-putting, but it can't go unnoticed. The super privacy-focused user may find some of its privacy features only fine and express some reservation about the fact it has a data center in the United States. It vows it doesn't have copies of your data across both jurisdictions, and I'll trust that the case (given its incorporation in Switzerland).
+
+## Backup to the Backup with rclone
+
+Part of this transition has made me appreciate that I could be leaning a lot more on myself to do what I otherwise entrusted a Linux app to do for me. It meant learning more about [rclone](https://rclone.org/) and doing some of this myself.
+
+I entrust the Koofr app on my desktop (laptop) to sync files to Koofr's cloud, which then syncs with my laptop (desktop) when I'm working at home or in the office. On my desktop (my main computer), I setup rclone to interact with pCloud largely following [the instructions here](https://rclone.org/pcloud/). Then, I wrote a simple bash script to sync Koofr to pCloud, as follows.
+
+```bash
+#!/bin/bash
+LOGFILE="/home/steve/Koofr/logs/$(date +%Y-%m-%d).log"
+
+rclone sync /home/steve/Koofr/ pcloudconfig: \
+    --exclude '**archive*/**' \
+    --exclude '**[Tt]rash*/**' \
+    --exclude 'pcloud-materials/**' \
+    -v \
+#    --dry-run \
+    --log-file="$LOGFILE"
+```
+
+This process runs every day at 5 p.m, by way of [crontab](https://man7.org/linux/man-pages/man5/crontab.5.html),. syncing my pCloud account to square with the Koofr account. It excludes things that I've archived (`--exclude '**archive*/**'`), things that are detritus/"trash" files created by both services (`--exclude '**[Tt]rash*/**'`), and some startup documents that pCloud gives you when you create an account (`--exclude 'pcloud-materials/**'`). This script is verbose (`-v`) and creates a log file when it's done that tells me what synced. As I was experimenting with its behavior, I would do a dry run (`--dry-run`) that informs me what it would synced/deleted. You might find that useful as you're getting started.
+
+## Other Alternatives
+
+Feel free to poke around and explore your options, but here are the other ones I strongly considered before finding what works for me.
+
+**Filen**: [Filen](https://filen.io/) intrigues me. Its development team is lightning fast with support- or sales-related questions and seem genuinely very interested in expanding the scope and quality of what they offer. It already boasts zero-knowledge encryption. But, it has no family plan. Its apparently working on a family plan, but does not have one right now. It is also a bit unforgiving with syncing. Past versions of a file count and assorted detritus count as used space. Beyond that, there is so much to like about what it offers.
+
+**Proton**: Proton Duo would be a no-brainer for [what it includes](https://proton.me/drive/pricing), if it included a Linux client for its Drive service. However, reviews I've encountered of its service are more sanguine about its "storage" capabilities and less its syncing for day-to-day use. I can't speak for that, though.
+
+**Jottacloud**: Jottacloud is fascinating to me. [The price can't be beat](https://jottacloud.com/en/pricing?category=jottacloud-personal). It's super fast. It has a command-line tool for Linux (if not a Linux app). It's also Nordic. I think I wanted the WebDAV support, though. I might come back to this, though, especially if it offers a Linux app beyond showing me how to do things in the command line. Jottacloud does a lot of things underneath the hood that I rather like.
+
+
