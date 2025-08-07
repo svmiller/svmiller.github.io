@@ -69,6 +69,7 @@ knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
 library(tidyverse)
 library(peacesciencer)
 library(stevethemes)
+library(kableExtra)
 theme_set(theme_steve())
 
 # rawData <- readRDS("~/Dropbox/svmiller.github.io/extdata/world-bank-example-cs.rds")
@@ -82,12 +83,12 @@ options(knitr.kable.NA = '')
 
 # theme_set(theme_steve())
 
-# IGO <- haven::read_dta("~/Koofr/data/cow/igo/3/igo_year_format_3.dta")
-# IGO %>%
-#   mutate(lastyear = max(year), .by = ioname) %>%
-#   arrange(year) %>%
-#   slice(1, .by=ioname) %>%
-#   select(ioname:year, lastyear)
+cowIGO <- haven::read_dta("~/Koofr/data/cow/igo/3/igo_year_format_3.dta")
+cowIGO %>%
+  mutate(lastyear = max(year), .by = ioname) %>%
+  arrange(year) %>%
+  slice(1, .by=ioname) %>%
+  select(ioname:year, lastyear)
 ```
 
 
@@ -95,11 +96,11 @@ options(knitr.kable.NA = '')
 add_jekyll_image('/images/bipm.jpeg', "Think the meter is kind of boring? It was the subject of an interesting political fight in the early 1900s about *when* something is a meter.", "350", "right")
 ```
 
-I'm writing this because I have to get ready for the semester coming up. My department's second sequence in its first-semester track is a discussion of global governance. This is kind of a challenge for this particular international relations scholar, who is more interested in talking about international conflict. It's also very much rooted in the -isms. And, well...
+I'm writing this because I have to get ready for the semester coming up. My department's second sequence in its first-semester track is a discussion of global governance. This is kind of a challenge for this particular international relations scholar, who is more interested in talking about international conflict. It's also very much rooted in the -isms. Neither of those are my cup of tea.
 
 I found a way to make this somewhat interesting to me. Clearly, questions of human rights and the environment are more important in the study of international cooperation. However, "global governance" people caution that the governance of the world is more than just the really big stuff that appears before the United Nations. Indeed, global governance pervades our lives in some mundane ways we take for granted, like [the standardization of basketball](https://www.fiba.basketball/en), [signals of creditworthiness](https://www.moodys.com/), and even [our domain names](https://www.icann.org/). If you know where to look, you'll find global governance stories everywhere in ways that can be quite interesting. Even in the meter.
 
-Yes, the meter. Defining the meter was subject to an interesting political fight at the end of the 19th century and beginning of the 20th century. Yes, there are important technical and scientific questions here, but there's also a political story you could shoehorn into an international relations lecture as I do. What follows is a fleshed out version of the bit in lecture I give to students. I'm writing it here so I can point students here after lecture.
+Yes, the meter and, to be more specific, when something is a meter long. Defining the meter was subject to an interesting political fight at the end of the 19th century and beginning of the 20th century. There are important technical and scientific questions here, but there's also a political story you could shoehorn into an international relations lecture as I do. What follows is a fleshed out version of the bit in lecture I give to students. I'm writing it here so I can point students here after lecture.
 
 There will be some R code here, using these packages.
 
@@ -107,6 +108,7 @@ There will be some R code here, using these packages.
 library(tidyverse)     # for most things
 library(peacesciencer) # for using CoW's NMC data
 library(stevethemes)   # for my custom themes
+library(kableExtra)    # for a table
 
 theme_set(theme_steve())
 ```
@@ -118,11 +120,45 @@ Here's a table of contents.
 1. [Some Background on Measurements, the Meter, and Standard Reference Temperature](#background)
 2. [The Political Fight(s) over Standard Reference Temperature](#politics)
 3. [The So-Called "-isms" and the Global Governance of Standard Reference Temperature](#isms)
-
+    - ["Realism"](#realism)
+    - ["Liberalism"](#liberalism)
+    - ["Constructivism"](#constructivism)
+4. [Conclusion](#conclusion)
 
 ## Some Background on Measurements, the Meter, and Standard Reference Temperature {#background}
 
-The story here has to assume some background. By this point in a lecture, I will have introduced students to [the International Bureau of Weights and Measures](https://en.wikipedia.org/wiki/International_Bureau_of_Weights_and_Measures) (BIPM). This is one of the older inter-governmental organizations (IGOs) in [the Correlates of War data](https://correlatesofwar.org/data-sets/igos/). It is the seventh oldest by formation and fourth oldest among those still in existence (behind [the Central Commission for the Navigation of the Rhine](https://www.ccr-zkr.org/) [CCNR], [the International Telecommunications Union](https://www.itu.int/en/Pages/default.aspx) [ITU], and [the Universal Postal Union](https://www.upu.int/en/home) [UPU]). I hope it's not lost on the reader, or my students, that there is no telling a story about the rise of intergovernmental organizations without telling a story about the consequences of war (CCNR, and see also: [the European Commission for Control of the Danube](https://en.wikipedia.org/wiki/Commissions_of_the_Danube_River) [1856-1939]) or advances in technology that necessitate some kind of coordination about things that we might take for granted. Who among us sweats the details of telegraphic networks (ITU), international mail delivery (UPU), or, in this case, what exactly is a meter or gram (BIPM). However, these are important details to sweat as they emerge. In the context of meters and grams, they are critical details to sweat with the rise of global trade in the 19th century. If I'm paying to import something that has some specified length, we should all agree on what exactly the length is. That was the initial mission of BIPM, a France-hosted IGO for coordinating measurement standards of [the International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units).
+The story here has to assume some background. By this point in a lecture, I will have introduced students to [the International Bureau of Weights and Measures](https://en.wikipedia.org/wiki/International_Bureau_of_Weights_and_Measures) (BIPM). This is one of the older inter-governmental organizations (IGOs) in [the Correlates of War data](https://correlatesofwar.org/data-sets/igos/). It is the seventh oldest by formation and fourth oldest among those still in existence (behind [the Central Commission for the Navigation of the Rhine](https://www.ccr-zkr.org/) [CCNR], [the International Telecommunications Union](https://www.itu.int/en/Pages/default.aspx) [ITU], and [the Universal Postal Union](https://www.upu.int/en/home) [UPU]). 
+
+Here, for example, are the first ten IGOs in the CoW data.
+
+```{r, echo = T, eval = F}
+cowIGO <- haven::read_dta("~/Koofr/data/cow/igo/3/igo_year_format_3.dta") 
+# ^ data current as of 2014
+cowIGO %>%
+  mutate(lastyear = max(year), .by = ioname) %>%
+  arrange(year) %>%
+  slice(1, .by=ioname) %>%
+  select(ioname:year, lastyear)
+```
+
+```{r, echo = F, eval = T}
+cowIGO <- haven::read_dta("~/Koofr/data/cow/igo/3/igo_year_format_3.dta")
+cowIGO %>%
+  mutate(lastyear = max(year), .by = ioname) %>%
+  arrange(year) %>%
+  slice(1, .by=ioname) %>%
+  select(ioname:year, lastyear) %>%
+  head(10) %>%
+  kbl(., longtable = TRUE, booktabs = TRUE,
+      align = c("clcc"),
+       table.attr='id="stevetable"',
+      caption = "The First Ten IGOs in the Correlates of War IGO data (v. 3)",
+      col.names = c("IGO (Abbr.)", "IGO Name", "Year Formed", "Last Year (2014 = Ongoing)")) %>%
+  row_spec(0, bold = TRUE) 
+```
+
+
+I hope it's not lost on the reader, or my students, that there is no telling a story about the rise of intergovernmental organizations without telling a story about the consequences of war (CCNR, and see also: [the European Commission for Control of the Danube](https://en.wikipedia.org/wiki/Commissions_of_the_Danube_River) [1856-1939]) or advances in technology that necessitate some kind of coordination about things that we might take for granted. Who among us sweats the details of telegraphic networks (ITU), international mail delivery (UPU), or, in this case, what exactly is a meter or gram (BIPM). However, these are important details to sweat as they emerge. In the context of meters and grams, they are critical details to sweat with the rise of global trade in the 19th century. If I'm paying to import something that has some specified length, we should all agree on what exactly the length is. That was the initial mission of BIPM, a France-hosted IGO for coordinating measurement standards of [the International System of Units](https://en.wikipedia.org/wiki/International_System_of_Units).
 
 
 ```{r bar27, echo=F, eval=T, results="asis", cache=F}
@@ -196,7 +232,9 @@ standards from 0 °C to 16.67 °C (62 °F).
 
 By the 1910s, there really wasn't a standard reference temperature as much as there were standard reference *temperatures* for different industries and different countries. I'll admit the specifics for why this was the case are beyond me. Whatever reasons various industries had at the time for different standard reference temperatures assuredly has a logic that eludes this political scientist. However, the years the followed eventually saw a renewed interest (from the American perspective) in standardizing this measurement and new measurements given ongoing electrification. American industry experts, bureaucrats, and metrologists wanted to standardize more measurements and expand the scope of the BIPM beyond what it had been doing to this point (before 1913). Ideally, it would further standardize international standards to what the United States had been doing through its [Bureau of Standards](https://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology#Bureau_of_Standards_(1901%E2%80%931988)): measuring at 20 °C.
 
-The Bureau of Standards prepared for the upcoming 1927 general conference of the BIPM by shoring up a united message from various industries about the value of 20 °C for standard reference temperature. The French position at this time seemed to concede defeat on 0 °C but wanted a bit more of a convoluted approach to thermal correction than anyone else would accept. The American position (p. 10) was "absolutely not" and the German position was, paraphrased, "hell no." The British were still advocating for 62 °F, but found an appeal to Fahrenheit a tough sell. To insert a Swede into this conversation, [Carl Edvard Johansson](https://en.wikipedia.org/wiki/Carl_Edvard_Johansson) had commanded a lot of intellectual currency to this point---especially in the United States---with his gauge blocks. He argued that his increasingly popular gauge blocks were more durable at 20 °C than they were at 62 °F, at which point body heat exerts a stronger influence on the performance of the gauges. Further, standardizing between Celsius and Fahrenheit was easier at 20 °C than it was at 62 °F. 20 (Celsius) = 68 (Fahrenheit). 62 (Fahrenheit) = ~16.67 (Celsius). If you're going to standardize, just do what the Americans are doing.
+The Bureau of Standards prepared for the upcoming 1927 general conference of the BIPM by shoring up a united message from various industries about the value of 20 °C for standard reference temperature. The French position at this time seemed to concede defeat on 0 °C but wanted a bit more of a convoluted approach to thermal correction than anyone else would accept. The American position (p. 10) was "absolutely not" and the German position was, paraphrased, "hell no." Whether the latter's opposition was a function of the ridiculousness of the proposal or some animosity about the fallout of the first world war is not something I feel I can answer. 
+
+Meanwhile, the British were still advocating for 62 °F, but found an appeal to Fahrenheit a tough sell. To insert a Swede into this conversation, [Carl Edvard Johansson](https://en.wikipedia.org/wiki/Carl_Edvard_Johansson) had commanded a lot of intellectual currency to this point---especially in the United States---with his gauge blocks. He argued that his increasingly popular gauge blocks were more durable at 20 °C than they were at 62 °F, at which point body heat exerts a stronger influence on the performance of the gauges. Further, standardizing between Celsius and Fahrenheit was easier at 20 °C than it was at 62 °F. 20 (Celsius) = 68 (Fahrenheit). 62 (Fahrenheit) = ~16.67 (Celsius). If you're going to standardize, just do what the Americans are doing.
 
 Thus, what was a massive fight at earlier meetings of the BIPM and correspondence on this issue was settled with a voice vote in 1931. The standard reference temperature for industrial measurements became 20 °C. In what I think is the niftiest epilogue to this story, this 1931 voice vote on standard reference temperature has the distinction of being the very first international standard introduced by the [International Organization for Standardization](https://en.wikipedia.org/wiki/International_Organization_for_Standardization). That's right; [it's ISO 1](https://en.wikipedia.org/wiki/ISO_1). People in my field might recognize [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) for country codes. You might have seen various ISO standards, like [ISO 8859](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) for character encoding. [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) largely shapes how you see dates and time. None of those are the first post-war international standard. Instead standard reference temperature is ISO 1, an example of the kind of global governance of mundane things done through a *non*-governmental organization of domestic standards agencies.
 
@@ -204,7 +242,7 @@ Thus, what was a massive fight at earlier meetings of the BIPM and correspondenc
 
 Students in my field are induced to think of things through the so-called "-isms". I wish they wouldn't? No matter, it's how they're induced to think and it's how they're inclined to think. You can tell an international relations story about this through these various -isms. Not that you should, but you could.
 
-### "Realism"
+### "Realism" {#realism}
 
 You know how I think. [These people are clowns](https://svmiller.com/blog/2025/04/stephen-a-smith-ir-scholarship/) that [have nothing to tell you about a question you should care to ask](https://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#pickatheory). Carr, Mearsheimer, Morgenthau, Walt, and Waltz would have no real explanation for this story, nor any capacity to care. They're not particularly capable of explaining the things they like to talk about, let alone things that involve coefficients of thermal expansion, atmospheric pressure, and thermometry. No matter, here are the things they would assuredly like to talk about with respect to this.
 
@@ -212,7 +250,7 @@ Realists generally start from an orientation toward the world as one of conflict
 
 Unsurprisingly, war pervades why this dysfunction emerged and how it was ultimately resolved. Great power war put meetings of the BIPM on hiatus. Countries had their own national standards to which they needed to adhere for manufacturing and the war effort. Harmonizing or changing practices would have been an inefficient use of energy at this time, especially when national security is at stake. It's also not terribly surprising that the U.S. (from this perspective) threw enough weight around to resolve this issue. Take a look at these assorted measures of "power" from the Correlates of War project. I'm standardizing iron and steel production and primary energy consumption to be proportional to the system total in a given year.
 
-```{r, fig.width = 10}
+```{r power-fra-gmy-gbr-usa-1875-1935, fig.width = 10.5}
 cow_nmc %>%
   mutate(sumirst = sum(irst, na.rm=T),
          sumpec = sum(pec, na.rm=T),
@@ -243,9 +281,9 @@ cow_nmc %>%
 
 Perhaps realists don't care about standard reference temperature and what that means for the history of the meter, but they did co-opt [hegemonic stability theory](https://en.wikipedia.org/wiki/Hegemonic_stability_theory) to be one of their things. The U.S. had weight to throw around after the first world war, and used it accordingly.
 
-At least from this perspective, if you had to talk about it.
+At least from this perspective, if you had to talk about it. It's still asking a lot for "realism" to have anything to say here. It's primarily interested in great power war, not the bureaucratic minutiae of IGOs and fights over where the temperature dial should be to measure things.
 
-### "Liberalism"
+### "Liberalism" {#liberalism}
 
 It's tough to say what "liberalism" is in international relations. I know I have a PhD in this, but I'm often confused to what "liberalism" is. No matter, I think this is generally what students get on "liberalism", at least as I would encourage them to see it.
 
@@ -258,10 +296,20 @@ Instead, you're seeing a bunch of actors in a bunch of roles you don't know abou
 The familiar kind of actors permitted entry into a so-called "realist" story are nowhere to be seen here. There is no Woodrow Wilson or Robert Lansing. There is no Kaiser Wilhelm or Arthur Zimmermann. There is no David Lloyd George or Sir Edward Grey. There is no Raymond Poincaré or Théophile Delcassé. No one in that kind of position would have that kind of expertise. Thus, they outsource something important-but-obtuse like this to domestic non-state actors to figure it out. You wouldn't get that in "realism", but you're going to get a better picture of it in "liberalism". Indeed, I largely glossed over how much of this big ol' snafu is a function of American domestic politics. This started because American bureaucrats and metrologists needed to satisfy legal requirements imposed by Congress.
 
 
-### "Constructivism"
+### "Constructivism" {#constructivism}
 
 This is a challenge. Mr. Constructivism himself would say ["constructivism is not a theory of international politics."](https://www.google.se/books/edition/Social_Theory_of_International_Politics/ib8mAAAAQBAJ?hl=en&gbpv=0). That's good as contextualization for what it ultimately is. Constructivism is primarily rooted in the sociology of knowledge, and is foremost interested in the ideational forces that construct the world and give it its meaning.
 
 There are several things here that would work well with a constructivist approach to understanding international relations, broadly understood. Notice there is a great deal of "learning" here. Yes, there is actual technical learning as actors at this time better hone their measurements. However, there is also active learning and an appeal to "experts" to "teach" and "inform." Carl Edvard Johansson played an important role as a kind of educator informing stakeholders why 20 °C is a better reference temperature in relation to his gauge blocks. There is important teaching going on as the United States sent a battery of industry representatives to persuade other voting members of the BIPM of the "rightness" of its position. There needed to be active educating of the voting members of the BIPM why the French position at the 1931 general conference was a non-starter. Constructivism, as it's done in international relations, isn't too far afield from the academic study of education and learning. There is educating and there is persuasion happening in this story, often done by people with certain roles and identities.
 
-Admittedly, this kind of framework isn't my forté. But you can flesh this out more if you had the spoons for it.
+Admittedly, this kind of framework isn't my forté. But you can flesh this out more if you had the spoons for it. The meter is, after all, an interesting social construction of the fraction of a line passing through Paris. We definitely construct the world around us through various means, even if the original idea is that the meter is based on "natural phenomena."
+
+## Conclusion {#conclusion}
+
+I wrote this to flesh out something that is a part of a lecture I have to give every semester. The academic interest in global governance concerns some major questions about the movement of people, their basic human dignity, and the climate that they all share. However, this academic interest in some of our most salient and urgent questions comes with an appreciation of how this manifests in some mundane ways we all take for granted. None of us may care so much for the nitty gritty details of what a meter is, or the conditions for which (historically) something was a meter long. But that doesn't preclude the meter from a conversation of global governance. It most certainly is part of global governance---arguably one of the earliest avenues of global governance. It just means we're disinclined to think about it and miss some interesting international politics around the conditions for which something historically was a meter long.
+
+There is an important technical and scientific issue underpinning the fight about standard reference temperature, none of which are necessarily political. Thermal expansion is effectively a natural phenomena for which a "social construction" of it would be kind of silly. Further, measuring temperature was an uncertain enterprise around this time, beyond some temperatures that were known with relatively more precision. No matter, even this phenomena had an interesting political fight about what was an appropriate course of action. If you know where to look, or how to look, you'll find these interesting stories. 
+
+You could further contextualize these stories around the familiar "-isms" that have currency in an intro-level international relations track. Not that you *should*, but you *could*. I would ask for a bit more by way of explanation for how anarchy (a constant) can explain varying attitudes about standard reference temperature, even if great power war is a clear backdrop to this debate. I would ask for a bit more clarification about the underlying domestic politics motivating the U.S. position and French position, even if you could clearly see the kind of endowment advantage and authority that the BIPM had early into this debate. I would further ask why you're bringing so-called "constructivism" into this in the first place, even if that particular "-ism" has a unique position as being an offshoot of the sociology of knowledge relative to other paradigms in international relations. I might ask that you theorize the political more than any of these particular "-isms" are willing to do as basic orientations toward international relations.
+
+No matter, anything spanning borders is "international relations". Yes, even---and especially---standard reference temperature. It's a cool-as-hell epilogue that it's ISO 1 if you're interested in global governance.
