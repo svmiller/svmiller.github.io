@@ -48,7 +48,7 @@ Let's get started.
 
 ## The Debate: Para Bellum and the "Steps to War" {#parabellum}
 
-> Si vis pacem, para bellum (if you want peace, prepare war)
+> Si vis pacem, para bellum (if you want peace, prepare for war)
 
 [This aphorism](https://en.wikipedia.org/wiki/Si_vis_pacem,_para_bellum) sounds cool and, from a so-called realist worldview, it has a certain kind of logic by which it works. Intuitively, a true balance of power between two states in which neither side could comfortably defeat the other side makes war an unattractive option. It's the same kind of logic that underpins [mutual assured destruction](https://en.wikipedia.org/wiki/Mutual_assured_destruction). It may not sound pleasant to the pacifist, but ["peace through strength"](https://en.wikipedia.org/wiki/Peace_through_strength) is sound strategy if you were to think of it in this particular way. Mutual military build-ups may evoke certain tensions or anxiety in the general public about an impending war, but the behavior itself would be perfectly rational if the idea is to avoid war. A rational state substantially increases it might to prepare for war, wanting peace. A rival state requites that militarization/mobilization, preparing for war while wanting peace. Together, they achieve an equilibrium where an increased mobilization for war makes peace more attractive than it might have been in the absence of the mutual build-up. So that story goes.
 
