@@ -150,11 +150,11 @@ When I do get [the opportunity to teach about arms races](https://posc3610.svmil
 
 
 
-I've glossed over to this point the exact tests scholars were using in this debate over operationalization and sample selection. It's almost always a chi-square test of independence for observed and expected counts. You could actually do this yourself with no real effort at all to understand the inferential claims the various people in this debate are making.
+I've glossed over to this point the exact tests scholars were using in this debate over operationalization and sample selection. It's almost always a chi-squared test of independence for observed and expected counts. You could actually do this yourself with no real effort at all to understand the inferential claims the various people in this debate are making.
 
 ## The Chi-Squared Test {#chisquared}
 
-Chi-squared ($$\chi^2$$) tests are common tests to use in very basic applications to assess whether the observed counts in some kind of category for two (or more) groups are discernibly different than what would be expected if there was no difference between or among the groups. It's easier to introduce students to this in a simple 2x2 application like this and it will lean on the contingency tables you've seen everywhere to this point.
+Chi-squared ($$\chi^2$$) tests are common tests to use in very basic applications to assess whether the observed counts in some kind of category for two (or more) groups are discernibly different than what would be expected if there were no difference between or among the groups. It's easier to introduce students to this in a simple 2x2 application like this and it will lean on the contingency tables you've seen everywhere to this point.
 
 {% include image.html url="/images/sample1997-tableix.png" caption="Table IX (Sample, 1997)" width=345 align="right" %}
 
@@ -283,7 +283,7 @@ csctl; cscbl; csctr; cscbr
 
 chisq <- csctl + cscbl + csctr + cscbr
 
-chisq
+chisq # rounding above is off 2/1000ths or so, but that's no biggie.
 #> [1] 12.96733
 ```
 
@@ -291,6 +291,8 @@ We're not quite done yet because we need to relate this test statistic to what w
 
 
 ``` r
+set.seed(8675309) # Jenny, I got your number...
+
 nobs <- 10000
 tibble(`rchisq(df = 1)` = rchisq(nobs, df = 1),
        `rchisq(df = 2)` = rchisq(nobs, df = 2),
@@ -312,6 +314,8 @@ pchisq(chisq, df = 1, lower.tail = F)
 
 Or, better yet, just do all this in R with the `chisq.test()` function. The only real headache with this is you'll have to teach yourself how to deal with matrices in R since that's what the `chisq.test()` function generally wants. Here's how you do it without Yates' continuity correction (`correct = FALSE`), which is what these analyses were doing.[^yates]
 
+
+[^yates]: R's default behavior sets Yates' default continuity correction to TRUE. This is the more conservative approach to a chi-squared test statistic because it will generally push down the test statistic for smaller samples to avoid Type I errors.
 
 
 
@@ -362,6 +366,9 @@ Data
 
 I take inspiration from [Gibler et al.'s (2005) analysis](https://journals.sagepub.com/doi/abs/10.1177/0022343305050687) on arms races and war and follow their lead in recreating a data set on arms races that I merge into this data set on all dyadic confrontations among strategic rivals.[^mmb] Importantly, I'm looking for whether there was a mutual military build-up that started and was ongoing prior to the start of the confrontation, in addition to whether the confrontation in question escalated to the point of dyadic war (i.e. whether the minimum dyadic fatalities surpassed 1,000).
 
+
+[^mmb]: You can see the details section of the codebook for a conversation about some case exclusion rules I employed along the way. I'm still tinkering with this military build-up measure and do not offer it here to be used uncritically.
+
 First, let's create a war measure that equals 1 if the minimum dyadic fatalities surpassed 1,000.
 
 
@@ -400,12 +407,4 @@ If there were no association between the arms races and war, the divergence betw
 
 ## Conclusion {#conclusion}
 
-This is mostly for the kids to give them something to do in a lab session for quantitative methods. It'd be nice for students in my program to get more of the boilerplate quantitative peace science stuff that I got in grdauate school. It would be nice for them to further contextualize why a lot of so-called "realist" talking points are poorly stated. It'd be nice for them understand more of John Vasquez. It would further be great to get them to do stuff in the R programming language. This particular application offers all of that.
-
-
-
-[^mmb]: You can see the details section of the codebook for a conversation about some case exclusion rules I employed along the way. I'm still tinkering with this military build-up measure and do not offer it here to be used uncritically.
-
-
-
-[^yates]: R's default behavior sets Yates' default continuity correction to TRUE. This is the more conservative approach to a chi-squared test statistic because it will generally push down the test statistic for smaller samples to avoid Type I errors.
+This is mostly for the kids to give them something to do in a lab session for quantitative methods. It'd be nice for students in my program to get more of the boilerplate quantitative peace science stuff that I got in grdauate school. It would be nice for them to further contextualize why a lot of so-called "realist" talking points are poorly stated. It'd be nice for them understand more of John Vasquez. It would further be great to get them to do stuff in the R programming language. This particular application offers all of that. There are more advanced ways of doing this, and it asks a lot for logics derived from observations of boats (or even nuclear weapons) to map to the current system. Still, it's classic stuff with classic methods. Students should know this stuff anyway.
