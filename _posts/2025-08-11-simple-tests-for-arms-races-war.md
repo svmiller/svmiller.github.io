@@ -314,7 +314,9 @@ pchisq(chisq, df = 1, lower.tail = F)
 #> [1] 0.0003169742
 ```
 
-Or, better yet, just do all this in R with the `chisq.test()` function. The only real headache with this is you'll have to teach yourself how to deal with matrices in R since that's what the `chisq.test()` function generally wants. Here's how you do it without Yates' continuity correction (`correct = FALSE`), which is what these analyses were doing.[^yates]
+Or, better yet, just do all this in R with the `chisq.test()` function. The only real headache with this is you'll have to teach yourself how to deal with matrices in R since that's what the `chisq.test()` function generally wants.[^onmatrices] Here's how you do it without Yates' continuity correction (`correct = FALSE`), which is what these analyses were doing.[^yates]
+
+[^onmatrices]: The operative arguments you'll want to learn are `nrow`, `ncol`, and `byrow`. Observe, for example, the difference between `matrix(c(1:4), nrow = 2)` and `matrix(c(1:4), nrow = 2, byrow=TRUE)` for a simple 2x2 matrix. Be mindful that the chi-squared test is agnostic about what are rows and what are columns because it largely hinges on the multiplication of row totals and column totals. Transposing a matrix would result in equal chi-squared statistics (e.g. `chisq.test(t(matrix(c(1:6), ncol = 2)))` and `chisq.test(matrix(c(1:6), ncol = 2))`). I work on the convention from [Pollock III (2016)](https://edge.sagepub.com/pollock/student-resources/essentials) that things informally understood as "causes" should be columns and things informally understood as "outcomes" should be rows in creating a cross-tabulation like this. In our case, war is understood as an outcome of arms races. However, the particular method here has the same limitations as Pearson's *r*. Use it with that in mind.
 
 
 [^yates]: R's default behavior sets Yates' default continuity correction to TRUE. This is the more conservative approach to a chi-squared test statistic because it will generally push down the test statistic for smaller samples to avoid Type I errors.
@@ -325,9 +327,9 @@ Or, better yet, just do all this in R with the `chisq.test()` function. The only
 # The observed counts, as a single vector
 c(14, 39, 17, 187)
 #> [1]  14  39  17 187
-# In matrix form, using nrow = 2. When doing this, R files column by column, 
-# though. That means the first column gets the first two values, which is 
-# incidentally what we want.
+# In matrix form, using nrow = 2. When doing it this way, R files column by 
+# column. That means the first column gets the first two values, which is 
+# incidentally what we want. There are other ways of doing this, though.
 matrix(c(14, 39, 17, 187), nrow = 2)
 #>      [,1] [,2]
 #> [1,]   14   17
