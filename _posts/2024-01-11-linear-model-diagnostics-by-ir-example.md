@@ -28,7 +28,7 @@ There's a lot to like about the argument, and certainly the data for pedagogical
 Here are the R packages we'll be using for this post.
 
 
-```r
+``` r
 library(tidyverse)     # for most things
 library(stevemisc)     # for helper functions
 library(kableExtra)    # for tables
@@ -49,7 +49,7 @@ This simple exercise will just replicate Model 1 of what is their Table I. Here,
 Let's explore this with [the `EBJ` data in `{stevedata}`](http://svmiller.com/stevedata/reference/EBJ.html), which is just a reduced form of their replication data. Their Stata code makes clear this is just a simple linear model with no adjustments reported for heteroskedasticity or "robustness". The following code will perfectly reproduce their Model 1 in Table I. `{modelsummary}` will quietly format the results into a regression table. 
 
 
-```r
+``` r
 M1 <- lm(fdi ~ pcj + econ_devel + econ_size + econ_growth + kaopen + xr + lf + lifeexp, EBJ)
 ```
 
@@ -160,7 +160,7 @@ I will leave the reader to compare the results of Model 1 here to Model 1 of Tab
 We teach students that one major assumption about the linear model is that the model is both *linear* and *additive*. In other words, the estimate of *y* (here: net FDI inflows) is an additive combination of the regressors (and an error term). The regression lines are assumed to be straight. A first cut to see if this assumption is satisfied is the fitted-residual plot. Plot the model's fitted values on the the *x*-axis and the residuals on the *y*-axis as a scatterplot. By definition, the line of best fit through the data is flat at 0. Ideally, a LOESS smoother agrees with it.
 
 
-```r
+``` r
 broom::augment(M1) %>%
   ggplot(.,aes(.fitted, .resid)) +
   geom_point() +
@@ -177,7 +177,7 @@ I have a function in [`{stevemisc}`](http://svmiller.com/stevemisc/) that offers
 [^car]: I will concede that the `residualPlots()` function in [`{car}`](https://cran.r-project.org/web/packages/car/index.html) is far, far better for the task at hand. However, I want to avoid [function clashes](https://github.com/cran/car/blob/master/R/recode.R) with `{tidyverse}` as much as I can.
 
 
-```r
+``` r
 linloess_plot(M1, span=1, se=F)
 ```
 
@@ -188,7 +188,7 @@ There's a lot to unpack here (acknowledging that binary IVs will never be an iss
 Indeed, a lot of what is shown here could've been anticipated by looking at the data first.
 
 
-```r
+``` r
 EBJ %>%
   select(fdi:lifeexp, -pcj) %>%
   gather(var, val) %>%
@@ -203,7 +203,7 @@ There are some obvious design choices you could make from this. We should 100% l
 For now, let's do this. Let's log-transform the development and size variables, +1-and-log the exchange rate variable, and just wave our hands at the economic growth variable and dependent variable. If the lin-LOESS plot I introduced above is correct, it's suggesting a square term effect of economic size that we should also model.
 
 
-```r
+``` r
 EBJ %>%
   log_at(c("econ_devel", "econ_size")) %>%
   mutate(ln_xr = log(xr + 1)) -> EBJ
@@ -350,7 +350,7 @@ The results here suggest that there was non-linearity evident in the original da
 The fitted-residual plot will often give you a pretty good indication about non-constant error variance (heteroskedasticity) if you have enough observations. It's a little harder to parse with the number of observations we have. No matter, we have a formal test diagnostic---the Breusch-Pagan test---for heteroskedasticity in the regression model. The test itself analyzes patterns/associations in the residuals as a function of the regressors, returning a test statistic (with a *p*-value) based on the extent of associations it sees. High enough test statistic with some *p*-value low enough (for whatever evidentiary threshold floats your boat) suggests heteroskedastic errors. I'm fairly sure we're going to see that here in both our models.
 
 
-```r
+``` r
 bptest(M1)
 #> 
 #> 	studentized Breusch-Pagan test
@@ -371,14 +371,16 @@ You have options, and I'll level with you that I think the bulk of these reduce 
 
 But wait, there's more. If you were learning statistics by reference to an econometrics textbook, it might balk at the very notion of doing this. Their rationale might be one or both of two things. First, weighted least squares [makes an assumption about the true nature of the error variance](https://www.bloomsbury.com/us/econometrics-by-example-9781137375018/) that might otherwise be unknowable. Second, if the implication of heteroskedasticity is that the lines are fine and the errors are wrong, it's [a lament that the weighted least squares approach is almost guaranteed to re-draw lines](https://www.cengage.uk/c/introductory-econometrics-7e-wooldridge/9781337558860/) to equalize the variance in errors. If the lines are fine and the errors are wrong, the errors of the offending model can be recalibrated based on information from the variance-covariance matrix to adjust for this. This would make the standard errors "robust." 
 
-Here, you have several options for so-called "heteroskedasticity consistent (HC)" or "robust" standard errors. Sometimes, it seems like you have too many options. The "default" (if you will) was introduced by White (1980) as an extension of earlier work by Eicker (1963) and Huber (1967). Sometimes known as "Huber-White" standard errors, or `HC0` in formula syntax, this approach adjusts the model-based standard errors using the empirical variability of the model residuals. *But wait, there's even more*. There are three competing options for these heteroskedasticity-consistent standard errors: `HC1`, `HC2`, and `HC3`, [all introduced by MacKinnon and White (1985)](https://www.sciencedirect.com/science/article/abs/pii/0304407685901587). With a large enough sample, all three don't differ too much from each other (as far as I understand it). I'll focus on two of the three, though. The first is `HC1`, which is generally recommended for small samples and is incidentally what Stata would use for default if you were to ask for "robust" standard errors. The second is `HC3`, which is the suggested default in the `{sandwich}` package we'll be using to calculate these things. For fun, we can also provide so-called Bell-McCaffrey degrees-of-freedom adjusted (DF. Adj.) robust standard errors following the recommendations of [Imbens and Kolesár (2016)](https://direct.mit.edu/rest/article-abstract/98/4/701/58336/Robust-Standard-Errors-in-Small-Samples-Some?redirectedFrom=fulltext).
+Here, you have several options for so-called "heteroskedasticity consistent (HC)" or "robust" standard errors. Sometimes, it seems like you have too many options. The "default" (if you will) was introduced by White (1980) as an extension of earlier work by Eicker (1963) and Huber (1967). Sometimes known as "Huber-White" standard errors, or `HC0` in formula syntax, this approach adjusts the model-based standard errors using the empirical variability of the model residuals. *But wait, there's even more*. There are three competing options for these heteroskedasticity-consistent standard errors: `HC1`, `HC2`, and `HC3`, [all introduced by MacKinnon and White (1985)](https://www.sciencedirect.com/science/article/abs/pii/0304407685901587). With a large enough sample, all three don't differ too much from each other (as far as I understand it). I'll focus on two of the three, though. The first is `HC1`, which is what incidentally what Stata would use for default if you were to ask for "robust" standard errors.[^whyhc1] The second is `HC3`, which is the suggested default in the `{sandwich}` package we'll be using to calculate these things. For fun, we can also provide so-called Bell-McCaffrey degrees-of-freedom adjusted (DF. Adj.) robust standard errors following the recommendations of [Imbens and Kolesár (2016)](https://direct.mit.edu/rest/article-abstract/98/4/701/58336/Robust-Standard-Errors-in-Small-Samples-Some?redirectedFrom=fulltext).
+
+[^whyhc1]: I'll be honest that I have no idea how how this became the default standard error correction in Stata. I wish I did. I just know that it was when I was using Stata (and might still be, for all I know).
 
 And yes, there's even more than that. If I were presented this hypothetical situation with 95 observations and all the computing power I could ever want, [I would 100% bootstrap this](http://svmiller.com/blog/2020/03/bootstrap-standard-errors-in-r/). You have plenty of options here. The simple bootstrap resamples, with replacement, from the data to create some number of desired replicates against which the model is re-estimated. Given enough replicates, the mean of the coefficients converges on the original coefficient but the standard deviation of the coefficient from those replicates is the new standard error. You judge statistical significance from that. There are several other bootstrapping approaches, but here's just two more. The first is a bootstrapped model from the residuals. Sometimes called a "Bayesian" or "fractional" bootstrap, this approach had its [hot girl summer](https://www.vox.com/the-goods/2019/7/12/20690515/hot-girl-summer-meme-define-explained) [on](https://twitter.com/MatteoCourthoud/status/1557308520596471808) [Twitter](https://twitter.com/instrumenthull/status/1487469316010389516?lang=en) [two or three](https://gist.github.com/grantmcdermott/7d8f9ea20d2bbf54d3366f5a72482ad9) years ago and leaves the regressors at their fixed values and resamples the residuals and adds them to the response variable. A spiritually similar approach, the so-called "wild" bootstrap, multiplies the residuals by response variable once they have been multiplied by a random variable. By default, this is [a Rademacher distribution](https://en.wikipedia.org/wiki/Rademacher_distribution).
 
 You could do all this mostly from the `vcov*` family of functions in the `{sandwich}` package, combined with `coeftest()` from `{lmtest}`. The reproducible seed is for funsies since there's bootstrap resampling happening here as well. We'll go with 500 replicates (which is what the `R` argument is doing).
 
 
-```r
+``` r
 set.seed(8675309)
 summary(M1)
 wls(M1) # from {stevemisc}
@@ -404,7 +406,7 @@ A better approach is to have `{modelsummary}` do all this for you, which is happ
    <th style="text-align:center;"> WLS </th>
    <th style="text-align:center;"> HC0 </th>
    <th style="text-align:center;"> HC1 </th>
-   <th style="text-align:center;">  HC3 </th>
+   <th style="text-align:center;"> HC3 </th>
    <th style="text-align:center;"> DF. Adj. </th>
    <th style="text-align:center;"> Bootstrap </th>
    <th style="text-align:center;"> Resid. Boot. </th>
@@ -672,11 +674,11 @@ We can do the same thing to the second model, which offers logarithmic transform
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
-   <th style="text-align:center;">  M2 </th>
+   <th style="text-align:center;"> M2 </th>
    <th style="text-align:center;"> WLS </th>
    <th style="text-align:center;"> HC0 </th>
    <th style="text-align:center;"> HC1 </th>
-   <th style="text-align:center;">  HC3 </th>
+   <th style="text-align:center;"> HC3 </th>
    <th style="text-align:center;"> DF. Adj. </th>
    <th style="text-align:center;"> Bootstrap </th>
    <th style="text-align:center;"> Resid. Boot. </th>
