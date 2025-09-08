@@ -1,0 +1,154 @@
+---
+title: "Assorted Opinionated Takes on Chatbot Use by Students"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2025-09-08'
+excerpt: "I admit I get prickly when it comes to students using chatbot, and I've always struggled to communicate myself clearly. Just hear me out a bit."
+layout: post
+categories:
+  - Teaching
+image: "godfellas.jpg"
+active: blog
+---
+
+```{r setup, include=FALSE, cache=F}
+
+rmd_name <- knitr::current_input()
+rmd_name <- stringr::str_sub(rmd_name, 12, -1)
+rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
+
+
+base_dir <- "~/Koofr/svmiller.github.io/"
+base_url <- "/"
+fig_path <- paste0("images/", rmd_name, "/")
+
+cache_path <- paste0("~/Koofr/svmiller.github.io/cache/", rmd_name, "/")
+
+add_jekyll_image <- function(url, caption, width, align) {
+ img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
+ cat(img)
+}
+
+add_update <- function(announce, text) {
+  
+  update <- paste0('{% include updatebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+add_announce <- function(announce, text) {
+  
+  update <- paste0('{% include announcebox.html announce="',announce,'" text="',text,'" %}')
+ cat(update)
+  
+}
+
+knitr::opts_knit$set(base.dir = base_dir, base.url = base_url)
+knitr::opts_chunk$set(fig.path = fig_path, dpi= 300,
+                      cache.path = cache_path,
+                      fig.width = 11,
+                      message=FALSE, warning=FALSE,
+                      cache = FALSE,
+                      collapse = TRUE, comment = "#>") 
+
+# library(tidyverse)     # for most things
+# library(stevemisc)     # for graph formatting
+# library(kableExtra)    # for tables
+# library(stevedata)
+# library(modelsummary)
+# library(stevethemes)
+# library(modelr)
+# library(lmtest)
+# library(sandwich)
+# library(ggdist)
+# library(ggrepel)
+library(tidyverse)
+library(stevedata)
+library(stevethemes)
+library(kableExtra)
+theme_set(theme_steve())
+
+# rawData <- readRDS("~/Dropbox/svmiller.github.io/extdata/world-bank-example-cs.rds")
+
+#library(kableExtra)
+# library(modelsummary)
+# library(stevethemes)
+# library(ggrepel)
+# library(modelr)
+options(knitr.kable.NA = '')
+
+# theme_set(theme_steve())
+```
+
+
+```{r leadimage, echo=F, eval=T, results="asis", cache=F}
+add_jekyll_image('/images/godfellas.jpg', "When you do things right, people shouldn't be sure you've done anything at all.", "400", "right")
+```
+
+What follows is a slightly more opinionated add-on to the required language on academic misconduct that goes into my course descriptions. To be clear, the "required language" I introduce in course descriptions is stuff we're told to inclue and will govern the course. These passages may provide additional clarification to the student in light of potentially negative, harsh, or critical feedback I provide. I'm sure it will be periodically updated. I just need students to know why I feel the way I do about what I see students doing.
+
+The most apt metaphor I've seen regarding the release of ChatGPT on 30 Nov. 2022 [likened it to the Trinity test](https://www.theregister.com/2025/06/15/ai_model_collapse_pollution/) in New Mexico on 16 July 1945. The Trinity test constituted the beginning of what we retroactively call "the atomic age", but it had one major implication for the world. It so contaminated *all* metals manufactured after that date that the onset of this "age" significantly jeopardized all important medical and technical equipment. To compensate, scientists working in technology and medicine needed important materials (so-called "low-background" steel/lead) that were manufactured before this date. [Supposedly our steel is no longer radioactive](https://medium.com/a-microbiome-scientist-at-large/good-news-our-steel-is-no-longer-radioactive-47d70124c531), in the same way or to the same degree, but that is still a major implication of just one event and one particular moment in time.
+
+The article I read invoking that metaphor is more concerned for new knowledge generation and what potentially happens when synthetic observations produced by AI models become part of future training sets. Those of us that [know about the Habsburgs](https://www.tandfonline.com/doi/full/10.1080/03014460.2019.1687752?scroll=top&needAccess=true&) or remember [what happens when you make copies of copies of VHS cassettes](https://www.youtube.com/watch?v=nqy_hYDI0As) will know what the implication is for the future of innovation and research. My concern is mostly for university education, however. Everything (where I work) is open-book and open-notes. Everything (where I work) is take-home with a deadline of seven days or so. I'm teaching students now who have only known ChatGPT (and related services) through the entirety of their university education. I will soon start teaching students who have had it through the entirety of their secondary education. Like the scientists frantically searching for scuttled ships for pre-war steel, I can no longer trust the quality of what I see. I know you're using it, and often uncritically. I cannot trust that you are actually doing what you say you are doing. That's true even if you are legitimately and earnestly doing the work, with or without assistance from a particular chatbot. I just can't trust you the same way I could before Nov. 2022. Whether it's topical courses in the intro-level, theses at the BA-level, or *definitely* quantitative methods instruction at any level, I'm confident that chatbots have so greatly contaminated what I'm asked to evaluate that I'm almost doing gratis product testing for one of these services.
+
+This manifests in several ways, and will likely coincide with me making harsh remarks in student output. These remarks will read like accusations, though our guidelines do not put us in great positions to actually prosecute these as misconduct, proper.[^dd] They aren't accusations as much as they are frustrations with what students do, or are asking me to do with a straight face. I cannot help if or how students use one of these particular services to guide yourself through university education, but I can offer these assorted comments to contextualize how I feel and why I might be frustrated with what a student is asking me to read.
+
+Here's a table of contents.
+
+1. ["Godfellas" (i.e. Please Make it Less Obvious)](#godfellas)
+2. [Your Chatbot Isn't Answering the Question I Asked](#answerthequestion)
+3. [You're Not the Only One](#nottheonlyone)
+4. [You Should Not Aspire to Sound Like a Chatbot](#linkedinglish)
+5. [False Positives and Actual Innocence](#innocent)
+
+## "Godfellas" (i.e. Please Make it Less Obvious)
+
+This has happened twice, as of writing, for assignments in which we as faculty often work closely with students through iterations of a particular assignment. In these two instances, students were basically submitting ChatGPT generated output for me to evaluate prior to the submission of a final assignment. It was obvious, especially when they couldn't explain what they were doing in their own words. They were at least honest about it. I don't feel evaluating ChatGPT output is a productive use of my time, but it turns out it was a required use of my time. The bulk of my interaction with them reduced to, in as many words, optimizing their use of ChatGPT to get what they wanted and pleading with them to make it less obvious (to me, at least) that this is what they were doing.
+
+What's frustrating in these instances is that I can't tell them "stop."  I couldn't enforce "don't." I tried it once but wasn't getting anywhere with no real recourse. Instead, I had to advise them to please make it less obvious that ChatGPT did this and you (i.e. those two students) didn't. I'm an American and reference American TV shows all the time. Thus, I had to harken a line from Futurama and one particular episode: "Godfellas." In this episode, Bender is flung to space and happens to meet "God." The conversation God and Bender have focus on the appropriateness of divine intervention, especially when divine intervention could be the difference between faith and reality. God's hedge in this conversation is that doing too little leads believers to lose faith, and doing too much induces unwanted dependence. Speaking Bender's particular language, you need a light touch to avoid detection if you want to be a successful pickpocket. If you're going to burn down a business for insurance money, you need to make it look like an electrical mishap. [When you do things right, I shouldn't be sure you've done anything at all](https://www.youtube.com/watch?v=QIBMMVJFM4M).
+
+I can't make dishonest students be honest, but try to make your arson look like a little more accidental if this is the route you choose.
+
+## Your Chatbot Isn't Answering the Question I Asked {#answerthequestion}
+
+I've harped on this before, but this is one of my biggest educational mantras. "Answer the question I asked." Too often, students (even before the new atomic age) would answer questions potentially (un)related to the question I would ask. I would reply that I need the student to be more focused on the question I'm actually asking. I find myself repeating that more since I moved here (incidentally just before Nov. 2022). I'm not sure students fully appreciate that the chatbot often goes into la-la land for a particular prompt, which often coincide with non-answers to *specific* questions that I'm asking. I structure my questions in a particular way because I want you to know a detail well. The chatbot will often miss that as much as the pre-atomic age student trying to know enough things, generally, to get by in the course.
+
+Related to this, students I think assume that I haven't fed my prompts through a chatbot to understand how they respond to my exam questions. I know how it behaves. I have a good idea of its tells with respect to what I'm asking the student (or the chatbot) to do.
+
+## You're Not the Only One {#nottheonlyone}
+
+Some classes I teach are entirely online and involve students from across Europe. Most are in-person, but where students are often tight-knit and work on stuff together. It's actually a welcome culture shock here relative to the United States, where students in a class often don't know other students exist and couldn't pick them out of a lineup. For the in-person classes, I can readily discern "networks" and friend groups in the class. In a class of 35-50 students, there might be two or three such networks consisting of maybe 10-15 students.
+
+If, however, I'm getting more than half the class all repeating particular statements and particular expressions, I'm left believing that it's coming from a common pool that's beyond the friend group. Again, you're not the only one, and try to make it less obvious. Students often see just the one thing they think they can slide underneath the radar. I see the several dozen things that students try to slide underneath my radar.
+
+## You Should Not Aspire to Sound Like a Chatbot {#linkedinglish}
+
+This is a particularly spicy take and it's aimed largely at students where English is not the first language. I understand students can use these services to catch typos and potentially tighten up a few passages in their written material. I respect that, but hear me out.
+
+I think most chatbots read in the most grating way possible. ChatGPT, in particular, is just an obnoxious messenger. I don't know this for a fact, but I'm inclined to believe its English training set is stuff on Medium or, in particular, LinkedIn. Its dialect is a very heavy ["Linkedinglish"](https://medium.com/@pierre.hagelberg/understanding-linkedinglish-the-unofficial-language-of-linkedin-44168123a23).[^irony] I despise reading that particular dialect because I don't think it's professional in the slightest. If I'm asking academic questions pleading for some type of professional response, what I get back reads like a clumsy sales pitch about what, say, central limit theorem can teach us about B2B sales. Just, gross.
+
+This will manifest in two particular ways, the latter of which might seem particularly harsh (even if I don't mean any ill will). First, I think the chatbot is getting worse in this way. ChatGPT, in particular, seems to have degenerated over time to an increasingly base-level Linkedinglish that's almost at the level of a university intern taking the reins of a company's social media platforms. I won't know this for a fact, but it's likely because it's learned that its users like this particular form of English. ChatGPT, if nothing else, is a people-pleaser. 
+
+From my vantage point, it's embarrassing to read its output sometimes because it's clear the product is entering an ["enshittification"](https://en.wikipedia.org/wiki/Enshittification) arc. It's what happens when a product expands so much it not longer is incentivized to sell you a product that works. It's more inclined just to keep you hooked on a product that won't get better the same way it did. Like a generic company's social media platform, the chatbot is more interested in selling you itself (and not necessarily solutions). 
+
+Be mindful of the distinction here. Whether it's working well for you is just incidental to whether you're using it. That's what matters to the tech company and its chatbot, first and foremost. The chatbot is kind of like a drug dealer. You come to it with problems, but it doesn't quite have the solutions you need. It gives you assurances that it does, though, in hopes that you'll get hooked to it. You come to it with questions and, above, it gives you answers to questions you did not ask. You come to it wanting to know how you should write, and you end up sounding like a post on how the 95% confidence interval helped you generate $25M in sales across your business journey. You should not aspire to sound like that.
+
+The second will seem harsh, but I only offer this because I'm on a similar journey learning Swedish (and Korean). The chatbot speaks better English than university students, whether English is the student's native language or not.[^formig] English is the lingua franca of the world, so of course its English capabilities are really good. It's going to sound better, without context, than students in that 19-23 age range. If you're using it to generate prompts, try to rewrite what you see in your own words and in a style that's more appropriate for the academic venue. You'll learn more that way. Also, *definitely* do that where output has emojis or unnecessarily terms in **bold face**. I would need two hands to tell you how many times I've seen that leak into student submissions.
+
+## False Positives and Actual Innocence {#innocent}
+
+Periodically, I'll write "this sounds like a chatbot" on a student's submission and the student will respond quite vigoriously that they did not do what I'm accusing of them. When this happens, I have a few initial reactions. Sometimes I'm convinced (or know outright) that they're not being truthful. Second, if it were an accusation, I would not have said it in this particular format because I only do that when I'm giving a grade. If it were an accusation, I'd have to charge the student and, for the meantime, could not give them a grade. Third, I might genuinely be wrong. It happens. I think I have a good idea for how chatbots approach my material, and I know for a fact they've seen my material a lot. However, I'm not foolproof. I could genuinely be mistaken. It's why I try my best not to couch it as an accusation, though I'm not the best at withholding my frustration.
+
+Still, if I may, for the potential student of mine reading this: imagine what it's like from my perspective seeing a student independently reproduce something a chatbot would do if and when that genuinely happens. I know chatbots routinely go into la-la land answering questions I did not ask. I know chatbots have a particular lingo and a particular set of tells with respect to my material, some of which are quite clumsy. I also know chatbots are something that a potential employer could use at a considerable saving to themselves in order to bullshit their way through the next quarterly report. If I'm an employer spending money on a chatbot and evaluating it and the job-candidate student that produces identical outputs, I will go with the chatbot every time. The chatbot is always cheaper. 
+
+Even when I was young, I was aware that deeper learning is only incidental to what the university offers. It offers a necessary credential to gain a foothold in a competitive job market and a changing economy. I can see why cynical students are tempted to chatbot their way through a university education in order to get that piece of paper, but I don't think they appreciate that doesn't necessarily put them in a great position in a job market ever interested in automation and making a labor force disappear from the budget. Even the most honest students should wrestle with this. If you sound like a free service to me, you'll sound like a free service to an employer. My heart sincerely aches for a younger generation that has to deal with that now. It makes me happy I'm as old as I and my friends did not have potential employers doubting my ability or utility the same way I'm sure a younger generation is being doubted and dismissed right now.
+
+In this day and age, especially with the bigger political problems we all face, it's why I get supremely frustrated with what I see students doing or failing to do. Slop is everywhere around us and I'm pleading with you, the student, to distinguish youself from the AI slop that's all around us. I want to see your humanity, warts and all, to help you get better. Again, I can't trust students are 100% honest in this atomic age. For the dishonest students, I don't want to see you atrophy your mind because the chatbot makes it conveniently easy for you to do that. For the honest students, I don't want to see you sound like the machine that's siphoning energy away from the human labor force. Be better than the machine. Try to rise above the machine. [Rage against it, even](https://www.youtube.com/watch?v=JukTvlrh-Wk).
+
+
+[^dd]: The burden to prosecute academic misconduct is particularly high where I work. One of my little American quirks here is thinking through what could be litigated and what I could "prove" as if it were a court of law. I cannot obviously summon the coercive arm of the state to seize a student's computer to prove impropriety, and the punishment mechanisms are often lacking relative to what I remember at American universities. There's not much more I can say than that. This wouldn't be the venue.
+[^irony]: I'm aware of the irony of that article being on Medium.
+[^formig]:  Likewise, it writes better Swedish than I do. I haven't tested it with Korean yet, but I'm just starting that journey.
