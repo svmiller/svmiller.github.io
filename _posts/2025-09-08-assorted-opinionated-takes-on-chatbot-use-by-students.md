@@ -41,7 +41,7 @@ This has happened twice, as of writing, for assignments in which we as faculty o
 
 Notice that I can't tell them "stop."  I couldn't enforce "don't." I tried it once but wasn't getting anywhere and I had no real recourse. Instead, I had to advise them to please make it less obvious that ChatGPT did this and you (i.e. those two students) didn't. I'm an American and reference American TV shows all the time. Thus, I had to harken a line from Futurama and one particular episode: "Godfellas." In this episode, Bender is flung to space and happens to meet "God." The conversation God and Bender have focus on the appropriateness of divine intervention, especially when divine intervention could be the difference between faith and reality. God's hedge in this conversation is that doing too little leads believers to lose faith, and doing too much induces unwanted dependence. Speaking Bender's particular language, you need a light touch to avoid detection if you want to be a successful pickpocket. If you're going to burn down a business for insurance money, you need to make it look like an electrical mishap. [When you do things right, I shouldn't be sure you've done anything at all](https://www.youtube.com/watch?v=QIBMMVJFM4M).
 
-I can't make dishonest students be honest, but try to make your arson look like a little more accidental if this is the route you choose. You're doing this because you want that insurance payout, right? Cover your tracks better.
+I can't make dishonest students be honest, but try to make your arson look a little more accidental if this is the route you choose. You're doing this because you want that insurance payout, right? Cover your tracks better.
 
 ## Your Chatbot Isn't Answering the Question I Asked {#answerthequestion}
 
