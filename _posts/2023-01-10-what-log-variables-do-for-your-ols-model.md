@@ -1,12 +1,12 @@
 ---
-title: "Log, Log, Log (i.e. What Logarithmic Transformations Do to Your OLS Model Summary)"
+title: "Log, Log, Log (i.e. What Logarithmic Transformations Do to Your Linear Model Summary)"
 output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
 author: "steve"
 date: '2023-01-10'
-excerpt: "This is a somewhat convoluted (and hopefully not too sloppily done) way of thinking about what logarithmic transformations mean for how you should summarize your OLS model."
+excerpt: "This is a somewhat convoluted (and hopefully not too sloppily done) way of thinking about what logarithmic transformations mean for how you should summarize your linear model."
 layout: post
 categories:
   - R
@@ -18,7 +18,7 @@ active: blog
 
 {% include image.html url="/images/ren-stimpy-log.png" caption="It's better than bad; it's good." width=400 align="right" %}
 
-I'm writing this out of necessity so that it may go into a future grad-level course about what logarithmic transformations do to your OLS model. When we are first introduced to logarithmic transformations, we learn they have a nice effect of coercing normality into positive real variables that have some kind of unwelcome skew. They become a quick fix for cases where the OLS model is sensitive to skew on either the left- or right-hand side of the equation. However, we often lose sight of the fact that the introduction of logarithmic transformations on one or both sides of the regression equation result in a different interpretation of what the OLS model is telling you for the stuff you want to know. So, I'm writing this as a simple primer for future students so that we can avoid some uncomfortable interpretations of OLS model parameters in the presence of logarithmic transformations. The goal of this post isn't to litigate whether logarithmic transformations make sense as a matter of principle. [Sometimes they do](https://statmodeling.stat.columbia.edu/2019/08/21/you-should-usually-log-transform-your-positive-data/); [sometimes they don't](https://www.jonathandroth.com/assets/files/LogUniqueHOD0_Draft.pdf). The goal here is just to make sure my students understand how interpretation of the model output changes in the presence of logarithmic transformations of the underlying phenomenon being estimated.
+When we are first introduced to logarithmic transformations, we learn they have a nice effect of coercing normality into positive real variables that have some kind of unwelcome skew. They become a quick fix for cases where the linear model summary is sensitive to skew on either the left- or right-hand side of the equation. However, we often lose sight of the fact that the introduction of logarithmic transformations on one or both sides of the regression equation result in a different interpretation of what the model is telling you for the stuff you want to know. So, I'm writing this as a simple primer for future students so that we can avoid some uncomfortable interpretations of model parameters in the presence of logarithmic transformations. The goal of this post isn't to litigate whether logarithmic transformations make sense as a matter of principle. [Sometimes they do](https://statmodeling.stat.columbia.edu/2019/08/21/you-should-usually-log-transform-your-positive-data/); [sometimes they don't](https://www.jonathandroth.com/assets/files/LogUniqueHOD0_Draft.pdf). The goal here is just to make sure my students understand how interpretation of the model output changes in the presence of logarithmic transformations of the underlying phenomenon being estimated.
 
 First, here are the R packages I'll be using in this post.
 
@@ -65,7 +65,7 @@ $$
 Here's a basic proof of concept in R for some of these important identities. Let [$$a$$ be 45](https://en.wikipedia.org/wiki/Archie_Griffin) and let [$$b$$ be 48](https://eu.buckeyextra.com/story/football/2020/11/26/ohio-state-football-great-brian-baschnagel-positive-amid-mystery-illness/6383487002/). Pay careful attention to the quotient and product identities.
 
 
-```r
+``` r
 log(45^48); 48*(log(45))
 #> [1] 182.7198
 #> [1] 182.7198
@@ -470,12 +470,14 @@ The data look like this.
 </tbody>
 </table>
 
+
+
 We are going to run four different regressions on these data, with an eye toward understanding forecasts of educated expenditure per capita as a function of all three of these other variables. In the first case, we're going to use the raw, untransformed scale of all the variables (i.e. nothing is log-transformed). In the second model, we're going to log-transform just the dependent variable. In the third model, we're going to pick one of the independent variables to transform (the under-18 population variable) and we're going to leave the dependent variable on its original scale. In the fourth model and final model, we're going to log-transform the dependent variable in addition to this under-18 population variable.
 
 Let's perform the analyses with the code below. [Vincent Arel-Bundock's `{modelsummary}`](https://vincentarelbundock.github.io/modelsummary/articles/modelsummary.html) magic is happening underneath the hood to format the regression table.
 
 
-```r
+``` r
 CP77 %>% mutate(ln_edexppc = log(edexppc),
                 ln_pop = log(pop)) -> CP77
 
@@ -493,25 +495,25 @@ M4 <- lm(ln_edexppc ~ urbanpop + incpc + ln_pop, CP77)
   <tr>
    <th style="text-align:left;">   </th>
    <th style="text-align:center;"> No Transformations </th>
-   <th style="text-align:center;">  DV is Log-Transformed </th>
-   <th style="text-align:center;">  Under-18 Population is Log-Transformed </th>
-   <th style="text-align:center;">  DV and Under-18 Population are Both Log-Transformed </th>
+   <th style="text-align:center;"> DV is Log-Transformed </th>
+   <th style="text-align:center;"> Under-18 Population is Log-Transformed </th>
+   <th style="text-align:center;"> DV and Under-18 Population are Both Log-Transformed </th>
   </tr>
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:left;font-weight: bold;background-color: #e3f4f7 !important;"> Under-18 Population </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> 1.552*** </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> 0.005*** </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> 503.206*** </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> 1.495*** </td>
+   <td style="text-align:left;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> Under-18 Population </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> 1.552*** </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> 0.005*** </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> 503.206*** </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> 1.495*** </td>
   </tr>
   <tr>
-   <td style="text-align:left;font-weight: bold;background-color: #e3f4f7 !important;">  </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> (0.315) </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> (0.001) </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> (106.804) </td>
-   <td style="text-align:center;font-weight: bold;background-color: #e3f4f7 !important;"> (0.341) </td>
+   <td style="text-align:left;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;">  </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> (0.315) </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> (0.001) </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> (106.804) </td>
+   <td style="text-align:center;font-weight: bold;background-color: rgba(227, 244, 247, 255) !important;"> (0.341) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Urban Population </td>
@@ -549,11 +551,11 @@ M4 <- lm(ln_edexppc ~ urbanpop + incpc + ln_pop, CP77)
    <td style="text-align:center;"> −4.128* </td>
   </tr>
   <tr>
-   <td style="text-align:left;box-shadow: 0px 1px">  </td>
-   <td style="text-align:center;box-shadow: 0px 1px"> (123.195) </td>
-   <td style="text-align:center;box-shadow: 0px 1px"> (0.395) </td>
-   <td style="text-align:center;box-shadow: 0px 1px"> (632.959) </td>
-   <td style="text-align:center;box-shadow: 0px 1px"> (2.019) </td>
+   <td style="text-align:left;box-shadow: 0px 1.5px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> (123.195) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> (0.395) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> (632.959) </td>
+   <td style="text-align:center;box-shadow: 0px 1.5px"> (2.019) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
@@ -574,6 +576,8 @@ M4 <- lm(ln_edexppc ~ urbanpop + incpc + ln_pop, CP77)
 <sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
 </table>
 
+
+
 </div>
 
 
@@ -581,10 +585,10 @@ Normally, this type of regression strategy would just minimally note that both s
 
 ### Neither the IV or DV is Log-Transformed {#linlin}
 
-This is the simplest case and I don't want to belabor it too much because I'm assuming a rudimentary understanding of OLS regression. In this instance, the regression coefficient is communicating a basic takeaway: **a one-unit change in the number of residents (per thousand) under 18 years of age coincides with an estimated change of about 1.552 in the projected per capita public school expenditures for 1975.** This isn't too difficult to understand; it's the most ideal case. We can use basic model predictions to show just that.
+This is the simplest case and I don't want to belabor it too much because I'm assuming a rudimentary understanding of OLS. In this instance, the regression coefficient is communicating a basic takeaway: **a one-unit change in the number of residents (per thousand) under 18 years of age coincides with an estimated change of about 1.552 in the projected per capita public school expenditures for 1975.** This isn't too difficult to understand; it's the most ideal case. We can use basic model predictions to show just that.
 
 
-```r
+``` r
 CP77 %>%
   data_grid(.model = M1,
             pop = seq(min(pop), max(pop), by=1)) %>%
@@ -605,13 +609,13 @@ predM1
 #>  8   294      661  4697  237.  1.55
 #>  9   295      661  4697  238.  1.55
 #> 10   296      661  4697  240.  1.55
-#> # … with 90 more rows
+#> # ℹ 90 more rows
 ```
 
 We can summarize those model predictions we just gathered as well and compare them to the regression coefficient.
 
 
-```r
+``` r
 predM1 %>% 
   # this is basically a mean in name only, given R distinct-value weirdness
   summarize(mean = mean(diff, na.rm=T)) %>% pull()
@@ -622,16 +626,16 @@ coef(M1)[4]
 #> 1.552054
 ```
 
-So yeah, this wasn't too hard. When nothing in the OLS model is log-transformed, a one-unit change in the value of the independent variable coincides with an estimated change of the regression coefficient in the value of the dependent variable. That's easy, but it's also worth repeating.
+So yeah, this wasn't too hard. When nothing in the model is log-transformed, a one-unit change in the value of the independent variable coincides with an estimated change of the regression coefficient in the value of the dependent variable. That's easy, but it's also worth repeating.
 
 ### The DV is Log-Transformed, but the IV Isn't {#loglin}
 
-This changes a little bit when the dependent variable is log-transformed as practitioners sometimes like to do to impose normality on positive, (typically?) right-skewed variables. After all, skewed dependent variables are typically the culprit of some OLS model diagnostic problems (e.g. heteroskedasticity, non-normal residuals). It's tempting---and I suppose, not completely dishonest---to say that a one-unit change in the under-18 population variable coincides with an estimated change of about .005 in the log-transformed value of the dependent variable. After all, R may or may not know that this dependent variable is a logarithmic transformation of something else. At least, if it knows, it doesn't care. The practitioner has to know something else is happening in this so-called "log-lin" model.
+This changes a little bit when the dependent variable is log-transformed as practitioners sometimes like to do to impose normality on positive, (typically?) right-skewed variables. After all, skewed dependent variables are typically the culprit of some OLS diagnostic problems (e.g. heteroskedasticity, non-normal residuals). It's tempting---and I suppose, not completely dishonest---to say that a one-unit change in the under-18 population variable coincides with an estimated change of about .005 in the log-transformed value of the dependent variable. After all, R may or may not know that this dependent variable is a logarithmic transformation of something else. At least, if it knows, it doesn't care. The practitioner has to know something else is happening in this so-called "log-lin" model.
 
 Let's illustrate what's happening here in a stylized form. First, let's create a simple prediction grid from this model where the income per capita and urban population variables are both fixed at their central tendency. I think `data_grid()` does the median by default. We're going to set the under-18 population variable to be two values. The first is the median and the second is the median, + 1. Our simple data look like this.
 
 
-```r
+``` r
 CP77 %>%
   data_grid(.model = M2,
             pop = c(median(pop), median(pop) + 1)) -> newdat
@@ -645,7 +649,7 @@ newdat %>% data.frame
 Now, we're going to get our estimated values of education expenditure per capita estimates, given the model. We're going to compare that to the regression coefficient and find something not too dissimilar to what we found before: the regression coefficient.
 
 
-```r
+``` r
 newdat %>%
   mutate(pred = predict(M2, newdata =.)) -> newdat
 
@@ -661,7 +665,7 @@ coef(M2)[4]
 ```
 
 Hold on, though! The dependent variable is a logarithm and logarithms have special rules, some of which we introduced above. In particular, the quotient rule is going to apply here. $$log(a) - log(b) = log(a/b)$$
-In our context here, we have two different values of the dependent variable. One, when the under-18 population variable is at the median, is about 5.630567. The other, when the under-18 population variable increases by one unit, is about 5.635155. The difference between them is the regression coefficient, yes, but those two values are logarithms. Thus, this quotient rule applies and we can understand the OLS model as communicating the following things, rounded for clarity, and omitting the other regressors (which are themselves fixed). Let $$y$$ be the value of estimated education expenditures per capita when the under-18 population variable is at the median and let $$y'$$ communicate the value of estimated education expenditures per capita when the under-18 population variable changes in its level by 1.
+In our context here, we have two different values of the dependent variable. One, when the under-18 population variable is at the median, is about 5.630567. The other, when the under-18 population variable increases by one unit, is about 5.635155. The difference between them is the regression coefficient, yes, but those two values are logarithms. Thus, this quotient rule applies and we can understand the linear model as communicating the following things, rounded for clarity, and omitting the other regressors (which are themselves fixed). Let $$y$$ be the value of estimated education expenditures per capita when the under-18 population variable is at the median and let $$y'$$ communicate the value of estimated education expenditures per capita when the under-18 population variable changes in its level by 1.
 
 $$
 log(y) = 5.63057 \\
@@ -685,7 +689,7 @@ A few interesting things are happening here. For one, recall that the dependent 
 We can use a prediction grid to illustrate this. Here, let's create a prediction grid with a sequence from the minimum to the maximum of the under-18 population variable, fixing the other regressors at a typical value. Then, we'll create model predictions, based on the model with the logged dependent variable. We can exponentiate those model predictions and create a relative change variable communicating the relative change from its previous value (i.e. $$\frac{y'-y}{y}$$), and then multiplying that by 100 to get its percentage change. What emerges is consistent with what we did above, though we are relating the discussion back to our raw (untransformed) variable that we log-transformed for the regression.
 
 
-```r
+``` r
 CP77 %>%
   data_grid(.model = M2,
             pop = seq(min(pop), max(pop), by=1)) -> newdat
@@ -716,7 +720,7 @@ coef(M2)[4]*100
 
 ### The DV isn't Log-Transformed, but the IV is {#linlog}
 
-This is the so-called "lin-log" model and I see this less often than I see the so-called "log-lin" model. In our case, a rudimentary explanation of the under-18 population coefficient would say "a one-unit change in the logged value of the under-18 population variable coincides with an estimated change of about 503 in the estimated per capita education expenditures." Or, words to that effect. This is already an odd thing to say because the transformation of the independent variable will juice up the absolute value of the coefficient (i.e. it reduces the scale of the variable in the model), which might artificially make the effect look "big." In our particular case, there is no possible increase of 1 on the log scale for this variable. The logged minimum is about 5.66 and the logged maximum is about 5.96. A one-unit change doesn't exist on the log scale here. Perhaps that is reason to not have log-transformed this variable in the first place, though the point of this exercises ignores that question altogether (i.e. I'm more interested in explaining how to interpret the OLS model in the presence of log transformations).
+This is the so-called "lin-log" model and I see this less often than I see the so-called "log-lin" model. In our case, a rudimentary explanation of the under-18 population coefficient would say "a one-unit change in the logged value of the under-18 population variable coincides with an estimated change of about 503 in the estimated per capita education expenditures." Or, words to that effect. This is already an odd thing to say because the transformation of the independent variable will juice up the absolute value of the coefficient (i.e. it reduces the scale of the variable in the model), which might artificially make the effect look "big." In our particular case, there is no possible increase of 1 on the log scale for this variable. The logged minimum is about 5.66 and the logged maximum is about 5.96. A one-unit change doesn't exist on the log scale here. Perhaps that is reason to not have log-transformed this variable in the first place, though the point of this exercise ignores that question altogether (i.e. I'm more interested in explaining how to interpret the model output in the presence of log transformations).
 
 That said, something else is happening here. It's a comparison of what the dependent variable is estimated to be under two hypotheticals. The first $$log(pop)$$ and the second is $$log(pop) + 1$$. Whatever that change comes out to is our regression coefficient (of about 503 in this case). However, we need to break this down into little pieces. To start, 1 in the context of a logarithmic variable can be understood as the log of Leonhard Eueler's constant ($$e$$). Thus, $$log(x) + 1$$ can also be restated as $$log(x) + log(e)$$, which we have available to us because this variable was log-transformed before plugging it into the model.·That could further be restated as $$log(xe)$$ given the logarithmic identities introduced above. Fundamentally, the regression coefficient is communicating a proportional change, saying what the dependent variable would look like if you were to multiply a value of the independent variable by Leonhard Euler's constant.
 
@@ -736,7 +740,7 @@ There's another way of looking at this, much like we did above with the percenta
 I see the fourth approach taught to students more often than the third. While I would not object to a student doing this, I think the third is more honest. Consider the code below as proof of concept. In this case, I'm starting a vector of 20 with the minimum of the under-18 population variable, leaving the next 19 spots blank. Then, I'm going to loop through the vector and create a new observation in the vector that is just the previous one, increased by 1%. This will encompass the effective range of the variable. Then, I'm going to create a prediction grid of its logarithm and get model predictions, summarizing the first differences of those predictions. While the $$\beta/100$$ interpretation isn't necessarily wrong for communicating the regression coefficient for a change of 1% (it's an admitted approximation!), $$\beta*log(1.01)$$ is the more accurate summary.
 
 
-```r
+``` r
 x <- c(322, rep(NA, 19))
 
 for (i in 2:20) {
@@ -767,7 +771,7 @@ coef(M3)[4]/100
 
 ### Both the DV and the IV are Log-Transformed {#loglog}
 
-Beyond the simple OLS case, I think this so-called "log-log" model is the most straightforward to understand. We may have struggled to internalize that the log-transformed dependent variable is now functionally a ratio because of the quotient rule, but learned that a one-unit change in the (not log-transformed) independent variable communicated some estimated *percent* change in the underlying dependent variable that was log-transformed. $$\beta*100$$ is a useful way of summarizing/approximating it. We may have found it odd to think about a log-transformed independent variable also having this property, but also learned that a one percentage change in the independent variable (underneath the logarithmic transformation) has a $$\beta*log(1.01) \approx \beta/100$$ change in the value of the dependent variable. Because the quotient rule applies to both the dependent variable and the independent variable in this case, we have both. There is an estimate percentage change in the dependent variable for some percentage change in the independent variable.
+Beyond the simple case where nothing is log-transformed, I think this so-called "log-log" model is the most straightforward to understand. We may have struggled to internalize that the log-transformed dependent variable is now functionally a ratio because of the quotient rule, but learned that a one-unit change in the (not log-transformed) independent variable communicated some estimated *percent* change in the underlying dependent variable that was log-transformed. $$\beta*100$$ is a useful way of summarizing/approximating it. We may have found it odd to think about a log-transformed independent variable also having this property, but also learned that a one percentage change in the independent variable (underneath the logarithmic transformation) has a $$\beta*log(1.01) \approx \beta/100$$ change in the value of the dependent variable. Because the quotient rule applies to both the dependent variable and the independent variable in this case, we have both. There is an estimate percentage change in the dependent variable for some percentage change in the independent variable.
 
 <div id="focusbox" markdown = "1">
 
@@ -781,7 +785,7 @@ Beyond the simple OLS case, I think this so-called "log-log" model is the most s
 We can use an amalgam of the same code above (having already generated our 1% changes in the under-18 population variable) to illustrate what this looks like.
 
 
-```r
+``` r
 CP77 %>%
     data_grid(.model = M4,
               ln_pop = log(x)) -> newdat
@@ -811,5 +815,5 @@ coef(M4)[4]
 
 ## Conclusion {#conclusion}
 
-It's not completely dishonest to summarize an OLS model with logarithmic transformations in very general language. A researcher could summarize an OLS model in which only the dependent variable is log-transformed by saying "a one-unit change in the independent variable coincides with an estimated change of $$\beta$$ in the log-transformed dependent variable." Perhaps the goal is just to identify statistical significance and direction, in which case the language can be even more general. However, it's not too much effort to relay the log transformations back to their untransformed values. Different procedures apply for different conditions of log transformation (i.e. whether the DV or IV is log-transformed, or if both are), but think of it this way. The standard OLS model in which nothing is log-transformed communicates unit changes and the presence of log transformations communicates proportional changes on the untransformed scale. How you communicate those depends on what exactly is log-transformed, but be mindful that the presence of logarithmic transformations mean there are multiplicative/proportional effects being communicated in the model.
+It's not completely dishonest to summarize a linear model with logarithmic transformations in general language. A researcher could summarize a model in which only the dependent variable is log-transformed by saying "a one-unit change in the independent variable coincides with an estimated change of $$\beta$$ in the log-transformed dependent variable." Perhaps the goal is just to identify statistical significance and direction, in which case the language can be even more general. However, it's not too much effort to relay the log transformations back to their untransformed values. Different procedures apply for different conditions of log transformation (i.e. whether the DV or IV is log-transformed, or if both are), but think of it this way. **The standard model in which nothing is log-transformed communicates unit changes and the presence of log transformations communicates proportional changes on the untransformed scale**. How you communicate those depends on what exactly is log-transformed, but be mindful that the presence of logarithmic transformations mean there are multiplicative/proportional effects you should unpack from the model output.
 
