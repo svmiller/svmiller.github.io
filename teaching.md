@@ -21,6 +21,7 @@ This page includes my teaching philosophy and an empirical assessment of my teac
 
 ### Stockholm University
 
+- [IRIII.2](https://ir3-2.svmiller.com) (Quantitative Methods in the Study of International Relations)
 - [EH 6105](http://eh6105.svmiller.com) (Quantitative Methods [old])
 - [EH 6127](http://eh6127.svmiller.com) (Quantitative Methods)
 
