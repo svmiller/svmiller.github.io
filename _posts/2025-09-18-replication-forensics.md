@@ -163,7 +163,7 @@ Data %>% distinct(poldem65) %>% pull()
 #> [91] "92.6" "9.8"  "100"
 ```
 
-It looks like the missing data code for this measure is a `.`. If I knew in advance this was an issue, I could've potentially passed it off as an argument in the `read_table()` function (i.e. `read_table(Data, na = "."`). But, I'm only catching this now. We'll find out what observation this is first before fixing it. We can already deduce from Table 2 that it concerns just one observation.
+It looks like the missing data code for this measure is a `.`. If I knew in advance this was an issue, I could've potentially passed it off as an argument in the `read_table()` function (i.e. `read_table(Data, na = ".")`). But, I'm only catching this now. We'll find out what observation this is first before fixing it. We can already deduce from Table 2 that it concerns just one observation.
 
 
 ``` r
