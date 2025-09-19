@@ -1,0 +1,706 @@
+position,member.id,member.first_name,member.last_name,member.country.code,member.country.label,member.country.iso_alpha_2,member.group.code,member.group.label,member.group.short_label
+VotePosition.FOR,197490,Magdalena,ADAMOWICZ,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,189525,Asim,ADEMOV,BGR,Bulgaria,BG,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,124831,Isabella,ADINOLFI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197826,Matteo,ADINOLFI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.DID_NOT_VOTE,197403,Alex,AGIUS SALIBA,MLT,Malta,MT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,198096,Mazaly,AGUILAR,ESP,Spain,ES,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,125045,Clara,AGUILERA,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197400,Abir,AL-SAHLANI,SWE,Sweden,SE,RENEW,Renew Europe,Renew
+VotePosition.FOR,204335,Alviina,ALAMETSÄ,FIN,Finland,FI,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,237224,João,ALBUQUERQUE,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197836,Alexander,ALEXANDROV YORDANOV,BGR,Bulgaria,BG,EPP,European People’s Party,EPP
+VotePosition.FOR,96750,François,ALFONSI,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197848,Atidzhe,ALIEVA-VELI,BGR,Bulgaria,BG,RENEW,Renew Europe,Renew
+VotePosition.FOR,247122,Catherine,AMALRIC,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,197783,Andris,AMERIKS,LVA,Latvia,LV,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197475,Christine,ANDERSON,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.FOR,197448,Rasmus,ANDRESEN,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,204332,Barry,ANDREWS,IRL,Ireland,IE,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,197691,Mathilde,ANDROUËT,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,202073,Marc,ANGEL,LUX,Luxembourg,LU,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,124973,Gerolf,ANNEMANS,BEL,Belgium,BE,ID,Identity and Democracy,ID
+VotePosition.FOR,124696,Andrus,ANSIP,EST,Estonia,EE,RENEW,Renew Europe,Renew
+VotePosition.FOR,197587,Attila,ARA-KOVÁCS,HUN,Hungary,HU,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,124936,Maria,ARENA,BEL,Belgium,BE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96808,Pablo,ARIAS ECHEVERRÍA,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.FOR,24922,Pascal,ARIMONT,BEL,Belgium,BE,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197701,Konstantinos,ARVANITIS,GRC,Greece,GR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197695,Anna-Michelle,ASIMAKOPOULOU,GRC,Greece,GR,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197533,Manon,AUBRY,FRA,France,FR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,28161,Margrete,AUKEN,DNK,Denmark,DK,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,124766,Petras,AUŠTREVIČIUS,LTU,Lithuania,LT,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,197651,Carmen,AVRAM,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197781,Malik,AZMANI,NLD,Netherlands,NL,RENEW,Renew Europe,Renew
+VotePosition.FOR,247735,Laura,BALLARÍN CEREZA,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197495,Marek Paweł,BALT,POL,Poland,PL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,131580,Jordan,BARDELLA,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197433,Katarina,BARLEY,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,197808,Pietro,BARTOLO,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197610,Alessandra,BASSO,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,197779,José Ramón,BAUZÁ DÍAZ,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,124760,Nicolas,BAY,FRA,France,FR,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,132191,Gunnar,BECK,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.FOR,254719,Vasco,BECKER-WEINBERG,PRT,Portugal,PT,EPP,European People’s Party,EPP
+VotePosition.FOR,124777,Tiziana,BEGHIN,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,197680,Aurélia,BEIGNEUX,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197496,Marek,BELKA,POL,Poland,PL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,197534,François-Xavier,BELLAMY,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197658,Adrian-Dragoş,BENEA,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,124867,Brando,BENIFEI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,197679,Isabel,BENJUMEA BENJUMEA,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.FOR,197408,Hildegard,BENTELE,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197778,Tom,BERENDSEN,NLD,Netherlands,NL,EPP,European People’s Party,EPP
+VotePosition.FOR,197478,Lars Patrick,BERG,DEU,Germany,DE,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197410,Stefan,BERGER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,4746,Sergio,BERLATO,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197648,Alexander,BERNHUBER,AUT,Austria,AT,EPP,European People’s Party,EPP
+VotePosition.AGAINST,23868,Monika,BEŇOVÁ,SVK,Slovakia,SK,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197498,Robert,BIEDROŃ,POL,Poland,PL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,23788,Adam,BIELAN,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,238674,Theresa,BIELOWSKI,AUT,Austria,AT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197551,Stéphane,BIJOUX,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,96922,Izaskun,BILBAO BARANDICA,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,124771,Dominique,BILDE,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197771,Vladimír,BILČÍK,SVK,Slovakia,SK,EPP,European People’s Party,EPP
+VotePosition.FOR,197435,Gabriele,BISCHOFF,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197512,Benoît,BITEAU,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,124992,Malin,BJÖRK,SWE,Sweden,SE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197637,Vasile,BLAGA,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197564,Hynek,BLAŠKO,CZE,Czechia,CZ,NI,Non-attached Members,Non-attached
+VotePosition.FOR,96681,Vilija,BLINKEVIČIŪTĖ,LTU,Lithuania,LT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197449,Michael,BLOSS,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,124712,Andrea,BOCSKOR,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197439,Damian,BOESELAGER,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197636,Ioan-Rareş,BOGDAN,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,125004,Franc,BOGOVIČ,SVN,Slovenia,SI,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197788,Anna,BONFRISCO,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.AGAINST,101039,Paolo,BORCHIA,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,112748,Biljana,BORZAN,HRV,Croatia,HR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,187917,Marc,BOTENGA,BEL,Belgium,BE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197668,Vlad-Marius,BOTOŞ,ROU,Romania,RO,RENEW,Renew Europe,Renew
+VotePosition.FOR,197467,Geert,BOURGEOIS,BEL,Belgium,BE,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197577,Gilles,BOYER,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,226260,Karolin,BRAUNSBERGER-REINHOLD,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.AGAINST,251324,Krzysztof,BREJZA,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,28346,Mercedes,BRESSO,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197431,Patrick,BREYER,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197446,Milan,BRGLEZ,SVN,Slovenia,SI,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197470,Saskia,BRICMONT,BEL,Belgium,BE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197501,Joachim Stanisław,BRUDZIŃSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,182995,Annika,BRUNA,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197576,Sylvie,BRUNET,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,128483,Markus,BUCHHEIT,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.FOR,125012,Daniel,BUDA,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,4267,Udo,BULLMANN,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197440,Delara,BURKHARDT,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197434,Martin,BUSCHMANN,DEU,Germany,DE,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197829,Jorge,BUXADÉ VILLALBA,ESP,Spain,ES,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,28269,Jerzy,BUZEK,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,38420,Cristian-Silviu,BUŞOI,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,96739,Reinhard,BÜTIKOFER,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197671,Traian,BĂSESCU,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.AGAINST,35016,Marco,CAMPOMENOSI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,96711,Pascal,CANFIN,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,250572,Patricia,CARO MAYA,ESP,Spain,ES,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,199996,Isabel,CARVALHAIS,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,197574,Damien,CARÊME,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,28122,David,CASA,MLT,Malta,MT,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197796,Massimo,CASANOVA,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,28219,Daniel,CASPARY,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,124812,Fabio Massimo,CASTALDO,ITA,Italy,IT,RENEW,Renew Europe,Renew
+VotePosition.FOR,86793,Anna,CAVAZZINI,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,126644,Jordi,CAÑAS,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,197786,Susanna,CECCARDI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,197641,Sara,CERDAS,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197505,Catherine,CHABAUD,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,236052,Patricia,CHAGNON,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197782,Mohammed,CHAHIM,NLD,Netherlands,NL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197529,Leila,CHAIBI,FRA,France,FR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,124708,Dita,CHARANZOVÁ,CZE,Czechia,CZ,RENEW,Renew Europe,Renew
+VotePosition.FOR,197463,Olivier,CHASTEL,BEL,Belgium,BE,RENEW,Renew Europe,Renew
+VotePosition.FOR,124861,Caterina,CHINNICI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.FOR,197558,Asger,CHRISTENSEN,DNK,Denmark,DK,RENEW,Renew Europe,Renew
+VotePosition.FOR,204416,Ilana,CICUREL,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,197507,Włodzimierz,CIMOSZEWICZ,POL,Poland,PL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,183793,Angelo,CIOCCA,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.DID_NOT_VOTE,197631,Dacian,CIOLOŞ,ROU,Romania,RO,RENEW,Renew Europe,Renew
+VotePosition.ABSTENTION,197657,Tudor,CIUHODARU,ROU,Romania,RO,NI,Non-attached Members,Non-attached
+VotePosition.FOR,245018,Christophe,CLERGEAU,FRA,France,FR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,124988,Deirdre,CLUNE,IRL,Ireland,IE,EPP,European People’s Party,EPP
+VotePosition.FOR,1892,Carlos,COELHO,PRT,Portugal,PT,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,197536,Nathalie,COLIN-OESTERLÉ,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,247737,Ana,COLLADO JIMÉNEZ,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197683,Gilbert,COLLARD,FRA,France,FR,NI,Non-attached Members,Non-attached
+VotePosition.FOR,96775,Lara,COMI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,202352,Antoni,COMÍN I OLIVERES,ESP,Spain,ES,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,197616,Rosanna,CONTE,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,197503,David,CORMAND,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,124856,Ignazio,CORRAO,ITA,Italy,IT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,240478,Beatrice,COVASSI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96880,Andrea,COZZOLINO,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.DID_NOT_VOTE,33997,Corina,CREȚU,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197588,Katalin,CSEH,HUN,Hungary,HU,RENEW,Renew Europe,Renew
+VotePosition.FOR,197654,Ciarán,CUFFE,IRL,Ireland,IE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197394,Josianne,CUTAJAR,MLT,Malta,MT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,28372,Ryszard,CZARNECKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,124835,Rosa,D'AMATO,ITA,Italy,IT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,197608,Gianantonio,DA RE,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,183338,Jakop G.,DALUNDE,SWE,Sweden,SE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,197731,Clare,DALY,IRL,Ireland,IE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,96747,Arnaud,DANJEAN,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.FOR,124821,Nicola,DANTI,ITA,Italy,IT,RENEW,Renew Europe,Renew
+VotePosition.FOR,239258,Maria Angela,DANZÌ,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,236050,Marie,DAUCHY,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.AGAINST,197556,Ivan,DAVID,CZE,Czechia,CZ,ID,Identity and Democracy,ID
+VotePosition.FOR,228604,Ilan,DE BASSO,SWE,Sweden,SE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,239262,Elisabetta,DE BLASIS,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,96891,Paolo,DE CASTRO,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,204414,Margarita,DE LA PISA CARRIÓN,ESP,Spain,ES,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197472,Filip,DE MAN,BEL,Belgium,BE,ID,Identity and Democracy,ID
+VotePosition.FOR,204333,Salvatore,DE MEO,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.FOR,197504,Jérémy,DECERLE,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,28390,Pilar,DEL CASTILLO VERA,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.FOR,197531,Gwendoline,DELBOS-CORFIELD,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,124714,Andor,DELI,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.FOR,96868,Karima,DELLI,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,197468,Özlem,DEMIREL,DEU,Germany,DE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197453,Anna,DEPARNAY-GRUNENBERG,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,96826,Tamás,DEUTSCH,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.ABSTENTION,190774,Geoffroy,DIDIER,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.FOR,124709,Martina,DLABAJOVÁ,CZE,Czechia,CZ,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,197579,Klára,DOBREV,HUN,Hungary,HU,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197473,Christian,DOLESCHAL,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197822,Francesca,DONATO,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.DID_NOT_VOTE,197595,Anna Júlia,DONÁTH,HUN,Hungary,HU,RENEW,Renew Europe,Renew
+VotePosition.FOR,96787,Herbert,DORFMANN,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.FOR,254720,Ana Miguel,DOS SANTOS,PRT,Portugal,PT,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197510,Jarosław,DUDA,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,124693,Pascal,DURAND,FRA,France,FR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,198329,Estrella,DURÁ FERRANDIS,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,124873,Angel,DZHAMBAZKI,BGR,Bulgaria,BG,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,99945,Lena,DÜPONT,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,237465,Matthias,ECKE,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,28226,Christian,EHLER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,96725,Bas,EICKHOUT,NLD,Netherlands,NL,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,209091,Cyrus,ENGERER,MLT,Malta,MT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96852,Cornelia,ERNST,DEU,Germany,DE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.AGAINST,197430,Engin,EROGLU,DEU,Germany,DE,RENEW,Renew Europe,Renew
+VotePosition.FOR,96811,Rosa,ESTARÀS FERRAGUT,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197649,Gheorghe,FALCĂ,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,197589,Laurence,FARRENG,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,1917,Markus,FERBER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,125046,Jonás,FERNÁNDEZ,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,192634,Giuseppe,FERRANDINO,ITA,Italy,IT,RENEW,Renew Europe,Renew
+VotePosition.FOR,124833,Laura,FERRARA,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,197480,Nicolaus,FEST,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.ABSTENTION,96810,Carlo,FIDANZA,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197607,Pietro,FIOCCHI,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197720,Frances,FITZGERALD,IRL,Ireland,IE,EPP,European People’s Party,EPP
+VotePosition.AGAINST,124985,Luke Ming,FLANAGAN,IRL,Ireland,IE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,197419,Valter,FLEGO,HRV,Croatia,HR,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,28353,Anna,FOTYGA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197414,Loucas,FOURLAS,CYP,Cyprus,CY,EPP,European People’s Party,EPP
+VotePosition.AGAINST,198490,Emmanouil,FRAGKOS,GRC,Greece,GR,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197513,Tomasz,FRANKOWSKI,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,197455,Cindy,FRANSSEN,BEL,Belgium,BE,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,193273,Romeo,FRANZ,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,106936,Daniel,FREUND,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197391,Heléne,FRITZON,SWE,Sweden,SE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,101585,Niels,FUGLSANG,DNK,Denmark,DK,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197795,Mario,FURORE,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.FOR,2341,Michael,GAHLER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197632,Claudia,GAMON,AUT,Austria,AT,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,197582,Gianna,GANCIA,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,197717,Ibán,GARCÍA DEL BLANCO,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197742,Isabel,GARCÍA MUÑOZ,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,28298,Iratxe,GARCÍA PÉREZ,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,1992,José Manuel,GARCÍA-MARGALLO Y MARFIL,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.FOR,96991,Eider,GARDIAZABAL RUBIAL,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197628,Jean-Paul,GARRAUD,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,239255,Matteo,GAZZINI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.FOR,183916,Alexandra,GEESE,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,96833,Jens,GEIER,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,197794,Chiara,GEMMA,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197416,Giorgos,GEORGIOU,CYP,Cyprus,CY,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,197819,Alexis,GEORGOULIS,GRC,Greece,GR,NI,Non-attached Members,Non-attached
+VotePosition.FOR,251874,Niels,GEUKING,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,209140,Vlad,GHEORGHE,ROU,Romania,RO,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,239256,Paola,GHIDONI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,197804,Dino,GIARRUSSO,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.FOR,124807,Jens,GIESEKE,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,253008,Linus,GLANZELIUS,SWE,Sweden,SE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,202036,Sunčana,GLAVAK,HRV,Croatia,HR,EPP,European People’s Party,EPP
+VotePosition.FOR,197694,Raphaël,GLUCKSMANN,FRA,France,FR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197443,Andreas,GLÜCK,DEU,Germany,DE,RENEW,Renew Europe,Renew
+VotePosition.FOR,840,Charles,GOERENS,LUX,Luxembourg,LU,RENEW,Renew Europe,Renew
+VotePosition.FOR,197728,Mónica Silvana,GONZÁLEZ,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197718,Nicolás,GONZÁLEZ CASARES,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,204419,Sandro,GOZI,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,197799,Valentino,GRANT,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,124785,Maria,GRAPINI,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197549,Markéta,GREGOROVÁ,CZE,Czechia,CZ,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,94649,Catherine,GRISET,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197780,Bart,GROOTHUIS,NLD,Netherlands,NL,RENEW,Renew Europe,Renew
+VotePosition.FOR,197452,Klemen,GROŠELJ,SVN,Slovenia,SI,RENEW,Renew Europe,Renew
+VotePosition.FOR,197557,Christophe,GRUDLER,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,204420,Claude,GRUFFAT,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197618,Elisabetta,GUALMINI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197645,Francisco,GUERREIRO,PRT,Portugal,PT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197543,Bernard,GUETTA,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,96952,Sylvie,GUILLAUME,FRA,France,FR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,88715,José,GUSMÃO,PRT,Portugal,PT,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,198063,Márton,GYÖNGYÖSI,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.DID_NOT_VOTE,23816,András,GYÜRK,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,96830,Enikő,GYŐRI,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,28150,Kinga,GÁL,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197702,Lina,GÁLVEZ,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,247709,Anja,HAGA,NLD,Netherlands,NL,EPP,European People’s Party,EPP
+VotePosition.FOR,197444,Svenja,HAHN,DEU,Germany,DE,RENEW,Renew Europe,Renew
+VotePosition.FOR,197457,Henrike,HAHN,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,198176,Roman,HAIDER,AUT,Austria,AT,ID,Identity and Democracy,ID
+VotePosition.DID_NOT_VOTE,34578,Robert,HAJŠEL,SVK,Slovakia,SK,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197596,Teuvo,HAKKARAINEN,FIN,Finland,FI,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197514,Andrzej,HALICKI,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,2054,Heidi,HAUTALA,FIN,Finland,FI,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197646,Mircea-Gheorghe,HAVA,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,135511,Valérie,HAYER,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,125023,Anja,HAZEKAMP,NLD,Netherlands,NL,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197682,Hannes,HEIDE,AUT,Austria,AT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197800,Eero,HEINÄLUOMA,FIN,Finland,FI,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197412,Niclas,HERBST,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197459,Pierrette,HERZBERGER-FOFANA,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,124586,Balázs,HIDVÉGHI,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,197526,Martin,HLAVÁČEK,CZE,Czechia,CZ,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,96780,Monika,HOHLMEIER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,197770,Martin,HOJSÍK,SVK,Slovakia,SK,RENEW,Renew Europe,Renew
+VotePosition.FOR,197398,Pär,HOLMGREN,SWE,Sweden,SE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,122978,Alicia,HOMS GINEL,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,218349,Michiel,HOOGEVEEN,NLD,Netherlands,NL,ECR,European Conservatives and Reformists,ECR
+VotePosition.ABSTENTION,5565,Brice,HORTEFEUX,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.FOR,197846,Ivo,HRISTOV,BGR,Bulgaria,BG,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,58789,Jan,HUITEMA,NLD,Netherlands,NL,RENEW,Renew Europe,Renew
+VotePosition.FOR,96752,Martin,HÄUSLING,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.ABSTENTION,124715,György,HÖLVÉNYI,HUN,Hungary,HU,EPP,European People’s Party,EPP
+VotePosition.AGAINST,96779,Danuta Maria,HÜBNER,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,197624,Ivars,IJABS,LVA,Latvia,LV,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,221463,Ladislav,ILČIĆ,HRV,Croatia,HR,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,28266,Sophia,IN 'T VELD,NLD,Netherlands,NL,RENEW,Renew Europe,Renew
+VotePosition.FOR,197392,Evin,INCIR,SWE,Sweden,SE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96772,Peter,JAHR,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,197837,Stasys,JAKELIŪNAS,LTU,Lithuania,LT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,197516,Patryk,JAKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,124770,Jean-François,JALKH,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.AGAINST,189065,France,JAMET,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.AGAINST,197517,Adam,JARUBAS,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,112747,Romana,JERKOVIĆ,HRV,Croatia,HR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,125021,Agnes,JONGERIUS,NLD,Netherlands,NL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197627,Virginie,JORON,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197447,Irena,JOVEVA,SVN,Slovenia,SI,RENEW,Renew Europe,Renew
+VotePosition.FOR,197840,Rasa,JUKNEVIČIENĖ,LTU,Lithuania,LT,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197518,Krzysztof,JURGIEL,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197767,Eugen,JURZYCA,SVK,Slovakia,SK,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197626,Hervé,JUVIN,FRA,France,FR,NI,Non-attached Members,Non-attached
+VotePosition.DID_NOT_VOTE,28141,Lívia,JÁRÓKA,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.FOR,125109,Eva,KAILI,GRC,Greece,GR,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,96771,Jarosław,KALINOWSKI,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,197491,Marina,KALJURAND,EST,Estonia,EE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96934,Sandra,KALNIETE,LVA,Latvia,LV,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,96837,Petra,KAMMEREVERT,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197839,Radan,KANEV,BGR,Bulgaria,BG,EPP,European People’s Party,EPP
+VotePosition.FOR,197469,Assita,KANKO,BEL,Belgium,BE,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,4246,Othmar,KARAS,AUT,Austria,AT,EPP,European People’s Party,EPP
+VotePosition.FOR,197585,Pierre,KARLESKIND,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,197401,Karin,KARLSBRO,SWE,Sweden,SE,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,250237,Włodzimierz,KARPIŃSKI,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,124887,Karol,KARSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,191693,Elsi,KATAINEN,FIN,Finland,FI,RENEW,Renew Europe,Renew
+VotePosition.FOR,251268,Michael,KAUCH,DEU,Germany,DE,RENEW,Renew Europe,Renew
+VotePosition.FOR,125068,Emmanouil,KEFALOGIANNIS,GRC,Greece,GR,EPP,European People’s Party,EPP
+VotePosition.FOR,197818,Billy,KELLEHER,IRL,Ireland,IE,RENEW,Renew Europe,Renew
+VotePosition.FOR,22858,Fabienne,KELLER,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,96734,Ska,KELLER,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,96668,Seán,KELLY,IRL,Ireland,IE,EPP,European People’s Party,EPP
+VotePosition.FOR,249603,Martine,KEMP,LUX,Luxembourg,LU,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197519,Beata,KEMPA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197415,Niyazi,KIZILYÜREK,CYP,Cyprus,CY,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.AGAINST,197520,Izabela-Helena,KLOC,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197528,Ondřej,KNOTEK,CZE,Czechia,CZ,RENEW,Renew Europe,Renew
+VotePosition.ABSTENTION,197523,Łukasz,KOHUT,POL,Poland,PL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197406,Arba,KOKALARI,SWE,Sweden,SE,EPP,European People’s Party,EPP
+VotePosition.FOR,197743,Petros,KOKKALIS,GRC,Greece,GR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197546,Marcel,KOLAJA,CZE,Czechia,CZ,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197438,Mislav,KOLAKUŠIĆ,HRV,Croatia,HR,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,23699,Kateřina,KONEČNÁ,CZE,Czechia,CZ,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,197740,Athanasios,KONSTANTINOU,GRC,Greece,GR,NI,Non-attached Members,Non-attached
+VotePosition.DID_NOT_VOTE,197525,Ewa,KOPACZ,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197530,Joanna,KOPCIŃSKA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,130833,Stelios,KOULOGLOU,GRC,Greece,GR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197699,Elena,KOUNTOURA,GRC,Greece,GR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,97968,Andrey,KOVATCHEV,BGR,Bulgaria,BG,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,118949,Ondřej,KOVAŘÍK,CZE,Czechia,CZ,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,197481,Maximilian,KRAH,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.AGAINST,124891,Zdzisław,KRASNODĘBSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197532,Elżbieta,KRUK,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197843,Andrius,KUBILIUS,LTU,Lithuania,LT,EPP,European People’s Party,EPP
+VotePosition.FOR,197395,Alice,KUHNKE,SWE,Sweden,SE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,197482,Joachim,KUHS,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.FOR,124735,Miapetra,KUMPULA-NATRI,FIN,Finland,FI,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,197692,Stelios,KYMPOUROPOULOS,GRC,Greece,GR,EPP,European People’s Party,EPP
+VotePosition.FOR,125063,Georgios,KYRTSOS,GRC,Greece,GR,RENEW,Renew Europe,Renew
+VotePosition.FOR,124866,Ilhan,KYUCHYUK,BGR,Bulgaria,BG,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,96829,Ádám,KÓSA,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197445,Moritz,KÖRNER,DEU,Germany,DE,RENEW,Renew Europe,Renew
+VotePosition.FOR,124822,Dietmar,KÖSTER,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,204421,Jean-Lin,LACAPELLE,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197460,Sergey,LAGODINSKY,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197737,Ioannis,LAGOS,GRC,Greece,GR,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197697,Aurore,LALUCQ,FRA,France,FR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96648,Philippe,LAMBERTS,BEL,Belgium,BE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,192635,Danilo Oscar,LANCINI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,1909,Bernd,LANGE,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197461,Katrin,LANGENSIEPEN,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197698,Pierre,LARROUTUROU,FRA,France,FR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,230085,Camilla,LAURETI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,251859,Guy,LAVOCAT,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,124738,Gilles,LEBRETON,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,197393,David,LEGA,SWE,Sweden,SE,EPP,European People’s Party,EPP
+VotePosition.AGAINST,96796,Ryszard Antoni,LEGUTKO,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197635,Maria-Manuel,LEITÃO-MARQUES,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,95074,Jeroen,LENAERS,NLD,Netherlands,NL,EPP,European People’s Party,EPP
+VotePosition.FOR,23781,Janusz,LEWANDOWSKI,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,204336,Miriam,LEXMANN,SVK,Slovakia,SK,EPP,European People’s Party,EPP
+VotePosition.FOR,23768,Bogusław,LIBERADZKI,POL,Poland,PL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,1927,Peter,LIESE,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197483,Sylvia,LIMMER,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.FOR,124808,Norbert,LINS,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197611,Elena,LIZZI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.DID_NOT_VOTE,197494,Nathalie,LOISEAU,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,228286,Karsten,LUCKE,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197721,César,LUENA,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,124996,Peter,LUNDGREN,SWE,Sweden,SE,ECR,European Conservatives and Reformists,ECR
+VotePosition.ABSTENTION,197458,Benoît,LUTGEN,BEL,Belgium,BE,EPP,European People’s Party,EPP
+VotePosition.FOR,125042,Javi,LÓPEZ,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96812,Juan Fernando,LÓPEZ AGUILAR,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,197777,Leopoldo,LÓPEZ GIL,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,28399,Antonio,LÓPEZ-ISTÚRIZ WHITE,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.FOR,96709,Morten,LØKKEGAARD,DNK,Denmark,DK,RENEW,Renew Europe,Renew
+VotePosition.FOR,205452,Chris,MACMANUS,IRL,Ireland,IE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.AGAINST,197493,Jaak,MADISON,EST,Estonia,EE,ID,Identity and Democracy,ID
+VotePosition.FOR,197719,Cristina,MAESTRE,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,197653,Claudiu,MANDA,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,4560,Antonius,MANDERS,NLD,Netherlands,NL,EPP,European People’s Party,EPP
+VotePosition.FOR,190713,Lukas,MANDL,AUT,Austria,AT,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197623,Thierry,MARIANI,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,33982,Marian-Jean,MARINESCU,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,209896,Colm,MARKEY,IRL,Ireland,IE,EPP,European People’s Party,EPP
+VotePosition.FOR,197462,Erik,MARQUARDT,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197634,Pedro,MARQUES,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197638,Margarida,MARQUES,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,124828,Fulvio,MARTUSCIELLO,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.FOR,249285,Lydie,MASSARD,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197441,Predrag Fred,MATIĆ,HRV,Croatia,HR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,96936,Gabriel,MATO,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.FOR,208722,Sara,MATTHIEU,BEL,Belgium,BE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,24505,Emmanuel,MAUREL,FRA,France,FR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,124691,Costas,MAVRIDES,CYP,Cyprus,CY,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197522,Radka,MAXOVÁ,CZE,Czechia,CZ,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,98341,Eva,MAYDELL,BGR,Bulgaria,BG,EPP,European People’s Party,EPP
+VotePosition.AGAINST,38511,Georg,MAYER,AUT,Austria,AT,ID,Identity and Democracy,ID
+VotePosition.AGAINST,197538,Beata,MAZUREK,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197841,Liudas,MAŽYLIS,LTU,Lithuania,LT,EPP,European People’s Party,EPP
+VotePosition.FOR,124806,David,MCALLISTER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,204418,Nora,MEBAREK,FRA,France,FR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197662,Vangelis,MEIMARAKIS,GRC,Greece,GR,EPP,European People’s Party,EPP
+VotePosition.FOR,130256,Dace,MELBĀRDE,LVA,Latvia,LV,EPP,European People’s Party,EPP
+VotePosition.FOR,197567,Karen,MELCHIOR,DNK,Denmark,DK,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,236053,Marina,MESURE,FRA,France,FR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,118859,Roberta,METSOLA,MLT,Malta,MT,EPP,European People’s Party,EPP
+VotePosition.FOR,193292,Tilly,METZ,LUX,Luxembourg,LU,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,190518,Jörg,MEUTHEN,DEU,Germany,DE,NI,Non-attached Members,Non-attached
+VotePosition.FOR,120478,Martina,MICHELS,DEU,Germany,DE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,125128,Iskra,MIHAYLOVA,BGR,Bulgaria,BG,RENEW,Renew Europe,Renew
+VotePosition.FOR,249826,Jozef,MIHÁL,SVK,Slovakia,SK,RENEW,Renew Europe,Renew
+VotePosition.FOR,197497,Sven,MIKSER,EST,Estonia,EE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,197824,Giuseppe,MILAZZO,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.ABSTENTION,197540,Leszek,MILLER,POL,Poland,PL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,28400,Francisco José,MILLÁN MON,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,236051,Eric,MINARDI,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.DID_NOT_VOTE,24942,Ana,MIRANDA PAZ,ESP,Spain,ES,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,212855,Alin,MITUȚA,ROU,Romania,RO,RENEW,Renew Europe,Renew
+VotePosition.ABSTENTION,197805,Silvia,MODIG,FIN,Finland,FI,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,124722,Csaba,MOLNÁR,HUN,Hungary,HU,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,197711,Dolors,MONTSERRAT,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,72779,Nadine,MORANO,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.FOR,28347,Javier,MORENO SÁNCHEZ,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,124799,Alessandra,MORETTI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,254876,Ricardo,MORGADO,PRT,Portugal,PT,EPP,European People’s Party,EPP
+VotePosition.FOR,197427,Marlene,MORTLER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197647,Dan-Ştefan,MOTREANU,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197541,Andżelika Anna,MOŻDŻANOWSKA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,124802,Siegfried,MUREŞAN,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,28429,Alessandra,MUSSOLINI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,124862,Ulrike,MÜLLER,DEU,Germany,DE,RENEW,Renew Europe,Renew
+VotePosition.FOR,190519,Caroline,NAGTEGAAL,NLD,Netherlands,NL,RENEW,Renew Europe,Renew
+VotePosition.FOR,125005,Javier,NART,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.FOR,88882,Victor,NEGRESCU,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,233862,Matjaž,NEMEC,SVN,Slovenia,SI,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,239260,Denis,NESCI,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,254721,Vânia,NETO,PRT,Portugal,PT,EPP,European People’s Party,EPP
+VotePosition.FOR,197464,Hannah,NEUMANN,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,124784,Dan,NICA,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,4289,Angelika,NIEBLER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,124701,Luděk,NIEDERMAYER,CZE,Czechia,CZ,EPP,European People’s Party,EPP
+VotePosition.FOR,197465,Niklas,NIENASS,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197802,Ville,NIINISTÖ,FIN,Finland,FI,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197734,Lefteris,NIKOLAOU-ALAVANOS,GRC,Greece,GR,NI,Non-attached Members,Non-attached
+VotePosition.FOR,238639,Johan,NISSINEN,SWE,Sweden,SE,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,202112,Gheorghe-Vlad,NISTOR,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,124836,Maria,NOICHL,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,28294,Ljudmila,NOVAK,SVN,Slovenia,SI,EPP,European People’s Party,EPP
+VotePosition.FOR,107212,Andrey,NOVAKOV,BGR,Bulgaria,BG,EPP,European People’s Party,EPP
+VotePosition.FOR,197889,Grace,O'SULLIVAN,IRL,Ireland,IE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197542,Janina,OCHOJSKA,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,197432,Jan-Christoph,OETJEN,DEU,Germany,DE,RENEW,Renew Europe,Renew
+VotePosition.FOR,237779,Carina,OHLSSON,SWE,Sweden,SE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,28288,Jan,OLBRYCHT,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.FOR,197838,Juozas,OLEKAS,LTU,Lithuania,LT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197687,Philippe,OLIVIER,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.AGAINST,30482,Younous,OMARJEE,FRA,France,FR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,253043,Henk Jan,ORMEL,NLD,Netherlands,NL,EPP,European People’s Party,EPP
+VotePosition.FOR,234344,Max,ORVILLE,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,232843,Jan,OVELGONNE,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,129073,Urmas,PAET,EST,Estonia,EE,RENEW,Renew Europe,Renew
+VotePosition.FOR,125038,Maite,PAGAZAURTUNDÚA,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,250235,Witold,PAHL,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.AGAINST,99283,Alessandro,PANZA,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,124692,Demetris,PAPADAKIS,CYP,Cyprus,CY,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,125093,Kostas,PAPADAKIS,GRC,Greece,GR,NI,Non-attached Members,Non-attached
+VotePosition.FOR,28586,Dimitrios,PAPADIMOULIS,GRC,Greece,GR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,244571,Nikos,PAPANDREOU,GRC,Greece,GR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,36392,Aldo,PATRICIELLO,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,197466,Jutta,PAULUS,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,124844,Piernicola,PEDICINI,ITA,Italy,IT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197563,Mauri,PEKKARINEN,FIN,Finland,FI,RENEW,Renew Europe,Renew
+VotePosition.FOR,197539,Mikuláš,PEKSA,CZE,Czechia,CZ,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197527,Anne-Sophie,PELLETIER,FRA,France,FR,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,197845,Tsvetelina,PENKOVA,BGR,Bulgaria,BG,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,243979,Francesca,PEPPUCCI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.FOR,197738,Lídia,PEREIRA,PRT,Portugal,PT,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,197754,Sandra,PEREIRA,PRT,Portugal,PT,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197573,Kira Marie,PETER-HANSEN,DNK,Denmark,DK,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,124872,Morten,PETERSEN,DNK,Denmark,DK,RENEW,Renew Europe,Renew
+VotePosition.FOR,124846,Pina,PICIERNO,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,112744,Tonino,PICULA,HRV,Croatia,HR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,28224,Markus,PIEPER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,40599,Sirpa,PIETIKÄINEN,FIN,Finland,FI,EPP,European People’s Party,EPP
+VotePosition.FOR,197619,Sabrina,PIGNEDOLI,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.ABSTENTION,136236,João,PIMENTA LOPES,PRT,Portugal,PT,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.ABSTENTION,197828,Manu,PINEDA,ESP,Spain,ES,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197629,Maxette,PIRBAKAS,FRA,France,FR,NI,Non-attached Members,Non-attached
+VotePosition.FOR,249443,Wolfram,PIRCHNER,AUT,Austria,AT,EPP,European People’s Party,EPP
+VotePosition.FOR,197590,Giuliano,PISAPIA,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,38595,Rovana,PLUMB,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197404,Jessica,POLFJÄRD,SWE,Sweden,SE,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,197765,Peter,POLLÁK,SVK,Slovakia,SK,EPP,European People’s Party,EPP
+VotePosition.FOR,124704,Stanislav,POLČÁK,CZE,Czechia,CZ,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,204443,Clara,PONSATÍ OBIOLS,ESP,Spain,ES,NI,Non-attached Members,Non-attached
+VotePosition.FOR,237320,Eva Maria,POPTCHEVA,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,96801,Tomasz Piotr,PORĘBA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.ABSTENTION,125706,Jiří,POSPÍŠIL,CZE,Czechia,CZ,EPP,European People’s Party,EPP
+VotePosition.FOR,239972,Erik,POULSEN,DNK,Denmark,DK,RENEW,Renew Europe,Renew
+VotePosition.ABSTENTION,197820,Nicola,PROCACCINI,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,202351,Carles,PUIGDEMONT I CASAMAJÓ,ESP,Spain,ES,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197663,Dragoş,PÎSLARU,ROU,Romania,RO,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,197764,Miroslav,RADAČOVSKÝ,SVK,Slovakia,SK,NI,Non-attached Members,Non-attached
+VotePosition.FOR,124850,Emil,RADEV,BGR,Bulgaria,BG,EPP,European People’s Party,EPP
+VotePosition.FOR,188945,Dennis,RADTKE,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197868,Samira,RAFAELA,NLD,Netherlands,NL,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,197544,Elżbieta,RAFALSKA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,239973,Bergur Løkke,RASMUSSEN,DNK,Denmark,DK,RENEW,Renew Europe,Renew
+VotePosition.FOR,96998,Evelyn,REGNER,AUT,Austria,AT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197488,Guido,REIL,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.FOR,103381,Terry,REINTKE,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,229839,René,REPASI,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,197413,Karlo,RESSLER,HRV,Croatia,HR,EPP,European People’s Party,EPP
+VotePosition.FOR,218347,Thijs,REUTEN,NLD,Netherlands,NL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197832,Diana,RIBA I GINER,ESP,Spain,ES,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,4253,Frédérique,RIES,BEL,Belgium,BE,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,197787,Antonio Maria,RINALDI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,229519,Catharina,RINZEMA,NLD,Netherlands,NL,RENEW,Renew Europe,Renew
+VotePosition.FOR,206158,Manuela,RIPA,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,96885,Dominique,RIQUET,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,197615,Jérôme,RIVIÈRE,FRA,France,FR,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197801,Franco,ROBERTI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,254718,Anabela,RODRIGUES,PRT,Portugal,PT,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.AGAINST,197785,Eugenia,RODRÍGUEZ PALOP,ESP,Spain,ES,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,4344,María Soraya,RODRÍGUEZ RAMOS,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.FOR,125043,Inma,RODRÍGUEZ-PIÑERO,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,250538,Rafał,ROMANOWSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197792,Daniela,RONDINELLI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197776,Rob,ROOKEN,NLD,Netherlands,NL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,204733,Dorien,ROOKMAKER,NLD,Netherlands,NL,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197709,Robert,ROOS,NLD,Netherlands,NL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197506,Caroline,ROOSE,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,125214,Bronis,ROPĖ,LTU,Lithuania,LT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,204413,Marcos,ROS SEMPERE,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,243912,Maria Veronica,ROSSI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.AGAINST,96653,Katarína,ROTH NEVEĎALOVÁ,SVK,Slovakia,SK,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,197690,André,ROUGÉ,FRA,France,FR,ID,Identity and Democracy,ID
+VotePosition.FOR,245858,Thomas,RUDNER,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,197773,Bert-Jan,RUISSEN,NLD,Netherlands,NL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,127096,Domènec,RUIZ DEVESA,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,132366,Pirkko,RUOHONEN-LERNER,FIN,Finland,FI,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197545,Bogdan,RZOŃCA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197584,Sándor,RÓNAI,HUN,Hungary,HU,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,204368,Christian,SAGARTZ,AUT,Austria,AT,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,249284,Laurence,SAILLIET,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.FOR,125670,Massimiliano,SALINI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,24594,Anne,SANDER,FRA,France,FR,EPP,European People’s Party,EPP
+VotePosition.FOR,124781,Alfred,SANT,MLT,Malta,MT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197650,Isabel,SANTOS,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,254722,Teófilo,SANTOS,PRT,Portugal,PT,EPP,European People’s Party,EPP
+VotePosition.AGAINST,251249,Esther,SANZ SELVA,ESP,Spain,ES,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.AGAINST,197578,Silvia,SARDONE,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,112611,Petri,SARVAMAA,FIN,Finland,FI,EPP,European People’s Party,EPP
+VotePosition.AGAINST,28297,Jacek,SARYUSZ-WOLSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197500,Mounir,SATOURI,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,37312,Christel,SCHALDEMOSE,DNK,Denmark,DK,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,213330,Ernő,SCHALLER-BAROSS,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197670,Andreas,SCHIEDER,AUT,Austria,AT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,190517,Martin,SCHIRDEWAN,DEU,Germany,DE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197422,Christine,SCHNEIDER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,96646,Helmut,SCHOLZ,DEU,Germany,DE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,125030,Annie,SCHREIJER-PIERIK,NLD,Netherlands,NL,EPP,European People’s Party,EPP
+VotePosition.FOR,124837,Joachim,SCHUSTER,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,28223,Andreas,SCHWAB,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197425,Ralf,SEEKATZ,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197835,Aušra,SEIBUTYTĖ,LTU,Lithuania,LT,EPP,European People’s Party,EPP
+VotePosition.FOR,197418,Monica,SEMEDO,LUX,Luxembourg,LU,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,197423,Nico,SEMSROTT,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197677,Günther,SIDL,AUT,Austria,AT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,124747,Pedro,SILVA PEREIRA,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197426,Sven,SIMON,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,197935,Ivan Vilibor,SINČIĆ,HRV,Croatia,HR,NI,Non-attached Members,Non-attached
+VotePosition.DID_NOT_VOTE,96932,Birgit,SIPPEL,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.ABSTENTION,197390,Sara,SKYTTEDAL,SWE,Sweden,SE,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197849,Andrey,SLABAKOV,BGR,Bulgaria,BG,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197791,Massimiliano,SMERIGLIO,ITA,Italy,IT,NI,Non-attached Members,Non-attached
+VotePosition.ABSTENTION,204334,Vincenzo,SOFO,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,197417,Tomislav,SOKOL,HRV,Croatia,HR,EPP,European People’s Party,EPP
+VotePosition.FOR,185974,Jordi,SOLÉ,ESP,Spain,ES,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197784,Susana,SOLÍS PÉREZ,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,124834,Martin,SONNEBORN,DEU,Germany,DE,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197550,Sylwia,SPUREK,POL,Poland,PL,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,125064,Maria,SPYRAKI,GRC,Greece,GR,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,197825,Raffaele,STANCANELLI,ITA,Italy,IT,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,124852,Sergei,STANISHEV,BGR,Bulgaria,BG,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,239271,Eleni,STAVROU,CYP,Cyprus,CY,EPP,European People’s Party,EPP
+VotePosition.FOR,197772,Tineke,STRIK,NLD,Netherlands,NL,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,134605,Ramona,STRUGARIU,ROU,Romania,RO,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,197553,Beata,SZYDŁO,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197722,Nacho,SÁNCHEZ AMOR,ESP,Spain,ES,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,125020,Paul,TANG,NLD,Netherlands,NL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,29579,Marc,TARABELLA,BEL,Belgium,BE,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,204346,Dominik,TARCZYŃSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197806,Annalisa,TARDINO,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,197756,Vera,TAX,NLD,Netherlands,NL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197655,Cristian,TERHEŞ,ROU,Romania,RO,ECR,European Conservatives and Reformists,ECR
+VotePosition.DID_NOT_VOTE,204449,Riho,TERRAS,EST,Estonia,EE,EPP,European People’s Party,EPP
+VotePosition.FOR,197831,Hermann,TERTSCH,ESP,Spain,ES,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197667,Barbara,THALER,AUT,Austria,AT,EPP,European People’s Party,EPP
+VotePosition.FOR,250918,François,THIOLLET,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,96776,Róża,THUN UND HOHENSTEIN,POL,Poland,PL,RENEW,Renew Europe,Renew
+VotePosition.FOR,197591,Irene,TINAGLI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,197559,Grzegorz,TOBISZOWSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197402,Tomas,TOBÉ,SWE,Sweden,SE,EPP,European People’s Party,EPP
+VotePosition.FOR,28340,Patrizia,TOIA,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197547,Irène,TOLLERET,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,197672,Eugen,TOMAC,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.AGAINST,96697,Waldemar,TOMASZEWSKI,LTU,Lithuania,LT,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,125104,Romana,TOMC,SVN,Slovenia,SI,EPP,European People’s Party,EPP
+VotePosition.FOR,124700,Jana,TOOM,EST,Estonia,EE,RENEW,Renew Europe,Renew
+VotePosition.FOR,114268,Nils,TORVALDS,FIN,Finland,FI,RENEW,Renew Europe,Renew
+VotePosition.FOR,97236,Marie,TOUSSAINT,FRA,France,FR,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.DID_NOT_VOTE,197580,Isabella,TOVAGLIERI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.FOR,96713,Evžen,TOŠENOVSKÝ,CZE,Czechia,CZ,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197894,László,TRÓCSÁNYI,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197665,Dragoş,TUDORACHE,ROU,Romania,RO,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,198183,Mihai,TUDOSE,ROU,Romania,RO,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,27714,Edina,TÓTH,HUN,Hungary,HU,NI,Non-attached Members,Non-attached
+VotePosition.AGAINST,197763,Milan,UHRÍK,SVK,Slovakia,SK,NI,Non-attached Members,Non-attached
+VotePosition.FOR,124705,István,UJHELYI,HUN,Hungary,HU,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,131507,Miguel,URBÁN CRESPO,ESP,Spain,ES,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,96698,Viktor,USPASKICH,LTU,Lithuania,LT,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197810,Nils,UŠAKOVS,LVA,Latvia,LV,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,28617,Inese,VAIDERE,LVA,Latvia,LV,EPP,European People’s Party,EPP
+VotePosition.FOR,5729,Kathleen,VAN BREMPT,BEL,Belgium,BE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,125106,Johan,VAN OVERTVELDT,BEL,Belgium,BE,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197870,Kim,VAN SPARRENTAK,NLD,Netherlands,NL,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,124934,Monika,VANA,AUT,Austria,AT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,185771,Tom,VANDENDRIESSCHE,BEL,Belgium,BE,ID,Identity and Democracy,ID
+VotePosition.FOR,129164,Tom,VANDENKENDELAERE,BEL,Belgium,BE,EPP,European People’s Party,EPP
+VotePosition.FOR,239257,Achille,VARIATI,ITA,Italy,IT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,130100,Hilde,VAUTMANS,BEL,Belgium,BE,RENEW,Renew Europe,Renew
+VotePosition.FOR,197502,Marie-Pierre,VEDRENNE,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,96756,Sabine,VERHEYEN,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,97058,Guy,VERHOFSTADT,BEL,Belgium,BE,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,125001,Harald,VILIMSKY,AUT,Austria,AT,ID,Identity and Democracy,ID
+VotePosition.AGAINST,197827,Idoia,VILLANUEVA RUIZ,ESP,Spain,ES,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.FOR,197571,Nikolaj,VILLUMSEN,DNK,Denmark,DK,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.ABSTENTION,98582,Loránt,VINCZE,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,199941,Marianne,VIND,DNK,Denmark,DK,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,124726,Henna,VIRKKUNEN,FIN,Finland,FI,EPP,European People’s Party,EPP
+VotePosition.AGAINST,124875,Anders,VISTISEN,DNK,Denmark,DK,ID,Identity and Democracy,ID
+VotePosition.FOR,197844,Petar,VITANOV,BGR,Bulgaria,BG,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197451,Viola,VON CRAMON-TAUBADEL,DEU,Germany,DE,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,197537,Alexandr,VONDRA,CZE,Czechia,CZ,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,96761,Axel,VOSS,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,125065,Elissavet,VOZEMBERG-VRIONIDI,GRC,Greece,GR,EPP,European People’s Party,EPP
+VotePosition.FOR,197552,Veronika,VRECIONOVÁ,CZE,Czechia,CZ,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197798,Lucia,VUOLO,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.FOR,204400,Adrián,VÁZQUEZ LÁZARA,ESP,Spain,ES,RENEW,Renew Europe,Renew
+VotePosition.FOR,190464,Thomas,WAITZ,AUT,Austria,AT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.AGAINST,197817,Mick,WALLACE,IRL,Ireland,IE,GUE_NGL,The Left in the European Parliament – GUE/NGL,GUE/NGL
+VotePosition.DID_NOT_VOTE,197863,Maria,WALSH,IRL,Ireland,IE,EPP,European People’s Party,EPP
+VotePosition.FOR,197429,Marion,WALSMANN,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197405,Jörgen,WARBORN,SWE,Sweden,SE,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197566,Witold Jan,WASZCZYKOWSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,28229,Manfred,WEBER,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,123562,Charlie,WEIMERS,SWE,Sweden,SE,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197515,Pernille,WEISS,DNK,Denmark,DK,EPP,European People’s Party,EPP
+VotePosition.FOR,2323,Rainer,WIELAND,DEU,Germany,DE,EPP,European People’s Party,EPP
+VotePosition.FOR,197675,Sarah,WIENER,AUT,Austria,AT,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.FOR,214839,Emma,WIESNER,SWE,Sweden,SE,RENEW,Renew Europe,Renew
+VotePosition.ABSTENTION,197769,Michal,WIEZIK,SVK,Slovakia,SK,RENEW,Renew Europe,Renew
+VotePosition.FOR,39725,Iuliu,WINKLER,ROU,Romania,RO,EPP,European People’s Party,EPP
+VotePosition.FOR,197652,Angelika,WINZIG,AUT,Austria,AT,EPP,European People’s Party,EPP
+VotePosition.FOR,197421,Isabel,WISELER-LIMA,LUX,Luxembourg,LU,EPP,European People’s Party,EPP
+VotePosition.AGAINST,124877,Jadwiga,WIŚNIEWSKA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,5392,Lara,WOLTERS,NLD,Netherlands,NL,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,185619,Tiemo,WÖLKEN,DEU,Germany,DE,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.FOR,197511,Salima,YENBOU,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.FOR,197581,Stéphanie,YON-COURTIN,FRA,France,FR,RENEW,Renew Europe,Renew
+VotePosition.DID_NOT_VOTE,197842,Elena,YONCHEVA,BGR,Bulgaria,BG,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,125067,Theodoros,ZAGORAKIS,GRC,Greece,GR,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.AGAINST,23712,Jan,ZAHRADIL,CZE,Czechia,CZ,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,197572,Anna,ZALEWSKA,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.FOR,197586,Stefania,ZAMBELLI,ITA,Italy,IT,EPP,European People’s Party,EPP
+VotePosition.AGAINST,124780,Marco,ZANNI,ITA,Italy,IT,ID,Identity and Democracy,ID
+VotePosition.ABSTENTION,197606,Javier,ZARZALEJOS,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,124713,Tomáš,ZDECHOVSKÝ,CZE,Czechia,CZ,EPP,European People’s Party,EPP
+VotePosition.AGAINST,197489,Bernhard,ZIMNIOK,DEU,Germany,DE,ID,Identity and Democracy,ID
+VotePosition.ABSTENTION,197621,Juan Ignacio,ZOIDO ÁLVAREZ,ESP,Spain,ES,EPP,European People’s Party,EPP
+VotePosition.FOR,124739,Carlos,ZORRINHO,PRT,Portugal,PT,SD,Progressive Alliance of Socialists and Democrats,S&D
+VotePosition.DID_NOT_VOTE,185341,Željana,ZOVKO,HRV,Croatia,HR,EPP,European People’s Party,EPP
+VotePosition.FOR,125237,Marco,ZULLO,ITA,Italy,IT,RENEW,Renew Europe,Renew
+VotePosition.FOR,96933,Milan,ZVER,SVN,Slovenia,SI,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,28615,Roberts,ZĪLE,LVA,Latvia,LV,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,124884,Kosma,ZŁOTOWSKI,POL,Poland,PL,ECR,European Conservatives and Reformists,ECR
+VotePosition.AGAINST,125025,Marcel,de GRAAFF,NLD,Netherlands,NL,NI,Non-attached Members,Non-attached
+VotePosition.FOR,197766,Lucia,ĎURIŠ NICHOLSONOVÁ,SVK,Slovakia,SK,RENEW,Renew Europe,Renew
+VotePosition.AGAINST,96791,Elżbieta Katarzyna,ŁUKACIJEWSKA,POL,Poland,PL,EPP,European People’s Party,EPP
+VotePosition.DID_NOT_VOTE,58766,Nicolae,ŞTEFĂNUȚĂ,ROU,Romania,RO,GREEN_EFA,Greens/European Free Alliance,Greens/EFA
+VotePosition.ABSTENTION,124710,Michaela,ŠOJDROVÁ,CZE,Czechia,CZ,EPP,European People’s Party,EPP
+VotePosition.ABSTENTION,124929,Ivan,ŠTEFANEC,SVK,Slovakia,SK,EPP,European People’s Party,EPP
+VotePosition.AGAINST,28619,Tatjana,ŽDANOKA,LVA,Latvia,LV,NI,Non-attached Members,Non-attached
