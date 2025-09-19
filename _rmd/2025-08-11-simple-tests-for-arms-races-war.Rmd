@@ -299,7 +299,7 @@ tibble(`rchisq(df = 1)` = rchisq(nobs, df = 1),
 
 ```
 
-In the case of the chi-squared test, the degrees of freedom is equal to the product of the number of rows (minus 1) and the number of columns (minus 1). For a simple 2x2 contingency table, that's 1. Inference here works in the same way it does most other applications. Higher values will generally indicate greater incompatibility with the distribution, suggesting a rejection of the null hypothesis of no association. You can do this in R with the `pchisq()` function.
+In the case of the chi-squared test, the degrees of freedom is equal to the product of the number of rows (minus 1) and the number of columns (minus 1). For a simple 2x2 contingency table, that's 1. Inference here works in the same way it does most other applications. Higher test values (lower *p*-values) will indicate greater incompatibility with the distribution, suggesting a rejection of the null hypothesis of no association. You can do this in R with the `pchisq()` function.
 
 ```{r}
 pchisq(chisq, df = 1, lower.tail = F)
