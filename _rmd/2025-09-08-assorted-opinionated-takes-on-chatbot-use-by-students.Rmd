@@ -1,5 +1,5 @@
 ---
-title: "Assorted Opinionated Takes on Chatbot Use by Students"
+title: "Some Opinionated Takes on Chatbot Use by Students"
 output:
   md_document:
     variant: gfm
