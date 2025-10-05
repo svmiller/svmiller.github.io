@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Assorted Article Summaries in Political Science/International Relations
+title: Some Article Summaries in Political Science/International Relations
 permalink: /article-summaries/
 image: "edward-james-olmos-stand-deliver.jpg"
 active: miscelanea
