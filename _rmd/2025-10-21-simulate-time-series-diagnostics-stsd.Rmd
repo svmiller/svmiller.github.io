@@ -310,7 +310,7 @@ DFC %>%
                       as.vector(DF5$stats))) -> teststats
 ```
 
-```{r simulated-test-stats-usd-sek, echo = F, eval = T}
+```{r simulated-test-stats-usd-sek, echo = F, eval = T, fig.width = 12}
 DF4$sims %>% mutate(hyp = "Non-stationary (Actual SED/USK Time Series)") %>%
   bind_rows(., DF5$sims %>% 
               mutate(hyp = "Stationary (First Difference of SED/USK Time Series)")) -> DFC
