@@ -86,7 +86,7 @@ add_jekyll_image('/images/protectors-of-our-industries.jpg', "Bernhard Gilliam's
 
 <!-- *Last updated: `r format(Sys.Date(), "%d %B %Y")`.*  -->
 
-This is yet another tutorial for students in my quantitative methods courses, this time at the BA-level. I sense a kind of panic from students as they approach a final paper in which I ask them to ask their own question and answer it with quantitative methods. They don't know where to look. I've made a few guides available to them. I have an example paper I provide to them where I do a simple analysis of Swedish respondents in the World Values Survey on attitudes toward democracy. I've given them some inspiration for [the kinds of analysis they can do](https://svmiller.com/blog/2024/10/inequality-insurgency-south-vietnam-1968-statistical-analysis/), and how you can [use `{WDI}` to do these types of papers as well](https://svmiller.com/blog/2024/10/make-simple-cross-sectional-world-bank-data-wdi/). I also make a copy of the Quality of Government (QoG) data from [the Quality of Government Institute](https://www.gu.se/en/quality-government) available to them. However, I don't offer them a particular example. I thought I would do that here to hopefully dissuade them from further panic about this assignment and from biting off more they can chew on conflict data. I laud the initiative to do spatial analyses or TSCS models of conflict fatalities, but doing those well requires *a lot* of guidance about [joins](https://svmiller.com/blog/2021/01/a-tutorial-on-the-join-family-in-r/), [state systems](https://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/), and [the myriad things you can do in `{peacesciencer}`](https://svmiller.com/peacesciencer/). However, [this class has just three lectures and seven labs](https://ir3-2.svmiller.com/). I can only do so much and ask for so much. I don't want students trying to do too much, and doing it poorly. I'd rather a very simple exercise be done confidently at this stage than see students try to slay a dragon with a fork and dinner plate.
+This is yet another tutorial for students in my quantitative methods courses, this time at the BA-level. I sense a kind of panic from students as they approach a final paper in which I ask them to ask their own question and answer it with quantitative methods. They don't know where to look. I've made a few guides available to them. I have an example paper I provide to them where I do a simple analysis of Swedish respondents in the World Values Survey on attitudes toward democracy. I've given them some inspiration for [the kinds of analysis they can do](https://svmiller.com/blog/2024/10/inequality-insurgency-south-vietnam-1968-statistical-analysis/), and how you can [use `{WDI}` to do these types of papers as well](https://svmiller.com/blog/2024/10/make-simple-cross-sectional-world-bank-data-wdi/). I also make a copy of the Quality of Government (QoG) data from [the Quality of Government Institute](https://www.gu.se/en/quality-government) available to them. However, I don't offer them a particular example with these data. I thought I would do that here to hopefully dissuade them from further panic about this assignment and from biting off more they can chew on conflict data. I laud the initiative to do spatial analyses or TSCS models of conflict fatalities, but doing those well requires *a lot* of guidance about [joins](https://svmiller.com/blog/2021/01/a-tutorial-on-the-join-family-in-r/), [state systems](https://svmiller.com/blog/2021/01/a-tutorial-on-state-classification-systems/), and [the myriad things you can do in `{peacesciencer}`](https://svmiller.com/peacesciencer/). [This class has just three lectures and seven labs](https://ir3-2.svmiller.com/) and students have to [draw an owl](https://www.reddit.com/r/pics/comments/d3zhx/how_to_draw_an_owl/) under those constraints. I can only do so much and ask for so much. I don't want students trying to do too much, and doing it poorly. I'd rather a very simple exercise be done confidently at this stage than see students try to slay a dragon with a fork and dinner plate.
 
 Here are the R packages I'll be using.
 
@@ -114,7 +114,7 @@ On with the show...
 
 Students should [download the "standard" data set](https://www.gu.se/en/quality-government/qog-data/data-downloads/standard-dataset) made available by the Quality of Government Institute. This is an intro-level, one-month-long quantitative methods course and I cannot expect students to get into the weeds of cross-section time-series (panel) data. Download the "Cross-Section" version of the data in any format and save it to your hard drive.
 
-Load it into R as follows. The file path obviously suggests that I make these available to my students (in Stata's `.dta` format).
+Load it into R as follows. The file path obviously suggests that I make these available to my students (in Stata's `.dta` format). Students should adjust their file path to wherever the data are on their hard drive.
 
 ```{r}
 QoG <- haven::read_dta("~/Koofr/teaching/eh1903-ir3/2/data/qog/qog_std_cs_jan24_stata14.dta")
@@ -133,7 +133,7 @@ I don't have much recourse other than to plead with the student to read, read wi
 add_jekyll_image('/images/top1-qog.png', "Information about the 'top 1%' variable in Quality of Government's cross-sectional data set.", "1200", "center")
 ```
 
-Do note the codebook helpfully communicates temporal reach and, importantly, cross-sectional coverage. For cross-sectional data with a global aim, we want as many observations as possible (knowing we have just 194 as a maximum). In this case, the codebook is advertising that 88.6% of countries have a measure of the "top 1%"'s share of pre-tax national income.
+Observe the codebook helpfully communicates temporal reach and, importantly, cross-sectional coverage. For cross-sectional data with a global aim, we want as many observations as possible (knowing we have just 194 as a maximum). In this case, the codebook is advertising that 88.6% of countries have a measure of the "top 1%"'s share of pre-tax national income.
 
 The measure itself [correlates highly](https://www.jstor.org/stable/4625575?seq=1) with other standard measures of "inequality" even if it [may not be an optimum measure of the thing in question](https://ciaotest.cc.columbia.edu/wps/cato/0026818/f_0026818_21908.pdf) when better alternatives are available.[^cato] No matter, the language of the "top 1%" still resonates in how we link issues of wealth concentration with the current trajectory of democracy in the international system. Modeling its variation and what we know about where extreme wealth concentrates is not a bad exercise for a student at this stage. I would obviously expect more of a literature review than this than I'm doing here even if I'm not asking for much on the assignment.
 
@@ -159,27 +159,28 @@ QoG %>%
        caption = "Data: Quality of Government Standard Dataset, 2024 (Cross-Section)")
 ```
 
-Having seen both, presenting the histogram, and consulting the basic measures of the range and central tendency of the measure, the basic takeaway is the typical country's wealth concentration in the top 1% is about 15%. The mean and median don't disagree with each other much at all though it looks like there is a small tail for a select few countries where as much as 31% of the pre-tax national income is held in the top 1% of the population. `filter()` and some hackery with `row_number()` can identify the top five and bottom five in this measure.
+Having seen both, presenting the histogram, and consulting the basic measures of the range and central tendency of the measure, the rough takeaway is the typical country's wealth concentration in the top 1% is about 15%. The mean and median don't disagree with each other much at all though it looks like there is a small tail for a select few countries where as much as 31% of the pre-tax national income is held in the top 1% of the population. `filter()` and some hackery with `row_number()` can identify the top five and bottom five in this measure.
 
 ```{r}
 QoG %>%
   select(cname, top_top1_income_share) %>%
   arrange(-top_top1_income_share) %>%
   na.omit %>% # cheesing this because of missing data
-  filter(row_number() %in% c(1:5, 168:172))
+  filter(row_number() %in% c(1:5, 168:172)) %>%
+  mutate(rank = c(1:5, 168:172))
 ```
 
 ## Look for Some "Causes" {#ivs}
 
-Social science likes to tug on pretty little causal levers when it can, though this isn't available to us in a cross-sectional data set like this for a class that lasts a month and has three lectures. Thus, we'll do our best to conceptualize some "causes" of the variation in the "top 1%" income share measure and just hope we don't get hounded by someone asking for an instrumental variable or difference-in-difference estimator or whatever. The best I can encourage students to do at this stage after identifying a dependent variable of interest is to search for analyses that have used this exact measure as a dependent variable. See what they did. 
+Social science likes to tug on pretty little causal levers when it can, though this isn't available to us in a cross-sectional data set like this for a class that lasts a month and has three lectures. Thus, we'll do our best to conceptualize some "causes" of the variation in the "top 1%" income share measure and just hope we don't get hounded by someone asking for an instrumental variable or difference-in-difference estimator or whatever. The best I can encourage students to do at this stage after identifying a dependent variable of interest is to search for analyses that have used this exact measure as a dependent variable. See what they did. Get some inspiration from that.
 
 This led me to [this 2019 article from Huber et al. in *Socio-Economic Review*](https://doi.org/10.1093/ser/mwx027) where this measure features as a dependent variable. Their main argument is the causes of variation in this measure are largely political and less economic. In particular, they argue we can understand variation in this measure as largely a function of tax rates, the power/prevalence of unions, and the control of government by the political right. This finding emerges even controlling for various economic indicators.
 
-I want to echo their argument about the prevalence of the bargaining power of the labor force as important correlate of this measure. I could spin a ball of yarn that the general flattening of income distributions is a triumph of organized labor in the early-to-mid 20th century and we should expect to see the legacy of that today.[^more] One thinks/hopes this argument would resonate with a Swedish audience that I teach. Let's see if we can't find something related to this by searching for things like "union", "bargain[ing]", "worker", or "labo[u]r".
+I want to echo their argument about the prevalence of the bargaining power of the labor force as important correlate of this measure. I could spin a ball of yarn that the general flattening of income distributions is a triumph of organized labor in the early-to-mid 20th century and we should expect to see the legacy of that today.[^more] One thinks/hopes this argument would resonate with a Swedish audience that I teach. Let's see if we can find something related to this by searching for things like "union", "bargain[ing]", "worker", or "labo[u]r".
 
 [^more]: Students of mine, I'm asking for a bit more than this. You can see my examples on the course module.
 
-Alas, I found something.
+Great, I found something.
 
 ```{r worker, echo=F, eval=T, results="asis", cache=F}
 add_jekyll_image('/images/worker-qog.png', "Information about worker's rights in Quality of Government's cross-sectional data set.", "1200", "center")
@@ -205,11 +206,11 @@ QoG %>%
 
 ### Getting Some Other Stuff {#controls}
 
-I will say up front we cannot possibly do everything that the authors did with this data set because some measures will just not be available or will be super limited in cross-sectional reach. I permit some flexibility in doing an analysis like this for the sake of the final assignment. No matter, we'll try our best to approximate what Huber et al. did with the following information that's also available in the QoG data. We have to "control" for the relationship we're arguing exists between worker's rights and the wealth concentration measure.
+I will say up front we cannot possibly do everything that the authors did with this data set because some measures will just not be available or will be super limited in its cross-sectional reach. I permit some flexibility in doing an analysis like this for the sake of the final assignment. No matter, we'll try our best to approximate what Huber et al. did with the following information that's also available in the QoG data. We have to "control" for the relationship we're arguing exists between worker's rights and the wealth concentration measure.
 
 - `[bmr_dem]`: We really need a measure of democracy of some kind but don't have the more granular measurements the authors use. We'll use a dummy indicator by way of [Boix et al. (2013)](https://journals.sagepub.com/doi/10.1177/0010414012463905). Boix, incidentally, has one of my favorite analyses of [the nexus between democracy and redistribution](https://www.cambridge.org/core/books/democracy-and-redistribution/ACB818ADD9174249D028E64634627626) that I have ever read.
 - `[wdi_expedu]`: government expenditure on education (as a percentage of GDP). We need some kind of human capital/education measure, and this is the one I chose. Word to the wise (students): prefices of `wdi_` generally signal greater cross-sectional coverage as it comes from the World Bank's DataBank.
-- `[fi_sog]`: the QoG data do not appear to have the kind of marginal tax rate variable that I would want, but a search for "tax rate" found this measure. It's an index from the "Economic Freedom Dataset" on the size of government by way of the Fraser Institute. Higher values signal, among other things, "low marginal tax rates and high income thresholds". I'll say this now to get it out of the way; [the Fraser Institute is not serious](https://www.huffpost.com/archive/ca/entry/koch-brothers-tea-party-billionaires-donated-to-right-wing-fra_n_1456223) and [anything they do should not be taken seriously](https://www.healthcoalition.ca/past-time-to-stop-platforming-the-fraser-institute-canada-can-afford-public-health-care/). It pains me to use this measure. Alas, it's here, for, umm, reasons and there's not (I think?) a better one at the moment in the data I have...
+- `[fi_sog]`: the QoG data do not appear to have the kind of marginal tax rate variable that I would want, but a search for "tax rate" found this measure. It's an index from the "Economic Freedom Dataset" on the size of government by way of the Fraser Institute. Higher values signal, among other things, "low marginal tax rates and high income thresholds". I'll say this now to get it out of the way; [the Fraser Institute is not serious](https://www.huffpost.com/archive/ca/entry/koch-brothers-tea-party-billionaires-donated-to-right-wing-fra_n_1456223) and [anything they do should not be taken seriously](https://www.healthcoalition.ca/past-time-to-stop-platforming-the-fraser-institute-canada-can-afford-public-health-care/). It pains me to use this measure. Alas, it's here, for, umm, reasons and there's not (I think?) a better one at the moment in the data I have. Perhaps the charitable interpretation from this forfeits a causal effect and asserts it's just going to find a (positive) partial association between its measure and what these people hope to achieve (i.e. the upward redistribution of wealth). Alas...
 - `[wdi_gdpcapcon2015]`: Gotta have GDP per capita. Will log-transform this.
 - `[wdi_fdiout]`: Foreign direct investment, net outflows (as percentage of GDP). This is a case where I needed to search for "foreign direct" and not "FDI" to better find what I wanted.
 - `[wdi_gdpgr]`: GDP growth (as an annual percentage). Huber et al. have it included in their paper, or at least a working paper that was easier to obtain.
@@ -236,7 +237,7 @@ Cool? Cool.
 
 ## Some Descriptive Statistics {#descriptive}
 
-From here, you can do some basic descriptive statistics like the kind I introduce to students in my class. This will lean on `{modelsummary}` and, in particular, the `datasummary_skim()` function it has. This is my go-to for teaching students how to effortlessly create a descriptive statistics table that they can copy-paste into their Word document. I wish I had time to teach them R Markdown, but that's a different conversation. Doing this in R Markdown would also make the title appear as a caption. Students can manually insert that themselves.
+From here, you can do some basic descriptive statistics like the kind I introduce to students in my class. This will lean on `{modelsummary}` and, in particular, the `datasummary_skim()` function it has. This is my go-to for teaching students how to effortlessly create a descriptive statistics table that they can copy-paste into their Word document. I wish I had time to teach them R Markdown, but that's a different conversation. Doing this in R Markdown would also make the title appear as a caption. Students can manually insert that themselves. However, it won't show for my purposes given [my relatively archaic setup](https://svmiller.com/categories/#Jekyll).
 
 ```{r, echo = T, eval = F}
 Data %>%
@@ -258,7 +259,7 @@ Data %>%
 ```
 </div>
 
-One thing I've discovered that I think(?) is a relatively new feature of `datasummary_skim()` in `{modelsummary}` is its ability to process variable labels. It really isn't worth belaboring these things in the limited time I have with students. Students can also just as well fix these things in their Word document. Alternatively, you can find where these things are stored in the data frame. You might also find an Easter egg from the Quality of Government Institute in the data referencing a Spiderman movie.
+One thing I've discovered that I think(?) is a relatively new feature of `datasummary_skim()` in `{modelsummary}` is its ability to process variable labels. It really isn't worth belaboring these things in the limited time I have with students. Students can also just as well fix these things in their Word document. For now, it might be nice to know you can find where these things are stored in the data frame. You might also find an Easter egg from the Quality of Government Institute in the data referencing a Spiderman movie.
 
 ```{r}
 str(Data)
@@ -355,7 +356,7 @@ modelsummary(list("Model 1" = M1),
 
 </div>
 
-The results identify statistically significant effects for the democracy measure, the worker's rights measure, the size of government variable, and GDP growth. The statistically significant effects we identify are not log-transformed, so we don't have to [sweat that detail](https://svmiller.com/blog/2023/01/what-log-variables-do-for-your-ols-model/). We can note, in the case of our hypothesis, that a one-unit change in the Worker's Rights Index decreases the percentage of wealth concentration in the top 1% by .04 percentage points. The model itself accounts for about 23% of the variation in the wealth concentration measure.
+The results identify statistically significant effects for the democracy measure, the worker's rights measure, the size of government variable, and GDP growth. The size of government variable from the Fraser Institute is easily the most precisely estimated effect. The others, by comparison, are significant at only the .10 level. The statistically significant effects we identify are not log-transformed, so we don't have to [sweat that detail](https://svmiller.com/blog/2023/01/what-log-variables-do-for-your-ols-model/). We can note, in the case of our hypothesis, that a one-unit change in the Worker's Rights Index decreases the percentage of wealth concentration in the top 1% by .04 percentage points. It's significant at the .10 level (p = .082). The model itself accounts for about 23% of the variation in the wealth concentration measure.
 
 ## Very Basic Diagnostics {#diagnostics}
 
@@ -374,7 +375,7 @@ broom::augment(M1) %>%
        caption = "I am pleasantly surprised this passed the Breusch-Pagan test.")
 ```
 
-My `linloess_plot()` function might say more about these relationships. Perhaps the size of government variable merits a square term, should we conceptualize about wealth concentration peculiarities at the tails of the spectrum vis-a-vis the middle.
+My `linloess_plot()` function might say more about these relationships. Perhaps the size of government variable merits a square term, should we conceptualize about wealth concentration peculiarities at the tails of the spectrum vis-a-vis the middle. That FDI outflow variable is, well, what it is. I knew what to expect and was not surprised.
 
 ```{r}
 linloess_plot(M1, se = FALSE, no_dummies = TRUE) +
@@ -390,7 +391,7 @@ You can humor the normality assumption (of the residuals) in a few ways. For exa
 shapiro.test(resid(M1))
 ```
 
-Here's my residual density plot function (`rd_plot()`). Before practitioners I know pounce on me for teaching students this, I do emphasize this assumption is the least important of OLS' assumptions. In real world applications, normality is reasonably approximated if never truly achieved for a model with a large number of observations and any peculiarities whatsoever.
+Here's my residual density plot function (`rd_plot()`). Before practitioners I know pounce on me for teaching students this, I do emphasize this assumption is the least important of OLS' assumptions. In real world applications, normality is reasonably approximated if never truly achieved for a model with a large number of observations and any peculiarities whatsoever. However, students can easily get the intuition behind this even as I belabor that it's a conditional assumption that wants to imply something about the dependent variable in question.
 
 ```{r}
 rd_plot(M1) +
