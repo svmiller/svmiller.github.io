@@ -200,7 +200,7 @@ QoG %>%
          top_top1_income_share, wef_wr,
          wdi_expedu, fi_sog, bmr_dem,
          wdi_gdpcapcon2015, wdi_fdiout, wdi_gdpgr) %>%
-  # go ahead an do this now...
+  # go ahead and do this now...
   mutate(ln_gdppc = log(wdi_gdpcapcon2015)) %>%
   # A nuclear option to get complete cases. Use with caution.
   # Do so only if your data are fully inclusive of everything you want and
