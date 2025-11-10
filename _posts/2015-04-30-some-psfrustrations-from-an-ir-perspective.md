@@ -17,7 +17,7 @@ I checked Twitter for the first time in two months or so and found this interest
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-The responses were great. This is surprising because few things reach a consensus in political science and our practitioners *love* to argue. However, the returns on this tweet, [summarized here][2] and aggregated on Twitter with the [#psfrustration][3] hashtag, largely focused on American politics. These are important for the layperson to know. *Citizens United* may be a nuisance, but money doesn't determine elections. We can pine for a viable third party but we will not have one under a first-past-the-post electoral rule like ours. Independents are secret partisans and partisanship is a perspective that conditions our outlook toward politics and society (and not the other way around).
+The responses were great. This is surprising because few things reach a consensus in political science and our practitioners *love* to argue. However, the returns on this tweet, [summarized here][2] and aggregated on Twitter with the [#psfrustration][3] hashtag, largely focused on American politics. These are important for the layperson to know. *Citizens United* may be a nuisance, but money doesn't determine elections. We can pine for a viable third party but we will not have one under a first-past-the-post electoral rule like ours. Independents are secret partisans and partisanship is a perspective that conditions our outlook toward politics and society (and not the other way around).
 
 Nothing I saw (at least, immediately) touched on international relations. That got me thinking about what are some things I wish I could implore on non-political scientists I know (and definitely students). The following list is incomplete, but they constitute some preliminary reactions.
 
@@ -80,10 +80,10 @@ So, yes, democracies do not fight each other, and never in war. We're not sure (
  [6]: https://books.google.com/books?id=3PLqetBxiOEC&printsec=frontcover&dq=collier+civil+war+trap&hl=en&sa=X&ei=Tp1BVbayC4mlgwTNsYBQ&ved=0CCEQuwUwAA#v=onepage&q=collier%20civil%20war%20trap&f=false
  [7]: http://www.upf.edu/enoticies/es/0405/_pdf/montalvo.pdf
  [8]: http://jpr.sagepub.com/content/51/5/634
- [9]: http://dev.wcfia.harvard.edu/sites/default/files/MT_GettingReligion.pdf
- [10]: http://citation.allacademic.com/meta/p_mla_apa_research_citation/4/9/8/6/9/p498695_index.html?phpsessid=hqj6b94ff0tph2edmpj2e24281
+ [9]: https://doi.org/10.1162/isec.2007.31.4.97
+ [10]: https://doi.org/10.1177/1532673X9402200307
  [11]: http://prq.sagepub.com/content/early/2008/02/09/1065912907307288.full.pdf
- [12]: http://acme.highpoint.edu/~msetzler/IntlSec/IntlSecReads/05.1.Levy1988Domestic.pdf
+ [12]: https://www.jstor.org/stable/204819
  [13]: http://en.wikipedia.org/wiki/Duverger%27s_law
  [14]: http://en.wikipedia.org/wiki/Democratic_peace_theory
  [15]: https://www.hawaii.edu/powerkills/BABST.ELECTIVE.GOVERNMENT.PDF
@@ -94,19 +94,19 @@ So, yes, democracies do not fight each other, and never in war. We're not sure (
  [20]: http://www.systemicpeace.org/polity/tur2.htm
  [21]: http://www.theguardian.com/commentisfree/2013/jul/16/egyptian-coup-warning-will-erdogan-listen
  [22]: http://mitpress.mit.edu/books/logic-political-survival
- [23]: http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=9371272&fileId=S1752971914000347
+ [23]: http://doi.org/10.1017/S1752971914000347
  [24]: https://doi.org/10.1111/j.1468-2478.2009.00552.x
- [25]: http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=2300088&fileId=S0003055408080131
- [26]: http://onlinelibrary.wiley.com/doi/10.1111/j.1540-5907.2007.00244.x/abstract?deniedAccessCustomisedMessage=&userIsAuthenticated=false
- [27]: http://politicalscience.cos.ucf.edu/wp-content/uploads/2013/08/Mous_ISQ-2013.pdf
- [28]: http://onlinelibrary.wiley.com/doi/10.1111/j.1540-5907.2010.00487.x/abstract?deniedAccessCustomisedMessage=&userIsAuthenticated=false
- [29]: http://onlinelibrary.wiley.com/doi/10.1111/isqu.12055/abstract?deniedAccessCustomisedMessage=&userIsAuthenticated=false
- [30]: http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=3218584&fileId=S0020818300001697
+ [25]: https://doi.org/10.1017/S0003055408080131
+ [26]: https://doi.org/10.1111/j.1540-5907.2007.00244.x
+ [27]: https://doi.org/10.1111/isqu.12003
+ [28]: https://doi.org/10.1111/j.1540-5907.2010.00487.x
+ [29]: https://doi.org/10.1111/isqu.12055
+ [30]: https://doi.org/10.1017/S0020818300001697https://doi.org/10.1017/S0020818300001697 
  [31]: http://svmiller.com/research
  [32]: http://www.cambridge.org/us/academic/subjects/politics-international-relations/international-relations-and-international-organisations/territorial-peace-borders-state-development-and-international-conflict
- [33]: http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=6190304&fileId=S0022381600053500
- [34]: http://onlinelibrary.wiley.com/doi/10.1111/0020-8833.00155/abstract
- [35]: http://onlinelibrary.wiley.com/doi/10.1111/0020-8833.00115/abstract
- [36]: http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=1927352&fileId=S0022381608080766
- [37]: http://onlinelibrary.wiley.com/doi/10.1111/j.1528-3577.2005.00217.x/abstract
- [38]: http://www.mitpressjournals.org/doi/abs/10.1162/ISEC_a_00117#.VUKO82RViko
+ [33]: https://doi.org/10.1017/S0022381600053500
+ [34]: https://doi.org/10.1111/0020-8833.00155
+ [35]: https://doi.org/10.1111/0020-8833.00115
+ [36]: https://doi.org/10.1017/S0022381608080766
+ [37]: https://doi.org/10.1111/j.1528-3577.2005.00217.x
+ [38]: https://doi.org/10.1162/ISEC_a_00117
