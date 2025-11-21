@@ -1,6 +1,27 @@
 /**
  * Site header
  */
+
+/* Better hygiene for the mobile hamburger icon */ 
+/* This will forcibly hide it on the desktop */
+.site-nav > .menu-icon,
+.site-nav > .menu-icon svg {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* For the most narrow screens, make sure it's visible */
+@media only screen and (max-width: 600px) {
+  .site-nav > .menu-icon,
+  .site-nav > .menu-icon svg {
+    display: inline-block !important; 
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
+
+
 .site-header {
     border-top: 0px solid $grey-color-dark;
 	border-bottom: 4px solid $su-water;
