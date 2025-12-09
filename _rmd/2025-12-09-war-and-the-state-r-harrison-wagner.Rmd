@@ -1,5 +1,5 @@
 ---
-title: "War and the State: An Appreciation of R. Harrison Wagner"
+title: "War and the State: An Appreciation"
 output:
   md_document:
     variant: gfm
