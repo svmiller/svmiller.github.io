@@ -22,11 +22,11 @@ rmd_name <- stringr::str_sub(rmd_name, 12, -1)
 rmd_name <- stringr::str_sub(rmd_name, 1, stringr::str_length(rmd_name)-4)
 
 
-base_dir <- "~/Dropbox/svmiller.github.io/"
+base_dir <- "~/Koofr/svmiller.github.io/"
 base_url <- "/"
 fig_path <- paste0("images/", rmd_name, "/")
 
-cache_path <- paste0("~/Dropbox/svmiller.github.io/cache/", rmd_name, "/")
+cache_path <- paste0("~/Koofr/svmiller.github.io/cache/", rmd_name, "/")
 
 add_jekyll_image <- function(url, caption, width, align) {
  img <- paste0('{% include image.html url="',url,'" caption="',caption,'" width=',width,' align="',align,'" %}')
@@ -245,7 +245,9 @@ Here, you have several options for so-called "heteroskedasticity consistent (HC)
 
 [^whyhc1]: I'll be honest that I have no idea how how this became the default standard error correction in Stata. I wish I did. I just know that it was when I was using Stata (and might still be, for all I know).
 
-And yes, there's even more than that. If I were presented this hypothetical situation with 95 observations and all the computing power I could ever want, [I would 100% bootstrap this](http://svmiller.com/blog/2020/03/bootstrap-standard-errors-in-r/). You have plenty of options here. The simple bootstrap resamples, with replacement, from the data to create some number of desired replicates against which the model is re-estimated. Given enough replicates, the mean of the coefficients converges on the original coefficient but the standard deviation of the coefficient from those replicates is the new standard error. You judge statistical significance from that. There are several other bootstrapping approaches, but here's just two more. The first is a bootstrapped model from the residuals. Sometimes called a "Bayesian" or "fractional" bootstrap, this approach had its [hot girl summer](https://www.vox.com/the-goods/2019/7/12/20690515/hot-girl-summer-meme-define-explained) [on](https://twitter.com/MatteoCourthoud/status/1557308520596471808) [Twitter](https://twitter.com/instrumenthull/status/1487469316010389516?lang=en) [two or three](https://gist.github.com/grantmcdermott/7d8f9ea20d2bbf54d3366f5a72482ad9) years ago and leaves the regressors at their fixed values and resamples the residuals and adds them to the response variable. A spiritually similar approach, the so-called "wild" bootstrap, multiplies the residuals by response variable once they have been multiplied by a random variable. By default, this is [a Rademacher distribution](https://en.wikipedia.org/wiki/Rademacher_distribution).
+And yes, there's even more than that. If I were presented this hypothetical situation with 95 observations and all the computing power I could ever want, [I would 100% bootstrap this](http://svmiller.com/blog/2020/03/bootstrap-standard-errors-in-r/). You have plenty of options here. The simple bootstrap resamples, with replacement, from the data to create some number of desired replicates against which the model is re-estimated. Given enough replicates, the mean of the coefficients converges on the original coefficient but the standard deviation of the coefficient from those replicates is the new standard error. You judge statistical significance from that. There are several other bootstrapping approaches, but here's just two more. The first is a bootstrapped model from the residuals. Rather than case resampling (with replacement), this approach takes the residuals from the offending model, resamples those with replacement, and adds the residuals to the outcome variable as new synthetic values. The regressors themselves are fixed and unchnaged, but the outcome variable is then subject to resampling of a kind.  A spiritually similar approach, the so-called "wild" bootstrap, multiplies the residuals by response variable once they have been multiplied by a random variable. By default, this is [a Rademacher distribution](https://en.wikipedia.org/wiki/Rademacher_distribution). Truthfully, if you are tempted to use the residual bootstrap, you should probably use the wild bootstrap instead.
+
+<!-- Sometimes called a "Bayesian" or "fractional" bootstrap, this approach had its [hot girl summer](https://www.vox.com/the-goods/2019/7/12/20690515/hot-girl-summer-meme-define-explained) [on](https://twitter.com/MatteoCourthoud/status/1557308520596471808) [Twitter](https://twitter.com/instrumenthull/status/1487469316010389516?lang=en) [two or three](https://gist.github.com/grantmcdermott/7d8f9ea20d2bbf54d3366f5a72482ad9) years ago and leaves the regressors at their fixed values and resamples the residuals and adds them to the response variable.  -->
 
 You could do all this mostly from the `vcov*` family of functions in the `{sandwich}` package, combined with `coeftest()` from `{lmtest}`. The reproducible seed is for funsies since there's bootstrap resampling happening here as well. We'll go with 500 replicates (which is what the `R` argument is doing).
 
