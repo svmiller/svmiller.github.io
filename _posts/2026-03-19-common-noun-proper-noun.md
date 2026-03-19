@@ -1,0 +1,32 @@
+---
+title: "Every Proper Noun is a Case of a Common Noun; Every Case is a Case of Something More General"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2026-03-19'
+excerpt: "If you're interested in proper nouns in political science/international relations, you need to identify the common noun that informs it."
+layout: post
+categories:
+  - Teaching
+image: "2018-rt-moscow.jpg"
+active: blog
+---
+
+
+
+
+{% include image.html url="/images/2018-rt-moscow.jpg" caption="Europe banned (or has 'tried' to ban) RT in light of Russia's invasion of Ukraine. There are proper nouns everywhere. What's the common noun, then? (Mladen Antonov / AFP via Getty Images file)." width=400 align="right" %}
+
+This is a (hopefully) quick hitter based on stuff that I've been repeating to students for a while and have been meaning to flesh out a little bit in a blog post.
+
+One challenge I've encountered for students since I've been here is trying to get them to see more general patterns or concepts. It's not something I remember having to think about in a past life in the United States. In that past life, I had a bit more agency over the curriculum, could structure topics more generally, and encourage students to think of examples. Students here instead express a passing interest in some current event or something that happened and, gulp, want to shoehorn that in one of the big -isms even when [I don't think it's a good idea](https://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#pickatheory). I keep expressing a confusion as to what the point is and, importantly, [what's the question](https://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#question). I end up circling back to two things, both related, that I keep having to repeat. **1) Every proper noun is a case of a common noun. 2) Every case is a case of something more general.**
+
+Here's one quite common example I keep encountering. On March 2, 2022, the European Council issued an ["urgent suspension"](https://www.consilium.europa.eu/en/press/press-releases/2022/03/02/eu-imposes-sanctions-on-state-owned-outlets-rtrussia-today-and-sputnik-s-broadcasting-in-the-eu/) of RT in light of Russia's ongoing invasion of Ukraine. My students keep saying this is a "ban", though I don't quite understand [how that's ever been the case](https://www.rferl.org/a/russia-rt-sputnik-eu-access-bans-propaganda-ukraine-war/32803929.html). No matter, every semester I encounter a student at the BA-level saying they want to write about this. Proper nouns are everywhere in the paragraph's second sentence (e.g. "European Council", "RT, "Russia", "Ukraine"), but there are common nouns lurking underneath that surface that I want the student to identify and bring into greater detail. What are they? The "EU banned RT". Okay, but that is a specific manifestation of something more general. What is it?
+
+I keep repeating this because my battle-weary hobby horses for students here is pleading with them to read scholarship on a topic and not lean on intro-level textbooks, podcasts, think tank reports, or news reports to do that for them. Toward that end, I need to know to more about a stated interest in something like the EU "ban" on RT and what exactly is the broader thing for which that is a specific and capital-case manifestation. Is "the EU 'bans' RT" (the proper nouns[s]) a case of censorship? If so, I want the student immediately consulting the broader academic literature on the politics of censorship and identifying what's missing in what we know about that common noun ("censorship") for which the proper noun(s) ("EU 'bans' RT") would be informative. Is this a policy response to so-called ["hybrid warfare?"](https://www.nato.int/en/what-we-do/deterrence-and-defence/countering-hybrid-threats) If so, I want the student reading about that to better identify how this thing fits in the bigger picture of things like it. The European Union states may have to deal with this vis-a-vis Russia and even Vietnam has to think about it with respect to China. How do these proper nouns fit with respect to the common noun? To answer that, you need to read more about the common noun.
+
+Likewise, students that express an interest in international conflict express an interest in the ongoing Russia-Ukraine War. Perfectly legitimate interest, but that's a proper noun. It's a case. What is its common noun? What is it a case of? How exactly you answer these questions will condition the literature you review that is not just the background information about the case in question. Certainly, the Russia-Ukraine War is a case of an inter-state war. If that's the more general case for which the Russia-Ukraine War is an exemplar, then there is [ample scholarship in the Correlates of War tradition to read](https://posc3610.svmiller.com/syllabus/posc3610-spring2022-syllabus.pdf). I'm even in [one of those books you should definitely read](https://www.bloomsbury.com/us/what-do-we-know-about-war-9781538193150/) at the BA-level. Is it a case of an "absolute war", [like the kind R. Harrison Wagner would write about](https://doi.org/10.2307/2669259)? If so, give him a read and follow some of his citations (and those that cite him). Do you intend to think of this is a "great power interventions?" I'm not sure how well that fits, given [how Scott Wolford describes it](https://doi.org/10.1093/isq/sqad003), but you could do worse than reading Wolford's stuff. He'll give more focused language to what you see. In the process, he'll better focus what you want to get out of looking at this case in particular. I've said before that students need to [go from having topics to having questions](https://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#question). Understanding what your case of interest is a case of and reading scholarship on that will help bring into greater relief what question you ultimately intend to ask.
+
+I try to plead with students to read and read widely and to better contextualize the things they see. They see some event and are interested in it. To get the most out of that interest, the student has to take that proper noun and identify the common noun that informs it. The student has to identify what their case is a case of. From that, read and read widely to better understand what question is important to ask about this case, given what we know (or don't know) about it more generally.
