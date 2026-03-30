@@ -68,16 +68,17 @@ tbody td { padding: 5px;
 
 ## Publications
 
+Gibler, Douglas M., and Steven V. Miller. 2024. "[The Militarized Interstate Events (MIE) Dataset, 1816–2014](https://doi.org/10.1177/07388942231182674)." Conflict Management and Peace Science 41(4): 463–81.
 
-Gibler, Douglas M. and Steven V. Miller. Forthcoming. "The Militarized Interstate Confrontation (MIC) Dataset, 1816-2014." *Journal of Conflict Resolution*.
+Gibler, Douglas M. and Steven V. Miller. 2024. "[The Militarized Interstate Confrontation (MIC) Dataset, 1816-2014](https://doi.org/10.1177/00220027221104704)." *Journal of Conflict Resolution*. 68(2-3): 562--86.
 
-Miller, Steven V. Forthcoming. "A Random Item Response Model of External Territorial Threat, 1816-2010." *Journal of Global Security Studies.*
+Miller, Steven V. 2023. "[Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017](/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)." *Social Science Journal.* 60(4): 818--37.
 
-Miller, Steven V. Forthcoming. "[`{peacesciencer}`](http://svmiller.com/peacesciencer/): An R Package for Quantitative Peace Science Research." *Conflict Management and Peace Science*. 39(6): 755--779.
+Miller, Steven V. 2022. "[A Random Item Response Model of External Territorial Threat, 1816-2010](https://doi.org/10.1093/jogss/ogac012)." *Journal of Global Security Studies* 7(4): ogac012.
+
+Miller, Steven V. 2022. "[`{peacesciencer}`](http://svmiller.com/peacesciencer/): An R Package for Quantitative Peace Science Research." *Conflict Management and Peace Science*. 39(6): 755--779.
 
 Gibler, Douglas M. and Steven V. Miller. 2022. "[An Appraisal of Project Mars and the Divided Armies Argument](https://doi.org/10.1093/isq/sqac011)." *International Studies Quarterly*. 66(2)
-
-Miller, Steven V. Forthcoming. "[Economic Anxiety or Ethnocentrism? An Evaluation of Attitudes Toward Immigration in the U.S. From 1992 to 2017](/research/economic-anxiety-ethnocentrism-immigration-1992-2017/)." *Social Science Journal.*
 
 Miller, Steven V. and Nicholas T. Davis. 2021. "[The Effect of White Social Prejudice on Support for American Democracy](/research/white-social-prejudice-support-american-democracy/)." *Journal of Race, Ethnicity, and Politics.* 6(2): 334--351.
 
@@ -111,11 +112,11 @@ Miller, Steven V. and Douglas M. Gibler. 2011. "[Democracies, Territory and Nego
 
 ## Book Chapters and Edited Volumes
 
-Miller, Steven V. 2022. "Territorial Disputes." *Encyclopedia of Violence, Peace & Conflict* (3rd ed.). Elsevier.
+Miller, Steven V. 2022. "[Territorial Disputes](https://e.pcloud.link/publink/show?code=XZwpAGZGMOXxLAldhy8EU64IG6iGLefUBzV)." *Encyclopedia of Violence, Peace & Conflict* (3rd ed.). Elsevier.
 
 Gibler, Douglas M. and Steven V. Miller. 2021. "The Territorial Peace." [*What Do We Know About War?* (3rd ed.)](https://rowman.com/ISBN/9781538140086/What-Do-We-Know-about-War-Third-Edition). Rowman & Littlefield. pp. 158-170.
 
-Miller, Steven V., Jaroslav Tir, and John A. Vasquez. 2020. "[Geography, Territory, and Conflict](https://oxfordre.com/internationalstudies/view/10.1093/acrefore/9780190846626.001.0001/acrefore-9780190846626-e-320)." *Oxford Research Encyclopedia of International Studies.* `doi:` [10.1093/acrefore/9780190846626.013.320](https://oxfordre.com/internationalstudies/view/10.1093/acrefore/9780190846626.001.0001/acrefore-9780190846626-e-320)
+Miller, Steven V., Jaroslav Tir, and John A. Vasquez. 2020. "[Geography, Territory, and Conflict](https://e.pcloud.link/publink/show?code=XZepAGZBmjRIf4IRB7dLgpHUip0hVgTxXFV)." *Oxford Research Encyclopedia of International Studies.* `doi:` [10.1093/acrefore/9780190846626.013.320](https://oxfordre.com/internationalstudies/view/10.1093/acrefore/9780190846626.001.0001/acrefore-9780190846626-e-320)
 
 ## Book Reviews
 
