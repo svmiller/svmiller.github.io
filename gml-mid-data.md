@@ -4,6 +4,16 @@ title: "Gibler-Miller-Little (GML) MID Data"
 permalink: /gml-mid-data/
 ---
 
+<div class="announcement-box" markdown = "1">
+<!-- <div id="focusbox" markdown = "1"> -->
+
+
+## Please Use the More Current International Conflict Data ⤵️
+
+This project has been superseded by the [International Conflict Data Project](https://internationalconflict.ua.edu/) hosted at the University of Alabama. Please consult that website for more information and more current data.
+
+</div>
+
 {% include image.html url="/images/agadir-crop.jpg" caption="The SMS Berlin arrives to fortify the Germans' position in Agadir in July 1911 (i.e. MID#0315)" width=350 align="right" %}
 
 This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from Gibler, Miller and Little's project published in *International Studies Quarterly*.
