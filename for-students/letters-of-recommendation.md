@@ -15,7 +15,8 @@ This page is a legacy from a past life at Clemson University where letters of
 recommendation were often tailored toward American law schools. I now work at 
 Stockholm University where students sometimes ask me for reference letters for a
 Master's program. Stockholm University students of mine should still find the
-first half of this necessary before approaching me about a letter of recommendation.
+first half of this necessary before approaching me about a letter of 
+recommendation. The second half of this really isn't applicable to their case.
 
 Students in my department at the BA level should be mindful about the first point
 in particular. Instruction in my department is rather faceless. I only teach
