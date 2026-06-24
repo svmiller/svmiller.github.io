@@ -17,7 +17,10 @@ I also offer [a three-page research statement](/docs/svm-research-statement.pdf)
 
 ## Data Sets Created/Maintained
 
-[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/) ![Version 2.2.1](https://img.shields.io/badge/release-v2.2.1-blue.svg) <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
+[*International Conflict Data*](https://internationalconflict.ua.edu/) ![Version 1.0](https://img.shields.io/badge/release-v1.0-blue.svg) <br /> A suite of logically-consistent, correctly-coded data sets that identify all threats, displays, and uses of force between states from 1816 to 2014. Data jointly created/maintained with Douglas M. Gibler.
+
+[*Gibler-Miller-Little (GML) MID Data*](/gml-mid-data/) ![Version 2.2.1](https://img.shields.io/badge/release-v2.2.1-blue.svg) ![superseded](https://img.shields.io/badge/superseded-orange
+) <br /> This page contains links to download non-directed/directed dyad-year militarized interstate dispute (MID) data derived from my co-authored project published in [*International Studies Quarterly*](https://academic.oup.com/isq/article-abstract/60/4/719/2918882/An-Analysis-of-the-Militarized-Interstate-Dispute?redirectedFrom=fulltext).
 
 [*Territorial Change*](https://correlatesofwar.org/data-sets/territorial-change) ![Version 6](https://img.shields.io/badge/release-v6-blue.svg) <br /> This data set records all peaceful and violent changes of territory from 1816-2018.
 
