@@ -5,6 +5,33 @@ permalink: /for-students/letters-of-recommendation/
 active: miscelanea
 ---
 
+<div class="announcement-box" markdown = "1">
+<!-- <div id="focusbox" markdown = "1"> -->
+
+
+## I Wrote This on Aug. 16, 2015 and a *Whole Lot* Has Changed Since Then
+
+This page is a legacy from a past life at Clemson University where letters of 
+recommendation were often tailored toward American law schools. I now work at 
+Stockholm University where students sometimes ask me for reference letters for a
+Master's program. Stockholm University students of mine should still find the
+first half of this necessary before approaching me about a letter of recommendation.
+
+Students in my department at the BA level should be mindful about the first point
+in particular. Instruction in my department is rather faceless. I only teach
+two classes at the BA level (IRII.2, [IRIII.2](https://ir3-2.svmiller.com/)) in 
+which I might actually know who a student is. Of those, IRII.2 is an elective while
+IRIII.2 is the mandatory quantitative methods ritual before the thesis. Everything 
+else is a large lecture hall with 100 students.  I'll reiterate the point here 
+that I mentioned  below over 10 years ago: "Don't take it personally, but I 
+just won’t know who you are." There is really nothing I can do about those 
+structural limitations.
+
+(*For maximum hilarity on how old this, observe that I advise students they can
+meet with me through Skype or Google+. Wow. What a time capsule.* 😳)
+
+</div>
+
 Writing letters of recommendation is an important professional service that professors provide for eligible students. I take these letters seriously when asked to write them and I become interested in how well the letter helps a student seeking some type of professional advancement (e.g. an internship, a job, graduate school, or law school). To that end, the letter I write requires a commitment from me to make sure that I’m helping you as best I can.
 
 Before asking me to write a letter of recommendation, I encourage the student to take the following into consideration **before sending a request to *meet*** about a letter of recommendation.
