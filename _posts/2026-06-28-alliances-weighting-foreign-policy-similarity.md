@@ -39,7 +39,7 @@ Here's a table of contents.
 
 1. [Some Caveats About Alliances as Source of Foreign Policy Similarity](#source)
 2. [Some Caveats About Treating Alliance Pledges as Ordinal](#ordinal)
-3. [Some Caveats about Weighting Alliance Ties by Capabilities](#weighting)
+3. [Some Caveats About Weighting Alliance Ties by Capabilities](#weighting)
 4. [Conclusion](#conclusion)
 
 Alrightie then...
@@ -872,7 +872,7 @@ I would welcome the reader to dig into the data and read about the conceptualiza
 
 You really should not interpret pledges as communicating ordinal information or that the alliance data permit the construction of an ordered-categorical scale based on pledges included in an alliance. A simple binary indicator communicating whether there is some kind of agreement will have to do, given the circumstances.
 
-## Some Caveats about Weighting Alliance Ties by Capabilities {#weighting}
+## Some Caveats About Weighting Alliance Ties by Capabilities {#weighting}
 
 One particular measure of dyadic foreign policy similarity---[Signorino and Ritter's (1999)](https://doi.org/10.1111/0020-8833.00113) *S*---offered a means capture how important some alliance ties were. Whereas their measure is a measure of "distance" while Kendall's Tau-b is more of a measure of the net probability of concordance for an ordered set of observations, their formula permits elevating some ties as more important than others. Using the (questionably) valued alliance data, you could potentially weight these alliances by the target states' capabilities. The obvious choice here would be the Composite Index of National Capabilities (CINC) measure from the Correlates of War project. 
 
