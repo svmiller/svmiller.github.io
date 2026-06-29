@@ -243,7 +243,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
 <tbody>
   <tr>
    <td style="text-align:center;"> 3740 </td>
-   <td style="text-align:center;"> Aug. 1, 75 </td>
+   <td style="text-align:center;"> Aug. 1, 1975 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -253,7 +253,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 3755 </td>
-   <td style="text-align:center;"> Feb. 24, 76 </td>
+   <td style="text-align:center;"> Feb. 24, 1976 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -263,7 +263,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 3765 </td>
-   <td style="text-align:center;"> Oct. 8, 76 </td>
+   <td style="text-align:center;"> Oct. 8, 1976 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -273,7 +273,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 3775 </td>
-   <td style="text-align:center;"> Mar. 31, 77 </td>
+   <td style="text-align:center;"> Mar. 31, 1977 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -283,7 +283,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 3835 </td>
-   <td style="text-align:center;"> Nov. 20, 78 </td>
+   <td style="text-align:center;"> Nov. 20, 1978 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -293,7 +293,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 3880 </td>
-   <td style="text-align:center;"> Oct. 8, 80 </td>
+   <td style="text-align:center;"> Oct. 8, 1980 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -303,7 +303,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 3890 </td>
-   <td style="text-align:center;"> May. 13, 81 </td>
+   <td style="text-align:center;"> May. 13, 1981 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -313,7 +313,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4010 </td>
-   <td style="text-align:center;"> Nov. 9, 90 </td>
+   <td style="text-align:center;"> Nov. 9, 1990 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -323,7 +323,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4055 </td>
-   <td style="text-align:center;"> Jul. 29, 91 </td>
+   <td style="text-align:center;"> Jul. 29, 1991 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -333,7 +333,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4115 </td>
-   <td style="text-align:center;"> Dec. 6, 91 </td>
+   <td style="text-align:center;"> Dec. 6, 1991 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -343,7 +343,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4145 </td>
-   <td style="text-align:center;"> Jan. 20, 92 </td>
+   <td style="text-align:center;"> Jan. 20, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -353,7 +353,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4170 </td>
-   <td style="text-align:center;"> Feb. 7, 92 </td>
+   <td style="text-align:center;"> Feb. 7, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
@@ -363,7 +363,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4220 </td>
-   <td style="text-align:center;"> May. 15, 92 </td>
+   <td style="text-align:center;"> May. 15, 1992 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -373,7 +373,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4230 </td>
-   <td style="text-align:center;"> May. 22, 92 </td>
+   <td style="text-align:center;"> May. 22, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -383,7 +383,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4235 </td>
-   <td style="text-align:center;"> May. 25, 92 </td>
+   <td style="text-align:center;"> May. 25, 1992 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -393,7 +393,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4240 </td>
-   <td style="text-align:center;"> May. 25, 92 </td>
+   <td style="text-align:center;"> May. 25, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -403,7 +403,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4245 </td>
-   <td style="text-align:center;"> May. 30, 92 </td>
+   <td style="text-align:center;"> May. 30, 1992 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -413,7 +413,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4255 </td>
-   <td style="text-align:center;"> Jun. 10, 92 </td>
+   <td style="text-align:center;"> Jun. 10, 1992 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -423,7 +423,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4265 </td>
-   <td style="text-align:center;"> Jun. 17, 92 </td>
+   <td style="text-align:center;"> Jun. 17, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -433,7 +433,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4270 </td>
-   <td style="text-align:center;"> Jun. 19, 92 </td>
+   <td style="text-align:center;"> Jun. 19, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -443,7 +443,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4300 </td>
-   <td style="text-align:center;"> Jul. 31, 92 </td>
+   <td style="text-align:center;"> Jul. 31, 1992 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -453,7 +453,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4305 </td>
-   <td style="text-align:center;"> Aug. 4, 92 </td>
+   <td style="text-align:center;"> Aug. 4, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -463,7 +463,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4365 </td>
-   <td style="text-align:center;"> Nov. 19, 92 </td>
+   <td style="text-align:center;"> Nov. 19, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -473,7 +473,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4385 </td>
-   <td style="text-align:center;"> Dec. 18, 92 </td>
+   <td style="text-align:center;"> Dec. 18, 1992 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -483,7 +483,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4395 </td>
-   <td style="text-align:center;"> Jan. 20, 93 </td>
+   <td style="text-align:center;"> Jan. 20, 1993 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -493,7 +493,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4400 </td>
-   <td style="text-align:center;"> Jan. 22, 93 </td>
+   <td style="text-align:center;"> Jan. 22, 1993 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -503,7 +503,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4415 </td>
-   <td style="text-align:center;"> Jan. 28, 93 </td>
+   <td style="text-align:center;"> Jan. 28, 1993 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -513,7 +513,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4470 </td>
-   <td style="text-align:center;"> May. 25, 93 </td>
+   <td style="text-align:center;"> May. 25, 1993 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -523,7 +523,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4485 </td>
-   <td style="text-align:center;"> Jun. 30, 93 </td>
+   <td style="text-align:center;"> Jun. 30, 1993 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -533,7 +533,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4500 </td>
-   <td style="text-align:center;"> Aug. 26, 93 </td>
+   <td style="text-align:center;"> Aug. 26, 1993 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -543,7 +543,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4505 </td>
-   <td style="text-align:center;"> Aug. 26, 93 </td>
+   <td style="text-align:center;"> Aug. 26, 1993 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -553,7 +553,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4560 </td>
-   <td style="text-align:center;"> Mar. 2, 94 </td>
+   <td style="text-align:center;"> Mar. 2, 1994 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
@@ -563,7 +563,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4568 </td>
-   <td style="text-align:center;"> Apr. 8, 94 </td>
+   <td style="text-align:center;"> Apr. 8, 1994 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -573,7 +573,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4570 </td>
-   <td style="text-align:center;"> Apr. 12, 94 </td>
+   <td style="text-align:center;"> Apr. 12, 1994 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
@@ -583,7 +583,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4605 </td>
-   <td style="text-align:center;"> Jun. 16, 94 </td>
+   <td style="text-align:center;"> Jun. 16, 1994 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
@@ -593,7 +593,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4635 </td>
-   <td style="text-align:center;"> Oct. 14, 94 </td>
+   <td style="text-align:center;"> Oct. 14, 1994 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -603,7 +603,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4675 </td>
-   <td style="text-align:center;"> Feb. 21, 95 </td>
+   <td style="text-align:center;"> Feb. 21, 1995 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -613,7 +613,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4810 </td>
-   <td style="text-align:center;"> Apr. 26, 96 </td>
+   <td style="text-align:center;"> Apr. 26, 1996 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -623,7 +623,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4865 </td>
-   <td style="text-align:center;"> Apr. 2, 97 </td>
+   <td style="text-align:center;"> Apr. 2, 1997 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
@@ -633,7 +633,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4875 </td>
-   <td style="text-align:center;"> May. 31, 97 </td>
+   <td style="text-align:center;"> May. 31, 1997 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -643,7 +643,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4885 </td>
-   <td style="text-align:center;"> Jul. 3, 97 </td>
+   <td style="text-align:center;"> Jul. 3, 1997 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -653,7 +653,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4890 </td>
-   <td style="text-align:center;"> Aug. 29, 97 </td>
+   <td style="text-align:center;"> Aug. 29, 1997 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -663,7 +663,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4896 </td>
-   <td style="text-align:center;"> Nov. 27, 97 </td>
+   <td style="text-align:center;"> Nov. 27, 1997 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -673,7 +673,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4897 </td>
-   <td style="text-align:center;"> Sep. 25, 97 </td>
+   <td style="text-align:center;"> Sep. 25, 1997 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -683,7 +683,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4940 </td>
-   <td style="text-align:center;"> Feb. 9, 00 </td>
+   <td style="text-align:center;"> Feb. 9, 2000 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
@@ -693,7 +693,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4957 </td>
-   <td style="text-align:center;"> Sep. 13, 00 </td>
+   <td style="text-align:center;"> Sep. 13, 2000 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -703,7 +703,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4958 </td>
-   <td style="text-align:center;"> Sep. 14, 00 </td>
+   <td style="text-align:center;"> Sep. 14, 2000 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -713,7 +713,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4968 </td>
-   <td style="text-align:center;"> Mar. 12, 01 </td>
+   <td style="text-align:center;"> Mar. 12, 2001 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -723,7 +723,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4980 </td>
-   <td style="text-align:center;"> Jul. 16, 01 </td>
+   <td style="text-align:center;"> Jul. 16, 2001 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -733,7 +733,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 4990 </td>
-   <td style="text-align:center;"> Nov. 19, 01 </td>
+   <td style="text-align:center;"> Nov. 19, 2001 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -743,7 +743,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 5000 </td>
-   <td style="text-align:center;"> Apr. 23, 02 </td>
+   <td style="text-align:center;"> Apr. 23, 2002 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -753,7 +753,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 5035 </td>
-   <td style="text-align:center;"> Jul. 4, 03 </td>
+   <td style="text-align:center;"> Jul. 4, 2003 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -763,7 +763,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 5045 </td>
-   <td style="text-align:center;"> Jun. 16, 04 </td>
+   <td style="text-align:center;"> Jun. 16, 2004 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -773,7 +773,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 5075 </td>
-   <td style="text-align:center;"> Nov. 14, 05 </td>
+   <td style="text-align:center;"> Nov. 14, 2005 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
@@ -783,7 +783,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 6020 </td>
-   <td style="text-align:center;"> Aug. 16, 07 </td>
+   <td style="text-align:center;"> Aug. 16, 2007 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -793,7 +793,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 6070 </td>
-   <td style="text-align:center;"> Nov. 11, 13 </td>
+   <td style="text-align:center;"> Nov. 11, 2013 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
    <td style="text-align:center;"> 1 </td>
@@ -803,7 +803,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 7005 </td>
-   <td style="text-align:center;"> Jun. 15, 16 </td>
+   <td style="text-align:center;"> Jun. 15, 2016 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -813,7 +813,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 7015 </td>
-   <td style="text-align:center;"> Feb. 28, 17 </td>
+   <td style="text-align:center;"> Feb. 28, 2017 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -823,7 +823,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 7030 </td>
-   <td style="text-align:center;"> Oct. 2, 17 </td>
+   <td style="text-align:center;"> Oct. 2, 2017 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -833,7 +833,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 7045 </td>
-   <td style="text-align:center;"> Sep. 25, 18 </td>
+   <td style="text-align:center;"> Sep. 25, 2018 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>
@@ -843,7 +843,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
   </tr>
   <tr>
    <td style="text-align:center;"> 7050 </td>
-   <td style="text-align:center;"> Sep. 28, 18 </td>
+   <td style="text-align:center;"> Sep. 28, 2018 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 1 </td>

@@ -205,7 +205,7 @@ Contrast Russian alliance behavior in the second half of the 19th century with a
 
 ```{r, echo = F, eval = T}
 activerusalliances %>%
-  mutate(date = format(date, "%b. %-d, %y")) %>%
+  mutate(date = format(date, "%b. %-d, %Y")) %>%
   mutate(states = ifelse(atopid == 3740, "<a href='https://en.wikipedia.org/wiki/Helsinki_Accords'>Helsinki Accords</a>", states),
          states = ifelse(atopid == 4220, "<a href='https://en.wikipedia.org/wiki/Collective_Security_Treaty_Organization'>Collective Security Treaty</a>", states),
          states = ifelse(atopid == 4400, "<a href='https://en.wikipedia.org/wiki/CIS_Charter'>Charter of the Commonwealth of Independent States</a>", states),
