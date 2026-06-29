@@ -1,12 +1,12 @@
 ---
-title: "Some Comments on Weighting (Alliance) Measures of Foreign Policy Similarity"
+title: "Some Comments on (Weighting) Alliance Measures of Foreign Policy Similarity"
 output:
   md_document:
     variant: gfm
     preserve_yaml: TRUE
 author: "steve"
 date: '2026-06-28'
-excerpt: "You can use alliances as a measure of dyadic foreign policy similarity. Just be mindful of what those measures are ultimately communicating."
+excerpt: "You can use alliances as a measure of dyadic foreign policy similarity. Just be mindful of what those measures are ultimately communicating. Also be critical of what weighting this information is doing."
 layout: post
 categories:
   - Political Science
