@@ -1,0 +1,258 @@
+---
+title: "Unpacking a Theoretical Argument (with an Application to Government Protectionism Policies)"
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: TRUE
+author: "steve"
+date: '2026-07-07'
+excerpt: "Arguments have assumptions. Students need to identify what those assumptions are in a theoretical argument."
+layout: post
+categories:
+  - Political Science
+  - Teaching
+image: "1900s-free-trade-postcard.jpg"
+active: blog
+---
+
+
+
+
+{% include image.html url="/images/1900s-free-trade-postcard.jpg" caption="Postcards were once a trendy medium for expressing anti-free trade positions (at least in the United Kingdom). The latter is en vogue again even if the former is not (but should be)." width=400 align="right" %}
+
+I'm taking over the intro-level international political economy (IPE) track this coming fall semester, which is exciting. Our department is likely no different than other IR departments in how we silo some topics. For example, I'm a quantitatively-oriented scholar primarily interested in the study of international conflict, which maps nicely to two such silos we have (quantitative vs. qualitative, governance vs. security). I've dabbled before in some of the governance stuff, but I've been asking for some time to teach students about some basics in IPE because there are some basic things that I really believe they need to know. That opportunity is coming up this fall.
+
+It also comes with a bit of a challenge because [wringing hands about the -isms](https://svmiller.com/blog/2024/05/assorted-tips-for-student-theses/#pickatheory) doesn't exactly [spark joy](https://konmari.com/marie-kondo-rules-of-tidying-sparks-joy/). The things that I think are worth knowing about IPE (e.g. monetary exchanges, FDI inflows/outflows, trade policy) are too important to be abstracted out too broadly to competing -isms that are ultimately talking past each other. Some things in IPE have fairly specific approaches that are important to know, and to know on their own terms. They come with specific assumptions about how some important thing operates that really need to be unpacked carefully without [asking Johnny if he can reconceptualize it as a hat, a brooch, or a pterodactyl](https://www.youtube.com/watch?v=L8oAQOvOEXY). There's an important skill to be learned here, and it's crucial for students to learn it early. Arguments have assumptions. Those assumptions, deductively stated, arrive at hypotheses or expectations. If I accept the assumptions, and the assumptions imply the hypothesis/conclusion, I have to accept the argument as valid. This is true for both theoretical model and statistical model, a la [Wagner (2007)](https://svmiller.com/blog/2025/12/war-and-the-state-r-harrison-wagner/) and [Clarke and Primo (2012)](https://academic.oup.com/book/7512?login=false).[^stats] If I don't accept the assumptions, I'm under no obligation to accept the conclusions to follow. If I do accept the assumptions and permit that the assumptions imply the hypothesis/conclusion, then denying the validity of the hypothesis/conclusion means I'm not operating in good faith. 
+
+[^stats]: For example, I teach our stats students [at the MA-level](https://eh6127.svmiller.com/lab-scripts/lab-5/) and [the BA-level](https://ir3-2.svmiller.com/lab-scripts/linear-models/) that one perhaps maximalist approach to statistical modeling is that failing to satisfy all the assumptions that underpin the OLS estimator is cause to reject the estimator as appropriate for the task at hand. In the case of the assumptions of the normality of the error term, that could be quite strong when normality can be reasonably approximated in a lot of cases. [In one instance I teach](https://ir3-2.svmiller.com/lab-scripts/linear-models-again/), the patterns of a fitted-residual plot strongly suggest a data-generating process that does not at all map to what could be reasonably estimated with OLS.
+
+Reasonable minds will disagree; social scientists are *world-class* deniers/haters/contrarians. However, it is imperative for the author (or the student) to state those assumptions clearly so that the reader can either agree or disagree. Good social science (that I enjoy) does this. I introduce students to this and ask them to identify what those assumptions are that authors make explicitly (or implicitly). You don't have to agree with it, but you have to know what it is that you find disagreeable.
+
+Toward that end, I'm going to have students take a look at an article to which I credit [Joshua Alley](https://joshuaalley.github.io/) for including in [his repository on analyses that can be done with simple OLS](https://github.com/joshuaalley/cross-sectional-ols). [Kono's (2006)](https://www.cambridge.org/core/journals/american-political-science-review/article/abs/optimal-obfuscation-democracy-and-trade-policy-transparency/C2F71E62F84259FA4BBDCA690923E2A0) article in the *American Political Science Review* ages nicely for a number of reasons (I think). Topically, it's quite salient now to think about the nexus between democracy and trade policy. The literature reviewed may be a bit of its time now that residents of democratic polities are seemingly less sanguine about globalization and international trade than ever before (since the end of World War II). However, the literature review he conducts nicely sets up a fairly straightforward argument about government protectionism policies that is accessible in both a qualitative form as well as a more technical form. I'll be reviewing that here.
+
+## Kono's (2006) Argument, in Qualitative Form
+
+Kono (2006, p. 370) begins his argument in a quite general, strictly qualitative format that still makes several assumptions that underpin the more technical, quantitative component to follow. Every definition is an assumption and, here, Kono starts with three broad forms of trade protectionism. The first is the simple tariff, which is an import tax collected by the government when a foreign good arrives at its borders to enter the domestic market. This is the crudest, most blunt, and most obvious form of trade protectionism, so it's no surprise Donald Trump is infatuated with it. There are, however, two other forms of trade protectionism that have tariff-like or tariff-adjacent effects in elevating domestic industries over foreign competitors. One is what he terms a "core" non-tariff barrier (NTB). These are things like export constraints or import quotas. Export constraints handicap the pool of buyers, which will (in very simple terms) generally decrease domestic prices but drive international prices higher. Import quotas, like [the kind America has imposed since the Great Depression on sugar](https://posc1020.svmiller.com/trade-1/posc1020-lecture-trade-1.pdf), will generally raise prices for consumers (and profits for producers). The other NTB is what he terms a "quality" NTB. These are subtle, but regulatory standards and product quarantines raise the costs of making a product in ways that are easier for (or artificially elevate) domestic producers. For example, one recurring complaint from the United States is the [British regulatory standards for beef](https://www.bbc.com/news/articles/c89pw3j7z9zo) crowd out American beef from entering the British market.[^rulebritania]
+
+[^rulebritania]: I'm with the British on this one. American beef is larger and, on its scale given its land endowment, is much cheaper than what the Brits can produce. Born in the U.S. but now living in Europe, American beef quality is atrocious relative to what's produced for consumption in Europe (and the UK). But, yes, that's a tariff-like barrier that elevates the British beef producers and keeps out (or keeps at bay) the American beef industry. It's understandable why the American government and American beef industry don't like it.
+
+Kono assumes that these instruments are similar in how they impede trade but are differentiated by their complexity for the typical voter. We should not give too much benefit of the doubt to the typical voter, but it's fair to assume the tariff is the simplest one to understand. Donald Trump will definitely mislead on who pays for it, but a tariff is a fairly straightforward tax imposed by the government on a domestic, private actor (firm or person) to bring a good into a domestic market for resale or private consumption. If it's for resale, the private firm or person 100% passes off the import cost to the consumer. If, say, [Trump is going to hit imported (i.e. Korean) washing machines with a tariff ranging from 20-50%](https://finance.yahoo.com/news/higher-prices-extra-jobs-lessons-from-trumps-washing-machine-tariffs-185047360.html?guccounter=1), then the imported washing machines are going to experience a rise in cost basically equal to the tariff. Domestic producers can further raise their prices under these circumstances. The effects of the NTBs are much less obvious to voters and require more care in messaging from politicians with a finite set of resources to command the voter's time. One further assumes the greatest difficulty in explaining the trade-impeding costs of the "quality" NTBs because the message the politician sends would have to contextualize that the complex price effects are more costly than the consumer benefits that follow from these quality/safety regulations. Voters can better keep up with Kardashians than keep up with that kind of information.
+
+The level of democracy necessarily weights the value that governments place in explaining things to voters. In a pure autocracy, the voter has no weight and there is no competing alternative to the government message. Under those circumstances, other considerations (like the revenue of trade restrictions or their value to relevant interest groups) dictate a government's trade policy. Under a condition of maximum democracy, voter considerations matters a great deal but come with the caveat about how much the voter understands what trade restrictions do for their quality of life. They will more easily see the tariff cost than they will understand what exactly import quotas or export restrictions mean for their welfare. They will understand the latter more than they will understand if and how safety regulations are worth the price they impose on the goods they consume. Per Kono (2006, p. 371), democracy produces asymmetries in policy transparency but increase the salience of these asymmetries. If interest groups still value trade restrictions, and are agnostic to the means of those restrictions, democratic governments have an incentive to hide the simple tariff but satiate interest groups with trade restrictions that are more opaque to voters.
+
+Stated this way, a student is in good position to follow along with the basic crux of what Kono is doing. However, Kono still believes there is an important ambiguity in this qualitative argument. For one, NTBs may be more attractive for democratic governments than tariffs, but couldn't democracy reduce those as well? For another, wouldn't any government prefer NTBs to tariffs if they value obfuscation? He's critiquing his own argument to set up the more technical argument in the next section, but he's at least introducing assumptions that underpin his argument to the reader. There is an assumption about the definition of, and universe of, trade-impeding policy instruments. There is an assumption about how much voters understand about what these instruments do. There is an additional assumption about the conditions in which governments care at all about what voters think or understand. In its qualitative form, the argument will at least make clear what the expectation is. If you accept the assumptions, you're inclined to accept the argument. If you don't accept those assumptions for whatever reason, and Kono incidentally gave you some reasons to be skeptical of the argument in qualitative form, then you don't have to accept that Kono can explain variation in trade policy as a function of democracy. However, you have to identify the assumptions in order to accept or reject them. Kono is helpfully offering them to you in a fairly clear way.
+
+## Kono's (2006) Argument, in More Technical Form
+
+Now it's time to make the first-semester IPE student wince a little bit with some math. The value of the math here is that it's outright formal. It certainly requires a bit more capability in parsing it, but it is very transparent.
+
+For one, Kono borrows from [Grossman and Helpman (1994)](https://www.jstor.org/stable/2118033) in specifying the value that governments place on the trade policy they choose. He states it this way as an extension of their framework.
+
+$$
+
+G(t, c, q) = C(t, c, q) + R(t, c, q) + DV(t,c,q)
+
+$$
+
+By itself, this tells us almost nothing. We have to say some things (i.e. assume some things) about what these parameters communicate. $$G$$ is the utility of the government; the thing to be explained. Whatever is the highest is the policy that the government will chose, contingent on the other parameters in the equation. In this output, $$t$$, $$c$$, and $$q$$ are the tariff level, the core NTB level, and the quality NTB level that are chosen by the government. Importantly, we are going to standardize this to be between 0 and 1, where 0 indicates no trade protection/restriction whatsoever and 1 indicates maximally prohibitive trade protection/restriction. There are three considerations for the government in the levels of $$t$$, $$c$$, and $$q$$: $$C$$, $$R$$, and $$V$$. $$C$$ is the sum of contributions from a homogeneous interest group with preferences over the values of the three trade restriction levels under consideration. $$R$$ is the (tariff) revenue that follows from trade restriction initiatives. Finally, $$V$$ is the voter support for the three different trade restriction policies, though this is importantly weighted by $$D$$. $$D$$ is the country's degree of democracy and is proportionalized to be between 0 (perfect autocracy) and 1 (perfect democracy).
+
+This is a nice start, but identifying what governments choose with respect to $$t$$, $$c$$, and $$q$$ requires us to specify what these functions are for $$C$$, $$R$$, and $$V$$.
+
+### The Contribution ($$C$$) Function
+
+Kono's $$C$$ function is of the following form. I will permit that students do not have to enjoy this, but it's useful to understand what it's doing.
+
+$$
+C(t, c, q) = t^{\theta} + c^{\theta} + q^{\theta} + tcq^{\theta} - (tc^{\theta} + tq^{\theta} + cq^{\theta})
+$$
+
+This is basically how you would specify a three-way interaction in a statistical model. There would be the individual components, the combination of all three components, and the combinations of bivariate components. However, the bivariate components subtract from the other additive components because of an assumed overlap. Kono basically says so himself when he identifies that these three instruments are perfect substitutes for each other. Notice the mathematical formula is specifying what he's assuming about the stakes that interests groups in have trade restrictions. They don't particularly care for the instrument; they just care that it has the desired effect (and, we assume from the government's perspective, would manifest in their contributions to the government in support of this policy).
+
+The important parameter here from the interest group's perspective is $$\theta$$. $$\theta$$, bound between (but not including) 0 and 1, controls the degree of diminishing marginal returns in the political value of protection. For lower values approaching 0, $$\theta$$ says the interest group derives the most value from the initial level of protection and that there are very strong diminishing returns. Higher values approaching 1 means the interest group sees almost no diminishing returns to protection and that the interest group values protection linearly. You can experiment with this in R under three conditions of low protection, medium protection, and high protection for varying levels of $$\theta$$.
+
+
+``` r
+# library(tidyverse)
+KC <- function(t, c, q, theta) {
+  C <- t^theta + c^theta + q^theta + (t*c*q)^theta - ((t*c)^theta + (t*q)^theta + (c*q)^theta)
+  return(C)
+}
+
+tibble(theta = seq(.1, .9, .1),
+       low = KC(.1, .1, .1, theta),
+       med = KC(.5, .5, .5, theta),
+       high = KC(.9, .9, .9, theta))
+#> # A tibble: 9 × 4
+#>   theta   low   med  high
+#>   <dbl> <dbl> <dbl> <dbl>
+#> 1   0.1 0.991 1.000 1.000
+#> 2   0.2 0.950 0.998 1.000
+#> 3   0.3 0.876 0.993 1.000
+#> 4   0.4 0.782 0.986 1.000
+#> 5   0.5 0.680 0.975 1.000
+#> 6   0.6 0.580 0.961 1.000
+#> 7   0.7 0.487 0.943 1.000
+#> 8   0.8 0.404 0.923 0.999
+#> 9   0.9 0.332 0.900 0.999
+```
+
+### The Revenue ($$R$$) Function
+
+Kono specifies the following revenue function $$R$$. Again, students do not have to enjoy this, but they should understand what it means both for his political support function (as a derivation of [Grossman and Helpman (1994)](https://www.jstor.org/stable/2118033)). It's also necessary to understand how trade restrictions compete against each other from a government's perspective.
+
+$$
+R(t,c,q) = (1 - c)(1 - q)(t - t^{\rho})
+$$
+
+From the interest group's perspective, $$t$$, $$c$$, and $$q$$ are doing basically the same (overlapping) thing. From the government's perspective, only $$t$$ generates revenue for it. NTBs like $$c$$ and $$q$$, by contrast, are not revenue instruments for the government. They in fact reduce imports and, thus, reduce the revenue for the government that could be generated from imposing tariffs on imports. If $$c$$ and $$q$$ were 1, tariff revenue would drop to 0 as there would be no imports of any form. Where as $$c$$ and $$q$$ have the same understanding as $$t$$ for the model, $$1 - c$$ and $$1 - q$$ can be understand as the fraction of imports that survive these trade restriction initiatives. Combined, their multiplication weights the revenue of surviving imports.
+
+$$\rho$$ is the important parameter from this revenue function. A value that must be greater than 1, it acts as a bit of a penalty on the raw tariff rate of $$t$$ (the tax mechanism of the government on imports). In other words, tariffs generate revenue for the government by taxing imports, but also eat into the revenue base of the government by cannibalizing that very revenue base. $$\rho$$ governs how aggressively that endogenous cannibalism happens.
+
+Again, you can see what this looks like for varying levels of $$\rho$$ with the following R code under the following conditions. First, we'll drop out $$c$$ and $$q$$ to focus on just the tariff component. We'll set $$\rho$$ to unrealistic values of .1, .5, .9, and 1 along with plausible values of 1.1, 2, 5, and 10. We'll illustrate how this revenue function performs under conditions of zero tariffs, low tariffs (.1), medium tariffs (.5), high tariffs (.9), and prohibitive tariffs (1).
+
+
+``` r
+# library(tidyverse)
+
+KR <- function(t, c, q, rho) {
+  R <- (1-c)*(1-q)*(t-t^rho)
+  return(R)
+}
+
+tibble(rho = c(.1, .5, .9, 1, 1.1, 2, 5, 10),
+       ztrev = KR(0, 0, 0, rho),
+       ltrev = KR(.1, 0, 0,  rho),
+       mtrev = KR(.5, 0, 0, rho),
+       htrev = KR(.9, 0, 0, rho),
+       ptrev = KR(1, 0, 0, rho))
+#> # A tibble: 8 × 6
+#>     rho ztrev   ltrev   mtrev    htrev ptrev
+#>   <dbl> <dbl>   <dbl>   <dbl>    <dbl> <dbl>
+#> 1   0.1     0 -0.694  -0.433  -0.0895      0
+#> 2   0.5     0 -0.216  -0.207  -0.0487      0
+#> 3   0.9     0 -0.0259 -0.0359 -0.00953     0
+#> 4   1       0  0       0       0           0
+#> 5   1.1     0  0.0206  0.0335  0.00943     0
+#> 6   2       0  0.09    0.25    0.09        0
+#> 7   5       0  0.1000  0.469   0.310       0
+#> 8  10       0  0.1000  0.499   0.551       0
+```
+
+The output illustrates why it's not interesting to let $$\rho$$ be less than or equal to 1. The ensuing output would always suggest negative or no utility to tariffs and that no one would ever choose them. That doesn't make for an interesting analysis, though. For higher values of $$\rho$$, the output of $$t^{\rho}$$ collapses to 0 and suggests less erosion to the tariff revenue base. However, there is important boundary behavior at 1. Prohibitive tariffs completely erode the tariff revenue base irregarding the erosion parameter of $$\rho$$.
+
+### The Voter ($$V$$) Function
+
+Finally, we conclude with the voter function that's of direct interest to Kono's analysis. We have this following function.
+
+$$
+V(t, c, q) = 1 - t^{\alpha} - c^{\beta} - q^{\delta} - t^{\alpha}c^{\beta}q^{\delta} + (t^{\alpha}c^{\beta} + t^{\alpha}q^{\delta} + c^{\beta}q^{\delta})
+$$
+
+There are a bit more moving pieces to this equation, so let's unpack them as we go along. First, like the contributions function, there is a three-way interaction of $$t$$, $$c$$, and $$q$$. Adequately modeling it involves including the individual components, the three-way interaction itself, and the three possible two-way interactions. However, the contribution function models an overlap or redundancy by subtracting out the two-way interactions. The voter function instead models a penalty or disutility for these measures with respect to the voters, but also assuming an overlap/redundancy. Simply, that could be stated as $$V = 1 - \text{(protectionism policy)}$$. Hence, many of the signs flip when factored out.
+
+The most important parts of this equation are easily $$\alpha$$, $$\beta$$, and $$\delta$$. Recall the qualitative argument that assumes the complexity of the three trade restriction instruments. Tariffs are the easiest to understand of the three. Of the two NTBs, quality regulations are more opaque and more difficult to understand for voters than core NTBs like import quotas. Reiterating that $$t$$, $$c$$, and $$q$$ are bound between 0 (no restrictions) and 1 (prohibitive restrictions), then we assume $$\alpha$$, $$\beta$$, and $$\delta$$ are positive values that satisfy the inequality of $$1 < \alpha < \beta < \delta$$. Consider the simple example where each trade restriction initiative of $$t$$, $$c$$, and $$q$$ is .5 for medium protection. Assuming that inequality of $$1 < \alpha < \beta < \delta$$, then let's have $$\alpha$$ be 2, $$\beta$$ be 3, and $$\delta$$ be 4. Therefore, the tariff penalty would be $$.5^2 = .25$$, the core NTB penalty would be $$.5^3 = .125$$ and the quality NTB penalty would be $$5^4 = .0625$$. This is just a quantitative statement of the qualitative claim about the policy complexity from the voter's perspective. They will hate tariffs more than the NTBs because they understand them better. That should not be confused as voters understanding what tariffs are, but they will have a better understanding of them than the NTBs. That's in contrast to the interest group in the contributions function, which sees all instruments as substitutable.
+
+Of course, the voter function is weighted by the level of democracy ($$D$$), but we'll get to that in the next part.
+
+### Simulating Politically Optimal Protection
+
+Let's make sense of what this means in some simple, stylized cases. Kono does this in his Figure 1 and we can do that here as well. First, we'll specify the formula that determines the government's utility ($$G$$) for policies of $$t$$, $$c$$, and $$q$$ as the output of the contributions function, the revenue function, and the voter function (weighted by the level of democracy). Let's set up the situation he set up for his simulations. $$t$$, $$c$$, and $$q$$ can be any value between .01 and .99 by increments of .01. The level of democracy ($$D$$) can be any value between 0 and 1 by increments of .1. We'll set $$\rho$$ to be either 1.1 (i.e. aggressive endogenous erosion to tariff revenue) or 2 (i.e. moderate endogenous erosion). We'll let $$\alpha$$, $$\beta$$, and $$\delta$$ be simple values of 2, 3, and 4 and let $$\theta$$ be .5 (for diminishing marginal returns to protection). 
+
+
+``` r
+kono <- function(t,c,q, D, theta, rho, alpha, beta, delta) {
+  
+  contributions <- t^theta + c^theta + q^theta + (t*c*q)^theta - ((t*c)^theta + (t*q)^theta + (c*q)^theta)
+  revenue <- (1-c)*(1-q)*(t-t^rho)
+  support <- (1 - t^alpha - c^beta - q^delta - t^alpha*c^beta*q^delta + (t^alpha*c^beta) + (c^beta*q^delta) + (t^alpha*q^delta))
+  
+  g <- contributions + revenue + D*support
+  
+  return(g)
+    
+}
+
+expand.grid(t = seq(.01, .99, by=.01), 
+            c = seq(.01, .99, by=.01), 
+            q = seq(.01, .99, by=.01),
+            dem = seq(0, 1, by = .1),
+            rho = c(1.1, 2),
+            alpha = 2, beta = 3, delta = 4, 
+            theta = .5) %>% 
+  as_tibble() %>%
+  mutate(g = kono(t, c, q, dem, theta, rho, alpha, beta, delta)) -> Data
+```
+
+According to this, we have over 21 million possible values to summarize. Yikes. 😬
+
+
+``` r
+Data
+#> # A tibble: 21,346,578 × 10
+#>        t     c     q   dem   rho alpha  beta delta theta     g
+#>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1  0.01  0.01  0.01     0   1.1     2     3     4   0.5 0.275
+#>  2  0.02  0.01  0.01     0   1.1     2     3     4   0.5 0.311
+#>  3  0.03  0.01  0.01     0   1.1     2     3     4   0.5 0.339
+#>  4  0.04  0.01  0.01     0   1.1     2     3     4   0.5 0.363
+#>  5  0.05  0.01  0.01     0   1.1     2     3     4   0.5 0.384
+#>  6  0.06  0.01  0.01     0   1.1     2     3     4   0.5 0.403
+#>  7  0.07  0.01  0.01     0   1.1     2     3     4   0.5 0.420
+#>  8  0.08  0.01  0.01     0   1.1     2     3     4   0.5 0.437
+#>  9  0.09  0.01  0.01     0   1.1     2     3     4   0.5 0.452
+#> 10  0.1   0.01  0.01     0   1.1     2     3     4   0.5 0.466
+#> # ℹ 21,346,568 more rows
+```
+
+We assume that governments will choose policies of $$t$$, $$c$$, and $$q$$ that generate the highest value for them, contingent on how they are funneled through the contributions, revenue, and voter functions (though the last of these is weighted by the level of democracy). In R, you can identify those values of $$t$$, $$c$$, and $$q$$ for each increment of democracy ($$D$$) and the two separate tariff erosion parameters of $$\rho$$.
+
+
+``` r
+Data %>%
+  slice(which(g == max(g)),
+        .by = c(rho, dem)) %>% data.frame
+#>       t    c    q dem rho alpha beta delta theta        g
+#> 1  0.99 0.99 0.99 0.0 1.1     2    3     4   0.5 1.000000
+#> 2  0.38 0.48 0.58 0.1 1.1     2    3     4   0.5 1.047049
+#> 3  0.29 0.41 0.52 0.2 1.1     2    3     4   0.5 1.121354
+#> 4  0.25 0.37 0.48 0.3 1.1     2    3     4   0.5 1.203267
+#> 5  0.22 0.34 0.46 0.4 1.1     2    3     4   0.5 1.289097
+#> 6  0.20 0.33 0.44 0.5 1.1     2    3     4   0.5 1.377364
+#> 7  0.18 0.31 0.43 0.6 1.1     2    3     4   0.5 1.467316
+#> 8  0.17 0.30 0.41 0.7 1.1     2    3     4   0.5 1.558523
+#> 9  0.16 0.29 0.40 0.8 1.1     2    3     4   0.5 1.650683
+#> 10 0.15 0.28 0.39 0.9 1.1     2    3     4   0.5 1.743588
+#> 11 0.15 0.27 0.38 1.0 1.1     2    3     4   0.5 1.837117
+#> 12 0.68 0.10 0.09 0.0 2.0     2    3     4   0.5 1.094271
+#> 13 0.68 0.09 0.10 0.0 2.0     2    3     4   0.5 1.094271
+#> 14 0.60 0.12 0.12 0.1 2.0     2    3     4   0.5 1.153444
+#> 15 0.53 0.14 0.15 0.2 2.0     2    3     4   0.5 1.221151
+#> 16 0.47 0.16 0.19 0.3 2.0     2    3     4   0.5 1.295532
+#> 17 0.42 0.18 0.22 0.4 2.0     2    3     4   0.5 1.374977
+#> 18 0.38 0.19 0.25 0.5 2.0     2    3     4   0.5 1.458148
+#> 19 0.35 0.19 0.27 0.6 2.0     2    3     4   0.5 1.543961
+#> 20 0.32 0.20 0.28 0.7 2.0     2    3     4   0.5 1.631757
+#> 21 0.30 0.20 0.28 0.8 2.0     2    3     4   0.5 1.720979
+#> 22 0.28 0.20 0.29 0.9 2.0     2    3     4   0.5 1.811379
+#> 23 0.26 0.20 0.30 1.0 2.0     2    3     4   0.5 1.902662
+```
+
+Plotted, they look like this, effectively reproducing Kono (2006).
+
+![plot of chunk reproduction-of-kono-2006-fig-1](/images/unpacking-a-theoretical-argument-kono-trade-protectionism/reproduction-of-kono-2006-fig-1-1.png)
+
+In other words, a situation in which tariffs have a pretty aggressive endogenous erosion factor ($$\rho = 1.1$$) are cases when democracy liberalizes all forms of trade. However, they will reduce the politically optimal tariff rate more aggressively than the NTB rates. When tariffs do not so aggressively cannibalize government revenue (i.e. $$\rho = 2$$), higher levels of democracy reduce tariffs but the politically optimal payout for governments increases NTBs (especially quality regulations) with increasing democracy. Per Kono's argument, voters will see the costs of tariffs more than they will understand how NTBs operate. However, the interest group sees these as substitutable and is less interested in the difference (under the assumption that political rents become increasingly saturated as protection rises).
+
+## Conclusion
+
+I'll save the regression stuff that Kono is doing for the seminar itself, but I'm writing this to expand a bit on some of the stuff that I want students to be able to do in our program.[^repl] If I ask you to read something, I want you to do more than tell me what the article is about. [The chatbot can do that](https://svmiller.com/blog/2025/09/assorted-opinionated-takes-on-chatbot-use-by-students/). I need a bit more. 
+
+Understand how Kono sets up the literature to compel the question he wants to ask and the approach he wants to use. Identify, in his case, the argument he's advancing in both its qualitative and quantitative/technical form. In both cases, he's making assumptions about what something is (e.g. trade restriction policies). He's making assumptions about the relevant actor (i.e. the government) and what inputs it considers (i.e. contributions from interest groups, revenue from tariffs, voter support weighted by the level of democracy). He's making further assumptions about the complexity of various trade restriction initiatives and how voters and interest groups respond to them differently. The mathematical formulation of his qualitative argument is simply formalizing his assumptions. If I'm asking you to read it, I'm asking you to take time to understand it. 
+
+I'll grant that it might be asking too much for students in our first semester to fully understand all the gory details, but I am asking to observe the details, take inventory of what's relevant to the argument, and to assess whether they accept the assumptions or not. Kono may have some open ends in his analysis, which he grants. For example, we don't know what the net effect is for democracy on trade policy. We also have just the one interest group, so we're not saying much about the terms of trade externality. We also have some assumptions that we are free to question. For one, Kono builds in an assumption that voters understand the tariff rate more than they understand how NTBs affect their welfare, but we have good reasons to question just how much voters understand tariffs at all. That would very much influence the weight the government would put on the voter function in addition to the democracy weight.[^anes] For another: Kono's qualitative argument channels government policy with respect to voters through government opposition. However, this actor disappears from his derivation of the  [Grossman and Helpman (1994)](https://www.jstor.org/stable/2118033) political support function. All are fair critiques to level about just how far this analysis can get us, even if I think it's a useful way of getting started thinking about the nexus between democracy and trade policy.
+
+[^anes]: In a past life, when I'd [talk more about trade policy with American students](https://posc1020.svmiller.com/trade-2/posc1020-lecture-trade-2.pdf), I'd show how the American National Election Studies data show how you can nudge Americans with "Buy American" or "protect American jobs" to get them to support things that are blatantly impermissible per the terms of American entry into the World Trade Organization.
+
+However, I think this is a really nifty and accessible argument for what it is. It's a valuable learning experience for students to identify the assumptions that underpin the argument and whether they think it is valid toward arriving at a hypothesis or expectation. Again, we're social scientists. We are *world-class* haters/contrarians. But, to get there, you have to get into the details of the argument. Credit Kono. There are plenty of details to this argument and he's being quite transparent in a way that I think students, even at the intro-level, would find quite valuable.
+
+[^repl]: Replicating his regression analyses is incidentally [one of my homework assignments](https://ir3-2.svmiller.com/problem-sets/4/eh1903-2-ps4.pdf) for the BA students in IRIII.2.
