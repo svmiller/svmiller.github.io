@@ -90,7 +90,7 @@ options(knitr.kable.NA = '')
 
 
 ```{r leadimage, echo=F, eval=T, results="asis", cache=F}
-add_jekyll_image('/images/stephen-a-smith-machiavelli.png', "I used to be proficient at Photoshop in a past life. It's just easier for ChatGPT to do this for me instead (because it did).", "275", "right")
+add_jekyll_image('/images/stephen-a-smith-machiavelli.png', "I used to be proficient at Photoshop in a past life.", "275", "right")
 ```
 
 <!-- *Last updated: `r format(Sys.Date(), "%d %B %Y")`.*  -->

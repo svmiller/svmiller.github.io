@@ -18,7 +18,7 @@ active: blog
 
 
 
-{% include image.html url="/images/stephen-a-smith-machiavelli.png" caption="I used to be proficient at Photoshop in a past life. It's just easier for ChatGPT to do this for me instead (because it did)." width=275 align="right" %}
+{% include image.html url="/images/stephen-a-smith-machiavelli.png" caption="I used to be proficient at Photoshop in a past life." width=275 align="right" %}
 
 <!-- *Last updated: 02 October 2025.*  -->
 
